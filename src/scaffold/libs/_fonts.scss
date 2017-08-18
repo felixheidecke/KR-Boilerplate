@@ -1,0 +1,45 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic";
+
+@mixin OpenSans($weight: 400) {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: $weight;
+}
+
+body, input, textarea, select, option, p, h4 {
+    @include OpenSans;
+
+    font-size: $font-size;
+    line-height: $line-height;
+}
+
+i, em, blockquote {
+    font-style: italic;
+}
+
+h1, h2, h3, h4, strong, b {
+    @include OpenSans(700);
+}
+
+h1, h2, h3, h4, p {
+    @include reset;
+
+    margin: {
+        top: $grid-spacing;
+        bottom: $grid-spacing;
+    };
+}
+
+h1 {
+    font-size: $font-size + 12;
+    line-height: $line-height + 12;
+}
+
+h2 {
+    font-size: $font-size + 8;
+    line-height: $line-height + 8;
+}
+
+h3 {
+    font-size: $font-size + 4;
+    line-height: $line-height + 4;
+}

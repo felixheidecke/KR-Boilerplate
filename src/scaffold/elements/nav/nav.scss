@@ -1,0 +1,83 @@
+$el : ".#{$prefix}nav-main";
+
+#{$el} {
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li.-is-current > a {
+        background-color: rgba($c-light, .33);
+        color: $c-light;
+        box-shadow: none !important;
+        font-weight: bold;
+    }
+}
+
+#{$el}--level-1 {
+    > li {
+        width: 100%;
+
+        a {
+            @include OpenSans();
+
+            border-bottom: 1px solid $c-light;
+            display: block;
+            font-size: 15px;
+            padding: 10px 0;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color .5s ease, box-shadow .5s ease, color .25s ease;
+
+            &:hover {
+                background-color: $c-light;
+                color: $c-dark;
+                box-shadow: 0 0 10px $c-light;
+            }
+        }
+    }
+}
+
+#{$el}--level-2 {
+    margin-bottom: 25px;
+
+    > li {
+        a {
+            font-size: 13px;
+            border-color: rgba($c-light, .125);
+        }
+    }
+}
+
+
+.#{$prefix}nav-main-burger {
+    display: block;
+    position: fixed;
+    top: 16px;
+    right: 15px;
+    width: 38px;
+    height: 28px;
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    transition: transform .5s ease;
+    z-index: 999;
+    outline: 0 none;
+    background: {
+        color: transparent;
+        image: url(../bild/burger.svg);
+        repeat: no-repeat;
+        position: center center;
+        size: 26px auto;
+    }
+
+    span {
+        display: none;
+    }
+}
+
+.-is-open .#{$prefix}nav-main-burger {
+    transform: rotate(90deg);
+}

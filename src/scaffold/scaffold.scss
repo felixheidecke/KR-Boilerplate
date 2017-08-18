@@ -1,0 +1,36 @@
+// --- setting defaults --------------------------------------------------------
+
+// prefixing selectors
+$prefix : "kr-" !default;
+
+$grid-spacing : 20px !default;
+$viewport     : $grid-spacing * 64 !default; // = 1280px
+
+$font-size   : 16px !default;
+$line-height : 26px !default;
+
+$c-light     : #fff;
+$c-gray      : lighten(black, 50%);
+$c-dark	     : lighten(black, 20%);
+
+$button-background-color : #E6E6E6 !default;
+$button-border-color     : #999 !default;
+$button-color            : $c-gray !default;
+
+$anchor-color            : $c-dark !default;
+$anchor-hover-color      : $c-gray !default;
+
+// --- collecting files --------------------------------------------------------
+
+@import "libs/breakpoints";
+@import "libs/base";
+@import "libs/fonts";
+@import "libs/buttons";
+@import "libs/fa";
+@import "libs/lists";
+@import "libs/helper";
+
+@import "elements/accordion/accordion";
+@import "elements/form/form";
+@import "elements/nav/nav";
+@import "elements/zoom/zoom";

@@ -1,0 +1,111 @@
+.h {
+    @include breakpoint("sm and up") {
+        &-float {
+            float: left;
+
+            &-right {
+                float: right;
+            }
+        }
+
+        &-clear {
+            clear: both;
+
+            &-left {
+                clear: left;
+            }
+
+            &-right {
+                clear: right;
+            }
+        }
+    }
+
+    &-reset {
+        @include reset;
+    }
+
+    &-text-center {
+        text-align: center;
+    }
+}
+
+@include breakpoint("sm and up") {
+    figure.h-float-right,
+    img.h-float-right {
+        float: right;
+        margin: 0 0 0 $grid-spacing;
+    }
+}
+
+
+@include breakpoint("sm and up") {
+    figure.h-float-left,
+    img.h-float-left {
+        float: left;
+        margin: 0 $grid-spacing 0 0;
+    }
+}
+
+
+.h-xs-hidden {
+    @include breakpoint("xs") {
+        display: none;
+    }
+}
+
+.h-sm-hidden {
+    @include breakpoint("sm") {
+        display: none;
+    }
+}
+
+.h-sm-and-up-hidden {
+    @include breakpoint("sm and up") {
+        display: none;
+    }
+}
+
+.h-md-hidden {
+    @include breakpoint("md") {
+        display: none;
+    }
+}
+
+.h-md-and-up-hidden {
+    @include breakpoint("md and up") {
+        display: none;
+    }
+}
+
+.h-lg-hidden {
+    @include breakpoint("lg") {
+        display: none;
+    }
+}
+
+.h-xl-hidden {
+    @include breakpoint("xl") {
+        display: none;
+    }
+}
+
+.h-xxl-hidden {
+    @include breakpoint("xxl") {
+        display: none;
+    }
+}
+
+.pure-g.pure-padded-children {
+    margin: {
+        left: -$grid-spacing;
+        right: -$grid-spacing;
+    };
+
+    > [class*="pure-u"] {
+        padding: {
+            left: $grid-spacing;
+            right: $grid-spacing;
+        };
+    }
+}

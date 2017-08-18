@@ -1,0 +1,55 @@
+// Requires FontAwesome
+@mixin list-fa($content, $text-offset:18px) {
+    li {
+        position: relative;
+        &:before {
+            font-family: FontAwesome, sans-serif;
+            position: absolute;
+            left: $text-offset * -1;
+            content: $content;
+        }
+    }
+}
+
+.list {
+    @extend p;
+    padding-left: $grid-spacing;
+    margin-left: $grid-spacing / 1.5;
+
+    &-disc {
+        @extend .list;
+        list-style: disc;
+    }
+
+    &-dash {
+        @extend p;
+        position: relative;
+
+        > li {
+            padding-left: 17px;
+
+            &:before {
+                position: absolute;
+                content: "-";
+                left: 0;
+            }
+        }
+    }
+
+    &-numbered {
+        @extend .list;
+        list-style: decimal;
+    }
+}
+
+.list {
+    &-chevron {
+        @extend .list;
+        @include list-fa("\f054");
+    }
+
+    &-pdf {
+        @extend .list;
+        @include list-fa("\f1c1");
+    }
+}

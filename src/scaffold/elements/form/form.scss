@@ -1,0 +1,80 @@
+$el : ".#{$prefix}form";
+
+#{$el} {
+	div[class^="pure-u-"] {
+		position: relative;
+		box-sizing: border-box;
+	}
+
+	@include breakpoint("md and up")
+	{
+		.kr-inline {
+			padding-left: 10px;
+			padding-right: 10px;
+
+			label { right: 21px; }
+			&-first-child { padding-right: 10px; label { right: 21px; } }
+			&-last-child { padding-left: 10px; }
+		}
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="digit"],
+	input[type="tel"],
+	textarea,
+	select {
+		width: 100%;
+		margin: 5px 0 20px;
+		padding: 5px;
+		border: 1px solid rgba($c-gray, .5);
+		border-radius: 3px;
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		display: inline-block;
+		float: left;
+		margin: 3px 15px 10px 0;
+	}
+
+	textarea {
+		resize: vertical;
+		min-height: 100px;
+	}
+
+	label {
+		position: absolute;
+		display: block;
+		display: none;
+		font-style: italic;
+		transition: height 1s ease;
+		right: 11px;
+		top: 11px;
+		color: lighten($c-gray, 15%);
+
+		&.number {
+			right: 24px;
+		}
+
+		&.visible {
+			display: block;
+			position: static;
+		}
+	}
+
+	input[type="submit"] {
+		width: inherit;
+		padding: 5px 10px;
+		text-decoration: none;
+
+		background-color: $c-gray;
+		color: $c-dark;
+		border: 0 none;
+		border-radius: 3px;
+
+		&:hover {
+			background-color: $c-gray;
+		}
+	}
+}

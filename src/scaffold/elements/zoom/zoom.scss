@@ -1,0 +1,21 @@
+$el : ".#{$prefix}zoom";
+
+#{$el} {
+    transition: transform .5s cubic-bezier(0.230, 1.650, 0.620, 0.985);
+
+    &:hover {
+        transform: scale(1.5);
+    }
+
+    .-x2 {
+        &:hover {
+            transform: scale(2);
+        }
+    }
+
+    .-x3 {
+        &:hover {
+            transform: scale(3);
+        }
+    }
+}

@@ -1,0 +1,106 @@
+$button-background-color : #E6E6E6 !default;
+$button-border-color     : #999 !default;
+$button-color            : #707070 !default;
+
+$anchor-color            : #000 !default;
+$anchor-hover-color      : rgba(#000, .8) !default;
+
+// base mixins
+
+@mixin reset {
+    margin: 0;
+    padding: 0;
+}
+
+// base styles
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    @include reset;
+
+    overflow-x: hidden;
+    background: #FFF;
+}
+
+a {
+    color: $anchor-color;
+
+    &:hover {
+        color: $anchor-hover-color;
+    }
+}
+
+.wrapper {
+    width: 100%;
+    max-width: $viewport;
+    margin: {
+        right: auto;
+        left: auto;
+    };
+    
+    &.-padded {
+        padding: {
+            left: $grid-spacing;
+            right: $grid-spacing;
+        }
+    }
+}
+
+/* ___ [ BLOCKQOUTE ] _________________________________________________________ */
+
+blockquote {
+    margin: $grid-spacing 0;
+    padding: 0.01px $grid-spacing;
+    background: lightgray;
+
+    @include breakpoint("sm and up") {
+        margin: {
+            left: $grid-spacing * 2;
+            right: $grid-spacing * 2;
+        };
+    }
+}
+
+/* ___ [ IMAGE, FIGURE & CAPTION ] ____________________________________________ */
+
+.flex-img {
+    max-width: 100%;
+    height: auto;
+}
+
+figure {
+    @include reset;
+
+    text-align: center;
+    margin: {
+        top: $grid-spacing;
+        bottom: $grid-spacing;
+    };
+
+    img {
+        @extend .flex-img;
+    }
+}
+
+figcaption {
+    display: inline-block;
+    text-align: left;
+    margin: ($grid-spacing / 3) 0;
+    font-size: $font-size - 4;
+    line-height: $line-height - 8;
+}
+
+/* ___ [ LIST STYLING ] _______________________________________________________ */
+
+ul,
+ol {
+    @include reset;
+
+    list-style: none;
+}

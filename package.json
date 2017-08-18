@@ -1,0 +1,20 @@
+{
+  "author": "Felix Heidecke",
+  "description": "Combines Sass (-> CSS) and Coffee (-> JS) framework basics",
+  "version": "0.1.0",
+  "scripts": {
+    "init": "grunt init",
+    "watch": "grunt dev"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-compress": "^1.4.3",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-curl": "^2.2.1",
+    "node-fetch": "^1.7.2"
+  }
+}
