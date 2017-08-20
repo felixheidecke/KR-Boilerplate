@@ -1,3 +1,31 @@
+let vendor = {
+    'jquery' : [
+        'jquery.min.js'],
+
+    'pure' : [
+        'base-min.css',
+        'grids-min.css',
+        'grids-responsive-min.css' ],
+
+    'vue' : [
+        'vue.min.js' ],
+
+    'mobile-detect' : [
+        'mobile-detect.min.js' ],
+
+    'simplelightbox' : [
+        'simple-lightbox.min.js',
+        'simplelightbox.min.css' ],
+
+    'font-awesome' : [
+        'css/font-awesome.min.css',
+        'fonts/fontawesome-webfont.eot',
+        'fonts/fontawesome-webfont.svg',
+        'fonts/fontawesome-webfont.ttf',
+        'fonts/fontawesome-webfont.woff',
+        'fonts/fontawesome-webfont.woff2' ]
+};
+
 const fetch = require('node-fetch');
 
 timestamp = function () {
@@ -13,39 +41,13 @@ timestamp = function () {
     time.push( d.getMinutes() );
 
     return date.join('.') + '_' + time.join('') + 'h';
-}
+};
 
 module.exports = function(grunt) {
     grunt.initConfig({
 
         cdnjs : {
-            libs : {
-                'jquery' : [
-                    'jquery.min.js'],
-
-                'pure' : [
-                    'base-min.css',
-                    'grids-min.css',
-                    'grids-responsive-min.css' ],
-
-                'vue' : [
-                    'vue.min.js' ],
-
-                'mobile-detect' : [
-                    'mobile-detect.min.js' ],
-
-                'simplelightbox' : [
-                    'simple-lightbox.min.js',
-                    'simplelightbox.min.css' ],
-
-                'font-awesome' : [
-                    'css/font-awesome.min.css',
-                    'fonts/fontawesome-webfont.eot',
-                    'fonts/fontawesome-webfont.svg',
-                    'fonts/fontawesome-webfont.ttf',
-                    'fonts/fontawesome-webfont.woff',
-                    'fonts/fontawesome-webfont.woff2' ]
-            }
+            libs : vendor
         },
 
         // --- Concat Vendor files ---------------------------------------------
@@ -131,7 +133,7 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     src: ['src/**', 'htdocs/**'],
-                    dest: timestamp() + '/',
+                    dest: '/',
                     filter: 'isFile'
                 }]
             }
@@ -248,7 +250,7 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask("init", ['cdnjs', 'curl-dir', 'copy', 'concat']);
+    grunt.registerTask("init", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat']);
     grunt.registerTask("dev", ['coffee', 'sass', 'watch']);
 
 };
