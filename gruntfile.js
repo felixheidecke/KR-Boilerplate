@@ -173,19 +173,6 @@ module.exports = function(grunt) {
             }
         },
 
-        // --- The cleaning lady is in -----------------------------------------
-
-        clean : {
-            all: [
-                '.gitignore',
-                'vendor',
-                'node_modules'
-            ],
-
-            git: [
-                '.gitignore'
-            ],
-        },
 
         // --- Watcher ---------------------------------------------------------
 
@@ -210,7 +197,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compress');
 
@@ -299,6 +285,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("init", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat']);
-    grunt.registerTask("dev", ['clean:git','compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat', 'coffee', 'sass', 'watch']);
+    grunt.registerTask("dev", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat', 'coffee', 'sass', 'watch']);
 
 };
