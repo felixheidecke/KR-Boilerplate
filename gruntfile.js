@@ -84,10 +84,9 @@ module.exports = function(grunt) {
             }
         },
 
+        // --- Copy vendor assets to htdocs  -----------------------------------
+
         copy: {
-
-            // --- copy fonts to htdocs ----------------------------------------
-
             vendorFonts: {
                 files: [{
                     expand: true,
@@ -103,9 +102,6 @@ module.exports = function(grunt) {
                 }],
             },
 
-
-            // --- copy images to htdocs ---------------------------------------
-
             vendorImages: {
                 files: [{
                     expand: true,
@@ -119,9 +115,7 @@ module.exports = function(grunt) {
             },
         },
 
-        /**
-         * Compile SASS
-         */
+        // --- Compile Sass and Coffee -----------------------------------------
 
         sass: {
             css: {
@@ -146,6 +140,8 @@ module.exports = function(grunt) {
             }
         },
 
+        // --- Create backups  -------------------------------------------------
+
         compress: {
             backup: {
                 options: {
@@ -159,8 +155,21 @@ module.exports = function(grunt) {
             }
         },
 
-        /* Watcher
-        ========================================================================== */
+        // --- The cleaning lady is in -----------------------------------------
+
+        clean : {
+            all: [
+                '.gitignore',
+                'vendor',
+                'node_modules'
+            ],
+
+            git: [
+                '.gitignore'
+            ],
+        },
+
+        // --- Watcher ---------------------------------------------------------
 
         watch: {
             options: {
@@ -183,6 +192,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compress');
 
@@ -271,6 +281,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("init", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat']);
-    grunt.registerTask("dev", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat', 'coffee', 'sass', 'watch']);
+    grunt.registerTask("dev", ['clean:git','compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat', 'coffee', 'sass', 'watch']);
 
 };
