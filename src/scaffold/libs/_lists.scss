@@ -1,3 +1,5 @@
+$el : ".#{$prefix}list";
+
 // Requires FontAwesome
 @mixin list-fa($content, $text-offset:18px) {
     li {
@@ -11,13 +13,13 @@
     }
 }
 
-.list {
+#{$el} {
     @extend p;
     padding-left: $grid-spacing;
     margin-left: $grid-spacing / 1.5;
 
     &-disc {
-        @extend .list;
+        @extend #{$el};
         list-style: disc;
     }
 
@@ -37,19 +39,17 @@
     }
 
     &-numbered {
-        @extend .list;
+        @extend #{$el};
         list-style: decimal;
     }
-}
 
-.list {
     &-chevron {
-        @extend .list;
+        @extend #{$el};
         @include list-fa("\f054");
     }
 
     &-pdf {
-        @extend .list;
+        @extend #{$el};
         @include list-fa("\f1c1");
     }
 }

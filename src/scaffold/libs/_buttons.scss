@@ -50,21 +50,19 @@ $el : ".#{$prefix}button";
         background-color: darken($button-background-color, 5%);
         box-shadow: 0 0 3px rgba(black, .5);
     }
-}
 
-.button {
     &-next {
-        @extend .button;
+        @extend #{$el};
         @include button-fa("\f101", 'right');
     }
 
     &-back {
-        @extend .button;
+        @extend #{$el};
         @include button-fa("\f100");
     }
 
     &-pdf {
-        @extend .button;
+        @extend #{$el};
         @include button-fa("\f1c1", 'left', 40px);
     }
 }

@@ -1,21 +1,39 @@
 let vendor = {
+
+    // --- http://jquery.com/ --------------------------------------------------
+
     'jquery' : [
-        'jquery.min.js'],
+        'jquery.min.js'
+    ],
+
+    // --- http://purecss.io/ --------------------------------------------------
 
     'pure' : [
         'base-min.css',
         'grids-min.css',
-        'grids-responsive-min.css' ],
+        'grids-responsive-min.css'
+    ],
+
+    // --- http://vuejs.org/ ---------------------------------------------------
 
     'vue' : [
-        'vue.min.js' ],
+        'vue.min.js'
+    ],
+
+    // --- http://hgoebl.github.io/mobile-detect.js/ ---------------------------
 
     'mobile-detect' : [
-        'mobile-detect.min.js' ],
+        'mobile-detect.min.js'
+    ],
+
+    // --- http://andreknieriem.de/simple-lightbox/ ----------------------------
 
     'simplelightbox' : [
         'simple-lightbox.min.js',
-        'simplelightbox.min.css' ],
+        'simplelightbox.min.css'
+    ],
+
+    // --- http://fontawesome.io/ ----------------------------------------------
 
     'font-awesome' : [
         'css/font-awesome.min.css',
@@ -23,7 +41,8 @@ let vendor = {
         'fonts/fontawesome-webfont.svg',
         'fonts/fontawesome-webfont.ttf',
         'fonts/fontawesome-webfont.woff',
-        'fonts/fontawesome-webfont.woff2' ]
+        'fonts/fontawesome-webfont.woff2'
+    ],
 };
 
 const fetch = require('node-fetch');
@@ -108,10 +127,11 @@ module.exports = function(grunt) {
             css: {
                 options: {
                     style : "expanded",
+                    noCache: true,
                     cacheLocation : '.cache/'
                 },
                 files: {
-                    'htdocs/css/style.css': 'src/scss/style.scss'
+                    'htdocs/css/style.css': 'src/sass/style.scss'
                 }
             }
         },
@@ -251,6 +271,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("init", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat']);
-    grunt.registerTask("dev", ['coffee', 'sass', 'watch']);
+    grunt.registerTask("dev", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat', 'coffee', 'sass', 'watch']);
 
 };

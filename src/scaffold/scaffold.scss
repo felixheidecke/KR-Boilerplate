@@ -1,17 +1,17 @@
 // --- setting defaults --------------------------------------------------------
 
 // prefixing selectors
-$prefix : "kr-" !default;
+$prefix                  : "kr-" !default;
 
-$grid-spacing : 20px !default;
-$viewport     : $grid-spacing * 64 !default; // = 1280px
+$grid-spacing            : 20px !default;
+$viewport                : $grid-spacing * 64 !default; // = 1280px
 
-$font-size   : 16px !default;
-$line-height : 26px !default;
+$font-size               : 16px !default;
+$line-height             : 26px !default;
 
-$c-light     : #fff;
-$c-gray      : lighten(black, 50%);
-$c-dark	     : lighten(black, 20%);
+$c-light                 : #fff;
+$c-gray                  : lighten(black, 50%);
+$c-dark	                 : lighten(black, 20%);
 
 $button-background-color : #E6E6E6 !default;
 $button-border-color     : #999 !default;
