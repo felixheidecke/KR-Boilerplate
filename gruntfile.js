@@ -14,25 +14,6 @@ let vendor = {
         'grids-responsive-min.css'
     ],
 
-    // --- http://vuejs.org/ ---------------------------------------------------
-
-    'vue' : [
-        'vue.min.js'
-    ],
-
-    // --- http://hgoebl.github.io/mobile-detect.js/ ---------------------------
-
-    'mobile-detect' : [
-        'mobile-detect.min.js'
-    ],
-
-    // --- http://andreknieriem.de/simple-lightbox/ ----------------------------
-
-    'simplelightbox' : [
-        'simple-lightbox.min.js',
-        'simplelightbox.min.css'
-    ],
-
     // --- http://fontawesome.io/ ----------------------------------------------
 
     'font-awesome' : [
@@ -43,6 +24,43 @@ let vendor = {
         'fonts/fontawesome-webfont.woff',
         'fonts/fontawesome-webfont.woff2'
     ],
+
+    // --- http://vuejs.org/ ---------------------------------------------------
+
+/*
+  'vue' : [
+        'vue.min.js'
+    ],
+*/
+
+    // --- http://hgoebl.github.io/mobile-detect.js/ ---------------------------
+
+/*
+    'mobile-detect' : [
+        'mobile-detect.min.js'
+    ],
+*/
+
+    // --- http://andreknieriem.de/simple-lightbox/ ----------------------------
+
+/*
+    'simplelightbox' : [
+        'simple-lightbox.min.js',
+        'simplelightbox.min.css'
+    ],
+*/
+
+    // --- http://lokeshdhakar.com/projects/lightbox2/ -------------------------
+/*
+    'lightbox2' : [
+        'js/lightbox.min.js',
+        'css/lightbox.min.css',
+        'images/close.png',
+        'images/loading.gif',
+        'images/next.png',
+        'images/prev.png'
+    ],
+*/
 };
 
 const fetch = require('node-fetch');
