@@ -17,6 +17,5 @@ node_modules/
 # --- Boilerplate --------------------------------------------------------------
 
 temp/
-backup/
 htdocs/*
 !/htdocs/index.html

@@ -1,7 +1,7 @@
 {
   "author": "Felix Heidecke",
   "description": "Combines Sass (-> CSS) and Coffee (-> JS) framework basics",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "init": "grunt init",
     "dev": "grunt dev"
