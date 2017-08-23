@@ -18,4 +18,4 @@ node_modules/
 
 temp/
 htdocs/*
-!/htdocs/index.html
+!/htdocs/index.htm
