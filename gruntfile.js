@@ -93,11 +93,11 @@ module.exports = function(grunt) {
 
         concat : {
             vendorJs : {
-                src: ['vendor/**/*.js'],
+                src: ['temp/vendor/**/*.js'],
                 dest: 'htdocs/js/vendor.min.js'
             },
             vendorCss : {
-                src: ['vendor/**/*.css'],
+                src: ['temp/vendor/**/*.css'],
                 dest: 'htdocs/css/vendor.min.css'
             }
         },
@@ -110,12 +110,12 @@ module.exports = function(grunt) {
                     expand: true,
                     flatten: true,
                     src: [
-                        'vendor/**/*.otf',
-                        'vendor/**/*.eot',
-                        'vendor/**/*-webfont.svg', // special for fontawesome
-                        'vendor/**/*.ttf',
-                        'vendor/**/*.woff',
-                        'vendor/**/*.woff2'],
+                        'temp/vendor/**/*.otf',
+                        'temp/vendor/**/*.eot',
+                        'temp/vendor/**/*-webfont.svg', // special for fontawesome
+                        'temp/vendor/**/*.ttf',
+                        'temp/vendor/**/*.woff',
+                        'temp/vendor/**/*.woff2'],
                     dest: 'htdocs/fonts/'
                 }],
             },
@@ -125,9 +125,9 @@ module.exports = function(grunt) {
                     expand: true,
                     flatten: true,
                     src: [
-                        'vendor/**/*.jpg',
-                        'vendor/**/*.png',
-                        'vendor/**/*.gif'],
+                        'temp/vendor/**/*.jpg',
+                        'temp/vendor/**/*.png',
+                        'temp/vendor/**/*.gif'],
                     dest: 'htdocs/images/'
                 }],
             },
@@ -158,19 +158,8 @@ module.exports = function(grunt) {
             }
         },
 
-        // --- Create backups  -------------------------------------------------
-
-        compress: {
-            backup: {
-                options: {
-                    archive: 'backup/' + timestamp() + '.zip'
-                },
-                files: [{
-                    src: ['src/**', 'htdocs/**'],
-                    dest: '/',
-                    filter: 'isFile'
-                }]
-            }
+        clean: {
+            tempFiles: ['temp'],
         },
 
 
@@ -197,6 +186,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compress');
 
@@ -227,7 +217,7 @@ module.exports = function(grunt) {
                     let filesFullUri = assets.map(function(file) { return baseUrl + lib + "/" + version + "/" + file });
 
                     // push to curlDir
-                    curlDir['vendor/' + lib] = filesFullUri;
+                    curlDir['temp/vendor/' + lib] = filesFullUri;
 
                 }).then(function(){
                     if (Object.keys(curlDir).length === Object.keys(libs).length) {
@@ -269,7 +259,7 @@ module.exports = function(grunt) {
                     let filesFullUri = assets.map(function(file) { return baseUrl + lib + "/" + version + "/" + file });
 
                     // push to curlDir
-                    curlDir['vendor/' + lib] = filesFullUri;
+                    curlDir['temp/vendor/' + lib] = filesFullUri;
 
                 }).then(function(){
                 if (Object.keys(curlDir).length === Object.keys(libs).length) {
@@ -284,7 +274,7 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask("init", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat']);
-    grunt.registerTask("dev", ['compress:backup', 'cdnjs', 'curl-dir', 'copy', 'concat', 'coffee', 'sass', 'watch']);
+    grunt.registerTask("init", ['cdnjs', 'curl-dir', 'copy', 'concat', 'clean:tempFiles']);
+    grunt.registerTask("dev", ['coffee', 'sass', 'watch']);
 
 };

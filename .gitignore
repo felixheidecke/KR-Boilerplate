@@ -16,7 +16,7 @@ node_modules/
 
 # --- Boilerplate --------------------------------------------------------------
 
-vendor/
+temp/
 backup/
 htdocs/*
 !/htdocs/index.html
