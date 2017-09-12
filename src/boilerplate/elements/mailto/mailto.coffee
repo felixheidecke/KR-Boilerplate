@@ -1,4 +1,4 @@
-$(document).ready ->
+jQuery.fn.krMailto = (callback) ->
     $('[data-mailto]').each ->
 
         encoded = $(@).text().trim()
@@ -7,15 +7,18 @@ $(document).ready ->
             .replace /(\[minus\])/g, "-"
             .replace /(\[dot\])/g, "."
 
-        if $(@).data('mailto').length != 0
-            $(@)
-                .after decoded
-                .remove()
-        else
-            href = $('<a>',
+        replacement = decoded
+
+        if $(@).data('mailto').length == 0
+            replacement = $('<a>',
                 href : "mailto:#{decoded.toLowerCase()}"
                 text : decoded )
 
+        $.when(
             $(@)
-                .after href
+                .after replacement
                 .remove()
+        ).then(
+            if typeof callback == "function"
+                callback()
+        )

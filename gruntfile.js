@@ -136,7 +136,7 @@ module.exports = function(grunt) {
             default: {
                 files: {
                     'htdocs/js/default.js' : [
-                        'src/scaffold/**/*.coffee',
+                        'src/boilerplate/**/*.coffee',
                         'src/coffee/**/*.coffee' ]
                 }
             }
