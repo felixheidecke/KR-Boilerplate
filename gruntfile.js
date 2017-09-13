@@ -71,7 +71,7 @@ let vendor = {
         ]
     },
 
-    'swiper' : { // ------------------------------------- iDangero.us Swiper ---
+    'Swiper' : { // ------------------------------------- iDangero.us Swiper ---
         install : false,
         js: [
             'js/swiper.min.js'
