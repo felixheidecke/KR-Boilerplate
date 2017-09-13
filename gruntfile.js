@@ -69,6 +69,16 @@ let vendor = {
             'images/next.png',
             'images/prev.png'
         ]
+    },
+
+    'swiper' : { // ------------------------------------- iDangero.us Swiper ---
+        install : false,
+        js: [
+            'js/swiper.min.js'
+        ],
+        css: [
+            'css/swiper.min.css'
+        ]
     }
 };
 
