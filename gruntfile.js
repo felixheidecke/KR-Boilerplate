@@ -83,6 +83,7 @@ let vendor = {
 };
 
 const fetch  = require('node-fetch');
+const moment = require('moment');
 
 module.exports = function(grunt) {
     grunt.initConfig({
@@ -156,6 +157,18 @@ module.exports = function(grunt) {
             tempFiles: ['temp'],
         },
 
+        zip: {
+            backup: {
+                src: [
+                    'htdocs/**/*',
+                    'src/**/*',
+                    'gruntfile.js',
+                    'package.json',
+                    'KR-Boilerplate.bat' ],
+                dest: 'backup/project-' + moment().format('DD-MM-YYYY_HH[h]-mm[m]-ss[s]') + '.zip'
+            }
+        },
+
         // --- Watcher ---------------------------------------------------------
 
         watch: {
@@ -181,6 +194,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-zip');
 
     grunt.registerMultiTask('cdnjs', 'Fetch JSON from CDN', function() {
 
@@ -290,4 +304,5 @@ module.exports = function(grunt) {
     grunt.registerTask("setup", ['cdnjs', 'curl-dir', 'copy', 'concat', 'clean']);
     grunt.registerTask("watcher",  ['coffee', 'sass', 'watch']);
     grunt.registerTask("build",  ['coffee', 'sass']);
+    grunt.registerTask("backup",  ['zip:backup']);
 };
