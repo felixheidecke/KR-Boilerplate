@@ -3,8 +3,10 @@
   "description": "Combines Sass (-> CSS) and Coffee (-> JS) framework basics",
   "version": "0.1.2",
   "scripts": {
-    "init": "grunt init",
-    "dev": "grunt dev"
+    "setup":  "grunt setup",
+    "watch":  "grunt watch",
+    "build":  "grunt build",
+    "backup": "grunt backup"
   },
   "devDependencies": {
     "chai": "^4.1.2",
