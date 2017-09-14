@@ -5,13 +5,17 @@ Eine Framework von Klickrhein.de in zusammenarbeit mit felix.heidecke.me
 
 ### KR-Mailto
 
-Um eine E-Mail Adresse zu verschleiern wird folgender Code verwendet:
+Um eine E-Mail Adresse zu verschleiern wird folgender Code verwendet.
 
 `<span data-mailto>max[at]muster[minus]mann[dot]de</span>`
 
-Ergebnis: max@muster-mann.de
+ergibt: `<a href="mailto:max@muster-mann.de">max@muster-mann.de</a>`
 
-_Wenn die E-Mail Addresse ohne Hyperlink nur abgebildet soll, dann muss das Attribut data-mailto="false" gesetzt werden._
+Optional kann die Adresse ohne Hyperlink ausgegeben werden:
+
+`<span data-mailto="false">max[at]muster[minus]mann[dot]de</span>`
+
+ergibt: `max@muster-mann.de`
 
 ---
 

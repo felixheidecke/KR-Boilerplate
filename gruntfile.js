@@ -287,6 +287,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask("init", ['cdnjs', 'curl-dir', 'copy', 'concat', 'clean']);
-    grunt.registerTask("dev",  ['coffee', 'sass', 'watch']);
+    grunt.registerTask("setup", ['cdnjs', 'curl-dir', 'copy', 'concat', 'clean']);
+    grunt.registerTask("watch",  ['coffee', 'sass', 'watch']);
+    grunt.registerTask("build",  ['coffee', 'sass']);
 };
