@@ -18,7 +18,7 @@ echo    den Projektvoraussetzungen angepasst wurde.
 echo.
 echo  [s] --^> Setup
 echo.
-echo  [w] --^> Watch   (Compiler)
+echo  [w] --^> Watcher (Compiler)
 echo.
 echo  [m] --^> Build   (Einmaliges compilen)
 echo.
@@ -37,9 +37,10 @@ Goto Home
 :Setup
 cls
 color 07
-echo * * * * *
-echo * SETUP *
-echo * * * * *
+echo.
+echo  * * * * *
+echo  * SETUP *
+echo  * * * * *
 echo.
 call npm install
 call npm run setup
@@ -50,23 +51,25 @@ echo Setup wurde beendet.
 pause
 goto Home
 
-:Compile
+:Watch
 cls
 color 07
-echo * * * * * * *
-echo * COMPILER  *
-echo * * * * * * *
 echo.
-call npm run watch
+echo  * * * * * *
+echo  * WATCHER *
+echo  * * * * * *
+echo.
+call npm run watcher
 pause
 goto Home
 
 :Build
 cls
 color 07
-echo * * * * *
-echo * BUILD *
-echo * * * * *
+echo.
+echo  * * * * *
+echo  * BUILD *
+echo  * * * * *
 echo.
 call npm run build
 pause
