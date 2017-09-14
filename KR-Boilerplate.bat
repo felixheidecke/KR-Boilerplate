@@ -30,7 +30,7 @@ SET /p menu=Auswahl:
 if '%menu%' == 's' goto Setup
 if '%menu%' == 'w' goto Watch
 if '%menu%' == 'm' goto Build
-::if '%menu%' == 'b' goto Backup
+if '%menu%' == 'b' goto Backup
 if '%menu%' == 'x' goto Exit
 Goto Home
 
@@ -72,6 +72,18 @@ echo  * BUILD *
 echo  * * * * *
 echo.
 call npm run build
+pause
+goto Home
+
+:Backup
+cls
+color 07
+echo.
+echo  * * * * * *
+echo  * BACKUP  *
+echo  * * * * * *
+echo.
+call npm run backup
 pause
 goto Home
 
