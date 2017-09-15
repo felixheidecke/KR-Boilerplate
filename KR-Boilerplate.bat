@@ -13,7 +13,7 @@ echo    ^|_^|\_\_^|  \_\     ^|____/ \___/^|_^|_^|\___^|_^|  ^| .__/^|_^|\__,_^|
 echo                                                ^| ^|
 echo                                                ^|_^|
 echo.
-echo    Bitte vor dem Projektstart ueberpruefen, ob die gruntfile.js entsprechend
+echo    Bitte vor dem Projektstart ueberpruefen, ob die config.json entsprechend
 echo    den Projektvoraussetzungen angepasst wurde.
 echo.
 echo  [s] --^> Setup
