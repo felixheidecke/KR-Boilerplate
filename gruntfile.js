@@ -81,6 +81,7 @@ module.exports = function(grunt) {
                     'src/**/*',
                     'gruntfile.js',
                     'package.json',
+                    'config.json',
                     'KR-Boilerplate.bat' ],
                 dest: 'backup/project-' + moment().format('DD-MM-YYYY_HH[h]-mm[m]-ss[s]') + '.zip'
             }
