@@ -22,7 +22,7 @@ ergibt: `max@muster-mann.de`
 ### KR-Akkordeon
 
 ```
-$(".akkordeon").krAkkordeon({   // Auf Element .akkordeon anwenden
+$(".demo").krAkkordeon({        // Auf Element .demo anwenden
     initClosed    :  true,      // Alle Karten schließen (Initial)
     initfirstOpen :  true,      // Erste Karte geöffnet (Initial)
     speed         : "fast",     // Slide Speed
@@ -31,5 +31,16 @@ $(".akkordeon").krAkkordeon({   // Auf Element .akkordeon anwenden
     tabItem       : '.tab',     // Tab Klasse (Initial)
     contentItem   : '.content', // Inhalt Klasse (Initial)
     activeClass   : 'is-active' // Aktive Klasse (Initial)
+});
+```
+
+---
+
+### KR-Form
+
+```
+$(".demo").krForm({      // Auf Element .demo anwenden
+    resetOnLoad : true,  // Beim Reload, Formular zurücksetzen
+    hideLabels  : false  // Labels direkt ausblenden
 });
 ```
