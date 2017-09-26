@@ -11,9 +11,9 @@ echo    ^|  ^< ^|  _  /______^|  _ ^< / _ \^| ^| ^|/ _ \ '__^| '_ \^| ^|/ _` ^| 
 echo    ^| . \^| ^| ^\ \      ^| ^|_) ^| (_) ^| ^| ^|  __/ ^|  ^| ^|_) ^| ^| (_^| ^| ^|^|  __/
 echo    ^|_^|\_\_^|  \_\     ^|____/ \___/^|_^|_^|\___^|_^|  ^| .__/^|_^|\__,_^|\__\___^|
 echo                                                ^| ^|
-echo                                                ^|_^|
+echo                                                ^|_^|       Version 0.2.0
 echo.
-echo    Bitte vor dem Projektstart ueberpruefen, ob die config.json entsprechend
+echo    Bitte vor dem Setup ueberpruefen, ob die config.json entsprechend
 echo    den Projektvoraussetzungen angepasst wurde.
 echo.
 echo  [s] --^> Setup
@@ -22,7 +22,7 @@ echo  [w] --^> Watcher (Compiler)
 echo.
 echo  [m] --^> Build   (Einmaliges compilen)
 echo.
-echo  [b] --^> Backup  (Noch nicht implementiert)
+echo  [b] --^> Backup
 echo.
 echo  [x] --^> Exit
 echo.
