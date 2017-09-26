@@ -5,6 +5,10 @@ Eine Framework von Klickrhein.de in zusammenarbeit mit felix.heidecke.me
 
 ### KR-Mailto
 
+```
+$('body').krMailto();  // Alle Elemente innerhalb von "body" transformieren
+```
+
 Um eine E-Mail Adresse zu verschleiern wird folgender Code verwendet.
 
 `<span data-mailto>max[at]muster[minus]mann[dot]de</span>`
