@@ -31,3 +31,5 @@ jQuery.fn.krTopLink = (params) ->
     $button.on 'click', (e) ->
         e.preventDefault()
         $('body,html').animate { scrollTop: 0 }, params.speed
+
+    return @

@@ -4,24 +4,26 @@ jQuery.fn.krForm = (params) ->
     hideLabels: false
   }, params)
 
-  if $(@).length > 0
-    if params.resetOnLoad
-      $(@)[0].reset()
+  if $(@).length == 0
+    return false
 
-    if params.hideLabels
-      $(@).find('label').hide()
+  if params.resetOnLoad
+    $(@)[0].reset()
 
-    $self = $(@)
-    $self.find('input, textarea').on 'keyup focus blur', ->
-      $label = $self.find('label[for=' + $(@).attr('id') + ']:not(.is-visible)')
-      if $(@).val().trim().length > 0
-        $label.slideDown()
-      else
-        $label.slideUp()
+  if params.hideLabels
+    $(@).find('label').hide()
 
-    $self.find('select').on 'keyup focus click', ->
-      $fo = $(@).find('option:first-child')
-      if $fo.hasClass('label')
-        $fo.attr 'disabled', 'disabled'
-  else
-    console.log 'krForm reference could not be found!'
+  $self = $(@)
+  $self.find('input, textarea').on 'keyup focus blur', ->
+    $label = $self.find('label[for=' + $(@).attr('id') + ']:not(.is-visible)')
+    if $(@).val().trim().length > 0
+      $label.slideDown()
+    else
+      $label.slideUp()
+
+  $self.find('select').on 'keyup focus click', ->
+    $fo = $(@).find('option:first-child')
+    if $fo.hasClass('label')
+      $fo.attr 'disabled', 'disabled'
+
+  return @

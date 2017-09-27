@@ -22,3 +22,4 @@ jQuery.fn.krMailto = (callback) ->
             if typeof callback == "function"
                 callback()
         )
+    return @

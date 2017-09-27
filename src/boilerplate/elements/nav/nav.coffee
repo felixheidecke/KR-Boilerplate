@@ -7,6 +7,10 @@ jQuery.fn.krNav = (params) ->
     scrollSpeed: 600
     slideSpeed: 'slow'
   }, params)
+
+  if $(@).length == 0
+    return false
+
   $nav = $(@)
   $list = $nav.find('.nav-level-1')
   $burger = $('<button>',
@@ -29,3 +33,5 @@ jQuery.fn.krNav = (params) ->
       $nav.removeClass 'is-on'
       $list.slideUp 'fast', ->
         $(this).removeAttr 'style'
+
+  return @

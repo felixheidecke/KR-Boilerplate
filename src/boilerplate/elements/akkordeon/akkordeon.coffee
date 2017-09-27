@@ -1,21 +1,24 @@
 jQuery.fn.krAkkordeon = (settings) ->
 
-  s = jQuery.extend({
+  s = jQuery.extend(
     initClosed    : true
     initfirstOpen : true
     speed         : 'fast'
     onlyOneCard   : true
 
-    cardItem      : '.card',
-    tabItem       : '.tab',
-    contentItem   : '.content',
+    cardItem      : '.card'
+    tabItem       : '.tab'
+    contentItem   : '.content'
     activeClass   : 'is-active'
 
-  }, settings)
+  , settings)
 
-  $cards      = $(@).find(s.cardItem)
-  $tabs       = $(@).find(s.tabItem)
-  $contents   = $(@).find(s.contentItem)
+  if $(@).length == 0
+    return false
+
+  $cards      = $(@).find s.cardItem
+  $tabs       = $(@).find s.tabItem
+  $contents   = $(@).find s.contentItem
 
   $(@).addClass s.activeClass
 
@@ -26,7 +29,6 @@ jQuery.fn.krAkkordeon = (settings) ->
 
   $tabs.on 'click', ->
     $card = $(@).parent(s.cardItem)
-#    $tab = $(@)
     $content = $card.find(s.contentItem)
     $card.toggleClass s.activeClass
     if !$card.hasClass(s.activeClass)
@@ -36,3 +38,5 @@ jQuery.fn.krAkkordeon = (settings) ->
       if s.onlyOneCard
         $cards.not($card).removeClass s.activeClass
         $contents.not($content).slideUp s.speed
+
+  return @
