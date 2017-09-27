@@ -25,8 +25,18 @@
         @include reset;
     }
 
-    &-text-center {
-        text-align: center;
+    &-text {
+        &-center {
+            text-align: center;
+        }
+
+        &-left {
+            text-align: left;
+        }
+
+        &-right {
+            text-align: right;
+        }
     }
 }
 
@@ -47,6 +57,7 @@
     }
 }
 
+// ------------------------------------------------------------- Hide Helper ---
 
 .h-xs-hidden {
     @include breakpoint("xs") {
@@ -96,6 +107,8 @@
     }
 }
 
+// ---------------------------------------------------- Pure-CSS add Padding ---
+
 .pure-g.pure-padded-children {
     margin: {
         left: -$grid-spacing;
@@ -107,5 +120,55 @@
             left: $grid-spacing;
             right: $grid-spacing;
         };
+    }
+
+    &-halved {
+        margin: {
+            left: -$grid-spacing / 2;
+            right: -$grid-spacing / 2;
+        };
+
+        > [class*="pure-u"] {
+            padding: {
+                left: $grid-spacing / 2;
+                right: $grid-spacing / 2;
+            };
+        }
+    }
+}
+
+// ----------------------------------------------- Preservable Aspect Ratios ---
+
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+
+    &:before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.h-aspect-ratio {
+
+    &-16-9 {
+        @include aspect-ratio(19,9);
+    }
+
+    &-16-10 {
+        @include aspect-ratio(19,10);
+    }
+
+    &-4-3 {
+        @include aspect-ratio(4,3);
     }
 }
