@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+
+    <title>krForm</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../htdocs/css/vendor.min.css"/>
+    <link rel="stylesheet" href="../htdocs/css/style.css"/>
+    <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+<div class="wrapper">
+    <h1 class="h-text-center">
+        krForm
+    </h1>
+    <form action="post" class="demo-form kr-form">
+        <div class="pure-g pure-padded-children-halved">
+            <div class="pure-u-1 pure-u-sm-1-2 kr-form-item-text">
+                <label for="firstname">Firstname</label>
+                <input type="text" id="firstname">
+            </div>
+            <div class="pure-u-1 pure-u-sm-1-2 kr-form-item-text">
+                <label for="lastname">Lastname</label>
+                <input type="text" id="lastname">
+            </div>
+            <div class="pure-u-1 pure-u-sm-1-4 kr-form-item-text">
+                <label for="plz">PLZ</label>
+                <input type="number" id="plz">
+            </div>
+            <div class="pure-u-1 pure-u-sm-3-4 kr-form-item-text">
+                <label for="street">Straße</label>
+                <input type="text" id="street">
+            </div>
+            <div class="pure-u-1 kr-form-item-select">
+                <label for="stuff">Lieblingsname:</label>
+                <select name="stuff" id="stuff">
+                    <option value="">bitte wählen</option>
+                    <option>Anne</option>
+                    <option>Bert</option>
+                    <option>Christoph</option>
+                    <option>Doris</option>
+                    <option>Emil</option>
+                    <option>Frank</option>
+                </select>
+            </div>
+            <div class="pure-u-1 kr-form-item-textarea">
+                <label for="street">Ihre Nachricht</label>
+                <textarea name="street" id="street" cols="30" rows="10"></textarea>
+            </div>
+            <div class="pure-u-1 pure-u-sm-1-2 kr-form-item-clicker">
+                <label for="agb"><input type="checkbox" id="agb"> Ich habe die AGB gelesen und akzeptiert.</label>
+            </div>
+            <div class="pure-u-1 pure-u-sm-1-2 h-text-right">
+                <input type="submit" value="Abschicken">
+            </div>
+        </div>
+    </form>
+</div>
+<style>
+.demo-form {
+    max-width:750px;
+    margin: 0 auto;
+}
+</style>
+<script src="../htdocs/js/vendor.min.js"></script>
+<script src="../htdocs/js/default.js"></script>
+<script>
+$('.demo-form').krForm();
+</script>
+</body>
+</html>

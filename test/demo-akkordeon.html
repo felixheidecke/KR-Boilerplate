@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+
+    <title>krAkkordeon</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../htdocs/css/vendor.min.css"/>
+    <link rel="stylesheet" href="../htdocs/css/style.css"/>
+    <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+<div class="wrapper">
+    <h1>
+        krAkkordeon
+    </h1>
+    <ul class="akkordeon pure-g">
+        <li class="card pure-u-1">
+            <h3 class="tab">
+                Lorem ipsum auf Deutsch
+            </h3>
+            <div class="content">
+                <p>
+                    Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder w&uuml;nscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zuf&auml;lligen Umst&auml;nden, in denen M&uuml;hen und Schmerz ihm gro&szlig;e Freude bereiten k&ouml;nnen.
+                </p>
+            </div>
+        </li>
+        <li class="card pure-u-1">
+            <h3 class="tab">
+                Hinter den Wortbergen
+            </h3>
+            <div class="content">
+                <p>
+                    Weit hinten, hinter den Wortbergen, fern der L&auml;nder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der K&uuml;ste des Semantik, eines gro&szlig;en Sprachozeans. Ein kleines B&auml;chlein namens Duden flie&szlig;t durch ihren Ort und versorgt sie mit den n&ouml;tigen Regelialien.
+                </p>
+            </div>
+        </li>
+        <li class="card pure-u-1">
+            <h3 class="tab">
+                Typoblindtext
+            </h3>
+            <div class="content">
+                <p>
+                    Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da sind und wie sie aussehen. Manchmal benutzt man Worte wie Hamburgefonts, Rafgenduks oder Handgloves, um Schriften zu testen. Manchmal S&auml;tze, die alle Buchstaben des Alphabets enthalten - man nennt diese S&auml;tze &raquo;Pangrams&laquo;.
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>
+<style>
+    .akkordeon .card {
+        border: 1px solid lightgray;
+        margin-bottom: 20px;
+    }
+
+    .akkordeon .card .tab {
+        background: lightgray;
+        padding: 5px 10px 4px;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    .akkordeon .card .content {
+        padding: 0 10px;
+    }
+</style>
+<script src="../htdocs/js/vendor.min.js"></script>
+<script src="../htdocs/js/default.js"></script>
+<script>
+$('.akkordeon').krAkkordeon()
+</script>
+</body>
+</html>

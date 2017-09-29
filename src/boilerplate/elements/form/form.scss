@@ -6,78 +6,118 @@ $el : ".#{$prefix}form";
 		box-sizing: border-box;
 	}
 
-	@include breakpoint("md and up")
-	{
-		.kr-inline {
-			padding-left: 10px;
-			padding-right: 10px;
-
-			label { right: 21px; }
-			&-first-child { padding-right: 10px; label { right: 21px; } }
-			&-last-child { padding-left: 10px; }
-		}
-	}
-
-	input[type="text"],
-	input[type="email"],
-	input[type="time"],
-	input[type="number"],
-	input[type="date"],
-	input[type="digit"],
-	input[type="tel"],
-	textarea,
-	select {
-		width: 100%;
-		margin: 5px 0 20px;
-		padding: 5px;
-		border: 1px solid rgba($c-gray, .5);
-		border-radius: 3px;
-	}
-
-	input[type="checkbox"],
-	input[type="radio"] {
-		display: inline-block;
-		float: left;
-		margin: 3px 15px 10px 0;
-	}
-
 	textarea {
 		resize: vertical;
 		min-height: 100px;
 	}
 
-	label {
-		position: absolute;
-		display: block;
-		display: none;
-		font-style: italic;
-		transition: height 1s ease;
-		right: 11px;
-		top: 11px;
-		color: lighten($c-gray, 15%);
+	input[type="submit"] {
+		@extend .kr-button;
+	}
 
-		&.number {
-			right: 24px;
-		}
+	&-item-text {
+		display: flex;
+		align-items: stretch;
+		margin-bottom: $grid-spacing / 2;
 
-		&.visible {
-			display: block;
-			position: static;
+		label {
+			@include OpenSans;
+			padding: 5px 10px;
+			background-color: lighten($c-gray, 40%);
+			border: 1px solid rgba($c-gray, .5);
+			border-bottom-left-radius: 3px;
+			border-top-left-radius: 3px;
+			color: $c-gray;
+
+			+ input {
+				width: 100%;
+				padding: 5px 10px;
+				border: 1px solid rgba($c-gray, .5);
+				border-bottom-right-radius: 3px;
+				border-top-right-radius: 3px;
+				border-left: 0;
+				outline: none;
+				min-width: 20px;
+			}
 		}
 	}
 
-	input[type="submit"] {
-		width: inherit;
-		padding: 5px 10px;
-		text-decoration: none;
+	&-item-textarea {
+		margin-bottom: $grid-spacing / 2;
 
-		background-color: $c-gray;
-		color: $c-dark;
-		border: 0 none;
-		border-radius: 3px;
+		label {
+			@include OpenSans;
+			padding: 5px 0 0 10px;
+			background-color: transparent;
+			color: $c-gray;
+			position: absolute;
 
-		&:hover {
-			background-color: $c-gray;
+			+ textarea {
+				width: 100%;
+				border: 1px solid rgba($c-gray, .5);
+				border-radius: 3px;
+				outline: none;
+				padding: 32px 9px;
+			}
+		}
+	}
+
+	&-item-clicker {
+		margin-bottom: $grid-spacing / 2;
+
+		label {
+			@include OpenSans;
+			position: relative;
+			padding: 5px 10px 5px 0;
+			color: $c-gray;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+
+			input {
+				margin-right: 10px;
+			}
+		}
+	}
+
+	&-item-select {
+		display: flex;
+		align-items: stretch;
+		margin-bottom: $grid-spacing / 2;
+
+		label {
+			@include OpenSans;
+			padding: 5px 10px;
+			background-color: lighten($c-gray, 40%);
+			border: 1px solid rgba($c-gray, .5);
+			border-bottom-left-radius: 3px;
+			border-top-left-radius: 3px;
+			color: $c-gray;
+		}
+
+		select {
+			position: relative;
+			width: 100%;
+			padding: 5px 10px 5px 9px;
+			border: 1px solid rgba($c-gray, .5);
+			border: {
+				bottom: {
+					right-radius: 3px;
+					left-radius: 0;
+				}
+				top: {
+					right-radius: 3px;
+					left-radius: 0;
+				}
+				left: 0;
+			}
+			outline: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+
+			&, option {
+				color: $c-dark;
+			}
 		}
 	}
 }
