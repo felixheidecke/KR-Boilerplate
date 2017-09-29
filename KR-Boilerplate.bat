@@ -1,3 +1,4 @@
+MODE 80, 30
 @echo off
 DEL /Q .gitignore
 :Home
