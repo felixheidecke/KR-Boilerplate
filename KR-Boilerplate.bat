@@ -101,7 +101,8 @@ echo  * * * * * *
 echo.
 call npm run update
 echo.
-echo Nach dem Update muss "Setup" neu ausgeführt werden!
+echo Nach dem Update muss SETUP neu ausgefuehrt werden!
+echo.
 pause
 goto Ende
 
