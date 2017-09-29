@@ -6,7 +6,8 @@
     "setup": "grunt setup",
     "watcher": "grunt watcher",
     "build": "grunt build",
-    "backup": "grunt backup"
+    "backup": "grunt backup",
+    "update": "grunt update"
   },
   "devDependencies": {
     "chai": "^4.1.2",
