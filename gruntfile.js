@@ -33,7 +33,7 @@ module.exports = function(grunt) {
                     flatten: true,
                     src: [],
                     dest: 'htdocs/fonts/'
-                }],
+                }]
             },
 
             vendorImages: {
@@ -42,8 +42,29 @@ module.exports = function(grunt) {
                     flatten: true,
                     src: [],
                     dest: 'htdocs/images/'
-                }],
-            },
+                }]
+            }
+        },
+
+        move: {
+            update: {
+                files: [{
+                    src: 'temp/KR-Boilerplate-master/src/boilerplate/',
+                    dest: 'src/boilerplate'
+                }, {
+                    src: 'temp/KR-Boilerplate-master/test/',
+                    dest: 'test'
+                }, {
+                    src: [
+                        'temp/KR-Boilerplate-master/config.json',
+                        'temp/KR-Boilerplate-master/gruntfile.js',
+                        'temp/KR-Boilerplate-master/package.json',
+                        'temp/KR-Boilerplate-master/.gitignore',
+                        'temp/KR-Boilerplate-master/README.md',
+                        'temp/KR-Boilerplate-master/KR-Boilerplate.bat'],
+                    dest: './'
+                }]
+            }
         },
 
         // --- Compile Sass and Coffee -----------------------------------------
@@ -72,6 +93,9 @@ module.exports = function(grunt) {
 
         clean: {
             tempFiles: ['temp'],
+            update: [
+                'src/boilerplate',
+                'test']
         },
 
         zip: {
@@ -84,6 +108,20 @@ module.exports = function(grunt) {
                     'config.json',
                     'KR-Boilerplate.bat' ],
                 dest: 'backup/project-' + moment().format('DD-MM-YYYY_HH[h]-mm[m]-ss[s]') + '.zip'
+            }
+        },
+
+        curl: {
+            update: {
+                src: 'https://github.com/felixheidecke/KR-Boilerplate/archive/master.zip',
+                dest: 'temp/master.zip'
+            }
+        },
+
+        unzip: {
+            update: {
+                src: 'temp/master.zip',
+                dest: "temp/"
             }
         },
 
@@ -112,6 +150,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-move');
     grunt.loadNpmTasks('grunt-zip');
 
     grunt.registerMultiTask('cdnjs', 'Fetch JSON from CDN', function() {
@@ -223,8 +262,9 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask("setup",   ['cdnjs', 'curl-dir', 'copy', 'concat', 'clean']);
+    grunt.registerTask("setup",   ['cdnjs', 'curl-dir', 'copy', 'concat', 'clean:tempFiles']);
     grunt.registerTask("watcher", ['coffee', 'sass', 'watch']);
     grunt.registerTask("build",   ['coffee', 'sass']);
     grunt.registerTask("backup",  ['zip:backup']);
+    grunt.registerTask("update",  ['curl:update', 'unzip:update', 'clean:update', 'move:update', 'clean:tempFiles']);
 };

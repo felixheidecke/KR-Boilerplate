@@ -11,7 +11,7 @@ echo    ^|  ^< ^|  _  /______^|  _ ^< / _ \^| ^| ^|/ _ \ '__^| '_ \^| ^|/ _` ^| 
 echo    ^| . \^| ^| ^\ \      ^| ^|_) ^| (_) ^| ^| ^|  __/ ^|  ^| ^|_) ^| ^| (_^| ^| ^|^|  __/
 echo    ^|_^|\_\_^|  \_\     ^|____/ \___/^|_^|_^|\___^|_^|  ^| .__/^|_^|\__,_^|\__\___^|
 echo                                                ^| ^|
-echo                                                ^|_^|       Version 0.3.0
+echo                                                ^|_^|       Version 0.4.0
 echo.
 echo    Bitte vor dem Setup ueberpruefen, ob die config.json entsprechend
 echo    den Projektvoraussetzungen angepasst wurde.
