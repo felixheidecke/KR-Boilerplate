@@ -24,6 +24,8 @@ echo  [m] --^> Build   (Einmaliges compilen)
 echo.
 echo  [b] --^> Backup
 echo.
+echo  [u] --^> Update
+echo.
 echo  [x] --^> Exit
 echo.
 SET /p menu=Auswahl:
@@ -31,6 +33,7 @@ if '%menu%' == 's' goto Setup
 if '%menu%' == 'w' goto Watch
 if '%menu%' == 'm' goto Build
 if '%menu%' == 'b' goto Backup
+if '%menu%' == 'u' goto Update
 if '%menu%' == 'x' goto Exit
 Goto Home
 
@@ -86,6 +89,20 @@ echo.
 call npm run backup
 pause
 goto Home
+
+:Update
+cls
+color 07
+echo.
+echo  * * * * * *
+echo  * UPDATE  *
+echo  * * * * * *
+echo.
+call npm run update
+echo.
+echo Nach dem Update muss "Setup" neu ausgeführt werden!
+pause
+goto Ende
 
 :Ende
 echo.
