@@ -56,7 +56,6 @@ module.exports = function(grunt) {
                     dest: 'test'
                 }, {
                     src: [
-                        'temp/KR-Boilerplate-master/config.json',
                         'temp/KR-Boilerplate-master/gruntfile.js',
                         'temp/KR-Boilerplate-master/package.json',
                         'temp/KR-Boilerplate-master/.gitignore',
