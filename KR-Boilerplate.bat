@@ -100,8 +100,10 @@ echo  * UPDATE  *
 echo  * * * * * *
 echo.
 call npm run update
+call npm install
 echo.
-echo Nach dem Update muss SETUP neu ausgefuehrt werden!
+echo Boilerplate wurde aktualisiert und wird beendet.
+echo Bitte KR-Boilerplate.bat neu starten.
 echo.
 pause
 goto Ende
