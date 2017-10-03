@@ -1,6 +1,6 @@
 {
   "author": "Felix Heidecke",
-  "description": "Combines Sass (-> CSS) and Coffee (-> JS) framework basics",
+  "description": "Klickrhein Boilerplate",
   "version": "0.4.2",
   "scripts": {
     "setup": "grunt setup",
