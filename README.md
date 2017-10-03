@@ -37,14 +37,3 @@ $(".demo").krAkkordeon({        // Auf Element .demo anwenden
     activeClass   : 'is-active' // Aktive Klasse (Initial)
 });
 ```
-
----
-
-### KR-Form
-
-```
-$(".demo").krForm({      // Auf Element .demo anwenden
-    resetOnLoad : true,  // Beim Reload, Formular zurücksetzen
-    hideLabels  : false  // Labels direkt ausblenden
-});
-```
