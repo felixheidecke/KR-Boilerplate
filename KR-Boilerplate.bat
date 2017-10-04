@@ -13,22 +13,22 @@ echo    ^| . \^| ^| ^\ \      ^| ^|_) ^| (_) ^| ^| ^|  __/ ^|  ^| ^|_) ^| ^| (_^
 echo    ^|_^|\_\_^|  \_\     ^|____/ \___/^|_^|_^|\___^|_^|  ^| .__/^|_^|\__,_^|\__\___^|
 echo                                                ^| ^|
 echo                                                ^|_^|
-call node -e console.log("  Version: " + require('./package.json').version);
+call node -e "console.info('   Version:%', require('./package.json').version);"
 echo.
 echo    Bitte vor dem Setup ueberpruefen, ob die config.json entsprechend
 echo    den Projektvoraussetzungen angepasst wurde.
 echo.
-echo  [s] --^> Setup
+echo    [s] --^> Setup
 echo.
-echo  [w] --^> Watcher (Compiler)
+echo    [w] --^> Watcher (Compiler)
 echo.
-echo  [m] --^> Build   (Einmaliges compilen)
+echo    [m] --^> Build   (Einmaliges compilen)
 echo.
-echo  [b] --^> Backup
+echo    [b] --^> Backup
 echo.
-echo  [u] --^> Update
+echo    [u] --^> Update
 echo.
-echo  [x] --^> Exit
+echo    [x] --^> Exit
 echo.
 SET /p menu=Auswahl:
 if '%menu%' == 's' goto Setup
