@@ -28,6 +28,7 @@ $el : ".#{$prefix}form";
 			border-bottom-left-radius: 3px;
 			border-top-left-radius: 3px;
 			color: $c-gray;
+			white-space: nowrap;
 
 			+ input {
 				width: 100%;
