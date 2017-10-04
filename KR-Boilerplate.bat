@@ -1,6 +1,7 @@
 MODE 80, 30
 @echo off
 DEL /Q .gitignore
+DEL /Q npm-debug.log
 :Home
 cls
 color 1f
