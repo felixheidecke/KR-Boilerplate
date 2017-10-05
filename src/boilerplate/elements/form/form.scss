@@ -121,4 +121,56 @@ $el : ".#{$prefix}form";
 			}
 		}
 	}
+
+	&-alert-success,
+	&-alert-error {
+		position: fixed;
+		z-index: 999;
+		bottom: $grid-spacing;
+		padding: $grid-spacing;
+		border-radius: 3px;
+		transform: translateY(200%);
+		animation: {
+			name: kr-form-alert;
+			duration: 3s;
+			iteration-count: 2;
+			direction: alternate;
+		}
+
+		@include breakpoint("sm") {
+			left: $grid-spacing;
+			right: $grid-spacing;
+		}
+
+		@include breakpoint("md and up") {
+			width: 100%;
+			max-width: 700px;
+			left: calc(50% - 350px);
+		}
+	}
+
+	&-alert-success {
+		background-color: lighten($alert-success-color, 33.333%);
+		color: $alert-success-color;
+
+		&:before {
+			content: $form-success-message;
+		}
+	}
+
+	&-alert-error {
+		background-color: lighten($alert-error-color, 33.333%);
+		color: $alert-error-color;
+
+
+		&:before {
+			content: $form-error-message;
+		}
+	}
+}
+
+@keyframes kr-form-alert {
+	0% { opacity: 0; }
+	20% { transform: translateY(0); opacity: 1; }
+	100% { transform: translateY(0); opacity: 1; }
 }
