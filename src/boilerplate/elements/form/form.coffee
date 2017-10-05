@@ -5,22 +5,29 @@ jQuery.fn.krForm = (params) ->
   if $(@).length == 0
     return false
 
-  $form  = $ @
-  action = $(@).attr 'action'
-  method = $(@).attr 'method'
+  $form     = $ @
+  $errorMsg = $ '<p>',
+    class: 'kr-form-alert-error'
+  $successMsg = $ '<p>',
+    class: 'kr-form-alert-success'
 
   $form.on('submit', (e) ->
     e.preventDefault();
 
     $.ajax(
-        url: action
-        method: method
-        accepts: "text/html"
-        dataType: "jsonp"
+        url : $form.attr 'action'
+        type: $form.attr 'method'
+        data: $form.serialize()
         beforeSend: ->
           console.info "Before sending"
-    ).done( ->
-      console.log "Done"
+        statusCode:
+          200: ->
+            $error = $errorMsg.clone();
+            $ 'body'
+              .append $error
+          302: ->
+            $ 'body'
+              .append $successMsg
     )
   )
 
