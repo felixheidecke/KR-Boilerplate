@@ -49,6 +49,12 @@ $alert-error-color                    : #f0506e                        !default;
 $alert-success-color                  : seagreen                       !default;
 $alert-warn-color                     : orange                         !default;
 
+
+// --- Form
+
+$form-error-message      : "Ein Fehler ist aufgetreten.";
+$form-success-message    : "Vielen Dank für Ihre Nachricht.";
+
 // --------------------------------------------------------- FILE COLLECTING ---
 
 @import "libs/breakpoints";
