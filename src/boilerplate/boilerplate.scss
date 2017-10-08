@@ -1,26 +1,54 @@
-// --- setting defaults --------------------------------------------------------
+// ------------------------------------------------------- SETTINGS DEFAULTS ---
 
-// prefixing selectors
-$prefix                  : "kr-" !default;
+// --- Base
+$prefix                               : "kr-"                          !default;
 
-$grid-spacing            : 20px !default;
-$viewport                : $grid-spacing * 64 !default; // = 1280px
+$grid-spacing                         : 20px                           !default;
+$viewport                             : $grid-spacing * 64             !default; // = 1280px
 
-$font-size               : 16px !default;
-$line-height             : 26px !default;
+$font-size                            : 16px                           !default;
+$line-height                          : 26px                           !default;
 
-$c-light                 : #fff !default;
-$c-gray                  : lighten(black, 55%) !default;
-$c-dark	                 : lighten(black, 20%) !default;
 
-$button-background-color : #E6E6E6 !default;
-$button-border-color     : #999 !default;
-$button-color            : $c-gray !default;
+// --- Base Colors
 
-$anchor-color            : $c-dark !default;
-$anchor-hover-color      : $c-gray !default;
+$c-light                              : #fff                           !default;
+$c-gray                               : lighten(black, 55%)            !default;
+$c-dark	                              : lighten(black, 20%)            !default;
 
-// --- collecting files --------------------------------------------------------
+// --- Buttons
+
+$button-background-color              : #E6E6E6                        !default;
+$button-border-color                  : #999                           !default;
+$button-color                         : $c-gray                        !default;
+
+
+// --- Anchors / Links
+
+$anchor-color                         : $c-dark                        !default;
+$anchor-hover-color                   : $c-gray                        !default;
+
+
+// --- Main Navigation
+
+$nav-main-breakpoint-mobile           : "sm"                           !default;
+$nav-main-breakpoint-desktop          : "md and up"                    !default;
+
+$nav-main-item-color                  : $c-light                       !default;
+$nav-main-item-color-hover            : $c-light                       !default;
+$nav-main-item-background-color       : $c-gray                        !default;
+$nav-main-item-background-color-hover : lighten($c-gray, 10%)          !default;
+
+$nav-main-burger-patty-color          : $c-dark                        !default;
+
+
+// --- Alerts
+
+$alert-error-color                    : #f0506e                        !default;
+$alert-success-color                  : seagreen                       !default;
+$alert-warn-color                     : orange                         !default;
+
+// --------------------------------------------------------- FILE COLLECTING ---
 
 @import "libs/breakpoints";
 @import "libs/base";
