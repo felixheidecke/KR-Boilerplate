@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+
+    <title>krAkkordeon</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../htdocs/css/vendor.min.css"/>
+    <link rel="stylesheet" href="../htdocs/css/style.css"/>
+    <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+<div class="wrapper">
+    <h1>
+        krNavMain
+    </h1>
+    <nav class="demo-nav kr-nav-main">
+        <ul>
+            <li>
+                <a href="#">First One</a>
+            </li>
+            <li>
+                <a href="#">First One</a>
+                <ul>
+                    <li>
+                        <a href="#">Second One</a>
+                    </li>
+                    <li>
+                        <a href="#">Second Two</a>
+                    </li>
+                    <li class="-is-active">
+                        <a href="#">Second Three</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">First Three</a>
+            </li>
+            <li>
+                <a href="#">First Four</a>
+                <ul>
+                    <li>
+                        <a href="#">Second Four</a>
+                    </li>
+                    <li>
+                        <a href="#">Second Five</a>
+                    </li>
+                    <li>
+                        <a href="#">Second Six</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">First Five</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="../htdocs/js/vendor.min.js"></script>
+<script src="../htdocs/js/default.js"></script>
+<script>
+$('.demo-nav').krNav()
+</script>
+</body>
+</html>
