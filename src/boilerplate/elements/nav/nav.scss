@@ -1,82 +1,222 @@
 $el : ".#{$prefix}nav-main";
 
 #{$el} {
-    ul,
-    li {
-        @include reset;
-        list-style: none;
+
+
+    // --------------------------------------------------------- FIRST LEVEL ---
+
+    &-1-ul { }
+
+    &-1-li { }
+
+    &-1-a  {
+        background-color: $nav-main-item-background-color;
+        color: $nav-main-item-color;
+
+        &:hover {
+            background-color: $nav-main-item-background-color-hover;
+            color: $nav-main-item-color-hover;
+        }
     }
 
-    li.-is-current > a {
-        background-color: rgba($c-light, .33);
-        color: $c-light;
-        box-shadow: none !important;
-        font-weight: bold;
+    @include breakpoint($nav-main-breakpoint-desktop) { // --- Desktop
+
+        &-1-ul {
+            display: flex;
+            justify-content: space-between;
+            flex: {
+                direction: row;
+                wrap: nowrap;
+            }
+        }
+
+        &-1-li {
+            position: relative;
+            flex-grow: 1;
+
+            &:not(:last-of-type) {
+                margin-right: 1px;
+            }
+        }
+
+        &-1-a {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: ($grid-spacing / 2) $grid-spacing;
+            text-decoration: none;
+            transition: all .333s;
+        }
+
+        &.-is-active #{$el}-1-a:hover {
+            background-color: $nav-main-item-background-color-hover;
+            color: $nav-main-item-color-hover;
+        }
     }
-}
 
-#{$el}--level-1 {
-    > li {
-        width: 100%;
+    @include breakpoint($nav-main-breakpoint-mobile) { // --- Mobile
 
-        a {
+        &-1-ul {
+            display: none;
+        }
+
+        &-1-li {
+            width: 100%;
+
+            &:not(:first-of-type) {
+                border-top: 1px solid $c-light;
+            }
+        }
+
+        &-1-a {
             @include OpenSans();
 
-            border-bottom: 1px solid $c-light;
             display: block;
             font-size: 15px;
             padding: 10px 0;
             text-align: center;
             text-decoration: none;
-            transition: background-color .5s ease, box-shadow .5s ease, color .25s ease;
+        }
 
-            &:hover {
-                background-color: $c-light;
-                color: $c-dark;
-                box-shadow: 0 0 10px $c-light;
-            }
+        &.-is-active #{$el}-2-a {
+            background-color: $nav-main-item-background-color-hover;
+            color: $nav-main-item-color-hover;
+        }
+    }
+
+
+    // -------------------------------------------------------- SECOND LEVEL ---
+
+    &-2-ul { }
+
+    &-2-li { }
+
+    &-2-a  {
+        display: block;
+        background-color: lighten($nav-main-item-background-color, 5%);
+        color: $nav-main-item-color;
+        font-size: $font-size - 2px;
+        text-decoration: none;
+
+        &:hover {
+            background-color: $nav-main-item-background-color-hover;
+            color: $nav-main-item-color-hover;
+        }
+    }
+
+    @include breakpoint($nav-main-breakpoint-desktop) { // --- Desktop
+
+        &-2-ul {
+            position: absolute;
+            width: 100%;
+            transform: perspective(600px) rotateX(90deg);
+            transform-origin: 50% 0;
+            transition: all .333s ease-in-out;
+        }
+
+        &-2-li { }
+
+        &-2-a {
+            padding: ($grid-spacing / 2) $grid-spacing;
+            transition: all .25s;
+        }
+
+        &.-is-active #{$el}-2-a:hover {
+            background-color: $nav-main-item-background-color-hover;
+            color: $nav-main-item-color-hover;
+        }
+    }
+
+    @include breakpoint($nav-main-breakpoint-mobile) { // --- Mobile
+
+        &-2-ul {}
+
+        &-2-li {}
+
+        &-2-a {
+            text-align: center;
+            padding: ($grid-spacing / 3) $grid-spacing;
+        }
+    }
+
+
+    // -------------------------------------------------------------- BURGER ---
+
+    &-burger {
+        position: fixed;
+        top: 16px;
+        right: 15px;
+        width: 32px;
+        height: 20px;
+        margin: 0;
+        padding: 0;
+        border: 0 none;
+        transition: width .5s ease;
+        z-index: 999;
+        outline: 0 none;
+        background-color: transparent;
+
+        &:before,
+        &:after,
+        span {
+            position: absolute;
+            content: "";
+            height: 3px;
+            background-color: $nav-main-burger-patty-color;
+            left: 0;
+            right: 0;
+            transition: all .333s;
+        }
+
+        &:before {
+            top: 0;
+            transform-origin: center center;
+        }
+
+        &:after {
+            bottom: 0;
+            transform-origin: center center;
+        }
+
+        span {
+            text-indent: -9999px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @include breakpoint($nav-main-breakpoint-desktop) {
+            display: none;
         }
     }
 }
 
-#{$el}--level-2 {
-    margin-bottom: 25px;
 
-    > li {
-        a {
-            font-size: 13px;
-            border-color: rgba($c-light, .125);
-        }
+// ------------------------------------------------------------------ STATES ---
+
+// --- Hover effekt for dropdown
+
+
+@include breakpoint($nav-main-breakpoint-desktop) {
+    #{$el}-1-li:hover #{$el}-2-ul {
+        transform: perspective(600px) rotateX(0);
     }
 }
 
+// --- Hover effekt for dropdown
 
-.#{$prefix}nav-main-burger {
-    display: block;
-    position: fixed;
-    top: 16px;
-    right: 15px;
-    width: 38px;
-    height: 28px;
-    margin: 0;
-    padding: 0;
-    border: 0 none;
-    transition: transform .5s ease;
-    z-index: 999;
-    outline: 0 none;
-    background: {
-        color: transparent;
-        image: url(../bild/burger.svg);
-        repeat: no-repeat;
-        position: center center;
-        size: 26px auto;
+#{$el}.-is-on #{$el}-burger {
+
+    &:before {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+    }
+
+    &:after {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
     }
 
     span {
-        display: none;
+        opacity: 0;
     }
-}
-
-.-is-open .#{$prefix}nav-main-burger {
-    transform: rotate(90deg);
 }

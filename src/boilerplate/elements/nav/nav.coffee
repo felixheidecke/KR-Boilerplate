@@ -1,7 +1,6 @@
 jQuery.fn.krNav = (params) ->
   params = jQuery.extend({
-    burgerClasses: ''
-    closeOnResize: false
+    closeOnResize: true
     scroll: true
     scrollOffset: 0
     scrollSpeed: 600
@@ -11,27 +10,39 @@ jQuery.fn.krNav = (params) ->
   if $(@).length == 0
     return false
 
-  $nav = $(@)
-  $list = $nav.find('.nav-level-1')
+  $nav = $ @
+  $1ul = $nav.find '> ul'
+  $1li = $nav.find '> ul > li'
+  $1a  = $nav.find '> ul > li > a'
+  $2ul = $nav.find '> ul > li > ul'
+  $2li = $nav.find '> ul > li > ul > li'
+  $2a  = $nav.find '> ul > li > ul > li > a'
+
+  $1ul.addClass 'kr-nav-main-1-ul'
+  $1li.addClass 'kr-nav-main-1-li'
+  $1a.addClass  'kr-nav-main-1-a'
+  $2ul.addClass 'kr-nav-main-2-ul'
+  $2li.addClass 'kr-nav-main-2-li'
+  $2a.addClass  'kr-nav-main-2-a'
+
   $burger = $('<button>',
-    'class': 'burger ' + params.burgerClasses
+    'class': 'kr-nav-main-burger '
     'html': '<span>Menu</span>')
   $burger.on('click', ->
-    if !$nav.hasClass('is-on')
-      $list.slideDown params.slideSpeed
-      $nav.addClass 'is-on'
+    if !$nav.hasClass('-is-on')
+      $1ul.slideDown params.slideSpeed
+      $nav.addClass '-is-on'
       if params.scroll
         $('html, body').animate { scrollTop: $nav.offset().top + params.scrollOffset }, params.scrollSpeed
     else
-      $nav.removeClass 'is-on'
-      $list.slideUp params.slideSpeed, ->
+      $nav.removeClass '-is-on'
+      $1ul.slideUp params.slideSpeed, ->
         $(this).removeAttr 'style'
   ).prependTo $nav
 
   $(window).on 'resize', ->
-    if params.closeOnResize and $nav.is('.is-on')
-      $nav.removeClass 'is-on'
-      $list.slideUp 'fast', ->
-        $(this).removeAttr 'style'
+    if params.closeOnResize and $nav.is('.-is-on')
+      $nav.removeClass '-is-on'
+      $1ul.removeAttr 'style'
 
   return @

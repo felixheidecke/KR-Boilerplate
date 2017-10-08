@@ -1,11 +1,11 @@
-// base mixins
+// --- base mixins
 
 @mixin reset {
     margin: 0;
     padding: 0;
 }
 
-// base styles
+// --- base styles
 
 *,
 *:before,
@@ -19,6 +19,8 @@ body {
 
     overflow-x: hidden;
     background: #FFF;
+    width: 100%;
+    height: 100%;
 }
 
 a {
@@ -28,6 +30,8 @@ a {
         color: $anchor-hover-color;
     }
 }
+
+// ----------------------------------------------------------------- WRAPPER ---
 
 .wrapper {
     width: 100%;
@@ -45,7 +49,8 @@ a {
     }
 }
 
-/* ___ [ BLOCKQOUTE ] _________________________________________________________ */
+
+// -------------------------------------------------------------- BLOCKQOUTE ---
 
 blockquote {
     margin: $grid-spacing 0;
@@ -60,7 +65,8 @@ blockquote {
     }
 }
 
-/* ___ [ IMAGE, FIGURE & CAPTION ] ____________________________________________ */
+
+// ------------------------------------------------- IMAGE, FIGURE & CAPTION ---
 
 .flex-img {
     max-width: 100%;
@@ -89,11 +95,11 @@ figcaption {
     line-height: $line-height - 8;
 }
 
-/* ___ [ LIST STYLING ] _______________________________________________________ */
+
+// ------------------------------------------------------------ LIST STYLING ---
 
 ul,
 ol {
     @include reset;
-
     list-style: none;
 }
