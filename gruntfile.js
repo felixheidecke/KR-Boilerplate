@@ -170,6 +170,13 @@ module.exports = function(grunt) {
                 css    : [], // "
                 images : [], // to be copied
                 fonts  : []  // "
+            },
+            filter = {
+                version : function(array, filter) {
+                    return array.filter(function(item){
+                        return item.version.includes(filter);
+                    });
+                }
             };
 
         for (let lib in libs) {
@@ -239,8 +246,10 @@ module.exports = function(grunt) {
                         return response.json();
                     })
                     .then(function(data) {
-                        let version = data.assets[0].version,
-                            assets  = data.assets[0].files;
+                        let flib = (libs[lib].version) ? filter.version(data.assets, libs[lib].version) : data.assets;
+
+                        let version = flib[0].version,
+                            assets  = flib[0].files;
 
                         // Prepend the base url to each file
                         let filesFullUri = assets.map(function(file) { return baseUrl + lib + "/" + version + "/" + file });
