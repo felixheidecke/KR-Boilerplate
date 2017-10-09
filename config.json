@@ -81,6 +81,7 @@
     "Swiper" : {
       "comment" : "------------------------------------ iDangero.us Swiper ---",
       "install" : false,
+      "version" : "3.4.2",
       "js" : [
         "js/swiper.min.js"
       ],
