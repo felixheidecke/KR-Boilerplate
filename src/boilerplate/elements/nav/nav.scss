@@ -1,7 +1,7 @@
 $el : ".#{$prefix}nav-main";
 
 #{$el} {
-
+    display: none;
 
     // --------------------------------------------------------- FIRST LEVEL ---
 
@@ -64,7 +64,7 @@ $el : ".#{$prefix}nav-main";
             width: 100%;
 
             &:not(:first-of-type) {
-                border-top: 1px solid $c-light;
+                border-top: 1px solid $nav-main-item-separator-color;
             }
         }
 
@@ -144,8 +144,8 @@ $el : ".#{$prefix}nav-main";
 
     &-burger {
         position: fixed;
-        top: 16px;
-        right: 15px;
+        top: $grid-spacing;
+        right: $grid-spacing;
         width: 32px;
         height: 20px;
         margin: 0;
