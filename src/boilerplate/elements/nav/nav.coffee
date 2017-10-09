@@ -25,6 +25,9 @@ jQuery.fn.krNav = (params) ->
   $2li.addClass 'kr-nav-main-2-li'
   $2a.addClass  'kr-nav-main-2-a'
 
+# Show after classes are attached to prevent flickering
+  $nav.show()
+
   $burger = $('<button>',
     'class': 'kr-nav-main-burger '
     'html': '<span>Menu</span>')
@@ -34,6 +37,8 @@ jQuery.fn.krNav = (params) ->
       $nav.addClass '-is-on'
       if params.scroll
         $('html, body').animate { scrollTop: $nav.offset().top + params.scrollOffset }, params.scrollSpeed
+      else
+        $('html, body').scrollTop(0)
     else
       $nav.removeClass '-is-on'
       $1ul.slideUp params.slideSpeed, ->
