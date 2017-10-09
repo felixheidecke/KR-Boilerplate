@@ -39,6 +39,7 @@ a {
     };
     
     &.-padded {
+        max-width: $viewport + $grid-spacing * 2;
         padding: {
             left: $grid-spacing;
             right: $grid-spacing;
