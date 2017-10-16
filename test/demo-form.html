@@ -20,7 +20,7 @@
     <form method="post" action="https://www.klickrhein.de/form/kr-kontakt.php" class="demo-form kr-form">
         <input type="hidden" name="subject" value="Der Betreff">
         <input type="hidden" name="id" value="4">
-        <input type="hidden" name="required" value="firstname">
+        <input type="hidden" name="required" value="firstname, lastname">
         <div class="pure-g pure-padded-children-halved">
             <div class="pure-u-1 pure-u-sm-1-2 kr-form-item-text">
                 <label for="firstname">Firstname</label>
@@ -28,7 +28,7 @@
             </div>
             <div class="pure-u-1 pure-u-sm-1-2 kr-form-item-text">
                 <label for="lastname">Lastname</label>
-                <input type="text" id="lastname" name="lastname">
+                <input type="text" id="lastname" name="lastname" required>
             </div>
             <div class="pure-u-1 pure-u-sm-1-4 kr-form-item-text">
                 <label for="plz">PLZ</label>
@@ -51,11 +51,11 @@
                 </select>
             </div>
             <div class="pure-u-1 kr-form-item-textarea">
-                <label for="street">Ihre Nachricht</label>
-                <textarea name="street" id="street" cols="30" rows="10"></textarea>
+                <label for="message">Ihre Nachricht</label>
+                <textarea name="message" id="message" cols="30" rows="10"></textarea>
             </div>
             <div class="pure-u-1 pure-u-sm-1-2 kr-form-item-clicker">
-                <label for="agb"><input type="checkbox" id="agb"> Ich habe die AGB gelesen und akzeptiert.</label>
+                <label for="agb"><input type="checkbox" name="agb" id="agb"> Ich habe die AGB gelesen und akzeptiert.</label>
             </div>
             <div class="pure-u-1 pure-u-sm-1-2 h-text-right">
                 <input type="submit" value="Abschicken">
