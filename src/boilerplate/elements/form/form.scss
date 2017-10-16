@@ -13,6 +13,10 @@ $el : ".#{$prefix}form";
 
 	input[type="submit"] {
 		@extend .kr-button;
+
+		&[disabled] {
+			display: none;
+		}
 	}
 
 	&-item-text {
@@ -39,6 +43,11 @@ $el : ".#{$prefix}form";
 				border-left: 0;
 				outline: none;
 				min-width: 20px;
+
+				&[disabled] {
+					color: $c-gray;
+					background-color: lighten($c-gray, 45%);
+				}
 			}
 		}
 	}
@@ -59,6 +68,11 @@ $el : ".#{$prefix}form";
 				border-radius: 3px;
 				outline: none;
 				padding: 32px 9px;
+
+				&[disabled] {
+					color: $c-gray;
+					background-color: lighten($c-gray, 45%);
+				}
 			}
 		}
 	}
@@ -119,16 +133,20 @@ $el : ".#{$prefix}form";
 			&, option {
 				color: $c-dark;
 			}
+
+			&[disabled] {
+				color: $c-gray;
+				background-color: lighten($c-gray, 45%);
+			}
 		}
 	}
 
-	&-alert-success,
-	&-alert-error {
+	&-alert {
 		position: fixed;
 		z-index: 999;
 		bottom: $grid-spacing;
 		padding: $grid-spacing;
-		border-radius: 3px;
+		border-radius: 6px;
 		transform: translateY(200%);
 		animation: {
 			name: kr-form-alert;
@@ -147,24 +165,17 @@ $el : ".#{$prefix}form";
 			max-width: 700px;
 			left: calc(50% - 350px);
 		}
-	}
 
-	&-alert-success {
-		background-color: lighten($alert-success-color, 33.333%);
-		color: $alert-success-color;
-
-		&:before {
-			content: $form-success-message;
+		&.-success {
+			background-color: lighten($alert-success-color, 33.333%);
+			color: $alert-success-color;
+			border: 1px solid $alert-success-color;
 		}
-	}
 
-	&-alert-error {
-		background-color: lighten($alert-error-color, 33.333%);
-		color: $alert-error-color;
-
-
-		&:before {
-			content: $form-error-message;
+		&.-error {
+			background-color: lighten($alert-error-color, 33.333%);
+			color: $alert-error-color;
+			border: 1px dotted $alert-error-color;
 		}
 	}
 }

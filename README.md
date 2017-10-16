@@ -6,7 +6,7 @@ Eine Framework von Klickrhein.de in zusammenarbeit mit felix.heidecke.me
 ### KR-Mailto
 
 ```
-$('body').krMailto();  // Alle Elemente innerhalb von "body" transformieren
+$("body").krMailto();  // Alle Elemente innerhalb von "body" transformieren
 ```
 
 Um eine E-Mail Adresse zu verschleiern wird folgender Code verwendet.
@@ -25,8 +25,14 @@ ergibt: `max@muster-mann.de`
 
 ### KR-Akkordeon
 
+Minimal:
 ```
-$(".demo").krAkkordeon({        // Auf Element .demo anwenden
+$(".my-akkordeon").krAkkordeon();
+```
+
+Mit Parametern:
+```
+$(".my-akkordeon").krAkkordeon({
     initClosed    :  true,      // Alle Karten schließen (Initial)
     initfirstOpen :  true,      // Erste Karte geöffnet (Initial)
     speed         : "fast",     // Slide Speed
@@ -35,5 +41,26 @@ $(".demo").krAkkordeon({        // Auf Element .demo anwenden
     tabItem       : '.tab',     // Tab Klasse (Initial)
     contentItem   : '.content', // Inhalt Klasse (Initial)
     activeClass   : 'is-active' // Aktive Klasse (Initial)
+});
+```
+
+---
+
+### KR-Form
+
+Minimal:
+```
+$(".my-form").krForm();
+```
+
+Mit Parametern:
+```
+$(".my-form").krForm({
+    alertDuration : 5000,                            // Alert Anzeigedauer
+    text: {
+        notFound : "Lorem Ipsum Dolor",              // Server nicht erreichbar
+        error    : "<b>Fehler</b> Ups, ein Fehler!", // Ein Fehler ist aufgetreten
+        success  : "Vielen Dank für Ihre Nachricht"  // Erfolgreich abgeschickt
+    }
 });
 ```
