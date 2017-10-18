@@ -1,12 +1,102 @@
+require('node-fetch');
+
 const config = require('./config.json');
-const fetch  = require('node-fetch');
 const moment = require('moment');
+const _      = require('lodash');
+
+let   libs   = {
+    "jquery" : {
+        "install" : false,
+        "js" : [
+            "jquery.min.js"
+        ]
+    },
+
+    "pure" : {
+        "install" : false,
+        "css" : [
+            "base-min.css",
+            "grids-min.css",
+            "grids-responsive-min.css"
+        ]
+    },
+
+    "font-awesome" : {
+        "install" : false,
+        "css" : [
+            "css/font-awesome.min.css"
+        ],
+        "fonts" : [
+            "fonts/fontawesome-webfont.eot",
+            "fonts/fontawesome-webfont.svg",
+            "fonts/fontawesome-webfont.ttf",
+            "fonts/fontawesome-webfont.woff",
+            "fonts/fontawesome-webfont.woff2"
+        ]
+    },
+
+    "vue" : {
+        "install" : false,
+        "js" : [
+            "vue.min.js"
+        ]
+    },
+
+    "mobile-detect" : {
+        "install" : false,
+        "js" : [
+            "mobile-detect.min.js"
+        ]
+    },
+
+    "simplelightbox" : {
+        "install" : false,
+        "js" : [
+            "simple-lightbox.min.js"
+        ],
+            "css" : [
+            "simplelightbox.min.css"
+        ]
+    },
+
+    "lightbox2" : {
+        "install" : false,
+        "js" : [
+            "js/lightbox.min.js"
+        ],
+        "css" : [
+            "css/lightbox.min.css"
+        ],
+        "images" : [
+            "images/close.png",
+            "images/close.png",
+            "images/loading.gif",
+            "images/next.png",
+            "images/prev.png"
+        ]
+    },
+
+    "Swiper" : {
+        "install" : false,
+        "version" : "3.4.2",
+        "js" : [
+            "js/swiper.min.js"
+        ],
+        "css" : [
+            "css/swiper.min.css"
+        ]
+    }
+};
+
+vendor = _.merge(libs, config.vendor);
+
+console.log(vendor);
 
 module.exports = function(grunt) {
     grunt.initConfig({
 
         cdnjs : {
-            libs : config.vendor
+            libs : vendor
         },
 
         // --- Concat Vendor files ---------------------------------------------
@@ -181,7 +271,6 @@ module.exports = function(grunt) {
         for (let lib in libs) {
 
             if (libs[lib].install) {
-
                 grunt.log.writeln('Fetching: '.green + lib.green);
 
                 for (let type in files) {
@@ -194,7 +283,9 @@ module.exports = function(grunt) {
             }
             else {
                 grunt.log.writeln('Skipping: '.red + lib.red);
+
                 exclude.push(lib);
+
                 for (let type in purge) {
                     if (libs[lib][type]) {
                         purge[type] = purge[type].concat(libs[lib][type].map(function (e) {
@@ -238,35 +329,35 @@ module.exports = function(grunt) {
             }
         });
 
-        for (let lib in libs) {
-            if (libs[lib].install) {
-                fetch(apiUrl + lib + '/')
-                    .then(function(response) {
-                        return response.json();
-                    })
-                    .then(function(data) {
-                        let flib = (libs[lib].version) ? filter.version(data.assets, libs[lib].version) : data.assets;
-
-                        let version = flib[0].version,
-                            assets  = flib[0].files;
-
-                        // Prepend the base url to each file
-                        let filesFullUri = assets.map(function(file) { return baseUrl + lib + "/" + version + "/" + file });
-
-                        // push to curlDir
-                        curlDir['temp/vendor/' + lib] = filesFullUri;
-
-                    }).then(function(){
-                        if (Object.keys(curlDir).length === Object.keys(libs).length - exclude.length) {
-                            grunt.config.set('curl-dir', curlDir);
-                            done(true); // async is done
-                        }
-                    })
-                    .catch(function(error){
-                        grunt.log.writeln('error:' + error.cyan);
-                    });
-            }
-        }
+        // for (let lib in libs) {
+        //     if (libs[lib].install) {
+        //         fetch(apiUrl + lib + '/')
+        //             .then(function(response) {
+        //                 return response.json();
+        //             })
+        //             .then(function(data) {
+        //                 let flib = (libs[lib].version) ? filter.version(data.assets, libs[lib].version) : data.assets;
+        //
+        //                 let version = flib[0].version,
+        //                     assets  = flib[0].files;
+        //
+        //                 // Prepend the base url to each file
+        //                 let filesFullUri = assets.map(function(file) { return baseUrl + lib + "/" + version + "/" + file });
+        //
+        //                 // push to curlDir
+        //                 curlDir['temp/vendor/' + lib] = filesFullUri;
+        //
+        //             }).then(function(){
+        //                 if (Object.keys(curlDir).length === Object.keys(libs).length - exclude.length) {
+        //                     grunt.config.set('curl-dir', curlDir);
+        //                     done(true); // async is done
+        //                 }
+        //             })
+        //             .catch(function(error){
+        //                 grunt.log.writeln('error:' + error.cyan);
+        //             });
+        //     }
+        // }
     });
 
     grunt.registerTask("setup",   ['cdnjs', 'curl-dir', 'copy', 'concat', 'clean:tempFiles']);
