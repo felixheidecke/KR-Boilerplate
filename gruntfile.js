@@ -1,28 +1,25 @@
-require('node-fetch');
-
 const config = require('./config.json');
 const moment = require('moment');
-const _      = require('lodash');
 
 let   libs   = {
     "jquery" : {
-        "install" : false,
+        "install" : config.vendor.jquery,
         "js" : [
-            "jquery.min.js"
+            "dist/jquery.min.js"
         ]
     },
 
-    "pure" : {
-        "install" : false,
+    "purecss" : {
+        "install" : config.vendor.purecss,
         "css" : [
-            "base-min.css",
-            "grids-min.css",
-            "grids-responsive-min.css"
+            "build/base-min.css",
+            "build/grids-min.css",
+            "build/grids-responsive-min.css"
         ]
     },
 
     "font-awesome" : {
-        "install" : false,
+        "install" : config.vendor['font-awesome'],
         "css" : [
             "css/font-awesome.min.css"
         ],
@@ -36,72 +33,65 @@ let   libs   = {
     },
 
     "vue" : {
-        "install" : false,
+        "install" : config.vendor.vue,
         "js" : [
-            "vue.min.js"
+            "dist/vue.min.js"
         ]
     },
 
     "mobile-detect" : {
-        "install" : false,
+        "install" : config.vendor['mobile-detect'],
         "js" : [
             "mobile-detect.min.js"
         ]
     },
 
     "simplelightbox" : {
-        "install" : false,
+        "install" : config.vendor.simplelightbox,
         "js" : [
-            "simple-lightbox.min.js"
+            "dist/simple-lightbox.min.js"
         ],
-            "css" : [
-            "simplelightbox.min.css"
+        "css" : [
+            "dist/simplelightbox.min.css"
         ]
     },
 
     "lightbox2" : {
-        "install" : false,
+        "install" : config.vendor.lightbox2,
         "js" : [
-            "js/lightbox.min.js"
+            "dist/js/lightbox.min.js"
         ],
         "css" : [
-            "css/lightbox.min.css"
+            "dist/css/lightbox.min.css"
         ],
         "images" : [
-            "images/close.png",
-            "images/close.png",
-            "images/loading.gif",
-            "images/next.png",
-            "images/prev.png"
+            "dist/images/close.png",
+            "dist/images/close.png",
+            "dist/images/loading.gif",
+            "dist/images/next.png",
+            "dist/images/prev.png"
         ]
     },
 
-    "Swiper" : {
-        "install" : false,
-        "version" : "3.4.2",
+    "swiper" : {
+        "install" : config.vendor.swiper,
         "js" : [
-            "js/swiper.min.js"
+            "dist/js/swiper.min.js"
         ],
         "css" : [
-            "css/swiper.min.css"
+            "dist/css/swiper.min.css"
         ]
     }
 };
-
-vendor = _.merge(libs, config.vendor);
-
-console.log(vendor);
 
 module.exports = function(grunt) {
     grunt.initConfig({
 
         cdnjs : {
-            libs : vendor
+            libs : libs
         },
 
         // --- Concat Vendor files ---------------------------------------------
-
-        'curl-dir' : {},
 
         concat : {
             vendorJs : {
@@ -243,53 +233,31 @@ module.exports = function(grunt) {
 
     grunt.registerMultiTask('cdnjs', 'Fetch JSON from CDN', function() {
 
-        let done    = this.async(),
-            libs    = grunt.config.get().cdnjs.libs,
-            apiUrl  = 'https://api.cdnjs.com/libraries/',
-            baseUrl = 'https://cdnjs.cloudflare.com/ajax/libs/',
-            exclude = [];
-            libCount = 0;
-            curlDir = {},
-            purge   = {
-                images : [],
-                fonts : []
-            },
-            files   = {
-                js     : [], // to be concatenated
-                css    : [], // "
-                images : [], // to be copied
-                fonts  : []  // "
-            },
-            filter = {
-                version : function(array, filter) {
-                    return array.filter(function(item){
-                        return item.version.includes(filter);
-                    });
-                }
-            };
+        const libs    = grunt.config.get().cdnjs.libs;
+        const libRoot = 'node_modules';
+        const dest    = 'htdocs';
+
+        let   purge   = { images: [], fonts: [] };
+        let   files   = { js: [], css: [], images: [], fonts: [] };
 
         for (let lib in libs) {
 
             if (libs[lib].install) {
-                grunt.log.writeln('Fetching: '.green + lib.green);
+                grunt.log.writeln('Adding '.green + lib.green);
 
                 for (let type in files) {
                     if (libs[lib][type]) {
                         files[type] = files[type].concat(libs[lib][type].map(function (e) {
-                            return "temp/**/" + e.replace(/js\/|css\/|images\/|fonts\//g, '')
+                            return [libRoot, lib, e].join('/');
                         }))
                     }
                 }
             }
             else {
-                grunt.log.writeln('Skipping: '.red + lib.red);
-
-                exclude.push(lib);
-
                 for (let type in purge) {
                     if (libs[lib][type]) {
                         purge[type] = purge[type].concat(libs[lib][type].map(function (e) {
-                            return "htdocs/**/" + e.replace(/js\/|css\/|images\/|fonts\//g, '')
+                            return [dest, e].join('/')
                         }))
                     }
                 }
@@ -323,44 +291,11 @@ module.exports = function(grunt) {
         });
 
         grunt.config.merge({
-            clean: {
-                vendorFonts: purge.fonts,
-                vendorImages: purge.images,
-            }
+            clean: purge
         });
-
-        // for (let lib in libs) {
-        //     if (libs[lib].install) {
-        //         fetch(apiUrl + lib + '/')
-        //             .then(function(response) {
-        //                 return response.json();
-        //             })
-        //             .then(function(data) {
-        //                 let flib = (libs[lib].version) ? filter.version(data.assets, libs[lib].version) : data.assets;
-        //
-        //                 let version = flib[0].version,
-        //                     assets  = flib[0].files;
-        //
-        //                 // Prepend the base url to each file
-        //                 let filesFullUri = assets.map(function(file) { return baseUrl + lib + "/" + version + "/" + file });
-        //
-        //                 // push to curlDir
-        //                 curlDir['temp/vendor/' + lib] = filesFullUri;
-        //
-        //             }).then(function(){
-        //                 if (Object.keys(curlDir).length === Object.keys(libs).length - exclude.length) {
-        //                     grunt.config.set('curl-dir', curlDir);
-        //                     done(true); // async is done
-        //                 }
-        //             })
-        //             .catch(function(error){
-        //                 grunt.log.writeln('error:' + error.cyan);
-        //             });
-        //     }
-        // }
     });
 
-    grunt.registerTask("setup",   ['cdnjs', 'curl-dir', 'copy', 'concat', 'clean:tempFiles']);
+    grunt.registerTask("setup",   ['cdnjs', 'copy', 'concat', 'clean:images', 'clean:fonts']);
     grunt.registerTask("watcher", ['coffee', 'sass', 'watch']);
     grunt.registerTask("build",   ['coffee', 'sass']);
     grunt.registerTask("backup",  ['zip:backup']);

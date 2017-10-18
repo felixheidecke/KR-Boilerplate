@@ -1,28 +1,12 @@
 {
     "vendor": {
-        "jquery": {
-            "install": true
-        },
-        "pure": {
-            "install": true
-        },
-        "font-awesome": {
-            "install": true
-        },
-        "vue": {
-            "install": false
-        },
-        "mobile-detect": {
-            "install": false
-        },
-        "simplelightbox": {
-            "install": false
-        },
-        "lightbox2": {
-            "install": false
-        },
-        "Swiper": {
-            "install": false
-        }
+        "jquery":         true,
+        "purecss":        true,
+        "font-awesome":   true,
+        "vue":            false,
+        "mobile-detect":  false,
+        "simplelightbox": false,
+        "lightbox2":      false,
+        "swiper":         false
     }
 }
