@@ -1,93 +1,28 @@
 {
-  "vendor" : {
-    "jquery" : {
-      "comment" : "------------------------------------------------ jQuery ---",
-      "install" : true,
-      "js" : [
-        "jquery.min.js"
-      ]
-    },
-
-    "pure" : {
-      "comment" : "---------------------------------------------- pure CSS ---",
-      "install" : true,
-      "css" : [
-        "base-min.css",
-        "grids-min.css",
-        "grids-responsive-min.css"
-      ]
-    },
-
-    "font-awesome" : {
-      "comment" : "------------------------------------------ Font Awesome ---",
-      "install" : true,
-      "css" : [
-        "css/font-awesome.min.css"
-      ],
-      "fonts" : [
-        "fonts/fontawesome-webfont.eot",
-        "fonts/fontawesome-webfont.svg",
-        "fonts/fontawesome-webfont.ttf",
-        "fonts/fontawesome-webfont.woff",
-        "fonts/fontawesome-webfont.woff2"
-      ]
-    },
-
-    "vue" : {
-      "comment" : "------------------------------------------------ Vue.js ---",
-      "install" : false,
-      "js" : [
-        "vue.min.js"
-      ]
-    },
-
-    "mobile-detect" : {
-      "comment" : "----------------------------------------- Mobile Detect ---",
-      "install": false,
-      "js" : [
-        "mobile-detect.min.js"
-      ]
-    },
-
-    "simplelightbox" : {
-      "comment" : "--------------------------------------- Simple lightbox ---",
-      "install": false,
-      "js" : [
-        "simple-lightbox.min.js"
-      ],
-      "css" : [
-        "simplelightbox.min.css"
-      ]
-    },
-
-    "lightbox2" : {
-      "comment" : "--------------------------------------------- Lightbox2 ---",
-      "install" : false,
-      "js" : [
-        "js/lightbox.min.js"
-      ],
-      "css" : [
-        "css/lightbox.min.css"
-      ],
-      "images" : [
-        "images/close.png",
-        "images/close.png",
-        "images/loading.gif",
-        "images/next.png",
-        "images/prev.png"
-      ]
-    },
-
-    "Swiper" : {
-      "comment" : "------------------------------------ iDangero.us Swiper ---",
-      "install" : false,
-      "version" : "3.4.2",
-      "js" : [
-        "js/swiper.min.js"
-      ],
-      "css" : [
-        "css/swiper.min.css"
-      ]
+    "vendor": {
+        "jquery": {
+            "install": true
+        },
+        "pure": {
+            "install": true
+        },
+        "font-awesome": {
+            "install": true
+        },
+        "vue": {
+            "install": false
+        },
+        "mobile-detect": {
+            "install": false
+        },
+        "simplelightbox": {
+            "install": false
+        },
+        "lightbox2": {
+            "install": false
+        },
+        "Swiper": {
+            "install": false
+        }
     }
-  }
 }
