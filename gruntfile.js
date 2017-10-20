@@ -87,7 +87,7 @@ let   libs   = {
 module.exports = function(grunt) {
     grunt.initConfig({
 
-        cdnjs : {
+        collect : {
             libs : libs
         },
 
@@ -231,9 +231,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-move');
     grunt.loadNpmTasks('grunt-zip');
 
-    grunt.registerMultiTask('cdnjs', 'Fetch JSON from CDN', function() {
+    grunt.registerMultiTask('collect', 'Collect, concat & copy libraries', function() {
 
-        const libs    = grunt.config.get().cdnjs.libs;
+        const libs    = grunt.config.get().collect.libs;
         const libRoot = 'node_modules';
         const dest    = 'htdocs';
 
@@ -295,7 +295,7 @@ module.exports = function(grunt) {
         });
     });
 
-    grunt.registerTask("setup",   ['cdnjs', 'copy', 'concat', 'clean:images', 'clean:fonts']);
+    grunt.registerTask("setup",   ['collect', 'copy', 'concat', 'clean:images', 'clean:fonts']);
     grunt.registerTask("watcher", ['coffee', 'sass', 'watch']);
     grunt.registerTask("build",   ['coffee', 'sass']);
     grunt.registerTask("backup",  ['zip:backup']);
