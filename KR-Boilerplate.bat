@@ -2,34 +2,24 @@ MODE 80, 30
 @echo off
 DEL /Q .gitignore
 DEL /Q npm-debug.log
+set current_dir=%cd%
 :Home
 cls
 color 1f
 echo.
-echo     _  _______        ____        _ _                 _       _
-echo    ^| ^|/ /  __ \      ^|  _ \      (_) ^|               ^| ^|     ^| ^|
-echo    ^| ' /^| ^|__) ^|_____^| ^|_) ^| ___  _^| ^| ___ _ __ _ __ ^| ^| __ _^| ^|_ ___
-echo    ^|  ^< ^|  _  /______^|  _ ^< / _ \^| ^| ^|/ _ \ '__^| '_ \^| ^|/ _` ^| __/ _ \
-echo    ^| . \^| ^| ^\ \      ^| ^|_) ^| (_) ^| ^| ^|  __/ ^|  ^| ^|_) ^| ^| (_^| ^| ^|^|  __/
-echo    ^|_^|\_\_^|  \_\     ^|____/ \___/^|_^|_^|\___^|_^|  ^| .__/^|_^|\__,_^|\__\___^|
-echo                                                ^| ^|
-echo                                                ^|_^|
-call node -e "console.info('   Version:%', require('./package.json').version);"
+call node header.js
 echo.
-echo    Bitte vor dem Setup ueberpruefen, ob die config.json entsprechend
-echo    den Projektvoraussetzungen angepasst wurde.
+echo  [s] --^> Setup
 echo.
-echo    [s] --^> Setup
+echo  [w] --^> Watcher (Compiler)
 echo.
-echo    [w] --^> Watcher (Compiler)
+echo  [m] --^> Build   (Einmaliges compilen)
 echo.
-echo    [m] --^> Build   (Einmaliges compilen)
+echo  [b] --^> Backup
 echo.
-echo    [b] --^> Backup
+echo  [u] --^> Update
 echo.
-echo    [u] --^> Update
-echo.
-echo    [x] --^> Exit
+echo  [x] --^> Exit
 echo.
 SET /p menu=Auswahl:
 if '%menu%' == 's' goto Setup
