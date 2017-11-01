@@ -93,14 +93,13 @@ echo  * * * * * *
 echo.
 call npm run update
 call npm install
+call npm run setup
 cls
 echo.
 color 0A
-echo Boilerplate wurde aktualisiert und wird beendet.
-echo Bitte KR-Boilerplate.bat neu starten.
-echo.
+echo Update wurde beendet.
 pause
-goto Ende
+goto Home
 
 :Ende
 echo.
