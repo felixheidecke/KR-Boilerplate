@@ -59,7 +59,7 @@ const titleString = "  _  _______        ____        _ _                 _      
 
 
 request({
-    url: 'https://cdn.rawgit.com/felixheidecke/KR-Boilerplate/master/package.json',
+    url: 'https://rawgit.com/felixheidecke/KR-Boilerplate/master/package.json',
     method: 'GET'
 }, function(err, res, body) {
 
