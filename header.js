@@ -71,6 +71,6 @@ request({
 
     echo(titleString, [local.version]);
 
-    if (comparison)
+    if (comparison > 0)
         echo(updateBox, [remote.version]);
 });
