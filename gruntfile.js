@@ -39,6 +39,13 @@ let   libs   = {
         ]
     },
 
+    "in-view" : {
+        "install" : config.vendor['in-view'],
+        "js" : [
+            "dist/in-view.min.js"
+        ]
+    },
+
     "mobile-detect" : {
         "install" : config.vendor['mobile-detect'],
         "js" : [

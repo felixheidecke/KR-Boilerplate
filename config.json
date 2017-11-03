@@ -7,6 +7,7 @@
         "mobile-detect":  false,
         "simplelightbox": false,
         "lightbox2":      false,
-        "swiper":         false
+        "swiper":         false,
+        "in-view":        false
     }
 }
