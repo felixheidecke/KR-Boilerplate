@@ -1,4 +1,50 @@
-describe('kr-toplink', function () {
+describe('kr-external-link', function () {
+
+    const expect       = chai.expect;
+
+    // Container to run DOM based tests in
+    const $container   = $('<div>', { id : '#test'} );
+
+    beforeEach(function() {
+        $container.appendTo('body');
+    });
+
+    afterEach(function() {
+        $container.remove();
+    });
+
+    it('ignores non http(s) hyperlinks', function () {
+        $container
+            .html(
+                '<a href="klaus/https/web.html">klaus/https/web.html</a>' +
+                '<a href="ftp://rheingaueins.de">ftp://rheingaueins.de</a>' +
+                '<a href="/index.html">/index.html</a>'
+            )
+            .krLinkExternal(function () {
+                expect($container.find("a:nth-of-type(1)").hasClass('kr-link-external')).to.be.false;
+                expect($container.find("a:nth-of-type(2)").hasClass('kr-link-external')).to.be.false;
+                expect($container.find("a:nth-of-type(3)").hasClass('kr-link-external')).to.be.false;
+            });
+    });
+
+    it('adds class kr-link-external to links starting with http://', function (done) {
+
+        $container
+            .html(
+                '<a href="http://google.de">http://google.de</a>' +
+                '<a href="https://index.html">http://google.de</a>'
+            )
+            .krLinkExternal(function () {
+                expect($container.find("a:first-child").hasClass('kr-link-external')).to.be.true;
+                expect($container.find("a:last-child").hasClass('kr-link-external')).to.be.true;
+                done()
+            });
+    });
+});
+
+
+
+    describe('kr-toplink', function () {
 
     const expect       = chai.expect;
 
