@@ -1,5 +1,6 @@
-# ---------------------------------------- toplink und mailto initialisieren ---
+# -------------------------- toplink, mailto und linkExternal initialisieren ---
 #
 $ 'body'
     .krTopLink()
     .krMailto()
+    .krLinkExternal()
