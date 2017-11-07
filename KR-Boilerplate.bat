@@ -3,7 +3,7 @@ MODE 80, 30
 DEL /Q .gitignore
 DEL /Q npm-debug.log
 cls
-if not exists node_modules\ajax-request call npm install ajax-request
+if not exist node_modules\ajax-request call npm install ajax-request
 set current_dir=%cd%
 :Home
 cls
