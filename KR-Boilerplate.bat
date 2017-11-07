@@ -2,6 +2,8 @@ MODE 80, 30
 @echo off
 DEL /Q .gitignore
 DEL /Q npm-debug.log
+cls
+if not exists node_modules\ajax-request call npm install ajax-request
 set current_dir=%cd%
 :Home
 cls
@@ -101,6 +103,6 @@ echo Update wurde beendet.
 pause
 goto Home
 
-:Ende
+:Exit
 echo.
 echo Boilerplate wurde beendet.
