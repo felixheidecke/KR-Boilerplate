@@ -34,6 +34,7 @@ $el : ".#{$prefix}button";
     cursor: pointer;
     user-select: none;
     box-sizing: border-box;
+    display: inline-flex;
 
     font-family: inherit;
     padding: 4px 12px;
@@ -62,6 +63,6 @@ $el : ".#{$prefix}button";
 
     &-pdf {
         @extend #{$el};
-        @include button-fa("\f1c1", 'left', 40px);
+        @include button-fa("\f1c1", 'left', 36px);
     }
 }
