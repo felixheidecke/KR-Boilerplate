@@ -1,0 +1,13 @@
+extends ../../demo/_template
+
+block title
+    | KR-Mailto
+
+block example
+    article
+        p Eine Email an <span data-mailto>info[at]max[minus]mustermann[dot]de</span> mit Mailto verknüfung.
+        p Die Mailadresse <span data-mailto="false">info[at]max[minus]mustermann[dot]de</span> in Plain text.
+
+block script
+    script.
+        $('#example').krMailto();

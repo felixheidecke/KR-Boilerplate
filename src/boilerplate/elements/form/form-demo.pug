@@ -1,0 +1,60 @@
+extends ../../demo/_template
+
+block title
+    | KR-Form
+
+block style
+    style.
+        .demo-form {
+            max-width:750px;
+            margin: 0 auto;
+        }
+
+block example
+    form.demo-form.kr-form(method='post', action='https://www.klickrhein.de/form/kr-kontakt.php')
+        input(type='hidden', name='subject', value='Der Betreff')
+        input(type='hidden', name='required', value='firstname, lastname')
+        .pure-g.pure-padded-children-halved
+            .pure-u-1.pure-u-sm-1-2.kr-form-item-text
+                label(for='firstname') Firstname
+                input#firstname(type='text', name='firstname', required='')
+            .pure-u-1.pure-u-sm-1-2.kr-form-item-text
+                label(for='lastname') Lastname
+                input#lastname(type='text', name='lastname', required='')
+            .pure-u-1.pure-u-sm-1-4.kr-form-item-text
+                label(for='plz') PLZ
+                input#plz(type='number', name='plz')
+            .pure-u-1.pure-u-sm-3-4.kr-form-item-text
+                label(for='street') Straße
+                input#street(type='text', name='street')
+            .pure-u-1.kr-form-item-select
+                label(for='favname') Lieblingsname:
+                select#favname(name='favname')
+                    option(value='') bitte wählen
+                    optgroup(label='Weiblich')
+                        option Anne
+                        option Doris
+                        option Angelika
+                    optgroup(label='Männlich')
+                        option Bert
+                        option Christoph
+                        option Emil
+                        option Frank
+            .pure-u-1.kr-form-item-textarea
+                label(for='message') Ihre Nachricht
+                textarea#message(name='message', cols='30', rows='10')
+            .pure-u-1.kr-form-item-select
+                label(for='id') Test Empfänger:
+                select#id(name='id')
+                    option(value='4') felix@heidecke.me (ID: 4)
+                    option(value='1') info@klickrhein.de (ID: 1)
+            .pure-u-1.pure-u-sm-1-2.kr-form-item-clicker
+                label(for='agb')
+                    input#agb(type='checkbox', name='agb')
+                    | Ich habe die AGB gelesen und akzeptiert.
+            .pure-u-1.pure-u-sm-1-2.h-text-right
+                input(type='submit', value='Abschicken')
+
+block script
+    script.
+        $('.demo-form').krForm();

@@ -1,0 +1,36 @@
+extends ../../demo/_template
+
+block title
+    | KR-Mailto
+
+block example
+    nav.kr-nav-main
+        ul
+            li
+                a(href='#') First One
+            li
+                a(href='#') First Two
+                ul
+                    li
+                        a(href='#') Second One
+                    li
+                        a(href='#') Second Two
+                    li.-is-active
+                        a(href='#') Second Three
+            li
+                a(href='#') First Three
+            li
+                a(href='#') First Four
+                ul
+                    li
+                        a(href='#') Second Four
+                    li
+                        a(href='#') Second Five
+                    li
+                        a(href='#') Second Six
+            li
+                a(href='#') First Five
+
+block script
+    script.
+        $('.kr-nav-main').krNav();

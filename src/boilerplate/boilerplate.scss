@@ -66,12 +66,12 @@ $alert-warn-color                     : orange                         !default;
 @import "libs/breakpoints";
 @import "libs/base";
 @import "libs/fonts";
-@import "libs/buttons";
 @import "libs/fa";
 @import "libs/lists";
 @import "libs/helper";
 
 @import "elements/akkordeon/akkordeon";
+@import "elements/buttons/buttons";
 @import "elements/form/form";
 @import "elements/link-external/link-external";
 @import "elements/nav/nav";

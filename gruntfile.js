@@ -1,6 +1,6 @@
-const config = require('./config.json');
-const moment = require('moment');
-
+const config   = require('./config.json');
+const moment   = require('moment');
+const testPort = Math.floor(Math.random() * (8900 - 8100) + 8100);
 let   libs   = {
     "jquery" : {
         "install" : config.vendor.jquery,
@@ -139,9 +139,6 @@ module.exports = function(grunt) {
                     src: 'temp/KR-Boilerplate-master/src/boilerplate/',
                     dest: 'src/boilerplate'
                 }, {
-                    src: 'temp/KR-Boilerplate-master/test/',
-                    dest: 'test'
-                }, {
                     src: [
                         'temp/KR-Boilerplate-master/gruntfile.js',
                         'temp/KR-Boilerplate-master/header.js',
@@ -150,13 +147,19 @@ module.exports = function(grunt) {
                         'temp/KR-Boilerplate-master/KR-Boilerplate.bat'],
                     dest: './'
                 }]
+            },
+            test: {
+                files: [{
+                    src: 'temp/src/boilerplate/**/*.html',
+                    dest: 'test/'
+                }]
             }
         },
 
         // --- Compile Sass and Coffee -----------------------------------------
 
         sass: {
-            css: {
+            default: {
                 options: {
                     style : "expanded",
                     noCache: true
@@ -164,7 +167,17 @@ module.exports = function(grunt) {
                 files: {
                     'htdocs/css/style.css': 'src/sass/style.scss'
                 }
-            }
+            },
+            test: {
+                options: {
+                    style : "expanded",
+                    sourcemap: "none",
+                    noCache: true
+                },
+                files: {
+                    'test/assets/boilerplate.css': 'src/boilerplate/boilerplate.scss'
+                }
+            },
         },
 
         coffee: {
@@ -174,11 +187,17 @@ module.exports = function(grunt) {
                         'src/boilerplate/**/*.coffee',
                         'src/coffee/**/*.coffee' ]
                 }
+            },
+            test: {
+                files: {
+                    'test/assets/boilerplate.js' : ['src/boilerplate/**/*.coffee']
+                }
             }
         },
 
         clean: {
             tempFiles: ['temp'],
+            test: ['test'],
             update: [
                 'src/boilerplate',
                 'test']
@@ -210,6 +229,40 @@ module.exports = function(grunt) {
                 dest: "temp/"
             }
         },
+        
+        // --- Pug ------------------------------------------------------------
+
+        pug: {
+            html: {
+                options: {
+                    client: false,
+                    pretty: "    ",
+                    data: {
+                        debug: false
+                    }
+                },
+                files: [{
+                    src: ["src/boilerplate/elements/**/*.pug"],
+                    dest: "temp/",
+                    expand: true,
+                    ext: ".html"
+                }]
+            }
+        },
+
+        // --- Server ---------------------------------------------------------
+
+        connect: {
+            testServer: {
+                options: {
+                    hostname: 'localhost',
+                    port: testPort,
+                    base: "test",
+                    keepalive: true,
+                    open: true
+                }
+            }
+        },
 
         // --- Watcher ---------------------------------------------------------
 
@@ -229,13 +282,15 @@ module.exports = function(grunt) {
         }
     }); //initConfig
     //
-    grunt.loadNpmTasks('grunt-curl');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-pug');
     grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-curl');
     grunt.loadNpmTasks('grunt-move');
     grunt.loadNpmTasks('grunt-zip');
 
@@ -304,8 +359,9 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("setup",   ['collect', 'copy', 'concat', 'clean:images', 'clean:fonts']);
-    grunt.registerTask("watcher", ['coffee', 'sass', 'watch']);
-    grunt.registerTask("build",   ['coffee', 'sass']);
+    grunt.registerTask("watcher", ['coffee:default', 'sass:default', 'watch']);
+    grunt.registerTask("build",   ['coffee:default', 'sass:default']);
     grunt.registerTask("backup",  ['zip:backup']);
+    grunt.registerTask("test",    ['clean:test', 'pug', 'coffee:test', 'sass:test', 'move:test', 'clean:tempFiles', 'connect:testServer']);
     grunt.registerTask("update",  ['curl:update', 'unzip:update', 'clean:update', 'move:update', 'clean:tempFiles']);
 };

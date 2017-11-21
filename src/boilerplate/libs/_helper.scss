@@ -21,6 +21,7 @@
         }
     }
 
+
     // position
 
     &-relative {
@@ -66,6 +67,46 @@
             text-align: justify;
         }
     }
+
+    &-margin {
+        margin: $grid-spacing;
+
+        &-top {
+            margin-top: $grid-spacing;
+        }
+
+        &-right {
+            margin-right: $grid-spacing;
+        }
+
+        &-bottom {
+            margin-bottom: $grid-spacing;
+        }
+
+        &-left {
+            margin-left: $grid-spacing;
+        }
+
+        &-remove {
+            margin: 0;
+
+            &-top {
+                margin-top: 0;
+            }
+
+            &-right {
+                margin-right: 0;
+            }
+
+            &-bottom {
+                margin-bottom: 0;
+            }
+
+            &-left {
+                margin-left: 0;
+            }
+        }
+    }
 }
 
 @include breakpoint("sm and up") {
@@ -84,6 +125,7 @@
         margin: 0 $grid-spacing 0 0;
     }
 }
+
 
 // ------------------------------------------------------------- Hide Helper ---
 
@@ -174,7 +216,7 @@
         display: block;
         content: "";
         width: 100%;
-        padding-top: ($height / $width) * 100%;
+        padding-top: $height / $width * 100%;
     }
 
     > * {
@@ -187,16 +229,15 @@
 }
 
 .h-aspect-ratio {
-
     &-16-9 {
-        @include aspect-ratio(19,9);
+        @include aspect-ratio(19, 9);
     }
 
     &-16-10 {
-        @include aspect-ratio(19,10);
+        @include aspect-ratio(19, 10);
     }
 
     &-4-3 {
-        @include aspect-ratio(4,3);
+        @include aspect-ratio(4, 3);
     }
 }
