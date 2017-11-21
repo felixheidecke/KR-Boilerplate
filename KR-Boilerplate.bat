@@ -19,16 +19,19 @@ echo  [m] --^> Build   (Einmaliges compilen)
 echo.
 echo  [b] --^> Backup
 echo.
+echo  [t] --^> Test
+echo.
 echo  [u] --^> Update
 echo.
 echo  [x] --^> Exit
 echo.
 SET /p menu=Auswahl:
-if '%menu%' == 's' goto Setup
-if '%menu%' == 'w' goto Watch
-if '%menu%' == 'm' goto Build
 if '%menu%' == 'b' goto Backup
+if '%menu%' == 'm' goto Build
+if '%menu%' == 's' goto Setup
+if '%menu%' == 't' goto Test
 if '%menu%' == 'u' goto Update
+if '%menu%' == 'w' goto Watch
 if '%menu%' == 'x' goto Exit
 Goto Home
 
@@ -47,6 +50,17 @@ echo.
 color 0A
 echo Setup wurde beendet.
 pause
+goto Home
+
+:Test
+cls
+color 07
+echo.
+echo  * * * * *
+echo  * TESTS *
+echo  * * * * *
+echo.
+call npm run test
 goto Home
 
 :Watch

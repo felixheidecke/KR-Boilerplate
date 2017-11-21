@@ -1,19 +1,19 @@
-$el : ".#{$prefix}zoom";
+$el: ".#{$prefix}zoom";
 
 #{$el} {
-    transition: transform .5s cubic-bezier(0.230, 1.650, 0.620, 0.985);
+    transition: transform 0.5s cubic-bezier(0.23, 1.65, 0.62, 0.985);
 
     &:hover {
         transform: scale(1.5);
     }
 
-    .-x2 {
+    &.-x2 {
         &:hover {
             transform: scale(2);
         }
     }
 
-    .-x3 {
+    &.-x3 {
         &:hover {
             transform: scale(3);
         }

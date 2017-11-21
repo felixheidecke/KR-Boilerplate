@@ -1,0 +1,69 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        title
+            block title
+
+        meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/base-min.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-min.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css")
+        link(rel="stylesheet" href="assets/boilerplate.css")
+
+        style(type='text/css').
+            .wrapper {
+                padding: 2vw;
+                background-color: #efefef;
+                min-height: 100vh;
+            }
+
+            .title {
+                margin: 0 0 40px;
+            }
+
+            hr {
+                margin: 40px 0 39px;
+                border: 0;
+                border-bottom: 1px solid lightgray;
+            }
+
+            code {
+                white-space: pre;
+                font-size: 80%;
+                line-height: 190%;
+            }
+
+        block style
+
+    body
+        .wrapper
+            h1.title
+                block title
+
+            h4 Beispiel Element:
+            div#preview
+                block example
+            hr
+            h4 Code für oben gezeigtes Beispiel:
+            code#code
+                block example
+    
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src="assets/boilerplate.js")
+    script.
+        $('code').each(function(i, block) {
+            // trim leading white-space
+            var code   = $(this).html().trim().replace(/^\s{16}/gm, '');
+            _.escape(code);
+
+            $(this).text(code);
+
+            hljs.highlightBlock(block);
+        });
+    block script
