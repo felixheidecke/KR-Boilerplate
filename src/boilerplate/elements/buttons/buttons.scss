@@ -65,4 +65,13 @@ $el : ".#{$prefix}button";
         @extend #{$el};
         @include button-fa("\f1c1", 'left', 36px);
     }
+
+    &-loading {
+        @extend #{$el};
+        @include button-fa("\f021", 'left', 36px);
+
+        &:before {
+            @include ani-spin()
+        }
+    }
 }

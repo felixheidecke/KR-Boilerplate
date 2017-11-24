@@ -1,57 +1,88 @@
 jQuery.fn.krForm = (params) ->
-  params = jQuery.extend({
-    alertDuration : 5000
-    text: {
-      notFound : "<strong>Fehler 404</strong><br>Bitte versuchen Sie es später erneut!"
-      error    : "<strong>Ein Fehler ist aufgetreten!</strong><br>Bitte füllen Sie alle mit einem * markierten Felder aus!"
-      success  : "<strong>Vielen Dank für Ihre Nachricht.</strong>"
-    }
-  }, params)
+    params = jQuery.extend(
+        alertDuration : 5000
+        textOnLoading : "Sendet"
+        textOnError   : "<strong>Ein Fehler ist aufgetreten!</strong><br>Bitte füllen Sie alle mit einem * markierten Felder aus!"
+        textOnSuccess : "<strong>Vielen Dank für Ihre Nachricht.</strong><br>Wir setzen uns in Kürze mit Ihnen in Verbindung"
+    , params)
 
-  if $(@).length == 0
-    return false
+    if $(@).length == 0
+        return false
 
-  $form     = $ @
-  makeAlert = (cssClass, message) ->
-    $el = $ '<p>',
-      'class'   : 'kr-form-alert'
-      'style'   : "animation-duration:#{params.alertDuration / 1000 / 2}s"
+    $form       = $ @
+    $submit     = $form.find 'button[type="submit"]'
+    submitLabel = $submit
+        .text()
+    required    = $form
+        .find 'input[name="required"]'
+        .val()
+        .split ','
 
-    return $el
-      .addClass cssClass
-      .html message
+    for i, val of required
+      $form.find("label[for='#{val.trim()}']").append('*')
 
-  removeAlert = ($el) ->
-    setTimeout ->
-      $el.remove()
-    , params.alertDuration + 100
-    return true
 
-  $form.on 'submit', (e) ->
-    e.preventDefault();
+    setButtonState = (state) ->
+        if state == 'loading'
+            $submit
+                .addClass 'kr-button-loading'
+                .text 'Sendet'
+                .prop 'disabled', true
 
-    $.ajax
-      url : $form.attr 'action'
-      type: $form.attr 'method'
-      data: $form.serialize()
-      statusCode:
-        200: ->
-          $alert = makeAlert '-error', params.text.error
-          $('body').append $alert
-          removeAlert $alert
+        else if state == 'reset'
+            $submit
+                .removeClass 'kr-button-loading'
+                .text submitLabel
+                .removeAttr 'disabled'
 
-        404: ->
-          $alert = makeAlert '-error', params.text.notFound
-          $('body').append $alert
-          removeAlert $alert
+    makeAlert = (cssClass, message) ->
+        $el = $ '<p>',
+            'class'   : 'kr-form-alert'
+            'style'   : "animation-duration:#{params.alertDuration / 1000 / 2}s"
 
-        302: ->
-          $alert = makeAlert '-success', params.text.success
-          $('body').append $alert
-          removeAlert $alert
+        return $el
+            .addClass cssClass
+            .html message
 
-          $form
-            .find 'input, select, textarea'
+    removeAlert = ($el) ->
+        setTimeout ->
+            $el.remove()
+        , params.alertDuration + 100
+        
+        return true
+
+    setToSuccess = ->
+        setButtonState 'reset'
+        $alert = makeAlert '-success', params.textOnSuccess
+        $('body').append $alert
+        removeAlert $alert
+        $form
+            .find 'input, select, textarea, button'
             .attr 'disabled', true
 
-  return @
+    setToError = ->
+        setButtonState 'reset'
+        $alert = makeAlert '-error', params.textOnError
+        $('body').append $alert
+        removeAlert $alert
+
+    $form.on 'submit', (e) ->
+        e.preventDefault()
+
+        $.ajax
+            url : $form.attr 'action'
+            type: $form.attr 'method'
+            data: $form.serialize()
+            beforeSend: ->
+                setButtonState 'loading'
+
+            statusCode:
+                302: ->
+                    setToSuccess()
+            success : ->
+                setToSuccess()
+
+            error : ->
+                setToError()
+
+    return @

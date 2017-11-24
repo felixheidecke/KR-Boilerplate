@@ -1,0 +1,21 @@
+$el: ".#{$prefix}-ani";
+
+@mixin ani-spin($duration:2s, $iterationCount:infinite) {
+    animation: {
+        name: ani-spin;
+        duration: $duration;
+        iteration-count: $iterationCount;
+        timing-function: linear;
+    }
+}
+
+#{$el}-spin {
+    @include ani-spin;
+}
+
+// --- KEYFRAMES -----
+
+@keyframes ani-spin {
+    from { transform: rotate(0deg) }
+    to { transform: rotate(360deg) }
+}

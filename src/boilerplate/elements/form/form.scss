@@ -13,10 +13,6 @@ $el: ".#{$prefix}form";
 
     input[type="submit"] {
         @extend .kr-button;
-
-        &[disabled] {
-            display: none;
-        }
     }
 
     &-item-text {

@@ -52,18 +52,20 @@ html
             code#code
                 block example
     
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
-    script(src="assets/boilerplate.js")
-    script.
-        $('code').each(function(i, block) {
-            // trim leading white-space
-            var code   = $(this).html().trim().replace(/^\s{16}/gm, '');
-            _.escape(code);
+            block additional
 
-            $(this).text(code);
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        script(src="assets/boilerplate.js")
+        script.
+            $('code').each(function(i, block) {
+                // trim leading white-space
+                var code   = $(this).html().trim().replace(/^\s{16}/gm, '');
+                _.escape(code);
 
-            hljs.highlightBlock(block);
-        });
-    block script
+                $(this).text(code);
+
+                hljs.highlightBlock(block);
+            });
+        block script
