@@ -1,21 +1,23 @@
-$el: ".#{$prefix}zoom";
+@if $zoom-enabled == "true" {
+    $el: ".#{$prefix}zoom";
 
-#{$el} {
-    transition: transform 0.5s cubic-bezier(0.23, 1.65, 0.62, 0.985);
+    #{$el} {
+        transition: transform 0.5s cubic-bezier(0.23, 1.65, 0.62, 0.985);
 
-    &:hover {
-        transform: scale(1.5);
-    }
-
-    &.-x2 {
         &:hover {
-            transform: scale(2);
+            transform: scale(1.5);
         }
-    }
 
-    &.-x3 {
-        &:hover {
-            transform: scale(3);
+        &.-x2 {
+            &:hover {
+                transform: scale(2);
+            }
+        }
+
+        &.-x3 {
+            &:hover {
+                transform: scale(3);
+            }
         }
     }
 }
