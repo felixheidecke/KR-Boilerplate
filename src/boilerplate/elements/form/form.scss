@@ -1,205 +1,211 @@
-$el: ".#{$prefix}form";
+@if $form-enabled == "true" {
+    $el: ".#{$prefix}form";
 
-#{$el} {
-    div[class^="pure-u-"] {
-        position: relative;
-        box-sizing: border-box;
-    }
-
-    textarea {
-        resize: vertical;
-        min-height: 100px;
-    }
-
-    input[type="submit"] {
-        @extend .kr-button;
-    }
-
-    &-item-text {
-        display: flex;
-        align-items: stretch;
-        margin-bottom: $grid-spacing / 2;
-
-        label {
-            @include OpenSans;
-
-            padding: 5px 10px;
-            background-color: $form-label-background-color;
-            border: $form-element-border;
-            border-bottom-left-radius: 3px;
-            border-top-left-radius: 3px;
-            color: $form-label-text-color;
-            white-space: nowrap;
-
-            + input {
-                width: 100%;
-                padding: 5px 10px;
-                border: $form-element-border;
-                border-bottom-right-radius: 3px;
-                border-top-right-radius: 3px;
-                border-left: 0;
-                outline: none;
-                min-width: 20px;
-                background-color: white;
-                color: $form-item-color;
-
-                &[disabled] {
-                    color: gray;
-                    background-color: lightgray;
-                }
-            }
-        }
-    }
-
-    &-item-textarea {
-        margin-bottom: $grid-spacing / 2;
-
-        label {
-            @include OpenSans;
-
-            padding: 5px 0 0 10px;
-            background-color: transparent;
-            color: $form-label-textarea-color;
-            position: absolute;
-
-            + textarea {
-                width: 100%;
-                border: $form-element-border;
-                border-radius: 3px;
-                outline: none;
-                padding: 32px 9px;
-                background-color: white;
-                color: $form-item-color;
-
-                &[disabled] {
-                    color: gray;
-                    background-color: lightgray;
-                }
-            }
-        }
-    }
-
-    &-item-clicker {
-        margin-bottom: $grid-spacing / 2;
-
-        label {
-            @include OpenSans;
-
+    #{$el} {
+        div[class^="pure-u-"] {
             position: relative;
-            padding: 5px 10px 5px 0;
-            color: $form-label-clicker-color;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-
-            input {
-                margin-right: 10px;
-            }
-        }
-    }
-
-    &-item-select {
-        display: flex;
-        align-items: stretch;
-        margin-bottom: $grid-spacing / 2;
-
-        label {
-            @include OpenSans;
-
-            padding: 5px 10px;
-            background-color: $form-label-background-color;
-            border: $form-element-border;
-            border-bottom-left-radius: 3px;
-            border-top-left-radius: 3px;
-            color: $form-label-text-color;
-            white-space: nowrap;
+            box-sizing: border-box;
         }
 
-        select {
-            position: relative;
-            background-color: white;
-            width: 100%;
-            padding: 5px 10px 5px 9px;
-            border: $form-element-border;
-            border: {
-                bottom: {
-                    right-radius: 3px;
-                    left-radius: 0;
-                };
-                top: {
-                    right-radius: 3px;
-                    left-radius: 0;
-                };
-                left: 0;
-            };
-            outline: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
 
-            &, option {
-                color: $form-item-color;
-            }
+        input[type="submit"] {
+            @extend .kr-button;
 
             &[disabled] {
-                color: gray;
-                background-color: lightgray;
+                display: none;
+            }
+        }
+
+        &-item-text {
+            display: flex;
+            align-items: stretch;
+            margin-bottom: $grid-spacing / 2;
+
+            label {
+                @include OpenSans;
+
+                padding: 5px 10px;
+                background-color: $form-label-background-color;
+                border: $form-element-border;
+                border-bottom-left-radius: 3px;
+                border-top-left-radius: 3px;
+                color: $form-label-text-color;
+                white-space: nowrap;
+
+                + input {
+                    width: 100%;
+                    padding: 5px 10px;
+                    border: $form-element-border;
+                    border-bottom-right-radius: 3px;
+                    border-top-right-radius: 3px;
+                    border-left: 0;
+                    outline: none;
+                    min-width: 20px;
+                    background-color: white;
+                    color: $form-item-color;
+
+                    &[disabled] {
+                        color: gray;
+                        background-color: lightgray;
+                    }
+                }
+            }
+        }
+
+        &-item-textarea {
+            margin-bottom: $grid-spacing / 2;
+
+            label {
+                @include OpenSans;
+
+                padding: 5px 0 0 10px;
+                background-color: transparent;
+                color: $form-label-textarea-color;
+                position: absolute;
+
+                + textarea {
+                    width: 100%;
+                    border: $form-element-border;
+                    border-radius: 3px;
+                    outline: none;
+                    padding: 32px 9px;
+                    background-color: white;
+                    color: $form-item-color;
+
+                    &[disabled] {
+                        color: gray;
+                        background-color: lightgray;
+                    }
+                }
+            }
+        }
+
+        &-item-clicker {
+            margin-bottom: $grid-spacing / 2;
+
+            label {
+                @include OpenSans;
+
+                position: relative;
+                padding: 5px 10px 5px 0;
+                color: $form-label-clicker-color;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+
+                input {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        &-item-select {
+            display: flex;
+            align-items: stretch;
+            margin-bottom: $grid-spacing / 2;
+
+            label {
+                @include OpenSans;
+
+                padding: 5px 10px;
+                background-color: $form-label-background-color;
+                border: $form-element-border;
+                border-bottom-left-radius: 3px;
+                border-top-left-radius: 3px;
+                color: $form-label-text-color;
+                white-space: nowrap;
+            }
+
+            select {
+                position: relative;
+                background-color: white;
+                width: 100%;
+                padding: 5px 10px 5px 9px;
+                border: $form-element-border;
+                border: {
+                    bottom: {
+                        right-radius: 3px;
+                        left-radius: 0;
+                    };
+                    top: {
+                        right-radius: 3px;
+                        left-radius: 0;
+                    };
+                    left: 0;
+                };
+                outline: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+
+                &, option {
+                    color: $form-item-color;
+                }
+
+                &[disabled] {
+                    color: gray;
+                    background-color: lightgray;
+                }
+            }
+        }
+
+        &-alert {
+            position: fixed;
+            z-index: 999;
+            bottom: $grid-spacing;
+            padding: $grid-spacing;
+            border-radius: 6px;
+            transform: translateY(200%);
+            animation: {
+                name: kr-form-alert;
+                duration: 3s;
+                iteration-count: 2;
+                direction: alternate;
+            };
+
+            @include breakpoint("sm") {
+                left: $grid-spacing;
+                right: $grid-spacing;
+            }
+
+
+            @include breakpoint("md and up") {
+                width: 100%;
+                max-width: 700px;
+                left: calc(50% - 350px);
+            }
+
+
+            &.-success {
+                background-color: lighten($alert-success-color, 33.333%);
+                color: $alert-success-color;
+                border: 1px solid $alert-success-color;
+            }
+
+            &.-error {
+                background-color: lighten($alert-error-color, 33.333%);
+                color: $alert-error-color;
+                border: 1px dotted $alert-error-color;
             }
         }
     }
 
-    &-alert {
-        position: fixed;
-        z-index: 999;
-        bottom: $grid-spacing;
-        padding: $grid-spacing;
-        border-radius: 6px;
-        transform: translateY(200%);
-        animation: {
-            name: kr-form-alert;
-            duration: 3s;
-            iteration-count: 2;
-            direction: alternate;
-        };
-
-        @include breakpoint("sm") {
-            left: $grid-spacing;
-            right: $grid-spacing;
+    @keyframes kr-form-alert {
+        0% {
+            opacity: 0;
         }
 
-
-        @include breakpoint("md and up") {
-            width: 100%;
-            max-width: 700px;
-            left: calc(50% - 350px);
+        20% {
+            transform: translateY(0);
+            opacity: 1;
         }
 
-
-        &.-success {
-            background-color: lighten($alert-success-color, 33.333%);
-            color: $alert-success-color;
-            border: 1px solid $alert-success-color;
+        100% {
+            transform: translateY(0);
+            opacity: 1;
         }
-
-        &.-error {
-            background-color: lighten($alert-error-color, 33.333%);
-            color: $alert-error-color;
-            border: 1px dotted $alert-error-color;
-        }
-    }
-}
-
-@keyframes kr-form-alert {
-    0% {
-        opacity: 0;
-    }
-
-    20% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
     }
 }

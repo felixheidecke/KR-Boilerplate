@@ -1,222 +1,228 @@
-$el : ".#{$prefix}nav-main";
+@if $nav-enabled == "true" {
+    $el: ".#{$prefix}nav-main";
 
-#{$el} {
-    display: none;
+    #{$el} {
+        display: none;
 
-    // --------------------------------------------------------- FIRST LEVEL ---
+        // --------------------------------------------------------- FIRST LEVEL ---
 
-    &-1-ul { }
+        &-1-ul {}
 
-    &-1-li { }
-
-    &-1-a  {
-        background-color: $nav-main-item-background-color;
-        color: $nav-main-item-color;
-
-        &:hover {
-            background-color: $nav-main-item-background-color-hover;
-            color: $nav-main-item-color-hover;
-        }
-    }
-
-    @include breakpoint($nav-main-breakpoint-desktop) { // --- Desktop
-
-        &-1-ul {
-            display: flex;
-            justify-content: space-between;
-            flex: {
-                direction: row;
-                wrap: nowrap;
-            }
-        }
-
-        &-1-li {
-            position: relative;
-            flex-grow: 1;
-
-            &:not(:last-of-type) {
-                margin-right: 1px;
-            }
-        }
+        &-1-li {}
 
         &-1-a {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: ($grid-spacing / 2) $grid-spacing;
-            text-decoration: none;
-            transition: all .333s;
-        }
+            background-color: $nav-main-item-background-color;
+            color: $nav-main-item-color;
 
-        &.-is-active #{$el}-1-a:hover {
-            background-color: $nav-main-item-background-color-hover;
-            color: $nav-main-item-color-hover;
-        }
-    }
-
-    @include breakpoint($nav-main-breakpoint-mobile) { // --- Mobile
-
-        &-1-ul {
-            display: none;
-        }
-
-        &-1-li {
-            width: 100%;
-
-            &:not(:first-of-type) {
-                border-top: 1px solid $nav-main-item-separator-color;
+            &:hover {
+                background-color: $nav-main-item-background-color-hover;
+                color: $nav-main-item-color-hover;
             }
         }
 
-        &-1-a {
-            @include OpenSans();
+        @include breakpoint($nav-main-breakpoint-desktop) {
+            // --- Desktop
 
-            display: block;
-            font-size: 15px;
-            padding: 10px 0;
-            text-align: center;
-            text-decoration: none;
+            &-1-ul {
+                display: flex;
+                justify-content: space-between;
+                flex: {
+                    direction: row;
+                    wrap: nowrap;
+                };
+            }
+
+            &-1-li {
+                position: relative;
+                flex-grow: 1;
+
+                &:not(:last-of-type) {
+                    margin-right: 1px;
+                }
+            }
+
+            &-1-a {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: ($grid-spacing / 2) $grid-spacing;
+                text-decoration: none;
+                transition: all .333s;
+            }
+
+            &.-is-active #{$el}-1-a:hover {
+                background-color: $nav-main-item-background-color-hover;
+                color: $nav-main-item-color-hover;
+            }
         }
 
-        &.-is-active #{$el}-2-a {
-            background-color: $nav-main-item-background-color-hover;
-            color: $nav-main-item-color-hover;
-        }
-    }
 
+        @include breakpoint($nav-main-breakpoint-mobile) {
+            // --- Mobile
 
-    // -------------------------------------------------------- SECOND LEVEL ---
+            &-1-ul {
+                display: none;
+            }
 
-    &-2-ul { }
+            &-1-li {
+                width: 100%;
 
-    &-2-li { }
+                &:not(:first-of-type) {
+                    border-top: 1px solid $nav-main-item-separator-color;
+                }
+            }
 
-    &-2-a  {
-        display: block;
-        background-color: lighten($nav-main-item-background-color, 5%);
-        color: $nav-main-item-color;
-        font-size: $font-size - 2px;
-        text-decoration: none;
+            &-1-a {
+                @include OpenSans;
 
-        &:hover {
-            background-color: $nav-main-item-background-color-hover;
-            color: $nav-main-item-color-hover;
-        }
-    }
+                display: block;
+                font-size: 15px;
+                padding: 10px 0;
+                text-align: center;
+                text-decoration: none;
+            }
 
-    @include breakpoint($nav-main-breakpoint-desktop) { // --- Desktop
-
-        &-2-ul {
-            position: absolute;
-            width: 100%;
-            transform: perspective(600px) rotateX(90deg);
-            transform-origin: 50% 0;
-            transition: all .333s ease-in-out;
+            &.-is-active #{$el}-2-a {
+                background-color: $nav-main-item-background-color-hover;
+                color: $nav-main-item-color-hover;
+            }
         }
 
-        &-2-li { }
 
-        &-2-a {
-            padding: ($grid-spacing / 2) $grid-spacing;
-            transition: all .25s;
-        }
-
-        &.-is-active #{$el}-2-a:hover {
-            background-color: $nav-main-item-background-color-hover;
-            color: $nav-main-item-color-hover;
-        }
-    }
-
-    @include breakpoint($nav-main-breakpoint-mobile) { // --- Mobile
+        // -------------------------------------------------------- SECOND LEVEL ---
 
         &-2-ul {}
 
         &-2-li {}
 
         &-2-a {
-            text-align: center;
-            padding: ($grid-spacing / 3) $grid-spacing;
-        }
-    }
+            display: block;
+            background-color: lighten($nav-main-item-background-color, 5%);
+            color: $nav-main-item-color;
+            font-size: $font-size - 2px;
+            text-decoration: none;
 
-
-    // -------------------------------------------------------------- BURGER ---
-
-    &-burger {
-        position: fixed;
-        top: $grid-spacing;
-        right: $grid-spacing;
-        width: 32px;
-        height: 20px;
-        margin: 0;
-        padding: 0;
-        border: 0 none;
-        transition: width .5s ease;
-        z-index: 999;
-        outline: 0 none;
-        background-color: transparent;
-
-        &:before,
-        &:after,
-        span {
-            position: absolute;
-            content: "";
-            height: 3px;
-            background-color: $nav-main-burger-patty-color;
-            left: 0;
-            right: 0;
-            transition: all .333s;
-        }
-
-        &:before {
-            top: 0;
-            transform-origin: center center;
-        }
-
-        &:after {
-            bottom: 0;
-            transform-origin: center center;
-        }
-
-        span {
-            text-indent: -9999px;
-            top: 50%;
-            transform: translateY(-50%);
+            &:hover {
+                background-color: $nav-main-item-background-color-hover;
+                color: $nav-main-item-color-hover;
+            }
         }
 
         @include breakpoint($nav-main-breakpoint-desktop) {
-            display: none;
+            // --- Desktop
+
+            &-2-ul {
+                position: absolute;
+                width: 100%;
+                transform: perspective(600px) rotateX(90deg);
+                transform-origin: 50% 0;
+                transition: all .333s ease-in-out;
+            }
+
+            &-2-li {}
+
+            &-2-a {
+                padding: ($grid-spacing / 2) $grid-spacing;
+                transition: all .25s;
+            }
+
+            &.-is-active #{$el}-2-a:hover {
+                background-color: $nav-main-item-background-color-hover;
+                color: $nav-main-item-color-hover;
+            }
+        }
+
+
+        @include breakpoint($nav-main-breakpoint-mobile) {
+            // --- Mobile
+
+            &-2-ul {}
+
+            &-2-li {}
+
+            &-2-a {
+                text-align: center;
+                padding: ($grid-spacing / 3) $grid-spacing;
+            }
+        }
+
+
+        // -------------------------------------------------------------- BURGER ---
+
+        &-burger {
+            position: fixed;
+            top: $grid-spacing;
+            right: $grid-spacing;
+            width: 32px;
+            height: 20px;
+            margin: 0;
+            padding: 0;
+            border: 0 none;
+            transition: width .5s ease;
+            z-index: 999;
+            outline: 0 none;
+            background-color: transparent;
+
+            &:before,
+            &:after,
+            span {
+                position: absolute;
+                content: "";
+                height: 3px;
+                background-color: $nav-main-burger-patty-color;
+                left: 0;
+                right: 0;
+                transition: all .333s;
+            }
+
+            &:before {
+                top: 0;
+                transform-origin: center center;
+            }
+
+            &:after {
+                bottom: 0;
+                transform-origin: center center;
+            }
+
+            span {
+                text-indent: -9999px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            @include breakpoint($nav-main-breakpoint-desktop) {
+                display: none;
+            }
         }
     }
-}
 
+    // ------------------------------------------------------------------ STATES ---
 
-// ------------------------------------------------------------------ STATES ---
+    // --- Hover effekt for dropdown
 
-// --- Hover effekt for dropdown
-
-
-@include breakpoint($nav-main-breakpoint-desktop) {
-    #{$el}-1-li:hover #{$el}-2-ul {
-        transform: perspective(600px) rotateX(0);
-    }
-}
-
-// --- Hover effekt for dropdown
-
-#{$el}.-is-on #{$el}-burger {
-
-    &:before {
-        top: 50%;
-        transform: translateY(-50%) rotate(45deg);
+    @include breakpoint($nav-main-breakpoint-desktop) {
+        #{$el}-1-li:hover #{$el}-2-ul {
+            transform: perspective(600px) rotateX(0);
+        }
     }
 
-    &:after {
-        bottom: 50%;
-        transform: translateY(50%) rotate(-45deg);
-    }
 
-    span {
-        opacity: 0;
+    // --- Hover effekt for dropdown
+
+    #{$el}.-is-on #{$el}-burger {
+        &:before {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        &:after {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+
+        span {
+            opacity: 0;
+        }
     }
 }

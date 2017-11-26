@@ -14,7 +14,7 @@ $line-height                          : 26px                           !default;
 
 $c-light                              : #fff                           !default;
 $c-gray                               : #808080                        !default;
-$c-dark	                              : #333                           !default;
+$c-dark                               : #333                           !default;
 
 // --- Buttons
 
@@ -60,6 +60,17 @@ $form-label-clicker-color             : $form-label-color              !default;
 $alert-error-color                    : #f0506e                        !default;
 $alert-success-color                  : seagreen                       !default;
 $alert-warn-color                     : orange                         !default;
+
+
+// ------------------------------------------------------ ENABELING ELEMENTS ---
+
+$akkordeon-enabled                    : 'true'                         !default;
+$buttons-enabled                      : 'true'                         !default;
+$form-enabled                         : 'true'                         !default;
+$link-external-enabled                : 'true'                         !default;
+$nav-enabled                          : 'true'                         !default;
+$zoom-enabled                         : 'true'                         !default;
+
 
 // --------------------------------------------------------- FILE COLLECTING ---
 
