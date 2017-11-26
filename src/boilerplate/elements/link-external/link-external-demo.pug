@@ -4,5 +4,17 @@ block title
     | KR Link external
 
 block example
-    article
-        p Willkommen auf <a href="http://klickrhein.de">Klickrein.de</a>! Ihrer lieblings Webseite im Rheingau.
+    main
+        article
+            p Willkommen auf <a href="http://klickrhein.de">Klickrein.de</a>! Ihrer lieblings Webseite im Rheingau.
+
+
+block additional
+    h4 Initialisieren
+    p Findet Links innerhalb von &lt;main&gt;
+    code.
+        $('main').krLinkExternal();
+
+block script
+    script.
+        $('main').krLinkExternal();
