@@ -155,27 +155,26 @@
         &-alert {
             position: fixed;
             z-index: 999;
-            bottom: $grid-spacing;
             padding: $grid-spacing;
             border-radius: 6px;
-            transform: translateY(200%);
-            animation: {
-                name: kr-form-alert;
-                duration: 3s;
-                iteration-count: 2;
-                direction: alternate;
-            };
+            top: 50%;
+            left: 50%;
+            display: none;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 50px rgba(black, 0.25);
 
-            @include breakpoint("sm") {
-                left: $grid-spacing;
-                right: $grid-spacing;
+            &-close {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 13px 10px 17px 15px;
+                cursor: pointer;
             }
 
-
-            @include breakpoint("md and up") {
-                width: 100%;
-                max-width: 700px;
-                left: calc(50% - 350px);
+            @include breakpoint("xs") {
+                left: $grid-spacing;
+                right: $grid-spacing;
+                transform: translate(0, -50%);
             }
 
 
@@ -190,22 +189,6 @@
                 color: $alert-error-color;
                 border: 1px dotted $alert-error-color;
             }
-        }
-    }
-
-    @keyframes kr-form-alert {
-        0% {
-            opacity: 0;
-        }
-
-        20% {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        100% {
-            transform: translateY(0);
-            opacity: 1;
         }
     }
 }

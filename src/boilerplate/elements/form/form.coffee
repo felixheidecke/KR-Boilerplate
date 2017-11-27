@@ -1,6 +1,5 @@
 jQuery.fn.krForm = (params) ->
     params = jQuery.extend(
-        alertDuration : 5000
         textOnLoading : "Sendet"
         textOnError   : "<strong>Ein Fehler ist aufgetreten!</strong><br>Bitte füllen Sie alle mit einem * markierten Felder aus!"
         textOnSuccess : "<strong>Vielen Dank für Ihre Nachricht.</strong><br>Wir setzen uns in Kürze mit Ihnen in Verbindung"
@@ -26,7 +25,7 @@ jQuery.fn.krForm = (params) ->
         if state == 'loading'
             $submit
                 .addClass 'kr-button-loading'
-                .text 'Sendet'
+                .text params.textOnLoading
                 .prop 'disabled', true
 
         else if state == 'reset'
@@ -36,26 +35,29 @@ jQuery.fn.krForm = (params) ->
                 .removeAttr 'disabled'
 
     makeAlert = (cssClass, message) ->
-        $el = $ '<p>',
-            'class'   : 'kr-form-alert'
-            'style'   : "animation-duration:#{params.alertDuration / 1000 / 2}s"
+        $el = $ '<div>',
+            'class' : 'kr-form-alert'
+            'style' : "animation-duration:#{params.alertDuration / 1000 / 2}s"
+
+        $x  = $ '<i>',
+            'class' : 'fa fa-lg fa-window-close kr-form-alert-close'
+            'aria-hidden' : true
+        .click ->
+            $el.remove()
 
         return $el
             .addClass cssClass
-            .html message
+            .html "<p class='h-margin-remove'>#{message}</p>"
+            .prepend $x
 
     removeAlert = ($el) ->
-        setTimeout ->
-            $el.remove()
-        , params.alertDuration + 100
-        
-        return true
+        $el.remove();
 
     setToSuccess = ->
         setButtonState 'reset'
         $alert = makeAlert '-success', params.textOnSuccess
         $('body').append $alert
-        removeAlert $alert
+        $alert.fadeIn()
         $form
             .find 'input, select, textarea, button'
             .attr 'disabled', true
@@ -64,7 +66,7 @@ jQuery.fn.krForm = (params) ->
         setButtonState 'reset'
         $alert = makeAlert '-error', params.textOnError
         $('body').append $alert
-        removeAlert $alert
+        $alert.fadeIn()
 
     $form.on 'submit', (e) ->
         e.preventDefault()
@@ -79,10 +81,9 @@ jQuery.fn.krForm = (params) ->
             statusCode:
                 302: ->
                     setToSuccess()
-            success : ->
-                setToSuccess()
-
-            error : ->
-                setToError()
+                200: ->
+                    setToSuccess()
+                400 : ->
+                    setToError()
 
     return @
