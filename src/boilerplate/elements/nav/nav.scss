@@ -4,7 +4,7 @@
     #{$el} {
         display: none;
 
-        // --------------------------------------------------------- FIRST LEVEL ---
+        // ----------------------------------------------------- FIRST LEVEL ---
 
         &-1-ul {}
 
@@ -12,11 +12,11 @@
 
         &-1-a {
             background-color: $nav-main-item-background-color;
-            color: $nav-main-item-color;
+            color           : $nav-main-item-color;
 
             &:hover {
                 background-color: $nav-main-item-background-color-hover;
-                color: $nav-main-item-color-hover;
+                color           : $nav-main-item-color-hover;
             }
         }
 
@@ -24,16 +24,16 @@
             // --- Desktop
 
             &-1-ul {
-                display: flex;
+                display        : flex;
                 justify-content: space-between;
-                flex: {
+                flex           : {
                     direction: row;
-                    wrap: nowrap;
+                    wrap     : nowrap;
                 };
             }
 
             &-1-li {
-                position: relative;
+                position : relative;
                 flex-grow: 1;
 
                 &:not(:last-of-type) {
@@ -42,20 +42,19 @@
             }
 
             &-1-a {
-                display: block;
-                width: 100%;
-                text-align: center;
-                padding: ($grid-spacing / 2) $grid-spacing;
+                display        : block;
+                width          : 100%;
+                text-align     : center;
+                padding        : ($grid-spacing / 2) $grid-spacing;
                 text-decoration: none;
-                transition: all .333s;
+                transition     : all .333s;
             }
 
             &.-is-active #{$el}-1-a:hover {
                 background-color: $nav-main-item-background-color-hover;
-                color: $nav-main-item-color-hover;
+                color           : $nav-main-item-color-hover;
             }
         }
-
 
         @include breakpoint($nav-main-breakpoint-mobile) {
             // --- Mobile
@@ -75,36 +74,35 @@
             &-1-a {
                 @include OpenSans;
 
-                display: block;
-                font-size: 15px;
-                padding: 10px 0;
-                text-align: center;
+                display        : block;
+                font-size      : 15px;
+                padding        : 10px 0;
+                text-align     : center;
                 text-decoration: none;
             }
 
             &.-is-active #{$el}-2-a {
                 background-color: $nav-main-item-background-color-hover;
-                color: $nav-main-item-color-hover;
+                color           : $nav-main-item-color-hover;
             }
         }
 
-
-        // -------------------------------------------------------- SECOND LEVEL ---
+        // ---------------------------------------------------- SECOND LEVEL ---
 
         &-2-ul {}
 
         &-2-li {}
 
         &-2-a {
-            display: block;
+            display         : block;
             background-color: lighten($nav-main-item-background-color, 5%);
-            color: $nav-main-item-color;
-            font-size: $font-size - 2px;
-            text-decoration: none;
+            color           : $nav-main-item-color;
+            font-size       : $font-size - 2px;
+            text-decoration : none;
 
             &:hover {
                 background-color: $nav-main-item-background-color-hover;
-                color: $nav-main-item-color-hover;
+                color           : $nav-main-item-color-hover;
             }
         }
 
@@ -112,26 +110,25 @@
             // --- Desktop
 
             &-2-ul {
-                position: absolute;
-                width: 100%;
-                transform: perspective(600px) rotateX(90deg);
+                position        : absolute;
+                width           : 100%;
+                transform       : perspective(600px) rotateX(90deg);
                 transform-origin: 50% 0;
-                transition: all .333s ease-in-out;
+                transition      : all .333s ease-in-out;
             }
 
             &-2-li {}
 
             &-2-a {
-                padding: ($grid-spacing / 2) $grid-spacing;
+                padding   : ($grid-spacing / 2) $grid-spacing;
                 transition: all .25s;
             }
 
             &.-is-active #{$el}-2-a:hover {
                 background-color: $nav-main-item-background-color-hover;
-                color: $nav-main-item-color-hover;
+                color           : $nav-main-item-color-hover;
             }
         }
-
 
         @include breakpoint($nav-main-breakpoint-mobile) {
             // --- Mobile
@@ -142,53 +139,52 @@
 
             &-2-a {
                 text-align: center;
-                padding: ($grid-spacing / 3) $grid-spacing;
+                padding   : ($grid-spacing / 3) $grid-spacing;
             }
         }
 
-
-        // -------------------------------------------------------------- BURGER ---
+        // ---------------------------------------------------------- BURGER ---
 
         &-burger {
-            position: fixed;
-            top: $grid-spacing;
-            right: $grid-spacing;
-            width: 32px;
-            height: 20px;
-            margin: 0;
-            padding: 0;
-            border: 0 none;
-            transition: width .5s ease;
-            z-index: 999;
-            outline: 0 none;
+            position        : fixed;
+            top             : $grid-spacing;
+            right           : $grid-spacing;
+            width           : 32px;
+            height          : 20px;
+            margin          : 0;
+            padding         : 0;
+            border          : 0 none;
+            transition      : width .5s ease;
+            z-index         : 999;
+            outline         : 0 none;
             background-color: transparent;
 
-            &:before,
             &:after,
+            &:before,
             span {
-                position: absolute;
-                content: "";
-                height: 3px;
+                position        : absolute;
+                content         : "";
+                height          : 3px;
                 background-color: $nav-main-burger-patty-color;
-                left: 0;
-                right: 0;
-                transition: all .333s;
+                left            : 0;
+                right           : 0;
+                transition      : all .333s;
             }
 
             &:before {
-                top: 0;
+                top             : 0;
                 transform-origin: center center;
             }
 
             &:after {
-                bottom: 0;
+                bottom          : 0;
                 transform-origin: center center;
             }
 
             span {
                 text-indent: -9999px;
-                top: 50%;
-                transform: translateY(-50%);
+                top        : 50%;
+                transform  : translateY(-50%);
             }
 
             @include breakpoint($nav-main-breakpoint-desktop) {
@@ -197,7 +193,7 @@
         }
     }
 
-    // ------------------------------------------------------------------ STATES ---
+    // -------------------------------------------------------------- STATES ---
 
     // --- Hover effekt for dropdown
 
@@ -207,17 +203,16 @@
         }
     }
 
-
     // --- Hover effekt for dropdown
 
     #{$el}.-is-on #{$el}-burger {
         &:before {
-            top: 50%;
+            top      : 50%;
             transform: translateY(-50%) rotate(45deg);
         }
 
         &:after {
-            bottom: 50%;
+            bottom   : 50%;
             transform: translateY(50%) rotate(-45deg);
         }
 
