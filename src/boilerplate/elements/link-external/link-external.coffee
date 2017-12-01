@@ -5,7 +5,7 @@ jQuery.fn.krLinkExternal = (callback) ->
 
     $ @
         .find 'a[href*="://"]'
-        .addClass 'kr-link-external'
+        .attr 'target', '_blank'
 
     if typeof callback == "function"
         callback()

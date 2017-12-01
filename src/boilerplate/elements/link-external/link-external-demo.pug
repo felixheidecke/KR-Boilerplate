@@ -1,20 +1,23 @@
 extends ../../demo/_template
 
 block title
-    | KR Link external
+	| KR Link external
 
 block example
-    main
-        article
-            p Willkommen auf <a href="http://klickrhein.de">Klickrein.de</a>! Ihrer lieblings Webseite im Rheingau.
-            p Hier geht's zur SSL verschüsselten <a href="https://www.youtube.com">YouTube</a> Webseite.
+	main
+		article
+			p Willkommen auf <a href="http://klickrhein.de">Klickrein.de</a>! Ihrer lieblings Webseite im Rheingau.
+			p Hier geht's zur SSL verschüsselten <a href="https://www.youtube.com">YouTube</a> Webseite.
+			p
+				a(href="http://klickrhein.de").kr-button-next Buttons
+				| &nbsp;bekommen kein Icon
 
 block additional
-    h4 Initialisieren
-    p Findet Links innerhalb von &lt;main&gt;
-    code.
-        $('main').krLinkExternal();
+	h4 Initialisieren
+	p Findet Links innerhalb von &lt;main&gt;
+	code.
+		$('main').krLinkExternal();
 
 block script
-    script.
-        $('main').krLinkExternal();
+	script.
+		$('main').krLinkExternal();
