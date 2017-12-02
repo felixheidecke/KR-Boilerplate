@@ -161,7 +161,8 @@ module.exports = function(grunt) {
         sass: {
             default: {
                 options: {
-                    style : "expanded",
+                    force: true,
+                    style: "expanded",
                     noCache: true
                 },
                 files: {
@@ -170,7 +171,8 @@ module.exports = function(grunt) {
             },
             test: {
                 options: {
-                    style : "expanded",
+                    force: true,
+                    style: "expanded",
                     sourcemap: "none",
                     noCache: true
                 },
@@ -230,7 +232,7 @@ module.exports = function(grunt) {
                 dest: "temp/"
             }
         },
-        
+
         // --- Pug ------------------------------------------------------------
 
         pug: {
@@ -294,6 +296,19 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-curl');
     grunt.loadNpmTasks('grunt-move');
     grunt.loadNpmTasks('grunt-zip');
+
+    grunt.registerTask('forceOn', 'turns the --force option ON', function() {
+        if (!grunt.option('force')) {
+            grunt.config.set('forceStatus', true);
+            grunt.option('force', true);
+        }
+    });
+
+    grunt.registerTask('forceOff', 'turns the --force option Off', function() {
+        if (grunt.config.get('forceStatus')) {
+            grunt.option('force', false);
+        }
+    });
 
     grunt.registerMultiTask('collect', 'Collect, concat & copy libraries', function() {
 
@@ -360,8 +375,8 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("setup",   ['collect', 'copy', 'concat', 'clean:images', 'clean:fonts']);
-    grunt.registerTask("watcher", ['coffee:default', 'sass:default', 'watch']);
-    grunt.registerTask("build",   ['coffee:default', 'sass:default']);
+    grunt.registerTask("watcher", ['forceOn', 'coffee:default', 'sass:default', 'forceOff', 'watch']);
+    grunt.registerTask("build",   ['forceOn', 'coffee:default', 'sass:default', 'forceOff']);
     grunt.registerTask("backup",  ['zip:backup']);
     grunt.registerTask("test",    ['clean:test', 'pug', 'coffee:test', 'sass:test', 'move:test', 'clean:tempFiles', 'connect:testServer']);
     grunt.registerTask("update",  ['curl:update', 'unzip:update', 'clean:update', 'move:update', 'clean:tempFiles']);
