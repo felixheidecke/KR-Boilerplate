@@ -1,0 +1,23 @@
+extends ../../demo/_template
+
+block title
+	| KR-Button
+
+block style
+	style.
+		[class^="kr-button"] + [class^="kr-button"] {
+			margin-left: 10px;
+		}
+
+block example
+	h4 Next
+	button.kr-button-next button
+	a.kr-button-next(href='') a href
+
+	h4 Back
+	button.kr-button-back button
+	a.kr-button-back(href='') a href
+
+	h4 PDF
+	button.kr-button-pdf button
+	a.kr-button-pdf(href='') a href
