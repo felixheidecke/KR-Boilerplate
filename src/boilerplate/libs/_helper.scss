@@ -21,7 +21,6 @@
         }
     }
 
-
     // position
 
     &-relative {
@@ -112,20 +111,18 @@
 @include breakpoint("sm and up") {
     figure.h-float-right,
     img.h-float-right {
-        float: right;
+        float : right;
         margin: 0 0 0 $grid-spacing;
     }
 }
 
-
 @include breakpoint("sm and up") {
     figure.h-float-left,
     img.h-float-left {
-        float: left;
+        float : left;
         margin: 0 $grid-spacing 0 0;
     }
 }
-
 
 // ------------------------------------------------------------- Hide Helper ---
 
@@ -181,26 +178,26 @@
 
 .pure-g.pure-padded-children {
     margin: {
-        left: -$grid-spacing;
+        left : -$grid-spacing;
         right: -$grid-spacing;
     };
 
     > [class*="pure-u"] {
         padding: {
-            left: $grid-spacing;
+            left : $grid-spacing;
             right: $grid-spacing;
         };
     }
 
     &-halved {
         margin: {
-            left: -$grid-spacing / 2;
+            left : -$grid-spacing / 2;
             right: -$grid-spacing / 2;
         };
 
         > [class*="pure-u"] {
             padding: {
-                left: $grid-spacing / 2;
+                left : $grid-spacing / 2;
                 right: $grid-spacing / 2;
             };
         }
@@ -213,18 +210,18 @@
     position: relative;
 
     &:before {
-        display: block;
-        content: "";
-        width: 100%;
+        display    : block;
+        content    : "";
+        width      : 100%;
         padding-top: $height / $width * 100%;
     }
 
     > * {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        top     : 0;
+        left    : 0;
+        right   : 0;
+        bottom  : 0;
     }
 }
 

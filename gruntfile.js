@@ -144,6 +144,7 @@ module.exports = function(grunt) {
 						'temp/KR-Boilerplate-master/header.js',
 						'temp/KR-Boilerplate-master/package.json',
 						'temp/KR-Boilerplate-master/README.md',
+						'temp/KR-Boilerplate-master/.jsbeautifyrc',
 						'temp/KR-Boilerplate-master/KR-Boilerplate.bat'],
 					dest: './'
 				}]

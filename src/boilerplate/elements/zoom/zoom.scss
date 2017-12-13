@@ -2,7 +2,7 @@
     $el: ".#{$prefix}zoom";
 
     #{$el} {
-        transition: transform 0.5s cubic-bezier(0.23, 1.65, 0.62, 0.985);
+        transition: transform .5s cubic-bezier(0.23, 1.65, 0.62, 0.985);
 
         &:hover {
             transform: scale(1.5);

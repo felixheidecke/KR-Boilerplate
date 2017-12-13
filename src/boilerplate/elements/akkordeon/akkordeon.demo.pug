@@ -1,41 +1,41 @@
 extends ../../demo/_template
 
 block title
-	| KR-Akkordeon
+    | KR-Akkordeon
 
 block example
-	ul.akkordeon.pure-g
-		li.card.pure-u-1
-			h3.tab Lorem ipsum auf Deutsch
-			.content
-				p Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können.
-		li.card.pure-u-1
-			h3.tab Hinter den Wortbergen
-			.content
-				p Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien.
-		li.card.pure-u-1
-			h3.tab Typoblindtext
-			.content
-				p Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da sind und wie sie aussehen. Manchmal benutzt man Worte wie Hamburgefonts, Rafgenduks oder Handgloves, um Schriften zu testen. Manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze "Pangrams".
+    ul.akkordeon.pure-g
+        li.card.pure-u-1
+            h3.tab Lorem ipsum auf Deutsch
+            .content
+                p Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können.
+        li.card.pure-u-1
+            h3.tab Hinter den Wortbergen
+            .content
+                p Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien.
+        li.card.pure-u-1
+            h3.tab Typoblindtext
+            .content
+                p Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da sind und wie sie aussehen. Manchmal benutzt man Worte wie Hamburgefonts, Rafgenduks oder Handgloves, um Schriften zu testen. Manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze "Pangrams".
 
 block style
-	style.
-		.akkordeon .card {
-			border: 1px solid lightgray;
-			margin-bottom: 20px;
-		}
+    style.
+        .akkordeon .card {
+            border: 1px solid lightgray;
+            margin-bottom: 20px;
+        }
 
-		.akkordeon .card .tab {
-			background: lightgray;
-			padding: 5px 10px 4px;
-			margin: 0;
-			cursor: pointer;
-		}
+        .akkordeon .card .tab {
+            background: lightgray;
+            padding: 5px 10px 4px;
+            margin: 0;
+            cursor: pointer;
+        }
 
-		.akkordeon .card .content {
-			padding: 0 10px;
-		}
+        .akkordeon .card .content {
+            padding: 0 10px;
+        }
 
 block script
-	script.
-		$('.akkordeon').krAkkordeon();
+    script.
+        $('.akkordeon').krAkkordeon();

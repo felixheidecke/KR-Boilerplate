@@ -1,20 +1,20 @@
 // --- base mixins
 
 @mixin reset {
-    margin: 0;
+    margin : 0;
     padding: 0;
 }
 
 // --- base styles
 
 *,
-*:before,
-*:after {
+*:after,
+*:before {
     box-sizing: border-box;
 }
 
-html,
-body {
+body,
+html {
     @include reset;
     overflow-x: hidden;
     background: #FFF;
@@ -31,52 +31,50 @@ a {
 // ----------------------------------------------------------------- WRAPPER ---
 
 .wrapper {
-    width: 100%;
+    width    : 100%;
     max-width: $viewport;
-    margin: {
+    margin   : {
         right: auto;
-        left: auto;
+        left : auto;
     };
-    
+
     &.-padded {
         max-width: $viewport + $grid-spacing * 2;
-        padding: {
-            left: $grid-spacing;
+        padding  : {
+            left : $grid-spacing;
             right: $grid-spacing;
         }
     }
 }
 
-
 // -------------------------------------------------------------- BLOCKQOUTE ---
 
 blockquote {
-    margin: $grid-spacing 0;
-    padding: 0.01px $grid-spacing;
+    margin    : $grid-spacing 0;
+    padding   : .01px $grid-spacing;
     background: lightgray;
 
     @include breakpoint("sm and up") {
         margin: {
-            left: $grid-spacing * 2;
+            left : $grid-spacing * 2;
             right: $grid-spacing * 2;
         };
     }
 }
 
-
 // ------------------------------------------------- IMAGE, FIGURE & CAPTION ---
 
 .flex-img {
     max-width: 100%;
-    height: auto;
+    height   : auto;
 }
 
 figure {
     @include reset;
 
     text-align: center;
-    margin: {
-        top: $grid-spacing;
+    margin    : {
+        top   : $grid-spacing;
         bottom: $grid-spacing;
     };
 
@@ -86,18 +84,17 @@ figure {
 }
 
 figcaption {
-    display: inline-block;
-    text-align: left;
-    margin: ($grid-spacing / 3) 0;
-    font-size: $font-size - 4;
+    display    : inline-block;
+    text-align : left;
+    margin     : ($grid-spacing / 3) 0;
+    font-size  : $font-size - 4;
     line-height: $line-height - 8;
 }
 
-
 // ------------------------------------------------------------ LIST STYLING ---
 
-ul,
-ol {
+ol,
+ul {
     @include reset;
     list-style: none;
 }

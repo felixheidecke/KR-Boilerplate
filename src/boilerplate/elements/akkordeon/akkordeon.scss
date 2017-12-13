@@ -3,15 +3,15 @@
         width: 100%;
 
         .card {
-            border: 1px solid lightgray;
+            border       : 1px solid lightgray;
             margin-bottom: $grid-spacing;
         }
 
         .tab {
             background: lightgray;
-            padding: ($grid-spacing / 4) ($grid-spacing / 2);
-            margin: 0;
-            cursor: pointer;
+            padding   : ($grid-spacing / 4) ($grid-spacing / 2);
+            margin    : 0;
+            cursor    : pointer;
         }
 
         .content {

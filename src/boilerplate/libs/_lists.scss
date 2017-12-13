@@ -1,14 +1,15 @@
-$el : ".#{$prefix}list";
+$el: ".#{$prefix}list";
 
 // Requires FontAwesome
 @mixin list-fa($content, $text-offset:18px) {
     li {
         position: relative;
+
         &:before {
             font-family: FontAwesome, sans-serif;
-            position: absolute;
-            left: $text-offset * -1;
-            content: $content;
+            position   : absolute;
+            left       : $text-offset * -1;
+            content    : $content;
         }
     }
 }
@@ -16,7 +17,7 @@ $el : ".#{$prefix}list";
 #{$el} {
     @extend p;
     padding-left: $grid-spacing;
-    margin-left: $grid-spacing / 1.5;
+    margin-left : $grid-spacing / 1.5;
 
     &-disc {
         @extend #{$el};
@@ -32,8 +33,8 @@ $el : ".#{$prefix}list";
 
             &:before {
                 position: absolute;
-                content: "-";
-                left: 0;
+                content : "-";
+                left    : 0;
             }
         }
     }

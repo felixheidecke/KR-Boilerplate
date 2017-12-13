@@ -1,9 +1,9 @@
 jQuery.fn.krTopLink = (params) ->
 
     params = jQuery.extend({
-        class: 'kr-toplink',
-        scrollOffset: 200
-        speed: 'slow'
+        class : 'kr-toplink',
+        scrollOffset : 200,
+        speed : 'slow'
     }, params)
 
     if $(@).find(".#{params.class}").length > 0
