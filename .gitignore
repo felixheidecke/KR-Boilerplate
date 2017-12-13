@@ -19,7 +19,6 @@ npm-debug.log
 
 temp/
 test/
-!/test/index.html
 backup/
 htdocs/*
 !/htdocs/index.php
