@@ -75,8 +75,6 @@ $zoom-enabled                        : 'true' !default;
 @import "libs/lists";
 @import "libs/helper";
 
-$nav-main-breakpoint                 : 700px;
-
 @import "elements/akkordeon/akkordeon";
 @import "elements/buttons/buttons";
 @import "elements/form/form";
