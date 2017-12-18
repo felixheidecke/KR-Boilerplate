@@ -5,6 +5,7 @@ jQuery.fn.krNav = (params) ->
         scrollOffset: 0
         scrollSpeed: 600
         slideSpeed: 'slow'
+        activeClass: '-is-active'
         breakpoint: 768
     }, params)
 
@@ -33,23 +34,28 @@ jQuery.fn.krNav = (params) ->
         'class': 'kr-nav-main-burger'
         'html': '<span>Menu</span>')
 
+    $nav.find("a.#{params.activeClass}").parents('li').each( ->
+        $(@).addClass params.activeClass
+        $(@).children("a:not(.#{params.activeClass})").addClass params.activeClass
+    )
+
     $burger.on('click', ->
-        if !$nav.hasClass('-is-on')
+        if !$nav.hasClass(params.activeClass)
             $1ul.slideDown params.slideSpeed
-            $nav.addClass '-is-on'
+            $nav.addClass params.activeClass
             if params.scroll
                 $('html, body').animate { scrollTop: $nav.offset().top + params.scrollOffset }, params.scrollSpeed
             else
                 $('html, body').scrollTop(0)
         else
-            $nav.removeClass '-is-on'
+            $nav.removeClass params.activeClass
             $1ul.slideUp params.slideSpeed, ->
                 $(this).removeAttr 'style'
     ).prependTo $nav
 
     $(window).on 'resize', ->
-        if params.closeOnResize and $nav.is('.-is-on') and $(window).width() >= params.breakpoint
-            $nav.removeClass '-is-on'
+        if params.closeOnResize and $nav.is('.' + params.activeClass) and $(window).width() >= params.breakpoint
+            $nav.removeClass params.activeClass
             $1ul.removeAttr 'style'
 
     return @

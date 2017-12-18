@@ -1,69 +1,81 @@
 // ------------------------------------------------------- SETTINGS DEFAULTS ---
 
 // --- Base
-$prefix: "kr-" !default;
+$prefix                                 : "kr-" !default;
 
-$grid-spacing: 20px !default;
-$viewport: $grid-spacing * 64 !default; // = 1280px
+$grid-spacing                           : 20px !default;
+$viewport                               : $grid-spacing * 64 !default; // = 1280px
 
-$font-size: 16px !default;
-$line-height: 26px !default;
+$font-size                              : 16px !default;
+$line-height                            : 26px !default;
 
 // --- Base Colors
 
-$c-light: #fff !default;
-$c-gray: #808080 !default;
-$c-dark: #333 !default;
+$c-light                                : #fff !default;
+$c-gray                                 : #808080 !default;
+$c-dark                                 : #333 !default;
 
 // --- Buttons
 
-$button-background-color: #E6E6E6 !default;
-$button-border-color: #999999 !default;
-$button-color: #8c8c8c !default;
+$button-background-color                : #E6E6E6 !default;
+$button-border-color                    : #999999 !default;
+$button-color                           : #8c8c8c !default;
 
 // --- Anchors / Links
 
-$anchor-color: #111 !default;
-$anchor-hover-color: $anchor-color !default;
+$anchor-color                           : #111 !default;
+$anchor-hover-color                     : $anchor-color !default;
 
 // --- Main Navigation
 
-$nav-main-enabled: "true" !default;
+$nav-main-enabled                       : "true" !default;
 
-$nav-main-breakpoint: 768px !default;
-$nav-main-item-color: #fff !default;
-$nav-main-item-color-hover: $nav-main-item-color !default;
-$nav-main-item-background-color: #808080 !default;
-$nav-main-item-background-color-hover: #9a9a9a !default;
-$nav-main-item-separator: 1px solid #333 !default;
+$nav-main-active-class                  : "-is-active" !default;
+$nav-main-breakpoint                    : 768px !default;
 
-$nav-main-burger-patty-color: #333 !default;
+$nav-main-item-1-color                  : #fff !default;
+$nav-main-item-1-color-hover            : $nav-main-item-1-color !default;
+$nav-main-item-1-color-active           : $nav-main-item-1-color !default;
+$nav-main-item-1-background-color       : #808080 !default;
+$nav-main-item-1-background-color-hover : #9a9a9a !default;
+$nav-main-item-1-background-color-active: #9a9a9a !default;
+
+$nav-main-item-2-color                  : $nav-main-item-1-color !default;
+$nav-main-item-2-color-hover            : $nav-main-item-2-color !default;
+$nav-main-item-2-color-active           : $nav-main-item-2-color !default;
+$nav-main-item-2-background-color       : $nav-main-item-1-background-color !default;
+$nav-main-item-2-background-color-hover : $nav-main-item-1-background-color-hover !default;
+$nav-main-item-2-background-color-active: $nav-main-item-1-background-color-hover !default;
+
+$nav-main-item-separator                : 1px solid #333 !default;
+
+$nav-main-burger-patty-color            : #333 !default;
 
 // --- Form
 
-$form-element-border: 1px solid #bfbfbf !default;
-$form-item-color: #333 !default;
+$form-element-border                    : 1px solid #bfbfbf !default;
+$form-item-color                        : #333 !default;
 
-$form-label-color: #808080 !default;
-$form-label-background-color: #e6e6e6 !default;
+$form-label-color                       : #808080 !default;
+$form-label-background-color            : #e6e6e6 !default;
 
-$form-label-text-color: $form-label-color !default;
-$form-label-textarea-color: $form-label-color !default;
-$form-label-clicker-color: $form-label-color !default;
+$form-label-text-color                  : $form-label-color !default;
+$form-label-textarea-color              : $form-label-color !default;
+$form-label-clicker-color               : $form-label-color !default;
 
 // --- Alerts
 
-$alert-error-color: #f0506e !default;
-$alert-success-color: seagreen !default;
-$alert-warn-color: orange !default;
+$alert-error-color                      : #f0506e !default;
+$alert-success-color                    : seagreen !default;
+$alert-warn-color                       : orange !default;
 
 // ------------------------------------------------------ ENABELING ELEMENTS ---
 
-$akkordeon-enabled: "true" !default;
-$buttons-enabled: "true" !default;
-$form-enabled: "true" !default;
-$link-external-enabled: "true" !default;
-$zoom-enabled: "true" !default;
+$akkordeon-enabled                      : "true" !default;
+$buttons-enabled                        : "true" !default;
+$form-enabled                           : "true" !default;
+$link-external-enabled                  : "true" !default;
+$zoom-enabled                           : "true" !default;
 
 // --------------------------------------------------------- FILE COLLECTING ---
 
