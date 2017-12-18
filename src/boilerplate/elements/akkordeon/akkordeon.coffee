@@ -2,7 +2,7 @@ jQuery.fn.krAkkordeon = (settings) ->
 
     s = jQuery.extend(
         initClosed : true
-        initfirstOpen : true
+        initfirstOpen : false
         speed : 'fast'
         onlyOneCard : true
 
