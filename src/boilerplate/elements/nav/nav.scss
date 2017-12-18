@@ -1,6 +1,7 @@
 @if $nav-main-enabled == "true" {
 
     $el                         : ".#{$prefix}nav-main";
+    $active                     : ".#{$nav-main-active-class}";
     $nav-main-breakpoint-desktop: $nav-main-breakpoint;
     $nav-main-breakpoint-mobile : $nav-main-breakpoint - 1;
 
@@ -14,12 +15,12 @@
         &-1-li {}
 
         &-1-a {
-            background-color: $nav-main-item-background-color;
-            color           : $nav-main-item-color;
+            background-color: $nav-main-item-1-background-color;
+            color           : $nav-main-item-1-color;
 
-            &:hover {
-                background-color: $nav-main-item-background-color-hover;
-                color           : $nav-main-item-color-hover;
+            &#{$active} {
+                background-color: $nav-main-item-1-background-color-active;
+                color           : $nav-main-item-1-color-active;
             }
         }
 
@@ -51,11 +52,11 @@
                 padding        : ($grid-spacing / 2) $grid-spacing;
                 text-decoration: none;
                 transition     : all .333s;
-            }
 
-            &.-is-active #{$el}-1-a:hover {
-                background-color: $nav-main-item-background-color-hover;
-                color           : $nav-main-item-color-hover;
+                &:hover {
+                    background-color: $nav-main-item-1-background-color-hover;
+                    color           : $nav-main-item-1-color-hover;
+                }
             }
         }
 
@@ -84,9 +85,9 @@
                 text-decoration: none;
             }
 
-            &.-is-active #{$el}-2-a {
-                background-color: $nav-main-item-background-color-hover;
-                color           : $nav-main-item-color-hover;
+            &#{$active} #{$el}-2-a {
+                background-color: $nav-main-item-2-background-color-hover;
+                color           : $nav-main-item-2-color-hover;
             }
         }
 
@@ -98,14 +99,14 @@
 
         &-2-a {
             display         : block;
-            background-color: lighten($nav-main-item-background-color, 5%);
-            color           : $nav-main-item-color;
+            background-color: lighten($nav-main-item-2-background-color, 5%);
+            color           : $nav-main-item-2-color;
             font-size       : $font-size - 2px;
             text-decoration : none;
 
-            &:hover {
-                background-color: $nav-main-item-background-color-hover;
-                color           : $nav-main-item-color-hover;
+            &#{$active} {
+                background-color: $nav-main-item-2-background-color-active;
+                color           : $nav-main-item-2-color-active;
             }
         }
 
@@ -125,12 +126,13 @@
             &-2-a {
                 padding   : ($grid-spacing / 2) $grid-spacing;
                 transition: all .25s;
+
+                &:hover {
+                    background-color: $nav-main-item-2-background-color-hover;
+                    color           : $nav-main-item-2-color-hover;
+                }
             }
 
-            &.-is-active #{$el}-2-a:hover {
-                background-color: $nav-main-item-background-color-hover;
-                color           : $nav-main-item-color-hover;
-            }
         }
 
         @media (max-width: $nav-main-breakpoint-mobile) {
@@ -208,7 +210,7 @@
 
     // --- Hover effekt for dropdown
 
-    #{$el}.-is-on #{$el}-burger {
+    #{$el}.-is-expanded #{$el}-burger {
         &:before {
             top      : 50%;
             transform: translateY(-50%) rotate(45deg);

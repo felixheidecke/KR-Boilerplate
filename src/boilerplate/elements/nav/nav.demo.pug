@@ -4,7 +4,7 @@ block title
     | KR-Nav
 
 block example
-    nav.kr-nav-main
+    nav#my-nav.kr-nav-main
         ul
             li
                 a(href='#') First One
@@ -15,8 +15,8 @@ block example
                         a(href='#') Second One
                     li
                         a(href='#') Second Two
-                    li.-is-active
-                        a(href='#') Second Three
+                    li
+                        a(href='#').-is-active Second Three
             li
                 a(href='#') First Three
             li
@@ -33,46 +33,45 @@ block example
 
 block additional
     h2 SCSS
-    p Wenn die Navigation nicht verwendet wird, kann der CSS Code deaktiviert werden:
+
     code.
-        $nav-main-enabled: 'false';
+        $nav-main-enabled                       : 'true';        // Navigation SCSS Code aktivieren / deaktiveren
 
-    p breakpoint manuell setzen:
-    code.
-        $nav-main-breakpoint: 768px;
+        $nav-main-active-class                  : "-is-active";  // Klassenname für aktive Elemente wählen (siehe Hinweis)
+        $nav-main-breakpoint                    : 768px;         // Breakpoint für Burger-Menü (siehe Hinweis)
 
-    p.hint Wenn der Breakpoint manuell gesetzt wird, muss dieser auch in der JavaScript Instanz gesetzt werden.
+        $nav-main-item-1-color                  : #fff;
+        $nav-main-item-1-color-hover            : $nav-main-item-1-color;
+        $nav-main-item-1-color-active           : $nav-main-item-1-color;
+        $nav-main-item-1-background-color       : #808080;
+        $nav-main-item-1-background-color-hover : #9a9a9a;
+        $nav-main-item-1-background-color-active: #9a9a9a;
 
-    p Farben (optional):
-    code.
-        $nav-main-item-color                 : #fff;
-        $nav-main-item-color-hover           : $nav-main-item-color;
-        $nav-main-item-background-color      : #808080;
-        $nav-main-item-background-color-hover: #9a9a9a;
-        $nav-main-item-separator-color       : #333;
+        $nav-main-item-2-color                  : $nav-main-item-1-color;
+        $nav-main-item-2-color-hover            : $nav-main-item-2-color;
+        $nav-main-item-2-color-active           : $nav-main-item-2-color;
+        $nav-main-item-2-background-color       : $nav-main-item-1-background-color;
+        $nav-main-item-2-background-color-hover : $nav-main-item-1-background-color-hover;
+        $nav-main-item-2-background-color-active: $nav-main-item-1-background-color-hover;
 
-        $nav-main-burger-patty-color         : #333;
+        $nav-main-item-separator                : 1px solid #333;
+
+        $nav-main-burger-patty-color            : #333;
+
+    p.hint Wenn der <b>$nav-main-breakpoint</b> und/oder <b>$nav-main-active-class</b> manuell gesetzt werden, muss dieser auch in der JavaScript Instanz gesetzt werden.
 
     h2 JavaScript
     code.
-        <script>
-            $('.kr-nav-main').krNav({
-                closeOnResize: true,
-                scroll: true,
-                scrollOffset: 0,
-                scrollSpeed: 600,
-                slideSpeed: 'slow',
-                breakpoint: 768
-            });
-        </script>
+        $('#my-nav').krNav({
+            closeOnResize: true
+            scroll: true
+            scrollOffset: 0
+            scrollSpeed: 600
+            slideSpeed: 'slow'
+            activeClass: '-is-active'  // Klassenname für aktive Elemente wählen (siehe Hinweis)
+            breakpoint: 768            // Breakpoint für Burger-Menü (siehe Hinweis)
+        });
 
 block script
     script.
-        $('.kr-nav-main').krNav({
-            closeOnResize: true,
-            scroll: true,
-            scrollOffset: 0,
-            scrollSpeed: 600,
-            slideSpeed: 'slow',
-            breakpoint: 768
-        });
+        $('#my-nav').krNav();
