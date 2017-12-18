@@ -4,7 +4,7 @@ block title
     | KR-Nav
 
 block example
-    nav#my-nav.kr-nav-main
+    nav.kr-nav-main
         ul
             li
                 a(href='#') First One
@@ -33,25 +33,13 @@ block example
 
 block additional
     h2 SCSS
-
-<<<<<<< HEAD
     code.
-        $nav-main-enabled                       : 'true';        // Navigation SCSS Code aktivieren / deaktiveren
+        $nav-main-enabled                       : true;                // KR-Menü de-/aktivieren
 
-        $nav-main-active-class                  : "-is-active";  // Klassenname für aktive Elemente wählen (siehe Hinweis)
-        $nav-main-breakpoint                    : 768px;         // Breakpoint für Burger-Menü (siehe Hinweis)
+        $nav-main-active-class                  : "-is-active";        // CSS Klasse für aktive Menü-Elemente
+        $nav-main-breakpoint                    : 768px;               // Breakpoint für Burger/mobiles Menü
+        $nav-main-min-height                    : $grid-spacing * 2;   // Mindesthöhe der Menü-Elemente
 
-=======
-    p Breakpoint und active-class manuell setzen:
-    code.
-        $nav-main-active-class: "-is-active";
-        $nav-main-breakpoint  : 768px;
-
-    p.hint Wenn der <b>$nav-main-breakpoint</b> und/oder <b>$nav-main-active-class</b >manuell gesetzt werden, muss dieser auch in der JavaScript Instanz gesetzt werden.
-
-    p Farben (optional):
-    code.
->>>>>>> 3498afee242196cc52dd3cd01a39ecd198afdfef
         $nav-main-item-1-color                  : #fff;
         $nav-main-item-1-color-hover            : $nav-main-item-1-color;
         $nav-main-item-1-color-active           : $nav-main-item-1-color;
@@ -65,45 +53,32 @@ block additional
         $nav-main-item-2-background-color       : $nav-main-item-1-background-color;
         $nav-main-item-2-background-color-hover : $nav-main-item-1-background-color-hover;
         $nav-main-item-2-background-color-active: $nav-main-item-1-background-color-hover;
-<<<<<<< HEAD
 
-        $nav-main-item-separator                : 1px solid #333;
+        $nav-main-item-separator                : 1px solid #fff;      // Abstandselement zwischen den Menüpunkten
+        $nav-main-burger-patty-color            : #333;                // Farbe der Burger-Elemente
 
-        $nav-main-burger-patty-color            : #333;
-
-    p.hint Wenn der <b>$nav-main-breakpoint</b> und/oder <b>$nav-main-active-class</b> manuell gesetzt werden, muss dieser auch in der JavaScript Instanz gesetzt werden.
-
-    h2 JavaScript
-    code.
-        $('#my-nav').krNav({
-=======
-
-        $nav-main-item-separator                : 1px solid #333;
-
-        $nav-main-burger-patty-color            : #333;
+        $nav-main-trigger-color                 : #ddd;                // Farbe des mobilen Aufklapp-Symbols (Chevron)
+        $nav-main-trigger-background-color      : rgba(#fff, .25);
+        $nav-main-trigger-radius                : 4px;
 
     h2 JavaScript
     code.
         $('.kr-nav-main').krNav({
->>>>>>> 3498afee242196cc52dd3cd01a39ecd198afdfef
-            closeOnResize: true
-            scroll: true
-            scrollOffset: 0
-            scrollSpeed: 600
-            slideSpeed: 'slow'
-<<<<<<< HEAD
-            activeClass: '-is-active'  // Klassenname für aktive Elemente wählen (siehe Hinweis)
-            breakpoint: 768            // Breakpoint für Burger-Menü (siehe Hinweis)
-=======
-            activeClass: '-is-active'
-            breakpoint: 768
->>>>>>> 3498afee242196cc52dd3cd01a39ecd198afdfef
+            closeOnResize: true,             // Navigation beim scrollen schließen
+            scroll       : true,             // Click auf Burger scrollt zu Menü anfang
+            scrollOffset : 0,                // Wenn "scroll: true"; scroll abstand zum Menü
+            scrollSpeed  : 600,              // Wenn "scroll: true"; Scrollgeschwindigkeit
+            slideSpeed   : 'slow',           // Scrollgeschwindigkeit des mobilen Menüs
+            activeClass  : '-is-active',     // CSS Klasse für aktive Elemente
+            expandedClass: '-is-expanded',   // CSS Klasse für aufgeklappte Elemente
+            breakpoint   : 768               // Breakpoint für Burger/mobiles Menü
         });
+
+    p.hint Wenn der <b>$nav-main-breakpoint</b> und/oder <b>$nav-main-active-class</b> manuell gesetzt werden, muss dieser auch in der JavaScript Instanz gesetzt werden.
+
 
 block script
     script.
-<<<<<<< HEAD
-        $('#my-nav').krNav();
-=======
-        $('.kr-nav-main').krNav();
->>>>>>> 3498afee242196cc52dd3cd01a39ecd198afdfef
+        $('.kr-nav-main').krNav({
+            scrollOffset: -50
+        });

@@ -1,7 +1,9 @@
 const config   = require('./config.json');
 const moment   = require('moment');
+const ip       = require('ip');
 const testPort = Math.floor(Math.random() * (8900 - 8100) + 8100);
-let   libs   = {
+
+let libs = {
 	"jquery" : {
 		"install" : config.vendor.jquery,
 		"js" : [
@@ -259,7 +261,7 @@ module.exports = function(grunt) {
 		connect: {
 			testServer: {
 				options: {
-					hostname: 'localhost',
+					hostname: ip.address(),
 					port: testPort,
 					base: "test",
 					keepalive: false,
