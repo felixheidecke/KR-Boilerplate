@@ -163,7 +163,7 @@ module.exports = function(grunt) {
 			default: {
 				options: {
 					force: true,
-					style: "expanded",
+					style: "compressed",
 					noCache: true
 				},
 				files: {
@@ -173,7 +173,7 @@ module.exports = function(grunt) {
 			test: {
 				options: {
 					force: true,
-					style: "expanded",
+					style: "compact",
 					sourcemap: "none",
 					noCache: true
 				},

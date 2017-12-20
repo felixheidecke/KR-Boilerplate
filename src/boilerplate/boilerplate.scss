@@ -28,7 +28,7 @@ $anchor-hover-color                     : $anchor-color !default;
 
 // --- Main Navigation
 
-$nav-main-enabled                       : "true" !default;
+$nav-main-enabled                       : true !default;
 
 $nav-main-active-class                  : "-is-active" !default;
 $nav-main-breakpoint                    : 768px !default;
@@ -72,10 +72,11 @@ $alert-warn-color                       : orange !default;
 
 // ------------------------------------------------------ ENABELING ELEMENTS ---
 
-$akkordeon-enabled                      : "true" !default;
-$buttons-enabled                        : "true" !default;
-$link-external-enabled                  : "true" !default;
-$zoom-enabled                           : "true" !default;
+$akkordeon-enabled                      : true !default;
+$buttons-enabled                        : true !default;
+$link-external-enabled                  : true !default;
+$zoom-enabled                           : true !default;
+$section-enabled                        : true !default;
 
 // --------------------------------------------------------- FILE COLLECTING ---
 
