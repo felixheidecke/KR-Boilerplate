@@ -34,12 +34,24 @@ block example
 block additional
     h2 SCSS
 
+<<<<<<< HEAD
     code.
         $nav-main-enabled                       : 'true';        // Navigation SCSS Code aktivieren / deaktiveren
 
         $nav-main-active-class                  : "-is-active";  // Klassenname für aktive Elemente wählen (siehe Hinweis)
         $nav-main-breakpoint                    : 768px;         // Breakpoint für Burger-Menü (siehe Hinweis)
 
+=======
+    p Breakpoint und active-class manuell setzen:
+    code.
+        $nav-main-active-class: "-is-active";
+        $nav-main-breakpoint  : 768px;
+
+    p.hint Wenn der <b>$nav-main-breakpoint</b> und/oder <b>$nav-main-active-class</b >manuell gesetzt werden, muss dieser auch in der JavaScript Instanz gesetzt werden.
+
+    p Farben (optional):
+    code.
+>>>>>>> 3498afee242196cc52dd3cd01a39ecd198afdfef
         $nav-main-item-1-color                  : #fff;
         $nav-main-item-1-color-hover            : $nav-main-item-1-color;
         $nav-main-item-1-color-active           : $nav-main-item-1-color;
@@ -53,6 +65,7 @@ block additional
         $nav-main-item-2-background-color       : $nav-main-item-1-background-color;
         $nav-main-item-2-background-color-hover : $nav-main-item-1-background-color-hover;
         $nav-main-item-2-background-color-active: $nav-main-item-1-background-color-hover;
+<<<<<<< HEAD
 
         $nav-main-item-separator                : 1px solid #333;
 
@@ -63,15 +76,34 @@ block additional
     h2 JavaScript
     code.
         $('#my-nav').krNav({
+=======
+
+        $nav-main-item-separator                : 1px solid #333;
+
+        $nav-main-burger-patty-color            : #333;
+
+    h2 JavaScript
+    code.
+        $('.kr-nav-main').krNav({
+>>>>>>> 3498afee242196cc52dd3cd01a39ecd198afdfef
             closeOnResize: true
             scroll: true
             scrollOffset: 0
             scrollSpeed: 600
             slideSpeed: 'slow'
+<<<<<<< HEAD
             activeClass: '-is-active'  // Klassenname für aktive Elemente wählen (siehe Hinweis)
             breakpoint: 768            // Breakpoint für Burger-Menü (siehe Hinweis)
+=======
+            activeClass: '-is-active'
+            breakpoint: 768
+>>>>>>> 3498afee242196cc52dd3cd01a39ecd198afdfef
         });
 
 block script
     script.
+<<<<<<< HEAD
         $('#my-nav').krNav();
+=======
+        $('.kr-nav-main').krNav();
+>>>>>>> 3498afee242196cc52dd3cd01a39ecd198afdfef
