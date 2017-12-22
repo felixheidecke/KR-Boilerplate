@@ -29,7 +29,6 @@
   "coffeescript": {
     "indent_char": " ",
     "indent_size": 4,
-    "beautify_on_save": true,
     "break_chained_methods": true
   }
 }

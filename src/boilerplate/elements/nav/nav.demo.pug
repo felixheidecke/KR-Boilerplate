@@ -33,19 +33,13 @@ block example
 
 block additional
     h2 SCSS
-    p Wenn die Navigation nicht verwendet wird, kann der CSS Code deaktiviert werden:
     code.
-        $nav-main-enabled: 'false';
+        $nav-main-enabled                       : true;                // KR-Menü de-/aktivieren
 
-    p Breakpoint und active-class manuell setzen:
-    code.
-        $nav-main-active-class: "-is-active";
-        $nav-main-breakpoint  : 768px;
+        $nav-main-active-class                  : "-is-active";        // CSS Klasse für aktive Menü-Elemente
+        $nav-main-breakpoint                    : 768px;               // Breakpoint für Burger/mobiles Menü
+        $nav-main-min-height                    : $grid-spacing * 2;   // Mindesthöhe der Menü-Elemente
 
-    p.hint Wenn der <b>$nav-main-breakpoint</b> und/oder <b>$nav-main-active-class</b >manuell gesetzt werden, muss dieser auch in der JavaScript Instanz gesetzt werden.
-
-    p Farben (optional):
-    code.
         $nav-main-item-1-color                  : #fff;
         $nav-main-item-1-color-hover            : $nav-main-item-1-color;
         $nav-main-item-1-color-active           : $nav-main-item-1-color;
@@ -60,22 +54,31 @@ block additional
         $nav-main-item-2-background-color-hover : $nav-main-item-1-background-color-hover;
         $nav-main-item-2-background-color-active: $nav-main-item-1-background-color-hover;
 
-        $nav-main-item-separator                : 1px solid #333;
+        $nav-main-item-separator                : 1px solid #fff;      // Abstandselement zwischen den Menüpunkten
+        $nav-main-burger-patty-color            : #333;                // Farbe der Burger-Elemente
 
-        $nav-main-burger-patty-color            : #333;
+        $nav-main-trigger-color                 : #ddd;                // Farbe des mobilen Aufklapp-Symbols (Chevron)
+        $nav-main-trigger-background-color      : rgba(#fff, .25);
+        $nav-main-trigger-radius                : 4px;
 
     h2 JavaScript
     code.
         $('.kr-nav-main').krNav({
-            closeOnResize: true
-            scroll: true
-            scrollOffset: 0
-            scrollSpeed: 600
-            slideSpeed: 'slow'
-            activeClass: '-is-active'
-            breakpoint: 768
+            closeOnResize: true,             // Navigation beim scrollen schließen
+            scroll       : true,             // Click auf Burger scrollt zu Menü anfang
+            scrollOffset : 0,                // Wenn "scroll: true"; scroll abstand zum Menü
+            scrollSpeed  : 600,              // Wenn "scroll: true"; Scrollgeschwindigkeit
+            slideSpeed   : 'slow',           // Scrollgeschwindigkeit des mobilen Menüs
+            activeClass  : '-is-active',     // CSS Klasse für aktive Elemente
+            expandedClass: '-is-expanded',   // CSS Klasse für aufgeklappte Elemente
+            breakpoint   : 768               // Breakpoint für Burger/mobiles Menü
         });
+
+    p.hint Wenn der <b>$nav-main-breakpoint</b> und/oder <b>$nav-main-active-class</b> manuell gesetzt werden, muss dieser auch in der JavaScript Instanz gesetzt werden.
+
 
 block script
     script.
-        $('.kr-nav-main').krNav();
+        $('.kr-nav-main').krNav({
+            scrollOffset: -50
+        });

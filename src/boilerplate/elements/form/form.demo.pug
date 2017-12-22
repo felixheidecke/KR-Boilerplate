@@ -5,13 +5,13 @@ block title
 
 block style
     style.
-        .demo-form {
+        #my-form {
             max-width:750px;
             margin: 0 auto;
         }
 
 block example
-    form.demo-form.kr-form(method='post', action='https://www.klickrhein.de/form/kr-kontakt.php')
+    form#my-form.kr-form(method='post', action='https://www.klickrhein.de/form/kr-kontakt.php')
         input(type='hidden', name='subject', value='Der Betreff')
         input(type='hidden', name='required', value='firstname, lastname')
         .pure-g.pure-padded-children-halved
@@ -56,13 +56,23 @@ block example
                 button(type='submit').kr-button Abschicken
 
 block additional
-    h4 Minimal instanz:
+    h2 SCSS
     code.
-        $('.demo-form').krForm();  
+        $form-enabled               : 'true'; // Formular SCSS Code aktivieren / deaktiveren
 
-    h4 Instanz mit eigenen Parametern:
+        $form-element-border        : 1px solid #bfbfbf;
+        $form-item-color            : #333;
+
+        $form-label-color           : #808080;
+        $form-label-background-color: #e6e6e6;
+
+        $form-label-text-color      : $form-label-color;
+        $form-label-textarea-color  : $form-label-color;
+        $form-label-clicker-color   : $form-label-color;
+
+    h2 JavaScript
     code.
-        $(".demo-form").krForm({
+        $("#my-form").krForm({
             textOnLoading : "Sendet",   // Button Text beim laden
             textOnError   : "<strong>Ein Fehler ist aufgetreten!</strong><br>Bitte füllen Sie alle mit einem * markierten Felder aus!",
             textOnSuccess : "<strong>Vielen Dank für Ihre Nachricht.</strong><br>Wir setzen uns in Kürze mit Ihnen in Verbindung"
@@ -70,4 +80,4 @@ block additional
 
 block script
     script.
-        $('.demo-form').krForm();
+        $('#my-form').krForm();
