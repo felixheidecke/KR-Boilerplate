@@ -91,6 +91,12 @@
         &-justify {
             text-align: justify;
         }
+
+        &-ellipsis {
+            text-overflow: ellipsis;
+            overflow-x   : hidden;
+            white-space  : nowrap;
+        }
     }
 
     &-margin {
