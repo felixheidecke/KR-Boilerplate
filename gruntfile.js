@@ -90,6 +90,13 @@ let libs = {
 		"css" : [
 			"dist/css/swiper.min.css"
 		]
+	},
+
+	"lodash" : {
+		"install" : config.vendor.lodash,
+		"js" : [
+			"lodash.min.js"
+		]
 	}
 };
 
