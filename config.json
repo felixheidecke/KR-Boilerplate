@@ -8,6 +8,7 @@
         "simplelightbox": false,
         "lightbox2":      false,
         "swiper":         false,
-        "in-view":        false
+        "in-view":        false,
+        "lodash":         false
     }
 }
