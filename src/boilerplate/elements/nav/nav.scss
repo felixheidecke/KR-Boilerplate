@@ -32,61 +32,65 @@
             }
         }
 
-        @media (min-width: $nav-main-breakpoint-desktop) {
-            // --- Desktop
+        @if $nav-main-desktop-enabled {
+            @media (min-width: $nav-main-breakpoint-desktop) {
+                // --- Desktop
 
-            &-1-ul {
-                display        : flex;
-                justify-content: space-between;
-                flex           : {
-                    direction: row;
-                    wrap     : nowrap;
-                };
-            }
-
-            &-1-li {
-                flex-grow: 1;
-
-                &:not(:last-of-type) {
-                    margin-right: 1px;
+                &-1-ul {
+                    display        : flex;
+                    justify-content: space-between;
+                    flex           : {
+                        direction: row;
+                        wrap     : nowrap;
+                    };
                 }
-            }
 
-            &-1-a {
-                display        : block;
-                width          : 100%;
-                text-align     : center;
-                text-decoration: none;
-                transition     : all .333s;
+                &-1-li {
+                    flex-grow: 1;
+
+                    &:not(:last-of-type) {
+                        margin-right: 1px;
+                    }
+                }
+
+                &-1-a {
+                    display        : block;
+                    width          : 100%;
+                    text-align     : center;
+                    text-decoration: none;
+                    transition     : all .333s;
+                }
             }
         }
 
-        @media (max-width: $nav-main-breakpoint-mobile) {
-            // --- Mobile
+        @if $nav-main-mobile-enabled {
+            @media (max-width: $nav-main-breakpoint-mobile) {
+                // --- Mobile
 
-            &-1-ul {
-                display: none;
-            }
-
-            &-1-li {
-                width: 100%;
-
-                &:not(:first-of-type) {
-                    border-top: $nav-main-item-separator;
+                &-1-ul {
+                    display: none;
                 }
-            }
 
-            &-1-a {
-                @include OpenSans;
+                &-1-li {
+                    width: 100%;
 
-                display        : block;
-                font-size      : 15px;
-                text-decoration: none;
-            }
+                    &:not(:first-of-type) {
+                        border-top: $nav-main-item-separator;
+                    }
+                }
 
-            &#{$active} #{$el}-2-a {
-                background-color: $nav-main-item-2-background-color-hover;
-                color           : $nav-main-item-2-color-hover;
+                &-1-a {
+                    @include OpenSans;
+
+                    display        : block;
+                    font-size      : 15px;
+                    text-decoration: none;
+                }
+
+                &#{$active} #{$el}-2-a {
+                    background-color: $nav-main-item-2-background-color-hover;
+                    color           : $nav-main-item-2-color-hover;
+                }
             }
         }
 
@@ -109,42 +113,45 @@
             }
         }
 
-        @media (min-width: $nav-main-breakpoint-desktop) {
-            // --- Desktop
+        @if $nav-main-desktop-enabled {
+            @media (min-width: $nav-main-breakpoint-desktop) {
+                // --- Desktop
 
-            &-2-ul {
-                position        : absolute;
-                width           : 100%;
-                transform       : perspective(600px) rotateX(90deg);
-                transform-origin: 50% 0;
-                transition      : all .333s ease-in-out;
-            }
+                &-2-ul {
+                    position        : absolute;
+                    width           : 100%;
+                    transform       : perspective(600px) rotateX(90deg);
+                    transform-origin: 50% 0;
+                    transition      : all .333s ease-in-out;
+                }
 
-            &-2-li {}
+                &-2-li {}
 
-            &-2-a {
-                padding   : ($grid-spacing / 2) $grid-spacing;
-                transition: all .25s;
+                &-2-a {
+                    padding   : ($grid-spacing / 2) $grid-spacing;
+                    transition: all .25s;
 
-                &:hover {
-                    background-color: $nav-main-item-2-background-color-hover;
-                    color           : $nav-main-item-2-color-hover;
+                    &:hover {
+                        background-color: $nav-main-item-2-background-color-hover;
+                        color           : $nav-main-item-2-color-hover;
+                    }
                 }
             }
-
         }
 
-        @media (max-width: $nav-main-breakpoint-mobile) {
-            // --- Mobile
+        @if $nav-main-mobile-enabled {
+            @media (max-width: $nav-main-breakpoint-mobile) {
+                // --- Mobile
 
-            &-2-ul {
-                display: none;
-            }
+                &-2-ul {
+                    display: none;
+                }
 
-            &-2-li {}
+                &-2-li {}
 
-            &-2-a {
-                padding: ($grid-spacing / 3) $grid-spacing;
+                &-2-a {
+                    padding: ($grid-spacing / 3) $grid-spacing;
+                }
             }
         }
 
@@ -192,8 +199,10 @@
                 transform  : translateY(-50%);
             }
 
-            @media (min-width: $nav-main-breakpoint-desktop) {
-                display: none;
+            @if $nav-main-desktop-enabled {
+                @media (min-width: $nav-main-breakpoint-desktop) {
+                    display: none;
+                }
             }
         }
     }
@@ -201,10 +210,11 @@
     // -------------------------------------------------------------- STATES ---
 
     // --- Hover effekt for dropdown
-
-    @media (min-width: $nav-main-breakpoint-desktop) {
-        #{$el}-1-li.-is-expanded #{$el}-2-ul {
-            transform: perspective(600px) rotateX(0);
+    @if $nav-main-desktop-enabled {
+        @media (min-width: $nav-main-breakpoint-desktop) {
+            #{$el}-1-li.-is-expanded #{$el}-2-ul {
+                transform: perspective(600px) rotateX(0);
+            }
         }
     }
 
@@ -229,17 +239,21 @@
     // --- non mobile devices ---
 
     body:not([data-mobile]) #{$el} {
-        @media (min-width: $nav-main-breakpoint-desktop) {
-            &-1-li:hover #{$el}-2-ul {
-                transform: perspective(600px) rotateX(0);
-            }
-        }
-        @media (max-width: $nav-main-breakpoint-mobile) {
-            &-2-ul {
-                display: block;
+        @if $nav-main-desktop-enabled {
+            @media (min-width: $nav-main-breakpoint-desktop) {
+                &-1-li:hover #{$el}-2-ul {
+                    transform: perspective(600px) rotateX(0);
+                }
             }
         }
 
+        @if $nav-main-mobile-enabled {
+            @media (max-width: $nav-main-breakpoint-mobile) {
+                &-2-ul {
+                    display: block;
+                }
+            }
+        }
     }
 
     // --- mobile devices ---
@@ -267,9 +281,11 @@
             transform: rotate(180deg);
         }
 
-        @media (max-width: $nav-main-breakpoint-mobile) {
-            &-1-li.-is-expanded #{$el}-2-ul {
-                display: block;
+        @if $nav-main-mobile-enabled {
+            @media (max-width: $nav-main-breakpoint-mobile) {
+                &-1-li.-is-expanded #{$el}-2-ul {
+                    display: block;
+                }
             }
         }
     }
