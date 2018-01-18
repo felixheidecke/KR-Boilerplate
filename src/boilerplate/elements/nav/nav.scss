@@ -1,9 +1,7 @@
 @if $nav-main-enabled {
 
-    $el                         : ".#{$prefix}nav-main";
-    $active                     : ".#{$nav-main-active-class}";
-    $nav-main-breakpoint-desktop: $nav-main-breakpoint;
-    $nav-main-breakpoint-mobile : $nav-main-breakpoint - 1;
+    $el    : ".#{$prefix}nav-main";
+    $active: ".#{$nav-main-active-class}";
 
     #{$el} {
         &,
@@ -152,7 +150,7 @@
 
                 &-2-a {
                     display        : block;
-                    padding: ($grid-spacing / 3) $grid-spacing;
+                    padding        : ($grid-spacing / 3) $grid-spacing;
                     text-decoration: none;
                 }
             }

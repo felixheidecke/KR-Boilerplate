@@ -34,7 +34,9 @@ $nav-main-desktop-enabled               : true !default;
 
 $nav-main-active-class                  : "-is-active" !default;
 $nav-main-breakpoint                    : 768px !default;
-$nav-main-min-height                    : $grid-spacing * 2;
+$nav-main-breakpoint-desktop            : $nav-main-breakpoint;
+$nav-main-breakpoint-mobile             : $nav-main-breakpoint - 1;
+$nav-main-min-height                    : $grid-spacing * 2 !default;
 
 $nav-main-item-1-color                  : #fff !default;
 $nav-main-item-1-color-hover            : $nav-main-item-1-color !default;
