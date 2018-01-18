@@ -29,7 +29,7 @@ $anchor-hover-color                     : $anchor-color !default;
 // --- Main Navigation
 
 $nav-main-enabled                       : true !default;
-$nav-main-mobile-enabled                : false !default;
+$nav-main-mobile-enabled                : true !default;
 $nav-main-desktop-enabled               : true !default;
 
 $nav-main-active-class                  : "-is-active" !default;
