@@ -104,12 +104,17 @@
         &-2-li {}
 
         &-2-a {
-            background-color: lighten($nav-main-item-2-background-color, 5%);
+            background-color: $nav-main-item-2-background-color;
             color           : $nav-main-item-2-color;
 
             &#{$active} {
                 background-color: $nav-main-item-2-background-color-active;
                 color           : $nav-main-item-2-color-active;
+            }
+
+            &:hover {
+                background-color: $nav-main-item-2-background-color-hover;
+                color           : $nav-main-item-2-color-hover;
             }
         }
 
