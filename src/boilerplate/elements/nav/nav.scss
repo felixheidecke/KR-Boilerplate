@@ -21,10 +21,14 @@
             background-color: $nav-main-item-1-background-color;
             color           : $nav-main-item-1-color;
 
-            &#{$active},
-            &:hover {
+            &#{$active} {
                 background-color: $nav-main-item-1-background-color-active;
                 color           : $nav-main-item-1-color-active;
+            }
+
+            &:hover {
+                background-color: $nav-main-item-1-background-color-hover;
+                color           : $nav-main-item-1-color-hover;
             }
         }
 
