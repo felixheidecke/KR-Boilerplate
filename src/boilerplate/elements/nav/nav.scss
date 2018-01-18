@@ -22,8 +22,6 @@
         &-1-a {
             background-color: $nav-main-item-1-background-color;
             color           : $nav-main-item-1-color;
-            padding         : $nav-main-min-height / 2;
-            line-height     : 0;
 
             &#{$active},
             &:hover {
@@ -59,6 +57,8 @@
                     text-align     : center;
                     text-decoration: none;
                     transition     : all .333s;
+                    padding        : $nav-main-min-height / 2;
+                    line-height    : 0;
                 }
             }
         }
@@ -85,6 +85,7 @@
                     display        : block;
                     font-size      : 15px;
                     text-decoration: none;
+                    padding        : ($grid-spacing / 2) $grid-spacing;
                 }
 
                 &#{$active} #{$el}-2-a {
@@ -101,11 +102,8 @@
         &-2-li {}
 
         &-2-a {
-            display         : block;
             background-color: lighten($nav-main-item-2-background-color, 5%);
             color           : $nav-main-item-2-color;
-            font-size       : $font-size - 2px;
-            text-decoration : none;
 
             &#{$active} {
                 background-color: $nav-main-item-2-background-color-active;
@@ -128,8 +126,11 @@
                 &-2-li {}
 
                 &-2-a {
-                    padding   : ($grid-spacing / 2) $grid-spacing;
-                    transition: all .25s;
+                    display        : block;
+                    padding        : ($grid-spacing / 2) $grid-spacing;
+                    transition     : all .25s;
+                    font-size      : $font-size - 2px;
+                    text-decoration: none;
 
                     &:hover {
                         background-color: $nav-main-item-2-background-color-hover;
@@ -150,7 +151,9 @@
                 &-2-li {}
 
                 &-2-a {
+                    display        : block;
                     padding: ($grid-spacing / 3) $grid-spacing;
+                    text-decoration: none;
                 }
             }
         }
