@@ -34,11 +34,15 @@ block example
 block additional
     h2 SCSS
     code.
-        $nav-main-enabled                       : true;                // KR-Menü de-/aktivieren
+        $nav-main-enabled                       : true;   // KR-Menü de-/aktivieren
+        $nav-main-mobile-enabled                : true;   // KR-Menü mobil de-/aktivieren
+        $nav-main-desktop-enabled               : true;   // KR-Menü desktop de-/aktivieren
 
-        $nav-main-active-class                  : "-is-active";        // CSS Klasse für aktive Menü-Elemente
-        $nav-main-breakpoint                    : 768px;               // Breakpoint für Burger/mobiles Menü
-        $nav-main-min-height                    : $grid-spacing * 2;   // Mindesthöhe der Menü-Elemente
+        $nav-main-active-class                  : "-is-active";
+        $nav-main-breakpoint                    : 768px;
+        $nav-main-breakpoint-desktop            : $nav-main-breakpoint;
+        $nav-main-breakpoint-mobile             : $nav-main-breakpoint - 1;
+        $nav-main-min-height                    : $grid-spacing * 2;
 
         $nav-main-item-1-color                  : #fff;
         $nav-main-item-1-color-hover            : $nav-main-item-1-color;
@@ -54,10 +58,10 @@ block additional
         $nav-main-item-2-background-color-hover : $nav-main-item-1-background-color-hover;
         $nav-main-item-2-background-color-active: $nav-main-item-1-background-color-active;
 
-        $nav-main-item-separator                : 1px solid #fff;      // Abstandselement zwischen den Menüpunkten
-        $nav-main-burger-patty-color            : #333;                // Farbe der Burger-Elemente
+        $nav-main-item-separator                : 1px solid #fff;   // Abstandselement zwischen den Menüpunkten
+        $nav-main-burger-patty-color            : #333;             // Farbe der Burger-Elemente
 
-        $nav-main-trigger-color                 : #ddd;                // Farbe des mobilen Aufklapp-Symbols (Chevron)
+        $nav-main-trigger-color                 : #ddd;             // Farbe des mobilen Aufklapp-Symbols (Chevron)
         $nav-main-trigger-background-color      : rgba(#fff, .25);
         $nav-main-trigger-radius                : 4px;
 
