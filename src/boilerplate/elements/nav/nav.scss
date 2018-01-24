@@ -79,6 +79,11 @@
                     &:not(:first-of-type) {
                         border-top: $nav-main-item-separator;
                     }
+
+                    &#{$active} #{$el}-2-a {
+                        background-color: $nav-main-item-2-background-color-active;
+                        color           : $nav-main-item-2-color-active;
+                    }
                 }
 
                 &-1-a {
@@ -88,11 +93,6 @@
                     font-size      : 15px;
                     text-decoration: none;
                     padding        : ($grid-spacing / 2) $grid-spacing;
-                }
-
-                &#{$active} #{$el}-2-a {
-                    background-color: $nav-main-item-2-background-color-hover;
-                    color           : $nav-main-item-2-color-hover;
                 }
             }
         }
