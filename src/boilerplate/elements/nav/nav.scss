@@ -124,7 +124,7 @@
 
                 &-2-ul {
                     position        : absolute;
-                    width           : 100%;
+                    min-width       : 100%;
                     transform       : perspective(600px) rotateX(90deg);
                     transform-origin: 50% 0;
                     transition      : all .333s ease-in-out;
