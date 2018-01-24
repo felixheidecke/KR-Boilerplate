@@ -74,6 +74,17 @@
             }
         }
     }
+    // z-index
+
+    &-z-index {
+        display: flex;
+
+        @for $z from 1 through 10 {
+            &-#{$z * 10} {
+                z-index: $z * 10;
+            }
+        }
+    }
 
     &-text {
         &-center {
