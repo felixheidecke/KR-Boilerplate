@@ -17,9 +17,14 @@ jQuery.fn.krNav = (params) ->
     $1ul = $nav.find '> ul'
     $1li = $nav.find '> ul > li'
     $1a  = $nav.find '> ul > li > a'
+
     $2ul = $nav.find '> ul > li > ul'
     $2li = $nav.find '> ul > li > ul > li'
     $2a  = $nav.find '> ul > li > ul > li > a'
+
+    $3ul = $nav.find '> ul > li > ul > li > ul'
+    $3li = $nav.find '> ul > li > ul > li > ul > li'
+    $3a  = $nav.find '> ul > li > ul > li > ul > li > a'
 
     $trigger = $ '<span>',
         'class' : 'kr-nav-main-trigger'
@@ -32,12 +37,18 @@ jQuery.fn.krNav = (params) ->
     $1ul.addClass 'kr-nav-main-1-ul'
     $1li.addClass 'kr-nav-main-1-li'
     $1a.addClass  'kr-nav-main-1-a'
+
     $2ul.addClass 'kr-nav-main-2-ul'
     $2li.addClass 'kr-nav-main-2-li'
     $2a.addClass  'kr-nav-main-2-a'
 
+    $3ul.addClass 'kr-nav-main-3-ul'
+    $3li.addClass 'kr-nav-main-3-li'
+    $3a.addClass  'kr-nav-main-3-a'
+
     # Add trigger for touch devices
-    $nav.find("a + ul").before $trigger
+    $nav.find(".kr-nav-main-1-a + ul").before $trigger
+    $3ul.prev('.kr-nav-main-2-a').addClass '-is-sub-parent'
 
     # Show after classes are attached to prevent flickering
     $nav.show()
