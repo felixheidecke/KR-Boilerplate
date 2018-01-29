@@ -15,6 +15,11 @@
 
         &-1-li {
             position: relative;
+
+            &:hover #{$el}-1-a {
+                background-color: $nav-main-item-1-background-color-hover;
+                color           : $nav-main-item-1-color-hover;
+            }
         }
 
         &-1-a {
@@ -24,11 +29,6 @@
             &#{$active} {
                 background-color: $nav-main-item-1-background-color-active;
                 color           : $nav-main-item-1-color-active;
-            }
-
-            &:hover {
-                background-color: $nav-main-item-1-background-color-hover;
-                color           : $nav-main-item-1-color-hover;
             }
         }
 
@@ -79,11 +79,6 @@
                     &:not(:first-of-type) {
                         border-top: $nav-main-item-separator;
                     }
-
-                    &#{$active} #{$el}-2-a {
-                        background-color: $nav-main-item-2-background-color-active;
-                        color           : $nav-main-item-2-color-active;
-                    }
                 }
 
                 &-1-a {
@@ -101,7 +96,14 @@
 
         &-2-ul {}
 
-        &-2-li {}
+        &-2-li {
+            position: relative;
+
+            &:hover #{$el}-2-a {
+                background-color: $nav-main-item-2-background-color-hover;
+                color           : $nav-main-item-2-color-hover;
+            }
+        }
 
         &-2-a {
             background-color: $nav-main-item-2-background-color;
@@ -110,11 +112,6 @@
             &#{$active} {
                 background-color: $nav-main-item-2-background-color-active;
                 color           : $nav-main-item-2-color-active;
-            }
-
-            &:hover {
-                background-color: $nav-main-item-2-background-color-hover;
-                color           : $nav-main-item-2-color-hover;
             }
         }
 
@@ -139,9 +136,13 @@
                     font-size      : $font-size - 2px;
                     text-decoration: none;
 
-                    &:hover {
-                        background-color: $nav-main-item-2-background-color-hover;
-                        color           : $nav-main-item-2-color-hover;
+                    &.-is-sub-parent {
+                        background: {
+                            image   : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAY1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+aRQ2gAAAAIHRSTlMAAQIFBwgLEBMYISQ+RWh3eH+YnqCipavO09XX4OTo6XFA+UIAAACfSURBVFjD7cxJDsJAEENRVwbCFOYxDaTuf0oWgIjSQqLLK0h57feBePVxmYPYWlVDyXmm8PD2wstbC29vK3S9pbBSpQpj7S8USYGZkoXswhaq1gufCo0XvOCFPy2cM7YwTwkUIQ7UKb6J/S3nfFsNyIdh+9K9+x/2cuI8pqTHhPTAhvSQPed7BYMHZMf5TsHoAdly/lkgPCCL62H09fsOIjGLL25z0XEAAAAASUVORK5CYII=");
+                            position: right ($grid-spacing / 2) center;
+                            repeat  : no-repeat;
+                            size    : 14px auto;
+                        }
                     }
                 }
             }
@@ -158,6 +159,76 @@
                 &-2-li {}
 
                 &-2-a {
+                    display        : block;
+                    padding        : ($grid-spacing / 3) $grid-spacing;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        // ----------------------------------------------------- THIRD LEVEL ---
+
+        &-3-ul {}
+
+        &-3-li {}
+
+        &-3-a {
+            background-color: $nav-main-item-3-background-color;
+            color           : $nav-main-item-3-color;
+
+            &#{$active} {
+                background-color: $nav-main-item-3-background-color-active;
+                color           : $nav-main-item-3-color-active;
+            }
+
+            &:hover {
+                background-color: $nav-main-item-3-background-color-hover;
+                color           : $nav-main-item-3-color-hover;
+            }
+        }
+
+        @if $nav-main-desktop-enabled {
+            @media (min-width: $nav-main-breakpoint-desktop) {
+                // --- Desktop
+
+                &-3-ul {
+                    position        : absolute;
+                    min-width       : 100%;
+                    transform       : translate(100%) rotateY(-90deg);
+                    top             : 0;
+                    transform-origin: 0 0;
+                    transition      : all .333s ease-in-out;
+                }
+
+                &-1-li:nth-last-child(#{$nav-main-ul-3-flip-left-on-nth-last}) #{$el}-3-ul {
+                    transform       : translate(-100%) rotateY(90deg);
+                    transform-origin: 100% 0;
+                }
+
+                &-3-li {}
+
+                &-3-a {
+                    display        : block;
+                    padding        : ($grid-spacing / 2) $grid-spacing;
+                    transition     : all .25s;
+                    font-size      : $font-size - 2px;
+                    text-decoration: none;
+
+                    &:hover {
+                        background-color: $nav-main-item-3-background-color-hover;
+                        color           : $nav-main-item-3-color-hover;
+                    }
+                }
+            }
+        }
+
+        @if $nav-main-mobile-enabled {
+            @media (max-width: $nav-main-breakpoint-mobile) {
+                // --- Mobile
+
+                &-3-li {}
+
+                &-3-a {
                     display        : block;
                     padding        : ($grid-spacing / 3) $grid-spacing;
                     text-decoration: none;
@@ -254,6 +325,14 @@
                 &-1-li:hover #{$el}-2-ul {
                     transform: perspective(600px) rotateX(0);
                 }
+
+                &-2-li:hover #{$el}-3-ul {
+                    transform: perspective(600px) translate(100%) rotateY(0deg);
+                }
+
+                &-1-li:nth-last-child(#{$nav-main-ul-3-flip-left-on-nth-last}) #{$el}-2-li:hover #{$el}-3-ul {
+                    transform: perspective(600px) translate(-100%) rotateY(0deg);
+                }
             }
         }
 
@@ -272,8 +351,7 @@
         &-trigger {
             width        : $nav-main-min-height - 6px;
             position     : absolute;
-            top          : 3px;
-            right        : 3px;
+
             height       : $nav-main-min-height - 6px;
             display      : block;
             border-radius: $nav-main-trigger-radius;
@@ -284,6 +362,16 @@
                 position: center 12px;
                 repeat  : no-repeat;
                 size    : 14px auto;
+            }
+
+            @media (min-width: $nav-main-breakpoint-desktop) {
+                top  : 3px;
+                right: 3px;
+            }
+
+            @media (max-width: $nav-main-breakpoint-mobile) {
+                top  : 6px;
+                right: 6px;
             }
         }
 

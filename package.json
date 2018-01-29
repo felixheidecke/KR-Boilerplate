@@ -1,7 +1,7 @@
 {
   "author": "Felix Heidecke",
   "description": "Klickrhein Boilerplate",
-  "version": "0.18.9",
+  "version": "0.19.0",
   "scripts": {
     "setup": "grunt setup",
     "watcher": "grunt watcher",

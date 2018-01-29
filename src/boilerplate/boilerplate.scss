@@ -52,6 +52,15 @@ $nav-main-item-2-background-color       : $nav-main-item-1-background-color !def
 $nav-main-item-2-background-color-hover : $nav-main-item-1-background-color-hover !default;
 $nav-main-item-2-background-color-active: $nav-main-item-1-background-color-active !default;
 
+$nav-main-item-3-color                  : $nav-main-item-2-color !default;
+$nav-main-item-3-color-hover            : $nav-main-item-2-color-hover !default;
+$nav-main-item-3-color-active           : $nav-main-item-2-color-active !default;
+$nav-main-item-3-background-color       : darken($nav-main-item-2-background-color, 7.5%) !default;
+$nav-main-item-3-background-color-hover : darken($nav-main-item-2-background-color-hover, 5%) !default;
+$nav-main-item-3-background-color-active: darken($nav-main-item-2-background-color-active, 5%) !default;
+
+$nav-main-ul-3-flip-left-on-nth-last    : 2 !default;
+
 $nav-main-item-separator                : 1px solid #fff !default;
 $nav-main-burger-patty-color            : #333 !default;
 
