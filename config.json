@@ -4,6 +4,7 @@
         "purecss":        true,
         "font-awesome":   true,
         "mobile-detect":  true,
+        "moment":         true,
         "vue":            false,
         "simplelightbox": false,
         "lightbox2":      false,

@@ -97,6 +97,14 @@ let libs = {
 		"js" : [
 			"lodash.min.js"
 		]
+	},
+
+	"moment" : {
+		"install" : config.vendor.moment,
+		"js" : [
+			"locale/de.js"
+			"min/moment.min.js"
+		]
 	}
 };
 

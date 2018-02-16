@@ -1,10 +1,10 @@
 $el: ".#{$prefix}button";
 
 // Requires FontAwesome
-@mixin button-fa($content, $position:'left', $text-offset:32px) {
+@mixin button-fa($content, $position: "left", $text-offset: 32px) {
     position: relative;
 
-    @if ($position == "left") {
+    @if $position == "left" {
         padding-left: $text-offset;
 
         &:before {
@@ -14,7 +14,7 @@ $el: ".#{$prefix}button";
             content    : $content;
         }
     } @else 
-    if ($position == 'right') {
+    if $position == "right" {
         padding-right: $text-offset;
 
         &:after {
@@ -27,51 +27,54 @@ $el: ".#{$prefix}button";
 }
 
 #{$el} {
-    white-space     : nowrap;
-    vertical-align  : middle;
-    text-align      : center;
-    cursor          : pointer;
-    user-select     : none;
+    background-color: $button-background-color;
+    border-radius   : 3px;
+    border          : 1px solid $button-border-color;
     box-sizing      : border-box;
+    color           : $button-color;
+    cursor          : pointer;
     display         : inline-flex;
-
     font-family     : inherit;
     padding         : 4px 12px;
-    color           : $button-color;
-    border          : 1px solid $button-border-color;
-    background-color: $button-background-color;
+    text-align      : center;
     text-decoration : none;
-    border-radius   : 3px;
     transition      : all .25s;
+    user-select     : none;
+    vertical-align  : middle;
+    white-space     : nowrap;
 
     &:focus,
     &:hover {
         color           : $button-color;
         background-color: darken($button-background-color, 5%);
-        box-shadow      : 0 0 3px rgba(black, .5);
+        box-shadow      : 0 0 3px rgba(black, 0.5);
     }
 
     &-next {
         @extend #{$el};
-        @include button-fa("\f101", "right");
+
+        @include button-fa("", "right");
     }
 
     &-back {
         @extend #{$el};
-        @include button-fa("\f100");
+
+        @include button-fa("");
     }
 
     &-pdf {
         @extend #{$el};
-        @include button-fa("\f1c1", 'left', 36px);
+
+        @include button-fa("", "left", 36px);
     }
 
     &-loading {
         @extend #{$el};
-        @include button-fa("\f021", 'left', 36px);
+
+        @include button-fa("", "left", 36px);
 
         &:before {
-            @include ani-spin()
+            @include ani-spin;
         }
     }
 }
