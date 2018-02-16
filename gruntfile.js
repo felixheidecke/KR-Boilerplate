@@ -102,7 +102,7 @@ let libs = {
 	"moment" : {
 		"install" : config.vendor.moment,
 		"js" : [
-			"locale/de.js"
+			"locale/de.js",
 			"min/moment.min.js"
 		]
 	}
