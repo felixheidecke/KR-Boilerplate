@@ -53,25 +53,25 @@ $el: ".#{$prefix}button";
     &-next {
         @extend #{$el};
 
-        @include button-fa("", "right");
+        @include button-fa("\f101", "right");
     }
 
     &-back {
         @extend #{$el};
 
-        @include button-fa("");
+        @include button-fa("\f100");
     }
 
     &-pdf {
         @extend #{$el};
 
-        @include button-fa("", "left", 36px);
+        @include button-fa("\f1c1", 'left', 36px);
     }
 
     &-loading {
         @extend #{$el};
 
-        @include button-fa("", "left", 36px);
+        @include button-fa("\f021", 'left', 36px);
 
         &:before {
             @include ani-spin;
