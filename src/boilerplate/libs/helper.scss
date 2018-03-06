@@ -152,6 +152,46 @@
             }
         }
 
+        &-negative {
+            margin: -$grid-spacing;
+
+            &-halved {
+                margin: $grid-spacing / -2;
+            }
+
+            &-top {
+                margin-top: -$grid-spacing;
+
+                &-halved {
+                    margin-top: $grid-spacing / -2;
+                }
+            }
+
+            &-right {
+                margin-right: -$grid-spacing;
+
+                &-halved {
+                    margin-right: $grid-spacing / -2;
+                }
+            }
+
+            &-bottom {
+                margin-bottom: -$grid-spacing;
+
+                &-halved {
+                    margin-bottom: $grid-spacing / -2;
+                }
+            }
+
+            &-left {
+                margin-left: -$grid-spacing;
+
+                &-halved {
+                    margin-left: $grid-spacing / -2;
+                }
+            }
+        }
+
         &-remove {
             margin: 0;
 
