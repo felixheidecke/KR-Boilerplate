@@ -25,11 +25,10 @@
         background: {
             position: center center;
             repeat  : no-repeat;
-        };
+        }
 
         &-cover {
             @extend .h-background;
-
             background-size: cover;
         }
     }
@@ -78,7 +77,6 @@
             }
         }
     }
-
     // z-index
 
     &-z-index {
@@ -118,20 +116,40 @@
     &-margin {
         margin: $grid-spacing;
 
+        &-halved {
+            margin: $grid-spacing / 2;
+        }
+
         &-top {
             margin-top: $grid-spacing;
+
+            &-halved {
+                margin-top: $grid-spacing / 2;
+            }
         }
 
         &-right {
             margin-right: $grid-spacing;
+
+            &-halved {
+                margin-right: $grid-spacing / 2;
+            }
         }
 
         &-bottom {
             margin-bottom: $grid-spacing;
+
+            &-halved {
+                margin-bottom: $grid-spacing / 2;
+            }
         }
 
         &-left {
             margin-left: $grid-spacing;
+
+            &-halved {
+                margin-left: $grid-spacing / 2;
+            }
         }
 
         &-remove {
@@ -158,16 +176,19 @@
     // extras
 
     &-cover-all {
-        position: absolute;
-        top     : 0;
-        left    : 0;
-        right   : 0;
-        bottom  : 0;
+        position    :absolute top: 0;
+        left        : 0;
+        right       : 0;
+        bottom      : 0;
     }
 
-    &-cursor {
-        &-pointer {
-            cursor: pointer;
+    &-responsive-img {
+        display: block;
+        width  : 100%;
+        height : 100%;
+        max    : {
+            width : 100%;
+            height: 100%;
         }
     }
 }
@@ -306,7 +327,6 @@
 
     @for $w from 1 through 4 {
         &-#{$w} {
-
             @for $h from 1 through 4 {
                 @if $w != $h {
                     &-#{$h} {
