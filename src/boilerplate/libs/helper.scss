@@ -120,11 +120,19 @@
             margin: $grid-spacing / 2;
         }
 
+        &-doubled {
+            margin: $grid-spacing * 2;
+        }
+
         &-top {
             margin-top: $grid-spacing;
 
             &-halved {
                 margin-top: $grid-spacing / 2;
+            }
+
+            &-doubled {
+                margin-top: $grid-spacing * 2;
             }
         }
 
@@ -134,6 +142,10 @@
             &-halved {
                 margin-right: $grid-spacing / 2;
             }
+
+            &-doubled {
+                margin-right: $grid-spacing * 2;
+            }
         }
 
         &-bottom {
@@ -142,6 +154,10 @@
             &-halved {
                 margin-bottom: $grid-spacing / 2;
             }
+
+            &-doubled {
+                margin-bottom: $grid-spacing * 2;
+            }
         }
 
         &-left {
@@ -149,6 +165,10 @@
 
             &-halved {
                 margin-left: $grid-spacing / 2;
+            }
+
+            &-doubled {
+                margin-left: $grid-spacing * 2;
             }
         }
 
