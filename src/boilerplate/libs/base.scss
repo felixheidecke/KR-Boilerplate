@@ -72,8 +72,10 @@ blockquote {
 figure {
     @include reset;
 
-    text-align: center;
-    margin    : {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    margin        : {
         top   : $grid-spacing;
         bottom: $grid-spacing;
     };
@@ -81,14 +83,13 @@ figure {
     img {
         @extend .flex-img;
     }
-}
 
-figcaption {
-    display    : inline-block;
-    text-align : left;
-    margin     : ($grid-spacing / 3) 0;
-    font-size  : $font-size - 4;
-    line-height: $line-height - 8;
+    figcaption {
+        display    : inline-block;
+        margin     : ($grid-spacing / 3) 0;
+        font-size  : $font-size - 4;
+        line-height: $line-height - 8;
+    }
 }
 
 // ------------------------------------------------------------ LIST STYLING ---
