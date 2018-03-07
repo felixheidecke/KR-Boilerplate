@@ -21,7 +21,8 @@ html {
 }
 
 a {
-    color: $anchor-color;
+    cursor: pointer;
+    color : $anchor-color;
 
     &:hover {
         color: $anchor-hover-color;
@@ -90,6 +91,13 @@ figure {
         font-size  : $font-size - 4;
         line-height: $line-height - 8;
     }
+}
+
+cite {
+    display         : inline-block;
+    padding         : $grid-spacing / 2 $grid-spacing;
+    background-color: lighten($c-gray, 33.333%);
+    border-radius   : $grid-spacing / 4;
 }
 
 // ------------------------------------------------------------ LIST STYLING ---

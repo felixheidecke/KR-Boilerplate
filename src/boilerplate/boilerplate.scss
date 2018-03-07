@@ -23,8 +23,8 @@ $button-color                           : #8c8c8c !default;
 
 // --- Anchors / Links
 
-$anchor-color                           : #111 !default;
-$anchor-hover-color                     : $anchor-color !default;
+$anchor-color                           : SteelBlue !default;
+$anchor-hover-color                     : lighten($anchor-color, 5%) !default;
 
 // --- Main Navigation
 
