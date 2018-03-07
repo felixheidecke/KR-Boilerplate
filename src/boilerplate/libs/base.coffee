@@ -1,7 +1,7 @@
 $ document
     .ready ->
         $body = $ 'body'
-        md   = new MobileDetect window.navigator.userAgent
+        md    = new MobileDetect window.navigator.userAgent
 
         if md.mobile()
             $body.attr 'data-mobile', md.mobile().toLowerCase()
