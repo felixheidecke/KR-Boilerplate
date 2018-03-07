@@ -30,6 +30,9 @@ $ "[data-xioni^='news.']:not(.xioni-prevent-default)"
                 dateFormat: (timestamp, format = 'LL') ->
                     moment.unix(timestamp).format format
 
+                textile: (string) ->
+                    textile string.trim()
+
                 dataPath: (item) ->
                     if item
                         this.urlBase + item

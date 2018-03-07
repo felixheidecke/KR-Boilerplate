@@ -105,6 +105,13 @@ let libs = {
             "min/moment.min.js",
 			"locale/de.js"
 		]
+	},
+
+    "textile-js" : {
+		"install" : config.vendor['textile-js'],
+		"js" : [
+            "lib/textile.min.js"
+		]
 	}
 };
 

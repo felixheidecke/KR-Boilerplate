@@ -6,6 +6,7 @@
         "mobile-detect":  true,
         "moment":         true,
         "lodash":         true,
+        "textile-js":     true,
         "vue":            false,
         "simplelightbox": false,
         "lightbox2":      false,
