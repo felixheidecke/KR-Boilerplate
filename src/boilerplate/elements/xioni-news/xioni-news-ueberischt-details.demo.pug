@@ -1,13 +1,24 @@
 extends ../../demo/_template
 
 block title
-    | XIONI-News
+    | XIONI-News (Übersicht und Details)
 
 block style
     style.
         #preview {
             max-width:960px;
             margin: 0 auto;
+        }
+
+        article {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 10px 40px;
+            box-shadow: 0 0 40px #999;
+        }
+
+        article + article {
+            margin-top: 40px;
         }
 
 block example
