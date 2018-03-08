@@ -12,7 +12,9 @@ block style
 
 block example
     section(data-xioni="news.1383")
-        //- ÜBERSICHT
+        // * * * * * * *  
+        // * ÜBERSICHT * 
+        // * * * * * * * 
         div(v-if='!details')
             article(v-for="item in items")
                 h2(v-text="item.title")
@@ -30,7 +32,9 @@ block example
                         p
                             a.h-font-small(@click="goTo(item.id)", :title="item.title") … mehr zu {{ item.title }}
 
-        //- DETAILS
+        // * * * * * * 
+        // * DETAILS * 
+        // * * * * * * 
         article(v-else)
             h2(v-text="details.title")
             .pure-g.pure-padded-children.h-margin-negative-bottom
