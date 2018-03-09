@@ -278,7 +278,7 @@ module.exports = function(grunt) {
 					}
 				},
 				files: [{
-					src: ["src/boilerplate/elements/**/*.demo.pug"],
+					src: ["src/boilerplate/**/*.demo.pug"],
 					dest: "temp/",
 					expand: true,
 					ext: ".html"

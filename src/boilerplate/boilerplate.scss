@@ -103,7 +103,6 @@ $section-enabled                        : true !default;
 @import "libs/fonts";
 @import "libs/fa";
 @import "libs/lists";
-@import "libs/helper";
 
 @import "elements/akkordeon/akkordeon";
 @import "elements/buttons/buttons";
@@ -111,3 +110,5 @@ $section-enabled                        : true !default;
 @import "elements/link-external/link-external";
 @import "elements/nav/nav";
 @import "elements/zoom/zoom";
+
+@import "libs/helper";
