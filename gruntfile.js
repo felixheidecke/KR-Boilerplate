@@ -102,15 +102,15 @@ let libs = {
 	"moment" : {
 		"install" : config.vendor.moment,
 		"js" : [
-            "min/moment.min.js",
+			"min/moment.min.js",
 			"locale/de.js"
 		]
 	},
 
-    "textile-js" : {
+	"textile-js" : {
 		"install" : config.vendor['textile-js'],
 		"js" : [
-            "lib/textile.min.js"
+			"lib/textile.min.js"
 		]
 	}
 };
@@ -209,13 +209,21 @@ module.exports = function(grunt) {
 
 		coffee: {
 			default: {
+				options: {
+					bare: true
+				},
 				files: {
 					'htdocs/js/default.js' : [
-						'src/boilerplate/**/*.coffee',
+						'src/boilerplate/boilerplate.coffee',
+						'src/boilerplate/libs/**/*.coffee',
+						'src/boilerplate/elements/**/*.coffee',
 						'src/coffee/**/*.coffee' ]
 				}
 			},
 			test: {
+				options: {
+					bare: true
+				},
 				files: {
 					'test/assets/boilerplate.js' : ['src/boilerplate/**/*.coffee']
 				}
