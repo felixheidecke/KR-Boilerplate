@@ -25,7 +25,7 @@ block example
         p
             span.h-cursor-pointer(data-kr-scroll-to=".zweite") &uarr; Scrolle zu .zweite
         p
-            span.h-cursor-pointer(data-kr-scroll-to="{ 'target' : '.zweite', 'speed' : 2500 }") &uarr; Scrolle zu .zweite gaaaaanz langsam
+            span.h-cursor-pointer(data-kr-scroll-to="{ 'target' : '.zweite', 'factor' : 5 }") &uarr; Scrolle zu .zweite gaaaaanz langsam
         p
             span.h-cursor-pointer(data-kr-scroll-to="{ 'target' : '#erste', 'offset' : 20 }") &uarr; Scrolle zu #erste mit 20 Pixel Versatz
 
@@ -47,15 +47,15 @@ block additional
         span Das Ziel zu dem gescrollt werden soll
 
 
-    h4 Speed
+    h4 Factor
     p.h-font-small Typ:&nbsp;
         span.code Integer
         br
         | Standard:&nbsp;
-        span.code 500
+        span.code 1
 
     p.h-margin-negative-top
-        span Scroll Geschwindigkeit
+        span Multiplikator der Scroll-Geschwindigkeit
 
 
     h4 Offset
