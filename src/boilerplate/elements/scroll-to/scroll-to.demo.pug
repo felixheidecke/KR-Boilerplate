@@ -1,4 +1,4 @@
-extends ../demo/_template
+extends ../../demo/_template
 
 block title
     | KR-Scroll To (smooth scroll)
@@ -20,50 +20,32 @@ block example
         // Abstandhalter
 
     .h-text-center
-        p
-            span.h-cursor-pointer(data-kr-scroll-to="#erste") &uarr; Scrolle zu #erste
-        p
-            span.h-cursor-pointer(data-kr-scroll-to=".zweite") &uarr; Scrolle zu .zweite
-        p
-            span.h-cursor-pointer(data-kr-scroll-to="{ 'target' : '.zweite', 'factor' : 5 }") &uarr; Scrolle zu .zweite gaaaaanz langsam
-        p
-            span.h-cursor-pointer(data-kr-scroll-to="{ 'target' : '#erste', 'offset' : 20 }") &uarr; Scrolle zu #erste mit 20 Pixel Versatz
+        h2 Standard scrolling
+        ul.demo-normal
+            li
+                a(href="#", data-kr-scroll-to="#erste") &uarr; Scrolle zu #erste
+            li
+                a(href="#", data-kr-scroll-to=".zweite") &uarr; Scrolle zu .zweite
 
+        h2 Mit Optionen
+        p
+            a.demo-langsamer-mit-offset(href="#", data-kr-scroll-to="#erste") &uarr; Scrolle langsamer zu #erste mit Offset
 block additional
     hr
-    h2 Optionen
-    p
-        | Das Attribut <span class="code">data-kr-scroll-to=""</span> kann direkt mit einer <b>ID</b> oder einer <b>Klasse</b> gefüttert werden.
-        br
-        | Optional kann ein <a href="https://de.wikipedia.org/wiki/JavaScript_Object_Notation#Beispiel" target="_blank">JSON Objekt</a> (wie oben gezeigt) eingesetzt werden um weitere Parameter zu setzen:
+    h2 JavaScript
+    code.
+        $('.demo-normal li a').krScrollTo();
+        $('.demo-langsamer-mit-offset').krScrollTo({
+            speed  : 0.25,  // Geschwindigkeit (Standard: 1)
+            offset : 20    // Offset (Standard: 0)
+        });
 
-    h3 Parameter
-
-    h4 Target
-    p.h-font-small Typ:&nbsp;
-        span.code string
-        br
-    p.h-margin-negative-top
-        span Das Ziel zu dem gescrollt werden soll
-
-
-    h4 Factor
-    p.h-font-small Typ:&nbsp;
-        span.code Integer
-        br
-        | Standard:&nbsp;
-        span.code 1
-
-    p.h-margin-negative-top
-        span Multiplikator der Scroll-Geschwindigkeit
-
-
-    h4 Offset
-    p.h-font-small Typ:&nbsp;
-        span.code Integer
-        br
-        | Standard:&nbsp;
-        span.code 0
-
-    p.h-margin-negative-top
-        span Zusätztliche scroll Strecke (Kann auch negativ sein)
+block script
+    script.
+        setTimeout(function(){
+            $('.demo-normal li a').krScrollTo();
+            $('.demo-langsamer-mit-offset').krScrollTo({
+                speed  : 0.25,
+                offset : 20
+            });
+        }, 500)

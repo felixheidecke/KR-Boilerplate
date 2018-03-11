@@ -1,36 +1,26 @@
-$ document
-    .ready ->
-        $ "[data-kr-scroll-to]"
-            .each ->
-                props  = $(@).attr('data-kr-scroll-to').trim()
-                data   = {
-                    "offset" : 0
-                    "factor" : 1
-                }
+jQuery.fn.krScrollTo = (params) ->
 
-                if props.search(/^\{.*\}$/) == 0
-                    raw  = props.replace /\'/g, '"'
-                    json = JSON.parse raw
-                    data = _.assignIn data, json
+    params = jQuery.extend({
+        offset : 0,
+        speed  : 1
+    }, params)
 
-                else
-                    data['target'] = props
+    $ @
+        .click (e) ->
+            target = $(@).attr 'data-kr-scroll-to'
 
-                $(@)
-                    .removeAttr 'data-kr-scroll-to'
-                    .click (e) ->
-                        e.preventDefault()
+            e.preventDefault()
 
-                        if $(data.target).length
+            if $(target).length
 
-                            windowPos  = $(window).scrollTop()
-                            targetPos  = Math.abs $(data.target).offset().top
-                            difference = Math.abs windowPos - targetPos
-                            factor     = data.factor + (difference / 100 * 0.1)
-                            distance   = Math.floor difference / factor
+                windowPos  = $(window).scrollTop()
+                targetPos  = Math.abs $(target).offset().top
+                difference = Math.abs windowPos - targetPos
+                factor     = params.speed * (difference / 100 * 0.1)
+                distance   = Math.floor difference / factor
 
-                            position = $(data.target).offset().top;
-                            $('body,html').animate { scrollTop: (position + data.offset) }, distance
+                position = $(target).offset().top;
+                $('body,html').animate { scrollTop: (position + params.offset) }, distance
 
-                        else
-                            kr.warn "'#{data.target}' does not exist!"
+            else
+                kr.warn "'#{target}' does not exist!"
