@@ -7,7 +7,7 @@
         "moment":         true,
         "lodash":         true,
         "textile-js":     true,
-        "vue":            false,
+        "vue":            true,
         "simplelightbox": false,
         "lightbox2":      false,
         "swiper":         false,
