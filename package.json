@@ -38,6 +38,7 @@
     "simplelightbox": "^1.13.0",
     "swiper": "^4.3.3",
     "textile-js": "^2.0.4",
+    "typeface-open-sans": "0.0.54",
     "vue": "^2.5.16"
   }
 }

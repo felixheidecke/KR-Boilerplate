@@ -92,6 +92,16 @@ let libs = {
 		]
 	},
 
+	"typeface-open-sans" : {
+		"install" : config.vendor['typeface-open-sans'],
+		"fonts" : [
+			"files/open-sans-latin-400.woff2",
+			"files/open-sans-latin-400italic.woff2",
+			"files/open-sans-latin-700.woff2",
+			"files/open-sans-latin-700italic.woff2"
+		]
+	},
+
 	"lodash" : {
 		"install" : config.vendor.lodash,
 		"js" : [

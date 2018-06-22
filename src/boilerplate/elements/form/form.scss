@@ -1,195 +1,191 @@
 @if $form-enabled == "true" {
-    $el: ".#{$prefix}form";
+	$el: ".#{$prefix}form";
 
-    #{$el} {
-        div[class^="pure-u-"] {
-            position  : relative;
-            box-sizing: border-box;
-        }
+	#{$el} {
+		div[class^="pure-u-"] {
+			position  : relative;
+			box-sizing: border-box;
+		}
 
-        textarea {
-            resize    : vertical;
-            min-height: 100px;
-        }
+		textarea {
+			resize    : vertical;
+			min-height: 100px;
+		}
 
-        input[type="submit"] {
-            @extend .kr-button;
+		input[type="submit"] {
+			@extend .kr-button;
 
-            &[disabled] {
-                display: none;
-            }
-        }
+			&[disabled] {
+				display: none;
+			}
+		}
 
-        &-item-text {
-            display      : flex;
-            align-items  : stretch;
-            margin-bottom: $grid-spacing / 2;
+		&-item-text {
+			display      : flex;
+			align-items  : stretch;
+			margin-bottom: $grid-spacing / 2;
 
-            label {
-                @include OpenSans;
+			label {
+				font-family              : "Open Sans";
+				padding                  : 5px 10px;
+				background-color         : $form-label-background-color;
+				border                   : $form-element-border;
+				border-bottom-left-radius: 3px;
+				border-top-left-radius   : 3px;
+				color                    : $form-label-text-color;
+				white-space              : nowrap;
 
-                padding                  : 5px 10px;
-                background-color         : $form-label-background-color;
-                border                   : $form-element-border;
-                border-bottom-left-radius: 3px;
-                border-top-left-radius   : 3px;
-                color                    : $form-label-text-color;
-                white-space              : nowrap;
+				+ input {
+					width                     : 100%;
+					padding                   : 5px 10px;
+					border                    : $form-element-border;
+					border-bottom-right-radius: 3px;
+					border-top-right-radius   : 3px;
+					border-left               : 0;
+					outline                   : none;
+					min-width                 : 20px;
+					background-color          : white;
+					color                     : $form-item-color;
 
-                + input {
-                    width                     : 100%;
-                    padding                   : 5px 10px;
-                    border                    : $form-element-border;
-                    border-bottom-right-radius: 3px;
-                    border-top-right-radius   : 3px;
-                    border-left               : 0;
-                    outline                   : none;
-                    min-width                 : 20px;
-                    background-color          : white;
-                    color                     : $form-item-color;
+					&[disabled] {
+						color           : gray;
+						background-color: lightgray;
+					}
+				}
+			}
+		}
 
-                    &[disabled] {
-                        color           : gray;
-                        background-color: lightgray;
-                    }
-                }
-            }
-        }
+		&-item-textarea {
+			margin-bottom: $grid-spacing / 2;
 
-        &-item-textarea {
-            margin-bottom: $grid-spacing / 2;
+			label {
+				font-family     : "Open Sans";
+				padding         : 5px 0 0 10px;
+				background-color: transparent;
+				color           : $form-label-textarea-color;
+				position        : absolute;
 
-            label {
-                @include OpenSans;
+				+ textarea {
+					width           : 100%;
+					border          : $form-element-border;
+					border-radius   : 3px;
+					outline         : none;
+					padding         : 32px 9px;
+					background-color: white;
+					color           : $form-item-color;
 
-                padding         : 5px 0 0 10px;
-                background-color: transparent;
-                color           : $form-label-textarea-color;
-                position        : absolute;
+					&[disabled] {
+						color           : gray;
+						background-color: lightgray;
+					}
+				}
+			}
+		}
 
-                + textarea {
-                    width           : 100%;
-                    border          : $form-element-border;
-                    border-radius   : 3px;
-                    outline         : none;
-                    padding         : 32px 9px;
-                    background-color: white;
-                    color           : $form-item-color;
+		&-item-clicker {
+			margin-bottom: $grid-spacing / 2;
 
-                    &[disabled] {
-                        color           : gray;
-                        background-color: lightgray;
-                    }
-                }
-            }
-        }
+			label {
+				font-family: "Open Sans";
+				position   : relative;
+				padding    : 5px 10px 5px 0;
+				color      : $form-label-clicker-color;
+				cursor     : pointer;
+				display    : flex;
+				align-items: center;
 
-        &-item-clicker {
-            margin-bottom: $grid-spacing / 2;
+				input {
+					margin-right: 10px;
+					flex-shrink : 0;
+				}
+			}
+		}
 
-            label {
-                @include OpenSans;
+		&-item-select {
+			display      : flex;
+			align-items  : stretch;
+			margin-bottom: $grid-spacing / 2;
 
-                position   : relative;
-                padding    : 5px 10px 5px 0;
-                color      : $form-label-clicker-color;
-                cursor     : pointer;
-                display    : flex;
-                align-items: center;
+			label {
+				font-family              : "Open Sans";
+				padding                  : 5px 10px;
+				background-color         : $form-label-background-color;
+				border                   : $form-element-border;
+				border-bottom-left-radius: 3px;
+				border-top-left-radius   : 3px;
+				color                    : $form-label-text-color;
+				white-space              : nowrap;
+			}
 
-                input {
-                    margin-right: 10px;
-                    flex-shrink : 0;
-                }
-            }
-        }
+			select {
+				position          : relative;
+				background-color  : white;
+				width             : 100%;
+				padding           : 5px 10px 5px 9px;
+				border            : $form-element-border;
+				border            : {
+					bottom: {
+						right-radius: 3px;
+						left-radius : 0;
+					};
+					top   : {
+						right-radius: 3px;
+						left-radius : 0;
+					};
+					left  : 0;
+				};
+				outline           : none;
+				-webkit-appearance: none;
+				-moz-appearance   : none;
 
-        &-item-select {
-            display      : flex;
-            align-items  : stretch;
-            margin-bottom: $grid-spacing / 2;
+				&,
+				option {
+					color: $form-item-color;
+				}
 
-            label {
-                @include OpenSans;
+				&[disabled] {
+					color           : gray;
+					background-color: lightgray;
+				}
+			}
+		}
 
-                padding                  : 5px 10px;
-                background-color         : $form-label-background-color;
-                border                   : $form-element-border;
-                border-bottom-left-radius: 3px;
-                border-top-left-radius   : 3px;
-                color                    : $form-label-text-color;
-                white-space              : nowrap;
-            }
+		&-alert {
+			position     : fixed;
+			z-index      : 999;
+			padding      : $grid-spacing;
+			border-radius: 6px;
+			top          : 50%;
+			left         : 50%;
+			display      : none;
+			transform    : translate(-50%, -50%);
+			box-shadow   : 0 0 50px rgba(black, 0.25);
 
-            select {
-                position          : relative;
-                background-color  : white;
-                width             : 100%;
-                padding           : 5px 10px 5px 9px;
-                border            : $form-element-border;
-                border            : {
-                    bottom: {
-                        right-radius: 3px;
-                        left-radius : 0;
-                    };
-                    top   : {
-                        right-radius: 3px;
-                        left-radius : 0;
-                    };
-                    left  : 0;
-                };
-                outline           : none;
-                -webkit-appearance: none;
-                -moz-appearance   : none;
+			&-close {
+				position: absolute;
+				top     : 0;
+				right   : 0;
+				padding : 13px 10px 17px 15px;
+				cursor  : pointer;
+			}
 
-                &,
-                option {
-                    color: $form-item-color;
-                }
+			@include breakpoint("xs") {
+				left     : $grid-spacing;
+				right    : $grid-spacing;
+				transform: translate(0, -50%);
+			}
 
-                &[disabled] {
-                    color           : gray;
-                    background-color: lightgray;
-                }
-            }
-        }
+			&.-success {
+				background-color: lighten($alert-success-color, 33.333%);
+				color           : $alert-success-color;
+				border          : 1px solid $alert-success-color;
+			}
 
-        &-alert {
-            position     : fixed;
-            z-index      : 999;
-            padding      : $grid-spacing;
-            border-radius: 6px;
-            top          : 50%;
-            left         : 50%;
-            display      : none;
-            transform    : translate(-50%, -50%);
-            box-shadow   : 0 0 50px rgba(black, 0.25);
-
-            &-close {
-                position: absolute;
-                top     : 0;
-                right   : 0;
-                padding : 13px 10px 17px 15px;
-                cursor  : pointer;
-            }
-
-            @include breakpoint("xs") {
-                left     : $grid-spacing;
-                right    : $grid-spacing;
-                transform: translate(0, -50%);
-            }
-
-            &.-success {
-                background-color: lighten($alert-success-color, 33.333%);
-                color           : $alert-success-color;
-                border          : 1px solid $alert-success-color;
-            }
-
-            &.-error {
-                background-color: lighten($alert-error-color, 33.333%);
-                color           : $alert-error-color;
-                border          : 1px dotted $alert-error-color;
-            }
-        }
-    }
+			&.-error {
+				background-color: lighten($alert-error-color, 33.333%);
+				color           : $alert-error-color;
+				border          : 1px dotted $alert-error-color;
+			}
+		}
+	}
 }

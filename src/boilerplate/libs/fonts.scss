@@ -1,8 +1,29 @@
-// @import "https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic";
+@font-face {
+	font-family: "Open Sans";
+	font-style : normal;
+	font-weight: 400;
+	src        : url("../fonts/open-sans-latin-400.woff2") format('woff2');
+}
 
-@mixin OpenSans($weight: 400) {
-    font-family: "Open Sans", sans-serif;
-    font-weight: $weight;
+@font-face {
+	font-family: "Open Sans Italic";
+	font-style : italic;
+	font-weight: 400;
+	src        : url("../fonts/open-sans-latin-400italic.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: "Open Sans Bold";
+	font-style : normal;
+	font-weight: 700;
+	src        : url("../fonts/open-sans-latin-700.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: "Open Sans Bold Italic";
+	font-style : italic;
+	font-weight: 700;
+	src        : url("../fonts/open-sans-latin-700italic.woff2") format('woff2');
 }
 
 body,
@@ -12,16 +33,15 @@ option,
 p,
 select,
 textarea {
-    @include OpenSans;
-
-    font-size  : $font-size;
-    line-height: $line-height;
+	font-family: "Open Sans";
+	font-size  : $font-size;
+	line-height: $line-height;
 }
 
 blockquote,
 em,
 i {
-    font-style: italic;
+	font-family: "Open Sans Italic";
 }
 
 b,
@@ -30,7 +50,7 @@ h2,
 h3,
 h4,
 strong {
-    @include OpenSans(700);
+	font-family: "Open Sans Bold Italic";
 }
 
 h1,
@@ -38,25 +58,25 @@ h2,
 h3,
 h4,
 p {
-    @include reset;
+	@include reset;
 
-    margin: {
-        top   : $grid-spacing;
-        bottom: $grid-spacing;
-    };
+	margin: {
+		top   : $grid-spacing;
+		bottom: $grid-spacing;
+	};
 }
 
 h1 {
-    font-size  : $font-size + 12;
-    line-height: $line-height + 12;
+	font-size  : $font-size + 12;
+	line-height: $line-height + 12;
 }
 
 h2 {
-    font-size  : $font-size + 8;
-    line-height: $line-height + 8;
+	font-size  : $font-size + 8;
+	line-height: $line-height + 8;
 }
 
 h3 {
-    font-size  : $font-size + 4;
-    line-height: $line-height + 4;
+	font-size  : $font-size + 4;
+	line-height: $line-height + 4;
 }

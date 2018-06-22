@@ -1,16 +1,17 @@
 {
     "vendor": {
-        "jquery":         true,
-        "purecss":        true,
-        "font-awesome":   true,
-        "mobile-detect":  true,
-        "moment":         true,
-        "lodash":         true,
-        "textile-js":     true,
-        "vue":            true,
-        "simplelightbox": false,
-        "lightbox2":      false,
-        "swiper":         false,
-        "in-view":        false
+        "jquery":             true,
+        "purecss":            true,
+        "font-awesome":       true,
+        "mobile-detect":      true,
+        "moment":             true,
+        "lodash":             true,
+        "textile-js":         true,
+        "vue":                true,
+		"typeface-open-sans": true,
+        "simplelightbox":     false,
+        "lightbox2":          false,
+        "swiper":             false,
+        "in-view":            false
     }
 }
