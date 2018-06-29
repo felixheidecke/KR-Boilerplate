@@ -1,0 +1,27 @@
+.pure-g.pure-padded-children {
+	margin: {
+		left : -$grid-spacing;
+		right: -$grid-spacing;
+	};
+
+	> [class*="pure-u"] {
+		padding: {
+			left : $grid-spacing;
+			right: $grid-spacing;
+		};
+	}
+
+	&-halved {
+		margin: {
+			left : -$grid-spacing / 2;
+			right: -$grid-spacing / 2;
+		};
+
+		> [class*="pure-u"] {
+			padding: {
+				left : $grid-spacing / 2;
+				right: $grid-spacing / 2;
+			};
+		}
+	}
+}

@@ -1,0 +1,10 @@
+.h {
+	@each $bp in $breakpoints {
+		$bps: str-replace($bp, ' ', "-");
+		@include breakpoint($bp) {
+			&-#{$bps}-hidden {
+				display: none;
+			}
+		}
+	}
+}

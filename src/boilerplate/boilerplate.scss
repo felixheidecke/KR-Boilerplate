@@ -97,6 +97,7 @@ $section-enabled                        : true !default;
 
 // --------------------------------------------------------- FILE COLLECTING ---
 
+@import "libs/functions";
 @import 'libs/breakpoints';
 @import "libs/base";
 @import "libs/animations";
@@ -111,4 +112,4 @@ $section-enabled                        : true !default;
 @import "elements/nav/nav";
 @import "elements/zoom/zoom";
 
-@import "libs/helper";
+@import "helpers/helpers";

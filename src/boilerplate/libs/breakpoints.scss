@@ -1,42 +1,44 @@
+$breakpoints: xs sm "sm and up" md "md and up" lg xl xxl;
+
 @mixin breakpoint($bp) {
-    @if $bp == "xs" {
-        @media (max-width: 567px) {
-            @content;
-        }
-    } @else 
-    if $bp == "sm" {
-        @media (max-width: 767px) {
-            @content;
-        }
-    } @else 
-    if $bp == "sm and up" {
-        @media (min-width: 568px) {
-            @content;
-        }
-    } @else 
-    if $bp == "md" {
-        @media (max-width: 1023px) {
-            @content;
-        }
-    } @else 
-    if $bp == "md and up" {
-        @media (min-width: 768px) {
-            @content;
-        }
-    } @else 
-    if $bp == "lg" {
-        @media (min-width: 1024px) {
-            @content;
-        }
-    } @else 
-    if $bp == "xl" {
-        @media (min-width: 1170px) {
-            @content;
-        }
-    } @else 
-    if $bp == "xxl" {
-        @media (min-width: 1280px) {
-            @content;
-        }
-    }
+	@if $bp == "xs" {
+		@media (max-width: 567px) {
+			@content;
+		}
+	} @else 
+	if $bp == "sm" {
+		@media (max-width: 767px) {
+			@content;
+		}
+	} @else 
+	if $bp == "sm and up" {
+		@media (min-width: 568px) {
+			@content;
+		}
+	} @else 
+	if $bp == "md" {
+		@media (max-width: 1023px) {
+			@content;
+		}
+	} @else 
+	if $bp == "md and up" {
+		@media (min-width: 768px) {
+			@content;
+		}
+	} @else 
+	if $bp == "lg" {
+		@media (min-width: 1024px) {
+			@content;
+		}
+	} @else 
+	if $bp == "xl" {
+		@media (min-width: 1170px) {
+			@content;
+		}
+	} @else 
+	if $bp == "xxl" {
+		@media (min-width: 1280px) {
+			@content;
+		}
+	}
 }
