@@ -23,4 +23,4 @@ jQuery.fn.krScrollTo = (params) ->
                 $('body,html').animate { scrollTop: (position + params.offset) }, distance
 
             else
-                kr.warn "'#{target}' does not exist!"
+                kr.warn target + " does not exist!"
