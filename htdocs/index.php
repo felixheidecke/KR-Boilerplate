@@ -23,6 +23,6 @@
 -->
 
 <script src="js/vendor.min.js"></script>
-<script src="js/default.js"></script>
+<script src="js/default.min.js"></script>
 </body>
 </html>

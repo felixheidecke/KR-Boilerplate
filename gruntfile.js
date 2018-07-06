@@ -240,7 +240,31 @@ module.exports = function(grunt) {
 			}
 		},
 
+		babel: {
+			options: {
+				sourceMap: false,
+				presets: ['env']
+			},
+			dist: {
+				files: {
+					'htdocs/js/default.js': 'htdocs/js/default.js'
+				}
+			}
+		},
+
+		uglify: {
+			default: {
+				files: {
+					'htdocs/js/default.min.js': ['htdocs/js/default.js'],
+				}
+			}
+		},
+
 		clean: {
+			preFlight : [
+				'htdocs/js/**/default.*',
+				'htdocs/css/**/style.*'
+			],
 			tempFiles: ['temp'],
 			test: ['test'],
 			update: [
@@ -319,11 +343,14 @@ module.exports = function(grunt) {
 				},
 				files: [
 					"src/**/*.coffee",
-					"src/**/*.scss" ],
-
+					"src/**/*.scss"
+				],
 				tasks: [
 					"sass:default",
-					"coffee:default" ]
+					"coffee:default",
+					'babel',
+					'uglify'
+				]
 			},
 			test: {
 				options: {
@@ -333,14 +360,15 @@ module.exports = function(grunt) {
 				files: [
 					"src/**/*.pug",
 					"src/**/*.coffee",
-					"src/**/*.scss" ],
-
+					"src/**/*.scss"
+				],
 				tasks: [
 					"pug",
 					"sass:test",
 					"coffee:test",
 					'move:test',
-					'clean:tempFiles' ]
+					'clean:tempFiles'
+				]
 			}
 		}
 	}); //initConfig
@@ -353,8 +381,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-pug');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-babel');
 	grunt.loadNpmTasks('grunt-curl');
 	grunt.loadNpmTasks('grunt-move');
+	grunt.loadNpmTasks('grunt-zip');
 	grunt.loadNpmTasks('grunt-zip');
 
 	grunt.registerTask('forceOn', 'turns the --force option ON', function() {
@@ -434,10 +465,55 @@ module.exports = function(grunt) {
 		});
 	});
 
-	grunt.registerTask("setup",      ['collect', 'copy', 'concat', 'clean:images', 'clean:fonts']);
-	grunt.registerTask("watcher",    ['forceOn', 'coffee:default', 'sass:default', 'forceOff', 'watch:default']);
-	grunt.registerTask("build",      ['forceOn', 'coffee:default', 'sass:default', 'forceOff']);
-	grunt.registerTask("backup",     ['zip:backup']);
-	grunt.registerTask("test",       ['clean:test', 'pug', 'coffee:test', 'sass:test', 'move:test', 'clean:tempFiles', 'connect:testServer', 'watch:test']);
-	grunt.registerTask("update",     ['curl:update', 'unzip:update', 'clean:update', 'move:update', 'clean:tempFiles']);
+	grunt.registerTask("setup", [
+		'collect',
+		'copy',
+		'concat',
+		'clean:images',
+		'clean:fonts'
+	]);
+
+	grunt.registerTask("watcher", [
+		'clean:preFlight',
+		'forceOn',
+		'coffee:default',
+		'sass:default',
+		'forceOff',
+		'babel',
+		'uglify',
+		'watch:default'
+	]);
+
+	grunt.registerTask("build", [
+		'clean:preFlight',
+		'forceOn',
+		'coffee:default',
+		'sass:default',
+		'forceOff',
+		'babel',
+		'uglify'
+	]);
+
+	grunt.registerTask("backup", [
+		'zip:backup'
+	]);
+
+	grunt.registerTask("test", [
+		'clean:test',
+		'pug',
+		'coffee:test',
+		'sass:test',
+		'move:test',
+		'clean:tempFiles',
+		'connect:testServer',
+		'watch:test'
+	]);
+
+	grunt.registerTask("update", [
+		'curl:update',
+		'unzip:update',
+		'clean:update',
+		'move:update',
+		'clean:tempFiles'
+	]);
 };
