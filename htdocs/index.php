@@ -23,13 +23,6 @@
 -->
 
 <script src="js/vendor.min.js"></script>
-<?php if (file_exists('./js/default.min.js')) : ?>
 <script src="js/default.min.js"></script>
-<?php elseif (file_exists('./js/default.js')) : ?>
-<script src="js/default.js"></script>
-<?php elseif (file_exists('./js/default.es6.js')) : ?>
-<script src="js/default.es6.js"></script>
-<?php endif; ?>
-
 </body>
 </html>
