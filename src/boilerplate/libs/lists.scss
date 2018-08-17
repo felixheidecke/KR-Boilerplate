@@ -2,55 +2,55 @@ $el: ".#{$prefix}list";
 
 // Requires FontAwesome
 @mixin list-fa($content, $text-offset:18px) {
-    li {
-        position: relative;
+	li {
+		position: relative;
 
-        &:before {
-            font-family: FontAwesome, sans-serif;
-            position   : absolute;
-            left       : $text-offset * -1;
-            content    : $content;
-        }
-    }
+		&:before {
+			font-family: FontAwesome, sans-serif;
+			position   : absolute;
+			left       : $text-offset * -1;
+			content    : $content;
+		}
+	}
 }
 
 #{$el} {
-    @extend p;
-    padding-left: $grid-spacing;
-    margin-left : $grid-spacing / 1.5;
+	@extend p;
+	padding-left: $grid-spacing;
+	margin-left : $grid-spacing / 1.5;
 
-    &-disc {
-        @extend #{$el};
-        list-style: disc;
-    }
+	&-disc {
+		@extend #{$el};
+		list-style: disc;
+	}
 
-    &-dash {
-        @extend p;
-        position: relative;
+	&-dash {
+		@extend p;
+		position: relative;
 
-        > li {
-            padding-left: 17px;
+		> li {
+			padding-left: 17px;
 
-            &:before {
-                position: absolute;
-                content : "-";
-                left    : 0;
-            }
-        }
-    }
+			&:before {
+				position: absolute;
+				content : "-";
+				left    : 0;
+			}
+		}
+	}
 
-    &-numbered {
-        @extend #{$el};
-        list-style: decimal;
-    }
+	&-numbered {
+		@extend #{$el};
+		list-style: decimal;
+	}
 
-    &-chevron {
-        @extend #{$el};
-        @include list-fa("\f054");
-    }
+	&-chevron {
+		@extend #{$el};
+		@include list-fa("\f054");
+	}
 
-    &-pdf {
-        @extend #{$el};
-        @include list-fa("\f1c1");
-    }
+	&-pdf {
+		@extend #{$el};
+		@include list-fa("\f1c1");
+	}
 }

@@ -1,8 +1,8 @@
 // --- base mixins
 
 @mixin reset {
-    margin : 0;
-    padding: 0;
+	margin : 0;
+	padding: 0;
 }
 
 // --- base styles
@@ -10,100 +10,100 @@
 *,
 *:after,
 *:before {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body,
 html {
-    @include reset;
-    overflow-x: hidden;
-    background: #FFF;
+	@include reset;
+	overflow-x: hidden;
+	background: #FFF;
 }
 
 a {
-    cursor: pointer;
-    color : $anchor-color;
+	cursor: pointer;
+	color : $anchor-color;
 
-    &:hover {
-        color: $anchor-hover-color;
-    }
+	&:hover {
+		color: $anchor-hover-color;
+	}
 }
 
 // ----------------------------------------------------------------- WRAPPER ---
 
 .wrapper {
-    width    : 100%;
-    max-width: $viewport;
-    margin   : {
-        right: auto;
-        left : auto;
-    };
+	width    : 100%;
+	max-width: $viewport;
+	margin   : {
+		right: auto;
+		left : auto;
+	};
 
-    &.-padded {
-        max-width: $viewport + $grid-spacing * 2;
-        padding  : {
-            left : $grid-spacing;
-            right: $grid-spacing;
-        }
-    }
+	&.-padded {
+		max-width: $viewport + $grid-spacing * 2;
+		padding  : {
+			left : $grid-spacing;
+			right: $grid-spacing;
+		}
+	}
 }
 
 // -------------------------------------------------------------- BLOCKQOUTE ---
 
 blockquote {
-    margin    : $grid-spacing 0;
-    padding   : .01px $grid-spacing;
-    background: lightgray;
+	margin    : $grid-spacing 0;
+	padding   : .01px $grid-spacing;
+	background: lightgray;
 
-    @include breakpoint("sm and up") {
-        margin: {
-            left : $grid-spacing * 2;
-            right: $grid-spacing * 2;
-        };
-    }
+	@include breakpoint("sm and up") {
+		margin: {
+			left : $grid-spacing * 2;
+			right: $grid-spacing * 2;
+		};
+	}
 }
 
 // ------------------------------------------------- IMAGE, FIGURE & CAPTION ---
 
 .flex-img {
-    max-width: 100%;
-    height   : auto;
+	max-width: 100%;
+	height   : auto;
 }
 
 figure {
-    @include reset;
+	@include reset;
 
-    display       : flex;
-    flex-direction: column;
-    align-items   : center;
-    margin        : {
-        top   : $grid-spacing;
-        bottom: $grid-spacing;
-    };
+	display       : flex;
+	flex-direction: column;
+	align-items   : center;
+	margin        : {
+		top   : $grid-spacing;
+		bottom: $grid-spacing;
+	};
 
-    img {
-        @extend .flex-img;
-    }
+	img {
+		@extend .flex-img;
+	}
 
-    figcaption {
-        display    : inline-block;
-        margin     : ($grid-spacing / 3) 0;
-        font-size  : $font-size - 4;
-        line-height: $line-height - 8;
-    }
+	figcaption {
+		display    : inline-block;
+		margin     : ($grid-spacing / 3) 0;
+		font-size  : $font-size - 4;
+		line-height: $line-height - 8;
+	}
 }
 
 cite {
-    display         : inline-block;
-    padding         : $grid-spacing / 2 $grid-spacing;
-    background-color: lighten($c-gray, 33.333%);
-    border-radius   : $grid-spacing / 4;
+	display         : inline-block;
+	padding         : $grid-spacing / 2 $grid-spacing;
+	background-color: lighten($c-gray, 33.333%);
+	border-radius   : $grid-spacing / 4;
 }
 
 // ------------------------------------------------------------ LIST STYLING ---
 
 ol,
 ul {
-    @include reset;
-    list-style: none;
+	@include reset;
+	list-style: none;
 }
