@@ -18,13 +18,13 @@ $ "[data-xioni^='news.']:not(.xioni-prevent-default)"
             el: "##{unique}"
             data:
                 items: []
-                urlBase: "http://www.rheingau.de/data/"
+                urlBase: "https://www.rheingau.de/data/"
                 details: false
                 params: dataParams
 
             computed:
                 url: ->
-                    "http://test1.rheingaueins.de/api/#{dataXioni[0]}.php?id=#{dataXioni[1]}"
+                    "https://api.klickrhein.de/#{dataXioni[0]}.php?id=#{dataXioni[1]}"
 
             methods:
                 dateFormat: (timestamp, format = 'LL') ->
