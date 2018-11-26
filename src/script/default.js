@@ -16,42 +16,74 @@ var deps = [
     // "kr-form",
     // "kr-nav",
     // "kr-shop",
-    // "kr-xioni-news",
-    // "kr-background-image",
-    // "kr-mobile-detect",
+    "kr-xioni-news",
+    "kr-background-image",
+    "kr-mobile-detect",
     // "kr-scroll-to",
 ];
 
 requirejs(deps, function() {
-    
-    /**
-    * Die oben aktivierten Skripte müssen nun noch initialisiert werden.
-    * Dabei werden solche, die an mehrere Elememente angeheftet werden
-    * (krLinkExternal, krFileExternal, krMailto, ect.) an das 'body'-Element
-    * angehäftet.
-    */
-    
+
     $('body')
         .krLinkExternal()
         .krFileExternal()
         .krMailto()
         .krTopLink()
-        // .krXioniNews()
-        // .krMobileDetect()
-        // .krBackgroundImage()
+        .krXioniNews()
+        .krMobileDetect()
+        .krBackgroundImage()
         .prop('hidden', false);
 
-    /**
-    * Skripte, die an individuelle Elemente angehäftet werden müssen,
-    * werden an eine Id oder Klasse geheftet.
-    */
 
     // Beispiel:
     // $('#mein-akkordeon').krAkkordeon()
     // $('#hauptnavi').krNav()
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 requirejs(["jquery", "swiper"], function($, Swiper) {
+
+    if ( !$('.swiper-main').length )
+        return;
+
+    new Swiper ('.swiper-main', {
+        loop       : true,
+        speed      : 2000,
+        effect     : 'fade',
+        navigation : {
+            nextEl : '.swiper-main-button.chevron-right',
+            prevEl : '.swiper-main-button.chevron-left',
+        },
+        autoplay   : {
+            delay  : 5000
+        }
+    });
 
     // --- Add Stylesheet ----------
     $('[data-requiremodule="swiper"]').after($('<link>', {
