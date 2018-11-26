@@ -98,18 +98,18 @@ $section-enabled                        : true !default;
 // --------------------------------------------------------- FILE COLLECTING ---
 
 @import "libs/functions";
-@import 'libs/breakpoints';
+@import "libs/breakpoints";
 @import "libs/base";
 @import "libs/animations";
 @import "libs/fonts";
 @import "libs/fa";
 @import "libs/lists";
 
-@import "elements/akkordeon/akkordeon";
-@import "elements/buttons/buttons";
-@import "elements/form/form";
-@import "elements/link-external/link-external";
-@import "elements/nav/nav";
-@import "elements/zoom/zoom";
+@import "elements/akkordeon";
+@import "elements/buttons";
+@import "elements/form";
+@import "elements/link-external";
+@import "elements/nav";
+@import "elements/zoom";
 
 @import "helpers/helpers";

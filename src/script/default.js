@@ -16,9 +16,9 @@ var deps = [
     // "kr-form",
     // "kr-nav",
     // "kr-shop",
-    "kr-xioni-news",
-    "kr-background-image",
-    "kr-mobile-detect",
+    // "kr-xioni-news",
+    // "kr-background-image",
+    // "kr-mobile-detect",
     // "kr-scroll-to",
 ];
 
@@ -29,9 +29,9 @@ requirejs(deps, function() {
         .krFileExternal()
         .krMailto()
         .krTopLink()
-        .krXioniNews()
-        .krMobileDetect()
-        .krBackgroundImage()
+        // .krXioniNews()
+        // .krMobileDetect()
+        // .krBackgroundImage()
         .prop('hidden', false);
 
 
@@ -39,33 +39,6 @@ requirejs(deps, function() {
     // $('#mein-akkordeon').krAkkordeon()
     // $('#hauptnavi').krNav()
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 requirejs(["jquery", "swiper"], function($, Swiper) {
 

@@ -5,8 +5,8 @@ define(['jquery'], function($) {
 			types: ['.pdf']
 		}, params);
 
-		params.types.forEach( (fileType) => {
-			$(this).find(`[href$="${fileType}"]`).attr('target', '_blank');
+		params.types.forEach( function(fileType) {
+			$(this).find('[href$="' + fileType + '"]').attr('target', '_blank');
 		});
 
 		if (typeof callback === "function") {

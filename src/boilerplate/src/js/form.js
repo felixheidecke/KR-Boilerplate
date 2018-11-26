@@ -1,18 +1,18 @@
 define(['jquery'], function($) {
     $.fn.krForm = function(params) {
-        var $form, $submit, i, makeAlert, removeAlert, required, setButtonState, setToError, setToSuccess, submitLabel, val;
+
         params = jQuery.extend({
             textOnLoading: "Sendet",
             textOnError: "<strong>Ein Fehler ist aufgetreten!</strong><br>Bitte füllen Sie alle mit einem * markierten Felder aus!",
             textOnSuccess: "<strong>Vielen Dank für Ihre Nachricht.</strong><br>Wir setzen uns in Kürze mit Ihnen in Verbindung"
         }, params);
-        if ($(this).length === 0) {
-            return false;
-        }
-        $form = $(this);
-        $submit = $form.find('button[type="submit"]');
-        submitLabel = $submit.text();
-        required = $form.find('input[name="required"]').val().split(',');
+
+        var $form        = $(this);
+        var $submit      = $form.find('button[type="submit"]');
+        
+        var submitLabel  = $submit.text();
+        var required     = $form.find('input[name="required"]').val().split(',');
+        
         for (i in required) {
             val = required[i];
             $form.find("label[for='" + (val.trim()) + "']").append('*');
@@ -25,21 +25,22 @@ define(['jquery'], function($) {
             }
         };
         makeAlert = function(cssClass, message) {
-            var $el, $x;
-            $el = $('<div>', {
+            var $el = $('<div>', {
                 'class': 'kr-form-alert',
                 'style': "animation-duration:" + (params.alertDuration / 1000 / 2) + "s"
             });
-            $x = $('<i>', {
+            
+            var $x = $('<i>', {
                 'class': 'fa fa-lg fa-window-close kr-form-alert-close',
                 'aria-hidden': true
             }).click(function() {
-                return $el.remove();
+                $el.remove();
             });
-            return $el.addClass(cssClass).html("<p class='h-margin-remove'>" + message + "</p>").prepend($x);
+            
+            $el.addClass(cssClass).html("<p class='h-margin-remove'>" + message + "</p>").prepend($x);
         };
         removeAlert = function($el) {
-            return $el.remove();
+            $el.remove();
         };
         setToSuccess = function() {
             var $alert;

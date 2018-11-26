@@ -14,18 +14,18 @@ module.exports = {
 		"jquery"              : `libs/jquery/${_dep_versions.jquery}/jquery.min` ,
 		"lightbox2"           : `libs/lightbox2/${_dep_versions.jquery}/lightbox.min` ,
 
-        "kr-akkordeon"        : `boilerplate/${_bp_version}/elements/akkordeon/akkordeon`,
-        "kr-form"             : `boilerplate/${_bp_version}/elements/form/form`,
-        "kr-link-external"    : `boilerplate/${_bp_version}/elements/link-external/link-external`,
-        "kr-nav"              : `boilerplate/${_bp_version}/elements/nav/nav`,
-        "kr-shop"             : `boilerplate/${_bp_version}/elements/shop/shop`,
-        "kr-xioni-news"       : `boilerplate/${_bp_version}/elements/xioni-news/xioni-news`,
+        "kr-akkordeon"        : `boilerplate/${_bp_version}/js/akkordeon`,
+        "kr-form"             : `boilerplate/${_bp_version}/js/form`,
+        "kr-link-external"    : `boilerplate/${_bp_version}/js/link-external`,
+        "kr-nav"              : `boilerplate/${_bp_version}/js/nav`,
+        "kr-shop"             : `boilerplate/${_bp_version}/js/shop`,
+        "kr-xioni-news"       : `boilerplate/${_bp_version}/js/xioni-news`,
 
-        "kr-background-image" : `boilerplate/${_bp_version}/libs/background-image`,
-        "kr-file-external"    : `boilerplate/${_bp_version}/libs/file-external`,
-        "kr-mailto"           : `boilerplate/${_bp_version}/libs/mailto`,
-        "kr-mobile-detect"    : `boilerplate/${_bp_version}/libs/mobile-detect`,
-        "kr-scroll-to"        : `boilerplate/${_bp_version}/libs/scroll-to`,
-        "kr-toplink"          : `boilerplate/${_bp_version}/libs/toplink`
+        "kr-background-image" : `boilerplate/${_bp_version}/js/background-image`,
+        "kr-file-external"    : `boilerplate/${_bp_version}/js/file-external`,
+        "kr-mailto"           : `boilerplate/${_bp_version}/js/mailto`,
+        "kr-mobile-detect"    : `boilerplate/${_bp_version}/js/mobile-detect`,
+        "kr-scroll-to"        : `boilerplate/${_bp_version}/js/scroll-to`,
+        "kr-toplink"          : `boilerplate/${_bp_version}/js/toplink`
     }
 }

@@ -11,15 +11,11 @@ color 1f
 echo.
 call node header.js
 echo.
-echo  [s] --^> Setup
-echo.
 echo  [w] --^> Watcher (Compiler)
 echo.
-echo  [m] --^> Build   (Einmaliges compilen)
+echo  [m] --^> Build   (Einmaliges kompilieren)
 echo.
 echo  [b] --^> Backup
-echo.
-echo  [t] --^> Test
 echo.
 echo  [u] --^> Update
 echo.
@@ -28,40 +24,10 @@ echo.
 SET /p menu=Auswahl:
 if '%menu%' == 'b' goto Backup
 if '%menu%' == 'm' goto Build
-if '%menu%' == 's' goto Setup
-if '%menu%' == 't' goto Test
 if '%menu%' == 'u' goto Update
 if '%menu%' == 'w' goto Watch
 if '%menu%' == 'x' goto Exit
 Goto Home
-
-:Setup
-cls
-color 07
-echo.
-echo  * * * * *
-echo  * SETUP *
-echo  * * * * *
-echo.
-call npm install
-call npm run setup
-cls
-echo.
-color 0A
-echo Setup wurde beendet.
-pause
-goto Home
-
-:Test
-cls
-color 07
-echo.
-echo  * * * * *
-echo  * TESTS *
-echo  * * * * *
-echo.
-call npm run test
-goto Home
 
 :Watch
 cls

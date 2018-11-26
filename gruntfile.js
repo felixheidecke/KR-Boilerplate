@@ -1,5 +1,6 @@
-const moment = require('moment');
-const sass   = require('node-sass');
+const version = require('./package.json').version;
+const moment  = require('moment');
+const sass    = require('node-sass');
 
 module.exports = function(grunt) {
 	grunt.initConfig({
@@ -13,7 +14,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'htdocs/css/style.css': 'src/sass/style.scss'
+					'htdocs/css/style.css' : 'src/sass/style.scss'
 				}
 			}
 		},
@@ -34,10 +35,28 @@ module.exports = function(grunt) {
 			}
 		},
 
+		uglify: {
+			boilerplate: {
+				files: [{
+					expand: true,
+					cwd: 'src/boilerplate/src/js',
+					src: '*.js',
+					dest: `src/boilerplate/build/${version}/js/`,
+					rename: function (dst, src) {
+						// To keep the source js files and make new files as `*.min.js`:
+						return dst + '/' + src.replace('.js', '.min.js');
+						// Or to override to src:
+						// return src;
+					}
+				}]
+			}
+		},
+
 		// --- Boilerplate Update -----------------------------------------
 
 		clean: {
 			afterUpdate: ['temp'],
+			bp_build: ['src/boilerplate/build'],
 			beforeUpdate: ['src/boilerplate']
 		},
 
@@ -112,6 +131,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-browserify');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-curl');
 	grunt.loadNpmTasks('grunt-zip');
 	grunt.loadNpmTasks('grunt-move');
