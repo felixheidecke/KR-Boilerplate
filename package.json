@@ -2,17 +2,23 @@
   "author": "Felix Heidecke",
   "description": "Klickrhein Boilerplate",
   "version": "2.0.0",
+  "license": "ISC",
+  "homepage": "https://klickrhein.de",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixheidecke/KR-Boilerplate.git"
+  },
   "scripts": {
     "watch": "grunt _watch",
     "build": "grunt _build",
     "backup": "grunt _backup",
     "update": "grunt _update",
     "bp:js": "grunt clean:bp_build uglify",
-    "bp:ncu": "node src/boilerplate/ncu.js"
+    "bp:ncu": "ncu -a --packageFile src/boilerplate/dependencies.json"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
     "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
     "babelify": "^8.0.0",
     "grunt": "^1.0.3",
     "grunt-babel": "^8.0.0",
@@ -26,7 +32,7 @@
     "grunt-sass": "^3.0.2",
     "grunt-zip": "^0.18.1",
     "moment": "^2.22.2",
-    "node-sass": "^4.10.0",
-    "npm-check-updates": "^2.15.0"
+    "babel-preset-env": "^1.7.0",
+    "node-sass": "^4.10.0"
   }
 }
