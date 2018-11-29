@@ -1,8 +1,8 @@
 MODE 80, 30
 @echo off
-DEL /Q .gitignore
 DEL /Q npm-debug.log
 cls
+call npm install
 if not exist node_modules\ajax-request call npm install ajax-request
 set current_dir=%cd%
 :Home
