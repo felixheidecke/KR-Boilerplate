@@ -1,4 +1,4 @@
-jQuery.fn.krNav = (params) ->
+jQuery.fn.krNav = (params, callback) ->
     params = jQuery.extend({
         closeOnResize: true
         scroll       : true
@@ -100,7 +100,6 @@ jQuery.fn.krNav = (params) ->
             _deactivate $nav
             $1ul.removeAttr 'style'
 
-
     _expand = ($el) ->
         $el.addClass params.expandedClass
 
@@ -124,5 +123,8 @@ jQuery.fn.krNav = (params) ->
             return true
 
         return false
+
+    if typeof callback is 'function'
+        callback $nav
 
     return @
