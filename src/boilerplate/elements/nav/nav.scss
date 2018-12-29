@@ -82,11 +82,14 @@
 				}
 
 				&-1-a {
-					font-family    : "Open Sans";
 					display        : block;
 					font-size      : 15px;
 					text-decoration: none;
 					padding        : ($grid-spacing / 2) $grid-spacing;
+
+					@if $default-font-enabled {
+						font-family    : "Open Sans";
+					}
 				}
 			}
 		}
