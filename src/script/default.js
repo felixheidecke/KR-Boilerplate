@@ -8,59 +8,50 @@ requirejs.config(config);
  */
 
 var deps = [
-    "kr-link-external",
-    "kr-file-external",
-    "kr-mailto",
-    "kr-toplink",
-    // "kr-akkordeon",
-    // "kr-form",
-    // "kr-nav",
-    // "kr-shop",
-    // "kr-xioni-news",
-    // "kr-background-image",
-    // "kr-mobile-detect",
-    // "kr-scroll-to",
+	"kr-link-external",
+	"kr-file-external",
+	"kr-mailto",
+	"kr-toplink",
+	// "kr-akkordeon",
+	// "kr-form",
+	// "kr-nav",
+	// "kr-shop",
+	// "kr-xioni-news",
+	// "kr-background-image",
+	// "kr-mobile-detect",
+	// "kr-scroll-to",
 ];
 
 requirejs(deps, function() {
 
-    $('body')
-        .krLinkExternal()
-        .krFileExternal()
-        .krMailto()
-        .krTopLink()
-        // .krXioniNews()
-        // .krMobileDetect()
-        // .krBackgroundImage()
-        .prop('hidden', false);
+	$('body')
+		.krLinkExternal()
+		.krFileExternal()
+		.krMailto()
+		.krTopLink()
+		// .krXioniNews()
+		// .krMobileDetect()
+		// .krBackgroundImage()
+		.prop('hidden', false);
 
 
-    // Beispiel:
-    // $('#mein-akkordeon').krAkkordeon()
-    // $('#hauptnavi').krNav()
+	// Beispiel:
+	// $('#mein-akkordeon').krAkkordeon()
+	// $('#hauptnavi').krNav()
 });
 
-requirejs(["jquery", "swiper"], function($, Swiper) {
+requirejs(["jquery", "swiper/js/swiper.min"], function($, Swiper) {
 
-    if ( !$('.swiper-main').length )
-        return;
+	// Abbruch wernn DOM Element nicht vorhanden
+	if ( !$('.swiper-main').length )
+		return;
 
-    new Swiper ('.swiper-main', {
-        loop       : true,
-        speed      : 2000,
-        effect     : 'fade',
-        navigation : {
-            nextEl : '.swiper-main-button.chevron-right',
-            prevEl : '.swiper-main-button.chevron-left',
-        },
-        autoplay   : {
-            delay  : 5000
-        }
-    });
+	// Neue Swiper Instanz öffnen
+	new Swiper ('.swiper-main');
 
-    // --- Add Stylesheet ----------
-    $('[data-requiremodule="swiper"]').after($('<link>', {
-        'rel'  : 'stylesheet',
-        'href' : config.baseUrl + config.paths.swiper.replace('/js/', '/css/') + '.css'
-    }));
+	// Swiper Stylesheet hinzufügen
+	$('head').append($('<link>', {
+		'rel'  : 'stylesheet',
+		'href' : `${config.baseUrl}${config.paths.swiper}/css/swiper.min.css`
+	}));
 })

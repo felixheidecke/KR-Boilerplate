@@ -19,6 +19,9 @@
 	<!--
 		Webseiten Inhalte
 	-->
+	<div class="swiper-main">
+		
+	</div>
 
 	<script data-main="js/default.js" src="https://cdn.klickrhein.de/libs/require.js/2.3.6/require.min.js"></script>
 </body>
