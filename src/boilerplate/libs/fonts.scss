@@ -4,28 +4,36 @@
 		font-family: "Open Sans";
 		font-style : normal;
 		font-weight: 400;
-		src        : url("../fonts/open-sans-latin-400.woff2") format('woff2');
+		src:
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans-latin-400.woff") format("woff"),
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans-latin-400.woff2") format('woff2');
 	}
 
 	@font-face {
 		font-family: "Open Sans Italic";
-		font-style : italic;
+		font-style: italic;
 		font-weight: 400;
-		src        : url("../fonts/open-sans-latin-400italic.woff2") format('woff2');
+		src:
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans-latin-400-italic.woff") format("woff"),
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans-latin-400-italic.woff2") format('woff2');
 	}
 
 	@font-face {
 		font-family: "Open Sans Bold";
-		font-style : normal;
+		font-style: normal;
 		font-weight: 700;
-		src        : url("../fonts/open-sans-latin-700.woff2") format('woff2');
+		src:
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans/open-sans-latin-700.woff") format("woff"),
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans/open-sans-latin-700.woff2") format('woff2');
 	}
 
 	@font-face {
 		font-family: "Open Sans Bold Italic";
-		font-style : italic;
+		font-style: italic;
 		font-weight: 700;
-		src        : url("../fonts/open-sans-latin-700italic.woff2") format('woff2');
+		src:
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans-latin-700-italic.woff") format("woff"),
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans-latin-700-italic.woff2") format('woff2');
 	}
 
 	body,
@@ -34,13 +42,13 @@
 	p,
 	select,
 	textarea {
-		font-family: "Open Sans";
+		font-family: "Open Sans", Arial, sans-serif;
 	}
 
 	blockquote,
 	em,
 	i {
-		font-family: "Open Sans Italic";
+		font-family: "Open Sans Italic", Arial, sans-serif;
 	}
 
 	b,
@@ -49,7 +57,7 @@
 	h3,
 	h4,
 	strong {
-		font-family: "Open Sans Bold Italic";
+		font-family: "Open Sans Bold Italic", Arial, sans-serif;
 	}
 }
 
