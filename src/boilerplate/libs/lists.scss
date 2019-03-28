@@ -41,7 +41,9 @@ $el: ".#{$prefix}list";
 
 	&-numbered {
 		@extend #{$el};
-		list-style: decimal;
+			> li {
+				list-style: decimal;
+		}
 	}
 
 	&-chevron {
