@@ -21,7 +21,9 @@ $el: ".#{$prefix}list";
 
 	&-disc {
 		@extend #{$el};
-		list-style: disc;
+			> li {
+			list-style: disc;
+		}
 	}
 
 	&-dash {
