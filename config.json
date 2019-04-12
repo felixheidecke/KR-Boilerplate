@@ -2,7 +2,6 @@
 	"vendor": {
 		"jquery"              : true,
 		"purecss"             : true,
-		"font-awesome"        : true,
 		"mobile-detect"       : true,
 		"moment"              : true,
 		"lodash"              : true,

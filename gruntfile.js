@@ -20,20 +20,6 @@ let libs = {
 		]
 	},
 
-	"font-awesome" : {
-		"install" : config.vendor['font-awesome'],
-		"css" : [
-			"css/font-awesome.min.css"
-		],
-		"fonts" : [
-			"fonts/fontawesome-webfont.eot",
-			"fonts/fontawesome-webfont.svg",
-			"fonts/fontawesome-webfont.ttf",
-			"fonts/fontawesome-webfont.woff",
-			"fonts/fontawesome-webfont.woff2"
-		]
-	},
-
 	"vue" : {
 		"install" : config.vendor.vue,
 		"js" : [
