@@ -21,7 +21,9 @@ $el: ".#{$prefix}list";
 
 	&-disc {
 		@extend #{$el};
-		list-style: disc;
+			> li {
+			list-style: disc;
+		}
 	}
 
 	&-dash {
@@ -41,7 +43,9 @@ $el: ".#{$prefix}list";
 
 	&-numbered {
 		@extend #{$el};
-		list-style: decimal;
+			> li {
+				list-style: decimal;
+		}
 	}
 
 	&-chevron {
