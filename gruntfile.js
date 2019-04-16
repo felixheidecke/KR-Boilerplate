@@ -27,7 +27,7 @@ module.exports = function (grunt) {
 				options: {
 					transform: [
 						['babelify', {
-							presets: 'env'
+							presets: ['@babel/env']
 						}]
 					],
 					browserifyOptions: {
@@ -53,7 +53,6 @@ module.exports = function (grunt) {
 
 		clean: {
 			afterUpdate: ['temp'],
-			bp_build: ['src/boilerplate/build'],
 			beforeUpdate: ['src/boilerplate']
 		},
 
@@ -75,7 +74,7 @@ module.exports = function (grunt) {
 			update: {
 				files: [{
 					src: 'temp/KR-Boilerplate-feature-cdn/src/boilerplate/',
-					dest: 'src/boilerplate'
+					dest: 'boilerplate'
 				}, {
 					src: [
 						'temp/KR-Boilerplate-feature-cdn/.gitignore',
@@ -99,6 +98,7 @@ module.exports = function (grunt) {
 					'htdocs/**/*',
 					'src/**/*',
 					'gruntfile.js',
+					'boilerplate/*',
 					'package.json',
 					'header.js',
 					'KR-Boilerplate.bat'
