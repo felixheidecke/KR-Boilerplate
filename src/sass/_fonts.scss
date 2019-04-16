@@ -1,0 +1,27 @@
+article {
+	h1, h2, h3 {
+		color: $c-rot;
+	}
+	
+	p {
+		line-height: $line-height + 8;
+	}
+}
+
+.header h2 {
+	text-align: center;
+	
+	a {
+		text-decoration: none;
+		font-weight: normal;
+		color: $c-light;
+		letter-spacing: 1px;
+	}
+}
+
+@include breakpoint("sm") {
+	
+	h1 {
+		font-size: $font-size + 8;
+	}
+}

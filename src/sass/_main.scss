@@ -1,0 +1,30 @@
+.main {
+	background: lighten($c-beige, 25%);
+	padding: 0 !important;
+
+	.article {
+		margin: 20px 80px;
+		text-align: center;
+	}
+	
+	.kontakt {
+		background: lighten($c-beige, 3%);
+		padding: $grid-spacing 0;
+	}
+
+	@include breakpoint("md") {
+		padding: 0 10px;
+		
+		.article {
+			margin: 20px;
+		}		
+	}
+
+	@include breakpoint("sm") {
+		
+		.article {
+			margin: 10px;
+		}
+	}	
+
+}

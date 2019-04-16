@@ -1,7 +1,7 @@
 {
   "author": "Felix Heidecke",
   "description": "Klickrhein Boilerplate",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "license": "ISC",
   "homepage": "https://klickrhein.de",
   "repository": {
@@ -13,26 +13,31 @@
     "build": "grunt _build",
     "backup": "grunt _backup",
     "update": "grunt _update",
-    "bp:js": "grunt clean:bp_build uglify",
-    "bp:ncu": "ncu -a --packageFile src/boilerplate/dependencies.json"
+    "ncu": "ncu",
+    "ncu:bp": "ncu -u --packageFile boilerplate/dependencies.json"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
+    "@babel/core": "^7.4.3",
     "babel-core": "^6.26.3",
-    "babelify": "^8.0.0",
-    "grunt": "^1.0.3",
+    "babel-preset-env": "^1.7.0",
+    "babelify": "^10.0.0",
+    "grunt": "^1.0.4",
     "grunt-babel": "^8.0.0",
     "grunt-browserify": "^5.3.0",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-curl": "^2.5.0",
-    "grunt-move": "^1.0.0",
+    "grunt-curl": "^2.5.1",
+    "grunt-move": "^1.0.1",
     "grunt-sass": "^3.0.2",
-    "grunt-zip": "^0.18.1",
-    "moment": "^2.22.2",
-    "babel-preset-env": "^1.7.0",
-    "node-sass": "^4.10.0"
+    "grunt-zip": "^0.18.2",
+    "moment": "^2.24.0",
+    "node-sass": "^4.11.0",
+    "npm-check-updates": "^3.1.8"
+  },
+  "dependencies": {
+    "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
+    "jquery": "^3.4.0"
   }
 }

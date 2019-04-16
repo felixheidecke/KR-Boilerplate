@@ -75,7 +75,6 @@ echo  * * * * * *
 echo.
 call npm run update
 call npm install
-call npm run setup
 cls
 echo.
 color 0A

@@ -1,7 +1,7 @@
 $grid-spacing           : 20px;
-$viewport               : $grid-spacing * 64;
+$viewport               : $grid-spacing * 48;
 
-// = 1280px
+// = 960px
 
 $font-size              : 16px;
 $line-height            : 26px;
@@ -9,6 +9,8 @@ $line-height            : 26px;
 $c-light                : #fff;
 $c-gray                 : lighten(black, 50%);
 $c-dark                 : lighten(black, 20%);
+$c-beige                : #EBE9DF;
+$c-rot                  : #9C5984;
 
 $button-background-color: #E6E6E6;
 $button-border-color    : #999;
@@ -17,4 +19,14 @@ $button-color           : $c-gray;
 $anchor-color           : $c-dark;
 $anchor-hover-color     : $c-gray;
 
-@import "../boilerplate/src/sass/boilerplate.scss";
+$nav-main-item-1-background-color       : darken($c-beige, 10%);
+$nav-main-item-1-background-color-hover : darken($c-beige, 20%);
+$nav-main-item-1-background-color-active: lighten($c-beige, 5%);
+
+@import "../../boilerplate/sass/boilerplate.scss";
+
+@import "base";
+@import "fonts";
+@import "galerie";
+@import "header";
+@import "main";
