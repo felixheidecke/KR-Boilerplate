@@ -1,6 +1,8 @@
 import config from 'config.js';
 requirejs.config(config);
 
+window.requirejsConfig = config;
+
 // +-------+
 // | krNav |
 // +-------+
@@ -87,44 +89,17 @@ requirejs.config(config);
 // | Lightbox 2 |
 // +------------+
 
-requirejs(["jquery", "lightbox2/js/lightbox.min", 'vue'], function($, lightbox, Vue) {
+// requirejs(["jquery", "lightbox2/js/lightbox.min", 'vue'], function($, lightbox, Vue) {
 
-	$('head').append($('<link>', {
-		'rel'  : 'stylesheet',
-		'href' : config.baseUrl + config.paths.lightbox2 + '/css/lightbox.min.css'
-	}));
+// 	$('head').append($('<link>', {
+// 		'rel'  : 'stylesheet',
+// 		'href' : config.baseUrl + config.paths.lightbox2 + '/css/lightbox.min.css'
+// 	}));
 
-	lightbox.option({
-		albumLabel : "Bild %1 von %2"
-	});
-
-	new Vue({
-		el : '#galerie',
-		data : {
-			name : 'Ferienwohnung',
-			images : [
-				'Von Außen',
-				'Der Wohnbereich',
-				'Die Küchenzeile',
-				'Mit gemütlicher Couch',
-				'Das Schlafzimmer',
-				'Mit gemütlichem Doppelbett',
-				'Modernes Bad',
-				'Nebenzimmer',
-				'Gemütliche Terasse',
-				'Mit kleinem Brunnen',
-				'Der Blick durch die Weinberge',
-				'Die Basilika']
-		},
-		methods : {
-			path (index, big = false) {
-				let type  = (big) ? big : '';
-				let image = (index + 1).toString().padStart(2, '0');
-				return 'images/galerie/' + image + type + '.jpg'
-			}
-		}
-	});
-})
+// 	lightbox.option({
+// 		albumLabel : "Bild %1 von %2"
+// 	});
+// })
 
 
 // +-------------------+
@@ -156,4 +131,7 @@ requirejs(["jquery"], function($) {
 		.krToplink()
 		.krBackground()
 		.removeAttr('hidden');
+
+	$('html')
+		.removeAttr('data-loading');
 });

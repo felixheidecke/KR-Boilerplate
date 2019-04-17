@@ -13,7 +13,7 @@
 	box-sizing: border-box;
 }
 
-html:after {
+html[data-loading]:after {
 	@include ani-spin(1s);
 	content: "";
 	width: 32px;

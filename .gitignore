@@ -16,3 +16,8 @@ backup/
 htdocs/*
 src/boilerplate/build
 !/htdocs/index.php
+
+
+# --- OS -----------------------------------------------------------------------
+
+.DS_Store
