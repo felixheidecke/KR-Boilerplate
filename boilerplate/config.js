@@ -6,7 +6,6 @@ module.exports = {
         "vue"                 : `vue/${version.vue}/vue.min`,
         "textile-js"          : `textile-js/${version["textile-js"]}/textile.min`,
         "moment"              : `moment.js/${version.moment}/moment.min`,
-        "mobile-detect"       : `mobile-detect/${version["mobile-detect"]}/mobile-detect.min`,
         "lodash"              : `lodash.js/${version.lodash}/lodash.min`,
         "jquery"              : `jquery/${version.jquery}/jquery.min`,
         "swiper"              : `Swiper/${version.swiper}`,

@@ -18,17 +18,6 @@
 	Webseiten Inhalte
 -->
 
-<nav>
-	<ul class="nav">
-		<li>
-			<a href="klaus">klaus</a>
-		</li>
-		<li>
-			<a href="maus">maus</a>
-		</li>
-	</ul>
-</nav>
-
 <script data-main="js/default.js" src="https://cdn.klickrhein.de/libs/require.js/2.3.6/require.min.js"></script>
 </body>
 </html>
