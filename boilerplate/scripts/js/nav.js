@@ -1,4 +1,4 @@
-export default function(params) {
+$.fn.krNav = function(params) {
 	var $1a, $1li, $1ul, $2a, $2li, $2ul, $3a, $3li, $3ul, $burger, $nav, $trigger, _activate, _collapse, _deactivate, _expand, _isActive, _isExpanded;
 	params = jQuery.extend({
 		closeOnResize: true,
@@ -115,5 +115,4 @@ export default function(params) {
 		}
 		return false;
 	};
-	return this;
 };

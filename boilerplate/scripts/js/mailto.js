@@ -1,4 +1,9 @@
-export default function(params, callback) {
+(function() {
+	if (typeof $ !== "function") {
+		console.error('jQuery is required for "mailto');
+		return;
+	}
+
     $('[data-mailto]').each(function() {
         var decoded, encoded, replacement;
         encoded = $(this).text().trim();
@@ -12,5 +17,4 @@ export default function(params, callback) {
         }
         return $.when($(this).after(replacement).remove()).then(typeof callback === "function" ? callback() : void 0);
     });
-    return this;
-};
+})();

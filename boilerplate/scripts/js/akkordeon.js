@@ -1,4 +1,4 @@
-export default function(params, callback) {
+$.fn.krAkkordeon = function(params) {
 	params = jQuery.extend({
 		initClosed    : true,
 		initfirstOpen : false,
@@ -41,10 +41,4 @@ export default function(params, callback) {
 			}
 		}
 	});
-
-	if (typeof callback === "function") {
-		callback();
-	}
-
-	return this;
 };

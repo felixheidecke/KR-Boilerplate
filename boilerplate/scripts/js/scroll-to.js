@@ -1,4 +1,4 @@
-export default function(params) {
+$.fn.krScrollTo = function(params) {
 	params = $.extend({
 		offset: 0,
 		speed: 1

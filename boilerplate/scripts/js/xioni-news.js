@@ -1,5 +1,10 @@
-export default function() {
-    $(this).find("[data-xioni^='news.']:not(.xioni-prevent-default)").each(function() {
+(function() {
+	if (typeof $ !== "function") {
+		console.error('jQuery is required for krXioniNews');
+		return;
+	}
+
+    $('body').find("[data-xioni^='news.']:not(.xioni-prevent-default)").each(function() {
         var dataParams, dataXioni, unique;
         unique = 'xid-' + Math.floor(Math.random() * Math.pow(83, 6));
         dataXioni = $(this).data('xioni').split('.');
@@ -69,4 +74,4 @@ export default function() {
             }
         });
     });
-};
+})();

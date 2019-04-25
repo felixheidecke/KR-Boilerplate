@@ -1,4 +1,4 @@
-export default function(params) {
+$.fn.krForm = function(params) {
     params = $.extend({
         textOnLoading: "Sendet",
         textOnError: "<strong>Ein Fehler ist aufgetreten!</strong><br>Bitte füllen Sie alle mit einem * markierten Felder aus!",
