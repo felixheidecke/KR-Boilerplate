@@ -37,7 +37,7 @@ echo  * * * * * *
 echo  * WATCHER *
 echo  * * * * * *
 echo.
-call npm run watcher
+call npm run watch
 pause
 goto Home
 
