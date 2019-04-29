@@ -59,7 +59,7 @@ const titleString = "  _  _______        ____        _ _                 _      
 
 
 request({
-    url: 'https://raw.githack.com/felixheidecke/KR-Boilerplate/master/package.json',
+    url: 'http://raw.githack.com/felixheidecke/KR-Boilerplate/stable_1/package.json',
     method: 'GET'
 }, function(err, res, body) {
 
