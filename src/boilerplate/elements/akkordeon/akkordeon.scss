@@ -1,4 +1,4 @@
-@if $akkordeon-enabled == "true" {
+@if $akkordeon-enabled {
     .#{$prefix}accordion {
         width: 100%;
 
