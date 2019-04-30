@@ -1,4 +1,4 @@
-@if $link-external-enabled == "true" {
+@if $link-external-enabled {
     $el                  : ".#{$prefix}link-external";
 
     $link-external-offset: 20px;

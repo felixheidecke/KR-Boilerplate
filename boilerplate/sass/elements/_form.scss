@@ -1,4 +1,4 @@
-@if $form-enabled == "true" {
+@if $form-enabled {
 	$el: ".#{$prefix}form";
 
 	#{$el} {
