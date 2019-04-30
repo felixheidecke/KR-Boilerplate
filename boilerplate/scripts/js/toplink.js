@@ -6,12 +6,6 @@
 
 	var $button, $style, css;
 
-	params = jQuery.extend({
-		"class": 'kr-toplink',
-		scrollOffset: 200,
-		speed: 'slow'
-	}, params);
-
 	if ($('body').find(".kr-toplink").length > 0) {
 		return false;
 	}
