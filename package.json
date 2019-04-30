@@ -1,7 +1,7 @@
 {
   "author": "Felix Heidecke",
   "description": "Klickrhein Boilerplate",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "license": "ISC",
   "homepage": "https://klickrhein.de",
   "repository": {
@@ -23,8 +23,8 @@
     "grunt": "^1.0.4",
     "grunt-browserify": "^5.3.0",
     "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
     "grunt-curl": "^2.5.1",
     "grunt-move": "^1.0.1",
     "grunt-sass": "^3.0.2",
