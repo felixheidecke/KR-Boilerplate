@@ -53,7 +53,7 @@ module.exports = function (grunt) {
 
 		clean: {
 			afterUpdate: ['temp'],
-			beforeUpdate: ['src/boilerplate']
+			beforeUpdate: ['boilerplate']
 		},
 
 		curl: {

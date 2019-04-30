@@ -4,8 +4,8 @@ DEL /Q npm-debug.log
 DEL /Q package-lock.json
 cls
 set current_dir=%cd%
-call npm install
-call npm install ajax-request
+call npm install -s
+call npm install ajax-request -s
 :Home
 cls
 color 1f
@@ -75,7 +75,8 @@ echo  * UPDATE  *
 echo  * * * * * *
 echo.
 call npm run update
-call npm install
+call npm install -s
+call npm install ajax-request -s
 cls
 echo.
 color 0A
