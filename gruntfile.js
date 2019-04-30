@@ -1,4 +1,3 @@
-const version = require('./package.json').version;
 const moment  = require('moment');
 const sass    = require('node-sass');
 
@@ -34,17 +33,6 @@ module.exports = function (grunt) {
 						debug: false,
 						paths: ["./boilerplate", "./node_modules"]
 					}
-				}
-			}
-		},
-
-		uglify: {
-			options: {
-				mangle: true
-			},
-			boilerplate: {
-				files: {
-					'htdocs/js/default.min.js': ['htdocs/js/default.js']
 				}
 			}
 		},
@@ -131,7 +119,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-browserify');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-curl');
 	grunt.loadNpmTasks('grunt-zip');
 	grunt.loadNpmTasks('grunt-move');
@@ -139,14 +126,12 @@ module.exports = function (grunt) {
 	grunt.registerTask("_watch", [
 		'sass',
 		'browserify',
-		'uglify',
 		'watch'
 	]);
 
 	grunt.registerTask("_build", [
 		'sass',
 		'browserify',
-		'uglify'
 	]);
 
 	grunt.registerTask("_backup", [
