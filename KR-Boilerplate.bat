@@ -73,7 +73,7 @@ echo  * UPDATE  *
 echo  * * * * * *
 echo.
 call npm run update
-DEL /Q node_modules
+RD /S /Q node_modules
 cls
 echo.
 color 0A
