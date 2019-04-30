@@ -58,7 +58,7 @@ module.exports = function (grunt) {
 
 		curl: {
 			update: {
-				src: 'https://github.com/felixheidecke/KR-Boilerplate/archive/feature-cdn.zip',
+				src: 'https://github.com/felixheidecke/KR-Boilerplate/archive/stable_1.zip',
 				dest: 'temp/master.zip'
 			}
 		},
@@ -73,17 +73,17 @@ module.exports = function (grunt) {
 		move: {
 			update: {
 				files: [{
-					src: 'temp/KR-Boilerplate-feature-cdn/src/boilerplate/',
+					src: 'temp/KR-Boilerplate-stable_1/src/boilerplate/',
 					dest: 'boilerplate'
 				}, {
 					src: [
-						'temp/KR-Boilerplate-feature-cdn/.gitignore',
-						'temp/KR-Boilerplate-feature-cdn/gruntfile.js',
-						'temp/KR-Boilerplate-feature-cdn/header.js',
-						'temp/KR-Boilerplate-feature-cdn/package.json',
-						'temp/KR-Boilerplate-feature-cdn/package-lock.json',
-						'temp/KR-Boilerplate-feature-cdn/README.md',
-						'temp/KR-Boilerplate-feature-cdn/KR-Boilerplate.bat'
+						'temp/KR-Boilerplate-stable_1/.gitignore',
+						'temp/KR-Boilerplate-stable_1/gruntfile.js',
+						'temp/KR-Boilerplate-stable_1/header.js',
+						'temp/KR-Boilerplate-stable_1/package.json',
+						'temp/KR-Boilerplate-stable_1/package-lock.json',
+						'temp/KR-Boilerplate-stable_1/README.md',
+						'temp/KR-Boilerplate-stable_1/KR-Boilerplate.bat'
 					],
 					dest: './'
 				}]
