@@ -1,11 +1,9 @@
 MODE 80, 30
 @echo off
 DEL /Q npm-debug.log
-DEL /Q package-lock.json
 cls
 set current_dir=%cd%
-call npm install -s
-call npm install ajax-request -s
+IF NOT EXIST node_modules GOTO Install
 :Home
 cls
 color 1f
@@ -75,13 +73,17 @@ echo  * UPDATE  *
 echo  * * * * * *
 echo.
 call npm run update
-call npm install -s
-call npm install ajax-request -s
+DEL /Q node_modules
 cls
 echo.
 color 0A
 echo Update wurde beendet.
 pause
+goto Exit
+
+:Install
+call npm install -s
+call npm install ajax-request -s
 goto Home
 
 :Exit

@@ -73,7 +73,7 @@ module.exports = function (grunt) {
 		move: {
 			update: {
 				files: [{
-					src: 'temp/KR-Boilerplate-stable_1/src/boilerplate/',
+					src: 'temp/KR-Boilerplate-stable_1/boilerplate/',
 					dest: 'boilerplate'
 				}, {
 					src: [
