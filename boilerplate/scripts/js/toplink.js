@@ -22,8 +22,8 @@
 		html: css
 	});
 
-	$style.prependTo($(this));
-	$button.appendTo($(this));
+	$style.prependTo($('body'));
+	$button.appendTo($('body'));
 
 	$(window).scroll(function() {
 		if ($(window).scrollTop() >= 200) {
