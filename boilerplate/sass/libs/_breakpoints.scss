@@ -37,7 +37,7 @@ $breakpoints: xs sm "sm and up" md "md and up" lg "lg and up" xl "xl and up" xxl
 		}
 	} @else 
 	if $bp == "xl" {
-		@media (min-width: 1279px) {
+		@media (max-width: 1280px) {
 			@content;
 		}
 	} @else 
