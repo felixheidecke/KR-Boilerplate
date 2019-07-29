@@ -26,8 +26,8 @@
 		font-weight: 700;
 		font-display: swap;
 		src:
-			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans/open-sans-latin-700.woff") format("woff"),
-			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans/open-sans-latin-700.woff2") format('woff2');
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans-latin-700.woff") format("woff"),
+			url("https://cdn.klickrhein.de/fonts/open-sans/fonts/open-sans-latin-700.woff2") format('woff2');
 	}
 
 	@font-face {
@@ -55,13 +55,16 @@
 		font-family: "Open Sans Italic", Arial, sans-serif;
 	}
 
-	b,
 	h1,
 	h2,
 	h3,
-	h4,
-	strong {
+	h4 {
 		font-family: "Open Sans Bold Italic", Arial, sans-serif;
+	}
+
+	b,
+	strong {
+		font-family: "Open Sans Bold", Arial, sans-serif;
 	}
 }
 
