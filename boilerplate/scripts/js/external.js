@@ -4,15 +4,6 @@
 		return;
 	}
 
-	// Files to external
-	['.pdf', '.zip'].forEach( function(fileType) {
-
-		let $link = $('body').find('[href$="' + fileType + '"]:not([class*="kr-stop"])');
-
-		$link.attr('target', '_blank');
-		$link.addClass('kr-link-external');
-	});
-
 	// Links to external
 	$('a[href*="://"]:not([class*="kr-stop"])').each(function() {
 		const $ref = $(this);
