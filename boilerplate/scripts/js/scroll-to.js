@@ -6,7 +6,6 @@ $.fn.krScrollTo = function(params) {
 	return $(this).click(function(e) {
 		var difference, distance, factor, position, target, targetPos, windowPos;
 		target = $(this).attr('data-kr-scroll-to');
-		e.preventDefault();
 		if ($(target).length) {
 			windowPos = $(window).scrollTop();
 			targetPos = Math.abs($(target).offset().top);
