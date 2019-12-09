@@ -1,8 +1,4 @@
-(function() {
-	if (typeof $ !== "function") {
-		console.error('jQuery is required for krXioniNews');
-		return;
-	}
+requirejs(["jquery"], $ => {
 
 	var $button, $style, css;
 
@@ -40,4 +36,4 @@
 		}, 'slow');
 	});
 
-})();
+})
