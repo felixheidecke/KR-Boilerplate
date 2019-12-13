@@ -1,8 +1,4 @@
-(function() {
-	if (typeof $ !== "function") {
-		console.error('jQuery is required for "mobile-detect"');
-		return;
-	}
+requirejs(["jquery"], $ => {
 
 	const userAgent = window.navigator.userAgent;
 	let mobile      = userAgent.match('iPad|iPhone|Android');
@@ -13,4 +9,4 @@
 	}
 
 	$('body').attr('data-agent', userAgent);
-})();
+})
