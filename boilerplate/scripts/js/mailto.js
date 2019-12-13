@@ -1,8 +1,4 @@
-(function() {
-	if (typeof $ !== "function") {
-		console.error('jQuery is required for "mailto');
-		return;
-	}
+requirejs(["jquery"], $ => {
 
     $('[data-mailto]').each(function() {
         var decoded, encoded, replacement;
@@ -17,4 +13,4 @@
         }
         return $.when($(this).after(replacement).remove()).then(typeof callback === "function" ? callback() : void 0);
     });
-})();
+})

@@ -1,8 +1,4 @@
-(function() {
-	if (typeof $ !== "function") {
-		console.error('jQuery is required for "shop"');
-		return;
-	}
+requirejs(["jquery"], $ => {
 
 	let $form = $(this).find('form.cart');
 	let $action = $(this).find('.js-form-action');
@@ -34,5 +30,4 @@
 	return $itemRemove.on('click', function(e) {
 		return e.preventDefault();
 	});
-
-})();
+})

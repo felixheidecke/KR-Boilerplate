@@ -1,8 +1,8 @@
-(function() {
-	if (typeof $ !== "function") {
-		console.error('jQuery is required for krXioniNews');
-		return;
-	}
+// This guy doesn't seem to like
+// requre.js, so let's just import it
+import textile from 'textile-js'
+
+requirejs(["jquery", "vue", "moment", "lodash"], function($, Vue, moment, _) {
 
     $('body').find("[data-xioni^='news.']:not(.xioni-prevent-default)").each(function() {
         var dataParams, dataXioni, unique;
@@ -74,4 +74,4 @@
             }
         });
     });
-})();
+});

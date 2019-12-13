@@ -1,8 +1,4 @@
-(function() {
-	if (typeof $ !== "function") {
-		console.error('jQuery is required for "external');
-		return;
-	}
+requirejs(["jquery"], $ => {
 
 	// Links to external
 	$('a[href*="://"]:not([class*="kr-stop"])').each(function() {
@@ -12,4 +8,4 @@
 			$ref.addClass('kr-link-external');
 		}
 	});
-})();
+})
