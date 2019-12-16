@@ -3,6 +3,8 @@
 import textile from 'textile-js'
 
 requirejs(["jquery", "vue", "moment", "lodash"], function($, Vue, moment, _) {
+    const locale = window.locale || $('html').attr('lang').trim().toLowerCase()
+    moment.locale(locale);
 
     $('body').find("[data-xioni^='news.']:not(.xioni-prevent-default)").each(function() {
         var dataParams, dataXioni, unique;

@@ -5,7 +5,7 @@ module.exports = {
     "paths": {
         "vue"            : `vue/${version.vue}/vue.min`,
         "textile-js"     : `textile-js/${version["textile-js"]}/textile.min`,
-        "moment"         : `moment.js/${version.moment}/moment.min`,
+        "moment"         : `moment.js/${version.moment}/moment-with-locales.min`,
         "lodash"         : `lodash.js/${version.lodash}/lodash.min`,
         "jquery"         : `jquery/${version.jquery}/jquery.min`,
         "swiper"         : `Swiper/${version.swiper}`,
