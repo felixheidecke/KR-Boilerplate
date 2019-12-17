@@ -26,35 +26,38 @@ requirejs(["jquery", "vue", "moment", "lodash"], function($, Vue, moment, _) {
                 params: dataParams
             },
             computed: {
-                url: function() {
+                url () {
                     return "https://api.klickrhein.de/" + dataXioni[0] + ".php?id=" + dataXioni[1];
                 }
             },
             methods: {
-                dateFormat: function(timestamp, format) {
+                dateFormat (timestamp, format) {
                     if (format == null) {
                         format = 'LL';
                     }
                     return moment.unix(timestamp).format(format);
                 },
-                textile: function(string) {
+                textile (string) {
                     return textile(string.trim());
                 },
-                dataPath: function(item) {
+                dataPath (item) {
                     if (item) {
                         return this.urlBase + item;
                     }
                 },
-                goTo: function(id) {
+                goTo (id) {
                     this.details = _.filter(this.items, ['id', id])[0];
                     window.location = "#" + id;
                     this.scrollTop();
                 },
-                goBack: function() {
+                goBack () {
                     this.details = false;
                     window.location = '#';
                 },
-                scrollTop: function() {
+                trimSheme (url) {
+                    return url.replace(/.*:\/\//, '')
+                },
+                scrollTop () {
                     $('body,html').animate({
                         scrollTop: $("#" + unique).offset().top
                     }, 500);
