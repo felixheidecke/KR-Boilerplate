@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" data-loading>
+<html lang="de">
 <!--  klickrhein, Frank Förster, Oestrich-Winkel, Tel. 06723-3410, www.klickrhein.de  -->
 <head>
 	<meta charset="UTF-8">
