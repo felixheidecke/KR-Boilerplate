@@ -1,10 +1,10 @@
 // This guy doesn't seem to like
 // requre.js, so let's just import it
 import textile from 'textile-js'
+const lang = document.querySelector('html').getAttribute('lang')
 
 requirejs(["jquery", "vue", "moment", "lodash"], function($, Vue, moment, _) {
-    const locale = window.locale || $('html').attr('lang').trim().toLowerCase()
-    moment.locale(locale);
+    moment.locale(lang);
 
     $('body').find("[data-xioni^='news.']:not(.xioni-prevent-default)").each(function() {
         var dataParams, dataXioni, unique;

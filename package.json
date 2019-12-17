@@ -1,7 +1,7 @@
 {
   "author": "Felix Heidecke",
   "description": "Klickrhein Boilerplate",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "license": "ISC",
   "homepage": "https://klickrhein.de",
   "repository": {
@@ -31,7 +31,7 @@
     "grunt-zip": "^0.18.2",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
-    "npm-check-updates": "^3.2.2"
+    "npm-check-updates": "^4.0.1"
   },
   "dependencies": {
     "ajax-request": "^1.2.3",
