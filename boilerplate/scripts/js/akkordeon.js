@@ -1,47 +1,52 @@
 requirejs(["jquery"], $ => {
 
-	$.fn.krAkkordeon = function(params) {
-		params = jQuery.extend({
-			initClosed    : true,
-			initfirstOpen : false,
-			speed         : 'fast',
-			onlyOneCard   : true,
-			cardItem      : '.card',
-			tabItem       : '.tab',
-			contentItem   : '.content',
-			activeClass   : 'is-active'
-		}, params);
-		
-		var $cards    = $(this).find(params.cardItem);
-		var $tabs     = $(this).find(params.tabItem);
-		var $contents = $(this).find(params.contentItem);
+    $.fn.krAkkordeon = function(params, callback) {
+        callback = callback || false;
 
-		$(this).addClass(params.activeClass);
+        params = jQuery.extend({
+            initClosed    : true,
+            initfirstOpen : false,
+            speed         : 'fast',
+            onlyOneCard   : true,
+            cardItem      : '.card',
+            tabItem       : '.tab',
+            contentItem   : '.content',
+            activeClass   : 'is-active'
+        }, params);
+        
+        var $cards    = $(this).find(params.cardItem);
+        var $tabs     = $(this).find(params.tabItem);
+        var $contents = $(this).find(params.contentItem);
 
-		if (params.initClosed) {
-			$contents.hide();
-		}
+        $(this).addClass(params.activeClass);
 
-		if (params.initfirstOpen) {
-			$(this).find(params.cardItem + ":first-of-type").addClass(params.activeClass).find(params.contentItem).show();
-		}
+        if (params.initClosed) {
+            $contents.hide();
+        }
 
-		$tabs.on('click', function() {
-			var $card    = $(this).parent(params.cardItem);
-			var $content = $card.find(params.contentItem);
-			
-			$card.toggleClass(params.activeClass);
-			
-			if (!$card.hasClass(params.activeClass)) {
-				$content.slideUp(params.speed);
-			}
-			else {
-				$content.slideDown(params.speed);
-				if (params.onlyOneCard) {
-					$cards.not($card).removeClass(params.activeClass);
-					$contents.not($content).slideUp(params.speed);
-				}
-			}
-		});
-	};
-})
+        if (params.initfirstOpen) {
+            $(this).find(params.cardItem + ":first-of-type").addClass(params.activeClass).find(params.contentItem).show();
+        }
+
+        $tabs.on('click', function() {
+            var $card    = $(this).parent(params.cardItem);
+            var $content = $card.find(params.contentItem);
+            
+            $card.toggleClass(params.activeClass);
+            
+            if (!$card.hasClass(params.activeClass)) {
+                $content.slideUp(params.speed);
+            }
+            else {
+                $content.slideDown(params.speed);
+                if (params.onlyOneCard) {
+                    $cards.not($card).removeClass(params.activeClass);
+                    $contents.not($content).slideUp(params.speed);
+                }
+            }
+        });
+
+        if (typeof callback === "function")
+            callback(this);
+    };
+});

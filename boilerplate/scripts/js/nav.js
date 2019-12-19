@@ -1,6 +1,8 @@
 requirejs(["jquery"], $ => {
 
-	$.fn.krNav = function(params) {
+	$.fn.krNav = function(params, callback) {
+		callback = callback || false;
+
 		var $1a, $1li, $1ul, $2a, $2li, $2ul, $3a, $3li, $3ul, $burger, $nav, $trigger, _activate, _collapse, _deactivate, _expand, _isActive, _isExpanded;
 		params = jQuery.extend({
 			closeOnResize: true,
@@ -117,5 +119,8 @@ requirejs(["jquery"], $ => {
 			}
 			return false;
 		};
+
+		if (typeof callback === "function")
+			callback(this);
 	};
-})
+});

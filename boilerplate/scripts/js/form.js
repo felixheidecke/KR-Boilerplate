@@ -1,6 +1,8 @@
 requirejs(["jquery"], $ => {
 
-    $.fn.krForm = function(params) {
+    $.fn.krForm = function(params, callback) {
+        callback = callback || false;
+
         params = $.extend({
             textOnLoading: "Sendet",
             textOnError: "<strong>Ein Fehler ist aufgetreten!</strong><br>Bitte füllen Sie alle mit einem * markierten Felder aus!",
@@ -16,7 +18,7 @@ requirejs(["jquery"], $ => {
         if ($form.find('input[name="required"]').length)
             required     = $form.find('input[name="required"]').val().split(',');
         
-        for (i in required) {
+        for (let i in required) {
             val = required[i];
             $form.find("label[for='" + (val.trim()) + "']").append('*');
         }
@@ -88,6 +90,8 @@ requirejs(["jquery"], $ => {
                 }
             });
         });
-        return this;
+
+        if (typeof callback === "function")
+            callback(this);
     };
-})
+});

@@ -1,6 +1,8 @@
 requirejs(["jquery"], $ => {
 
-	$.fn.krScrollTo = function(params) {
+	$.fn.krScrollTo = function(params, callback) {
+		callback = callback || false;
+
 		params = $.extend({
 			offset: 0,
 			speed: 1
@@ -23,4 +25,4 @@ requirejs(["jquery"], $ => {
 			}
 		});
 	};
-})
+});
