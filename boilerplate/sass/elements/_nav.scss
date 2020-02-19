@@ -1,389 +1,390 @@
 @if $nav-main-enabled {
 
-	$el    : ".#{$prefix}nav-main";
-	$active: ".#{$nav-main-active-class}";
-
-	#{$el} {
-		&,
-		&-trigger {
-			display: none;
-		}
-
-		// ----------------------------------------------------- FIRST LEVEL ---
-
-		&-1-ul {}
-
-		&-1-li {
-			position: relative;
-
-			&:hover #{$el}-1-a {
-				background-color: $nav-main-item-1-background-color-hover;
-				color           : $nav-main-item-1-color-hover;
-			}
-		}
-
-		&-1-a {
-			background-color: $nav-main-item-1-background-color;
-			color           : $nav-main-item-1-color;
-
-			&#{$active} {
-				background-color: $nav-main-item-1-background-color-active;
-				color           : $nav-main-item-1-color-active;
-			}
-		}
-
-		@if $nav-main-desktop-enabled {
-			@media (min-width: $nav-main-breakpoint-desktop) {
-				// --- Desktop
-
-				&-1-ul {
-					display        : flex;
-					justify-content: space-between;
-					flex           : {
-						direction: row;
-						wrap     : nowrap;
-					};
-				}
-
-				&-1-li {
-					flex-grow: 1;
-
-					&:not(:last-of-type) {
-						margin-right: 1px;
-					}
-				}
-
-				&-1-a {
-					display        : block;
-					width          : 100%;
-					text-align     : center;
-					text-decoration: none;
-					transition     : all .333s;
-					padding        : $nav-main-min-height / 2;
-					line-height    : 0;
-				}
-			}
-		}
-
-		@if $nav-main-mobile-enabled {
-			@media (max-width: $nav-main-breakpoint-mobile) {
-				// --- Mobile
-
-				&-1-ul {
-					display: none;
-				}
-
-				&-1-li {
-					width: 100%;
-
-					&:not(:first-of-type) {
-						border-top: $nav-main-item-separator;
-					}
-				}
-
-				&-1-a {
-					font-family    : "Open Sans";
-					display        : block;
-					font-size      : 15px;
-					text-decoration: none;
-					padding        : ($grid-spacing / 2) $grid-spacing;
-				}
-			}
-		}
-
-		// ---------------------------------------------------- SECOND LEVEL ---
-
-		&-2-ul {}
-
-		&-2-li {
-			position: relative;
-
-			&:hover #{$el}-2-a {
-				background-color: $nav-main-item-2-background-color-hover;
-				color           : $nav-main-item-2-color-hover;
-			}
-		}
-
-		&-2-a {
-			background-color: $nav-main-item-2-background-color;
-			color           : $nav-main-item-2-color;
-
-			&#{$active} {
-				background-color: $nav-main-item-2-background-color-active;
-				color           : $nav-main-item-2-color-active;
-			}
-		}
-
-		@if $nav-main-desktop-enabled {
-			@media (min-width: $nav-main-breakpoint-desktop) {
-				// --- Desktop
-
-				&-2-ul {
-					position        : absolute;
-					min-width       : 100%;
-					transform       : perspective(600px) rotateX(90deg);
-					transform-origin: 50% 0;
-					transition      : all .333s ease-in-out;
-				}
-
-				&-2-li {}
-
-				&-2-a {
-					display        : block;
-					padding        : ($grid-spacing / 2) $grid-spacing;
-					transition     : all .25s;
-					font-size      : $font-size - 2px;
-					text-decoration: none;
-
-					&.-is-sub-parent {
-						background: {
-							image   : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAY1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+aRQ2gAAAAIHRSTlMAAQIFBwgLEBMYISQ+RWh3eH+YnqCipavO09XX4OTo6XFA+UIAAACfSURBVFjD7cxJDsJAEENRVwbCFOYxDaTuf0oWgIjSQqLLK0h57feBePVxmYPYWlVDyXmm8PD2wstbC29vK3S9pbBSpQpj7S8USYGZkoXswhaq1gufCo0XvOCFPy2cM7YwTwkUIQ7UKb6J/S3nfFsNyIdh+9K9+x/2cuI8pqTHhPTAhvSQPed7BYMHZMf5TsHoAdly/lkgPCCL62H09fsOIjGLL25z0XEAAAAASUVORK5CYII=");
-							position: right ($grid-spacing / 2) center;
-							repeat  : no-repeat;
-							size    : 14px auto;
-						}
-					}
-				}
-			}
-		}
-
-		@if $nav-main-mobile-enabled {
-			@media (max-width: $nav-main-breakpoint-mobile) {
-				// --- Mobile
-
-				&-2-ul {
-					display: none;
-				}
-
-				&-2-li {}
-
-				&-2-a {
-					display        : block;
-					padding        : ($grid-spacing / 3) $grid-spacing;
-					text-decoration: none;
-				}
-			}
-		}
-
-		// ----------------------------------------------------- THIRD LEVEL ---
-
-		&-3-ul {}
-
-		&-3-li {}
-
-		&-3-a {
-			background-color: $nav-main-item-3-background-color;
-			color           : $nav-main-item-3-color;
-
-			&#{$active} {
-				background-color: $nav-main-item-3-background-color-active;
-				color           : $nav-main-item-3-color-active;
-			}
-
-			&:hover {
-				background-color: $nav-main-item-3-background-color-hover;
-				color           : $nav-main-item-3-color-hover;
-			}
-		}
-
-		@if $nav-main-desktop-enabled {
-			@media (min-width: $nav-main-breakpoint-desktop) {
-				// --- Desktop
-
-				&-3-ul {
-					position        : absolute;
-					min-width       : 100%;
-					transform       : translate(100%) rotateY(-90deg);
-					top             : 0;
-					transform-origin: 0 0;
-					transition      : all .333s ease-in-out;
-				}
-
-				&-1-li:nth-last-child(#{$nav-main-ul-3-flip-left-on-nth-last}) #{$el}-3-ul {
-					transform       : translate(-100%) rotateY(90deg);
-					transform-origin: 100% 0;
-				}
-
-				&-3-li {}
-
-				&-3-a {
-					display        : block;
-					padding        : ($grid-spacing / 2) $grid-spacing;
-					transition     : all .25s;
-					font-size      : $font-size - 2px;
-					text-decoration: none;
-
-					&:hover {
-						background-color: $nav-main-item-3-background-color-hover;
-						color           : $nav-main-item-3-color-hover;
-					}
-				}
-			}
-		}
-
-		@if $nav-main-mobile-enabled {
-			@media (max-width: $nav-main-breakpoint-mobile) {
-				// --- Mobile
-
-				&-3-li {}
-
-				&-3-a {
-					display        : block;
-					padding        : ($grid-spacing / 3) $grid-spacing;
-					text-decoration: none;
-				}
-			}
-		}
-
-		// ---------------------------------------------------------- BURGER ---
-
-		&-burger {
-			position        : fixed;
-			top             : $grid-spacing;
-			right           : $grid-spacing;
-			width           : 32px;
-			height          : 20px;
-			margin          : 0;
-			padding         : 0;
-			border          : 0 none;
-			transition      : width .5s ease;
-			z-index         : 999;
-			outline         : 0 none;
-			background-color: transparent;
-
-			&:after,
-			&:before,
-			span {
-				position        : absolute;
-				content         : "";
-				height          : 3px;
-				background-color: $nav-main-burger-patty-color;
-				left            : 0;
-				right           : 0;
-				transition      : all .333s;
-			}
-
-			&:before {
-				top             : 0;
-				transform-origin: center center;
-			}
-
-			&:after {
-				bottom          : 0;
-				transform-origin: center center;
-			}
-
-			span {
-				text-indent: -9999px;
-				top        : 50%;
-				transform  : translateY(-50%);
-			}
-
-			@if $nav-main-desktop-enabled {
-				@media (min-width: $nav-main-breakpoint-desktop) {
-					display: none;
-				}
-			}
-		}
-	}
-
-	// -------------------------------------------------------------- STATES ---
-
-	// --- Hover effekt for dropdown
-	@if $nav-main-desktop-enabled {
-		@media (min-width: $nav-main-breakpoint-desktop) {
-			#{$el}-1-li.-is-expanded #{$el}-2-ul {
-				transform: perspective(600px) rotateX(0);
-			}
-		}
-	}
-
-	// --- Hover effekt for dropdown
-
-	#{$el}.-is-active #{$el}-burger {
-		&:before {
-			top      : 50%;
-			transform: translateY(-50%) rotate(45deg);
-		}
-
-		&:after {
-			bottom   : 50%;
-			transform: translateY(50%) rotate(-45deg);
-		}
-
-		span {
-			opacity: 0;
-		}
-	}
-
-	// --- non mobile devices ---
-
-	body:not([data-mobile]) #{$el} {
-		@if $nav-main-desktop-enabled {
-			@media (min-width: $nav-main-breakpoint-desktop) {
-				&-1-li:hover #{$el}-2-ul {
-					transform: perspective(600px) rotateX(0);
-				}
-
-				&-2-li:hover #{$el}-3-ul {
-					transform: perspective(600px) translate(100%) rotateY(0deg);
-				}
-
-				&-1-li:nth-last-child(#{$nav-main-ul-3-flip-left-on-nth-last}) #{$el}-2-li:hover #{$el}-3-ul {
-					transform: perspective(600px) translate(-100%) rotateY(0deg);
-				}
-			}
-		}
-
-		@if $nav-main-mobile-enabled {
-			@media (max-width: $nav-main-breakpoint-mobile) {
-				&-2-ul {
-					display: block;
-				}
-			}
-		}
-	}
-
-	// --- mobile devices ---
-
-	body[data-mobile] #{$el} {
-		&-trigger {
-			width        : $nav-main-min-height - 6px;
-			position     : absolute;
-
-			height       : $nav-main-min-height - 6px;
-			display      : block;
-			border-radius: $nav-main-trigger-radius;
-			transform    : rotate(90deg);
-			background   : {
-				image   : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAA+CAYAAADd977FAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowNEI4RUEyOEExQzQxMUU2QkZCNkU1RTE3MTUyQjMwNCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowNEI4RUEyOUExQzQxMUU2QkZCNkU1RTE3MTUyQjMwNCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjY1ODAxOEY1QTFDMjExRTZCRkI2RTVFMTcxNTJCMzA0IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjY1ODAxOEY2QTFDMjExRTZCRkI2RTVFMTcxNTJCMzA0Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+HjmzBAAAAVlJREFUeNrs28Ftw0AMRFGV4BJTgjtySSpJsQAL8SGOTWkVfJKfAPc6IN5lLzNNBWZZltu6k4PB2EYUEIYoQAxRgBiiADFEAWKIAsQQBYghChBDFCCGKEAMUYAYogAxRAFiiALEEAWIIQoQQxQgRm8UKEZPFDhGL5QkGD1QkmHURkmKURPlHzC+HisKAeMpSxQKhihADFGAGKIAMUQBYrRHIWK0RSFjtEPJgNEGJRNGeZSMGGVRMmOUQ6mAUQalEkZ6lIoYaVEqY6RD6YCRBqUTBh6lIwYWpTMGDkUMEIoYIBQxQChigFDEgKHcn1kMDMq8BlxOQimHcTLKanDZAkajlMU4CeUH4ylgFEqb9tH91uspGANR2vXzDn6KXmMMQGnbYN2J8h7jAEr7jncQ5XOMHSgW7mMocYwAihgxlP0YH6CIEUM5jvEHihgxlHEYv6CIEUMJYXwLMAD5uV2YbexVEAAAAABJRU5ErkJggg==");
-				color   : $nav-main-trigger-background-color;
-				position: center 12px;
-				repeat  : no-repeat;
-				size    : 14px auto;
-			}
-
-			@media (min-width: $nav-main-breakpoint-desktop) {
-				top  : 3px;
-				right: 3px;
-			}
-
-			@media (max-width: $nav-main-breakpoint-mobile) {
-				top  : 6px;
-				right: 6px;
-			}
-		}
-
-		&-1-li.-is-expanded #{$el}-trigger {
-			transform: rotate(180deg);
-		}
-
-		@if $nav-main-mobile-enabled {
-			@media (max-width: $nav-main-breakpoint-mobile) {
-				&-1-li.-is-expanded #{$el}-2-ul {
-					display: block;
-				}
-			}
-		}
-	}
+  $el    : ".#{$prefix}nav-main";
+  $active: ".#{$nav-main-active-class}";
+
+  #{$el} {
+    &,
+    &-trigger {
+      display: none;
+    }
+
+    // ----------------------------------------------------- FIRST LEVEL ---
+
+    &-1-ul {}
+
+    &-1-li {
+      position: relative;
+
+      &:hover #{$el}-1-a {
+        background-color: $nav-main-item-1-background-color-hover;
+        color           : $nav-main-item-1-color-hover;
+      }
+    }
+
+    &-1-a {
+      background-color: $nav-main-item-1-background-color;
+      color           : $nav-main-item-1-color;
+
+      &#{$active} {
+        background-color: $nav-main-item-1-background-color-active;
+        color           : $nav-main-item-1-color-active;
+      }
+    }
+
+    @if $nav-main-desktop-enabled {
+      @media (min-width: $nav-main-breakpoint-desktop) {
+        // --- Desktop
+
+        &-1-ul {
+          display        : flex;
+          justify-content: space-between;
+          flex           : {
+            direction: row;
+            wrap     : nowrap;
+          };
+        }
+
+        &-1-li {
+          flex-grow: 1;
+
+          &:not(:last-of-type) {
+            margin-right: 1px;
+          }
+        }
+
+        &-1-a {
+          display        : block;
+          width          : 100%;
+          text-align     : center;
+          text-decoration: none;
+          transition     : all .333s;
+          padding        : $nav-main-min-height / 2;
+          line-height    : 0;
+        }
+      }
+    }
+
+    @if $nav-main-mobile-enabled {
+      @media (max-width: $nav-main-breakpoint-mobile) {
+        // --- Mobile
+
+        &-1-ul {
+          display: none;
+        }
+
+        &-1-li {
+          width: 100%;
+
+          &:not(:first-of-type) {
+            border-top: $nav-main-item-separator;
+          }
+        }
+
+        &-1-a {
+          font-family    : "Open Sans";
+          display        : block;
+          font-size      : 15px;
+          text-decoration: none;
+          padding        : ($grid-spacing / 2) $grid-spacing;
+        }
+      }
+    }
+
+    // ---------------------------------------------------- SECOND LEVEL ---
+
+    &-2-ul {}
+
+    &-2-li {
+      position: relative;
+
+      &:hover #{$el}-2-a {
+        background-color: $nav-main-item-2-background-color-hover;
+        color           : $nav-main-item-2-color-hover;
+      }
+    }
+
+    &-2-a {
+      background-color: $nav-main-item-2-background-color;
+      color           : $nav-main-item-2-color;
+
+      &#{$active} {
+        background-color: $nav-main-item-2-background-color-active;
+        color           : $nav-main-item-2-color-active;
+      }
+    }
+
+    @if $nav-main-desktop-enabled {
+      @media (min-width: $nav-main-breakpoint-desktop) {
+        // --- Desktop
+
+        &-2-ul {
+          position        : absolute;
+          min-width       : 100%;
+          transform       : perspective(600px) rotateX(90deg);
+          transform-origin: 50% 0;
+          transition      : all .333s ease-in-out;
+        }
+
+        &-2-li {}
+
+        &-2-a {
+          display        : block;
+          padding        : ($grid-spacing / 2) $grid-spacing;
+          transition     : all .25s;
+          font-size      : $font-size - 2px;
+          text-decoration: none;
+
+          &.-is-sub-parent {
+            background: {
+              image   : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAY1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+aRQ2gAAAAIHRSTlMAAQIFBwgLEBMYISQ+RWh3eH+YnqCipavO09XX4OTo6XFA+UIAAACfSURBVFjD7cxJDsJAEENRVwbCFOYxDaTuf0oWgIjSQqLLK0h57feBePVxmYPYWlVDyXmm8PD2wstbC29vK3S9pbBSpQpj7S8USYGZkoXswhaq1gufCo0XvOCFPy2cM7YwTwkUIQ7UKb6J/S3nfFsNyIdh+9K9+x/2cuI8pqTHhPTAhvSQPed7BYMHZMf5TsHoAdly/lkgPCCL62H09fsOIjGLL25z0XEAAAAASUVORK5CYII=");
+              position: right ($grid-spacing / 2) center;
+              repeat  : no-repeat;
+              size    : 14px auto;
+            }
+          }
+        }
+      }
+    }
+
+    @if $nav-main-mobile-enabled {
+      @media (max-width: $nav-main-breakpoint-mobile) {
+        // --- Mobile
+
+        &-2-ul {
+          display: none;
+        }
+
+        &-2-li {}
+
+        &-2-a {
+          display        : block;
+          padding        : ($grid-spacing / 3) $grid-spacing;
+          text-decoration: none;
+        }
+      }
+    }
+
+    // ----------------------------------------------------- THIRD LEVEL ---
+
+    &-3-ul {}
+
+    &-3-li {}
+
+    &-3-a {
+      background-color: $nav-main-item-3-background-color;
+      color           : $nav-main-item-3-color;
+
+      &#{$active} {
+        background-color: $nav-main-item-3-background-color-active;
+        color           : $nav-main-item-3-color-active;
+      }
+
+      &:hover {
+        background-color: $nav-main-item-3-background-color-hover;
+        color           : $nav-main-item-3-color-hover;
+      }
+    }
+
+    @if $nav-main-desktop-enabled {
+      @media (min-width: $nav-main-breakpoint-desktop) {
+        // --- Desktop
+
+        &-3-ul {
+          position        : absolute;
+          min-width       : 100%;
+          transform       : translate(100%) rotateY(-90deg);
+          top             : 0;
+          transform-origin: 0 0;
+          transition      : all .333s ease-in-out;
+        }
+
+        &-1-li:nth-last-child(#{$nav-main-ul-3-flip-left-on-nth-last}) #{$el}-3-ul {
+          transform       : translate(-100%) rotateY(90deg);
+          transform-origin: 100% 0;
+        }
+
+        &-3-li {}
+
+        &-3-a {
+          display        : block;
+          padding        : ($grid-spacing / 2) $grid-spacing;
+          transition     : all .25s;
+          font-size      : $font-size - 2px;
+          text-decoration: none;
+
+          &:hover {
+            background-color: $nav-main-item-3-background-color-hover;
+            color           : $nav-main-item-3-color-hover;
+          }
+        }
+      }
+    }
+
+    @if $nav-main-mobile-enabled {
+      @media (max-width: $nav-main-breakpoint-mobile) {
+        // --- Mobile
+
+        &-3-li {}
+
+        &-3-a {
+          display        : block;
+          padding        : ($grid-spacing / 3) $grid-spacing;
+          text-decoration: none;
+        }
+      }
+    }
+
+    // ---------------------------------------------------------- BURGER ---
+
+    &-burger {
+      position        : fixed;
+      top             : $grid-spacing;
+      right           : $grid-spacing;
+      width           : calc(32px + 8px);
+      height          : calc(20px + 8px);
+      margin          : 0;
+      padding         : 0;
+      border          : 0 none;
+      transition      : width .5s ease;
+      z-index         : 999;
+      outline         : 0 none;
+      background-color: $nav-main-burger-background;
+      border-radius   : 3px;
+
+      &:after,
+      &:before,
+      span {
+        position        : absolute;
+        content         : "";
+        height          : 3px;
+        background-color: $nav-main-burger-patty-color;
+        left            : 4px;
+        right           : 4px;
+        transition      : all .333s;
+      }
+
+      &:before {
+        top             : 4px;
+        transform-origin: center center;
+      }
+
+      &:after {
+        bottom          : 4px;
+        transform-origin: center center;
+      }
+
+      span {
+        text-indent: -9999px;
+        top        : 50%;
+        transform  : translateY(-50%);
+      }
+
+      @if $nav-main-desktop-enabled {
+        @media (min-width: $nav-main-breakpoint-desktop) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  // -------------------------------------------------------------- STATES ---
+
+  // --- Hover effekt for dropdown
+  @if $nav-main-desktop-enabled {
+    @media (min-width: $nav-main-breakpoint-desktop) {
+      #{$el}-1-li.-is-expanded #{$el}-2-ul {
+        transform: perspective(600px) rotateX(0);
+      }
+    }
+  }
+
+  // --- Hover effekt for dropdown
+
+  #{$el}.-is-active #{$el}-burger {
+    &:before {
+      top      : 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    &:after {
+      bottom   : 50%;
+      transform: translateY(50%) rotate(-45deg);
+    }
+
+    span {
+      opacity: 0;
+    }
+  }
+
+  // --- non mobile devices ---
+
+  body:not([data-mobile]) #{$el} {
+    @if $nav-main-desktop-enabled {
+      @media (min-width: $nav-main-breakpoint-desktop) {
+        &-1-li:hover #{$el}-2-ul {
+          transform: perspective(600px) rotateX(0);
+        }
+
+        &-2-li:hover #{$el}-3-ul {
+          transform: perspective(600px) translate(100%) rotateY(0deg);
+        }
+
+        &-1-li:nth-last-child(#{$nav-main-ul-3-flip-left-on-nth-last}) #{$el}-2-li:hover #{$el}-3-ul {
+          transform: perspective(600px) translate(-100%) rotateY(0deg);
+        }
+      }
+    }
+
+    @if $nav-main-mobile-enabled {
+      @media (max-width: $nav-main-breakpoint-mobile) {
+        &-2-ul {
+          display: block;
+        }
+      }
+    }
+  }
+
+  // --- mobile devices ---
+
+  body[data-mobile] #{$el} {
+    &-trigger {
+      width        : $nav-main-min-height - 6px;
+      position     : absolute;
+
+      height       : $nav-main-min-height - 6px;
+      display      : block;
+      border-radius: $nav-main-trigger-radius;
+      transform    : rotate(90deg);
+      background   : {
+        image   : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAA+CAYAAADd977FAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowNEI4RUEyOEExQzQxMUU2QkZCNkU1RTE3MTUyQjMwNCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowNEI4RUEyOUExQzQxMUU2QkZCNkU1RTE3MTUyQjMwNCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjY1ODAxOEY1QTFDMjExRTZCRkI2RTVFMTcxNTJCMzA0IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjY1ODAxOEY2QTFDMjExRTZCRkI2RTVFMTcxNTJCMzA0Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+HjmzBAAAAVlJREFUeNrs28Ftw0AMRFGV4BJTgjtySSpJsQAL8SGOTWkVfJKfAPc6IN5lLzNNBWZZltu6k4PB2EYUEIYoQAxRgBiiADFEAWKIAsQQBYghChBDFCCGKEAMUYAYogAxRAFiiALEEAWIIQoQQxQgRm8UKEZPFDhGL5QkGD1QkmHURkmKURPlHzC+HisKAeMpSxQKhihADFGAGKIAMUQBYrRHIWK0RSFjtEPJgNEGJRNGeZSMGGVRMmOUQ6mAUQalEkZ6lIoYaVEqY6RD6YCRBqUTBh6lIwYWpTMGDkUMEIoYIBQxQChigFDEgKHcn1kMDMq8BlxOQimHcTLKanDZAkajlMU4CeUH4ylgFEqb9tH91uspGANR2vXzDn6KXmMMQGnbYN2J8h7jAEr7jncQ5XOMHSgW7mMocYwAihgxlP0YH6CIEUM5jvEHihgxlHEYv6CIEUMJYXwLMAD5uV2YbexVEAAAAABJRU5ErkJggg==");
+        color   : $nav-main-trigger-background-color;
+        position: center 12px;
+        repeat  : no-repeat;
+        size    : 14px auto;
+      }
+
+      @media (min-width: $nav-main-breakpoint-desktop) {
+        top  : 3px;
+        right: 3px;
+      }
+
+      @media (max-width: $nav-main-breakpoint-mobile) {
+        top  : 6px;
+        right: 6px;
+      }
+    }
+
+    &-1-li.-is-expanded #{$el}-trigger {
+      transform: rotate(180deg);
+    }
+
+    @if $nav-main-mobile-enabled {
+      @media (max-width: $nav-main-breakpoint-mobile) {
+        &-1-li.-is-expanded #{$el}-2-ul {
+          display: block;
+        }
+      }
+    }
+  }
 }
