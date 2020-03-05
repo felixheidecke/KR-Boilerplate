@@ -317,6 +317,18 @@
     }
   }
 
+  body:not([data-mobile]) #{$el}.-is-sticky {
+    position: fixed;
+    width: 100vw;
+    transition: transform .333s ease-in-out, opacity .333s;
+    opacity: 1;
+  }
+
+  body:not([data-mobile]) #{$el}.-is-sticky.-is-offset {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
   // --- non mobile devices ---
 
   body:not([data-mobile]) #{$el} {
