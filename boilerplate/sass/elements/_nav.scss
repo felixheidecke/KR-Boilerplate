@@ -322,6 +322,7 @@
     width: 100vw;
     transition: transform .333s ease-in-out, opacity .333s;
     opacity: 1;
+    z-index: 10;
   }
 
   body:not([data-mobile]) #{$el}.-is-sticky.-is-offset {
