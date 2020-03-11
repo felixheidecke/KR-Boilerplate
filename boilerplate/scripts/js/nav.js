@@ -3,7 +3,7 @@ requirejs(["jquery"], $ => {
   $.fn.krNav = function(params, callback) {
     callback = callback || false;
 
-    var $1a, $1li, $1ul, $2a, $2li, $2ul, $3a, $3li, $3ul, $burger, $nav, $trigger, _activate, _collapse, _deactivate, _expand, _isActive, _isExpanded, _scrollTimeout;
+    var $1a, $1li, $1ul, $2a, $2li, $2ul, $3a, $3li, $3ul, $burger, $nav, $trigger, _activate, _collapse, _deactivate, _expand, _isActive, _isExpanded, _scrollTimeout, _scrollPos;
     params = jQuery.extend({
       closeOnResize: true,
       scroll: true,
@@ -13,8 +13,7 @@ requirejs(["jquery"], $ => {
       activeClass: '-is-active',
       expandedClass: '-is-expanded',
       breakpoint: 768,
-      sticky: false,
-      hideOnOffset: 0
+      sticky: false
     }, params);
     if ($(this).length === 0) {
       return false;
@@ -60,21 +59,27 @@ requirejs(["jquery"], $ => {
       return $(this).children("a:not(." + params.activeClass + ")").addClass(params.activeClass);
     });
 
-    if (params.sticky || params.hideOnOffset > 0) {
+    if (params.sticky) {
       $nav.addClass('-is-sticky')
     }
 
-    if (params.hideOnOffset > 0) {
+
+    if (params.sticky === 'hide') {
+      _scrollPos = 0
+
       $(window).on('scroll', function () {
         if (!_scrollTimeout) {
-          _scrollTimeout = setTimeout( () => {
-            if ($('html').scrollTop() > params.hideOnOffset) {
-              $nav.addClass('-is-offset')
-            } else {
+          _scrollTimeout = setTimeout( function () {
+            if ( $('html').scrollTop() < _scrollPos ) {
               $nav.removeClass('-is-offset')
+              console.log('UP')
+            } else {
+              $nav.addClass('-is-offset')
+              console.log('DOWN')
             }
-            _scrollTimeout = null;
-          }, 250);
+            _scrollTimeout = null
+            _scrollPos = $('html').scrollTop()
+          }, 60);
         }
       });
     }
