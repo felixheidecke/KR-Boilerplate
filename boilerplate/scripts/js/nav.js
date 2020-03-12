@@ -15,7 +15,9 @@ cdn.require(['jquery']).then( () => {
       activeClass: '-is-active',
       expandedClass: '-is-expanded',
       breakpoint: 768,
-      sticky: false
+      sticky: false,
+      mobileDisable: false,
+      nameSpace: 'kr-nav-main'
     }, params);
     if ($(this).length === 0) {
       return false;
@@ -31,24 +33,24 @@ cdn.require(['jquery']).then( () => {
     $3li = $nav.find('> ul > li > ul > li > ul > li');
     $3a  = $nav.find('> ul > li > ul > li > ul > li > a');
     $trigger = $('<span>', {
-      'class': 'kr-nav-main-trigger',
+      'class': `${params.nameSpace}-trigger`,
       'aria-hidden': 'true'
     });
     $burger = $('<button>', {
-      'class': 'kr-nav-main-burger',
+      'class': `${params.nameSpace}-burger`,
       'html': '<span>Menu</span>'
     });
-    $1ul.addClass('kr-nav-main-1-ul');
-    $1li.addClass('kr-nav-main-1-li');
-    $1a.addClass('kr-nav-main-1-a');
-    $2ul.addClass('kr-nav-main-2-ul');
-    $2li.addClass('kr-nav-main-2-li');
-    $2a.addClass('kr-nav-main-2-a');
-    $3ul.addClass('kr-nav-main-3-ul');
-    $3li.addClass('kr-nav-main-3-li');
-    $3a.addClass('kr-nav-main-3-a');
-    $nav.find(".kr-nav-main-1-a + ul").before($trigger);
-    $3ul.prev('.kr-nav-main-2-a').addClass('-is-sub-parent');
+    $1ul.addClass(`${params.nameSpace}-1-ul`);
+    $1li.addClass(`${params.nameSpace}-1-li`);
+    $1a.addClass(`${params.nameSpace}-1-a`);
+    $2ul.addClass(`${params.nameSpace}-2-ul`);
+    $2li.addClass(`${params.nameSpace}-2-li`);
+    $2a.addClass(`${params.nameSpace}-2-a`);
+    $3ul.addClass(`${params.nameSpace}-3-ul`);
+    $3li.addClass(`${params.nameSpace}-3-li`);
+    $3a.addClass(`${params.nameSpace}-3-a`);
+    $nav.find(`.${params.nameSpace}-1-a + ul`).before($trigger);
+    $3ul.prev(`.${params.nameSpace}-2-a`).addClass('-is-sub-parent');
     $nav.show();
     setTimeout(function() {
       return $nav.find("a." + params.activeClass).parents('li').each(function() {
@@ -86,38 +88,41 @@ cdn.require(['jquery']).then( () => {
       });
     }
 
-    $burger.on('click', function() {
-      if (!_isActive($nav)) {
-        _activate($nav);
-        $1ul.slideDown(params.slideSpeed);
-        if (params.scroll) {
-          return $('html, body').animate({
-            scrollTop: $nav.offset().top + params.scrollOffset
-          }, params.scrollSpeed);
-        } else {
-          return $('html, body').scrollTop(0);
-        }
-      } else {
-        _deactivate($nav);
-        return $1ul.slideUp(params.slideSpeed, function() {
-          return $(this).removeAttr('style');
-        });
-      }
-    }).prependTo($nav);
+    if (!params.mobileDisable) {
 
-    $('.kr-nav-main-trigger').on('click', function() {
-      var $el;
-      $el = $(this);
-      _deactivate($('.kr-nav-main-trigger').not($(this)));
-      _collapse($nav.find("." + params.expandedClass).not($el));
-      if (!_isActive($el)) {
-        _activate($el);
-        return _expand($el.parent('li'));
-      } else {
-        _deactivate($el);
-        return _collapse($nav.find("." + params.expandedClass));
-      }
-    });
+      $burger.on('click', function() {
+        if (!_isActive($nav)) {
+          _activate($nav);
+          $1ul.slideDown(params.slideSpeed);
+          if (params.scroll) {
+            return $('html, body').animate({
+              scrollTop: $nav.offset().top + params.scrollOffset
+            }, params.scrollSpeed);
+          } else {
+            return $('html, body').scrollTop(0);
+          }
+        } else {
+          _deactivate($nav);
+          return $1ul.slideUp(params.slideSpeed, function() {
+            return $(this).removeAttr('style');
+          });
+        }
+      }).prependTo($nav);
+
+      $(`.${params.nameSpace}-trigger`).on('click', function() {
+        var $el;
+        $el = $(this);
+        _deactivate($(`.${params.nameSpace}-trigger`).not($(this)));
+        _collapse($nav.find("." + params.expandedClass).not($el));
+        if (!_isActive($el)) {
+          _activate($el);
+          return _expand($el.parent('li'));
+        } else {
+          _deactivate($el);
+          return _collapse($nav.find("." + params.expandedClass));
+        }
+      });
+    }
 
     $(window).on('resize', function() {
       _collapse($nav.find("." + params.expandedClass));
@@ -126,6 +131,7 @@ cdn.require(['jquery']).then( () => {
         return $1ul.removeAttr('style');
       }
     });
+
 
     _expand = function($el) {
       return $el.addClass(params.expandedClass);
