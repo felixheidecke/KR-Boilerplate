@@ -5,6 +5,8 @@
 import cdn from 'cdn-buddy'
 cdn.config = require('config')
 
+require('style')
+
 // /* ------------------ *
 //  * Skripte aktivieren *
 //  * ------------------ */
