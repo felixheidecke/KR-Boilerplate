@@ -9,6 +9,9 @@
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="images/favicon.png" />
 	<link rel="apple-touch-icon" type="image/png" href="images/favicon.png" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
