@@ -1,5 +1,4 @@
-const moment  = require('moment');
-const sass    = require('node-sass');
+const sass = require('node-sass');
 
 module.exports = function (grunt) {
 	grunt.initConfig({
@@ -78,25 +77,6 @@ module.exports = function (grunt) {
 			}
 		},
 
-		// --- Write Backup ---------------------------------------------------------
-
-		zip: {
-			backup: {
-				src: [
-					'htdocs/**/*',
-					'src/**/*',
-					'gruntfile.js',
-					'boilerplate/*',
-					'package.json',
-					'header.js',
-					'KR-Boilerplate.bat'
-				],
-				dest: 'backup/project-' + moment().format('DD-MM-YYYY_HH[h]-mm[m]-ss[s]') + '.zip'
-			}
-		},
-
-
-
 		// --- Watcher ---------------------------------------------------------
 
 		watch: {
@@ -132,10 +112,6 @@ module.exports = function (grunt) {
 	grunt.registerTask("_build", [
 		'sass',
 		'browserify',
-	]);
-
-	grunt.registerTask("_backup", [
-		'zip'
 	]);
 
 	grunt.registerTask("_update", [

@@ -1,4 +1,6 @@
-requirejs(["jquery"], $ => {
+import cdn from 'cdn-buddy'
+
+cdn.require(['jquery']).then( () => {
 
     $('[data-mailto]').each(function() {
         var decoded, encoded, replacement;

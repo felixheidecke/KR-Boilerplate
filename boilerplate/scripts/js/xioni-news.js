@@ -1,10 +1,9 @@
-// This guy doesn't seem to like
-// requre.js, so let's just import it
-import textile from 'textile-js'
-const lang = document.querySelector('html').getAttribute('lang')
+import cdn from 'cdn-buddy'
 
-requirejs(["jquery", "vue", "moment", "lodash"], function($, Vue, moment, _) {
-    moment.locale(lang);
+cdn.require(["jquery", "vue", "lodash", "textile-js", 'moment.js/2.24.0/moment.min.js']).then( () => {
+
+  // requires moment.js to be loaeded
+  cdn.require(['moment.js/2.24.0/locale/de.js'])
 
     $('body').find("[data-xioni^='news.']:not(.xioni-prevent-default)").each(function() {
         var dataParams, dataXioni, unique;

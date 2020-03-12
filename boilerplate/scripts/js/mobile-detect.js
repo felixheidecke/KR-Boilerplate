@@ -1,4 +1,6 @@
-requirejs(["jquery"], $ => {
+import cdn from 'cdn-buddy'
+
+cdn.require(['jquery']).then( () => {
 
 	const userAgent = window.navigator.userAgent;
 	let mobile      = userAgent.match('iPad|iPhone|Android');

@@ -14,14 +14,11 @@ echo  [w] --^> Watcher (Compiler)
 echo.
 echo  [m] --^> Build   (Einmaliges kompilieren)
 echo.
-echo  [b] --^> Backup
-echo.
 echo  [u] --^> Update
 echo.
 echo  [x] --^> Exit
 echo.
 SET /p menu=Auswahl:
-if '%menu%' == 'b' goto Backup
 if '%menu%' == 'm' goto Build
 if '%menu%' == 'u' goto Update
 if '%menu%' == 'w' goto Watch
@@ -52,18 +49,6 @@ call npm run build
 pause
 goto Home
 
-:Backup
-cls
-color 07
-echo.
-echo  * * * * * *
-echo  * BACKUP  *
-echo  * * * * * *
-echo.
-call npm run backup
-pause
-goto Home
-
 :Update
 cls
 color 07
@@ -82,8 +67,8 @@ pause
 goto Exit
 
 :Install
+DEL /Q package-lock.json
 call npm install -s
-call npm install ajax-request -s
 goto Home
 
 :Exit

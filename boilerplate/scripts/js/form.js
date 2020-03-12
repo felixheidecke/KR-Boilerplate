@@ -1,4 +1,6 @@
-requirejs(["jquery"], $ => {
+import cdn from 'cdn-buddy'
+
+cdn.require(['jquery']).then( () => {
 
     $.fn.krForm = function(params, callback) {
         callback = callback || false;
