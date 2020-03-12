@@ -6,7 +6,7 @@ set current_dir=%cd%
 IF NOT EXIST node_modules GOTO Install
 :Home
 cls
-color 1f
+color 2E
 echo.
 call node header.js
 echo.
@@ -57,7 +57,10 @@ echo  * * * * * *
 echo  * UPDATE  *
 echo  * * * * * *
 echo.
+call npm i grunt grunt-contrib-clean grunt-curl grunt-move grunt-zip -s
+RD /S /Q boilerplate
 call npm run update
+RD /S /Q temp
 RD /S /Q node_modules
 cls
 echo.
@@ -67,8 +70,8 @@ pause
 goto Exit
 
 :Install
-DEL /Q package-lock.json
 call npm install -s
+call npm install ajax-request -s
 goto Home
 
 :Exit

@@ -1,7 +1,7 @@
 {
   "author": "Felix Heidecke",
   "description": "Klickrhein Boilerplate",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "license": "ISC",
   "homepage": "https://klickrhein.de",
   "repository": {
@@ -9,30 +9,24 @@
     "url": "git+https://github.com/felixheidecke/KR-Boilerplate.git"
   },
   "scripts": {
-    "watch": "grunt _watch",
-    "build": "grunt _build",
+    "watch": "webpack -d --watch",
+    "build": "webpack -p",
     "update": "grunt _update",
     "ncu": "ncu -u",
     "ncu:bp": "ncu -u --packageFile boilerplate/dependencies.json"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
-    "babelify": "^10.0.0",
-    "cryptiles": "^4.1.3",
-    "grunt": "^1.0.4",
-    "grunt-browserify": "^5.3.0",
-    "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-curl": "^2.5.1",
-    "grunt-move": "^1.0.3",
-    "grunt-sass": "^3.1.0",
-    "grunt-zip": "^0.18.2",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.2",
     "node-sass": "^4.13.1",
-    "npm-check-updates": "^4.0.4"
+    "npm-check-updates": "^4.0.4",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "ajax-request": "^1.2.3",
     "cdn-buddy": "^0.1.2-beta.0"
   }
 }

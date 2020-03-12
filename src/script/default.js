@@ -3,7 +3,7 @@
  * ------------------- */
 
 import cdn from 'cdn-buddy'
-cdn.config = require('config.js')
+cdn.config = require('config')
 
 // /* ------------------ *
 //  * Skripte aktivieren *
