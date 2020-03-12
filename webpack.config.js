@@ -1,9 +1,11 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = [{
   name: 'app',
   entry: './src/script/default.js',
   output: {
-    filename: 'js/bundle.js'
+    filename: 'js/default.js'
   },
   resolve: {
     alias: {
@@ -11,7 +13,7 @@ module.exports = [{
       'scripts' : path.resolve('boilerplate/scripts/'),
       'style'   : path.resolve('src/sass/style.scss'),
     },
-    extensions: ['*', '.js', '.json']
+    extensions: ['scss', '.js', '.json']
   },
   module: {
     rules: [{
@@ -19,7 +21,25 @@ module.exports = [{
       loader: 'babel-loader'
     }, {
       test: /\.scss$/,
-      use: ["style-loader", "css-loader", "sass-loader"]
+      use: ["style-loader", {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          publicPath: 'css/style.css',
+        }
+      }, {
+        loader: 'css-loader',
+        options: {
+          url: false
+        }
+      }, "sass-loader"]
     }]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: 'css/style.css',
+      chunkFilename: 'css/[id].css',
+    }),
+  ],
 }]
