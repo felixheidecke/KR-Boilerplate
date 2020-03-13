@@ -19,6 +19,6 @@
 	Webseiten Inhalte
 -->
 
-<script src="js/bundle.js"></script>
+<script src="js/default.js"></script>
 </body>
 </html>
