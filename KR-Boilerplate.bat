@@ -16,12 +16,15 @@ echo  [m] --^> Build   (Einmaliges kompilieren)
 echo.
 echo  [u] --^> Update
 echo.
+echo  [r] --^> Repair  (Reparieren)
+echo.
 echo  [x] --^> Exit
 echo.
 SET /p menu=Auswahl:
 if '%menu%' == 'm' goto Build
-if '%menu%' == 'u' goto Update
 if '%menu%' == 'w' goto Watch
+if '%menu%' == 'u' goto Update
+if '%menu%' == 'r' goto Repair
 if '%menu%' == 'x' goto Exit
 Goto Home
 
@@ -47,6 +50,18 @@ echo  * * * * *
 echo.
 call npm run build
 pause
+goto Home
+
+:Repair
+cls
+color 07
+echo.
+echo  * * * * * *
+echo  * REPAIR  *
+echo  * * * * * *
+echo.
+RD /S /Q node_modules
+call npm install -s
 goto Home
 
 :Update
