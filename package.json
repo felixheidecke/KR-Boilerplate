@@ -11,7 +11,7 @@
   "scripts": {
     "watch": "webpack -d --watch",
     "build": "webpack -p",
-    "update": "grunt _update",
+    "update": "grunt update",
     "ncu": "ncu -u",
     "ncu:bp": "ncu -u --packageFile boilerplate/dependencies.json"
   },
