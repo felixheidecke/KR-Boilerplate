@@ -43,7 +43,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-zip');
   grunt.loadNpmTasks('grunt-move');
 
-  grunt.registerTask("_update", [
+  grunt.registerTask("update", [
     'curl',
     'unzip',
     'move'
