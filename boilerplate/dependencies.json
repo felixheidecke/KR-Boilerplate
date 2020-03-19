@@ -1,14 +1,11 @@
 {
   "dependencies": {
-    "is-in-viewport": "3.0.4",
     "jquery": "3.4.1",
     "lodash": "4.17.15",
-    "mobile-detect": "1.4.4",
     "moment": "2.24.0",
     "swiper": "4.5.0",
     "textile-js": "2.0.5",
     "vue": "2.6.11",
-    "lightbox2": "2.11.1",
-    "requirejs": "2.3.6"
+    "lightbox2": "2.11.1"
   }
 }
