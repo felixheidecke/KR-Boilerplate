@@ -1,5 +1,3 @@
-import cdn from 'cdn-buddy'
-
 cdn.require(['jquery']).then( () => {
 
 	const userAgent = window.navigator.userAgent;

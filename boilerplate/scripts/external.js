@@ -1,5 +1,3 @@
-import cdn from 'cdn-buddy'
-
 cdn.require(['jquery']).then( () => {
 
 	// Links to external

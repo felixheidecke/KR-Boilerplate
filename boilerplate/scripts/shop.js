@@ -1,5 +1,3 @@
-import cdn from 'cdn-buddy'
-
 cdn.require(['jquery']).then( () => {
 
 	let $form = $(this).find('form.cart');
