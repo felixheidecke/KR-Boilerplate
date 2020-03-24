@@ -1,10 +1,10 @@
 import cdn from 'cdn-buddy'
-let version = require('../dependencies.json').dependencies.moment
+import { dependencies } from '../dependencies.json'
 
 (async () => {
   await cdn.require(['jquery', 'vue', 'lodash', 'textile'])
-  await cdn.require([`moment.js/${version}/moment.min.js`])
-  await cdn.require([`moment.js/${version}/locale/de.js`])
+  await cdn.require([`moment.js/${dependencies.moment}/moment.min.js`])
+  await cdn.require([`moment.js/${dependencies.moment}/locale/de.js`])
 
   $('body').find("[data-xioni^='news.']:not(.xioni-prevent-default)").each(function() {
       var dataParams, dataXioni, unique;
