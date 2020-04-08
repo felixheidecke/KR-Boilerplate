@@ -1,34 +1,24 @@
-cdn.require(['jquery']).then( () => {
+cdn.require(['jquery']).then(() => {
 
-	$.fn.krScrollTo = function(params, callback) {
-		callback = callback || false;
+  $.fn.krScrollTo = function(params, callback) {
 
-		params = $.extend({
-			offset: 0,
-			speed: 1,
-			preventDefault: false
-		}, params);
-		$(this).click(function(e) {
-			if (params.preventDefault) {
-				e.preventDefault()
-			}
-			
-			var difference, distance, factor, position, target, targetPos, windowPos;
-			target = $(this).attr('data-kr-scroll-to');
-			if ($(target).length) {
-				windowPos = $(window).scrollTop();
-				targetPos = Math.abs($(target).offset().top);
-				difference = Math.abs(windowPos - targetPos);
-				factor = params.speed * (difference / 100 * 0.1);
-				distance = Math.floor(difference / factor);
-				position = $(target).offset().top;
-				
-				$('body,html').animate({
-					scrollTop: position + params.offset
-				}, distance);
-			} else {
-				console.warn(target + " does not exist!");
-			}
-		});
-	};
+    callback = callback || false;
+    params = $.extend({
+      offset: 0,
+      speed: 'slow',
+      preventDefault: false
+    }, params);
+
+    $(this).click(function(e) {
+
+      const target = $(this).attr('data-kr-scroll-to');
+      if (params.preventDefault) e.preventDefault()
+      if (!$(target).length) return
+      const position = $(target).offset().top;
+
+      $('body,html').animate({
+        scrollTop: position
+      }, params.speed);
+    });
+  };
 });
