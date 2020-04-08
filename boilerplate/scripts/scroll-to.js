@@ -5,9 +5,14 @@ cdn.require(['jquery']).then( () => {
 
 		params = $.extend({
 			offset: 0,
-			speed: 1
+			speed: 1,
+			preventDefault: false
 		}, params);
-		return $(this).click(function(e) {
+		$(this).click(function(e) {
+			if (params.preventDefault) {
+				e.preventDefault()
+			}
+			
 			var difference, distance, factor, position, target, targetPos, windowPos;
 			target = $(this).attr('data-kr-scroll-to');
 			if ($(target).length) {
@@ -17,7 +22,8 @@ cdn.require(['jquery']).then( () => {
 				factor = params.speed * (difference / 100 * 0.1);
 				distance = Math.floor(difference / factor);
 				position = $(target).offset().top;
-				return $('body,html').animate({
+				
+				$('body,html').animate({
 					scrollTop: position + params.offset
 				}, distance);
 			} else {
