@@ -1,7 +1,10 @@
 cdn.require(['jquery']).then( () => {
 
-  $.fn.krNav = function(params, callback) {
-    callback = callback || false;
+  $.fn.krNav = function(params, callback = false) {
+
+    if ($(this).length === 0) {
+      return false;
+    }
 
     var $1a, $1li, $1ul, $2a, $2li, $2ul, $3a, $3li, $3ul, $burger, $nav, $trigger, _activate, _collapse, _deactivate, _expand, _isActive, _isExpanded, _scrollTimeout, _scrollPos;
     params = jQuery.extend({
@@ -15,11 +18,10 @@ cdn.require(['jquery']).then( () => {
       breakpoint: 768,
       sticky: false,
       mobileDisable: false,
+      detectActive: true,
       nameSpace: 'kr-nav-main'
     }, params);
-    if ($(this).length === 0) {
-      return false;
-    }
+
     $nav = $(this);
     $1ul = $nav.find('> ul');
     $1li = $nav.find('> ul > li');
@@ -50,21 +52,20 @@ cdn.require(['jquery']).then( () => {
     $nav.find(`.${params.nameSpace}-1-a + ul`).before($trigger);
     $3ul.prev(`.${params.nameSpace}-2-a`).addClass('-is-sub-parent');
     $nav.show();
-    setTimeout(function() {
-      return $nav.find("a." + params.activeClass).parents('li').each(function() {
-        _activate($(this));
-        return _activate($(this).children("a:not(." + params.activeClass + ")"));
-      });
-    }, 0);
-    $nav.find("a." + params.activeClass).parents('li').each(function() {
-      $(this).addClass(params.activeClass);
-      return $(this).children("a:not(." + params.activeClass + ")").addClass(params.activeClass);
-    });
+
+    if (params.detectActive) {
+      const filename = window.location.pathname.split('/').reverse()[0]
+
+      setTimeout( () => {
+        $nav.find(`a[href="${filename}"], a[href="/${filename}"]`).parents('li').each(function() {
+          _activate($(this).children("a:not(." + params.activeClass + ")"));
+        });
+      }, 25)
+    }
 
     if (params.sticky) {
       $nav.addClass('-is-sticky')
     }
-
 
     if (params.sticky === 'hide') {
       _scrollPos = 0
@@ -74,10 +75,8 @@ cdn.require(['jquery']).then( () => {
           _scrollTimeout = setTimeout( function () {
             if ( $('html').scrollTop() < _scrollPos ) {
               $nav.removeClass('-is-offset')
-              console.log('UP')
             } else {
               $nav.addClass('-is-offset')
-              console.log('DOWN')
             }
             _scrollTimeout = null
             _scrollPos = $('html').scrollTop()
@@ -93,16 +92,16 @@ cdn.require(['jquery']).then( () => {
           _activate($nav);
           $1ul.slideDown(params.slideSpeed);
           if (params.scroll) {
-            return $('html, body').animate({
+            $('html, body').animate({
               scrollTop: $nav.offset().top + params.scrollOffset
             }, params.scrollSpeed);
           } else {
-            return $('html, body').scrollTop(0);
+            $('html, body').scrollTop(0);
           }
         } else {
           _deactivate($nav);
-          return $1ul.slideUp(params.slideSpeed, function() {
-            return $(this).removeAttr('style');
+          $1ul.slideUp(params.slideSpeed, function() {
+            $(this).removeAttr('style');
           });
         }
       }).prependTo($nav);
@@ -114,10 +113,10 @@ cdn.require(['jquery']).then( () => {
         _collapse($nav.find("." + params.expandedClass).not($el));
         if (!_isActive($el)) {
           _activate($el);
-          return _expand($el.parent('li'));
+          _expand($el.parent('li'));
         } else {
           _deactivate($el);
-          return _collapse($nav.find("." + params.expandedClass));
+          _collapse($nav.find("." + params.expandedClass));
         }
       });
     }
@@ -130,21 +129,20 @@ cdn.require(['jquery']).then( () => {
       }
     });
 
-
     _expand = function($el) {
-      return $el.addClass(params.expandedClass);
+      $el.addClass(params.expandedClass);
     };
 
     _collapse = function($el) {
-      return $el.removeClass(params.expandedClass);
+      $el.removeClass(params.expandedClass);
     };
 
     _activate = function($el) {
-      return $el.addClass(params.activeClass);
+      $el.addClass(params.activeClass);
     };
 
     _deactivate = function($el) {
-      return $el.removeClass(params.activeClass);
+      $el.removeClass(params.activeClass);
     };
 
     _isActive = function($el) {
