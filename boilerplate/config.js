@@ -13,6 +13,7 @@ module.exports = {
           `Swiper/${version.swiper}/js/swiper.min.js`,
           `Swiper/${version.swiper}/css/swiper.min.css`,
         ],
+        'in-view' : 'in-view/0.6.1/in-view.min.js',
         simplelightbox : [
           `simplelightbox/${version.simplelightbox}/simple-lightbox.min.js`,
           `simplelightbox/${version.simplelightbox}/simple-lightbox.min.css`,
