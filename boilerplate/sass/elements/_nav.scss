@@ -23,6 +23,7 @@
     }
 
     &-1-a {
+      font-family     : "Open Sans";
       background-color: $nav-main-item-1-background-color;
       color           : $nav-main-item-1-color;
 
@@ -82,7 +83,6 @@
         }
 
         &-1-a {
-          font-family    : "Open Sans";
           display        : block;
           font-size      : 15px;
           text-decoration: none;
