@@ -85,8 +85,9 @@
         &-1-a {
           display        : block;
           font-size      : 15px;
-          text-decoration: none;
           padding        : ($grid-spacing / 2) $grid-spacing;
+          text-align     : center;
+          text-decoration: none;
         }
       }
     }
