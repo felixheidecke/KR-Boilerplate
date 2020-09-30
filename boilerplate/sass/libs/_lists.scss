@@ -1,60 +1,16 @@
 $el: ".#{$prefix}list";
 
-// Requires FontAwesome
-@mixin list-fa($content, $text-offset:18px) {
-	li {
-		position: relative;
-
-		&:before {
-			font-family: FontAwesome, sans-serif;
-			position   : absolute;
-			left       : $text-offset * -1;
-			content    : $content;
-		}
-	}
-}
-
 #{$el} {
 	@extend p;
 	padding-left: $grid-spacing;
 	margin-left : $grid-spacing / 1.5;
 
-	&-disc {
-		@extend #{$el};
-			> li {
-			list-style: disc;
-		}
-	}
+  > li {
+    position: relative;
 
-	&-dash {
-		@extend p;
-		position: relative;
-
-		> li {
-			padding-left: 17px;
-
-			&:before {
-				position: absolute;
-				content : "-";
-				left    : 0;
-			}
-		}
-	}
-
-	&-numbered {
-		@extend #{$el};
-			> li {
-				list-style: decimal;
-		}
-	}
-
-	&-chevron {
-		@extend #{$el};
-		@include list-fa("\f054");
-	}
-
-	&-pdf {
-		@extend #{$el};
-		@include list-fa("\f1c1");
-	}
+    > i[class*="fa-"] {
+      position: absolute;
+      transform: translate(-150%, 6px);
+    }
+  }
 }

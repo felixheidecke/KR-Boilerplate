@@ -9,6 +9,7 @@ module.exports = {
         lodash    : `lodash.js/${version.lodash}/lodash.min.js`,
         jquery    : `jquery/${version.jquery}/jquery.min.js`,
         lightbox2 : `lightbox2/${version.lightbox2}`,
+        'font-awesome' : `font-awesome/${version['@fortawesome/fontawesome-free']}/css/all.min.css`,
         swiper    : [
           `Swiper/${version.swiper}/js/swiper.min.js`,
           `Swiper/${version.swiper}/css/swiper.min.css`,

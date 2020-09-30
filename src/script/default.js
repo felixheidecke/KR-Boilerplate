@@ -13,8 +13,9 @@ cdn.setConfig(require('config'))
 
 require('scripts/external.js');
 require('scripts/mailto.js');
-require('scripts/toplink.js');
 require('scripts/mobile-detect.js');
+require('scripts/toplink.js');
+require('scripts/list.js');
 // require('scripts/xioni-news.js');
 // require('scripts/shop.js');
 // require('scripts/akkordeon.js');
