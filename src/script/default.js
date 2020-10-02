@@ -12,6 +12,7 @@ cdn.setConfig(require('config'))
 //  * ------------------ */
 
 require('scripts/external.js');
+require('scripts/in-view.js');
 require('scripts/mailto.js');
 require('scripts/mobile-detect.js');
 require('scripts/toplink.js');
