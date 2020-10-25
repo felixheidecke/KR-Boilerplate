@@ -1,9 +1,9 @@
 $el: ".#{$prefix}list";
 
 #{$el} {
-	@extend p;
-	padding-left: $grid-spacing;
-	margin-left : $grid-spacing / 1.5;
+  @extend p;
+  padding-left: $grid-spacing;
+  margin-left : $grid-spacing / 1.5;
 
   > li {
     position: relative;
@@ -11,6 +11,31 @@ $el: ".#{$prefix}list";
     > i[class*="fa-"] {
       position: absolute;
       transform: translate(-150%, 6px);
+    }
+  }
+
+  // Pre-Build lists
+
+  &-disc {
+    @extend #{$el};
+
+    > li {
+      list-style: disc;
+    }
+  }
+
+  &-dash {
+    @extend #{$el};
+
+    > li:marker {
+      display: none;
+    }
+
+    > li:before {
+      content: '-';
+      font-weight: bold;
+      position: absolute;
+      left: -17px;
     }
   }
 }

@@ -19,19 +19,6 @@
   Webseiten Inhalte
 -->
 
-<ul data-icon="far fa-circle">
-  <li>Lorem</li>
-  <li>Ipsum</li>
-  <li>Dolor</li>
-</ul>
-
-<ul>
-  <li data-icon="fas fa-file-word">Word</li>
-  <li data-icon="fas fa-file-pdf">PDF</li>
-  <li data-icon="fab fa-apple">Apple</li>
-</ul>
-
-
 <script src="js/default.js"></script>
 </body>
 </html>
