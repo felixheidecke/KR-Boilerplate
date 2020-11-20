@@ -14,7 +14,7 @@ cdn.require(['jquery']).then(() => {
       const target = $(this).attr('data-kr-scroll-to');
       if (params.preventDefault) e.preventDefault()
       if (!$(target).length) return
-      const position = $(target).offset().top;
+      const position = $(target).offset().top + params.offset;
 
       $('body,html').animate({
         scrollTop: position
