@@ -112,6 +112,7 @@ figure {
 
   img {
     @extend .flex-img;
+    display: block;
   }
 
   figcaption {
