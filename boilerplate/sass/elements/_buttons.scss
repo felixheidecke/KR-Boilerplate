@@ -1,80 +1,36 @@
 $el: ".#{$prefix}button";
 
-// Requires FontAwesome
-@mixin button-fa($content, $position: "left", $text-offset: 32px) {
-    position: relative;
-
-    @if $position == "left" {
-        padding-left: $text-offset;
-
-        &:before {
-            font-family: FontAwesome ,sans-serif;
-            position   : absolute;
-            left       : 12px;
-            content    : $content;
-        }
-    } @else 
-    if $position == "right" {
-        padding-right: $text-offset;
-
-        &:after {
-            font-family: FontAwesome, sans-serif;
-            position   : absolute;
-            right      : 12px;
-            content    : $content;
-        }
-    }
-}
-
 #{$el} {
-    background-color: $button-background-color;
-    border-radius   : 3px;
-    border          : 1px solid $button-border-color;
-    box-sizing      : border-box;
+  background-color: $button-background-color;
+  border-radius   : 3px;
+  border          : 1px solid $button-border-color;
+  box-sizing      : border-box;
+  color           : $button-color;
+  cursor          : pointer;
+  display         : inline-flex;
+  font-family     : inherit;
+  padding         : 4px 12px;
+  text-align      : center;
+  text-decoration : none;
+  transition      : all .25s;
+  user-select     : none;
+  vertical-align  : middle;
+  white-space     : nowrap;
+
+  &:focus,
+  &:hover {
     color           : $button-color;
-    cursor          : pointer;
-    display         : inline-flex;
-    font-family     : inherit;
-    padding         : 4px 12px;
-    text-align      : center;
-    text-decoration : none;
-    transition      : all .25s;
-    user-select     : none;
-    vertical-align  : middle;
-    white-space     : nowrap;
+    background-color: darken($button-background-color, 5%);
+    box-shadow      : 0 0 3px rgba(black, 0.5);
+  }
 
-    &:focus,
-    &:hover {
-        color           : $button-color;
-        background-color: darken($button-background-color, 5%);
-        box-shadow      : 0 0 3px rgba(black, 0.5);
+  &.-has-icon {
+    @extend #{$el};
+    padding-left: 28px;
+
+    > i[class*="fa-"] {
+      position: absolute;
+      transform: translate(-150%, 5px);
     }
-
-    &-next {
-        @extend #{$el};
-
-        @include button-fa("\f101", "right");
-    }
-
-    &-back {
-        @extend #{$el};
-
-        @include button-fa("\f100");
-    }
-
-    &-pdf {
-        @extend #{$el};
-
-        @include button-fa("\f1c1", 'left', 36px);
-    }
-
-    &-loading {
-        @extend #{$el};
-
-        @include button-fa("\f021", 'left', 36px);
-
-        &:before {
-            @include ani-spin;
-        }
-    }
+  }
 }

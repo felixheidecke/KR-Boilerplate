@@ -1,6 +1,6 @@
-cdn.require(['jquery', 'font-awesome']).then( () => {
-  
-  $('[data-icon]').each(function() {
+cdn.require(['jquery', 'font-awesome']).then(() => {
+
+  $('[data-icon]').each(function () {
     let iconClass = $(this).data('icon')
     let iconNode  = $(`<i class="${iconClass}"></i>`)
     let nodeName  = $(this)[0].nodeName
@@ -19,6 +19,13 @@ cdn.require(['jquery', 'font-awesome']).then( () => {
         .prepend(iconNode)
         .parent('ul:not(.kr-list)')
         .addClass('kr-list')
+    }
+
+    else if (nodeName === 'BUTTON') {
+      $(this)
+        .prepend(iconNode)
+        .addClass('kr-button')
+        .addClass('-has-icon')
     }
   })
 })

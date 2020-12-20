@@ -16,7 +16,7 @@ require('scripts/in-view.js');
 require('scripts/mailto.js');
 require('scripts/mobile-detect.js');
 require('scripts/toplink.js');
-require('scripts/list.js');
+require('scripts/font-awesome.js');
 // require('scripts/xioni-news.js');
 // require('scripts/shop.js');
 // require('scripts/akkordeon.js');
@@ -27,6 +27,6 @@ require('scripts/list.js');
 //  * --------------------------------- */
 
 require('scripts/nav.js');
-cdn.require(['jquery']).then( () => {
+cdn.require(['jquery']).then(() => {
   $('.kr-nav-main').krNav()
 })
