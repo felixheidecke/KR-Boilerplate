@@ -21,7 +21,7 @@ cdn.require(['jquery', 'font-awesome']).then(() => {
         .addClass('kr-list')
     }
 
-    else if (nodeName === 'BUTTON') {
+    else if (nodeName === 'BUTTON' || nodeName === 'A') {
       $(this)
         .prepend(iconNode)
         .addClass('kr-button')
