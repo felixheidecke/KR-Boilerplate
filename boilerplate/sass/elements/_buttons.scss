@@ -26,11 +26,22 @@ $el: ".#{$prefix}button";
 
   &.-has-icon {
     @extend #{$el};
-    padding-left: 28px;
+    position: relative;
 
     > i[class*="fa-"] {
       position: absolute;
-      transform: translate(-150%, 5px);
+      transform: translate(100%, 5px);
+      left: 0;
+    }
+  }
+
+  &.-has-icon-right {
+    position: relative;
+
+    > i[class*="fa-"] {
+      position: absolute;
+      right: 0;
+      transform: translate(-100%, 5px);
     }
   }
 }

@@ -1,11 +1,10 @@
 cdn.require(['jquery', 'font-awesome']).then(() => {
 
-  $('[data-icon]').each(function () {
-    let iconClass = $(this).data('icon')
+  $('[data-icon], [data-icon-right]').each(function () {
+
+    let iconClass = $(this).data('icon') || $(this).data('iconRight')
     let iconNode  = $(`<i class="${iconClass}"></i>`)
     let nodeName  = $(this)[0].nodeName
-
-    $(this).removeAttr('data-icon')
 
     if (nodeName === 'UL') {
       $(this)
@@ -25,7 +24,20 @@ cdn.require(['jquery', 'font-awesome']).then(() => {
       $(this)
         .prepend(iconNode)
         .addClass('kr-button')
+    }
+
+    if ($(this).data('icon')) {
+      $(this)
+        .css('padding-left', iconNode.width() * 2.5)
         .addClass('-has-icon')
+        .removeAttr('data-icon')
+    }
+    
+    else if ($(this).data('iconRight')) {
+      $(this)
+        .css('padding-right', iconNode.width() * 2.5)
+        .addClass('-has-icon-right')
+        .removeAttr('data-icon-right')
     }
   })
 })
