@@ -63,6 +63,10 @@ cdn.require(['jquery']).then( () => {
       }, 25)
     }
 
+    $nav.find('a[href^="#"]').on('click', function() {
+			_deactivate($nav)
+		});
+    
     if (params.sticky) {
       $nav.addClass('-is-sticky')
     }
