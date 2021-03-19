@@ -28,14 +28,12 @@ cdn.require(['jquery', 'font-awesome']).then(() => {
 
     if ($(this).data('icon')) {
       $(this)
-        .css('padding-left', iconNode.width() * 2.5)
         .addClass('-has-icon')
         .removeAttr('data-icon')
     }
     
     else if ($(this).data('iconRight')) {
       $(this)
-        .css('padding-right', iconNode.width() * 2.5)
         .addClass('-has-icon-right')
         .removeAttr('data-icon-right')
     }
