@@ -26,22 +26,21 @@ $el: ".#{$prefix}button";
 
   &.-has-icon {
     @extend #{$el};
-    position: relative;
+    display: inline-flex;
+    align-items: center;
 
     > i[class*="fa-"] {
-      position: absolute;
-      transform: translate(100%, 5px);
-      left: 0;
+      margin-right: 12px;
     }
   }
 
   &.-has-icon-right {
-    position: relative;
+    display: inline-flex;
+    align-items: center;
 
     > i[class*="fa-"] {
-      position: absolute;
-      right: 0;
-      transform: translate(-100%, 5px);
+      margin-left: 12px;
+      order: 2;
     }
   }
 }
