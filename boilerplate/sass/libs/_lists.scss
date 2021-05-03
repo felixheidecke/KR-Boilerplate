@@ -8,6 +8,10 @@ $el: ".#{$prefix}list";
   > li {
     position: relative;
 
+    &:marker {
+      display: none;
+    }
+
     > i[class*="fa-"] {
       position: absolute;
       transform: translate(-150%, 6px);
@@ -19,23 +23,22 @@ $el: ".#{$prefix}list";
   &-disc {
     @extend #{$el};
 
-    > li {
-      list-style: disc;
+    > li:before {
+      content: '-';
+      font-weight: bold;
+      position: relative;
+      left: -16px;
     }
   }
 
   &-dash {
     @extend #{$el};
 
-    > li:marker {
-      display: none;
-    }
-
     > li:before {
-      content: '-';
+      content: '•';
       font-weight: bold;
-      position: absolute;
-      left: -17px;
+      position: relative;
+      left: -16px;
     }
   }
 }
