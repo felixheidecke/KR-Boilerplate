@@ -20,7 +20,7 @@ $el: ".#{$prefix}list";
 
   // Pre-Build lists
 
-  &-disc {
+  &-dash {
     @extend #{$el};
 
     > li:before {
@@ -31,7 +31,7 @@ $el: ".#{$prefix}list";
     }
   }
 
-  &-dash {
+  &-disc {
     @extend #{$el};
 
     > li:before {
