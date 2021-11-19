@@ -1,32 +1,7 @@
 @if $link-external-enabled {
     $el                  : ".#{$prefix}link-external";
 
-    $link-external-offset: 20px;
-
-    @if $font-size >= 18px {
-        $link-external-offset: 24px;
-    }
-
-    @if $font-size >= 24px {
-        $link-external-offset: 30px;
-    }
-
-    #{$el} {
-        display    : inline-block;
-        position   : relative;
-        margin-left: $link-external-offset;
-
-        &:before {
-            position               : absolute;
-            left                   : -$link-external-offset;
-            top                    : 50%;
-            transform              : translateY(-50%);
-            font                   : normal normal normal 14px/1 FontAwesome;
-            font-size              : inherit;
-            text-rendering         : auto;
-            -webkit-font-smoothing : antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            content                : "\f08e";
-        }
+    #{$el} i[class*="fa-"] {
+        margin-right: $grid-spacing / 3;
     }
 }
