@@ -11,12 +11,12 @@ cdn.setConfig(require('config'))
 //  * Skripte aktivieren *
 //  * ------------------ */
 
-require('scripts/external.js');
-require('scripts/in-view.js');
-require('scripts/mailto.js');
-require('scripts/mobile-detect.js');
-require('scripts/toplink.js');
-require('scripts/font-awesome.js');
+require('scripts/external.js')
+require('scripts/in-view.js')
+require('scripts/mailto.js')
+require('scripts/mobile-detect.js')
+require('scripts/toplink.js')
+require('scripts/font-awesome.js')
 // require('scripts/xioni-news.js');
 // require('scripts/shop.js');
 // require('scripts/akkordeon.js');
@@ -26,7 +26,7 @@ require('scripts/font-awesome.js');
 //  * Bspw.: krNav, krAkkordeon, ect.   *
 //  * --------------------------------- */
 
-require('scripts/nav.js');
+require('scripts/nav.js')
 cdn.require(['jquery']).then(() => {
   $('.kr-nav-main').krNav()
 })
