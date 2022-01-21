@@ -11,8 +11,8 @@ module.exports = {
     lightbox2: `lightbox2/${version.lightbox2}`,
     'font-awesome': `font-awesome/${version['@fortawesome/fontawesome-free']}/css/all.min.css`,
     swiper: [
-      `Swiper/${version.swiper}/js/swiper.min.js`,
-      `Swiper/${version.swiper}/css/swiper.min.css`,
+      `Swiper/${version.swiper}/swiper-bundle.min.js`,
+      `Swiper/${version.swiper}/swiper-bundle.min.css`,
     ],
     'in-view': 'in-view/0.6.1/in-view.min.js',
     simplelightbox: [
