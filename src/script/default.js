@@ -30,3 +30,5 @@ require('scripts/nav.js')
 cdn.require(['jquery']).then(() => {
   $('.kr-nav-main').krNav()
 })
+
+require('scripts/init.js')

@@ -2,7 +2,7 @@
   "name": "kr-boilerplate",
   "author": "Felix Heidecke",
   "description": "Klickrhein Boilerplate",
-  "version": "2.4.8",
+  "version": "2.5.0",
   "license": "ISC",
   "homepage": "https://klickrhein.de",
   "prettier": {
@@ -21,15 +21,15 @@
     "update": "grunt update"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.5",
-    "@babel/preset-env": "^7.16.5",
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.3",
-    "css-loader": "^6.5.1",
-    "node-sass": "^7.0.0",
+    "css-loader": "^6.6.0",
+    "node-sass": "^7.0.1",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1"
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "cdn-buddy": "^0.5.1"
