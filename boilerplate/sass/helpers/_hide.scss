@@ -3,7 +3,7 @@
 		$bps: str-replace($bp, ' ', "-");
 		@include breakpoint($bp) {
 			&-#{$bps}-hidden {
-				display: none;
+				display: none !important;
 			}
 		}
 	}
