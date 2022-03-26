@@ -12,6 +12,7 @@ module.exports = [
         config: path.resolve('boilerplate/config.js'),
         scripts: path.resolve('boilerplate/scripts/'),
         style: path.resolve('src/sass/style.scss'),
+        'cdn-buddy': path.resolve('boilerplate/scripts/cdn-buddy.js'),
       },
       extensions: ['scss', '.js', '.json'],
     },
