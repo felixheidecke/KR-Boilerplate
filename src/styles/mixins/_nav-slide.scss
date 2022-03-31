@@ -1,0 +1,26 @@
+// @mixin nav {}
+// @mixin nav--active {}
+
+// @mixin nav-ul {}
+// @mixin nav-li {}
+// @mixin nav-a {}
+
+// @mixin nav-ul-ul {}
+// @mixin nav-li-li {}
+// @mixin nav-a-a {}
+
+// @mixin nav-burger {}
+// @mixin nav-burger--active {}
+
+@mixin nav-slide-ul {
+  background-color: map-get($color, arty);
+}
+
+@mixin nav-slide-a {
+  color: map-get($color, meteorite);
+}
+
+@mixin nav-slide-a-a {
+  color: map-get($color, meteorite);
+  font-weight: bold;
+}

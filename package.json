@@ -1,37 +1,71 @@
 {
-  "name": "kr-boilerplate",
-  "author": "Felix Heidecke",
-  "description": "Klickrhein Boilerplate",
-  "version": "2.4.7",
-  "license": "ISC",
-  "homepage": "https://klickrhein.de",
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "semi": false,
-    "singleQuote": true
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/felixheidecke/KR-Boilerplate.git"
-  },
+  "name": "krb-svelte",
+  "version": "3.0.0-alpha.0",
   "scripts": {
-    "watch": "webpack --mode=development --watch",
-    "build": "webpack --mode=production",
-    "update": "grunt update"
+    "dev": "svelte-kit dev --host",
+    "build": "svelte-kit build",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview",
+    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "printWidth": 120
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "svelte3"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "*.svelte"
+        ],
+        "processor": "svelte3/svelte3"
+      }
+    ],
+    "settings": {
+      "svelte3/missing-declaration": "off"
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2020
+    },
+    "env": {
+      "browser": true,
+      "es2017": true,
+      "node": true
+    }
   },
   "devDependencies": {
-    "@babel/core": "^7.16.5",
-    "@babel/preset-env": "^7.16.5",
-    "babel-loader": "^8.2.3",
-    "css-loader": "^6.5.1",
-    "node-sass": "^7.0.0",
-    "sass-loader": "^12.4.0",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1"
+    "@originjs/vite-plugin-content": "^1.0.1",
+    "@sveltejs/adapter-static": "^1.0.0-next.24",
+    "@sveltejs/kit": "next",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-svelte3": "^3.4.1",
+    "prettier": "^2.6.1",
+    "prettier-plugin-svelte": "^2.6.0",
+    "sass": "^1.49.9",
+    "svelte": "^3.46.4",
+    "svelte-preprocess": "^4.10.4",
+    "vite-plugin-autoimport": "^1.4.3",
+    "vite-plugin-markdown": "^2.0.2"
   },
+  "type": "module",
   "dependencies": {
-    "cdn-buddy": "^0.5.1"
+    "@glidejs/glide": "^3.5.2",
+    "highlight.js": "^11.5.0",
+    "in-view": "^0.6.1",
+    "lodash-es": "^4.17.21"
   }
 }

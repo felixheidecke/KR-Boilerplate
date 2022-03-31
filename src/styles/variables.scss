@@ -1,0 +1,10 @@
+$color: (
+  meteorite: #313282,
+  haiti: #191345,
+  water: #0088ce,
+  arty: #ed0677,
+  jeans: #a5cbec
+);
+
+@import 'mixins/nav-bar';
+@import 'mixins/nav-slide';

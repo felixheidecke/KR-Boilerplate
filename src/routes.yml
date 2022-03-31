@@ -1,0 +1,11 @@
+/: Start
+
+//github.com/felixheidecke/KR-Boilerplate/wiki:
+  name: Wiki
+  icon: fab fa-github
+
+//fontawesome.com/v5/search?m=free:
+  name: Font Awesome
+  icon: fab fa-font-awesome-flag
+
+//klickrhein.de: Klickrhein.de

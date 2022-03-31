@@ -1,23 +1,8 @@
-# --- Sass/SCSS ----------------------------------------------------------------
-
-.sass-cache/
-*.css.map
-
-# --- Node ---------------------------------------------------------------------
-
-node_modules/
-npm-debug.log
-
-
-# --- Boilerplate --------------------------------------------------------------
-
-temp/
-backup/
-dist/*
-src/boilerplate/build
-!/htdocs/index.php
-
-
-# --- OS -----------------------------------------------------------------------
-
 .DS_Store
+node_modules
+/htdocs
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example

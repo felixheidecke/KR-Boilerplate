@@ -1,0 +1,8 @@
+// @mixin toplink {}
+// @mixin toplink--hidden {}
+
+@mixin toplink {
+  background-color: map-get($color, jeans);
+  border-radius: .5rem;
+}
+

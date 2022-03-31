@@ -1,0 +1,24 @@
+.kr-list {
+  padding-left: 1rem;
+  margin-left: 0.75rem;
+
+  &.--dash > li {
+    &::marker {
+      display: none;
+    }
+
+    &::before {
+      content: '-';
+      transform: translateX(-1rem);
+      position: absolute;
+    }
+  }
+
+  &.--disc {
+    list-style: disc;
+  }
+
+  &:not(.--disc) {
+    list-style: none;
+  }
+}

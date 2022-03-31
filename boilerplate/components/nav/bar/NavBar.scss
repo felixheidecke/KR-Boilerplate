@@ -1,0 +1,79 @@
+.kr-nav-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  @if mixin-exists(nav-bar) {
+    @include nav-bar;
+  }
+}
+
+// --- First Level ----------------------------------------
+
+.kr-nav-bar > ul {
+  @include reset-list;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 2.5rem;
+
+  @if mixin-exists(nav-bar-ul) {
+    @include nav-bar-ul;
+  }
+
+  > li {
+    position: relative;
+    display: inherit;
+    @if mixin-exists(nav-bar-li) {
+      @include nav-bar-li;
+    }
+
+    > a {
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      white-space: nowrap;
+
+      @if mixin-exists(nav-bar-a) {
+        @include nav-bar-a;
+      }
+    }
+  }
+}
+
+// --- Second Level ---------------------------------------
+
+.kr-nav-bar > ul ul {
+  @include reset-list;
+  left: 50%;
+  position: absolute;
+  top: 2.5rem;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  @if mixin-exists(nav-bar-ul-ul) {
+    @include nav-bar-ul-ul;
+  }
+
+  > li {
+    display: flex;
+
+    @if mixin-exists(nav-bar-li-li) {
+      @include nav-bar-li-li;
+    }
+
+    > a {
+      font-size: 0.85rem;
+      padding: 0.5rem 2rem;
+      white-space: nowrap;
+      width: 100%;
+
+      @if mixin-exists(nav-bar-a-a) {
+        @include nav-bar-a-a;
+      }
+    }
+  }
+}
+
+.kr-nav-bar > ul > :not(li:hover) ul {
+  display: none;
+}

@@ -1,7 +1,0 @@
-@if $link-external-enabled {
-    $el                  : ".#{$prefix}link-external";
-
-    #{$el} i[class*="fa-"] {
-        margin-right: $grid-spacing / 3;
-    }
-}

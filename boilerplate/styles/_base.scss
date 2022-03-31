@@ -1,0 +1,74 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  @include reset;
+  overflow-x: hidden;
+  background: #fff;
+  width: 100vw;
+  min-height: 100vh;
+  font-size: 16px;
+  color: #222;
+}
+
+a,
+a:hover,
+a:active {
+  color: #222;
+  text-decoration: none;
+}
+
+abbr {
+  cursor: help;
+}
+
+// -------------------------------------------------------------- BLOCKQOUTE ---
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.01px 1rem;
+  background: lightgray;
+
+  @include breakpoint('tablet-up') {
+    margin: {
+      left: 2rem;
+      right: 2rem;
+    }
+  }
+}
+
+// ------------------------------------------------- IMAGE, FIGURE & CAPTION ---
+
+figure {
+  @include reset;
+
+  text-align: center;
+  margin: {
+    top: 1rem;
+    bottom: 1rem;
+  }
+
+  img {
+    display: block;
+  }
+
+  figcaption {
+    clear: both;
+    font-size: 0.75rem;
+    margin: 0.75rem 0;
+    display: inline-block;
+    line-height: 0.75rem;
+    text-align: left;
+  }
+}
+
+cite {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: lighten(gray, 33.333%);
+  border-radius: 0.25rem;
+}
