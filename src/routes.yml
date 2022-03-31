@@ -9,3 +9,7 @@
   icon: fab fa-font-awesome-flag
 
 //klickrhein.de: Klickrhein.de
+
+/foo:
+  name: Foo
+  /bar: Bar

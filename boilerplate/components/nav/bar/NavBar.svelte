@@ -14,7 +14,9 @@
 
 {#if show()}
   <nav class="kr-nav-bar" aria-label="main navigation">
-    <Tree routes={$routes} />
+    <ul>
+      <Tree routes={$routes} />
+    </ul>
   </nav>
 {/if}
 

@@ -17,8 +17,10 @@
 </script>
 
 {#if show()}
-  <nav class="kr-nav-slide" class:--is-active={active} aria-label="main navigation">
-    <Tree routes={$routes} on:click={toggle} />
+  <nav class="kr-nav-slide" class:--active={active} aria-label="main navigation" on:click={toggle}>
+    <ul>
+      <Tree routes={$routes} on:click={toggle} />
+    </ul>
   </nav>
   <Burger {active} on:click={toggle} />
 {/if}

@@ -1,26 +1,47 @@
-// @mixin nav {}
-// @mixin nav--active {}
-
-// @mixin nav-ul {}
-// @mixin nav-li {}
-// @mixin nav-a {}
-
-// @mixin nav-ul-ul {}
-// @mixin nav-li-li {}
-// @mixin nav-a-a {}
-
-// @mixin nav-burger {}
-// @mixin nav-burger--active {}
+@mixin nav-slide {
+  // <nav>
+}
 
 @mixin nav-slide-ul {
+  // <ul> Erste Ebene
   background-color: map-get($color, arty);
 }
 
+@mixin nav-slide-li {
+  // <li> Erste Ebene
+}
+
 @mixin nav-slide-a {
+  // <a> Erste Ebene
   color: map-get($color, meteorite);
+
+  &.--hover,
+  &.--active {
+    color: map-get($color, haiti);
+  }
+}
+
+@mixin nav-slide-ul-ul {
+  // <ul> Zweite Ebene
+}
+
+@mixin nav-slide-li-li {
+  // <li> Zweite Ebene
 }
 
 @mixin nav-slide-a-a {
+  // <a> Zweite Ebene
   color: map-get($color, meteorite);
-  font-weight: bold;
+
+  &.--hover,
+  &.--active {
+    color: map-get($color, haiti);
+  }
+}
+
+@mixin nav-burger {
+  // <button>
+  &.--active svg * {
+    fill: white;
+  }
 }

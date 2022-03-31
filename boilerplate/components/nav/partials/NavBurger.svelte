@@ -2,7 +2,7 @@
   export let active = false;
 </script>
 
-<button class:--is-active={active} on:click>
+<button class:--active={active} on:click>
   <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
   {#if active}
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
@@ -34,19 +34,12 @@
     position: fixed;
     right: 1rem;
     top: 0.5rem;
-    // width: 3rem;
     z-index: 2;
     font-weight: bold;
     font-size: 1rem;
 
-    @if mixin-exists(nav-slide-burger) {
-      @include nav-slide-burger;
-    }
-
-    &.--is-active {
-      @if mixin-exists(nav-slide-burger--active) {
-        @include nav-slide-burger--active;
-      }
+    @if mixin-exists(nav-burger) {
+      @include nav-burger;
     }
   }
 

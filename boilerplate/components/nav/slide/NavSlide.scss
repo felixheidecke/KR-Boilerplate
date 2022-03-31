@@ -7,21 +7,17 @@
   z-index: 1;
   transition: background-color 0.5s;
 
-  @if mixin-exists(nav-slide) {
-    @include nav-slide;
-  }
-
-  &:not(.--is-active) {
+  &:not(.--active) {
     background-color: transparent;
     user-select: none;
     pointer-events: none;
   }
 
-  &.--is-active {
+  &.--active {
     background-color: rgba(black, 0.666);
 
-    @if mixin-exists(nav-slide--active) {
-      @include nav-slide--active;
+    @if mixin-exists(nav-slide) {
+      @include nav-slide;
     }
   }
 }
@@ -75,7 +71,7 @@
   }
 }
 
-.kr-nav-slide.--is-active > ul {
+.kr-nav-slide.--active > ul {
   transform: translateX(0);
 }
 
