@@ -2,20 +2,7 @@
   "Svelte template": {
     "scope": "svelte",
     "prefix": "svelte",
-    "body": [
-      "<script>",
-      "  // Component Logic",
-      "  // import { } from 'bp.components';",
-      "</script>",
-      "",
-      "<div>",
-      "  $1",
-      "</div>",
-      "",
-      "<style lang=\"scss\">",
-      "  // Component Styling",
-      "</style>"
-    ],
+    "body": ["<div>", "  $1", "</div>", "", "<style lang=\"scss\">", "  // Component Styling", "</style>"],
     "description": "Svelte File"
   }
 }
