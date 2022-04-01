@@ -20,5 +20,5 @@
   </PageTransition>
 </Wrapper>
 
-<style lang="scss">
+<style lang="scss" global>
 </style>
