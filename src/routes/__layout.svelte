@@ -12,7 +12,7 @@
   <a href="/"><Logo /></a>
 </header>
 
-<Nav slide />
+<Nav bar />
 
 <Wrapper>
   <PageTransition {url}>

@@ -72,8 +72,3 @@
 
 <svelte:body on:load={init()} />
 <svelte:window on:resize|passive={handleBreakpoints} />
-
-<!-- <style lang="scss" global>
-  @import 'boilerplate/styles/style';
-  @import 'src/styles/style';
-</style> -->

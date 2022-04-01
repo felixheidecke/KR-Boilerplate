@@ -6,24 +6,18 @@
 </script>
 
 {#each routes as route, i}
-  <li class="-li" on:mouseenter={() => (hoverState = i)} on:mouseleave={() => (hoverState = false)}>
+  <li class="-li-li" on:mouseenter={() => (hoverState = i)} on:mouseleave={() => (hoverState = false)}>
     <a
-      class="-a"
+      class="-a-a"
       href={route.href}
       class:--active={$page.url.pathname === route.href}
       class:--hover={hoverState === i}
       on:click
     >
       {#if route.icon}
-        <Icon name={route.icon} ex-class="-icon" class="-mr-xs" />
+        <Icon name={route.icon} ex-class="-icon-icon" class="-mr-xs" />
       {/if}
       {route.name}
     </a>
-
-    {#if !!route.routes.length}
-      <ul class="-ul-ul" class:--visible={hoverState === i}>
-        <NavSubTree routes={route.routes} on:click />
-      </ul>
-    {/if}
   </li>
 {/each}

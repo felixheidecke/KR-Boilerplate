@@ -5,7 +5,7 @@
   const cn = [];
 
   if (size) {
-    cn.push('kr-grid__item');
+    cn.push('-item');
     cn.push(
       size
         .split(' ')
@@ -13,7 +13,7 @@
         .join(' ')
     );
   } else {
-    cn.push('kr-grid');
+    cn.push('grid');
     if (gap) cn.push('--gap');
   }
 </script>
@@ -23,7 +23,7 @@
 </div>
 
 <style lang="scss" global>
-  .kr-grid {
+  .grid {
     display: flex;
     flex-wrap: wrap;
 
@@ -31,7 +31,7 @@
       width: calc(100% + 2rem);
       transform: translateX(-1rem);
 
-      .kr-grid__item {
+      .-item {
         padding: {
           left: 1rem;
           right: 1rem;
@@ -40,7 +40,7 @@
     }
   }
 
-  .kr-grid__item {
+  .grid .-item {
     width: 100%;
 
     &.--1-3 {
@@ -88,7 +88,7 @@
     'widescreen': #{map-get($mediaquery, 'widescreen')}
   );
 
-  .kr-grid__item {
+  .grid .-item {
     @each $m, $query in $gridquery {
       @media #{$query} {
         &.--#{$m}-1-3 {

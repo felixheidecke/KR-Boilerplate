@@ -4,5 +4,11 @@
     "prefix": "svelte",
     "body": ["<div>", "  $1", "</div>", "", "<style lang=\"scss\">", "  // Component Styling", "</style>"],
     "description": "Svelte File"
+  },
+  "Svelte if": {
+    "scope": "svelte",
+    "prefix": "if",
+    "body": ["{#if $1}", "  $2", "{/if}"],
+    "description": "Svelte If Statement"
   }
 }

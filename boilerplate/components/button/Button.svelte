@@ -7,23 +7,24 @@
   const hasIcon = icon || iconRight;
 </script>
 
-<button class={$$props.class} class:--has-icon={hasIcon}>
+<button class={['button'].toClass($$props)} class:--has-icon={hasIcon}>
   {#if icon}
-    <Icon class="-pr-sm" name={icon} />
+    <Icon ex-class="-icon-left" name={icon} />
   {/if}
   <slot />
   {#if iconRight}
-    <Icon class="-pl-sm" name={iconRight} />
+    <Icon ex-class="-icon-right" name={iconRight} />
   {/if}
 </button>
 
-<style lang="scss">
-  button {
+<style lang="scss" global>
+  .button {
     align-items: center;
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
+    font-size: 1rem;
     padding: 0.25rem 1rem;
     text-align: center;
     text-decoration: none;
@@ -33,8 +34,12 @@
     background-color: white;
     border: 1px solid #333;
 
-    @if mixin-exists(button) {
-      @include button;
+    .-icon-left {
+      margin-right: 0.5rem;
+    }
+
+    .-icon-right {
+      margin-left: 0.5rem;
     }
   }
 </style>

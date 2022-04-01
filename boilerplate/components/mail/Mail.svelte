@@ -12,7 +12,7 @@
 <a
   name="mail"
   on:click={() => (location.href = 'mailto:' + to)}
-  class={['kr-mail'].toClass($$props)}
+  class={['mail'].toClass($$props)}
   class:--has-icon={icon}
 >
   {#if icon}

@@ -1,8 +1,12 @@
 import { isEmpty, isUndefined } from 'lodash-es';
 
-Array.prototype.toClass = function (props) {
+Array.prototype.toClass = function (props = {}) {
 
-  if (props?.class) {
+  if (props['ex-class']) {
+    this[0] = props['ex-class']
+  }
+
+  if (props.class) {
     this.push(props.class)
   }
 

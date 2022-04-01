@@ -13,6 +13,6 @@
 
 <svelte:window on:scroll|passive={() => (isInView = inView.is(wrapper))} />
 
-<div bind:this={wrapper} class={['kr-in-view'].toClass($$props)} class:--in-view={isInView}>
+<div bind:this={wrapper} class={['in-view'].toClass($$props)} class:--in-view={isInView}>
   <slot />
 </div>

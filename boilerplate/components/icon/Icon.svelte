@@ -3,12 +3,7 @@
   export let size = false;
 
   // -- CSS Classes -------------------
-  export let blank = false;
-
-  const className = [name];
-
-  if (blank) className.push('icon');
-  else className.push('kr-icon');
+  const className = ['icon', name];
 
   if (size > 1 && size <= 10) {
     className.push(`fa-${size}x`);

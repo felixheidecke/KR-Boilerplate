@@ -44,6 +44,14 @@ const config = {
       server: {
         fs: {
           allow: ['./boilerplate']
+        },
+        watch: {
+          paths: [
+            './src/**/*.scss',
+            './src/**/*.svelte',
+            './src/**/*.html',
+            './src/**/*.yml',
+          ]
         }
       },
       resolve: {

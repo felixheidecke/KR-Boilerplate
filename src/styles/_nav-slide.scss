@@ -1,0 +1,35 @@
+.nav-slide {
+  .-ul {
+    background-color: map-get($color, arty);
+  }
+
+  // .-li { }
+
+  .-a {
+    color: map-get($color, meteorite);
+
+    &.--hover,
+    &.--active {
+      color: map-get($color, haiti);
+    }
+  }
+
+  // .-ul-ul { }
+
+  // .-li-li { }
+
+  .-a-a {
+    color: map-get($color, meteorite);
+
+    &.--hover,
+    &.--active {
+      color: map-get($color, haiti);
+    }
+  }
+
+  .-burger {
+    &.--active svg * {
+      fill: white;
+    }
+  }
+}

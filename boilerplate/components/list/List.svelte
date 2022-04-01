@@ -4,7 +4,7 @@
   export let disc = false;
   export let dash = false;
 
-  const className = ['kr-list'];
+  const className = ['list'];
 
   if (disc) className.push('--disc');
   else if (dash) className.push('--dash');
@@ -14,12 +14,12 @@
   <slot />
 </ul>
 
-<style lang="scss">
-  ul {
+<style lang="scss" global>
+  .kr-list {
     padding-left: 1rem;
     margin-left: 0.75rem;
 
-    :global(ul.--dash > li) {
+    &.--dash > li {
       &::marker {
         display: none;
       }

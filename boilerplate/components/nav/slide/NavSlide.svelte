@@ -17,8 +17,8 @@
 </script>
 
 {#if show()}
-  <nav class="kr-nav-slide" class:--active={active} aria-label="main navigation" on:click={toggle}>
-    <ul>
+  <nav class="nav-slide" class:--active={active} aria-label="main navigation" on:click={toggle}>
+    <ul class="-ul">
       <Tree routes={$routes} on:click={toggle} />
     </ul>
   </nav>

@@ -1,3 +1,9 @@
-body, a {
-  color: map-get($color, haiti)
+@import 'button';
+@import 'nav-bar';
+@import 'nav-slide';
+@import 'toplink';
+
+body,
+a {
+  color: map-get($color, haiti);
 }

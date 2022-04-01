@@ -13,8 +13,8 @@
 </script>
 
 {#if show()}
-  <nav class="kr-nav-bar" aria-label="main navigation">
-    <ul>
+  <nav class="nav-bar" aria-label="main navigation">
+    <ul class="-ul">
       <Tree routes={$routes} />
     </ul>
   </nav>

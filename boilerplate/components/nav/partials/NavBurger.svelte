@@ -2,7 +2,7 @@
   export let active = false;
 </script>
 
-<button class:--active={active} on:click>
+<button class="nav-burger" class:--active={active} on:click>
   <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
   {#if active}
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
@@ -20,8 +20,8 @@
   {/if}
 </button>
 
-<style lang="scss">
-  button {
+<style lang="scss" global>
+  .nav-burger {
     align-items: center;
     background: none;
     border: 0 none;
@@ -38,17 +38,13 @@
     font-weight: bold;
     font-size: 1rem;
 
-    @if mixin-exists(nav-burger) {
-      @include nav-burger;
+    span {
+      margin-right: 0.5rem;
     }
-  }
 
-  span {
-    margin-right: 0.5rem;
-  }
-
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 </style>
