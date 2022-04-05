@@ -1,5 +1,5 @@
 <script>
-  import Icon from '../icon/Icon.svelte';
+  import Icon from './Icon.svelte';
 
   let isHidden = true;
 
@@ -14,12 +14,12 @@
 
 <svelte:window on:scroll|passive={handleOffset} />
 
-<button class:--hidden={isHidden} on:click={scrollToTop}>
+<button class={['.TopLink'].toClass($$props)} class:--hidden={isHidden} on:click={scrollToTop}>
   <Icon name="fas fa-angle-up" size="5" />
 </button>
 
 <style lang="scss">
-  button {
+  [class*='TopLink'] {
     position: fixed;
     right: 0.5rem;
     bottom: 0.5rem;

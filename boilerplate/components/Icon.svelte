@@ -3,7 +3,7 @@
   export let size = false;
 
   // -- CSS Classes -------------------
-  const className = ['icon', name];
+  const className = ['Icon', name];
 
   if (size > 1 && size <= 10) {
     className.push(`fa-${size}x`);
@@ -12,6 +12,6 @@
 
 <i class={className.toClass($$props)} />
 
-<style>
-  @import url('https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css');
+<style src="https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css">
+  /* @import url('https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css'); */
 </style>

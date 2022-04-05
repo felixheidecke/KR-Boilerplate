@@ -1,6 +1,5 @@
 <script>
-  export let on;
-
+  export let on = false;
   export let bar = false;
   export let slide = false;
 </script>

@@ -17,9 +17,9 @@
 </script>
 
 {#if show()}
-  <nav class="nav-slide" class:--active={active} aria-label="main navigation" on:click={toggle}>
+  <nav class="Nav --slide" class:--active={active} aria-label="main navigation" on:click={() => (active = false)}>
     <ul class="-ul">
-      <Tree routes={$routes} on:click={toggle} />
+      <Tree routes={$routes} on:click={() => (active = false)} />
     </ul>
   </nav>
   <Burger {active} on:click={toggle} />

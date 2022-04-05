@@ -1,5 +1,5 @@
 <script>
-  import Aspect from '../aspect/Aspect.svelte';
+  import Aspect from './Aspect.svelte';
 
   export let ratio = '16:9';
   export let id;
@@ -7,7 +7,8 @@
 
 <Aspect {ratio}>
   <iframe
-    src={'https://www.youtube.com/embed/' + id}
+    class={['YouTube'].toClass($$props)}
+    src={'https://www.youtube-nocookie.com/embed/' + id}
     title="YouTube video player"
     frameborder="0"
     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"

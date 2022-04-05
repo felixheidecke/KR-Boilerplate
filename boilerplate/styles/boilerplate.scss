@@ -1,0 +1,7 @@
+@import 'style';
+
+// Add higher specificity to
+// styles from user
+body {
+  @import 'src/styles/style';
+}

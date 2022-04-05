@@ -18,11 +18,11 @@
   {#if tablet}
     <source srcset={tablet} media="(min-width: 768px)" />
   {/if}
-  <img class={['picture'].toClass($$props)} srcset={src} {alt} {loading} />
+  <img class={['Picture'].toClass($$props)} srcset={src} {alt} {loading} />
 </picture>
 
 <style global>
-  picture img {
+  [class*='Picture'] img {
     display: block;
     width: 100%;
     height: auto;

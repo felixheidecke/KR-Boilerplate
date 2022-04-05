@@ -3,15 +3,15 @@ module.exports = function (grunt) {
     curl: {
       update: {
         src: 'https://github.com/felixheidecke/KR-Boilerplate/archive/refs/heads/dev/svelte.zip',
-        dest: 'temp/svelte.zip',
-      },
+        dest: 'temp/svelte.zip'
+      }
     },
 
     unzip: {
       update: {
         src: 'temp/svelte.zip',
-        dest: 'temp/',
-      },
+        dest: 'temp/'
+      }
     },
 
     move: {
@@ -19,7 +19,11 @@ module.exports = function (grunt) {
         files: [
           {
             src: 'temp/KR-Boilerplate-dev-svelte/boilerplate/',
-            dest: 'boilerplate',
+            dest: 'boilerplate'
+          },
+          {
+            src: 'temp/KR-Boilerplate-dev-svelte/.vscode/',
+            dest: '.vscode'
           },
           {
             src: [
@@ -28,18 +32,18 @@ module.exports = function (grunt) {
               'temp/KR-Boilerplate-dev-svelte/gruntfile.js',
               'temp/KR-Boilerplate-dev-svelte/package.json',
               'temp/KR-Boilerplate-dev-svelte/package-lock.json',
-              'temp/KR-Boilerplate-dev-svelte/svelte.config.js',
+              'temp/KR-Boilerplate-dev-svelte/svelte.config.js'
             ],
-            dest: './',
-          },
-        ],
-      },
-    },
-  })
+            dest: './'
+          }
+        ]
+      }
+    }
+  });
 
-  grunt.loadNpmTasks('grunt-curl')
-  grunt.loadNpmTasks('grunt-zip')
-  grunt.loadNpmTasks('grunt-move')
+  grunt.loadNpmTasks('grunt-curl');
+  grunt.loadNpmTasks('grunt-zip');
+  grunt.loadNpmTasks('grunt-move');
 
-  grunt.registerTask('update', ['curl', 'unzip', 'move'])
-}
+  grunt.registerTask('update', ['curl', 'unzip', 'move']);
+};

@@ -11,8 +11,15 @@ html {
   background: #fff;
   width: 100vw;
   min-height: 100vh;
-  font-size: 16px;
   color: #222;
+
+  @include breakpoint('mobile') {
+    font-size: 14px;
+  }
+
+  @include breakpoint('tablet-up') {
+    font-size: 16px;
+  }
 }
 
 a,

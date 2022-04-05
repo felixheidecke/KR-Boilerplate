@@ -11,11 +11,11 @@ const config = {
       // default options are shown
       pages: 'htdocs',
       assets: 'htdocs',
-      fallback: null,
-      precompress: true
+      fallback: false,
+      precompress: false
     }),
 
-    target: '#app',
+    trailingSlash: 'always',
 
     vite: {
       plugins: [
@@ -24,11 +24,7 @@ const config = {
         autoImport({
           components: ['./boilerplate', './src/components'],
           include: ['**/*.svelte'],
-          exclude: ['**/node_modules/**'],
-
-          mapping: {
-            foo: `import { breakpoints } from 'boilerplate/stores/breakpoints'`
-          }
+          exclude: ['**/node_modules/**']
         })
       ],
       css: {
@@ -46,19 +42,14 @@ const config = {
           allow: ['./boilerplate']
         },
         watch: {
-          paths: [
-            './src/**/*.scss',
-            './src/**/*.svelte',
-            './src/**/*.html',
-            './src/**/*.yml',
-          ]
+          paths: ['./src/**/*.scss', './src/**/*.svelte', './src/**/*.html', './src/**/*.yml']
         }
       },
       resolve: {
         alias: {
           // Boilderplate
           boilerplate: resolve('./boilerplate/'),
-          src: resolve('./src/'),
+          src: resolve('./src/')
         }
       }
     }
@@ -69,7 +60,6 @@ const config = {
       scss: {
         prependData: `
           @import "boilerplate/styles/variables.scss";
-          @import "src/styles/variables.scss";
         `
       }
     })

@@ -6,13 +6,11 @@
   export let url;
 </script>
 
-<Boilerplate />
-
 <header>
   <a href="/"><Logo /></a>
 </header>
 
-<Nav bar />
+<Nav />
 
 <Wrapper>
   <PageTransition {url}>
@@ -20,5 +18,19 @@
   </PageTransition>
 </Wrapper>
 
+<Boilerplate />
+
 <style lang="scss" global>
+  body {
+    background-color: #fbfbfb;
+  }
+
+  header {
+    position: relative;
+    text-align: center;
+  }
+
+  .Nav {
+    margin-bottom: 2rem;
+  }
 </style>

@@ -8,7 +8,7 @@
 {#each routes as route, i}
   <li class="-li" on:mouseenter={() => (hoverState = i)} on:mouseleave={() => (hoverState = false)}>
     <a
-      class="-a"
+      class={['-a', route.class].toClass()}
       href={route.href}
       class:--active={$page.url.pathname === route.href}
       class:--hover={hoverState === i}

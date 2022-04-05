@@ -69,6 +69,7 @@
     "highlight.js": "^11.5.0",
     "in-view": "^0.6.1",
     "lodash-es": "^4.17.21",
-    "marked": "^4.0.12"
+    "marked": "^4.0.12",
+    "slugify": "^1.6.5"
   }
 }

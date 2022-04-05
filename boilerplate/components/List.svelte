@@ -1,10 +1,8 @@
 <script>
-  import './List.scss';
-
   export let disc = false;
   export let dash = false;
 
-  const className = ['list'];
+  const className = ['List'];
 
   if (disc) className.push('--disc');
   else if (dash) className.push('--dash');
@@ -15,7 +13,7 @@
 </ul>
 
 <style lang="scss" global>
-  .kr-list {
+  [class*='List'] {
     padding-left: 1rem;
     margin-left: 0.75rem;
 

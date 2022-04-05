@@ -1,4 +1,4 @@
-.nav-slide {
+[class*='Nav'].--slide {
   position: fixed;
   top: 0;
   right: 0;
@@ -44,7 +44,6 @@
     display: inline-flex;
     justify-content: center;
     width: fit-content;
-    background: white;
     flex-direction: column;
     max-width: 19rem;
   }

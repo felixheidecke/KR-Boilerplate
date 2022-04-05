@@ -3,11 +3,9 @@
   import 'boilerplate/js/array.toClass';
   import 'boilerplate/js/string.isTrue';
 
-  import 'boilerplate/styles/style.scss';
-  import 'src/styles/style.scss';
+  import 'boilerplate/styles/boilerplate.scss';
 
   import { breakpoints } from '../stores/breakpoints';
-  import { onMount } from 'svelte';
 
   // --- Breakpoints --------------------------------------------
 
@@ -55,19 +53,6 @@
   const init = () => {
     handleBreakpoints();
   };
-
-  onMount(() => {
-    // Device detection
-    if (
-      window.navigator.userAgent.includes('Android') ||
-      window.navigator.userAgent.includes('iPhone') ||
-      window.navigator.userAgent.includes('iPad')
-    ) {
-      document.body.dataset.mobile = true;
-    } else {
-      document.body.dataset.desktop = true;
-    }
-  });
 </script>
 
 <svelte:body on:load={init()} />

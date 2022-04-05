@@ -13,7 +13,7 @@
         .join(' ')
     );
   } else {
-    cn.push('grid');
+    cn.push('Grid');
     if (gap) cn.push('--gap');
   }
 </script>
@@ -23,7 +23,7 @@
 </div>
 
 <style lang="scss" global>
-  .grid {
+  [class*='Grid'] {
     display: flex;
     flex-wrap: wrap;
 
@@ -40,7 +40,7 @@
     }
   }
 
-  .grid .-item {
+  [class*='Grid'] .-item {
     width: 100%;
 
     &.--1-3 {
@@ -88,7 +88,7 @@
     'widescreen': #{map-get($mediaquery, 'widescreen')}
   );
 
-  .grid .-item {
+  [class*='Grid'] .-item {
     @each $m, $query in $gridquery {
       @media #{$query} {
         &.--#{$m}-1-3 {

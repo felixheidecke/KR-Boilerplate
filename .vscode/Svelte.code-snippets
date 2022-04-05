@@ -2,7 +2,19 @@
   "Svelte template": {
     "scope": "svelte",
     "prefix": "svelte",
-    "body": ["<div>", "  $1", "</div>", "", "<style lang=\"scss\" global>", "  // Styling", "</style>"],
+    "body": [
+      "<svelte:head>",
+      "  <title>$1</title>",
+      "</svelte:head>",
+      "",
+      "<div>",
+      "  $2",
+      "</div>",
+      "",
+      "<style lang=\"scss\" global>",
+      "  // Styling",
+      "</style>"
+    ],
     "description": "Svelte File"
   }
 }

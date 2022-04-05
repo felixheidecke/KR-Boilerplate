@@ -1,5 +1,5 @@
 <script>
-  import Icon from '../icon/Icon.svelte';
+  import Icon from './Icon.svelte';
 
   export let icon = false;
   export let iconRight = false;
@@ -7,7 +7,7 @@
   const hasIcon = icon || iconRight;
 </script>
 
-<button class={['button'].toClass($$props)} class:--has-icon={hasIcon}>
+<button class={['Button'].toClass($$props)} class:--has-icon={hasIcon}>
   {#if icon}
     <Icon ex-class="-icon-left" name={icon} />
   {/if}
@@ -18,7 +18,7 @@
 </button>
 
 <style lang="scss" global>
-  .button {
+  .Button {
     align-items: center;
     box-sizing: border-box;
     cursor: pointer;

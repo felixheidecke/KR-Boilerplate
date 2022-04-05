@@ -1,5 +1,5 @@
 <script>
-  import { Icon } from 'bp.components';
+  import { Icon } from './Icon.svelte';
   import { onMount } from 'svelte';
   import { uniqueId } from 'lodash-es';
   import Glide from '@glidejs/glide';
@@ -40,17 +40,17 @@
   });
 </script>
 
-<div {id} class="kr-swiper glide" bind:this={slider}>
+<div {id} class={['Swiper', 'glide'].toClass($$props)} bind:this={slider}>
   <div class="glide__track" data-glide-el="track">
     <div class="glide__slides">
       <slot />
     </div>
   </div>
   {#if nav === 'true'}
-    <button class="kr-swiper__button --prev" on:click={() => swiper.go('<')}>
+    <button class="-button --prev" on:click={() => swiper.go('<')}>
       <Icon name="fas fa-angle-left" size="3" />
     </button>
-    <button class="kr-swiper__button --next" on:click={() => swiper.go('>')}>
+    <button class="-button --next" on:click={() => swiper.go('>')}>
       <Icon name="fas fa-angle-right" size="3" />
     </button>
   {/if}
@@ -59,7 +59,7 @@
 <style lang="scss">
   @import '../../../node_modules/@glidejs/glide/dist/css/glide.core.min.css';
 
-  .kr-swiper__button {
+  [class*='Swiper'] .-button {
     background-color: $swiper-button-background;
     padding: 0.5rem;
     border: 0 none;

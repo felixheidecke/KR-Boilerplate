@@ -6,12 +6,12 @@
   setContext('activeItem', activeItem);
 </script>
 
-<ul class={['accordion'].toClass($$props)}>
+<ul class={['Accordion'].toClass($$props)}>
   <slot />
 </ul>
 
 <style lang="scss" global>
-  .accordion {
+  .Accordion {
     width: 100%;
 
     .-slide {
