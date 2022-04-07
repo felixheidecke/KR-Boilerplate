@@ -15,6 +15,11 @@ const config = {
       precompress: false
     }),
 
+    prerender: {
+      // News fallback
+      entries: ['/news/0000-fallback/']
+    },
+
     trailingSlash: 'always',
 
     vite: {
@@ -42,7 +47,7 @@ const config = {
           allow: ['./boilerplate']
         },
         watch: {
-          paths: ['./src/**/*.scss', './src/**/*.svelte', './src/**/*.html', './src/**/*.yml']
+          paths: ['./src/**/*.scss', './src/**/*.svelte', './src/**/*.yml']
         }
       },
       resolve: {
@@ -59,8 +64,10 @@ const config = {
     preprocess({
       scss: {
         prependData: `
-          @import "boilerplate/styles/variables.scss";
-        `
+          @import "boilerplate/styles/variables";
+          @import "src/styles/variables";
+          @import 'src/styles/extend/extend';
+          `
       }
     })
   ]

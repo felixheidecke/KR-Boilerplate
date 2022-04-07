@@ -59,8 +59,7 @@
 <style lang="scss">
   @import '../../../node_modules/@glidejs/glide/dist/css/glide.core.min.css';
 
-  [class*='Swiper'] .-button {
-    background-color: $swiper-button-background;
+  .Swiper .-button {
     padding: 0.5rem;
     border: 0 none;
     cursor: pointer;

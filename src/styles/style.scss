@@ -1,6 +1,4 @@
-@import 'button', 'nav', 'toplink';
-
-body,
+&,
 a {
   color: map-get($color, haiti);
 }

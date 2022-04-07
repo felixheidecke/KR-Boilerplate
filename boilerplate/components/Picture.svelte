@@ -22,7 +22,7 @@
 </picture>
 
 <style global>
-  [class*='Picture'] img {
+  .Picture img {
     display: block;
     width: 100%;
     height: auto;

@@ -1,9 +1,0 @@
-.Button {
-  background-color: map-get($color, wool);
-  border-color: map-get($color, wool-darker);
-  transition: border-color 333ms;
-
-  &:hover {
-    border-color: map-get($color, skin);
-  }
-}

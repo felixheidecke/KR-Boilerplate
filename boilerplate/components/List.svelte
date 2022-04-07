@@ -13,7 +13,7 @@
 </ul>
 
 <style lang="scss" global>
-  [class*='List'] {
+  .List {
     padding-left: 1rem;
     margin-left: 0.75rem;
 

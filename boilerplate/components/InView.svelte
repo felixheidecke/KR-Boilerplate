@@ -24,7 +24,7 @@
 
 <style lang="scss" global>
   // -- Fade ----------------
-  [class*='InView'].--fade {
+  .InView.--fade {
     opacity: 0;
     transition: {
       delay: 100ms;
@@ -39,7 +39,7 @@
 
   // -- Scale ----------------
 
-  [class*='InView'].--scale {
+  .InView.--scale {
     transform: scale(0.75);
     opacity: 0.75;
     transition: {

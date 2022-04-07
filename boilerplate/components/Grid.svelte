@@ -23,7 +23,7 @@
 </div>
 
 <style lang="scss" global>
-  [class*='Grid'] {
+  .Grid {
     display: flex;
     flex-wrap: wrap;
 
@@ -40,7 +40,7 @@
     }
   }
 
-  [class*='Grid'] .-item {
+  .Grid .-item {
     width: 100%;
 
     &.--1-3 {
@@ -88,7 +88,7 @@
     'widescreen': #{map-get($mediaquery, 'widescreen')}
   );
 
-  [class*='Grid'] .-item {
+  .Grid .-item {
     @each $m, $query in $gridquery {
       @media #{$query} {
         &.--#{$m}-1-3 {

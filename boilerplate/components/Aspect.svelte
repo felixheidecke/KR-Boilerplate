@@ -10,7 +10,7 @@
 </section>
 
 <style lang="scss" global>
-  [class*='Aspect'] {
+  .Aspect {
     position: relative;
     width: 100%;
     overflow: hidden;

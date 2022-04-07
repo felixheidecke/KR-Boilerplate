@@ -12,6 +12,6 @@
 
 <i class={className.toClass($$props)} />
 
-<style src="https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css">
-  /* @import url('https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css'); */
+<style lang="scss" global>
+  @import url('https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css');
 </style>

@@ -1,0 +1,45 @@
+@mixin NavBar {
+  // Erweitern des <NavBar /> Styles
+  // ---------------------------
+
+  // Opitonal @mixin NavBar-reset {}
+  // um standard Styling zu entfernen
+
+  // .-ul              { }
+  // .-li              { }
+  // .-a               { }
+  // .-a.--hover       { }
+  // .-a.--active      { }
+
+  // .-ul-ul           { }
+  // .-ul-ul.--visible { }
+  // .-li-li           { }
+
+  // .-a-a             { }
+  // .-a-a.--hover     { }
+  // .-a-a.--active    { }
+}
+
+@mixin NavSlide {
+  // Erweitern des <NavSlide /> Styles
+  // ---------------------------
+
+  // Opitonal @mixin NavSlide-reset {}
+  // um standard Styling zu entfernen
+
+  // .-ul           { }
+  // .-li           { }
+  // .-a            { }
+  // .-a.--hover    { }
+  // .-a.--active   { }
+
+  // .-ul-ul        { }
+  // .-li-li        { }
+  // .-a-a          { }
+  // .-a-a.--hover  { }
+  // .-a-a.--active { }
+}
+
+@mixin Burger {
+  // &.--active { }
+}

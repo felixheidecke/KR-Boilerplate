@@ -12,11 +12,11 @@
 
 <Nav />
 
-<Wrapper>
+<main>
   <PageTransition {url}>
     <slot />
   </PageTransition>
-</Wrapper>
+</main>
 
 <Boilerplate />
 
@@ -28,6 +28,11 @@
   header {
     position: relative;
     text-align: center;
+  }
+
+  main {
+    max-width: 60rem;
+    margin: 2rem auto;
   }
 
   .Nav {

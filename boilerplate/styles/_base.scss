@@ -4,13 +4,11 @@
   box-sizing: border-box;
 }
 
-body,
-html {
+body {
   @include reset;
   overflow-x: hidden;
   background: #fff;
   width: 100vw;
-  min-height: 100vh;
   color: #222;
 
   @include breakpoint('mobile') {

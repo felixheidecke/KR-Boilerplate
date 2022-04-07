@@ -13,7 +13,7 @@
 </script>
 
 {#if show()}
-  <nav class="Nav --bar" aria-label="main navigation">
+  <nav class="NavBar" aria-label="main navigation">
     <ul class="-ul">
       <Tree routes={$routes} />
     </ul>
@@ -21,56 +21,66 @@
 {/if}
 
 <style lang="scss" global>
-  [class*='Nav'].--bar {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    // --- First Level ----------------------------------------
-
-    .-ul {
-      @include reset-list;
-      position: relative;
+  .NavBar {
+    @if mixin-exists(NavBar-reset) {
+      @include NavBar-reset;
+    } @else {
+      width: 100%;
       display: flex;
       justify-content: center;
-      height: 2.5rem;
-    }
+      background-color: lightblue;
 
-    .-li {
-      position: relative;
-      display: inherit;
-    }
+      // --- First Level ----------------------------------------
 
-    .-a {
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      white-space: nowrap;
-    }
+      .-ul {
+        @include reset-list;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        height: 2.5rem;
+      }
 
-    // --- Second Level ---------------------------------------
+      .-li {
+        position: relative;
+        display: inherit;
+      }
 
-    .-ul-ul {
-      @include reset-list;
-      left: 50%;
-      position: absolute;
-      top: 2.5rem;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
+      .-a {
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        white-space: nowrap;
+      }
 
-    .-li:not(:hover) .-ul-ul {
-      display: none;
-    }
+      // --- Second Level ---------------------------------------
 
-    .-li-li {
-      display: flex;
-    }
+      .-ul-ul {
+        @include reset-list;
+        left: 50%;
+        position: absolute;
+        top: 2.5rem;
+        transform: translateX(-50%);
+        z-index: 1;
+        background-color: lightblue;
 
-    .-a-a {
-      font-size: 0.85rem;
-      padding: 0.5rem 2rem;
-      white-space: nowrap;
-      width: 100%;
+        &:not(.--visible) {
+          display: none;
+        }
+      }
+
+      .-li-li {
+        display: flex;
+      }
+
+      .-a-a {
+        font-size: 0.85rem;
+        padding: 0.5rem 2rem;
+        white-space: nowrap;
+        width: 100%;
+      }
+
+      @if mixin-exists(NavBar) {
+        @include NavBar;
+      }
     }
   }
 </style>
