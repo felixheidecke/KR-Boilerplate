@@ -3,8 +3,5 @@
 /news:
   name: Neuigkeiten
 
-/test:
-  name: Test
-
-  /test/1: Eins
-  /test/2: Zwei
+/articles:
+  name: Artikel

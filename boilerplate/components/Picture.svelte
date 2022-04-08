@@ -1,4 +1,6 @@
 <script>
+  import { toClass } from '@/js/utils';
+
   export let src;
   export let alt = '';
   export let loading = 'lazy';
@@ -8,7 +10,7 @@
   export let widescreen = false;
 </script>
 
-<picture>
+<picture class={toClass(['Picture'], $$props)}>
   {#if widescreen}
     <source srcset={widescreen} media="(min-width: 1441px)" />
   {/if}
@@ -18,13 +20,16 @@
   {#if tablet}
     <source srcset={tablet} media="(min-width: 768px)" />
   {/if}
-  <img class={['Picture'].toClass($$props)} srcset={src} {alt} {loading} />
+  <img srcset={src} {alt} {loading} />
 </picture>
 
-<style global>
-  .Picture img {
+<style lang="scss" global>
+  .Picture {
     display: block;
-    width: 100%;
-    height: auto;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 </style>

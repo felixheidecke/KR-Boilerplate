@@ -1,24 +1,25 @@
 <script>
+  import { toClass } from '@/js/utils';
   export let gap = false;
   export let size = false;
 
-  const cn = [];
+  const className = [];
 
   if (size) {
-    cn.push('-item');
-    cn.push(
+    className.push('-item');
+    className.push(
       size
         .split(' ')
         .map((i) => `--${i}`)
         .join(' ')
     );
   } else {
-    cn.push('Grid');
-    if (gap) cn.push('--gap');
+    className.push('Grid');
+    if (gap) className.push('--gap');
   }
 </script>
 
-<div class={cn.toClass($$props)}>
+<div class={toClass(className, $$props)}>
   <slot />
 </div>
 

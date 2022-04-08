@@ -1,10 +1,4 @@
-<script context="module">
-  export const load = async ({ url }) => ({ props: { url } });
-</script>
-
-<script>
-  export let url;
-</script>
+<Boilerplate />
 
 <header>
   <a href="/"><Logo /></a>
@@ -13,18 +7,10 @@
 <Nav />
 
 <main>
-  <PageTransition {url}>
-    <slot />
-  </PageTransition>
+  <slot />
 </main>
 
-<Boilerplate />
-
-<style lang="scss" global>
-  body {
-    background-color: #fbfbfb;
-  }
-
+<style lang="scss">
   header {
     position: relative;
     text-align: center;
@@ -33,9 +19,10 @@
   main {
     max-width: 60rem;
     margin: 2rem auto;
+    padding: 0 2rem;
   }
 
-  .Nav {
+  :global(.Nav) {
     margin-bottom: 2rem;
   }
 </style>

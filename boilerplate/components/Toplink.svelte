@@ -1,4 +1,5 @@
 <script>
+  import { toClass } from '@/js/utils';
   import Icon from './Icon.svelte';
 
   let isHidden = true;
@@ -14,7 +15,7 @@
 
 <svelte:window on:scroll|passive={handleOffset} />
 
-<button class={['Toplink'].toClass($$props)} class:--hidden={isHidden} on:click={scrollToTop}>
+<button class={toClass(['Toplink'], $$props)} class:--hidden={isHidden} on:click={scrollToTop}>
   <Icon name="fas fa-angle-up" size="5" />
 </button>
 

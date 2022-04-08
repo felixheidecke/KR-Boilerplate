@@ -1,7 +1,7 @@
 <script>
   import Tree from '../partials/NavTree.svelte';
-  import { routes } from 'boilerplate/stores/routes';
-  import { breakpoints } from 'boilerplate/stores/breakpoints';
+  import { routes } from '@/stores/routes';
+  import { breakpoints } from '@/stores/breakpoints';
 
   export let on = false;
 

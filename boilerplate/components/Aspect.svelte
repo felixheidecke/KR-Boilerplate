@@ -1,10 +1,11 @@
 <script>
+  import { toClass } from '@/js/utils';
   export let ratio = '16:9';
 
   const [x, y] = ratio.split(':');
 </script>
 
-<section class={['Aspect'].toClass($$props)}>
+<section class={toClass(['Aspect'], $$props)}>
   <div class="-ratio" style={`padding-top: ${(+y / +x) * 100}%`} />
   <slot />
 </section>

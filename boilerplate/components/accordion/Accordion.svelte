@@ -1,12 +1,13 @@
 <script>
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
+  import { toClass } from '@/js/utils';
 
   let activeItem = writable(1);
   setContext('activeItem', activeItem);
 </script>
 
-<ul class={['Accordion'].toClass($$props)}>
+<ul class={toClass(['Accordion'], $$props)}>
   <slot />
 </ul>
 

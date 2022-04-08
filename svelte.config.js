@@ -17,7 +17,7 @@ const config = {
 
     prerender: {
       // News fallback
-      entries: ['/news/0000-fallback/']
+      // entries: ['/news/0-fallback/']
     },
 
     trailingSlash: 'always',
@@ -53,7 +53,7 @@ const config = {
       resolve: {
         alias: {
           // Boilderplate
-          boilerplate: resolve('./boilerplate/'),
+          '@': resolve('./boilerplate/'),
           src: resolve('./src/')
         }
       }

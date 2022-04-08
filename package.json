@@ -6,7 +6,6 @@
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
-    "update": "grunt update --gruntfile ./gruntfile.cjs",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
@@ -66,7 +65,6 @@
   "dependencies": {
     "@glidejs/glide": "^3.5.2",
     "date-fns": "^2.28.0",
-    "highlight.js": "^11.5.0",
     "in-view": "^0.6.1",
     "lodash-es": "^4.17.21",
     "marked": "^4.0.12",

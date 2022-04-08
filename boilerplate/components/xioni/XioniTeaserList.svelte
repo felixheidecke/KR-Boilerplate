@@ -1,12 +1,14 @@
 <script>
   import { format } from 'date-fns';
   import { onMount } from 'svelte';
-  import { articles, groups, fetchArticles } from '../store';
+  import { articles, groups, fetchArticles } from '@/stores/articles';
 
   // --- Props --------
   export let id;
+  export let max = 25;
   export let author = false;
   export let date = false;
+  export let detailsPath = '';
 
   // --- Computed -----
   $: teasers = $articles.filter((a) => a.module == id) || [];
@@ -15,37 +17,37 @@
   onMount(async () => {
     if ($groups.includes(id)) return;
 
-    fetchArticles(id);
+    fetchArticles(id, max);
   });
 </script>
 
 {#each teasers as teaser}
-  <article class="XioniTeaser" data-id={teaser.id}>
+  <article class="XioniTeaserList" data-id={teaser.id}>
     <h2 class="-title">
       {teaser.title}
     </h2>
     {#if teaser.image}
-      <Picture ex-class="-picture" src={teaser.image.src} tablet={teaser.image.srcSmall} alt={teaser.image.alt} />
+      <Picture ex-class="-picture" src={teaser.image.srcSmall} tablet={teaser.image.src} alt={teaser.image.alt} />
     {/if}
     <div class="-meta">
       {#if author && teaser.author}
         <span class="-meta-author">{teaser.author}</span>
       {/if}
       {#if date && teaser.date}
-        <time class="-meta-date">{format(teaser.date * 1000, 'dd.MM.yyyy')}</time>
+        <time class="-meta-date">{format(teaser.date, 'dd.MM.yyyy')}</time>
       {/if}
     </div>
     <div class="-teaser">
       {@html teaser.text}
     </div>
-    <a href={teaser.slug} class="-read-more">... weiter lesen</a>
+    <a href={detailsPath + '/' + teaser.slug} class="-read-more">... weiter lesen</a>
   </article>
 {/each}
 
 <style lang="scss" global>
-  .XioniTeaser {
-    @if mixin-exists(XioniTeaser-reset) {
-      @include XioniTeaser-reset;
+  .XioniTeaserList {
+    @if mixin-exists(XioniTeaserList-reset) {
+      @include XioniTeaserList-reset;
     } @else {
       display: flow-root;
 
@@ -62,7 +64,13 @@
         content: 'Von: ';
       }
 
-      .-picture {
+      .-picture img {
+        max-width: 10rem;
+        float: left;
+        margin-right: 2rem;
+      }
+
+      .-picture img {
         max-width: 10rem;
         float: left;
         margin-right: 2rem;
@@ -76,8 +84,8 @@
       }
     }
 
-    @if mixin-exists(XioniTeaser) {
-      @include XioniTeaser;
+    @if mixin-exists(XioniTeaserList) {
+      @include XioniTeaserList;
     }
   }
 </style>

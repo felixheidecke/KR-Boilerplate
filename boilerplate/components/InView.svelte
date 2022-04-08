@@ -1,7 +1,8 @@
 <script>
+  import { toClass } from '@/js/utils';
   import { onMount } from 'svelte';
 
-  export let transition;
+  export let transition = 'fade';
 
   let inView;
   let wrapper;
@@ -18,7 +19,7 @@
 
 <svelte:window on:scroll|passive={() => (isInView = inView.is(wrapper))} />
 
-<div bind:this={wrapper} class={className.toClass($$props)} class:--in-view={isInView}>
+<div bind:this={wrapper} class={toClass(className, $$props)} class:--in-view={isInView}>
   <slot />
 </div>
 

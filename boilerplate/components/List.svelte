@@ -1,4 +1,5 @@
 <script>
+  import { toClass } from '@/js/utils';
   export let disc = false;
   export let dash = false;
 
@@ -8,7 +9,7 @@
   else if (dash) className.push('--dash');
 </script>
 
-<ul class={className.toClass($$props)}>
+<ul class={toClass(className, $$props)}>
   <slot />
 </ul>
 

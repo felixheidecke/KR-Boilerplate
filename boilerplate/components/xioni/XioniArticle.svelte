@@ -1,5 +1,5 @@
 <script>
-  import { articles, fetchArticle } from '../store';
+  import { articles, fetchArticle, state } from '@/stores/articles';
   import { format } from 'date-fns';
   import { onMount } from 'svelte';
 
@@ -18,32 +18,21 @@
   });
 </script>
 
-<!-- <pre>
-  {JSON.stringify(article, '  ', 2)}
-</pre> -->
-
-{#if article.id}
-  <article class="XioniArticle" data-id={id}>
+<article class="XioniArticle" class:--is-loading={$state.loading} data-id={id}>
+  {#if article.id}
     <h2 class="-title">
       {article.title}
     </h2>
-    <ul class="-meta">
+    <div class="-meta">
       {#if author && article.author}
-        <li class="-meta-author">Von {article.author}</li>
+        <span class="-meta-author">Von {article.author}</span>
       {/if}
       {#if date && article.date}
-        <li class="-meta-date">
-          <time>{format(article.date, 'dd.MM.yyyy')}</time>
-        </li>
+        <time class="-meta-date">{format(article.date, 'dd.MM.yyyy')}</time>
       {/if}
-      {#if article.pdf}
-        <li class="-meta-pdf">
-          <a href={article.pdf.src} target="_blank" rel="follow" title={article.pdf.name}>{article.pdf.title}</a>
-        </li>
-      {/if}
-    </ul>
+    </div>
     {#if article.image}
-      <Picture ex-class="-picture" src={article.image.src} tablet={article.image.srcSmall} alt={article.image.alt} />
+      <Picture ex-class="-picture" src={article.image.srcSmall} tablet={article.image.src} alt={article.image.alt} />
     {/if}
     <div class="-teaser">
       {@html article.text}
@@ -61,11 +50,17 @@
       </div>
     {/if}
 
-    {#if article.link}
-      <a href={article.link} rel="nofollow" target="_blank">{article.link}</a>
+    {#if article.pdf}
+      <a href={article.pdf.src} class="-pdf" target="_blank" rel="follow" title={article.pdf.name}
+        >{article.pdf.title}</a
+      >
     {/if}
-  </article>
-{/if}
+
+    {#if article.link}
+      <a href={article.link} class="-link" rel="nofollow" target="_blank">{article.link}</a>
+    {/if}
+  {/if}
+</article>
 
 <style lang="scss" global>
   .XioniArticle {
@@ -74,34 +69,30 @@
     } @else {
       display: flow-root;
 
-      .-meta {
-        @include reset-list;
-
-        &-author,
-        &-date {
-          display: inline-block;
-        }
-
-        &-pdf {
-          display: flex;
-          align-items: center;
-
-          svg {
-            max-width: 1rem;
-            max-height: 1rem;
-            margin-right: 0.333rem;
-          }
-        }
+      .-meta-author,
+      .-meta-date {
+        display: inline-block;
       }
 
-      .-picture {
+      .-picture img {
         max-width: 10rem;
         float: left;
         margin-right: 2rem;
       }
 
-      .-text-picture {
+      .-text-picture img {
         max-width: 100%;
+      }
+
+      .-pdf {
+        display: flex;
+        align-items: center;
+
+        svg {
+          max-width: 1rem;
+          max-height: 1rem;
+          margin-right: 0.333rem;
+        }
       }
     }
 

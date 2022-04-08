@@ -1,11 +1,8 @@
 <script>
   // Site Styles
-  import 'boilerplate/js/array.toClass';
-  import 'boilerplate/js/string.isTrue';
+  import('./Boilerplate.scss');
 
-  import 'boilerplate/styles/boilerplate.scss';
-
-  import { breakpoints } from '../stores/breakpoints';
+  import { breakpoints } from '@/stores/breakpoints';
 
   // --- Breakpoints --------------------------------------------
 
