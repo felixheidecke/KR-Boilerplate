@@ -4,7 +4,7 @@
   <a href="/"><Logo /></a>
 </header>
 
-<Nav />
+<Nav slide="mobile" bar="tablet-up" />
 
 <main>
   <slot />

@@ -12,9 +12,10 @@
   $: article = $articles.find((a) => a.id === parseInt(id)) || {};
 
   // --- Lifecycle ----
-  onMount(() => {
+  onMount(async () => {
     if (article.id) return;
-    fetchArticle(id);
+    await fetchArticle(id);
+    window.scrollTo(0, 0);
   });
 </script>
 

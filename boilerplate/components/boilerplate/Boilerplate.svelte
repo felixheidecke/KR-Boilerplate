@@ -11,33 +11,30 @@
   const handleBreakpoints = () => {
     const width = window.innerWidth;
     let bp = {
-      MOBILE: false,
-
-      TABLET: false,
-      TABLET_UP: false,
-      TABLET_DOWN: false,
-
-      DESKTOP: false,
-      DESKTOP_UP: false,
-      DESKTOP_DOWN: false,
-
-      WIDESCREEN: false
+      mobile: false,
+      tablet: false,
+      'tablet-up': false,
+      'tablet-down': false,
+      desktop: false,
+      'desktop-up': false,
+      'desktop-down': false,
+      widescreen: false
     };
 
     // Mobile
-    if (width < 768) bp.MOBILE = true;
+    if (width < 768) bp.mobile = true;
 
     // Tablet
-    if (width >= 768) bp.TABLET_UP = true;
-    if (width <= 1024) bp.TABLET_DOWN = true;
-    if (bp.TABLET_UP && bp.TABLET_DOWN) bp.TABLET = true;
+    if (width >= 768) bp['tablet-up'] = true;
+    if (width <= 1024) bp['tablet-down'] = true;
+    if (bp['tablet-up'] && bp['tablet-down']) bp.tablet = true;
 
     // Desktop
-    if (width > 1024) bp.DESKTOP_UP = true;
-    if (width <= 1440) bp.DESKTOP_DOWN = true;
-    if (bp.DESKTOP_UP && bp.DESKTOP_DOWN) bp.DESKTOP = true;
+    if (width > 1024) bp['desktop-up'] = true;
+    if (width <= 1440) bp['desktop-down'] = true;
+    if (bp['desktop-up'] && bp['desktop-down']) bp.desktop = true;
 
-    if (width > 1440) bp.WIDESCREEN = true;
+    if (width > 1440) bp.widescreen = true;
 
     if (JSON.stringify(previousBreakpoints) == JSON.stringify(bp)) return;
 

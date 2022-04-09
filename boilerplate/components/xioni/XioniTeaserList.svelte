@@ -1,4 +1,5 @@
 <script>
+  import { random } from 'lodash-es';
   import { format } from 'date-fns';
   import { onMount } from 'svelte';
   import { articles, groups, fetchArticles } from '@/stores/articles';
@@ -19,7 +20,19 @@
 
     fetchArticles(id, max);
   });
+
+  const sceletonWidth = () => {
+    return `width: ${random(22, 88)}%`;
+  };
 </script>
+
+<div class="XioniSceleton" aria-hidden>
+  <div class="h2" style={`width: ${random(66, 88)}%`}>&nbsp;</div>
+  <div class="p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
+  <div class="p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
+  <div class="p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
+  <div class="p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
+</div>
 
 {#each teasers as teaser}
   <article class="XioniTeaserList" data-id={teaser.id}>
@@ -42,9 +55,19 @@
     </div>
     <a href={detailsPath + '/' + teaser.slug} class="-read-more">... weiter lesen</a>
   </article>
+{:else}
+  <div class="XioniSceleton" aria-hidden>
+    <div class="h2">&nbsp;</div>
+  </div>
 {/each}
 
 <style lang="scss" global>
+  .XioniSceleton {
+    div {
+      background-color: rgba(black, 0.05);
+    }
+  }
+
   .XioniTeaserList {
     @if mixin-exists(XioniTeaserList-reset) {
       @include XioniTeaserList-reset;

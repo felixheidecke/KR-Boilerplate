@@ -20,7 +20,7 @@ const config = {
       // entries: ['/news/0-fallback/']
     },
 
-    trailingSlash: 'always',
+    trailingSlash: 'never',
 
     vite: {
       plugins: [

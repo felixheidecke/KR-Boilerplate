@@ -1,15 +1,15 @@
 import { writable } from 'svelte/store';
 
 export const breakpoints = writable({
-  MOBILE: false,
+  mobile: false,
 
-  TABLET: false,
-  TABLET_UP: false,
-  TABLET_DOWN: false,
+  tablet: false,
+  'tablet-up': false,
+  'tablet-down': false,
 
-  DESKTOP: false,
-  DESKTOP_UP: false,
-  DESKTOP_DOWN: false,
+  desktop: false,
+  'desktop-up': false,
+  'desktop-down': false,
 
-  WIDESCREEN: false
+  widescreen: false
 });

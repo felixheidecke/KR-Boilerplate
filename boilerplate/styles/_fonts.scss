@@ -70,7 +70,8 @@ h3,
 
 h4,
 .h4,
-p {
+p,
+.p {
   font-size: 1rem;
   line-height: 1.5rem;
   margin: {
@@ -87,7 +88,8 @@ h3,
 .h3,
 h4,
 .h4,
-p {
+p,
+.p {
   &:first-child {
     margin-top: 0;
   }

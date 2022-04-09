@@ -1,7 +1,4 @@
 /: Start
 
-/news:
-  name: Neuigkeiten
-
 /articles:
   name: Artikel
