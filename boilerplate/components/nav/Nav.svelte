@@ -1,7 +1,8 @@
 <script>
-  import log from '@/js/log';
+  // import log from '@/js/log';
   import { routes } from '@/stores/routes';
-  import { breakpoints } from '@/stores/breakpoints';
+  import { browser } from '$app/env';
+  import { onMount } from 'svelte';
 
   import Tree from './partials/NavTree.svelte';
   import Burger from './partials/NavBurger.svelte';
@@ -9,44 +10,61 @@
   import './styles/nav-bar.scss';
   import './styles/nav-slide.scss';
 
+  const Type = {
+    bar: 'bar',
+    slide: 'slide'
+  };
+
+  export let variant = false;
+  export let breakpoint = false;
+
+  let type = variant;
+
+  onMount(() => {
+    if (!breakpoint || !browser) return;
+
+    const media = window.matchMedia(`(max-width: ${breakpoint})`);
+    type = media.matches ? Type.slide : Type.bar;
+
+    media.onchange = (media) => {
+      hide();
+      type = media.matches ? Type.slide : Type.bar;
+      show();
+    };
+  });
+
+  // Change visibility of the nav
+  // to prevent initial transition effects.
+  // Replay on media change
+
+  let hidden = true;
+
+  const hide = () => (hidden = true);
+
+  const show = () => setTimeout(() => (hidden = false));
+
+  // Toggle active / inactive
+
   let active = false;
 
-  // --- Handle Bar --------
-  export let bar = false;
-
-  $: isBar = () => {
-    if (bar === true) return true;
-    if (!!$breakpoints[bar]) return true;
-    return false;
-  };
-
-  // --- Handle Slide --------
-  export let slide = false;
-
-  $: isSlide = () => {
-    if (slide === true) return true;
-    if (!!$breakpoints[slide]) return true;
-    return false;
-  };
-
-  if (!slide && !bar) {
-    log.error('Nav', 'either "slide" or "bar" needs to be set!');
-  }
-
   const toggle = () => (active = !active);
+
+  // Init
+  show();
 </script>
 
 <nav
-  class:NavSlide={isSlide()}
-  class:NavBar={isBar()}
+  class:NavSlide={type === Type.slide}
+  class:NavBar={type === Type.bar}
   class:--active={active}
   aria-label="main navigation"
+  {hidden}
   on:click={() => (active = false)}
 >
   <ul class="-ul">
     <Tree routes={$routes} on:click={() => (active = false)} />
   </ul>
 </nav>
-{#if slide}
+{#if type === Type.slide}
   <Burger {active} on:click={toggle} />
 {/if}

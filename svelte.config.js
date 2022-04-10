@@ -5,7 +5,7 @@ import autoImport from 'vite-plugin-autoimport';
 import { resolve } from 'path';
 import markdown from 'vite-plugin-markdown';
 
-const config = {
+export default {
   kit: {
     adapter: adapter({
       // default options are shown
@@ -16,7 +16,7 @@ const config = {
     }),
 
     prerender: {
-      // News fallback
+      default: true
       // entries: ['/news/0-fallback/']
     },
 
@@ -53,6 +53,7 @@ const config = {
       resolve: {
         alias: {
           // Boilderplate
+          'boilerplate': resolve('./boilerplate/'),
           '@': resolve('./boilerplate/'),
           src: resolve('./src/')
         }
@@ -71,6 +72,4 @@ const config = {
       }
     })
   ]
-};
-
-export default config;
+}

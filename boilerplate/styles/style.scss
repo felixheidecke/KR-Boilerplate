@@ -1,1 +1,7 @@
 @import 'hidden', 'base', 'fonts';
+
+:root {
+  @each $query, $size in $mediaquery {
+    --#{$query}: #{$size};
+  }
+}

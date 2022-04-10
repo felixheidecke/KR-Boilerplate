@@ -84,32 +84,32 @@ const restructure = function ({
   return {
     id: +id,
     module: +module,
-    slug: slugify(`${id}-${title}`, { lower: true }),
+    slug: slugify(`${id}_${title}`, { lower: true }),
     date: +date * 1000,
     author,
     title,
     image: image
       ? {
-          src: root + image,
-          srcSmall: root + imageSmall,
-          alt: imageDescription
-        }
+        src: root + image,
+        srcSmall: root + imageSmall,
+        alt: imageDescription
+      }
       : null,
     pdf: pdf
       ? {
-          src: root + pdf,
-          name: pdfName,
-          title: pdfTitle || pdfName
-        }
+        src: root + pdf,
+        name: pdfName,
+        title: pdfTitle || pdfName
+      }
       : null,
     text: text ? marked.parse(text.trim()) : null,
     content: paragraphs.map((p) => {
       return {
         image: p.image
           ? {
-              src: root + p.image,
-              alt: p.imageDescription
-            }
+            src: root + p.image,
+            alt: p.imageDescription
+          }
           : null,
         text: p.text ? marked.parse(p.text.trim()) : null
       };

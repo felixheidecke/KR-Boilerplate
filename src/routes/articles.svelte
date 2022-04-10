@@ -1,5 +1,5 @@
 <div>
-  <XioniTeaserList id="10" author date detailsPath="/article" />
+  <XioniTeaserList id="10" author date />
 </div>
 
 <style>

@@ -1,10 +1,13 @@
-<Boilerplate />
+<script>
+  import 'boilerplate/styles/style.scss';
+  import 'src/styles/style.scss';
+</script>
 
 <header>
   <a href="/"><Logo /></a>
 </header>
 
-<Nav slide="mobile" bar="tablet-up" />
+<Nav breakpoint="440px" />
 
 <main>
   <slot />

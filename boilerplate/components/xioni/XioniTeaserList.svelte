@@ -20,22 +20,10 @@
 
     fetchArticles(id, max);
   });
-
-  const sceletonWidth = () => {
-    return `width: ${random(22, 88)}%`;
-  };
 </script>
 
-<div class="XioniSceleton" aria-hidden>
-  <div class="h2" style={`width: ${random(66, 88)}%`}>&nbsp;</div>
-  <div class="p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-  <div class="p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-  <div class="p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-  <div class="p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-</div>
-
 {#each teasers as teaser}
-  <article class="XioniTeaserList" data-id={teaser.id}>
+  <article class="XioniTeaser" data-id={teaser.id}>
     <h2 class="-title">
       {teaser.title}
     </h2>
@@ -57,20 +45,32 @@
   </article>
 {:else}
   <div class="XioniSceleton" aria-hidden>
-    <div class="h2">&nbsp;</div>
+    {#each [1, 2, 3] as i}
+      <div class="-group">
+        <div class="-item h2" style={`width: ${random(66, 88)}%`}>&nbsp;</div>
+        <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
+        <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
+        <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
+        <div class="-item p" style={`width: ${random(22, 77)}%;`}>&nbsp;</div>
+      </div>
+    {/each}
   </div>
 {/each}
 
 <style lang="scss" global>
   .XioniSceleton {
-    div {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    .-item {
       background-color: rgba(black, 0.05);
     }
   }
 
-  .XioniTeaserList {
-    @if mixin-exists(XioniTeaserList-reset) {
-      @include XioniTeaserList-reset;
+  .XioniTeaser {
+    @if mixin-exists(XioniTeaser-reset) {
+      @include XioniTeaser-reset;
     } @else {
       display: flow-root;
 
@@ -107,8 +107,8 @@
       }
     }
 
-    @if mixin-exists(XioniTeaserList) {
-      @include XioniTeaserList;
+    @if mixin-exists(XioniTeaser) {
+      @include XioniTeaser;
     }
   }
 </style>

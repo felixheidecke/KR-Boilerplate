@@ -27,5 +27,3 @@ const normalizeRoute = (routes) => {
 };
 
 export const routes = readable(normalizeRoute(routesYml));
-
-// export const activeRoute = writable();

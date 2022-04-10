@@ -1,6 +1,4 @@
-<Boilerplate />
-
-<Nav slide />
+<Nav variant="slide" />
 
 <slot />
 
