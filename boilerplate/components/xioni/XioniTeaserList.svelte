@@ -44,30 +44,10 @@
     <a href={detailsPath + '/' + teaser.slug} class="-read-more">... weiter lesen</a>
   </article>
 {:else}
-  <div class="XioniSceleton" aria-hidden>
-    {#each [1, 2, 3] as i}
-      <div class="-group">
-        <div class="-item h2" style={`width: ${random(66, 88)}%`}>&nbsp;</div>
-        <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-        <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-        <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-        <div class="-item p" style={`width: ${random(22, 77)}%;`}>&nbsp;</div>
-      </div>
-    {/each}
-  </div>
+  <XioniSceleton />
 {/each}
 
 <style lang="scss" global>
-  .XioniSceleton {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-
-    .-item {
-      background-color: rgba(black, 0.05);
-    }
-  }
-
   .XioniTeaser {
     @if mixin-exists(XioniTeaser-reset) {
       @include XioniTeaser-reset;

@@ -12,12 +12,12 @@ export default {
       pages: 'htdocs',
       assets: 'htdocs',
       fallback: false,
-      precompress: false
+      precompress: true
     }),
 
     prerender: {
       default: true
-      // entries: ['/news/0-fallback/']
+      // entries: ['/news/0_fallback/']
     },
 
     trailingSlash: 'never',
@@ -53,7 +53,7 @@ export default {
       resolve: {
         alias: {
           // Boilderplate
-          'boilerplate': resolve('./boilerplate/'),
+          boilerplate: resolve('./boilerplate/'),
           '@': resolve('./boilerplate/'),
           src: resolve('./src/')
         }
@@ -72,4 +72,4 @@ export default {
       }
     })
   ]
-}
+};

@@ -19,8 +19,8 @@
   });
 </script>
 
-<article class="XioniArticle" class:--is-loading={$state.loading} data-id={id}>
-  {#if article.id}
+{#if article.id || $state.loading}
+  <article class="XioniArticle" data-id={id}>
     <h2 class="-title">
       {article.title}
     </h2>
@@ -60,8 +60,10 @@
     {#if article.link}
       <a href={article.link} class="-link" rel="nofollow" target="_blank">{article.link}</a>
     {/if}
-  {/if}
-</article>
+  </article>
+{:else}
+  <XioniSceleton />
+{/if}
 
 <style lang="scss" global>
   .XioniArticle {
