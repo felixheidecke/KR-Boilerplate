@@ -54,32 +54,7 @@ blockquote {
 
 // ------------------------------------------------- IMAGE, FIGURE & CAPTION ---
 
-figure {
-  @include reset;
-
-  text-align: center;
-  margin: {
-    top: 1rem;
-    bottom: 1rem;
-  }
-
-  img {
-    display: block;
-  }
-
-  figcaption {
-    clear: both;
-    font-size: 0.75rem;
-    margin: 0.75rem 0;
-    display: inline-block;
-    line-height: 0.75rem;
-    text-align: left;
-  }
-}
-
-cite {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: lighten(gray, 33.333%);
-  border-radius: 0.25rem;
+img {
+  width: 100%;
+  height: auto;
 }

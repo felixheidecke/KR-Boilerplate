@@ -38,6 +38,7 @@ export default {
             additionalData: `
               @import "boilerplate/styles/variables.scss";
               @import "src/styles/variables.scss";
+              @import 'src/styles/extend/extend';
             `
           }
         }
@@ -55,7 +56,8 @@ export default {
           // Boilderplate
           boilerplate: resolve('./boilerplate/'),
           '@': resolve('./boilerplate/'),
-          src: resolve('./src/')
+          src: resolve('./src/'),
+          styles: resolve('./boilerplate/styles/collect-all.scss')
         }
       }
     }

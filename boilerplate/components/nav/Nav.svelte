@@ -16,7 +16,7 @@
   };
 
   export let variant = false;
-  export let breakpoint = false;
+  export let breakpoint = '1024px';
 
   let type = variant;
 
