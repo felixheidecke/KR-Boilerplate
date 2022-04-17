@@ -3,7 +3,6 @@ import adapter from '@sveltejs/adapter-static';
 import content from '@originjs/vite-plugin-content';
 import autoImport from 'vite-plugin-autoimport';
 import { resolve } from 'path';
-import markdown from 'vite-plugin-markdown';
 
 export default {
   kit: {
@@ -24,7 +23,6 @@ export default {
 
     vite: {
       plugins: [
-        markdown.plugin({ mode: 'html' }),
         content.default(),
         autoImport({
           components: ['./boilerplate', './src/components'],
