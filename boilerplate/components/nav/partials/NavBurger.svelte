@@ -48,6 +48,7 @@
       svg {
         width: 1.5rem;
         height: 1.5rem;
+        fill: currentColor;
       }
 
       @if mixin-exists(Burger) {

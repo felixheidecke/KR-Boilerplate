@@ -1,5 +1,4 @@
 <script>
-  import { random } from 'lodash-es';
   import { format } from 'date-fns';
   import { onMount } from 'svelte';
   import { articles, groups, fetchArticles } from '@/stores/articles';
@@ -23,7 +22,7 @@
 </script>
 
 {#each teasers as teaser}
-  <article class="XioniTeaser" data-id={teaser.id}>
+  <article class="XioniTeaser" data-article-id={teaser.id}>
     <h2 class="-title">
       {teaser.title}
     </h2>

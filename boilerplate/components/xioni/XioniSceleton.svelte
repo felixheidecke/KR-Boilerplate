@@ -1,5 +1,5 @@
 <script>
-  import { range } from 'lodash-es';
+  import { range, random } from 'lodash-es';
   export let max = 3;
 </script>
 
@@ -7,10 +7,9 @@
   {#each range(+max) as i}
     <div class="-group" data-id={i}>
       <div class="-item h2" style={`width: ${random(66, 88)}%`}>&nbsp;</div>
-      <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-      <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-      <div class="-item p" style={`width: ${random(22, 77)}%`}>&nbsp;</div>
-      <div class="-item p" style={`width: ${random(22, 77)}%;`}>&nbsp;</div>
+      {#each range(4) as o}
+        <div class="-item p" data-id={`${i}-${o}`} style={`width: ${random(22, 77)}%`}>&nbsp;</div>
+      {/each}
     </div>
   {/each}
 </div>

@@ -1,10 +1,11 @@
 <script>
-  import 'boilerplate/styles/style.scss';
-  import 'src/styles/style.scss';
+  import 'style';
 </script>
 
 <header>
-  <a href="/"><Logo /></a>
+  <h1>
+    <a href="/">Boilerplate 3</a>
+  </h1>
 </header>
 
 <Nav breakpoint="440px" />
@@ -17,6 +18,7 @@
   header {
     position: relative;
     text-align: center;
+    padding: 1rem;
   }
 
   main {

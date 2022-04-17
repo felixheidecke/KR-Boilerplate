@@ -57,7 +57,7 @@ export default {
           boilerplate: resolve('./boilerplate/'),
           '@': resolve('./boilerplate/'),
           src: resolve('./src/'),
-          styles: resolve('./boilerplate/styles/collect-all.scss')
+          style: resolve('./boilerplate/styles/style.scss')
         }
       }
     }

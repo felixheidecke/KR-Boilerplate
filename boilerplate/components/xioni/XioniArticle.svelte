@@ -15,7 +15,9 @@
   onMount(async () => {
     if (article.id) return;
     await fetchArticle(id);
-    window.scrollTo(0, 0);
+
+    // Defer to end of callstack
+    setTimeout(() => window.scrollTo(0, 0));
   });
 </script>
 
