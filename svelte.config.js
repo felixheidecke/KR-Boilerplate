@@ -11,7 +11,7 @@ export default {
       pages: 'htdocs',
       assets: 'htdocs',
       fallback: false,
-      precompress: true
+      precompress: false
     }),
 
     prerender: {
