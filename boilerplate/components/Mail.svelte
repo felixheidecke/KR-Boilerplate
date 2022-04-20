@@ -32,7 +32,7 @@
       @include Mail-reset;
     } @else {
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       gap: 0.5rem;
       align-items: center;
 
