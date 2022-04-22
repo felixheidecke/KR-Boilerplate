@@ -21,7 +21,7 @@
   let type = variant;
 
   onMount(() => {
-    if (!breakpoint || !browser) return;
+    if (!breakpoint || !browser || variant) return;
 
     const media = window.matchMedia(`(max-width: ${breakpoint})`);
     type = media.matches ? Type.slide : Type.bar;
