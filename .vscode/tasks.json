@@ -22,14 +22,7 @@
     },
     {
       "type": "npm",
-      "script": "install",
-      "problemMatcher": [],
-      "label": "Install",
-      "detail": "Boilerplate Daten installieren"
-    },
-    {
-      "type": "npm",
-      "script": "install",
+      "script": "install --no-optional",
       "problemMatcher": [],
       "label": "Install",
       "detail": "Boilerplate Daten installieren"
