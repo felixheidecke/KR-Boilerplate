@@ -1,5 +1,13 @@
 import { isEmpty, isUndefined } from 'lodash-es';
 
+/**
+ * Format array to css class-list
+ *
+ * @param {array} base list of classes
+ * @param {object} props $$props
+ * @returns {string} \n separated values
+ */
+
 export const toClass = function (base = [], props = {}) {
   if (props['ex-class']) {
     base[0] = props['ex-class'];
