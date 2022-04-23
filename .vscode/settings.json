@@ -3,6 +3,6 @@
     "missing-declaration": "ignore"
   },
   "search.exclude": {
-    // "**/boilerplate": true
+    "**/boilerplate": true
   }
 }

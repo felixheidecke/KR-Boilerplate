@@ -5,30 +5,27 @@
   export let name;
   export let required = false;
   export let label = false;
-  export let checked;
+  export let value;
+  export let selected;
 
-  const id = uniqueId(`checkbox-${name}-`);
+  const id = uniqueId(`radio-${name}-`);
 
-  // Props ------------
-
-  const inputProps = {
-    id,
-    name,
-    class: '-input',
-    required,
-    hidden
+  const changeHandler = (event) => {
+    console.log(event);
   };
+
+  // -- Input proplist ---
 
   required = required ? { required } : {};
 </script>
 
-<div class={toClass(['Checkbox'], $$props)} class:--active={checked} on:click={() => (checked = !checked)}>
-  {#if checked}
+<div class={toClass(['Checkbox'], $$props)} class:--active={selected} on:click={() => (selected = !selected)}>
+  {#if selected}
     <Icon name="fas fa-check" ex-class="-icon" />
   {:else}
     <Icon name="far fa-square" ex-class="-icon" />
   {/if}
-  <input {...inputProps} type="checkbox" bind:checked />
+  <input {id} {name} {value} class="-input" {...required} type="radio" on:change={changeHandler} />
   <span class="-label">{@html label}</span>
 </div>
 
@@ -42,6 +39,10 @@
       left: 2px;
       top: 3px;
       cursor: pointer;
+    }
+
+    .-input {
+      display: none;
     }
 
     .-label {

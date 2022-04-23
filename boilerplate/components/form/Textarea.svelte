@@ -3,12 +3,12 @@
   import { toClass } from 'boilerplate/js/utils.js';
 
   export let name;
-  export let type = 'text';
   export let required = false;
   export let label = false;
   export let placeholder = false;
+  export let height = '8rem';
 
-  const id = uniqueId(name + '-');
+  const id = uniqueId(`textarea-${name}-`);
 
   label = required ? label + '*' : label;
 
@@ -25,19 +25,19 @@
   }
 </script>
 
-<div class={toClass(['Input'], $$props)}>
+<div class={toClass(['Textarea'], $$props)}>
   {#if label}
-    <label class="-label" for={id}>{label}</label>
+    <label class="-label" for={name}>{label}</label>
   {/if}
-  <input {id} {type} {name} {...inputProps} />
+  <textarea class="-input" {id} {name} {...inputProps} style={`height:${height}`} />
 </div>
 
 <style lang="scss">
-  .Input {
+  .Textarea {
     display: flex;
     flex-direction: column;
 
-    label {
+    .-label {
       display: block;
       background: #eee;
       padding: 0.25rem 0.666rem;
@@ -49,16 +49,16 @@
       user-select: none;
     }
 
-    input {
+    .-input {
       width: 100%;
       padding: 0.666rem;
       font-size: 1rem;
       border: 1px solid lightgray;
       border-top: 0 none;
-      outline: none;
-      background-color: white;
       border-bottom-left-radius: 0.25rem;
       border-bottom-right-radius: 0.25rem;
+      outline: none;
+      resize: none;
     }
   }
 </style>

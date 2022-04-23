@@ -25,7 +25,14 @@ export default {
       plugins: [
         content.default(),
         autoImport({
-          components: ['./boilerplate', './src/components'],
+          components: [{
+            name: './boilerplate',
+            flat: true
+          },
+          {
+            name: './src/components',
+            flat: true
+          }],
           include: ['**/*.svelte'],
           exclude: ['**/node_modules/**']
         })

@@ -1,36 +1,39 @@
 <script>
   import { uniqueId } from 'lodash-es';
   import { toClass } from 'boilerplate/js/utils.js';
+  import { createEventDispatcher } from 'svelte';
 
   export let name;
   export let required = false;
   export let label = false;
-  export let placeholder = false;
   export let options = [];
+  export let selected = options[0];
 
   const id = uniqueId(name + '-');
-  let selected = options[0];
 
-  // -- Input proplist ---
+  // Props ------------
 
-  const inputProps = {
-    name,
+  const selectProps = {
     id,
-    placeholder: placeholder || ''
+    name,
+    class: '-input',
+    required
   };
 
-  if (required) {
-    inputProps.required = 'required';
-  }
+  // Events -----------
+
+  const dispatch = createEventDispatcher();
+  $: dispatch('selected', selected);
 </script>
 
 <div class={toClass(['Select'], $$props)}>
   {#if label}
-    <label for={id}>{label}</label>
+    <label class="-label" for={name}>{label}</label>
   {/if}
-  <select {...inputProps} bind:value={selected}>
-    {#each options as option, i}
-      <option value={option}>{option}</option>
+  <select {...selectProps} bind:value={selected}>
+    <!-- <option value="0">Bitte wählen</option> -->
+    {#each options as value}
+      <option {value}>{value}</option>
     {/each}
   </select>
 </div>
@@ -40,26 +43,26 @@
     display: flex;
     flex-direction: column;
 
-    label {
+    .-label {
       display: block;
       background: #eee;
       padding: 0.25rem 0.666rem;
       font-size: 0.8rem;
       border: 1px solid lightgray;
       border-bottom: 0 none;
-      border-top-left-radius: 0.333rem;
-      border-top-right-radius: 0.333rem;
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
       user-select: none;
     }
 
-    select {
+    .-input {
       width: 100%;
       padding: 0.666rem;
       font-size: 1rem;
       border: 1px solid lightgray;
       border-top: 0 none;
-      border-bottom-left-radius: 0.333rem;
-      border-bottom-right-radius: 0.333rem;
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
       appearance: none;
       background-color: white;
     }

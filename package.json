@@ -60,7 +60,7 @@
     "sass": "^1.50.1",
     "svelte": "^3.47.0",
     "svelte-preprocess": "^4.10.6",
-    "vite-plugin-autoimport": "^1.6.1"
+    "vite-plugin-autoimport": "^1.6.4"
   },
   "type": "module",
   "dependencies": {
