@@ -130,14 +130,14 @@ _(\*\* Hier kann auch ein Icon string platziert werden. Bspw: `fab fa-apple`)_
 Zeigt die Slider-Navigation an.
 
 ```HTML
-<Nav slide />
+<Nav variant="slide" />
 ```
 
-Darstellung der `<NavSlide />` und `<NavBar />` Navigation für verschiedene Breakpoints.
+Darstellung der `<Nav variant="slide" />` und `<Nav variant="bar" />` Navigation für verschiedene Breakpoints.
 
 ```HTML
 <!-- Lange Fassung -->
-<Nav slide="tablet-down" bar="desktop-up" />
+<Nav breakpoint="1024px" />
 
 <!-- Kurze Fassung -->
 <Nav />
@@ -217,3 +217,87 @@ Styling für beide Varianten kann in `src/styles/extend/nav.scss` erweitert oder
 ---
 
 _(\* = Pflichfeld)_
+
+# Formular
+
+Das standard Gerüst rund um Formular Eingabefelder.
+
+```HTML
+<Form id="4" subject="Betreff">
+  [...]
+</Form>
+```
+
+| Attribute | Default          | Description           |
+| :-------- | :--------------- | :-------------------- |
+| `id` (\*) | -                | Formular Empfänger ID |
+| `subject` | `Neue Nachricht` | Betreff               |
+
+## Checkbox
+
+```HTML
+<Checkbox name="agb" label="Ich habe die AGB gelesen und akzeptiere." required />
+```
+
+| Attribute   | Default | Description       |
+| :---------- | :------ | :---------------- |
+| `name` (\*) | -       | Feldname          |
+| `label`     | -       | Beschreibungstext |
+| `required`  | `false` | Pflichtfeld       |
+| `checked`   | `false` | Vorausgewählt     |
+
+## Input
+
+```HTML
+<Input name="name" label="Vor- & Nachname" required />
+```
+
+| Attribute     | Default | Description          |
+| :------------ | :------ | :------------------- |
+| `name` (\*)   | -       | Feldname             |
+| `label`       | -       | Beschreibungstext    |
+| `placeholder` | -       | Platzhaltertext      |
+| `required`    | `false` | Pflichtfeld          |
+| `type`        | `text`  | Vorausgewählt        |
+| `value`       | -       | Vorausgefüllter Text |
+
+## Radio
+
+```HTML
+<Radio name="agb" label="Ich habe die AGB gelesen und akzeptiere." required />
+```
+
+| Attribute    | Default | Description       |
+| :----------- | :------ | :---------------- |
+| `name` (\*)  | -       | Feldname          |
+| `value` (\*) | -       | Wert              |
+| `label`      | -       | Beschreibungstext |
+| `required`   | `false` | Pflichtfeld       |
+| `checked`    | `false` | Vorausgewählt     |
+
+## Select
+
+```HTML
+<Select name="tier" label="Lieblingstier" options={['Hund', 'Katze', 'Maus']} />
+```
+
+| Attribute   | Default   | Description                     |
+| :---------- | :-------- | :------------------------------ |
+| `name` (\*) | -         | Feldname                        |
+| `label`     | -         | Beschreibungstext               |
+| `options`   | `[]`      | Liste von Optionen              |
+| `required`  | `false`   | Pflichtfeld                     |
+| `values`    | `options` | 1:1 Werte Mapping für `options` |
+
+## Submit
+
+Der "Abschicken" Button
+
+```HTML
+<Submit name="tier" label="Lieblingstier" options={['Hund', 'Katze', 'Maus']} />
+```
+
+| Attribute  | Default      | Description        |
+| :--------- | :----------- | :----------------- |
+| `text`     | `Abschicken` | Feldname           |
+| `disabled` | `false`      | Button deaktiviert |

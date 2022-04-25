@@ -2,52 +2,45 @@
   import { uniqueId } from 'lodash-es';
   import { toClass } from 'boilerplate/js/utils.js';
 
+  export let label = false;
   export let name;
   export let required = false;
-  export let label = false;
+  export let checked = false;
   export let value;
-  export let selected;
+  export let group = checked ? value : '';
 
   const id = uniqueId(`radio-${name}-`);
 
-  const changeHandler = (event) => {
-    console.log(event);
+  const inputProps = {
+    id,
+    name,
+    value,
+    class: '-input',
+    required,
+    checked: checked ? 'checked' : undefined
   };
-
-  // -- Input proplist ---
-
-  required = required ? { required } : {};
 </script>
 
-<div class={toClass(['Checkbox'], $$props)} class:--active={selected} on:click={() => (selected = !selected)}>
-  {#if selected}
-    <Icon name="fas fa-check" ex-class="-icon" />
-  {:else}
-    <Icon name="far fa-square" ex-class="-icon" />
-  {/if}
-  <input {id} {name} {value} class="-input" {...required} type="radio" on:change={changeHandler} />
+<label class={toClass(['Checkbox'], $$props)} class:--active={checked}>
+  <input {...inputProps} {value} type="radio" bind:group />
   <span class="-label">{@html label}</span>
-</div>
+</label>
 
 <style lang="scss" global>
   .Checkbox {
-    position: relative;
-    padding-left: 26px;
+    @if mixin-exists(Radio-reset) {
+      @include Radio-reset;
+    } @else {
+      position: relative;
 
-    .-icon {
-      position: absolute;
-      left: 2px;
-      top: 3px;
-      cursor: pointer;
-    }
+      .-label {
+        user-select: none;
+        font-size: 0.85rem;
+      }
 
-    .-input {
-      display: none;
-    }
-
-    .-label {
-      user-select: none;
-      font-size: 0.85rem;
+      @if mixin-exists(Radio) {
+        @include Radio;
+      }
     }
   }
 </style>

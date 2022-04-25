@@ -25,14 +25,16 @@ export default {
       plugins: [
         content.default(),
         autoImport({
-          components: [{
-            name: './boilerplate',
-            flat: true
-          },
-          {
-            name: './src/components',
-            flat: true
-          }],
+          components: [
+            {
+              name: './boilerplate',
+              flat: true
+            },
+            {
+              name: './src/components',
+              flat: true
+            }
+          ],
           include: ['**/*.svelte'],
           exclude: ['**/node_modules/**']
         })
@@ -65,7 +67,7 @@ export default {
           style: resolve('./boilerplate/styles/style.scss')
         }
       }
-    }
+    },
   },
 
   preprocess: [

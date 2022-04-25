@@ -1,4 +1,5 @@
 import { readable } from 'svelte/store';
+import { base } from '$app/paths';
 import { isObject, omit, forEach } from 'lodash-es';
 
 import routesYml from 'src/routes.yml';
@@ -9,10 +10,10 @@ const normalizeRoute = (routes) => {
   forEach(routes, (item, href) => {
     let route;
     if (!isObject(item)) {
-      route = { href, name: item, class: null, meta: null, icon: false, routes: [] };
+      route = { href: base + href, name: item, class: null, meta: null, icon: false, routes: [] };
     } else {
       route = {
-        href,
+        href: base + href,
         icon: item.icon,
         name: item.name,
         class: item.class || null,

@@ -19,7 +19,7 @@
   }
 </script>
 
-<div class={toClass(className, $$props)}>
+<div class={toClass(className, $$props)} id={$$props.id}>
   <slot />
 </div>
 

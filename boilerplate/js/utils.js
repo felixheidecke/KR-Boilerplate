@@ -1,4 +1,5 @@
 import { isEmpty, isUndefined } from 'lodash-es';
+import { base, assets } from '$app/paths';
 
 /**
  * Format array to css class-list
@@ -27,4 +28,12 @@ export const toClass = function (base = [], props = {}) {
 export const isTrue = function (variable) {
   if (variable === 'false') return false;
   return !!variable;
+};
+
+export const assetPath = function (asset) {
+  return `${assets}${asset}`
+};
+
+export const basePath = function (link) {
+  return `${base}${link}`
 };

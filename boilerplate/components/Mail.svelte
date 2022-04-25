@@ -13,7 +13,7 @@
   const obfuscated = to.trim().split('').join('&shy;');
 </script>
 
-<a name="mail" on:click={() => (location.href = 'mailto:' + to)} class={toClass(['Mail'], $$props)}>
+<a name="mail" ref="external" on:click={() => (location.href = 'mailto:' + to)} class={toClass(['Mail'], $$props)}>
   {#if icon}
     <Icon ex-class="-icon" name={iconName} />
   {/if}

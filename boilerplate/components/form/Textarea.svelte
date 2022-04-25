@@ -8,17 +8,21 @@
   export let placeholder = false;
   export let height = '8rem';
 
+  let value = '';
+
   const id = uniqueId(`textarea-${name}-`);
 
   label = required ? label + '*' : label;
 
   // -- Input proplist ---
 
-  const inputProps = {};
-
-  if (required) {
-    inputProps.required = 'required';
-  }
+  const inputProps = {
+    id,
+    name,
+    style: `height:${height}`,
+    class: '-textarea',
+    required
+  };
 
   if (placeholder) {
     inputProps.placeholder = 'placeholder';
@@ -29,36 +33,44 @@
   {#if label}
     <label class="-label" for={name}>{label}</label>
   {/if}
-  <textarea class="-input" {id} {name} {...inputProps} style={`height:${height}`} />
+  <textarea {...inputProps} bind:value />
 </div>
 
 <style lang="scss">
   .Textarea {
-    display: flex;
-    flex-direction: column;
+    @if mixin-exists(Textarea-reset) {
+      @include Textarea-reset;
+    } @else {
+      display: flex;
+      flex-direction: column;
 
-    .-label {
-      display: block;
-      background: #eee;
-      padding: 0.25rem 0.666rem;
-      font-size: 0.8rem;
-      border: 1px solid lightgray;
-      border-bottom: 0 none;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
-      user-select: none;
-    }
+      .-label {
+        display: block;
+        background: #eee;
+        padding: 0.25rem 0.666rem;
+        font-size: 0.8rem;
+        border: 1px solid lightgray;
+        border-bottom: 0 none;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+        user-select: none;
+      }
 
-    .-input {
-      width: 100%;
-      padding: 0.666rem;
-      font-size: 1rem;
-      border: 1px solid lightgray;
-      border-top: 0 none;
-      border-bottom-left-radius: 0.25rem;
-      border-bottom-right-radius: 0.25rem;
-      outline: none;
-      resize: none;
+      .-textarea {
+        width: 100%;
+        padding: 0.666rem;
+        font-size: 1rem;
+        border: 1px solid lightgray;
+        border-top: 0 none;
+        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+        outline: none;
+        resize: none;
+      }
+
+      @if mixin-exists(Textarea) {
+        @include Input;
+      }
     }
   }
 </style>

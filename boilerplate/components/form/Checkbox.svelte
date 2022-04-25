@@ -2,10 +2,10 @@
   import { uniqueId } from 'lodash-es';
   import { toClass } from 'boilerplate/js/utils.js';
 
+  export let checked = false;
+  export let label = false;
   export let name;
   export let required = false;
-  export let label = false;
-  export let checked;
 
   const id = uniqueId(`checkbox-${name}-`);
 
@@ -15,34 +15,18 @@
     id,
     name,
     class: '-input',
-    required,
-    hidden
+    required
   };
-
-  required = required ? { required } : {};
 </script>
 
-<div class={toClass(['Checkbox'], $$props)} class:--active={checked} on:click={() => (checked = !checked)}>
-  {#if checked}
-    <Icon name="fas fa-check" ex-class="-icon" />
-  {:else}
-    <Icon name="far fa-square" ex-class="-icon" />
-  {/if}
+<label class={toClass(['Checkbox'], $$props)} class:--active={checked}>
   <input {...inputProps} type="checkbox" bind:checked />
   <span class="-label">{@html label}</span>
-</div>
+</label>
 
 <style lang="scss" global>
   .Checkbox {
     position: relative;
-    padding-left: 26px;
-
-    .-icon {
-      position: absolute;
-      left: 2px;
-      top: 3px;
-      cursor: pointer;
-    }
 
     .-label {
       user-select: none;

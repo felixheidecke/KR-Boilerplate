@@ -4,10 +4,11 @@
 
   export let href = false;
   export let icon = false;
+  export let disabled = false;
 </script>
 
 {#if !href}
-  <button class={toClass(['Button'], $$props)}>
+  <button class={toClass(['Button'], $$props)} {disabled}>
     {#if icon}
       <Icon ex-class="-icon" name={icon} />
     {/if}
@@ -42,6 +43,11 @@
       background-color: white;
       border: 1px solid #333;
       gap: 0.5rem;
+
+      &:disabled {
+        border-color: lightgray;
+        color: lightgray;
+      }
     }
 
     @if mixin-exists(Button) {
