@@ -24,6 +24,8 @@
 {/if}
 
 <style lang="scss" global>
+  @import 'src/styles/extend/button';
+
   .Button {
     @if mixin-exists(Button-reset) {
       @include Button-reset;

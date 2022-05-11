@@ -45,7 +45,6 @@ export default {
             additionalData: `
               @import "boilerplate/styles/variables.scss";
               @import "src/styles/variables.scss";
-              @import 'src/styles/extend/extend';
             `
           }
         }
@@ -76,7 +75,6 @@ export default {
         prependData: `
           @import "boilerplate/styles/variables";
           @import "src/styles/variables";
-          @import 'src/styles/extend/extend';
           `
       }
     })

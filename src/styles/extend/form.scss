@@ -5,6 +5,70 @@
   // Opitonal @mixin Form-reset {}
   // um standard Styling zu entfernen
 
-  // .-icon    { }
-  // .-address { }
+  // .-body   { }
+  // .-done   { }
+  // .-errors { }
+}
+
+@mixin Checkbox {
+  // Erweitern des <Checkbox /> Styles
+  // ---------------------------
+
+  // Opitonal @mixin Checkbox-reset {}
+  // um standard Styling zu entfernen
+
+  // .-label { }
+  // .-input { }
+}
+
+@mixin Input {
+  // Erweitern des <Input /> Styles
+  // ---------------------------
+
+  // Opitonal @mixin Input-reset {}
+  // um standard Styling zu entfernen
+
+  // .-label { }
+  // .-input { }
+}
+
+@mixin Radio {
+  // Erweitern des <Radio /> Styles
+  // ---------------------------
+
+  // Opitonal @mixin Radio-reset {}
+  // um standard Styling zu entfernen
+
+  // .-label { }
+  // .-input { }
+}
+
+@mixin Select {
+  // Erweitern des <Select /> Styles
+  // ---------------------------
+
+  // Opitonal @mixin Select-reset {}
+  // um standard Styling zu entfernen
+
+  // .-label { }
+  // .-input { }
+}
+
+@mixin Textarea {
+  // Erweitern des <Textarea /> Styles
+  // ---------------------------
+
+  // Opitonal @mixin Textarea-reset {}
+  // um standard Styling zu entfernen
+
+  // .-label    { }
+  // .-textarea { }
+}
+
+@mixin Submit {
+  // Erweitern des <Submit /> Styles
+  // ---------------------------
+
+  // Opitonal @mixin Submit-reset {}
+  // um standard Styling zu entfernen
 }

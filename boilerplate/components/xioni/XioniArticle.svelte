@@ -68,6 +68,8 @@
 {/if}
 
 <style lang="scss" global>
+  @import 'src/styles/extend/xioni';
+
   .XioniArticle {
     @if mixin-exists(XioniArticle-reset) {
       @include XioniArticle-reset;

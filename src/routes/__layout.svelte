@@ -8,7 +8,7 @@
   </h1>
 </header>
 
-<!-- <Nav breakpoint="440px" /> -->
+<Nav breakpoint="440px" />
 
 <main>
   <slot />
@@ -25,9 +25,5 @@
     max-width: 60rem;
     margin: 2rem auto;
     padding: 0 2rem;
-  }
-
-  :global(.Nav) {
-    margin-bottom: 2rem;
   }
 </style>

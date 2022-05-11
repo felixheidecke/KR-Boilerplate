@@ -20,6 +20,8 @@
 </button>
 
 <style lang="scss">
+  @import 'src/styles/extend/toplink';
+
   .Toplink {
     @if mixin-exists(Toplink-reset) {
       @include Toplink-reset;

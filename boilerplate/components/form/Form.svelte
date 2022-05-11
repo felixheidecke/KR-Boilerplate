@@ -80,6 +80,8 @@
 </form>
 
 <style lang="scss" global>
+  @import 'src/styles/extend/form';
+
   .Form {
     @if mixin-exists(Form-reset) {
       @include Form-reset;

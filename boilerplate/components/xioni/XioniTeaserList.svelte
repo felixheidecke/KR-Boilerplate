@@ -47,6 +47,8 @@
 {/each}
 
 <style lang="scss" global>
+  @import 'src/styles/extend/xioni';
+
   .XioniTeaser {
     @if mixin-exists(XioniTeaser-reset) {
       @include XioniTeaser-reset;

@@ -27,6 +27,8 @@
 </a>
 
 <style lang="scss">
+  @import 'src/styles/extend/mail';
+
   .Mail {
     @if mixin-exists(Mail-reset) {
       @include Mail-reset;
