@@ -1,11 +1,13 @@
 <script>
-  import { articles, fetchArticle, state } from '@/stores/articles';
+  import { toClass } from '@/js/utils';
   import { format } from 'date-fns';
   import { onMount } from 'svelte';
+  import { articles, fetchArticle, state } from '@/stores/articles';
 
   // --- Props --------
   export let id;
   export let author = false;
+  export let expanded = true;
   export let date = false;
 
   // --- Computed -----
@@ -22,7 +24,7 @@
 </script>
 
 {#if article.id || $state.loading}
-  <article class="XioniArticle" data-id={id}>
+  <article class={toClass(['XioniArticle'], $$props)} data-id={id}>
     <h2 class="-title">
       {article.title}
     </h2>
@@ -40,27 +42,30 @@
     <div class="-teaser">
       {@html article.text}
     </div>
-    {#if article.content.length}
-      <div class="-text">
-        {#each article.content as c}
-          {#if c.image}
-            <Picture ex-class="-text-picture" src={c.image.src} alt={c.image.alt} />
-          {/if}
-          {#if c.text}
-            {@html c.text}
-          {/if}
-        {/each}
-      </div>
-    {/if}
 
-    {#if article.pdf}
-      <a href={article.pdf.src} class="-pdf" target="_blank" rel="follow" title={article.pdf.name}
-        >{article.pdf.title}</a
-      >
-    {/if}
+    {#if expanded}
+      {#if article.content.length}
+        <div class="-text">
+          {#each article.content as c}
+            {#if c.image}
+              <Picture ex-class="-text-picture" src={c.image.src} alt={c.image.alt} />
+            {/if}
+            {#if c.text}
+              {@html c.text}
+            {/if}
+          {/each}
+        </div>
+      {/if}
 
-    {#if article.link}
-      <a href={article.link} class="-link" rel="nofollow" target="_blank">{article.link}</a>
+      {#if article.pdf}
+        <a href={article.pdf.src} class="-pdf" target="_blank" rel="follow" title={article.pdf.name}
+          >{article.pdf.title}</a
+        >
+      {/if}
+
+      {#if article.link}
+        <a href={article.link} class="-link" rel="nofollow" target="_blank">{article.link}</a>
+      {/if}
     {/if}
   </article>
 {:else}
@@ -68,43 +73,38 @@
 {/if}
 
 <style lang="scss" global>
-  @import 'src/styles/extend/xioni';
-
   .XioniArticle {
-    @if mixin-exists(XioniArticle-reset) {
-      @include XioniArticle-reset;
-    } @else {
-      display: flow-root;
+    display: flow-root;
 
-      .-meta-author,
-      .-meta-date {
-        display: inline-block;
-      }
-
-      .-picture img {
-        max-width: 10rem;
-        float: left;
-        margin-right: 2rem;
-      }
-
-      .-text-picture img {
-        max-width: 100%;
-      }
-
-      .-pdf {
-        display: flex;
-        align-items: center;
-
-        svg {
-          max-width: 1rem;
-          max-height: 1rem;
-          margin-right: 0.333rem;
-        }
-      }
+    .-meta-author,
+    .-meta-date {
+      display: inline-block;
     }
 
-    @if mixin-exists(XioniArticle) {
-      @include XioniArticle;
+    .-picture img {
+      max-width: 10rem;
+      float: left;
+      margin-right: 2rem;
+    }
+
+    .-text-picture img {
+      max-width: 100%;
+    }
+
+    .-text ul {
+      list-style-type: disc;
+      padding-left: 2rem;
+    }
+
+    .-pdf {
+      display: flex;
+      align-items: center;
+
+      svg {
+        max-width: 1rem;
+        max-height: 1rem;
+        margin-right: 0.333rem;
+      }
     }
   }
 </style>

@@ -20,38 +20,28 @@
 </button>
 
 <style lang="scss">
-  @import 'src/styles/extend/toplink';
-
   .Toplink {
-    @if mixin-exists(Toplink-reset) {
-      @include Toplink-reset;
-    } @else {
-      position: fixed;
-      right: 0.5rem;
-      bottom: 0.5rem;
-      height: 5rem;
-      width: 5rem;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.5s, transform 0.5s;
-      border: 0 none;
+    position: fixed;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    height: 5rem;
+    width: 5rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.5s, transform 0.5s;
+    border: 0 none;
 
-      &:hover {
-        opacity: 1;
-      }
+    &:hover {
+      opacity: 1;
+    }
 
-      @media only screen and (max-width: 500px) {
-        height: 50px;
-        width: 50px;
-      }
+    @media only screen and (max-width: 500px) {
+      height: 50px;
+      width: 50px;
+    }
 
-      &.--hidden {
-        transform: translateY(120%);
-      }
-
-      @if mixin-exists(Toplink) {
-        @include Toplink;
-      }
+    &.--hidden {
+      transform: translateY(120%);
     }
   }
 </style>

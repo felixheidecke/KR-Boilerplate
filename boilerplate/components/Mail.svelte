@@ -27,24 +27,14 @@
 </a>
 
 <style lang="scss">
-  @import 'src/styles/extend/mail';
-
   .Mail {
-    @if mixin-exists(Mail-reset) {
-      @include Mail-reset;
-    } @else {
-      cursor: pointer;
-      display: inline-flex;
-      gap: 0.5rem;
-      align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
 
-      .-address {
-        text-decoration: underline;
-      }
-
-      @if mixin-exists(Mail) {
-        @include Mail;
-      }
+    .-address {
+      text-decoration: underline;
     }
   }
 </style>

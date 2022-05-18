@@ -24,36 +24,26 @@
 {/if}
 
 <style lang="scss" global>
-  @import 'src/styles/extend/button';
-
   .Button {
-    @if mixin-exists(Button-reset) {
-      @include Button-reset;
-    } @else {
-      align-items: center;
-      box-sizing: border-box;
-      cursor: pointer;
-      display: inline-flex;
-      font-family: inherit;
-      font-size: 1rem;
-      padding: 0.25rem 1rem;
-      text-align: center;
-      text-decoration: none;
-      transition: all 0.25s;
-      user-select: none;
-      white-space: nowrap;
-      background-color: white;
-      border: 1px solid #333;
-      gap: 0.5rem;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.25rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.25s;
+    user-select: none;
+    white-space: nowrap;
+    background-color: white;
+    border: 1px solid #333;
+    gap: 0.5rem;
 
-      &:disabled {
-        border-color: lightgray;
-        color: lightgray;
-      }
-    }
-
-    @if mixin-exists(Button) {
-      @include Button;
+    &:disabled {
+      border-color: lightgray;
+      color: lightgray;
     }
   }
 </style>

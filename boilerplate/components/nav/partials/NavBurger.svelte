@@ -21,34 +21,26 @@
 
 <style lang="scss" global>
   .Burger {
-    @if mixin-exists(Burger-reset) {
-      @include Burger-reset;
-    } @else {
-      align-items: center;
-      background: none;
-      border: 0 none;
-      cursor: pointer;
-      display: flex;
-      height: 3rem;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
-      position: fixed;
-      right: 1rem;
-      top: 0.5rem;
-      z-index: 2;
-      font-weight: bold;
-      font-size: 1rem;
+    align-items: center;
+    background: none;
+    border: 0 none;
+    cursor: pointer;
+    display: flex;
+    height: 3rem;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    right: 1rem;
+    top: 0.5rem;
+    z-index: 2;
+    font-weight: bold;
+    font-size: 1rem;
 
-      svg {
-        width: 1.5rem;
-        height: 1.5rem;
-        fill: currentColor;
-      }
-
-      @if mixin-exists(Burger) {
-        @include Burger;
-      }
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      fill: currentColor;
     }
   }
 </style>

@@ -38,39 +38,31 @@
 
 <style lang="scss">
   .Textarea {
-    @if mixin-exists(Textarea-reset) {
-      @include Textarea-reset;
-    } @else {
-      display: flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-      .-label {
-        display: block;
-        background: #eee;
-        padding: 0.25rem 0.666rem;
-        font-size: 0.8rem;
-        border: 1px solid lightgray;
-        border-bottom: 0 none;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-        user-select: none;
-      }
+    .-label {
+      display: block;
+      background: #eee;
+      padding: 0.25rem 0.666rem;
+      font-size: 0.8rem;
+      border: 1px solid lightgray;
+      border-bottom: 0 none;
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
+      user-select: none;
+    }
 
-      .-textarea {
-        width: 100%;
-        padding: 0.666rem;
-        font-size: 1rem;
-        border: 1px solid lightgray;
-        border-top: 0 none;
-        border-bottom-left-radius: 0.25rem;
-        border-bottom-right-radius: 0.25rem;
-        outline: none;
-        resize: none;
-      }
-
-      @if mixin-exists(Textarea) {
-        @include Input;
-      }
+    .-textarea {
+      width: 100%;
+      padding: 0.666rem;
+      font-size: 1rem;
+      border: 1px solid lightgray;
+      border-top: 0 none;
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+      outline: none;
+      resize: none;
     }
   }
 </style>

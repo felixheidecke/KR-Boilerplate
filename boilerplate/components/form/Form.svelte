@@ -80,33 +80,23 @@
 </form>
 
 <style lang="scss" global>
-  @import 'src/styles/extend/form';
-
   .Form {
-    @if mixin-exists(Form-reset) {
-      @include Form-reset;
-    } @else {
-      .-body {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
+    .-body {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-      .-errors {
-        @include reset-list;
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        bottom: 1rem;
-        left: 1rem;
-        right: 1rem;
-      }
-
-      @if mixin-exists(Form) {
-        @include Form;
-      }
+    .-errors {
+      @include reset-list;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
     }
   }
 </style>

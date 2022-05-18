@@ -28,19 +28,11 @@
 
 <style lang="scss" global>
   .Checkbox {
-    @if mixin-exists(Radio-reset) {
-      @include Radio-reset;
-    } @else {
-      position: relative;
+    position: relative;
 
-      .-label {
-        user-select: none;
-        font-size: 0.85rem;
-      }
-
-      @if mixin-exists(Radio) {
-        @include Radio;
-      }
+    .-label {
+      user-select: none;
+      font-size: 0.85rem;
     }
   }
 </style>

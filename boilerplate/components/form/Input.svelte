@@ -39,39 +39,31 @@
 
 <style lang="scss">
   .Input {
-    @if mixin-exists(Input-reset) {
-      @include Input-reset;
-    } @else {
-      display: flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-      .-label {
-        display: block;
-        background: #eee;
-        padding: 0.25rem 0.666rem;
-        font-size: 0.8rem;
-        border: 1px solid lightgray;
-        border-bottom: 0 none;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-        user-select: none;
-      }
+    .-label {
+      display: block;
+      background: #eee;
+      padding: 0.25rem 0.666rem;
+      font-size: 0.8rem;
+      border: 1px solid lightgray;
+      border-bottom: 0 none;
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
+      user-select: none;
+    }
 
-      .-input {
-        width: 100%;
-        padding: 0.666rem;
-        font-size: 1rem;
-        border: 1px solid lightgray;
-        border-top: 0 none;
-        outline: none;
-        background-color: white;
-        border-bottom-left-radius: 0.25rem;
-        border-bottom-right-radius: 0.25rem;
-      }
-
-      @if mixin-exists(Input) {
-        @include Input;
-      }
+    .-input {
+      width: 100%;
+      padding: 0.666rem;
+      font-size: 1rem;
+      border: 1px solid lightgray;
+      border-top: 0 none;
+      outline: none;
+      background-color: white;
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
     }
   }
 </style>
