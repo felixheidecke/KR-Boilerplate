@@ -28,7 +28,7 @@
     <li>
       <XioniArticle id={article.id} {date} {author} {expanded} ex-class={!expanded ? '-article' : null} />
       {#if !expanded && article.content.length}
-        <a href={detailsPath + '/' + article.slug} class="-read-more">... weiter lesen</a>
+        <Button href={detailsPath + '/' + article.slug} class="-read-more">... weiter lesen</Button>
       {/if}
     </li>
   {:else}
@@ -37,7 +37,7 @@
 </ul>
 
 <style lang="scss" global>
-  .XioniArticles {
+  :where(.XioniArticles) {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -68,10 +68,7 @@
     }
 
     .-read-more {
-      border: 1px solid lightgray;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.85rem;
-      cursor: pointer;
+      // Read More button
     }
   }
 </style>

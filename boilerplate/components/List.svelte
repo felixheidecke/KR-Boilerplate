@@ -14,7 +14,7 @@
 </ul>
 
 <style lang="scss" global>
-  .List {
+  :where(.List) {
     padding-left: 1rem;
     margin-left: 0.75rem;
 

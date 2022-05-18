@@ -27,7 +27,7 @@
 </a>
 
 <style lang="scss">
-  .Mail {
+  :where(.Mail) {
     cursor: pointer;
     display: inline-flex;
     gap: 0.5rem;

@@ -73,7 +73,7 @@
 {/if}
 
 <style lang="scss" global>
-  .XioniArticle {
+  :where(.XioniArticle) {
     display: flow-root;
 
     .-meta-author,

@@ -24,7 +24,7 @@
 </picture>
 
 <style lang="scss" global>
-  .Picture {
+  :where(.Picture) {
     display: block;
 
     img {

@@ -15,7 +15,7 @@
 </div>
 
 <style lang="scss">
-  .XioniSceleton {
+  :where(.XioniSceleton) {
     display: flex;
     flex-direction: column;
     gap: 3rem;

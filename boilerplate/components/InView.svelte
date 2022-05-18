@@ -25,7 +25,7 @@
 
 <style lang="scss" global>
   // -- Fade ----------------
-  .InView.--fade {
+  :where(.InView.--fade) {
     opacity: 0;
     transition: {
       delay: 100ms;
@@ -40,7 +40,7 @@
 
   // -- Scale ----------------
 
-  .InView.--scale {
+  :where(.InView.--scale) {
     transform: scale(0.75);
     opacity: 0.75;
     transition: {

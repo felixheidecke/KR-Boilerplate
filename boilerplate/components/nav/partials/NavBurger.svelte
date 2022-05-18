@@ -2,7 +2,7 @@
   export let active = false;
 </script>
 
-<button class="Burger" class:--active={active} on:click>
+<button class="Burger" class:--active={active} on:click aria-label="Menü">
   <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
   {#if active}
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
@@ -20,7 +20,7 @@
 </button>
 
 <style lang="scss" global>
-  .Burger {
+  :where(.Burger) {
     align-items: center;
     background: none;
     border: 0 none;

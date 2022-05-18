@@ -24,7 +24,7 @@
 </div>
 
 <style lang="scss" global>
-  .Grid {
+  :where(.Grid) {
     display: flex;
     flex-wrap: wrap;
 

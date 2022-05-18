@@ -20,7 +20,7 @@
 </button>
 
 <style lang="scss">
-  .Toplink {
+  :where(.Toplink) {
     position: fixed;
     right: 0.5rem;
     bottom: 0.5rem;

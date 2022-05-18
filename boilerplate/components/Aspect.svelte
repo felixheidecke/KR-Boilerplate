@@ -11,7 +11,7 @@
 </section>
 
 <style lang="scss" global>
-  .Aspect {
+  :where(.Aspect) {
     position: relative;
     width: 100%;
     overflow: hidden;
