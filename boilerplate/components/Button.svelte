@@ -5,17 +5,23 @@
   export let href = false;
   export let icon = false;
   export let disabled = false;
+  export let target = '_self';
+  export let reverse = false;
+
+  const className = ['Button'];
+  if (reverse) className.push('--reverse');
+  if (href) className.push('--anchor');
 </script>
 
 {#if !href}
-  <button class={toClass(['Button'], $$props)} {disabled}>
+  <button class={toClass(className, $$props)} {disabled}>
     {#if icon}
       <Icon ex-class="-icon" name={icon} />
     {/if}
     <slot />
   </button>
 {:else}
-  <a {href} class={toClass(['Button', '--anchor'], $$props)}>
+  <a {href} {target} class={toClass(className, $$props)}>
     {#if icon}
       <Icon ex-class="-icon" name={icon} />
     {/if}

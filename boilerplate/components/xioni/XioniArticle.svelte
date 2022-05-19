@@ -19,7 +19,7 @@
     await fetchArticle(id);
 
     // Defer to end of callstack
-    setTimeout(() => window.scrollTo(0, 0));
+    // setTimeout(() => window.scrollTo(0, 0));
   });
 </script>
 

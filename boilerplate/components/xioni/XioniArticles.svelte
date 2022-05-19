@@ -67,8 +67,6 @@
       margin-right: 2rem;
     }
 
-    .-read-more {
-      // Read More button
-    }
+    // .-read-more { }
   }
 </style>
