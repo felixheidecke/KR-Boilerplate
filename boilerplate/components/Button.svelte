@@ -5,9 +5,9 @@
   export let href = false;
   export let icon = false;
   export let disabled = false;
-  export let target = '_self';
+  export let target = null;
   export let reverse = false;
-
+  // Anchor
   const className = ['Button'];
   if (reverse) className.push('--reverse');
   if (href) className.push('--anchor');
@@ -49,8 +49,8 @@
     user-select: none;
     white-space: nowrap;
 
-    &:focus,
-    &:hover {
+    &:not(:disabled):focus,
+    &:not(:disabled):hover {
       background-color: darken(white, 5%);
       box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
     }
@@ -58,6 +58,7 @@
     &:disabled {
       border-color: lightgray;
       color: lightgray;
+      cursor: not-allowed;
     }
   }
 </style>

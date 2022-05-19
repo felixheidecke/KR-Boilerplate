@@ -25,11 +25,12 @@
 
 <style lang="scss" global>
   :where(.Picture) {
-    display: block;
+    display: inline-block;
 
     img {
       width: 100%;
       height: auto;
+      max-width: fit-content;
     }
   }
 </style>
