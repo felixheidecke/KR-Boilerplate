@@ -37,3 +37,9 @@ export const assetPath = function (asset) {
 export const basePath = function (link) {
   return `${base}${link}`
 };
+
+export const scrollTo = (element) => {
+  document.querySelector(element).scrollIntoView({
+    behavior: `smooth`,
+  });
+};

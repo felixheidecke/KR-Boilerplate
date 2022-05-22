@@ -13,6 +13,7 @@
   let errors = [];
   let isLoading = false;
   let isDone = false;
+  let isDoneEl;
 
   $: if (errors.length) {
     setTimeout(() => (errors = []), 5000);
@@ -39,6 +40,8 @@
 
       errors = response.ok ? [] : await response.json();
       isDone = !errors.length;
+
+      setTimeout(scrollToDoneText, 500);
     } catch (error) {
       console.error(error);
       isDone = false;
@@ -53,15 +56,24 @@
       required = [...required, element.getAttribute('name')];
     });
   });
+
+  const scrollToDoneText = () => {
+    if (!isDoneEl) return;
+
+    isDoneEl.scrollIntoView({
+      behavior: `smooth`
+    });
+  };
 </script>
 
 <form class="Form" bind:this={form} on:submit|preventDefault={submit}>
   <input type="hidden" name="subject" value={subject} />
   <input type="hidden" name="id" value={id} />
   <input type="hidden" name="required" value={required.join(',')} />
+  <input type="text" name="honig" />
 
   {#if isDone}
-    <section class="-done" transition:slide>
+    <section bind:this={isDoneEl} class="-done" transition:slide>
       <slot name="done" />
     </section>
   {:else}
@@ -97,6 +109,11 @@
       bottom: 1rem;
       left: 1rem;
       right: 1rem;
+    }
+
+    input[name='honig'] {
+      position: absolute;
+      left: -9999px;
     }
   }
 </style>
