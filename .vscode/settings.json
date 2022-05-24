@@ -4,5 +4,11 @@
   },
   "search.exclude": {
     "**/boilerplate": true
-  }
+  },
+  "files.exclude": {
+    ".npmrc": false,
+    "Desktop.ini": true,
+    ".owncloudsync.log": true,
+    ".sync_*": true
+  },
 }
