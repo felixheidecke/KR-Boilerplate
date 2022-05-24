@@ -6,7 +6,7 @@
 <button class="Submit" on:click {disabled}>{text}</button>
 
 <style lang="scss">
-  .Submit {
+  :where(.Submit) {
     width: fit-content;
     font-size: 1rem;
     background: #eee;

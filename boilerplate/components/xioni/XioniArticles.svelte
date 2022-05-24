@@ -10,7 +10,17 @@
   export let author = false;
   export let date = false;
   export let expanded = false;
-  export let detailsPath = '';
+  export let config = null;
+
+  config = {
+    id,
+    limit,
+    author,
+    date,
+    expanded,
+    detailPagePrefix: '',
+    ...config
+  };
 
   // --- Computed -----
   $: listOfarticles = $articles.filter((a) => a.module == id) || [];
@@ -26,9 +36,9 @@
 <ul class={toClass(['XioniArticles'], $$props)}>
   {#each listOfarticles as article}
     <li>
-      <XioniArticle id={article.id} {date} {author} {expanded} ex-class={!expanded ? '-article' : null} />
+      <XioniArticle id={article.id} {date} {author} {expanded} ex-class="-article" />
       {#if !expanded && article.content.length}
-        <Button href={detailsPath + '/' + article.slug} class="-read-more">... weiter lesen</Button>
+        <Button href={config.detailPagePrefix + '/' + article.slug} class="-read-more">... weiter lesen</Button>
       {/if}
     </li>
   {:else}

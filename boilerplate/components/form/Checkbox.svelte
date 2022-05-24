@@ -25,7 +25,7 @@
 </label>
 
 <style lang="scss" global>
-  .Checkbox {
+  :where(.Checkbox) {
     position: relative;
 
     .-label {

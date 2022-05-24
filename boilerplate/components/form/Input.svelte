@@ -38,7 +38,7 @@
 </div>
 
 <style lang="scss">
-  .Input {
+  :where(.Input) {
     display: flex;
     flex-direction: column;
 

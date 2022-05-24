@@ -33,7 +33,7 @@
 </div>
 
 <style lang="scss">
-  .Select {
+  :where(.Select) {
     display: flex;
     flex-direction: column;
 

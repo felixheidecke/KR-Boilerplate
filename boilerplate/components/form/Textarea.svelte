@@ -37,7 +37,7 @@
 </div>
 
 <style lang="scss">
-  .Textarea {
+  :where(.Textarea) {
     display: flex;
     flex-direction: column;
 

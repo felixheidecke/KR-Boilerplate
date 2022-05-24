@@ -5,10 +5,10 @@
   import { articles, fetchArticle, state } from '@/stores/articles';
 
   // --- Props --------
-  export let id;
   export let author = false;
-  export let expanded = true;
   export let date = false;
+  export let expanded = true;
+  export let id;
 
   // --- Computed -----
   $: article = $articles.find((a) => a.id === parseInt(id)) || {};

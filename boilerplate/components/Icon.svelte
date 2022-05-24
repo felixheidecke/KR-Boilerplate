@@ -11,7 +11,7 @@
   }
 </script>
 
-<i class={toClass(className, $$props)} />
+<i class={toClass(className, $$props)} aria-hidden />
 
 <style lang="scss" global>
   @import url('https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css');

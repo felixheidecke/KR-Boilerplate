@@ -21,13 +21,13 @@
   };
 </script>
 
-<label class={toClass(['Checkbox'], $$props)} class:--active={checked}>
+<label class={toClass(['Radio'], $$props)} class:--active={checked}>
   <input {...inputProps} {value} type="radio" bind:group />
   <span class="-label">{@html label}</span>
 </label>
 
 <style lang="scss" global>
-  .Checkbox {
+  :where(.Radio) {
     position: relative;
 
     .-label {

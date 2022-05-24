@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { slide } from 'svelte/transition';
 
-  export let subject = 'Subject';
+  export let subject = 'Kontakformular';
   export let id = 0;
 
   let form; // Form HTML Element
@@ -92,7 +92,7 @@
 </form>
 
 <style lang="scss" global>
-  .Form {
+  :where(.Form) {
     .-body {
       position: relative;
       display: flex;
