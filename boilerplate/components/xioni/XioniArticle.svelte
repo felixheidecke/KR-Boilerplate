@@ -1,75 +1,60 @@
 <script>
   import { classNameHelper } from '@/js/utils';
   import { format } from 'date-fns';
-  import { onMount } from 'svelte';
-  import { articles, fetchArticle, state } from '@/stores/articles';
+  import { de } from 'date-fns/locale';
 
   // --- Props --------
-  export let author = false;
-  export let date = false;
-  export let expanded = true;
+  export let author;
+  export let content;
+  export let date;
   export let id;
-
-  // --- Computed -----
-  $: article = $articles.find((a) => a.id === parseInt(id)) || {};
-
-  // --- Lifecycle ----
-  onMount(async () => {
-    if (article.id) return;
-    await fetchArticle(id);
-
-    // Defer to end of callstack
-    // setTimeout(() => window.scrollTo(0, 0));
-  });
+  export let image;
+  export let link;
+  export let pdf;
+  export let text;
+  export let title;
 </script>
 
 <article class={classNameHelper(['XioniArticle'], $$props)} id={`article-${id}`}>
   <h2 class="-title">
-      {article.title}
+    {title}
   </h2>
   <div class="-meta">
-      {#if author && article.author}
-        <span class="-meta-author">Von {article.author}</span>
+    {#if author}
+      <span class="-meta-author">Von {author}</span>
     {/if}
-      {#if date && article.date}
-        <time class="-meta-date">{format(article.date, 'dd.MM.yyyy')}</time>
+    {#if date}
+      <time class="-meta-date">{format(date * 1000, 'PP', { locale: de })}</time>
     {/if}
   </div>
-    {#if article.image}
-      <Picture ex-class="-picture" src={article.image.srcSmall} tablet={article.image.src} alt={article.image.alt} />
+  {#if image}
+    <Picture ex-class="-picture" src={image.srcSmall} tablet={image.src} alt={image.alt} />
   {/if}
   <div class="-teaser">
-      {@html article.text}
+    {@html text}
   </div>
 
-    {#if expanded}
-      {#if article.content.length}
+  {#if content}
     <div class="-text">
-          {#each article.content as c}
-            {#if c.image}
-              <Picture ex-class="-text-picture" src={c.image.src} alt={c.image.alt} />
+      {#each content as { image, text }}
+        {#if image}
+          <Picture ex-class="-text-picture" src={image.src} alt={image.alt} align={image.position} />
         {/if}
-            {#if c.text}
-              {@html c.text}
+        {#if text}
+          {@html text}
         {/if}
       {/each}
     </div>
   {/if}
 
-      {#if article.pdf}
-        <a href={article.pdf.src} class="-pdf" target="_blank" rel="follow" title={article.pdf.name}
-          >{article.pdf.title}</a
-        >
+  {#if pdf}
+    <a href={pdf.src} class="-pdf" target="_blank" rel="follow" title={pdf.name}>{pdf.title}</a>
   {/if}
 
-      {#if article.link}
-        <a href={article.link} class="-link" rel="nofollow" target="_blank">{article.link}</a>
-      {/if}
+  {#if link}
+    <a href={link} class="-link" rel="nofollow" target="_blank">{link}</a>
   {/if}
 </article>
-{:else}
-  <XioniSceleton />
-{/if}
 
 <style lang="scss" global>
   :where(.XioniArticle) {

@@ -1,6 +1,5 @@
 <script>
   import { classNameHelper } from '@/js/utils';
-  import { Icon } from './Icon.svelte';
   import { onMount } from 'svelte';
   import { uniqueId } from 'lodash-es';
   import Glide from '@glidejs/glide';
@@ -57,8 +56,8 @@
   {/if}
 </div>
 
-<style lang="scss">
-  @import '../../../node_modules/@glidejs/glide/dist/css/glide.core.min.css';
+<style lang="scss" global>
+  @import '../../node_modules/@glidejs/glide/dist/css/glide.core.min.css';
 
   :where(.Swiper) .-button {
     padding: 0.5rem;

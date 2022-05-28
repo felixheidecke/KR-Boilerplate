@@ -129,19 +129,21 @@ _(\*\* Hier kann auch ein Icon string platziert werden. Bspw: `fab fa-apple`)_
 
 ```HTML
 <Picture
-  src="/images/512.png"
-  tablet="/images/1920.png"
+  src="https://picsum.photos/768/432"
+  tablet="https://picsum.photos/1024/576"
+  desktop="https://picsum.photos/1440/810"
+  widescreen="https://picsum.photos/1920/1080"
 />
 ```
 
-| Attribute    | Standardwert | Beschreibung      |
-| ------------ | ------------ | ----------------- |
-| `src` (\*)   | -            | Standard Bildpfad |
-| `alt`        | -            | Bildbeschreibung  |
-| `loading`    | `lazy`       | Ladeverhalten     |
-| `tablet`     | `false`      | Bildpfad >= 768px |
-| `desktop`    | `false`      | Bildpfad > 1024px |
-| `widescreen` | `false`      | Bildpfad > 1440px |
+| Attribute    | Standard | Beschreibung      |
+| ------------ | -------- | ----------------- |
+| `src` (\*)   | -        | Standard Bildpfad |
+| `alt`        | -        | Bildbeschreibung  |
+| `loading`    | `lazy`   | Ladeverhalten     |
+| `tablet`     | `false`  | Bildpfad >= 768px |
+| `desktop`    | `false`  | Bildpfad > 1024px |
+| `widescreen` | `false`  | Bildpfad > 1440px |
 
 [The Image Embed element (developer.mozilla.org)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
 
@@ -150,20 +152,20 @@ _(\*\* Hier kann auch ein Icon string platziert werden. Bspw: `fab fa-apple`)_
 # Slider
 
 ```HTML
-<Swiper autoplay="2500">
-  <Picture src="http://placeimg.com/640/480/any" />
-  <Picture src="http://placeimg.com/640/480/arch" />
-  <Picture src="http://placeimg.com/640/480/nature" />
+<Swiper autoplay="3500">
+  <Picture src="https://picsum.photos/id/1011/1280/720" loading="eager" />
+  <Picture src="https://picsum.photos/id/1015/1280/720" loading="eager" />
+  <Picture src="https://picsum.photos/id/1025/1280/720" loading="eager" />
 </Swiper>
 ```
 
-| Attribute    | Type              | Default | Description                                                   |
-| :----------- | :---------------- | :------ | :------------------------------------------------------------ |
-| `autoplay`   | `Number, Boolean` | `false` | Change slides after a specified interval.                     |
-| `hoverpause` | `Boolean`         | `true`  | Stop autoplay on mouseover event.                             |
-| `perView`    | `Number`          | `1`     | A number of slides visible on the single viewport.            |
-| `speed`      | `Number`          | `1000`  | Duration of the animation in milliseconds.                    |
-| `startAt`    | `Number`          | `0`     | Start at specific slide number defined with zero-based index. |
+| Attribute    | Standard | Beschreibung                                                  |
+| :----------- | :------- | :------------------------------------------------------------ |
+| `autoplay`   | `false`  | Change slides after a specified interval.                     |
+| `hoverpause` | `true`   | Stop autoplay on mouseover event.                             |
+| `perView`    | `1`      | A number of slides visible on the single viewport.            |
+| `speed`      | `1000`   | Duration of the animation in milliseconds.                    |
+| `startAt`    | `0`      | Start at specific slide number defined with zero-based index. |
 
 ---
 

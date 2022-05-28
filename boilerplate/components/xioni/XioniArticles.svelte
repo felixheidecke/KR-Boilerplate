@@ -3,44 +3,58 @@
   import { articles, groups, fetchArticles } from '@/stores/articles';
   import { classNameHelper } from '@/js/utils';
 
-  import { toClass } from '@/js/utils';
+  // --- Props ----------------------------------------
 
-  // --- Props --------
   export let id;
   export let limit = 100;
   export let author = false;
   export let date = false;
   export let expanded = false;
-  export let config = null;
+  export let detailPagePrefix = '';
 
-  config = {
-    id,
-    limit,
-    author,
-    date,
-    expanded,
-    detailPagePrefix: '',
-    ...config
-  };
+  id = parseInt(id);
+  limit = parseInt(limit);
 
-  // --- Computed -----
-  $: listOfarticles = $articles.filter((a) => a.module == id) || [];
+  // --- Computed -------------------------------------
 
-  // --- Lifecycle ----
+  $: listOfarticles = $articles.filter((a) => a.module === id) || [];
+
+  // --- Lifecycle ------------------------------------
+
   onMount(async () => {
     if ($groups.includes(id)) return;
-
-    fetchArticles(id, limit);
+    await fetchArticles(id, { limit, expanded });
   });
+
+  // --- Methods --------------------------------------
+
+  /**
+   * Set "unwanted" keys to null
+   *
+   * @param {object} article
+   * @returns {object} updated article
+   */
+
+  const prepareArticle = (article) => {
+    return {
+      ...article,
+      date: date ? article.date : null,
+      author: author ? article.author : null,
+      content: expanded ? article.content : null
+    };
+  };
 </script>
 
+<svelte:head>
+  <link rel="preconnect" href="https://www.rheingau.de" />
+</svelte:head>
 
 <ul class={classNameHelper(['XioniArticles'], $$props)} id={`module-${id}`}>
   {#each listOfarticles as article}
     <li>
-      <XioniArticle id={article.id} {date} {author} {expanded} ex-class="-article" />
-      {#if !expanded && article.content.length}
-        <Button href={config.detailPagePrefix + '/' + article.slug} class="-read-more">... weiter lesen</Button>
+      <XioniArticle {...prepareArticle(article)} ex-class="-article" />
+      {#if !expanded}
+        <Button href={`${detailPagePrefix}/${article.id}-${article.slug}`} class="-read-more">... weiter lesen</Button>
       {/if}
     </li>
   {:else}

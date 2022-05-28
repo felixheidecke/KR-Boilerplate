@@ -1,7 +1,5 @@
-import { uniq, uniqBy } from 'lodash-es';
+import { uniq, uniqBy, sortBy } from 'lodash-es';
 import { writable } from 'svelte/store';
-import { marked } from 'marked';
-import slugify from 'slugify';
 
 export const articles = writable([]);
 export const groups = writable([]);
@@ -9,6 +7,8 @@ export const state = writable({
   isLoading: false,
   hasError: false
 });
+
+const BASE_URL = 'http://api.klickrhein.de:8300';
 
 /**
  * Fetch a list of articles from Xioni API
@@ -19,100 +19,80 @@ export const state = writable({
  * @returns {Promise}
  */
 
-export const fetchArticles = async (moduleId, max = 25) => {
-  state.set({ isLoading: true, hasError: false });
+export const fetchArticles = async (id, { limit = 100, expanded = false }) => {
+  setLoading();
 
-  const res = await fetch(`https://api.klickrhein.de/v2/articles/?${moduleId}&max=${max}`);
+  const res = await fetch(`${BASE_URL}/articles/${id}?limit=${limit}&expanded=${expanded}`);
 
   if (!res.ok) {
-    state.set({ isLoading: false, hasError: true });
-    return Promise.reject(res);
+    Promise.reject(res);
+    return setError();
   }
 
-  const text = await res.json();
-  const contents = text.map((article) => restructure(article));
+  const contents = await res.json();
 
-  articles.update((a) => uniqBy(a.concat(contents), 'id'));
+  articles.update((articles) => {
+    // Make sure to have no douplicates
+    const update = uniqBy(contents.concat(articles), 'id');
+    return sortBy(update, 'date').reverse();
+  });
 
-  // write module id to groups,
-  // so we know it has been fetched
-  groups.update((g) => uniq([...g, moduleId]));
+  groups.update((groups) => {
+    const update = [...groups, id];
+    return uniq(update);
+  });
 
-  state.set({ isLoading: false, hasError: false });
+  setDone();
 };
 
 /**
  * Fetch an article from Xioni API
  * and write it to the store
  *
- * @param {string, number} articleId Xioni article id
+ * @param {number} id Xioni article id
  * @returns {Promise}
  */
 
-export const fetchArticle = async (articleId) => {
-  const res = await fetch(`https://api.klickrhein.de/v2/article/?${+articleId}`);
+export const fetchArticle = async (id) => {
+  setLoading();
 
-  if (!res.ok) return Promise.reject(res);
+  const res = await fetch(`${BASE_URL}/article/${id}`);
 
-  const text = await res.json();
-  articles.update((a) => uniqBy([...a, restructure(text)], 'id'));
+  if (!res.ok) {
+    Promise.reject(res);
+    return setError();
+  }
+
+  const content = await res.json();
+
+  articles.update((articles) => {
+    // Make sure to have no douplicates
+    const update = uniqBy([content].concat(articles), 'id');
+    return sortBy(update, 'date').reverse();
+  });
+
+  setDone();
 };
 
-/**
- *
- * @param {object} article structure
- * @returns {object} restructured
- */
+// --- Set state helper -----------
 
-const restructure = function ({
-  id,
-  module,
-  date,
-  author,
-  title,
-  image,
-  imageSmall,
-  imageDescription,
-  pdf,
-  pdfName,
-  pdfTitle,
-  text,
-  paragraphs
-}) {
-  const root = 'https://www.rheingau.de/data/';
+const setLoading = () => {
+  state.set({
+    isLoading: true,
+    hasError: false
+  });
+};
 
-  return {
-    id: +id,
-    module: +module,
-    slug: slugify(`${id}_${title}`, { lower: true }),
-    date: +date * 1000,
-    author,
-    title,
-    image: image
-      ? {
-          src: root + image,
-          srcSmall: root + imageSmall,
-          alt: imageDescription
-        }
-      : null,
-    pdf: pdf
-      ? {
-          src: root + pdf,
-          name: pdfName,
-          title: pdfTitle || pdfName
-        }
-      : null,
-    text: text ? marked.parse(text.trim()) : null,
-    content: paragraphs.map((p) => {
-      return {
-        image: p.image
-          ? {
-              src: root + p.image,
-              alt: p.imageDescription
-            }
-          : null,
-        text: p.text ? marked.parse(p.text.trim()) : null
-      };
-    })
-  };
+const setError = () => {
+  state.set({
+    isLoading: false,
+    hasError: true
+  });
+};
+
+const setDone = () => {
+  state.set({
+    isLoading: false,
+    hasError: false
+  });
 };

@@ -22,6 +22,10 @@
 
     .-item {
       background-color: rgba(black, 0.05);
+
+      + .-item {
+        margin-top: 1rem;
+      }
     }
   }
 </style>

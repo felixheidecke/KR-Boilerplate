@@ -1,0 +1,23 @@
+.wrapper {
+  width: 100%;
+  max-width: 64rem;
+
+  padding: {
+    left: 1rem;
+    right: 1rem;
+  }
+
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+@include breakpoint('tablet-up') {
+  .wrapper {
+    padding: {
+      left: 2rem;
+      right: 2rem;
+    }
+  }
+}

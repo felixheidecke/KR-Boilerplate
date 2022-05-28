@@ -42,7 +42,9 @@
   }
 
   .Grid .-item {
-    width: 100%;
+    &.--1 {
+      width: 100%;
+    }
 
     &.--1-3 {
       width: calc(100% / 3);
