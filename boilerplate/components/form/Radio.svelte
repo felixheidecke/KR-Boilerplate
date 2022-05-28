@@ -1,6 +1,6 @@
 <script>
   import { uniqueId } from 'lodash-es';
-  import { toClass } from 'boilerplate/js/utils.js';
+  import { classNameHelper } from 'boilerplate/js/utils.js';
 
   export let label = false;
   export let name;
@@ -21,7 +21,7 @@
   };
 </script>
 
-<label class={toClass(['Radio'], $$props)} class:--active={checked}>
+<label class={classNameHelper(['Radio'], $$props)} class:--active={checked}>
   <input {...inputProps} {value} type="radio" bind:group />
   <span class="-label">{@html label}</span>
 </label>

@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   import { page } from '$app/stores';
   export let routes = [];
 
@@ -9,7 +9,7 @@
 {#each routes as route, i}
   <li class="-li-li" on:mouseenter={() => (hoverState = i)} on:mouseleave={() => (hoverState = false)}>
     <a
-      class={toClass(['-a-a', route.class])}
+      class={classNameHelper(['-a-a', route.class])}
       href={route.href}
       class:--active={$page.url.pathname === route.href}
       class:--hover={hoverState === i}

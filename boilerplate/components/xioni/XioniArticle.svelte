@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   import { format } from 'date-fns';
   import { onMount } from 'svelte';
   import { articles, fetchArticle, state } from '@/stores/articles';
@@ -23,51 +23,50 @@
   });
 </script>
 
-{#if article.id || $state.loading}
-  <article class={toClass(['XioniArticle'], $$props)} data-id={id}>
-    <h2 class="-title">
+<article class={classNameHelper(['XioniArticle'], $$props)} id={`article-${id}`}>
+  <h2 class="-title">
       {article.title}
-    </h2>
-    <div class="-meta">
+  </h2>
+  <div class="-meta">
       {#if author && article.author}
         <span class="-meta-author">Von {article.author}</span>
-      {/if}
+    {/if}
       {#if date && article.date}
         <time class="-meta-date">{format(article.date, 'dd.MM.yyyy')}</time>
-      {/if}
-    </div>
+    {/if}
+  </div>
     {#if article.image}
       <Picture ex-class="-picture" src={article.image.srcSmall} tablet={article.image.src} alt={article.image.alt} />
-    {/if}
-    <div class="-teaser">
+  {/if}
+  <div class="-teaser">
       {@html article.text}
-    </div>
+  </div>
 
     {#if expanded}
       {#if article.content.length}
-        <div class="-text">
+    <div class="-text">
           {#each article.content as c}
             {#if c.image}
               <Picture ex-class="-text-picture" src={c.image.src} alt={c.image.alt} />
-            {/if}
+        {/if}
             {#if c.text}
               {@html c.text}
-            {/if}
-          {/each}
-        </div>
-      {/if}
+        {/if}
+      {/each}
+    </div>
+  {/if}
 
       {#if article.pdf}
         <a href={article.pdf.src} class="-pdf" target="_blank" rel="follow" title={article.pdf.name}
           >{article.pdf.title}</a
         >
-      {/if}
+  {/if}
 
       {#if article.link}
         <a href={article.link} class="-link" rel="nofollow" target="_blank">{article.link}</a>
       {/if}
-    {/if}
-  </article>
+  {/if}
+</article>
 {:else}
   <XioniSceleton />
 {/if}

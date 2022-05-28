@@ -1,16 +1,17 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
 
   export let src;
   export let alt = '';
   export let loading = 'lazy';
+  export let align = 'left';
 
   export let tablet = false;
   export let desktop = false;
   export let widescreen = false;
 </script>
 
-<picture class={toClass(['Picture'], $$props)}>
+<picture class={classNameHelper(['Picture'], $$props)}>
   {#if widescreen}
     <source srcset={widescreen} media="(min-width: 1441px)" />
   {/if}
@@ -20,7 +21,7 @@
   {#if tablet}
     <source srcset={tablet} media="(min-width: 768px)" />
   {/if}
-  <img srcset={src} {alt} {loading} />
+  <img srcset={src} {alt} {loading} {align} />
 </picture>
 
 <style lang="scss" global>

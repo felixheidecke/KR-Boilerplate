@@ -1,6 +1,6 @@
 <script>
   import { uniqueId } from 'lodash-es';
-  import { toClass } from 'boilerplate/js/utils.js';
+  import { classNameHelper } from 'boilerplate/js/utils.js';
 
   export let checked = false;
   export let label = false;
@@ -19,7 +19,7 @@
   };
 </script>
 
-<label class={toClass(['Checkbox'], $$props)} class:--active={checked}>
+<label class={classNameHelper(['Checkbox'], $$props)} class:--active={checked}>
   <input {...inputProps} type="checkbox" bind:checked />
   <span class="-label">{@html label}</span>
 </label>

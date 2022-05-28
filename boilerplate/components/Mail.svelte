@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   import Icon from './Icon.svelte';
 
   export let to;
@@ -13,7 +13,12 @@
   const obfuscated = to.trim().split('').join('&shy;');
 </script>
 
-<a name="mail" ref="external" on:click={() => (location.href = 'mailto:' + to)} class={toClass(['Mail'], $$props)}>
+<a
+  name="mail"
+  ref="external"
+  on:click={() => (location.href = 'mailto:' + to)}
+  class={classNameHelper(['Mail'], $$props)}
+>
   {#if icon}
     <Icon ex-class="-icon" name={iconName} />
   {/if}

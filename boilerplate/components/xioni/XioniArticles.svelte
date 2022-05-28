@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { articles, groups, fetchArticles } from '@/stores/articles';
+  import { classNameHelper } from '@/js/utils';
 
   import { toClass } from '@/js/utils';
 
@@ -33,7 +34,8 @@
   });
 </script>
 
-<ul class={toClass(['XioniArticles'], $$props)}>
+
+<ul class={classNameHelper(['XioniArticles'], $$props)} id={`module-${id}`}>
   {#each listOfarticles as article}
     <li>
       <XioniArticle id={article.id} {date} {author} {expanded} ex-class="-article" />

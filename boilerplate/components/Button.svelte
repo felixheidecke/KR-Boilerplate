@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   import Icon from './Icon.svelte';
 
   export let href = false;
@@ -14,14 +14,14 @@
 </script>
 
 {#if !href}
-  <button class={toClass(className, $$props)} {disabled}>
+  <button class={classNameHelper(className, $$props)} {disabled}>
     {#if icon}
       <Icon ex-class="-icon" name={icon} />
     {/if}
     <slot />
   </button>
 {:else}
-  <a {href} {target} class={toClass(className, $$props)}>
+  <a {href} {target} class={classNameHelper(className, $$props)}>
     {#if icon}
       <Icon ex-class="-icon" name={icon} />
     {/if}

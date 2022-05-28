@@ -9,7 +9,7 @@ import { base, assets } from '$app/paths';
  * @returns {string} \n separated values
  */
 
-export const toClass = function (base = [], props = {}) {
+export const classNameHelper = function (base = [], props = {}) {
   if (props['ex-class']) {
     base[0] = props['ex-class'];
   }

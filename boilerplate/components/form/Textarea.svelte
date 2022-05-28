@@ -1,6 +1,6 @@
 <script>
   import { uniqueId } from 'lodash-es';
-  import { toClass } from 'boilerplate/js/utils.js';
+  import { classNameHelper } from 'boilerplate/js/utils.js';
 
   export let name;
   export let required = false;
@@ -29,7 +29,7 @@
   }
 </script>
 
-<div class={toClass(['Textarea'], $$props)}>
+<div class={classNameHelper(['Textarea'], $$props)}>
   {#if label}
     <label class="-label" for={name}>{label}</label>
   {/if}

@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   export let disc = false;
   export let dash = false;
 
@@ -9,7 +9,7 @@
   else if (dash) className.push('--dash');
 </script>
 
-<ul class={toClass(className, $$props)}>
+<ul class={classNameHelper(className, $$props)}>
   <slot />
 </ul>
 

@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   import { Icon } from './Icon.svelte';
   import { onMount } from 'svelte';
   import { uniqueId } from 'lodash-es';
@@ -41,7 +41,7 @@
   });
 </script>
 
-<div {id} class={toClass(['Swiper', 'glide'], $$props)} bind:this={slider}>
+<div {id} class={classNameHelper(['Swiper', 'glide'], $$props)} bind:this={slider}>
   <div class="glide__track" data-glide-el="track">
     <div class="glide__slides">
       <slot />

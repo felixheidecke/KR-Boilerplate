@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   import Aspect from './Aspect.svelte';
 
   export let ratio = '16:9';
@@ -8,7 +8,7 @@
 
 <Aspect {ratio}>
   <iframe
-    class={toClass(['YouTube'], $$props)}
+    class={classNameHelper(['YouTube'], $$props)}
     src={'https://www.youtube-nocookie.com/embed/' + id}
     title="YouTube video player"
     frameborder="0"

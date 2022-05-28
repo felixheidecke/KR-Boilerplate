@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   export let gap = false;
   export let size = false;
 
@@ -19,7 +19,7 @@
   }
 </script>
 
-<div class={toClass(className, $$props)} id={$$props.id}>
+<div class={classNameHelper(className, $$props)} id={$$props.id}>
   <slot />
 </div>
 

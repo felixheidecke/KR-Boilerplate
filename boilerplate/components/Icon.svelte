@@ -1,5 +1,5 @@
 <script>
-  import { toClass } from '@/js/utils';
+  import { classNameHelper } from '@/js/utils';
   export let name = 'fas fa-carrot';
   export let size = false;
 
@@ -11,7 +11,7 @@
   }
 </script>
 
-<i class={toClass(className, $$props)} aria-hidden />
+<i class={classNameHelper(className, $$props)} aria-hidden />
 
 <style lang="scss" global>
   @import url('https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css');
