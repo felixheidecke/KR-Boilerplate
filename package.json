@@ -1,6 +1,6 @@
 {
   "name": "krb-svelte",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "scripts": {
     "dev": "svelte-kit dev --host",
     "build": "svelte-kit build",
