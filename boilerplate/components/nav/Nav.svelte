@@ -54,6 +54,7 @@
 </script>
 
 <nav
+  class="Nav"
   class:NavSlide={type === Type.slide}
   class:NavBar={type === Type.bar}
   class:--active={active}
