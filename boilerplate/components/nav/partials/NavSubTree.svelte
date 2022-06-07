@@ -4,21 +4,35 @@
   export let routes = [];
 
   let hoverState = false;
+
+  const setClassName = (route, hover) => {
+    const className = ['-a-a', route.class];
+
+    if ($page.url.pathname === route.href) {
+      className.push('--active');
+    }
+
+    if (hover) {
+      className.push('--hover');
+    }
+
+    return classNameHelper(className);
+  };
 </script>
 
 {#each routes as route, i}
-  <li class="-li-li" on:mouseenter={() => (hoverState = i)} on:mouseleave={() => (hoverState = false)}>
-    <a
-      class={classNameHelper(['-a-a', route.class])}
-      href={route.href}
-      class:--active={$page.url.pathname === route.href}
-      class:--hover={hoverState === i}
+  <li
+    class="-li-li"
+    on:mouseenter={() => (hoverState = i)}
+    on:mouseleave={() => (hoverState = false)}
+  >
+    <Link
+      ex-class={setClassName(route, hoverState === i)}
+      to={route.href}
+      icon={route.icon}
       on:click
     >
-      {#if route.icon}
-        <Icon name={route.icon} ex-class="-icon-icon" class="-mr-xs" />
-      {/if}
       {route.name}
-    </a>
+    </Link>
   </li>
 {/each}
