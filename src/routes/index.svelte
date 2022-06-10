@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Website Titel</title>
+</svelte:head>
+
 <Grid>
   <Grid size="1">
     <p>Viel Spaß mit der neuen Boilerplate 👍</p>
