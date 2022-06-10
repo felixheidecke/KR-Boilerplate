@@ -9,11 +9,23 @@ const normalizeRoute = (routes) => {
 
   forEach(routes, (item, href) => {
     let route;
+
+    if (href.indexOf('//')) {
+      href = base + href
+    }
+
     if (!isObject(item)) {
-      route = { href: base + href, name: item, class: null, meta: null, icon: false, routes: [] };
+      route = {
+        href,
+        name: item,
+        class: null,
+        meta: null,
+        icon: false,
+        routes: []
+      };
     } else {
       route = {
-        href: base + href,
+        href,
         icon: item.icon,
         name: item.name,
         class: item.class || null,
