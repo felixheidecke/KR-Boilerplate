@@ -14,14 +14,14 @@
 </script>
 
 {#if !href}
-  <button class={classNameHelper(className, $$props)} {disabled}>
+  <button class={classNameHelper(className, $$props)} {disabled} on:click|preventDefault>
     {#if icon}
       <Icon ex-class="-icon" name={icon} />
     {/if}
     <slot />
   </button>
 {:else}
-  <a {href} {target} class={classNameHelper(className, $$props)}>
+  <a {href} {target} class={classNameHelper(className, $$props)} on:click>
     {#if icon}
       <Icon ex-class="-icon" name={icon} />
     {/if}
@@ -49,8 +49,8 @@
     user-select: none;
     white-space: nowrap;
 
-    &:not(:disabled):focus,
-    &:not(:disabled):hover {
+    &:focus,
+    &:hover {
       background-color: darken(white, 5%);
       box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
     }

@@ -1,6 +1,6 @@
 <script>
   import { uniqueId } from 'lodash-es';
-  import { classNameHelper } from 'boilerplate/js/utils.js';
+  import { classNameHelper } from '@/js/utils.js';
 
   export let label = false;
   export let name;

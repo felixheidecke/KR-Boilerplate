@@ -1,0 +1,151 @@
+.\$p {
+  padding: 1rem;
+}
+
+.\$pt {
+  padding-top: 1rem;
+}
+
+.\$pr {
+  padding-right: 1rem;
+}
+
+.\$pb {
+  padding-bottom: 1rem;
+}
+
+.\$pl {
+  padding-left: 1rem;
+}
+
+.\$px {
+  padding: {
+    left: 1rem;
+    right: 1rem;
+  }
+}
+
+.\$py {
+  padding: {
+    top: 1rem;
+    bottom: 1rem;
+  }
+}
+
+@each $a, $b in $spacing {
+  .\$p-#{$a} {
+    padding: $b;
+  }
+
+  .\$p-#{$a} {
+    padding: $b;
+  }
+
+  .\$pt-#{$a} {
+    padding-top: $b;
+  }
+
+  .\$pr-#{$a} {
+    padding-right: $b;
+  }
+
+  .\$pb-#{$a} {
+    padding-bottom: $b;
+  }
+
+  .\$pl-#{$a} {
+    padding-left: $b;
+  }
+
+  .\$px-#{$a} {
+    padding: {
+      left: $b;
+      right: $b;
+    }
+  }
+
+  .\$py-#{$a} {
+    padding: {
+      top: $b;
+      bottom: $b;
+    }
+  }
+}
+
+@each $size, $query in $mediaquery {
+  @media #{$query} {
+    .\$p\@#{$size} {
+      padding: 1rem;
+    }
+
+    .\$pt\@#{$size} {
+      padding-top: 1rem;
+    }
+
+    .\$pr\@#{$size} {
+      padding-right: 1rem;
+    }
+
+    .\$pb\@#{$size} {
+      padding-bottom: 1rem;
+    }
+
+    .\$pl\@#{$size} {
+      padding-left: 1rem;
+    }
+
+    .\$px\@#{$size} {
+      padding: {
+        left: 1rem;
+        right: 1rem;
+      }
+    }
+
+    .\$py\@#{$size} {
+      padding: {
+        top: 1rem;
+        bottom: 1rem;
+      }
+    }
+
+    @each $a, $b in $spacing {
+      .\$p-#{$a}\@#{$size} {
+        padding: $b;
+      }
+
+      .\$p-#{$a}\@#{$size} {
+        padding: $b;
+      }
+
+      .\$pt-#{$a}\@#{$size} {
+        padding-top: $b;
+      }
+
+      .\$pr-#{$a}\@#{$size} {
+        padding-right: $b;
+      }
+
+      .\$pb-#{$a}\@#{$size} {
+        padding-bottom: $b;
+      }
+
+      .\$pl-#{$a}\@#{$size} {
+        padding-left: $b;
+      }
+
+      .\$px-#{$a}\@#{$size} {
+        padding: {
+          left: $b;
+          right: $b;
+        }
+      }
+
+      .\$py-#{$a}\@#{$size} {
+        padding: {
+          top: $b;
+          bottom: $b;
+        }
+      }
+    }
+  }
+}

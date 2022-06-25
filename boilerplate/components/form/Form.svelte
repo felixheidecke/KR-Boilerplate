@@ -1,6 +1,9 @@
 <script>
-  import { onMount } from 'svelte';
+  import { classNameHelper } from '@/js/utils';
+  import { onMount, createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
+
+  const emit = createEventDispatcher();
 
   export let subject = 'Kontakformular';
   export let id = 0;
@@ -40,11 +43,13 @@
 
       errors = response.ok ? [] : await response.json();
       isDone = !errors.length;
+      emit('done');
 
       setTimeout(scrollToDoneText, 500);
     } catch (error) {
       console.error(error);
       isDone = false;
+      emit('error', error);
     } finally {
       isLoading = false;
     }
@@ -66,7 +71,7 @@
   };
 </script>
 
-<form class="Form" bind:this={form} on:submit|preventDefault={submit}>
+<form class={classNameHelper(['Form'], $$props)} bind:this={form} on:submit|preventDefault={submit}>
   <input type="hidden" name="subject" value={subject} />
   <input type="hidden" name="id" value={id} />
   <input type="hidden" name="required" value={required.join(',')} />
@@ -110,10 +115,10 @@
       left: 1rem;
       right: 1rem;
     }
+  }
 
-    input[name='honig'] {
-      position: absolute;
-      left: -9999px;
-    }
+  input[name='honig'] {
+    position: absolute;
+    left: -9999px;
   }
 </style>

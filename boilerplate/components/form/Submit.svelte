@@ -1,11 +1,12 @@
 <script>
+  import { classNameHelper } from '@/js/utils.js';
   export let text = 'Abschicken';
   export let disabled = false;
 </script>
 
-<button class="Submit" on:click {disabled}>{text}</button>
+<button class={classNameHelper(['Submit'], $$props)} on:click {disabled}>{text}</button>
 
-<style lang="scss">
+<style lang="scss" global>
   :where(.Submit) {
     width: fit-content;
     font-size: 1rem;

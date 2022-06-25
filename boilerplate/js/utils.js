@@ -43,3 +43,22 @@ export const scrollTo = (element) => {
     behavior: `smooth`,
   });
 };
+
+export const fetchJSON = async (url, params) => {
+  if (params) {
+    params = new URLSearchParams(params)
+    url = `${url}?${params}`
+  }
+
+  const res = await fetch(url)
+  return await res.json()
+}
+
+export const formatEuro = (number) => {
+  const formatter = new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR'
+  });
+
+  return formatter.format(number)
+}

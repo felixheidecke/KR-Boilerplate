@@ -3,6 +3,8 @@
   import { format } from 'date-fns';
   import { de } from 'date-fns/locale';
 
+  // --- Components -----------------------------------
+
   import Picture from '../Picture.svelte';
 
   // --- Props --------

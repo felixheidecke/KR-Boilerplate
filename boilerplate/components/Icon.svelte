@@ -11,7 +11,7 @@
   }
 </script>
 
-<i class={classNameHelper(className, $$props)} aria-hidden />
+<i class={classNameHelper(className, $$props)} aria-hidden on:click />
 
 <style lang="scss" global>
   @import url('https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css');
