@@ -1,4 +1,4 @@
-@import 'hidden', 'base', 'fonts', 'list';
+@import 'hidden', 'base', 'fonts', 'list', 'helper';
 
 :root {
   @each $query, $size in $mediaquery {

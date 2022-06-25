@@ -1,0 +1,19 @@
+.\$font {
+  &-small {
+    font-size: 0.85rem;
+    line-height: 1.45rem;
+  }
+
+  &-large {
+    font-size: 1.15rem;
+    line-height: 1.65rem;
+  }
+
+  &-bold {
+    font-weight: bold;
+  }
+
+  &-italic {
+    font-style: italic;
+  }
+}

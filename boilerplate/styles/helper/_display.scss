@@ -1,0 +1,23 @@
+.\$ {
+  &block {
+    display: block;
+  }
+
+  &hidden {
+    display: none;
+  }
+}
+
+@each $size, $query in $mediaquery {
+  @media #{$query} {
+    .\$\@#{$size} {
+      &block {
+        display: block;
+      }
+
+      &hidden {
+        display: none;
+      }
+    }
+  }
+}

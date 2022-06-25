@@ -8,6 +8,8 @@
   export let required = false;
   export let type = 'text';
   export let value = '';
+  export let min = null;
+  export let max = null;
 
   const id = uniqueId(name + '-');
 
@@ -28,6 +30,14 @@
   if (placeholder) {
     inputProps.placeholder = 'placeholder';
   }
+
+  if (type === 'number' && min) {
+    inputProps.min = min;
+  }
+
+  if (type === 'number' && max) {
+    inputProps.max = max;
+  }
 </script>
 
 <div class={classNameHelper(['Input'], $$props)}>
@@ -37,7 +47,7 @@
   <input {...inputProps} bind:value />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
   :where(.Input) {
     display: flex;
     flex-direction: column;
