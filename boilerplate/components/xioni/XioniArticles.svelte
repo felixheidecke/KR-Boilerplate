@@ -3,6 +3,10 @@
   import { articles, groups, fetchArticles } from '@/stores/articles';
   import { classNameHelper } from '@/js/utils';
 
+  import Button from '../Button.svelte';
+  import Article from './XioniArticle.svelte';
+  import Sceleton from './XioniSceleton.svelte';
+
   // --- Props ----------------------------------------
 
   export let id;
@@ -52,13 +56,13 @@
 <ul class={classNameHelper(['XioniArticles'], $$props)} id={`module-${id}`}>
   {#each listOfarticles as article}
     <li>
-      <XioniArticle {...prepareArticle(article)} ex-class="-article" />
+      <Article {...prepareArticle(article)} ex-class="-article" />
       {#if !expanded}
         <Button href={`${detailPagePrefix}/${article.id}-${article.slug}`} class="-read-more">... weiter lesen</Button>
       {/if}
     </li>
   {:else}
-    <XioniSceleton />
+    <Sceleton />
   {/each}
 </ul>
 
