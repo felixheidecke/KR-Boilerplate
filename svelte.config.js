@@ -23,21 +23,21 @@ export default {
 
     vite: {
       plugins: [
-        content.default(),
         autoImport({
-          components: [
-            {
-              name: './boilerplate',
-              flat: true
-            },
-            {
-              name: './src/components',
-              flat: true
-            }
-          ],
-          include: ['**/*.svelte'],
-          exclude: ['**/node_modules/**']
-        })
+          // components: [
+          //   {
+          //     name: './boilerplate/components',
+          //     flat: true
+          //   },
+          //   {
+          //     name: './src/components',
+          //     flat: true
+          //   }
+          // ],
+          // include: ['**/*.svelte'],
+          // exclude: ['**/node_modules/**']
+        }),
+        content.default()
       ],
       css: {
         preprocessorOptions: {

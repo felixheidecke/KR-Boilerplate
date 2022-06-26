@@ -12,21 +12,19 @@
 
 <div>
   <header>
-    <Nav variant="slide" />
+    <Nav />
   </header>
   <main>
-    <Wrapper>
-      <PageTransition {url}>
-        <slot />
-      </PageTransition>
-    </Wrapper>
+    <PageTransition {url}>
+      <slot />
+    </PageTransition>
   </main>
   <footer>
     <small>&copy; Klickrhein {year}</small>
   </footer>
 </div>
 
-<style>
+<style lang="scss">
   div {
     width: 100vw;
     height: 100vh;
@@ -39,7 +37,7 @@
     flex-shrink: 0;
     padding: 1rem;
     text-align: center;
-    background: #141d37;
+    background-color: $c-light;
   }
 
   main {

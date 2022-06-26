@@ -2,7 +2,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: lightblue;
 
   // --- First Level ----------------------------------------
 
@@ -23,6 +22,7 @@
     font-weight: bold;
     padding: 0.5rem 1rem;
     white-space: nowrap;
+    background-color: #777;
   }
 
   // --- Second Level ---------------------------------------
@@ -34,7 +34,7 @@
     top: 2.5rem;
     transform: translateX(-50%);
     z-index: 1;
-    background-color: lightblue;
+    background-color: #777;
 
     &:not(.--visible) {
       display: none;
