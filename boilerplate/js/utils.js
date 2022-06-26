@@ -31,28 +31,28 @@ export const isTrue = function (variable) {
 };
 
 export const assetPath = function (asset) {
-  return `${assets}${asset}`
+  return `${assets}${asset}`;
 };
 
 export const basePath = function (link) {
-  return `${base}${link}`
+  return `${base}${link}`;
 };
 
 export const scrollTo = (element) => {
   document.querySelector(element).scrollIntoView({
-    behavior: `smooth`,
+    behavior: `smooth`
   });
 };
 
 export const fetchJSON = async (url, params) => {
   if (params) {
-    params = new URLSearchParams(params)
-    url = `${url}?${params}`
+    params = new URLSearchParams(params);
+    url = `${url}?${params}`;
   }
 
-  const res = await fetch(url)
-  return await res.json()
-}
+  const res = await fetch(url);
+  return await res.json();
+};
 
 export const formatEuro = (number) => {
   const formatter = new Intl.NumberFormat('de-DE', {
@@ -60,5 +60,5 @@ export const formatEuro = (number) => {
     currency: 'EUR'
   });
 
-  return formatter.format(number)
-}
+  return formatter.format(number);
+};

@@ -20,9 +20,7 @@ export default {
     trailingSlash: 'never',
 
     vite: {
-      plugins: [
-        content.default()
-      ],
+      plugins: [content.default()],
       css: {
         preprocessorOptions: {
           scss: {
@@ -49,7 +47,7 @@ export default {
           style: resolve('./boilerplate/styles/style.scss')
         }
       }
-    },
+    }
   },
 
   preprocess: [
