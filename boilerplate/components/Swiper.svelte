@@ -4,6 +4,9 @@
   import { uniqueId } from 'lodash-es';
   import Glide from '@glidejs/glide';
 
+  // Components
+  import Icon from './Icon.svelte';
+
   let slider;
 
   // Props
