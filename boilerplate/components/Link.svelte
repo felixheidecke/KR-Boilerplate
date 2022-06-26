@@ -1,5 +1,6 @@
 <script>
   import { classNameHelper as cn } from '@/js/utils';
+  import Icon from './Icon.svelte';
 
   export let to = '';
   export let target;

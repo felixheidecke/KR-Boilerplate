@@ -2,6 +2,7 @@
   import { classNameHelper } from '@/js/utils';
   import { onMount, createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
+  import Error from './Error.svelte';
 
   const emit = createEventDispatcher();
 

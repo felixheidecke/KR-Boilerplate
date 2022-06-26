@@ -16,7 +16,8 @@
     "useTabs": false,
     "singleQuote": true,
     "trailingComma": "none",
-    "printWidth": 120
+    "printWidth": 120,
+    "htmlWhitespaceSensitivity": "ignore"
   },
   "eslintConfig": {
     "root": true,
@@ -59,8 +60,7 @@
     "prettier-plugin-svelte": "^2.7.0",
     "sass": "^1.53.0",
     "svelte": "^3.48.0",
-    "svelte-preprocess": "^4.10.7",
-    "vite-plugin-autoimport": "^1.6.6"
+    "svelte-preprocess": "^4.10.7"
   },
   "type": "module",
   "dependencies": {

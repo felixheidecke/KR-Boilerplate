@@ -1,13 +1,11 @@
 import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-static';
 import content from '@originjs/vite-plugin-content';
-import autoImport from 'vite-plugin-autoimport';
 import { resolve } from 'path';
 
 export default {
   kit: {
     adapter: adapter({
-      // default options are shown
       pages: 'htdocs',
       assets: 'htdocs',
       fallback: false,
@@ -23,20 +21,6 @@ export default {
 
     vite: {
       plugins: [
-        autoImport({
-          // components: [
-          //   {
-          //     name: './boilerplate/components',
-          //     flat: true
-          //   },
-          //   {
-          //     name: './src/components',
-          //     flat: true
-          //   }
-          // ],
-          // include: ['**/*.svelte'],
-          // exclude: ['**/node_modules/**']
-        }),
         content.default()
       ],
       css: {
@@ -60,7 +44,6 @@ export default {
       resolve: {
         alias: {
           // Boilderplate
-          boilerplate: resolve('./boilerplate/'),
           '@': resolve('./boilerplate/'),
           src: resolve('./src/'),
           style: resolve('./boilerplate/styles/style.scss')
