@@ -1,0 +1,19 @@
+{
+  "extends": "./.svelte-kit/tsconfig.json",
+  "include": [
+    "src/**/*",
+    "boilerplate/**/*"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@/*": [
+        "./boilerplate/components/*",
+        "./boilerplate/js/*",
+        "./boilerplate/store/*"
+      ],
+      "src/*": [
+        "./src/*"
+      ]
+    }
+  }
+}
