@@ -34,7 +34,7 @@
     </a>
   </span>
 {:else}
-  <a class={cn(className, $$props)} href={to} {...props} on:click> <slot /> </a>
+  <a class={cn(className, $$props)} href={to} {...props} on:click><slot /></a>
 {/if}
 
 <style lang="scss" global>

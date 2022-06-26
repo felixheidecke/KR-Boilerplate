@@ -18,7 +18,7 @@ const normalizeRoute = (routes) => {
     };
 
     if (href.indexOf('//')) {
-      route.href = base + href
+      route.href = base + href;
     }
 
     if (isObject(item)) {
