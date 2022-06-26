@@ -2,15 +2,9 @@
   <title>Website Titel</title>
 </svelte:head>
 
-<Grid>
-  <Grid size="1">
-    <p>Viel Spaß mit der neuen Boilerplate 👍</p>
-  </Grid>
-  <Grid size="1-2">Hallo du Nudel</Grid>
+<h1>Welcome</h1>
 
-  <Grid size="1-2">Hallo du Pudel</Grid>
-</Grid>
-
-<Button>Klick mich</Button>
-
-<XioniArticles id="1021" date expanded />
+<p>
+  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt dolor iste tempore repellat molestiae ut quis eius,
+  iusto exercitationem consequatur odio magnam, minus fuga ipsa cumque esse ab, nihil quae!
+</p>
