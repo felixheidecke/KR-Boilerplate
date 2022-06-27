@@ -5,6 +5,13 @@
 </script>
 
 <script>
+  // Boilerplate components
+  import Nav from '@/components/nav/Nav.svelte';
+  import PageTransition from '@/components/PageTransition.svelte';
+
+  // Local components
+  import Logo from 'src/components/Logo.svelte';
+
   export let url;
 
   let year = new Date().getFullYear();
@@ -12,6 +19,7 @@
 
 <div>
   <header>
+    <Logo />
     <Nav />
   </header>
   <main>
