@@ -1,6 +1,6 @@
 {
   "name": "krb-svelte",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "scripts": {
     "dev": "svelte-kit dev --host",
     "build": "svelte-kit build",
@@ -60,7 +60,8 @@
     "prettier-plugin-svelte": "^2.7.0",
     "sass": "^1.53.0",
     "svelte": "^3.48.0",
-    "svelte-preprocess": "^4.10.7"
+    "svelte-preprocess": "^4.10.7",
+    "sveltekit-autoimport": "^1.6.8"
   },
   "type": "module",
   "dependencies": {
