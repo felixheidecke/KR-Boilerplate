@@ -1,6 +1,8 @@
 import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-static';
 import content from '@originjs/vite-plugin-content';
+import autoImport from 'sveltekit-autoimport';
+
 import { resolve } from 'path';
 
 export default {
@@ -20,7 +22,23 @@ export default {
     trailingSlash: 'never',
 
     vite: {
-      plugins: [content.default()],
+      plugins: [
+        content.default(),
+        autoImport({
+          components: [
+            {
+              name: './boilerplate',
+              flat: true
+            },
+            {
+              name: './src/components',
+              flat: true
+            }
+          ],
+          include: ['**/*.svelte'],
+          exclude: ['**/node_modules/**']
+        })
+      ],
       css: {
         preprocessorOptions: {
           scss: {

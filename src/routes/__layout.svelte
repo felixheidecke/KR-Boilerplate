@@ -12,6 +12,7 @@
 
 <div>
   <header>
+    <Logo />
     <Nav />
   </header>
   <main>
