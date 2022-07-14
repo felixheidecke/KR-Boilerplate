@@ -1,29 +1,38 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
   import Icon from './Icon.svelte';
 
-  export let href = false;
+  // --- Props ------------------------
+
+  export let to = false;
   export let icon = false;
   export let disabled = false;
   export let target = null;
   export let reverse = false;
-  // Anchor
-  const className = ['Button'];
-  if (reverse) className.push('--reverse');
-  if (href) className.push('--anchor');
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'Button';
+
+  $: className = classnames(
+    baseName,
+    $$props.class,
+    !reverse || baseName + '--reverse',
+    !to || baseName + '--anchor'
+  );
 </script>
 
-{#if !href}
-  <button class={classNameHelper(className, $$props)} {disabled} on:click|preventDefault>
+{#if !to}
+  <button class={className} {disabled} on:click|preventDefault>
     {#if icon}
-      <Icon ex-class="-icon" name={icon} />
+      <Icon ex-class={baseName + '__icon'} name={icon} />
     {/if}
     <slot />
   </button>
 {:else}
-  <a {href} {target} class={classNameHelper(className, $$props)} on:click>
+  <a href={to} {target} class={className} on:click>
     {#if icon}
-      <Icon ex-class="-icon" name={icon} />
+      <Icon ex-class={baseName + '__icon'} name={icon} />
     {/if}
     <slot />
   </a>
@@ -49,16 +58,19 @@
     user-select: none;
     white-space: nowrap;
 
-    &:focus,
-    &:hover {
+    &:not(:disabled):hover {
       background-color: darken(white, 5%);
       box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
     }
 
     &:disabled {
-      border-color: lightgray;
-      color: lightgray;
+      border-color: darkgrey;
+      color: darkgrey;
       cursor: not-allowed;
     }
+  }
+
+  :where(.Button--reverse) {
+    flex-direction: row-reverse;
   }
 </style>

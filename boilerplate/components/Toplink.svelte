@@ -1,25 +1,39 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
   import Icon from './Icon.svelte';
 
-  let isHidden = true;
+  let isVisible = false;
+
+  export let name = null;
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'Toplink';
+
+  $: className = classnames(
+    baseName,
+    $$props.class,
+    !isVisible || baseName + '--visible'
+  );
+
+  // --- Methods ----------------------
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleOffset = () => {
-    isHidden = window.scrollY < 200;
+    isVisible = window.scrollY > 200;
   };
 </script>
 
 <svelte:window on:scroll|passive={handleOffset} />
 
-<button class={classNameHelper(['Toplink'], $$props)} class:--hidden={isHidden} on:click={scrollToTop}>
+<button {name} class={className} on:click={scrollToTop}>
   <Icon name="fas fa-angle-up" size="5" />
 </button>
 
-<style lang="scss">
+<style lang="scss" global>
   :where(.Toplink) {
     position: fixed;
     right: 0.5rem;
@@ -30,6 +44,8 @@
     opacity: 0.5;
     transition: opacity 0.5s, transform 0.5s;
     border: 0 none;
+    transform: translateY(120%);
+    background-color: gainsboro;
 
     &:hover {
       opacity: 1;
@@ -39,9 +55,9 @@
       height: 50px;
       width: 50px;
     }
+  }
 
-    &.--hidden {
-      transform: translateY(120%);
-    }
+  :where(.Toplink--visible) {
+    transform: translateY(0%);
   }
 </style>

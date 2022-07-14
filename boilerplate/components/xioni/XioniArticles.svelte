@@ -1,7 +1,7 @@
 <script>
+  import classnames from 'classnames';
   import { onMount } from 'svelte';
   import { articles, groups, fetchArticles } from '@/stores/articles';
-  import { classNameHelper } from '@/js/utils';
 
   // --- Components -----------------------------------
 
@@ -18,19 +18,8 @@
   export let expanded = false;
   export let detailPagePrefix = '';
 
-  id = parseInt(id);
-  limit = parseInt(limit);
-
-  // --- Computed -------------------------------------
-
-  $: listOfarticles = $articles.filter((a) => a.module === id) || [];
-
-  // --- Lifecycle ------------------------------------
-
-  onMount(async () => {
-    if ($groups.includes(id)) return;
-    await fetchArticles(id, { limit, expanded });
-  });
+  id = +id;
+  limit = +limit;
 
   // --- Methods --------------------------------------
 
@@ -49,18 +38,41 @@
       content: expanded ? article.content : null
     };
   };
+
+  onMount(async () => {
+    if ($groups.includes(id)) return;
+    await fetchArticles(id, { limit, expanded });
+  });
+
+  // --- Data -------------------------------------
+
+  $: listOfarticles = $articles.filter((a) => a.module === id) || [];
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'XioniArticles';
+
+  $: className = classnames(baseName, $$props.class);
 </script>
 
 <svelte:head>
   <link rel="preconnect" href="https://www.rheingau.de" />
 </svelte:head>
 
-<ul class={classNameHelper(['XioniArticles'], $$props)} id={`module-${id}`}>
+<ul class={className} id={`module-${id}`}>
   {#each listOfarticles as article}
     <li>
-      <XioniArticle {...prepareArticle(article)} ex-class="-article" />
+      <XioniArticle
+        {...prepareArticle(article)}
+        class={baseName + '__article'}
+      />
       {#if !expanded}
-        <Button href={`${detailPagePrefix}/${article.id}-${article.slug}`} class="-read-more">... weiter lesen</Button>
+        <Button
+          href={`${detailPagePrefix}/${article.id}-${article.slug}`}
+          class={baseName + '__read-more'}
+        >
+          ... weiter lesen
+        </Button>
       {/if}
     </li>
   {:else}
@@ -74,7 +86,7 @@
     flex-direction: column;
     gap: 1rem;
 
-    .-meta {
+    .XioniArticle__meta {
       @include reset-list;
       margin-bottom: 1rem;
       font-size: 0.85rem;
@@ -83,22 +95,14 @@
       gap: 0.333rem;
     }
 
-    .-meta-author:before {
+    .XioniArticle__author:before {
       content: 'Von: ';
     }
 
-    .-picture img {
+    .XioniArticle__image img {
       max-width: 10rem;
       float: left;
       margin-right: 2rem;
     }
-
-    .-picture img {
-      max-width: 10rem;
-      float: left;
-      margin-right: 2rem;
-    }
-
-    // .-read-more { }
   }
 </style>

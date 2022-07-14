@@ -1,5 +1,5 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
   import { onMount } from 'svelte';
 
   export let transition = 'fade';
@@ -13,34 +13,42 @@
     isInView = inView.is(wrapper);
   });
 
-  const className = ['InView'];
-  if (transition) className.push(`--${transition}`);
+  // --- CSS Classname ----------------
+
+  const baseName = $$props['ex-class'] || 'InView';
+
+  $: className = classnames(
+    baseName,
+    $$props.class,
+    !isInView || baseName + '--visible',
+    !transition || baseName + '--fade'
+  );
 </script>
 
 <svelte:window on:scroll|passive={() => (isInView = inView.is(wrapper))} />
 
-<div bind:this={wrapper} class={classNameHelper(className, $$props)} class:--in-view={isInView}>
+<div bind:this={wrapper} class={className}>
   <slot />
 </div>
 
 <style lang="scss" global>
   // -- Fade ----------------
-  :where(.InView.--fade) {
+  :where(.InView--fade) {
     opacity: 0;
     transition: {
       delay: 100ms;
       property: opacity;
       duration: 333ms;
     }
+  }
 
-    &.--in-view {
-      opacity: 1;
-    }
+  :where(.InView--fade.InView--visible) {
+    opacity: 1;
   }
 
   // -- Scale ----------------
 
-  :where(.InView.--scale) {
+  :where(.InView--scale) {
     transform: scale(0.75);
     opacity: 0.75;
     transition: {
@@ -48,10 +56,10 @@
       property: transform, opacity;
       duration: 500ms;
     }
+  }
 
-    &.--in-view {
-      transform: scale(1);
-      opacity: 1;
-    }
+  :where(.InView--scale.InView--visible) {
+    transform: scale(1);
+    opacity: 1;
   }
 </style>

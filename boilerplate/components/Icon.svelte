@@ -1,18 +1,21 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
   export let name = 'fas fa-carrot';
   export let size = false;
 
-  // -- CSS Classes -------------------
-  const className = ['Icon', name];
+  // --- CSS Class --------------------
 
-  if (size > 1 && size <= 10) {
-    className.push(`fa-${size}x`);
-  }
+  const baseName = $$props['ex-class'] || 'Icon';
+
+  $: className = classnames(
+    baseName,
+    name,
+    !(size > 1 && size <= 10) || `fa-${size}x`
+  );
 </script>
 
-<i class={classNameHelper(className, $$props)} aria-hidden on:click />
+<i class={className} aria-hidden on:click />
 
 <style lang="scss" global>
-  @import url('https://cdn.klickrhein.de/libs/font-awesome/5.14.0/css/all.min.css');
+  @import url('https://cdn.klickrhein.de/libs/font-awesome/5.15.4/css/all.min.css');
 </style>

@@ -1,5 +1,7 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
+
+  // --- Data -------------------------
 
   export let src;
   export let alt = '';
@@ -9,9 +11,15 @@
   export let tablet = false;
   export let desktop = false;
   export let widescreen = false;
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'Picture';
+
+  $: className = classnames(baseName, $$props.class);
 </script>
 
-<picture class={classNameHelper(['Picture'], $$props)}>
+<picture class={className}>
   {#if widescreen}
     <source srcset={widescreen} media="(min-width: 1441px)" />
   {/if}

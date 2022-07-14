@@ -1,85 +1,97 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
+
+  // --- Props ------------------------
+
+  export let tag = 'div';
   export let gap = false;
   export let size = false;
+  export let id = null;
 
-  const className = [];
+  // --- Methods ----------------------
 
-  if (size) {
-    className.push('-item');
-    className.push(
-      size
-        .split(' ')
-        .map((i) => `--${i}`)
-        .join(' ')
-    );
-  } else {
-    className.push('Grid');
-    if (gap) className.push('--gap');
-  }
+  const sizeToClass = (size) => {
+    if (typeof size !== 'string') return;
+
+    return size
+      .split(' ')
+      .map((i) => `${baseName}__item--${i}`)
+      .join(' ');
+  };
+
+  // --- CSS Class --------------------
+
+  const baseName = 'Grid';
+
+  $: className = (() => {
+    if (size) {
+      return classnames(baseName + '__item', $$props.class, sizeToClass(size));
+    } else {
+      return classnames(baseName, $$props.class, !gap || baseName + '--gap');
+    }
+  })();
 </script>
 
-<div class={classNameHelper(className, $$props)} id={$$props.id}>
+<svelte:element this={tag} class={className} {id}>
   <slot />
-</div>
+</svelte:element>
 
 <style lang="scss" global>
-  :where(.Grid) {
+  .Grid {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
+  }
 
-    &.--gap {
-      width: calc(100% + 2rem);
-      transform: translateX(-1rem);
+  .Grid--gap {
+    width: calc(100% + 2rem);
+    transform: translateX(-1rem);
 
-      .-item {
-        padding: {
-          left: 1rem;
-          right: 1rem;
-        }
+    [class*='Grid__item'] {
+      padding: {
+        left: 1rem;
+        right: 1rem;
       }
     }
   }
 
-  .Grid .-item {
-    &.--1 {
-      width: 100%;
-    }
+  .Grid__item {
+    width: 100%;
 
-    &.--1-3 {
+    &--1-3 {
       width: calc(100% / 3);
     }
 
-    &.--2-3 {
+    &--2-3 {
       width: calc(100% / 1.5);
     }
 
-    &.--1-2,
-    &.--2-4 {
+    &--1-2,
+    &--2-4 {
       width: 50%;
     }
 
-    &.--1-4 {
+    &--1-4 {
       width: 25%;
     }
 
-    &.--3-4 {
+    &--3-4 {
       width: 75%;
     }
 
-    &.--1-5 {
+    &--1-5 {
       width: 20%;
     }
 
-    &.--2-5 {
+    &--2-5 {
       width: 40%;
     }
 
-    &.--3-5 {
+    &--3-5 {
       width: 60%;
     }
 
-    &.--4-5 {
+    &--4-5 {
       width: 80%;
     }
   }
@@ -91,7 +103,7 @@
     'widescreen': #{map-get($mediaquery, 'widescreen')}
   );
 
-  .Grid .-item {
+  .Grid__item {
     @each $m, $query in $gridquery {
       @media #{$query} {
         &.--#{$m}-1-3 {

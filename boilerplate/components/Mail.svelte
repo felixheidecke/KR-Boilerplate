@@ -1,28 +1,30 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
   import Icon from './Icon.svelte';
 
   export let to;
   export let icon = 'fas fa-envelope';
 
-  if (!to) {
-    console.error('<Mail />', 'Missing "to" attribute!');
-  }
-
   const iconName = typeof icon === 'boolean' ? 'far fa-envelope' : icon;
   const obfuscated = to.trim().split('').join('&shy;');
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'Mail';
+
+  $: className = classnames(baseName, $$props.class);
 </script>
 
 <a
-  name="mail"
+  name="email"
   ref="external"
   on:click={() => (location.href = 'mailto:' + to)}
-  class={classNameHelper(['Mail'], $$props)}
+  class={className}
 >
   {#if icon}
-    <Icon ex-class="-icon" name={iconName} />
+    <Icon ex-class={baseName + '__icon'} name={iconName} />
   {/if}
-  <span class="-address">
+  <span class={baseName + '__address'}>
     {#if $$slots.default}
       <slot />
     {:else}
@@ -31,15 +33,15 @@
   </span>
 </a>
 
-<style lang="scss">
+<style lang="scss" global>
   :where(.Mail) {
     cursor: pointer;
     display: inline-flex;
     gap: 0.5rem;
     align-items: center;
+  }
 
-    .-address {
-      text-decoration: underline;
-    }
+  :where(.Mail__address) {
+    text-decoration: underline;
   }
 </style>

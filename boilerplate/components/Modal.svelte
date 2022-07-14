@@ -1,14 +1,18 @@
 <script>
+  import classnames from 'classnames';
   import { createEventDispatcher } from 'svelte';
   import { fade } from 'svelte/transition';
-  import { classNameHelper } from '@/js/utils';
 
   import Icon from './Icon.svelte';
 
   const emit = createEventDispatcher();
 
+  // --- Props ------------------------
+
   export let title = false;
-  let isOpen = $$props['is-open'];
+  export let isOpen = false;
+
+  // --- Methods ----------------------
 
   const close = () => {
     isOpen = false;
@@ -20,22 +24,32 @@
   const onKeyDown = ({ key }) => {
     if (key === 'Escape') close();
   };
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'Modal';
+
+  $: className = classnames(baseName, $$props.class);
 </script>
 
 {#if isOpen}
-  <section class={classNameHelper(['Modal'], $$props)} transition:fade={{ duration: 100 }} on:click|self={close}>
-    <div class="-wrapper">
-      <button class="-close-button --pointer" on:click={close}>
+  <section
+    class={className}
+    transition:fade={{ duration: 100 }}
+    on:click|self={close}
+  >
+    <div class={baseName + '__wrapper'}>
+      <button class={baseName + '__close-button'} on:click={close}>
         <Icon name="fas fa-times-circle" />
       </button>
       {#if title}
-        <header class="-header">{title}</header>
+        <header class={baseName + '__header'}>{title}</header>
       {/if}
-      <main class="-body">
+      <main class={baseName + '__body'}>
         <slot />
       </main>
       {#if $$slots.footer}
-        <footer class="-footer"><slot name="footer" /></footer>
+        <footer class={baseName + '__footer'}><slot name="footer" /></footer>
       {/if}
     </div>
   </section>
@@ -52,57 +66,57 @@
     width: 100vw;
     height: 100vh;
     z-index: 10;
+  }
 
-    .-wrapper {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 32rem;
-      max-width: 90vw;
-      max-height: 80vh;
-      background-color: white;
-      box-shadow: 0.5rem 0.5rem 1rem rgba(black, 0.25);
-      border-radius: 0.5rem;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+  :where(.Modal__wrapper) {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32rem;
+    max-width: 90vw;
+    max-height: 80vh;
+    background-color: white;
+    box-shadow: 0.5rem 0.5rem 1rem rgba(black, 0.25);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  :where(.Modal__close-button) {
+    @include reset;
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    border: 0 none;
+    background: none;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  :where(.Modal__header) {
+    padding: 1rem 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+  }
+
+  :where(.Modal__body) {
+    padding: 1.5rem;
+    overflow-y: scroll;
+
+    & > *:first-child {
+      margin-top: 0;
     }
 
-    .-close-button {
-      @include reset;
-      position: absolute;
-      top: 0rem;
-      right: 0rem;
-      border: 0 none;
-      background: none;
-      padding: 0.5rem;
-      cursor: pointer;
+    & > *:last-child {
+      margin-bottom: 0;
     }
+  }
 
-    .-header {
-      padding: 1rem 1.5rem;
-      font-weight: bold;
-      text-align: center;
-      border-bottom: 1px solid lightgray;
-    }
-
-    .-body {
-      padding: 1.5rem;
-      overflow-y: scroll;
-
-      & > *:first-child {
-        margin-top: 0;
-      }
-
-      & > *:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .-footer {
-      border-top: 1px solid lightgray;
-      padding: 1rem 1.5rem;
-    }
+  :where(.Modal__footer) {
+    border-top: 1px solid lightgray;
+    padding: 1rem 1.5rem;
   }
 </style>
