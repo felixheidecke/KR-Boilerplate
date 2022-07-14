@@ -10,5 +10,6 @@
     "Desktop.ini": true,
     ".owncloudsync.log": true,
     ".sync_*": true
-  }
+  },
+  "editor.wordWrap": "on"
 }

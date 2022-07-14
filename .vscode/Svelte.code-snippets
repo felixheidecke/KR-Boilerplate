@@ -7,14 +7,24 @@
       "  <title>$1</title>",
       "</svelte:head>",
       "",
-      "<div>",
+      "<div data-comp>",
       "  $2",
       "</div>",
       "",
-      "<style lang=\"scss\" global>",
-      "  // Styling",
+      "<style lang=\"scss\">",
+      "  [data-comp] :global {",
+      "    // Component Styling",
+      "    $3",
+      "  }",
       "</style>"
     ],
     "description": "Svelte File"
+  },
+  "Comment": {
+    "scope": "svelte, js",
+    "prefix": "cc",
+    "body": [
+      "// --- $1 -----------------------------"
+    ]
   }
 }

@@ -11,10 +11,7 @@
 </script>
 
 <div>
-  <header>
-    <Logo />
-    <Nav />
-  </header>
+  <header><h1 class="$m-0">Boilerplate</h1></header>
   <main>
     <PageTransition {url}>
       <slot />
@@ -24,6 +21,8 @@
     <small>&copy; Klickrhein {year}</small>
   </footer>
 </div>
+
+<Toplink />
 
 <style lang="scss">
   div {

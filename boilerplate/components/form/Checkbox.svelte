@@ -1,6 +1,6 @@
 <script>
   import { uniqueId } from 'lodash-es';
-  import { classNameHelper } from '@/js/utils.js';
+  import classnames from 'classnames';
 
   export let checked = false;
   export let label = false;
@@ -14,14 +14,28 @@
   const inputProps = {
     id,
     name,
-    class: '-input',
     required
   };
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'Checkbox';
+
+  $: className = classnames(
+    baseName,
+    $$props.class,
+    !checked || baseName + '--active'
+  );
 </script>
 
-<label class={classNameHelper(['Checkbox'], $$props)} class:--active={checked}>
-  <input {...inputProps} type="checkbox" bind:checked />
-  <span class="-label">{@html label}</span>
+<label class={className}>
+  <input
+    {...inputProps}
+    class={baseName + '__input'}
+    type="checkbox"
+    bind:checked
+  />
+  <span class={baseName + 'label'}>{@html label}</span>
 </label>
 
 <style lang="scss" global>

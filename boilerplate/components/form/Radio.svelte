@@ -1,38 +1,48 @@
 <script>
+  import classnames from 'classnames';
   import { uniqueId } from 'lodash-es';
-  import { classNameHelper } from 'boilerplate/js/utils.js';
 
+  export let checked = false;
+  export let group = checked ? value : '';
   export let label = false;
   export let name;
   export let required = false;
-  export let checked = false;
   export let value;
-  export let group = checked ? value : '';
 
   const id = uniqueId(`radio-${name}-`);
 
-  const inputProps = {
-    id,
-    name,
-    value,
-    class: '-input',
-    required,
-    checked: checked ? 'checked' : undefined
-  };
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'Radio';
+
+  $: className = classnames(
+    baseName,
+    $$props.class,
+    !checked || baseName + '--active'
+  );
 </script>
 
-<label class={classNameHelper(['Radio'], $$props)} class:--active={checked}>
-  <input {...inputProps} {value} type="radio" bind:group />
-  <span class="-label">{@html label}</span>
+<label class={className}>
+  <input
+    {checked}
+    {id}
+    {name}
+    {required}
+    {value}
+    class={baseName + '__input'}
+    type="radio"
+    bind:group
+  />
+  <span class={baseName + '__label'}>{@html label}</span>
 </label>
 
-<style lang="scss" global>
+<style global>
   :where(.Radio) {
     position: relative;
+  }
 
-    .-label {
-      user-select: none;
-      font-size: 0.85rem;
-    }
+  :where(.Radio__label) {
+    user-select: none;
+    font-size: 0.85rem;
   }
 </style>

@@ -1,13 +1,15 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
   import { format } from 'date-fns';
   import { de } from 'date-fns/locale';
 
-  // --- Components -----------------------------------
+  // --- Components -------------------
 
   import Picture from '../Picture.svelte';
+  import Link from '../Link.svelte';
 
-  // --- Props --------
+  // --- Props ------------------------
+
   export let author;
   export let content;
   export let date;
@@ -17,32 +19,50 @@
   export let pdf;
   export let text;
   export let title;
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'XioniArticle';
+
+  $: className = classnames(baseName, $$props.class);
 </script>
 
-<article class={classNameHelper(['XioniArticle'], $$props)} id={`article-${id}`}>
-  <h2 class="-title">
+<article class={className} id={`article-${id}`}>
+  <h2 class={baseName + '__title'}>
     {title}
   </h2>
-  <div class="-meta">
+  <div class={baseName + '__meta'}>
     {#if author}
-      <span class="-meta-author">Von {author}</span>
+      <span class={baseName + '__author'}>Von {author}</span>
     {/if}
     {#if date}
-      <time class="-meta-date">{format(date * 1000, 'PP', { locale: de })}</time>
+      <time class={baseName + '__date'}>
+        {format(date * 1000, 'PP', { locale: de })}
+      </time>
     {/if}
   </div>
   {#if image}
-    <Picture ex-class="-picture" src={image.srcSmall} tablet={image.src} alt={image.alt} />
+    <Picture
+      ex-class={baseName + '__image'}
+      src={image.srcSmall}
+      tablet={image.src}
+      alt={image.alt}
+    />
   {/if}
-  <div class="-teaser">
+  <div class={baseName + '__teaser'}>
     {@html text}
   </div>
 
   {#if content}
-    <div class="-text">
+    <div class={baseName + '__content'}>
       {#each content as { image, text }}
         {#if image}
-          <Picture ex-class="-text-picture" src={image.src} alt={image.alt} align={image.position} />
+          <Picture
+            ex-class={baseName + '__content-image'}
+            src={image.src}
+            alt={image.alt}
+            align={image.position}
+          />
         {/if}
         {#if text}
           {@html text}
@@ -52,47 +72,55 @@
   {/if}
 
   {#if pdf}
-    <a href={pdf.src} class="-pdf" target="_blank" rel="follow" title={pdf.name}>{pdf.title}</a>
+    <a
+      href={pdf.src}
+      class={baseName + '__pdf'}
+      target="_blank"
+      rel="follow"
+      title={pdf.name}
+    >
+      {pdf.title}
+    </a>
   {/if}
 
   {#if link}
-    <a href={link} class="-link" rel="nofollow" target="_blank">{link}</a>
+    <Link to={link} ex-class={baseName + '__link'}>{link}</Link>
   {/if}
 </article>
 
-<style lang="scss" global>
+<style global>
   :where(.XioniArticle) {
     display: flow-root;
+  }
 
-    .-meta-author,
-    .-meta-date {
-      display: inline-block;
-    }
+  :where(.XioniArticle__author),
+  :where(.XioniArticle__date) {
+    display: inline-block;
+  }
 
-    .-picture img {
-      max-width: 10rem;
-      float: left;
-      margin-right: 2rem;
-    }
+  :where(.XioniArticle__image img) {
+    max-width: 10rem;
+    float: left;
+    margin-right: 2rem;
+  }
 
-    .-text-picture img {
-      max-width: 100%;
-    }
+  :where(.XioniArticle__content-image img) {
+    max-width: 100%;
+  }
 
-    .-text ul {
-      list-style-type: disc;
-      padding-left: 2rem;
-    }
+  :where(.XioniArticle__content ul) {
+    list-style-type: disc;
+    padding-left: 2rem;
+  }
 
-    .-pdf {
-      display: flex;
-      align-items: center;
+  :where(.XioniArticle__pdf) {
+    display: flex;
+    align-items: center;
+  }
 
-      svg {
-        max-width: 1rem;
-        max-height: 1rem;
-        margin-right: 0.333rem;
-      }
-    }
+  :where(.XioniArticle__pdf svg) {
+    max-width: 1rem;
+    max-height: 1rem;
+    margin-right: 0.333rem;
   }
 </style>

@@ -1,32 +1,41 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
   import { page } from '$app/stores';
 
   import Link from '@/components/Link.svelte';
   import SubTree from './NavSubTree.svelte';
 
+  // --- Data -------------------------
+
   export let routes = [];
+  export let baseName;
 
   let hoverState = false;
 
-  const setClassName = (route, hover) => {
-    const className = ['-a', route.class];
+  // --- CSS Class --------------------
 
-    if ($page.url.pathname === route.href) {
-      className.push('--active');
-    }
-
-    if (hover) {
-      className.push('--hover');
-    }
-
-    return classNameHelper(className);
+  const className = (route, hover) => {
+    return classnames(
+      baseName + '__a',
+      route.class,
+      !hover || baseName + '--hover',
+      $page.url.pathname !== route.href || baseName + '--active'
+    );
   };
 </script>
 
 {#each routes as route, i}
-  <li class="-li" on:mouseenter={() => (hoverState = i)} on:mouseleave={() => (hoverState = false)}>
-    <Link ex-class={setClassName(route, hoverState === i)} to={route.href} icon={route.icon} on:click>
+  <li
+    class="-li"
+    on:mouseenter={() => (hoverState = i)}
+    on:mouseleave={() => (hoverState = false)}
+  >
+    <Link
+      ex-class={className(route, hoverState === i)}
+      to={route.href}
+      icon={route.icon}
+      on:click
+    >
       {route.name}
     </Link>
 

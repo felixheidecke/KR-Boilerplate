@@ -1,10 +1,21 @@
 <script>
-  import { classNameHelper } from '@/js/utils.js';
+  import classnames from 'classnames';
+
+  // --- Data -------------------------
+
   export let text = 'Abschicken';
   export let disabled = false;
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'Submit';
+
+  $: className = classnames(baseName, $$props.class);
 </script>
 
-<button class={classNameHelper(['Submit'], $$props)} on:click {disabled}>{text}</button>
+<button class={className} {disabled} on:click>
+  {text}
+</button>
 
 <style lang="scss" global>
   :where(.Submit) {

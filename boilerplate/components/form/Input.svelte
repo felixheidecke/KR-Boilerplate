@@ -1,79 +1,71 @@
 <script>
+  import classnames from 'classnames';
   import { uniqueId } from 'lodash-es';
-  import { classNameHelper } from '@/js/utils.js';
 
   export let label = false;
+  export let max = null;
+  export let min = null;
   export let name;
   export let placeholder = false;
   export let required = false;
   export let type = 'text';
   export let value = '';
-  export let min = null;
-  export let max = null;
 
   const id = uniqueId(name + '-');
 
-  if (label && required) {
-    label += '*';
-  }
+  if (label && required) label += '*';
 
-  // -- Input proplist ---
+  // --- CSS Class --------------------
 
-  const inputProps = {
-    id,
-    name,
-    type,
-    required,
-    class: '-input'
-  };
+  const baseName = $$props['ex-class'] || 'Input';
 
-  if (placeholder) {
-    inputProps.placeholder = 'placeholder';
-  }
-
-  if (type === 'number' && min) {
-    inputProps.min = min;
-  }
-
-  if (type === 'number' && max) {
-    inputProps.max = max;
-  }
+  $: className = classnames(baseName, $$props.class);
 </script>
 
-<div class={classNameHelper(['Input'], $$props)}>
+<div class={className}>
   {#if label}
-    <label class="-label" for={id}>{label}</label>
+    <label class={baseName + '__label'} for={id}>{label}</label>
   {/if}
-  <input {...inputProps} bind:value />
+  <input
+    class={baseName + '__input'}
+    {id}
+    {max}
+    {min}
+    {name}
+    {placeholder}
+    {required}
+    {type}
+    bind:value
+  />
 </div>
 
-<style lang="scss" global>
+<style global>
   :where(.Input) {
     display: flex;
     flex-direction: column;
+  }
 
-    .-label {
-      display: block;
-      background: #eee;
-      padding: 0.25rem 0.666rem;
-      font-size: 0.8rem;
-      border: 1px solid lightgray;
-      border-bottom: 0 none;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
-      user-select: none;
-    }
+  :where(.Input__label) {
+    display: block;
+    background: #eee;
+    padding: 0.25rem 0.666rem;
+    font-size: 0.8rem;
+    border: 1px solid lightgray;
+    border-bottom: 0 none;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    user-select: none;
+  }
 
-    .-input {
-      width: 100%;
-      padding: 0.666rem;
-      font-size: 1rem;
-      border: 1px solid lightgray;
-      border-top: 0 none;
-      outline: none;
-      background-color: white;
-      border-bottom-left-radius: 0.25rem;
-      border-bottom-right-radius: 0.25rem;
-    }
+  :where(.Input__input) {
+    width: 100%;
+    padding: 0.666rem;
+    font-size: 1rem;
+    border: 1px solid lightgray;
+    border-top: 0 none;
+    outline: none;
+    background-color: white;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
   }
 </style>

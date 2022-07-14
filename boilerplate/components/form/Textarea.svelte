@@ -1,68 +1,69 @@
 <script>
+  import classnames from 'classnames';
   import { uniqueId } from 'lodash-es';
-  import { classNameHelper } from 'boilerplate/js/utils.js';
 
-  export let name;
-  export let required = false;
+  // --- Data -------------------------
+
   export let label = false;
+  export let name;
   export let placeholder = false;
-  export let height = '8rem';
-
-  let value = '';
+  export let required = false;
+  export let rows = 4;
+  label = required ? label + '*' : label;
 
   const id = uniqueId(`textarea-${name}-`);
 
-  label = required ? label + '*' : label;
+  let value = '';
 
-  // -- Input proplist ---
+  // --- CSS Class --------------------
 
-  const inputProps = {
-    id,
-    name,
-    style: `height:${height}`,
-    class: '-textarea',
-    required
-  };
+  const baseName = $$props['ex-class'] || 'Textarea';
 
-  if (placeholder) {
-    inputProps.placeholder = 'placeholder';
-  }
+  $: className = classnames(baseName, $$props.class);
 </script>
 
-<div class={classNameHelper(['Textarea'], $$props)}>
+<div class={className}>
   {#if label}
-    <label class="-label" for={name}>{label}</label>
+    <label class={baseName + '__label'} for={name}>{label}</label>
   {/if}
-  <textarea {...inputProps} bind:value />
+  <textarea
+    class={baseName + '__input'}
+    {required}
+    {id}
+    {name}
+    {rows}
+    {placeholder}
+    bind:value
+  />
 </div>
 
-<style lang="scss">
+<style global>
   :where(.Textarea) {
     display: flex;
     flex-direction: column;
+  }
 
-    .-label {
-      display: block;
-      background: #eee;
-      padding: 0.25rem 0.666rem;
-      font-size: 0.8rem;
-      border: 1px solid lightgray;
-      border-bottom: 0 none;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
-      user-select: none;
-    }
+  :where(.Textarea__label) {
+    display: block;
+    background: #eee;
+    padding: 0.25rem 0.666rem;
+    font-size: 0.8rem;
+    border: 1px solid lightgray;
+    border-bottom: 0 none;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    user-select: none;
+  }
 
-    .-textarea {
-      width: 100%;
-      padding: 0.666rem;
-      font-size: 1rem;
-      border: 1px solid lightgray;
-      border-top: 0 none;
-      border-bottom-left-radius: 0.25rem;
-      border-bottom-right-radius: 0.25rem;
-      outline: none;
-      resize: none;
-    }
+  :where(.Textarea__input) {
+    width: 100%;
+    padding: 0.666rem;
+    font-size: 1rem;
+    border: 1px solid lightgray;
+    border-top: 0 none;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    outline: none;
+    resize: none;
   }
 </style>

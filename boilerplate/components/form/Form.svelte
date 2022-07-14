@@ -1,18 +1,17 @@
 <script>
-  import { classNameHelper } from '@/js/utils';
+  import classnames from 'classnames';
   import { onMount, createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
   import Error from './Error.svelte';
 
   const emit = createEventDispatcher();
 
+  // --- Data -------------------------
+
   export let subject = 'Kontakformular';
   export let id = 0;
 
-  let form; // Form HTML Element
-
-  // State ------------
-
+  let form;
   let required = [];
   let errors = [];
   let isLoading = false;
@@ -23,7 +22,15 @@
     setTimeout(() => (errors = []), 5000);
   }
 
-  // Methods ----------
+  // --- Methods ----------------------
+
+  const scrollToDoneText = () => {
+    if (!isDoneEl) return;
+
+    isDoneEl.scrollIntoView({
+      behavior: `smooth`
+    });
+  };
 
   const submit = async () => {
     const formData = new FormData(form);
@@ -63,34 +70,32 @@
     });
   });
 
-  const scrollToDoneText = () => {
-    if (!isDoneEl) return;
+  // --- CSS Class --------------------
 
-    isDoneEl.scrollIntoView({
-      behavior: `smooth`
-    });
-  };
+  const baseName = $$props['ex-class'] || 'Checkbox';
+
+  $: className = classnames(baseName, $$props.class);
 </script>
 
-<form class={classNameHelper(['Form'], $$props)} bind:this={form} on:submit|preventDefault={submit}>
+<form class={className} bind:this={form} on:submit|preventDefault={submit}>
   <input type="hidden" name="subject" value={subject} />
   <input type="hidden" name="id" value={id} />
   <input type="hidden" name="required" value={required.join(',')} />
   <input type="text" name="honig" />
 
   {#if isDone}
-    <section bind:this={isDoneEl} class="-done" transition:slide>
+    <section bind:this={isDoneEl} class={baseName + '__done'} transition:slide>
       <slot name="done" />
     </section>
   {:else}
-    <section class="-body" transition:slide>
+    <section class={baseName + '__body'} transition:slide>
       <slot />
     </section>
   {/if}
 
-  <ul class="-errors">
+  <ul class={baseName + '__errors'}>
     {#each errors as { message }}
-      <li class="-error" transition:slide>
+      <li transition:slide>
         <Error>{message}</Error>
       </li>
     {/each}
@@ -98,24 +103,22 @@
 </form>
 
 <style lang="scss" global>
-  :where(.Form) {
-    .-body {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+  :where(.Form__body) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    .-errors {
-      @include reset-list;
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      bottom: 1rem;
-      left: 1rem;
-      right: 1rem;
-    }
+  :where(.Form__errors) {
+    @include reset-list;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
   }
 
   input[name='honig'] {
