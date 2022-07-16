@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-  <title>Button.svelte</title>
+  <title>Grid | Boilerplate</title>
 </svelte:head>
 
 <div data-page>

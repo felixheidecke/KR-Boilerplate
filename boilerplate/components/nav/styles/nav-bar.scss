@@ -2,53 +2,66 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  clip-path: inset(0 -100vw -100vw -100vw);
+}
 
-  // --- First Level ----------------------------------------
+// --- First Level ----------------------------------------
 
-  .-ul {
-    @include reset-list;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    height: 2.5rem;
+:where(.NavBar__ul) {
+  @include reset-list;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 2.5rem;
+}
+
+:where(.NavBar__li) {
+  position: relative;
+  display: inherit;
+  z-index: 0;
+}
+
+:where(.NavBar__a) {
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  background-color: rgb(200, 200, 200);
+  text-decoration: none;
+  transition: background-color 0.25s;
+}
+
+:where(.NavBar__a--hover) {
+  background-color: rgb(225, 225, 225);
+}
+
+// --- Second Level ---------------------------------------
+
+:where(.NavBar__ul-ul) {
+  @include reset-list;
+  left: 50%;
+  position: absolute;
+  top: 2.5rem;
+  transform: translateX(-50%);
+  background-color: rgb(200, 200, 200);
+  z-index: -1;
+  transition: transform 333ms, opacity 250ms;
+  transition-delay: 100ms;
+
+  &:not(.NavBar__ul-ul--visible) {
+    transform: translate(-50%, -100%);
+    pointer-events: none;
+    opacity: 0;
   }
+}
 
-  .-li {
-    position: relative;
-    display: inherit;
-  }
+:where(.NavBar__li-li) {
+  display: flex;
+}
 
-  .-a {
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    white-space: nowrap;
-    background-color: #777;
-  }
-
-  // --- Second Level ---------------------------------------
-
-  .-ul-ul {
-    @include reset-list;
-    left: 50%;
-    position: absolute;
-    top: 2.5rem;
-    transform: translateX(-50%);
-    z-index: 1;
-    background-color: #777;
-
-    &:not(.--visible) {
-      display: none;
-    }
-  }
-
-  .-li-li {
-    display: flex;
-  }
-
-  .-a-a {
-    font-size: 0.85rem;
-    padding: 0.5rem 2rem;
-    white-space: nowrap;
-    width: 100%;
-  }
+:where(.NavBar__a-a) {
+  font-size: 1rem;
+  padding: 0.5rem 2rem;
+  white-space: nowrap;
+  width: 100%;
+  text-decoration: none;
 }

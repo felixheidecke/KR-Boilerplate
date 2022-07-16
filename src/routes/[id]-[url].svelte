@@ -3,19 +3,22 @@
 </script>
 
 <script>
-  import { articles, fetchArticle, state } from '@/stores/articles';
+  import { ARTICLES, FETCH_ARTICLE, STATE } from '@/stores/articles';
   import { onMount } from 'svelte';
 
-  // --- Props --------
+  // --- Data -------------------------
+
   export let id;
 
-  // --- Computed -----
-  $: article = $articles.find((article) => article.id === id && 'content' in article) || {};
+  // --- Computed ---------------------
 
-  // --- Lifecycle ----
+  $: article = $ARTICLES.find((article) => article.id === id) || {};
+
+  // --- Lifecycle --------------------
+
   onMount(async () => {
     if (article.id) return;
-    await fetchArticle(id);
+    await FETCH_ARTICLE(id);
   });
 </script>
 
@@ -25,12 +28,10 @@
   <link rel="preconnect" href="https://www.rheingau.de" />
 </svelte:head>
 
-{#if article.id && !$state.loading}
+{#if article.id && !$STATE.loading}
   <XioniArticle {...article} />
 {:else}
   <XioniSceleton />
 {/if}
-
-<pre>{JSON.stringify(article, null, 2)}</pre>
 
 <Button icon="fas fa-chevron-left" href="/">Zurück zur Übersicht</Button>

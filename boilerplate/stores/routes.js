@@ -2,7 +2,7 @@ import { readable } from 'svelte/store';
 import { base } from '$app/paths';
 import { isObject, omit, forEach } from 'lodash-es';
 
-import routesYml from 'src/routes.yml';
+import routes from 'src/routes.yml';
 
 const normalizeRoute = (routes) => {
   const normalRoutes = [];
@@ -37,4 +37,4 @@ const normalizeRoute = (routes) => {
   return normalRoutes;
 };
 
-export const routes = readable(normalizeRoute(routesYml));
+export const ROUTES = readable(normalizeRoute(routes));

@@ -5,32 +5,28 @@
   import Link from '@/components/Link.svelte';
 
   export let routes = [];
+  export let baseName;
 
   let hoverState = false;
 
-  const className = (route, hover) => {
+  $: className = (route, hover) => {
     return classNames(
-      '-a-a',
+      baseName + '__a-a',
       route.class,
-      !hover || '--hover',
-      $page.url.pathname !== route.href || '--active'
+      !hover || baseName + '--hover',
+      $page.url.pathname !== route.href || baseName + '--active'
     );
   };
 </script>
 
 {#each routes as route, i}
   <li
-    class="-li-li"
+    class={baseName + '__li-li'}
     on:mouseenter={() => (hoverState = i)}
     on:mouseleave={() => (hoverState = false)}
   >
-    <Link
-      ex-class={className(route, hoverState === i)}
-      to={route.href}
-      icon={route.icon}
-      on:click
-    >
+    <a class={className(route, hoverState === i)} href={route.href} on:click>
       {route.name}
-    </Link>
+    </a>
   </li>
 {/each}

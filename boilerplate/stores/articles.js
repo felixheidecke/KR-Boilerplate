@@ -1,9 +1,9 @@
 import { uniq, uniqBy, sortBy } from 'lodash-es';
 import { writable } from 'svelte/store';
 
-export const articles = writable([]);
-export const groups = writable([]);
-export const state = writable({
+export const ARTICLES = writable([]);
+export const GROUPS = writable([]);
+export const STATE = writable({
   isLoading: false,
   hasError: false
 });
@@ -19,10 +19,12 @@ const BASE_URL = 'http://api.klickrhein.de:8300';
  * @returns {Promise}
  */
 
-export const fetchArticles = async (id, { limit = 100, expanded = false }) => {
+export const FETCH_ARTICLES = async (id, { limit = 100, expanded = false }) => {
   setLoading();
 
-  const res = await fetch(`${BASE_URL}/articles/${id}?limit=${limit}&expanded=${expanded}`);
+  const res = await fetch(
+    `${BASE_URL}/articles/${id}?limit=${limit}&expanded=${expanded}`
+  );
 
   if (!res.ok) {
     Promise.reject(res);
@@ -31,13 +33,13 @@ export const fetchArticles = async (id, { limit = 100, expanded = false }) => {
 
   const contents = await res.json();
 
-  articles.update((articles) => {
+  ARTICLES.update((articles) => {
     // Make sure to have no douplicates
     const update = uniqBy(contents.concat(articles), 'id');
     return sortBy(update, 'date').reverse();
   });
 
-  groups.update((groups) => {
+  GROUPS.update((groups) => {
     const update = [...groups, id];
     return uniq(update);
   });
@@ -53,7 +55,7 @@ export const fetchArticles = async (id, { limit = 100, expanded = false }) => {
  * @returns {Promise}
  */
 
-export const fetchArticle = async (id) => {
+export const FETCH_ARTICLE = async (id) => {
   setLoading();
 
   const res = await fetch(`${BASE_URL}/article/${id}`);
@@ -65,7 +67,7 @@ export const fetchArticle = async (id) => {
 
   const content = await res.json();
 
-  articles.update((articles) => {
+  ARTICLES.update((articles) => {
     // Make sure to have no douplicates
     const update = uniqBy([content].concat(articles), 'id');
     return sortBy(update, 'date').reverse();
@@ -74,24 +76,24 @@ export const fetchArticle = async (id) => {
   setDone();
 };
 
-// --- Set state helper -----------
+// --- Set STATE helper -----------
 
 const setLoading = () => {
-  state.set({
+  STATE.set({
     isLoading: true,
     hasError: false
   });
 };
 
 const setError = () => {
-  state.set({
+  STATE.set({
     isLoading: false,
     hasError: true
   });
 };
 
 const setDone = () => {
-  state.set({
+  STATE.set({
     isLoading: false,
     hasError: false
   });

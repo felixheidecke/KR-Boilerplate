@@ -1,6 +1,6 @@
 <script>
   import classnames from 'classnames';
-  import { routes } from '@/stores/routes';
+  import { ROUTES } from '@/stores/routes';
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
 
@@ -47,8 +47,8 @@
   // --- CSS Class --------------------
 
   $: baseName = (() => {
-    if (type === Type.slide) return Type.slide;
-    if (type === Type.bar) return Type.bar;
+    if (type === Type.slide) return 'NavSlide';
+    if (type === Type.bar) return 'NavBar';
   })();
 
   $: className = classnames(
@@ -67,8 +67,8 @@
   {hidden}
   on:click={() => (active = false)}
 >
-  <ul class="-ul">
-    <Tree routes={$routes} {baseName} on:click={() => (active = false)} />
+  <ul class={baseName + '__ul'}>
+    <Tree routes={$ROUTES} {baseName} on:click={() => (active = false)} />
   </ul>
 </nav>
 {#if type === Type.slide}

@@ -4,10 +4,14 @@ import oh from 'opening_hours';
 
 export const localiseOpeningHours = (openingHours) => {
   return openingHours
-    .replace(/Tu/g, 'Di')
-    .replace(/We/g, 'Mi')
-    .replace(/Th/g, 'Do')
-    .replace(/Su/g, 'So')
+    .replace(/Mo/g, 'Mo.')
+    .replace(/Tu/g, 'Di.')
+    .replace(/We/g, 'Mi.')
+    .replace(/Th/g, 'Do.')
+    .replace(/Fr/g, 'Fr.')
+    .replace(/Sa/g, 'Sa.')
+    .replace(/Su/g, 'So.')
+    .replace(/-/g, ' - ')
     .replace(/off/g, 'geschlossen')
     .replace(/PH/g, 'Feiertags');
 };
@@ -23,7 +27,6 @@ const formatDistance = (nextChange) => {
 };
 
 class OpeningHours {
-
   constructor(hours) {
     this._nominatim = {
       // Center of Germany
@@ -34,41 +37,41 @@ class OpeningHours {
       }
     };
 
-    this._hours = hours
-    this._oh = new oh(hours, this._nominatim)
-    this._openNow = this._oh.getState()
-    this._nextChange = this._oh.getNextChange()
+    this._hours = hours;
+    this._oh = new oh(hours, this._nominatim);
+    this._openNow = this._oh.getState();
+    this._nextChange = this._oh.getNextChange();
   }
 
   // --- Setter -----------------------
 
   set countryCode(code) {
-    this._nominatim.address.country_code = code
+    this._nominatim.address.country_code = code;
   }
 
   set coordinates({ lat, lon }) {
-    this._nominatim.lat = lat
-    this._nominatim.lon = lon
+    this._nominatim.lat = lat;
+    this._nominatim.lon = lon;
   }
 
   // --- Getter -----------------------
 
   get openNow() {
-    return this._openNow
+    return this._openNow;
   }
 
   get nextChange() {
-    return format(this._nextChange, "EEEE 'um' p 'Uhr'", { locale })
+    return format(this._nextChange, "EEEE 'um' p 'Uhr'", { locale });
   }
 
   get distanceToNextChange() {
-    return formatDistance(this._nextChange)
+    return formatDistance(this._nextChange);
   }
 
   get table() {
-    const localised = localiseOpeningHours(this._hours)
-    return localised.split(';').map(i => i.trim())
+    const localised = localiseOpeningHours(this._hours);
+    return localised.split(';').map((i) => i.trim());
   }
 }
 
-export default OpeningHours
+export default OpeningHours;

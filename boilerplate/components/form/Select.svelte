@@ -22,9 +22,9 @@
 
 <div class={className}>
   {#if label}
-    <label class={className + '__label'} for={name}>{label}</label>
+    <label class={baseName + '__label'} for={name}>{label}</label>
   {/if}
-  <select {id} {name} {required} class={className + '__input'} bind:value>
+  <select {id} {name} {required} class={baseName + '__input'} bind:value>
     {#each options as option, i}
       <option value={values[i]}>{option}</option>
     {/each}
@@ -54,10 +54,14 @@
     padding: 0.666rem;
     font-size: 1rem;
     border: 1px solid lightgray;
-    border-top: 0 none;
-    border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-radius: 0.25rem;
     appearance: none;
     background-color: white;
+  }
+
+  :where(.Select__label + .Select__input) {
+    border-top: 0 none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 </style>

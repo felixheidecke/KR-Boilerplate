@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-  <title>Aspect.svelte</title>
+  <title>Aspect | Boilerplate</title>
 </svelte:head>
 
 <div data-page>

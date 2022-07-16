@@ -15,8 +15,11 @@ export default {
     }),
 
     prerender: {
-      default: true
-      // entries: ['/news/0_fallback/']
+      default: true,
+      entries: [
+        '/sitemap.xml'
+        // '/news/0_fallback/'
+      ]
     },
 
     trailingSlash: 'never',

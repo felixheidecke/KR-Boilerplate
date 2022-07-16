@@ -1,9 +1,9 @@
 <script>
   import classnames from 'classnames';
-  import OpeningHours from '@/js/opening-hours';
+  import OpeningHours from './OpeningHours';
   import { isTrue } from '@/js/utils';
 
-  // --- Props ------------------------
+  // --- Data -------------------------
 
   export let hours;
   export let signOpen = false;
@@ -18,11 +18,13 @@
     hours
   );
 
-  const signText = openNow
+  // --- Computed ---------------------
+
+  $: signText = openNow
     ? `Wir schließen ${distanceToNextChange}`
     : `Wir öffnen ${distanceToNextChange}`;
 
-  // --- CSS Class -------------------
+  // --- CSS Class
 
   const baseName = $$props['ex-class'] || 'OpeningHours';
 
@@ -61,7 +63,7 @@
   >
     <div class={baseName + '__modal-body'}>
       {#each table as day}
-        {day}
+        {day} Uhr
         <br />
       {/each}
     </div>

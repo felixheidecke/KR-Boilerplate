@@ -61,13 +61,21 @@
       class={`${baseName}__button ${baseName}__button--prev`}
       on:click={() => swiper.go('<')}
     >
-      <Icon name="fas fa-angle-left" size="3" />
+      <Icon
+        ex-class={`${baseName}__button-icon`}
+        name="fas fa-angle-left"
+        size="5"
+      />
     </button>
     <button
       class={`${baseName}__button ${baseName}__button--next`}
       on:click={() => swiper.go('>')}
     >
-      <Icon name="fas fa-angle-right" size="3" />
+      <Icon
+        ex-class={`${baseName}__button-icon`}
+        name="fas fa-angle-right"
+        size="5"
+      />
     </button>
   {/if}
 </div>
@@ -75,20 +83,38 @@
 <style lang="scss" global>
   @import '../../node_modules/@glidejs/glide/dist/css/glide.core.min.css';
 
+  :where(.Swiper) {
+    overflow: hidden;
+  }
+
   :where(.Swiper__button) {
-    padding: 0.5rem;
+    padding: 4rem;
     border: 0 none;
     cursor: pointer;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    bottom: 0;
+    color: white;
+    transition: transform 0.33s, opacity 0.33s;
   }
 
   :where(.Swiper__button--prev) {
-    left: 1rem;
+    background: linear-gradient(90deg, rgba(black, 0.25) 0%, transparent 100%);
+    left: 0;
+
+    &:not(:hover) {
+      transform: translateX(-33.333%);
+      opacity: 0;
+    }
   }
 
   :where(.Swiper__button--next) {
-    right: 1rem;
+    background: linear-gradient(-90deg, rgba(black, 0.25) 0%, transparent 100%);
+    right: 0;
+
+    &:not(:hover) {
+      transform: translateX(33.333%);
+      opacity: 0;
+    }
   }
 </style>

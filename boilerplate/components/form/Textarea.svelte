@@ -6,7 +6,7 @@
 
   export let label = false;
   export let name;
-  export let placeholder = false;
+  export let placeholder = null;
   export let required = false;
   export let rows = 4;
   label = required ? label + '*' : label;
@@ -55,12 +55,16 @@
     user-select: none;
   }
 
+  :where(.Textarea__label + .Textarea__input) {
+    border-top: 0 none;
+  }
+
   :where(.Textarea__input) {
     width: 100%;
     padding: 0.666rem;
     font-size: 1rem;
+    font-family: sans-serif;
     border: 1px solid lightgray;
-    border-top: 0 none;
     border-bottom-left-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
     outline: none;

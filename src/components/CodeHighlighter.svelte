@@ -5,19 +5,18 @@
 
   let el;
 
-  onMount(() => {
-    el.innerHTML = hljs.highlightAuto(html.trim()).value;
-  });
+  onMount(() => (el.innerHTML = hljs.highlightAuto(html.trim()).value));
 </script>
 
-<pre bind:this={el} data-comp><slot /></pre>
+<pre bind:this={el} class="CodeHighlighter"><slot /></pre>
 
-<style>
-  pre {
+<style global>
+  .CodeHighlighter {
     background-color: rgb(51, 51, 51);
-    padding: 1rem;
     color: white;
-    line-height: 175%;
     font-family: 'Roboto Mono', monospace;
+    line-height: 175%;
+    overflow-x: scroll;
+    padding: 1rem;
   }
 </style>

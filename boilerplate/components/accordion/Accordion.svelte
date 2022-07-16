@@ -1,34 +1,22 @@
 <script>
+  import classnames from 'classnames';
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
-  import { classNameHelper } from '@/js/utils';
 
   let activeItem = writable(1);
-  setContext('activeItem', activeItem);
+  setContext('Accordion:activeItem', activeItem);
+
+  // --- CSS Class --------------------
+
+  $: className = classnames('Aspect', $$props.class);
 </script>
 
-<ul class={classNameHelper(['Accordion'], $$props)}>
+<ul class={className}>
   <slot />
 </ul>
 
-<style lang="scss" global>
-  .Accordion {
+<style global>
+  :where(.Accordion) {
     width: 100%;
-
-    .-slide {
-      border: 1px solid lightgray;
-      margin-bottom: 1rem;
-
-      &-title {
-        background: lightgray;
-        padding: 0.25rem 0.5rem;
-        margin: 0;
-        cursor: pointer;
-      }
-
-      &-content {
-        padding: 0 1rem;
-      }
-    }
   }
 </style>

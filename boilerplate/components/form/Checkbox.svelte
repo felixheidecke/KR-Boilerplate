@@ -35,16 +35,24 @@
     type="checkbox"
     bind:checked
   />
-  <span class={baseName + 'label'}>{@html label}</span>
+  <span class={baseName + '__label'}>{@html label}</span>
 </label>
 
-<style lang="scss" global>
+<style global>
   :where(.Checkbox) {
-    position: relative;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+  }
 
-    .-label {
-      user-select: none;
-      font-size: 0.85rem;
-    }
+  :where(.Checkbox__label) {
+    user-select: none;
+    font-size: 0.85rem;
+  }
+
+  :where(.Checkbox__input) {
+    margin: 0;
+    padding: 0;
   }
 </style>

@@ -72,7 +72,7 @@
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Checkbox';
+  const baseName = $$props['ex-class'] || 'Form';
 
   $: className = classnames(baseName, $$props.class);
 </script>
@@ -103,13 +103,6 @@
 </form>
 
 <style lang="scss" global>
-  :where(.Form__body) {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
   :where(.Form__errors) {
     @include reset-list;
     position: absolute;

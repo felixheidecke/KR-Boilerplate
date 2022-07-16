@@ -14,34 +14,40 @@
 
   // --- CSS Class --------------------
 
-  const className = (route, hover) => {
+  $: linkClassName = (route, hover) => {
     return classnames(
       baseName + '__a',
       route.class,
-      !hover || baseName + '--hover',
-      $page.url.pathname !== route.href || baseName + '--active'
+      !hover || baseName + '__a--hover',
+      $page.url.pathname !== route.href || baseName + '__a--active'
+    );
+  };
+
+  $: ulClassName = (hover) => {
+    return classnames(
+      baseName + '__ul-ul',
+      !hover || baseName + '__ul-ul--visible'
     );
   };
 </script>
 
 {#each routes as route, i}
   <li
-    class="-li"
+    class={baseName + '__li'}
     on:mouseenter={() => (hoverState = i)}
     on:mouseleave={() => (hoverState = false)}
   >
-    <Link
-      ex-class={className(route, hoverState === i)}
-      to={route.href}
-      icon={route.icon}
+    <a
+      class={linkClassName(route, hoverState === i)}
+      href={route.href}
       on:click
     >
       {route.name}
-    </Link>
+    </a>
 
     {#if !!route.routes.length}
-      <ul class="-ul-ul" class:--visible={hoverState === i}>
-        <SubTree routes={route.routes} on:click />
+      <ul class={ulClassName(hoverState === i)}>
+        <SubTree {baseName} routes={route.routes} on:click />
       </ul>
     {/if}
   </li>

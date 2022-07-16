@@ -18,9 +18,9 @@
   $: className = classnames(baseName, $$props.class);
 </script>
 
-<Aspect {ratio}>
+<Aspect class={className} {ratio}>
   <iframe
-    class={className}
+    class={baseName + '__iframe'}
     src={'https://www.youtube-nocookie.com/embed/' + id}
     title="YouTube video player"
     frameborder="0"
@@ -28,3 +28,10 @@
     allowfullscreen
   />
 </Aspect>
+
+<style>
+  :where(.YouTube__iframe) {
+    width: 100%;
+    height: 100%;
+  }
+</style>

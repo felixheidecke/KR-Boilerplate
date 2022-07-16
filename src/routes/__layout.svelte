@@ -11,7 +11,10 @@
 </script>
 
 <div>
-  <header><h1 class="$m-0">Boilerplate</h1></header>
+  <header>
+    <h1 class="$m-0">Boilerplate</h1>
+    <Nav />
+  </header>
   <main>
     <PageTransition {url}>
       <slot />

@@ -2,16 +2,17 @@
   import classnames from 'classnames';
   import { uniqueId } from 'lodash-es';
 
-  export let label = false;
+  export let label = null;
   export let max = null;
   export let min = null;
   export let name;
-  export let placeholder = false;
+  export let placeholder = null;
   export let required = false;
   export let type = 'text';
   export let value = '';
 
   const id = uniqueId(name + '-');
+  const inputProps = { id, max, min, name, placeholder, required, type };
 
   if (label && required) label += '*';
 
@@ -26,17 +27,7 @@
   {#if label}
     <label class={baseName + '__label'} for={id}>{label}</label>
   {/if}
-  <input
-    class={baseName + '__input'}
-    {id}
-    {max}
-    {min}
-    {name}
-    {placeholder}
-    {required}
-    {type}
-    bind:value
-  />
+  <input class={baseName + '__input'} {...inputProps} bind:value />
 </div>
 
 <style global>

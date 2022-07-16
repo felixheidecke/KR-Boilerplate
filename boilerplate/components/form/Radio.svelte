@@ -4,7 +4,7 @@
 
   export let checked = false;
   export let group = checked ? value : '';
-  export let label = false;
+  export let label = null;
   export let name;
   export let required = false;
   export let value;
@@ -38,7 +38,14 @@
 
 <style global>
   :where(.Radio) {
-    position: relative;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  :where(.Radio__input) {
+    margin: 0;
   }
 
   :where(.Radio__label) {

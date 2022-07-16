@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-  <title>Button.svelte</title>
+  <title>Button | Boilerplate</title>
 </svelte:head>
 
 <div data-page>
