@@ -8,19 +8,6 @@ const hostname = 'http://rheingaueins.de';
 
 let pages = [];
 
-// --- Methods ------------------------
-
-const createUrls = (routes) => {
-  return routes.map((path) => {
-    return `<url>
-  <loc>${hostname + path}</loc>
-  <lastmod>${format(new Date(), 'P')}</lastmod>
-</url>`;
-  });
-};
-
-// --- Subscriptions ------------------
-
 ROUTES.subscribe((data) => {
   data.forEach(({ href, routes }) => {
     pages.push(href);
@@ -33,6 +20,15 @@ ROUTES.subscribe((data) => {
   pages = uniq(pages);
 });
 
+const urls = pages.map((path) => {
+  return [
+    '<url>',
+    `  <loc>${hostname + path}</loc>`,
+    `  <lastmod>${format(new Date(), 'P')}</lastmod>`,
+    '</url>'
+  ].join('\n')
+})
+
 // --- Expose -------------------------
 
 export async function get() {
@@ -43,7 +39,7 @@ export async function get() {
     body: [
       '<?xml version="1.0" encoding="UTF-8" ?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-      ...createUrls(pages),
+      ...urls,
       '</urlset>'
     ].join('\n')
   };

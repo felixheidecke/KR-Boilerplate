@@ -2,21 +2,27 @@
   import { onMount } from 'svelte';
 
   export let html;
+  const refs = {};
 
-  let el;
+  onMount(() => {
+    const loader = setInterval(() => {
+      if (!hljs) return;
 
-  onMount(() => (el.innerHTML = hljs.highlightAuto(html.trim()).value));
+      refs.el.innerHTML = hljs.highlightAuto(html.trim()).value;
+      clearInterval(loader);
+    }, 150);
+  });
 </script>
 
-<pre bind:this={el} class="CodeHighlighter"><slot /></pre>
+<pre bind:this={refs.el} class="CodeHighlighter"><slot /></pre>
 
 <style global>
   .CodeHighlighter {
-    background-color: rgb(51, 51, 51);
+    background-color: rgb(50, 50, 50);
     color: white;
     font-family: 'Roboto Mono', monospace;
     line-height: 175%;
-    overflow-x: scroll;
+    overflow-x: auto;
     padding: 1rem;
   }
 </style>

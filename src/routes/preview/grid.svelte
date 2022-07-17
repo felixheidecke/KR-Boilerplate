@@ -1,11 +1,11 @@
 <script>
   let html = `
 <Grid>
-  <Grid size="1-2">1-2</Grid>
-  <Grid size="1-2">1-2</Grid>
-  <Grid size="1-3">1-3</Grid>
-  <Grid size="1-3">1-3</Grid>
-  <Grid size="1-3">1-3</Grid>
+  <Grid size="tablet-1-2 desktop-1-3">Frank</Grid>
+  <Grid size="tablet-1-2 desktop-2-3">Felix</Grid>
+  <Grid size="tablet-1-3">Klaus</Grid>
+  <Grid size="tablet-1-3">Susi</Grid>
+  <Grid size="tablet-1-3">Uwe</Grid>
 </Grid>
 `;
 </script>
@@ -20,11 +20,11 @@
 
   <h3>Ergebnis</h3>
   <Grid>
-    <Grid size="1-2" class="c1">50%</Grid>
-    <Grid size="1-2" class="c2">50%</Grid>
-    <Grid size="1-3" class="c3">33%</Grid>
-    <Grid size="1-3" class="c4">33%</Grid>
-    <Grid size="1-3" class="c5">33%</Grid>
+    <Grid size="tablet-1-2 desktop-1-3" class="c1">Frank</Grid>
+    <Grid size="tablet-1-2 desktop-2-3" class="c2">Felix</Grid>
+    <Grid size="tablet-1-3" class="c3">Klaus</Grid>
+    <Grid size="tablet-1-3" class="c4">Susi</Grid>
+    <Grid size="tablet-1-3" class="c5">Uwe</Grid>
   </Grid>
 </div>
 
