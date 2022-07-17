@@ -1,7 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { format } from 'date-fns';
-import { de as locale } from 'date-fns/locale';
 
 const getPackageJson = () => {
   const metadata = readFileSync(resolve('./package.json'), {
@@ -21,7 +20,7 @@ export async function get() {
     },
     body: {
       version,
-      build: format(new Date(), 'PPpp', { locale })
+      build: format(new Date(), 'PPpp')
     }
   };
 }

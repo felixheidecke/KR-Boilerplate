@@ -1,16 +1,39 @@
-import routes from 'src/routes.yml';
 import { format } from 'date-fns';
+import { ROUTES } from '@/stores/routes';
+import { uniq } from 'lodash-es';
+
+// --- Data ---------------------------
 
 const hostname = 'http://rheingaueins.de';
 
+let pages = [];
+
+// --- Methods ------------------------
+
 const createUrls = (routes) => {
-  return Object.keys(routes).map((route) => {
+  return routes.map((path) => {
     return `<url>
-  <loc>${hostname + route}</loc>
+  <loc>${hostname + path}</loc>
   <lastmod>${format(new Date(), 'P')}</lastmod>
 </url>`;
   });
 };
+
+// --- Subscriptions ------------------
+
+ROUTES.subscribe((data) => {
+  data.forEach(({ href, routes }) => {
+    pages.push(href);
+
+    if (routes.length) {
+      pages.push(...routes.map((i) => i.href));
+    }
+  });
+
+  pages = uniq(pages);
+});
+
+// --- Expose -------------------------
 
 export async function get() {
   return {
@@ -20,7 +43,7 @@ export async function get() {
     body: [
       '<?xml version="1.0" encoding="UTF-8" ?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-      ...createUrls(routes),
+      ...createUrls(pages),
       '</urlset>'
     ].join('\n')
   };

@@ -17,7 +17,8 @@ export default {
     prerender: {
       default: true,
       entries: [
-        '/sitemap.xml'
+        '/sitemap.xml',
+        '/info.json'
         // '/news/0_fallback/'
       ]
     },
