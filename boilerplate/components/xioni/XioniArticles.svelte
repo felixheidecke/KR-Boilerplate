@@ -61,11 +61,8 @@
 
 <ul class={className} id={`module-${id}`}>
   {#each listOfarticles as article}
-    <li>
-      <XioniArticle
-        {...prepareArticle(article)}
-        class={baseName + '__article'}
-      />
+    <li class={baseName + '__article'}>
+      <XioniArticle {...prepareArticle(article)} />
       {#if !expanded}
         <Button
           href={`${detailPagePrefix}/${article.id}-${article.slug}`}

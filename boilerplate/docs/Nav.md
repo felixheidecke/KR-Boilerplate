@@ -34,45 +34,44 @@ Darstellung der `<Nav variant="slide" />` und `<Nav variant="bar" />` Navigation
 
 ```SCSS
 .NavBar {
-  .-ul              { }
+  &__ul             { }
 
-  .-li              { }
+  &__li             { }
 
-  .-a               { }
-  .-a.--hover       { }
-  .-a.--active      { }
+  &__a              { }
+  &__a--hover       { }
+  &__a--active      { }
 
-  .-ul-ul           { }
-  .-ul-ul.--visible { }
+  &__ul-ul          { }
+  &__ul-ul--visible { }
 
-  .-li-li           { }
+  &__li-li          { }
 
-  .-a-a             { }
-  .-a-a.--hover     { }
-  .-a-a.--active    { }
+  &_a-a             { }
+  &_a-a--hover      { }
+  &_a-a--active     { }
 }
 
 
 .NavSlide {
-  .-ul           { }
+  &__ul             { }
 
-  .-li           { }
+  &__li             { }
 
-  .-a            { }
-  .-a.--hover    { }
-  .-a.--active   { }
+  &__a              { }
+  &__a--hover       { }
+  &__a--active      { }
 
-  .-ul-ul        { }
+  &__ul-ul          { }
 
-  .-li-li        { }
+  &__li-li          { }
 
-  .-a-a          { }
-  .-a-a.--hover  { }
-  .-a-a.--active { }
+  &_a-a             { }
+  &_a-a--hover      { }
+  &_a-a--active     { }
 }
 
 .Burger {
-  &.--active     { }
+  &--active         { }
 }
-
 ```

@@ -16,6 +16,22 @@
 </Accordion>
 ```
 
+### Styling
+
+```SCSS
+.Accordion { }
+
+// Slide
+.AccordionSlide {
+
+  // Titelseite
+  &__title { }
+
+  // Text/Bild inhalt
+  &__content { }
+}
+```
+
 ---
 
 # Aspect
@@ -29,13 +45,9 @@ Der `<Aspect>` Wrapper umschließt seinen Inhalt mit einem `<div>`, dessen Seite
     Im bin im Seitenverhältnis 4 zu 3
   </div>
 </Aspect>
-
-<style>
-  div {
-    background: lime;
-  }
-</style>
 ```
+
+### Attribute
 
 | Attribut | Standard | Beschreibung     |
 | -------- | -------- | ---------------- |
@@ -52,12 +64,14 @@ Der `<Aspect>` Wrapper umschließt seinen Inhalt mit einem `<div>`, dessen Seite
 </Grid>
 ```
 
+### Attribute
+
 | Attribute | Standardwert | Beschreibung                 | Hinweis!        |
 | --------- | ------------ | ---------------------------- | --------------- |
 | `size`    | `-`          | Variable Spaltenbreiten      | nur für Spalten |
 | `gap`     | `false`      | Abstand zwischen den Spalten | nur für Wraper  |
 
-**Verfügbar Breiten**
+Verfügbare `size` Werte:
 
 | Wert  | Mobile       | Tablet       | Desktop       | Widescreen       | Breite |
 | ----- | ------------ | ------------ | ------------- | ---------------- | ------ |
@@ -81,6 +95,8 @@ Der `<Aspect>` Wrapper umschließt seinen Inhalt mit einem `<div>`, dessen Seite
 <Icon name="fas fa-bath" size="10" />
 ```
 
+### Attribute
+
 | Attribute | Standard        | Beschreibung      |
 | :-------- | :-------------- | :---------------- |
 | `name`    | `fas fa-carrot` | Font-Awesome icon |
@@ -90,7 +106,7 @@ Der `<Aspect>` Wrapper umschließt seinen Inhalt mit einem `<div>`, dessen Seite
 
 # In View
 
-Der `<InView>` Wrapper umschließt seinen Inhalt mit einem `<div>`, welches die Klasse `--in-view` erhält, wenn es sich im Sichtbaren bereich befindet.
+Der `<InView>` Wrapper umschließt seinen Inhalt mit einem `<div>`, welches die Klasse `.InView--visible` erhält, wenn es sich im Sichtbaren bereich befindet.
 
 ```HTML
 <InView transition="scale">
@@ -98,30 +114,65 @@ Der `<InView>` Wrapper umschließt seinen Inhalt mit einem `<div>`, welches die 
 </InView>
 ```
 
+### Attribute
+
 | Attribut     | Standard | Beschreibung    |
 | ------------ | -------- | --------------- |
-| `transition` | `fade`   | Trasition style |
+| `transition` | `fade`\* | Trasition style |
 
-Verfügbare Werte für `transition` sind _"fade"_ und _"slide"_
+\* Verfügbare Werte: `fade` und `slide`
+
+### Styling
+
+```SCSS
+.InView {
+  &--fade { }
+  &--scale { }
+}
+```
 
 ---
+
+# List
+
+Listen, bei der jedes Element das gleiche Icon vorangestellt werden soll, werden über die `use` action hinzugefügt.
+
+```HTML
+<script>
+  import icon from '@/js/use.icon';
+</script>
+
+<ul use:icon={'fas fa-caret-right'}>
+  <li>Lorem ipsum</li>
+  <li>Consectetur adipisicing</li>
+  <li>Dolor sit amet</li>
+</ul>
+```
 
 # Mail
 
 ```HTML
 Meine E-Mail Adresse: <Mail to="max@mustermann.de" />
-```
-
-```HTML
 Schicke eine Mail an <Mail to="max@mustermann.de">Max Mustermann</Mail>
 ```
 
-| Attribut  | Standard       | Beschreibung                 |
-| --------- | -------------- | ---------------------------- |
-| `to` (\*) | -              | E-Mail Adresse               |
-| `icon`    | `false` (\*\*) | Standard Icon wird angezeigt |
+### Attribute
+
+| Attribut | Standard    | Beschreibung                 |
+| -------- | ----------- | ---------------------------- |
+| `to`\*   | -           | E-Mail Adresse               |
+| `icon`   | `false`\*\* | Standard Icon wird angezeigt |
 
 _(\*\* Hier kann auch ein Icon string platziert werden. Bspw: `fab fa-apple`)_
+
+### Style
+
+```SCSS
+.Mail {
+  &__icon { }
+  &__address { }
+}
+```
 
 ---
 
@@ -136,6 +187,8 @@ _(\*\* Hier kann auch ein Icon string platziert werden. Bspw: `fab fa-apple`)_
 />
 ```
 
+### Attribute
+
 | Attribute    | Standard | Beschreibung      |
 | ------------ | -------- | ----------------- |
 | `src` (\*)   | -        | Standard Bildpfad |
@@ -147,17 +200,30 @@ _(\*\* Hier kann auch ein Icon string platziert werden. Bspw: `fab fa-apple`)_
 
 [The Image Embed element (developer.mozilla.org)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
 
+### Style
+
+```SCSS
+// Wrapper
+.Picture {
+
+  // <img />
+  &__img { }
+}
+```
+
 ---
 
-# Slider
+# Swiper
 
 ```HTML
 <Swiper autoplay="3500">
-  <Picture src="https://picsum.photos/id/1011/1280/720" loading="eager" />
-  <Picture src="https://picsum.photos/id/1015/1280/720" loading="eager" />
-  <Picture src="https://picsum.photos/id/1025/1280/720" loading="eager" />
+  <img src="https://picsum.photos/id/1011/1280/720" alt="1011" />
+  <img src="https://picsum.photos/id/1015/1280/720" alt="1015" />
+  <img src="https://picsum.photos/id/1025/1280/720" alt="1025" />
 </Swiper>
 ```
+
+### Attribute
 
 | Attribute    | Standard | Beschreibung                                                  |
 | :----------- | :------- | :------------------------------------------------------------ |
@@ -167,12 +233,33 @@ _(\*\* Hier kann auch ein Icon string platziert werden. Bspw: `fab fa-apple`)_
 | `speed`      | `1000`   | Duration of the animation in milliseconds.                    |
 | `startAt`    | `0`      | Start at specific slide number defined with zero-based index. |
 
+### Style
+
+```SCSS
+.Swiper {
+
+  &__button { }
+  &__button--prev { }
+  &__button--next { }
+
+  &__button-icon { }
+}
+```
+
 ---
 
 # Toplink
 
 ```HTML
 <Toplink />
+```
+
+### Style
+
+```SCSS
+.Toplink {
+  &--visible { }
+}
 ```
 
 ---
@@ -183,11 +270,21 @@ _(\*\* Hier kann auch ein Icon string platziert werden. Bspw: `fab fa-apple`)_
 <YouTube id="dQw4w9WgXcQ">
 ```
 
+### Attribute
+
 | Attribute | Default | Description            |
 | :-------- | :------ | :--------------------- |
-| `id` (\*) | -       | YouTube Video ID       |
+| `id`\*    | -       | YouTube Video ID       |
 | `ratio`   | `16:9`  | Video Seitenverhältnis |
+| `allow`   | \*\*    | Konfiguration          |
 
----
+\* = Pflichfeld  
+\*\* = `['autoplay', 'clipboard-write', 'encrypted-media', 'picture-in-picture']`
 
-_(\* = Pflichfeld)_
+### Style
+
+```SCSS
+.YouTube {
+  &__iframe { }
+}
+```

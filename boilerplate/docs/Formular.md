@@ -17,8 +17,8 @@
 
 ```SCSS
 .Form {
-  .-body {}
-  .-errors {} // Liste der Fehler
+  &__body {}
+  &__errors {} // Liste der Fehler
 }
 ```
 
@@ -49,11 +49,11 @@
 .Checkbox {
 
   // Modifier
-  &.--checked {}
+  &--active {}
 
   // Elemente
-  .-input {}
-  .-label {}
+  &__input {}
+  &__label {}
 }
 ```
 
@@ -86,8 +86,8 @@
 .Input {
 
   // Elemente
-  .-input {}
-  .-label {}
+  &__input {}
+  &__label {}
 }
 ```
 
@@ -119,8 +119,8 @@
 .Radio {
 
   // Elemente
-  .-input {}
-  .-label {}
+  &__input {}
+  &__label {}
 }
 ```
 
@@ -152,12 +152,42 @@
 .Select {
 
   // Elemente
-  .-input {}
-  .-label {}
+  &__input {}
+  &__label {}
 }
 ```
 
-## Submit
+# Textarea
+
+```HTML
+<Textarea name="message" label="Ihre Nachricht" />
+```
+
+### Attribute
+
+| Attribut    | Standard | Beschreibung      |
+| :---------- | :------- | :---------------- |
+| label       | -        | Beschreibungstext |
+| name\*      | -        | Name              |
+| placeholder | -        | Platzhalter       |
+| rows        | `4`      | Höhe des Felds    |
+
+### Bindings
+
+| Attribut | Payload  |
+| :------- | :------- |
+| `value`  | _string_ |
+
+### Styling
+
+```SCSS
+.Textarea {
+  &__label { }
+  &__input { }
+}
+```
+
+# Submit
 
 Der "Abschicken" Button
 
@@ -172,6 +202,8 @@ Der "Abschicken" Button
 | `text`     | `Abschicken` | Feldname           |
 | `disabled` | `false`      | Button deaktiviert |
 
+\* = Pflichtfeld
+
 ### Events
 
 | Attribut | Payload |
@@ -183,7 +215,3 @@ Der "Abschicken" Button
 ```SCSS
 .Submit { }
 ```
-
----
-
-- (\*) Ist Verpflichtend

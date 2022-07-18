@@ -29,17 +29,16 @@
   {#if tablet}
     <source srcset={tablet} media="(min-width: 768px)" />
   {/if}
-  <img srcset={src} {alt} {loading} {align} />
+  <img class={baseName + '__img'} srcset={src} {alt} {loading} {align} />
 </picture>
 
 <style lang="scss" global>
   :where(.Picture) {
     display: inline-block;
-
-    img {
-      width: 100%;
-      height: auto;
-      max-width: fit-content;
-    }
+  }
+  :where(.Picture__img) {
+    width: 100%;
+    height: auto;
+    max-width: fit-content;
   }
 </style>

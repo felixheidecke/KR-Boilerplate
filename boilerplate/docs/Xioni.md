@@ -48,23 +48,11 @@ Hier steht zusätzlich `detailPagePrefix` zur Verfügung. Darüber kann ein Deta
 
 ```SCSS
 .XioniArticles {
-  .-article {
-    .-title { }
-
-    // Verfügbar wenn date oder author aktiviert
-    .-meta { }
-    .-meta-date { }
-    .-meta-author { }
-
-    .-picture { }
-    .-teaser { }
-
-    // Verfügbar wenn expanded
-    .-text { }
-    .-text-picture { }
+  &__item {
+    .XioniArticle { }
   }
 
-  .-read-more {}
+  &__read-more { }
 }
 ```
 
@@ -92,20 +80,21 @@ Darstellung eines einzelnene Artikels
 ## Styling
 
 ```SCSS
-.XioniArticles {
-  .-title { }
+.XioniArticle {
+  &__title { }
 
-  // Verfügbar wenn date oder author aktiviert
-  .-meta { }
-  .-meta-date { }
-  .-meta-author { }
+  // Wrapper um author und date
+  &__meta { }
+  &__author { }
+  &__date { }
 
-  .-picture { }
-  .-teaser { }
+  &__image { }
+  &__teaser { }
 
-  // Verfügbar wenn expanded
-  .-text { }
-  .-text-picture { }
+  &__content { }
+  &__content-image { }
+
+  &__pdf { }
 }
 ```
 
@@ -117,6 +106,6 @@ Plathalter Elemente, so lange der Content noch nicht geladen wurde.
 
 ```SCSS
 .XioniSceleton {
-  .-item {}
+  &__item {}
 }
 ```
