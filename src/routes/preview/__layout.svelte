@@ -12,7 +12,8 @@
     'opening-hours',
     'picture',
     'swiper',
-    'youtube'
+    'youtube',
+    'xioni-article'
   ];
 </script>
 

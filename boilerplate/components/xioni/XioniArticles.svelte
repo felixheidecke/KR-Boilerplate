@@ -1,7 +1,7 @@
 <script>
   import classnames from 'classnames';
   import { onMount } from 'svelte';
-  import { articles, groups, fetchArticles } from '@/stores/articles';
+  import { ARTICLES, GROUPS, FETCH_ARTICLES, ERROR } from '@/stores/articles';
 
   // --- Components -----------------------------------
 
@@ -40,13 +40,13 @@
   };
 
   onMount(async () => {
-    if ($groups.includes(id)) return;
-    await fetchArticles(id, { limit, expanded });
+    if ($GROUPS.includes(id)) return;
+    await FETCH_ARTICLES(id, { limit, expanded });
   });
 
   // --- Data -------------------------------------
 
-  $: listOfarticles = $articles.filter((a) => a.module === id) || [];
+  $: listOfarticles = $ARTICLES.filter((a) => a.module === id) || [];
 
   // --- CSS Class --------------------
 
@@ -59,47 +59,38 @@
   <link rel="preconnect" href="https://www.rheingau.de" />
 </svelte:head>
 
-<ul class={className} id={`module-${id}`}>
+{#if $ERROR}
+  <h3>Ein Fehler ist aufgetreten</h3>
+  <pre class={baseName + '__error'}>{JSON.stringify($ERROR, null, 2)}</pre>
+{:else}
   {#each listOfarticles as article}
-    <li class={baseName + '__article'}>
-      <XioniArticle {...prepareArticle(article)} />
-      {#if !expanded}
-        <Button
-          href={`${detailPagePrefix}/${article.id}-${article.slug}`}
-          class={baseName + '__read-more'}
-        >
-          ... weiter lesen
-        </Button>
-      {/if}
-    </li>
+    <XioniArticle {...prepareArticle(article)} />
+    {#if !expanded}
+      <Button
+        to={`${detailPagePrefix}/${article.id}-${article.slug}`}
+        class={baseName + '__read-more'}
+      >
+        ... weiter lesen
+      </Button>
+    {/if}
   {:else}
     <XioniSceleton />
   {/each}
-</ul>
+{/if}
 
 <style lang="scss" global>
-  :where(.XioniArticles) {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  :where(.XioniArticle + .XioniArticle) {
+    margin-top: 1rem;
+  }
 
-    .XioniArticle__meta {
-      @include reset-list;
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
-      font-style: italic;
-      display: flex;
-      gap: 0.333rem;
-    }
+  :where(.XioniArticles__read-more) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 
-    .XioniArticle__author:before {
-      content: 'Von: ';
-    }
-
-    .XioniArticle__image img {
-      max-width: 10rem;
-      float: left;
-      margin-right: 2rem;
-    }
+  :where(.XioniArticles__error) {
+    background-color: rgba(red, 0.125);
+    border: 1px dashed red;
+    padding: 1rem;
   }
 </style>

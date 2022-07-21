@@ -10,7 +10,7 @@
   <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
   {#if active}
     <svg
-      class="Burder__svg"
+      class="Burger__svg"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 352 512"
     >
@@ -20,7 +20,7 @@
     </svg>
   {:else}
     <svg
-      class="Burder__svg"
+      class="Burger__svg"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 448 512"
     >

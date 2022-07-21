@@ -10,15 +10,15 @@
 
   // --- Props ------------------------
 
-  export let author;
-  export let content;
-  export let date;
+  export let author = null;
+  export let content = null;
+  export let date = null;
   export let id;
-  export let image;
-  export let link;
-  export let pdf;
-  export let text;
-  export let title;
+  export let image = null;
+  export let link = null;
+  export let pdf = null;
+  export let text = null;
+  export let title = null;
 
   // --- CSS Class --------------------
 
@@ -43,8 +43,8 @@
   </div>
   {#if image}
     <Picture
-      ex-class={baseName + '__image'}
-      src={image.srcSmall}
+      class={baseName + '__image'}
+      src={image.thumbSrc}
       tablet={image.src}
       alt={image.alt}
     />
@@ -58,8 +58,8 @@
       {#each content as { image, text }}
         {#if image}
           <Picture
-            ex-class={baseName + '__content-image'}
             src={image.src}
+            ex-class={baseName + '__content-image'}
             alt={image.alt}
             align={image.position}
           />
@@ -88,24 +88,36 @@
   {/if}
 </article>
 
-<style global>
+<style global lang="scss">
   :where(.XioniArticle) {
     display: flow-root;
   }
 
-  :where(.XioniArticle__author),
-  :where(.XioniArticle__date) {
-    display: inline-block;
+  :where(.XioniArticle__meta) {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
   }
 
-  :where(.XioniArticle__image img) {
+  :where(.XioniArticle__image) {
     max-width: 10rem;
     float: left;
-    margin-right: 2rem;
+    margin-right: 1.5rem;
   }
 
-  :where(.XioniArticle__content-image img) {
-    max-width: 100%;
+  :where(.XioniArticle__content-image) {
+    display: inline-block;
+    max-width: 18rem;
+  }
+
+  :where(.XioniArticle__content-image--right) {
+    float: right;
+    margin-left: 1rem;
+  }
+
+  :where(.XioniArticle__content-image--left) {
+    float: left;
+    margin-right: 1rem;
   }
 
   :where(.XioniArticle__content ul) {

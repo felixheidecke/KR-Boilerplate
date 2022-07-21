@@ -15,7 +15,7 @@
   // --- Data -------------------------
 
   export let to;
-  export let target;
+  export let target = null;
   export let icon = false;
 
   const rel = isExternalLink(to) ? 'no-follow' : null;

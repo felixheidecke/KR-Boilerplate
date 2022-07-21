@@ -16,7 +16,11 @@
 
   const baseName = $$props['ex-class'] || 'Picture';
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(
+    baseName,
+    $$props.class,
+    [baseName, '--', align].join('')
+  );
 </script>
 
 <picture class={className}>
@@ -29,16 +33,19 @@
   {#if tablet}
     <source srcset={tablet} media="(min-width: 768px)" />
   {/if}
-  <img class={baseName + '__img'} srcset={src} {alt} {loading} {align} />
+  <img srcset={src} {alt} {loading} />
 </picture>
 
 <style lang="scss" global>
   :where(.Picture) {
     display: inline-block;
   }
-  :where(.Picture__img) {
-    width: 100%;
-    height: auto;
-    max-width: fit-content;
+
+  :where(.Picture--right) {
+    float: right;
+  }
+
+  :where(.Picture--left) {
+    float: left;
   }
 </style>

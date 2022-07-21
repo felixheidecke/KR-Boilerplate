@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 
 export const ARTICLES = writable([]);
 export const GROUPS = writable([]);
+export const ERROR = writable(null);
 export const STATE = writable({
   isLoading: false,
   hasError: false
@@ -26,12 +27,12 @@ export const FETCH_ARTICLES = async (id, { limit = 100, expanded = false }) => {
     `${BASE_URL}/articles/${id}?limit=${limit}&expanded=${expanded}`
   );
 
+  const contents = await res.json();
+
   if (!res.ok) {
     Promise.reject(res);
-    return setError();
+    return setError(contents);
   }
-
-  const contents = await res.json();
 
   ARTICLES.update((articles) => {
     // Make sure to have no douplicates
@@ -79,13 +80,15 @@ export const FETCH_ARTICLE = async (id) => {
 // --- Set STATE helper -----------
 
 const setLoading = () => {
+  ERROR.set(null);
   STATE.set({
     isLoading: true,
     hasError: false
   });
 };
 
-const setError = () => {
+const setError = (error) => {
+  ERROR.set(error);
   STATE.set({
     isLoading: false,
     hasError: true
@@ -93,6 +96,7 @@ const setError = () => {
 };
 
 const setDone = () => {
+  ERROR.set(null);
   STATE.set({
     isLoading: false,
     hasError: false

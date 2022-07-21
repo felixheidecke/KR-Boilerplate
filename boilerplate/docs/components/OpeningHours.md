@@ -31,15 +31,3 @@
   &--closed { } // Wenn geschlossen
 }
 ```
-
-## Output
-
-Beispiel entsprechend dem Markup (siehe oben)
-
-```HTML
-<div class="OpeningHours OpeningHours--open">
-  <img class="OpeningHours__sign" src="/images/we-are-open.png" alt="Wir haben geöffnet">
-  <span class="OpeningHours__distance">Wir schließen in 3 Minuten</span>
-  <span class="OpeningHours__next-change">Samstag um 12:00 Uhr</span>
-</div>
-```
