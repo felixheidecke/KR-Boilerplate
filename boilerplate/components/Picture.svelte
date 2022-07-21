@@ -6,7 +6,7 @@
   export let src;
   export let alt = '';
   export let loading = 'lazy';
-  export let align = 'left';
+  export let align = false;
 
   export let tablet = false;
   export let desktop = false;
@@ -19,7 +19,7 @@
   $: className = classnames(
     baseName,
     $$props.class,
-    [baseName, '--', align].join('')
+    !align || [baseName, '--', align].join('')
   );
 </script>
 
