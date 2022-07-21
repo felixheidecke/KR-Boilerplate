@@ -46,10 +46,11 @@
 
   // --- CSS Class --------------------
 
-  $: baseName = (() => {
-    if (type === Type.slide) return 'NavSlide';
-    if (type === Type.bar) return 'NavBar';
-  })();
+  $: baseName =
+    (() => {
+      if (type === Type.slide) return 'NavSlide';
+      if (type === Type.bar) return 'NavBar';
+    })() || 'Nav';
 
   $: className = classnames(
     $$props['ex-class'] || baseName,

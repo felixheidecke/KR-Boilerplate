@@ -2,10 +2,8 @@
   import classNames from 'classnames';
   import { page } from '$app/stores';
 
-  import Link from '@/components/Link.svelte';
-
   export let routes = [];
-  export let baseName;
+  export let baseName = 'Nav';
 
   let hoverState = false;
 

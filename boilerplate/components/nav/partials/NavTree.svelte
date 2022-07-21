@@ -2,13 +2,12 @@
   import classnames from 'classnames';
   import { page } from '$app/stores';
 
-  import Link from '@/components/Link.svelte';
   import SubTree from './NavSubTree.svelte';
 
   // --- Data -------------------------
 
   export let routes = [];
-  export let baseName;
+  export let baseName = 'Nav';
 
   let hoverState = false;
 
