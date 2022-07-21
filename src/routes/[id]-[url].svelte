@@ -6,16 +6,15 @@
   import { ARTICLES, FETCH_ARTICLE, STATE } from '@/stores/articles';
   import { onMount } from 'svelte';
 
-  // --- Data -------------------------
-
+  // --- Props --------
   export let id;
 
-  // --- Computed ---------------------
+  // --- Computed -----
+  $: article =
+    $ARTICLES.find((article) => article.id === id && 'content' in article) ||
+    {};
 
-  $: article = $ARTICLES.find((article) => article.id === id) || {};
-
-  // --- Lifecycle --------------------
-
+  // --- Lifecycle ----
   onMount(async () => {
     if (article.id) return;
     await FETCH_ARTICLE(id);
@@ -34,4 +33,6 @@
   <XioniSceleton />
 {/if}
 
-<Button icon="fas fa-chevron-left" href="/">Zurück zur Übersicht</Button>
+<Button class="$mt-2" icon="fas fa-chevron-left" to="/aktuelles">
+  Zurück zur Übersicht
+</Button>
