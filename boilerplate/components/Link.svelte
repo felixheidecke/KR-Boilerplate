@@ -17,8 +17,12 @@
   export let to;
   export let target = null;
   export let icon = false;
+  export let rel = 'follow';
 
-  const rel = isExternalLink(to) ? 'no-follow' : null;
+  if (isExternalLink(to)) {
+    rel = 'no-follow';
+    target = '_blank';
+  }
 
   // --- CSS Class --------------------
 

@@ -16,7 +16,9 @@
   export let author = false;
   export let date = false;
   export let expanded = false;
-  export let detailPagePrefix = '';
+
+  $: buttonText = $$props['button-text'] || '... weiterlesen';
+  $: detailPath = $$props['detail-path'] || '';
 
   id = +id;
   limit = +limit;
@@ -64,28 +66,29 @@
   <pre class={baseName + '__error'}>{JSON.stringify($ERROR, null, 2)}</pre>
 {:else}
   {#each listOfarticles as article}
-    <XioniArticle {...prepareArticle(article)} />
-    {#if !expanded}
-      <Button
-        to={`${detailPagePrefix}/${article.id}-${article.slug}`}
-        class={baseName + '__read-more'}
-      >
-        ... weiter lesen
-      </Button>
-    {/if}
+    <div class="XioniArticle__wrapper">
+      <XioniArticle {...prepareArticle(article)} />
+      {#if !expanded}
+        <Button
+          to={`${detailPath}/${article.id}-${article.slug}`}
+          class={baseName + '__read-more'}
+        >
+          {buttonText}
+        </Button>
+      {/if}
+    </div>
   {:else}
     <XioniSceleton />
   {/each}
 {/if}
 
 <style lang="scss" global>
-  :where(.XioniArticle + .XioniArticle) {
-    margin-top: 1rem;
+  :where(.XioniArticle__wrapper:not(:first-of-type)) {
+    margin-top: 2rem;
   }
 
   :where(.XioniArticles__read-more) {
     margin-top: 1rem;
-    margin-bottom: 1rem;
   }
 
   :where(.XioniArticles__error) {

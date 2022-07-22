@@ -31,16 +31,18 @@
   <h2 class={baseName + '__title'}>
     {title}
   </h2>
-  <div class={baseName + '__meta'}>
-    {#if author}
-      <span class={baseName + '__author'}>Von {author}</span>
-    {/if}
-    {#if date}
-      <time class={baseName + '__date'}>
-        {format(date * 1000, 'PP', { locale: de })}
-      </time>
-    {/if}
-  </div>
+  {#if author || date}
+    <div class={baseName + '__meta'}>
+      {#if author}
+        <span class={baseName + '__author'}>Von {author}</span>
+      {/if}
+      {#if date}
+        <time class={baseName + '__date'}>
+          {format(date * 1000, 'PP', { locale: de })}
+        </time>
+      {/if}
+    </div>
+  {/if}
   {#if image}
     <Picture
       class={baseName + '__image'}
