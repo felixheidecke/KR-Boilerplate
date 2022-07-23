@@ -3,7 +3,7 @@
     "missing-declaration": "ignore"
   },
   "search.exclude": {
-    "**/boilerplate": true
+    // "**/boilerplate": true
   },
   "files.exclude": {
     ".npmrc": false,

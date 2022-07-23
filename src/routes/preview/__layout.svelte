@@ -13,7 +13,7 @@
     'picture',
     'swiper',
     'youtube',
-    'xioni-article'
+    'xioni-article-list'
   ];
 </script>
 

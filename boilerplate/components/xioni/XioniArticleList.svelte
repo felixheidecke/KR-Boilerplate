@@ -1,21 +1,21 @@
 <script>
-  import classnames from 'classnames';
   import { onMount } from 'svelte';
   import { ARTICLES, GROUPS, FETCH_ARTICLES, ERROR } from '@/stores/articles';
 
   // --- Components -----------------------------------
 
   import XioniArticle from './XioniArticle.svelte';
-  import XioniSceleton from './XioniSceleton.svelte';
+  import XioniSceleton from './partials/Sceleton.svelte';
   import Button from '../Button.svelte';
 
   // --- Props ----------------------------------------
 
-  export let id;
-  export let limit = 100;
   export let author = false;
   export let date = false;
   export let expanded = false;
+  export let pdf = false;
+  export let id;
+  export let limit = 100;
 
   $: buttonText = $$props['button-text'] || '... weiterlesen';
   $: detailPath = $$props['detail-path'] || '';
@@ -37,6 +37,7 @@
       ...article,
       date: date ? article.date : null,
       author: author ? article.author : null,
+      pdf: pdf ? article.pdf : null,
       content: expanded ? article.content : null
     };
   };
@@ -49,49 +50,49 @@
   // --- Data -------------------------------------
 
   $: listOfarticles = $ARTICLES.filter((a) => a.module === id) || [];
-
-  // --- CSS Class --------------------
-
-  const baseName = $$props['ex-class'] || 'XioniArticles';
-
-  $: className = classnames(baseName, $$props.class);
 </script>
 
 <svelte:head>
   <link rel="preconnect" href="https://www.rheingau.de" />
 </svelte:head>
 
-{#if $ERROR}
-  <h3>Ein Fehler ist aufgetreten</h3>
-  <pre class={baseName + '__error'}>{JSON.stringify($ERROR, null, 2)}</pre>
-{:else}
-  {#each listOfarticles as article}
-    <div class="XioniArticle__wrapper">
-      <XioniArticle {...prepareArticle(article)} />
-      {#if !expanded}
-        <Button
-          to={`${detailPath}/${article.id}-${article.slug}`}
-          class={baseName + '__read-more'}
-        >
-          {buttonText}
-        </Button>
-      {/if}
-    </div>
+<div class="XioniArticleList">
+  {#if $ERROR}
+    <h3>Ein Fehler ist aufgetreten</h3>
+    <pre class="XioniArticleList__error">{JSON.stringify($ERROR, null, 2)}</pre>
   {:else}
-    <XioniSceleton />
-  {/each}
-{/if}
+    {#each listOfarticles as article}
+      <XioniArticle {...prepareArticle(article)}>
+        <span slot="append">
+          {#if !expanded}
+            <Button
+              to={`${detailPath}/${article.id}-${article.slug}`}
+              class="XioniArticle__read-more"
+            >
+              {buttonText}
+            </Button>
+          {/if}
+        </span>
+      </XioniArticle>
+    {:else}
+      <Sceleton />
+    {/each}
+  {/if}
+</div>
 
 <style lang="scss" global>
-  :where(.XioniArticle__wrapper:not(:first-of-type)) {
-    margin-top: 2rem;
+  :where(.XioniArticleList) {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
-  :where(.XioniArticles__read-more) {
-    margin-top: 1rem;
+  :where(.XioniArticle__read-more) {
+    clear: both;
+    display: inline-block;
   }
 
-  :where(.XioniArticles__error) {
+  :where(.XioniArticle__error) {
     background-color: rgba(red, 0.125);
     border: 1px dashed red;
     padding: 1rem;

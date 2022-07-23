@@ -12,4 +12,6 @@
   </p>
 
   <Toplink />
+
+  <Events module={[1289]} />
 </div>

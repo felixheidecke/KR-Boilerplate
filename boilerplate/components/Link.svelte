@@ -14,10 +14,11 @@
 
   // --- Data -------------------------
 
-  export let to;
+  export let to = '';
   export let target = null;
   export let icon = false;
   export let rel = 'follow';
+  export let tag = 'a';
 
   if (isExternalLink(to)) {
     rel = 'no-follow';
@@ -37,29 +38,39 @@
 </script>
 
 {#if icon}
-  <span class={className} on:click>
+  <span class={className}>
     <Icon ex-class={baseName + '__icon'} name={icon} />
-    <a href={to} {target} {rel}>
+    <svelte:element this={tag} href={to} {target} {rel} on:click>
       {#if $$slots.default}
         <slot />
       {:else}
         {trimScheme(to)}
       {/if}
-    </a>
+    </svelte:element>
   </span>
 {:else}
-  <a class={className} href={to} {target} {rel} on:click>
+  <svelte:element
+    this={tag}
+    class={className}
+    href={to}
+    {target}
+    {rel}
+    on:click
+  >
     {#if $$slots.default}
       <slot />
     {:else}
       {trimScheme(to)}
     {/if}
-  </a>
+  </svelte:element>
 {/if}
 
 <style global>
-  :where(.Link--has-icon) {
+  :where(.Link) {
     cursor: pointer;
+  }
+
+  :where(.Link--has-icon) {
     display: inline-flex;
     gap: 0.5rem;
     align-items: center;

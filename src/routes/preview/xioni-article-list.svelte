@@ -11,5 +11,5 @@
 
   <CodeHighlighter {html} />
 
-  <XioniArticles author date expanded id="1383" limit="999" />
+  <XioniArticleList author date id="1383" limit="999" />
 </div>
