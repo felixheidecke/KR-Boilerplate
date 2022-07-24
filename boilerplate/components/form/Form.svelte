@@ -2,7 +2,7 @@
   import classnames from 'classnames';
   import { onMount, createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
-  import Error from './Error.svelte';
+  import Message from '../Message.svelte';
 
   const emit = createEventDispatcher();
 
@@ -81,41 +81,29 @@
   <input type="hidden" name="subject" value={subject} />
   <input type="hidden" name="id" value={id} />
   <input type="hidden" name="required" value={required.join(',')} />
-  <input type="text" name="honig" />
+  <input type="text" name="honig" style="position:absolute;left:-9999px;" />
 
   {#if isDone}
     <section bind:this={isDoneEl} class={baseName + '__done'} transition:slide>
       <slot name="done" />
     </section>
   {:else}
-    <section class={baseName + '__body'} transition:slide>
+    <section class={baseName + '__body'}>
       <slot />
     </section>
   {/if}
 
-  <ul class={baseName + '__errors'}>
-    {#each errors as { message }}
-      <li transition:slide>
-        <Error>{message}</Error>
-      </li>
-    {/each}
-  </ul>
+  {#if errors.length}
+    <Message
+      class={baseName + '__errors'}
+      type="error"
+      title="Fehler aufgetreten"
+    >
+      <ul>
+        {#each errors as { message }}
+          <li>{message}</li>
+        {/each}
+      </ul>
+    </Message>
+  {/if}
 </form>
-
-<style lang="scss" global>
-  :where(.Form__errors) {
-    @include reset-list;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
-  }
-
-  input[name='honig'] {
-    position: absolute;
-    left: -9999px;
-  }
-</style>

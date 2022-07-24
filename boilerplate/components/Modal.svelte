@@ -104,7 +104,7 @@
 
   :where(.Modal__body) {
     padding: 1.5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     & > *:first-child {
       margin-top: 0;

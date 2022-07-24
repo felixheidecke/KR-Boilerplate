@@ -1,7 +1,7 @@
 <script>
   import classnames from 'classnames';
   import { format } from 'date-fns';
-  import { de } from 'date-fns/locale';
+  import { de } from 'date-fns/locale/index.js';
 
   // --- Components -------------------
 
@@ -27,7 +27,9 @@
   $: className = classnames(baseName, $$props.class);
 </script>
 
-<article class={className} id={`article-${id}`}>
+<article class={className} id={'xioni-article-' + id}>
+  <slot name="prepend" />
+
   <h2 class={baseName + '__title'}>
     {title}
   </h2>
@@ -74,20 +76,16 @@
   {/if}
 
   {#if pdf}
-    <a
-      href={pdf.src}
-      class={baseName + '__pdf'}
-      target="_blank"
-      rel="follow"
-      title={pdf.name}
-    >
+    <Link to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
       {pdf.title}
-    </a>
+    </Link>
   {/if}
 
   {#if link}
-    <Link to={link} ex-class={baseName + '__link'}>{link}</Link>
+    <Link to={website} class={baseName + '__website'} icon="fas fa-link" />
   {/if}
+
+  <slot name="append" />
 </article>
 
 <style global lang="scss">

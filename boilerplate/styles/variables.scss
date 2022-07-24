@@ -39,8 +39,8 @@ $spacing: (
 );
 
 $mediaquery: (
-  'mobile': '(max-width: 767px)',
-  'tablet': '(min-width: 768px) and (max-width: 1024px)',
+  'mobile': '(max-width: 620px)',
+  'tablet': '(min-width: 621px) and (max-width: 1024px)',
   'tablet-up': '(min-width: 768px)',
   'tablet-down': '(max-width: 1024px)',
   'desktop': '(min-width: 1025px) and (max-width: 1440px)',
