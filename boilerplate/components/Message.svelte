@@ -15,9 +15,11 @@
 </script>
 
 <div class={className}>
-  <h5>
-    {title}
-  </h5>
+  {#if title}
+    <h4 class={baseName + '__title'}>
+      {title}
+    </h4>
+  {/if}
   {#if $$slots.default}
     <slot />
   {/if}
@@ -27,28 +29,34 @@
 </div>
 
 <style global>
-  :where(.Error) {
+  :where(.Message) {
     padding: 1rem;
     border-radius: 0.25rem;
     font-style: italic;
     box-shadow: 0 0 0.5rem rgba(#000, 0.25);
+    background: #dfdfdf;
+    border: 1px solid #7c7c7c;
+    color: darken(rgb(34, 34, 34), 0.666);
+  }
+
+  :where(.Message__title) {
+    margin: 0 0 1rem;
+    padding: 0;
+    text-align: center;
   }
 
   :where(.Message--error) {
     background: #ffe3e3;
     border: 1px solid #ffb0b0;
-    color: darken(#f00, 0.666);
   }
 
   :where(.Message--info) {
     background: #fff8e3;
     border: 1px solid #fff3b0;
-    color: lighten(rgb(0, 0, 0), 0.25);
   }
 
   :where(.Message--success) {
     background: #e6ffe3;
     border: 1px solid #8ee79d;
-    color: lighten(rgb(0, 0, 0), 0.25);
   }
 </style>

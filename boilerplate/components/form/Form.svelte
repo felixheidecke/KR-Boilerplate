@@ -2,7 +2,7 @@
   import classnames from 'classnames';
   import { onMount, createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
-  import Error from '../Message.svelte';
+  import Message from '../Message.svelte';
 
   const emit = createEventDispatcher();
 
@@ -93,7 +93,7 @@
     </section>
   {/if}
 
-  {#if error.length}
+  {#if errors.length}
     <Message
       class={baseName + '__errors'}
       type="error"

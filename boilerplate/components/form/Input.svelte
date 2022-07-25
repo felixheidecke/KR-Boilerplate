@@ -10,9 +10,19 @@
   export let required = false;
   export let type = 'text';
   export let value = '';
+  export let readonly = null;
 
   const id = uniqueId(name + '-');
-  const inputProps = { id, max, min, name, placeholder, required, type };
+  const inputProps = {
+    id,
+    max,
+    min,
+    name,
+    placeholder,
+    required,
+    type,
+    readonly
+  };
 
   if (label && required) label += '*';
 
@@ -30,10 +40,8 @@
   <input class={baseName + '__input'} {...inputProps} bind:value />
 </div>
 
-<style global>
+<style global lang="scss">
   :where(.Input) {
-    display: flex;
-    flex-direction: column;
   }
 
   :where(.Input__label) {
@@ -52,11 +60,16 @@
     width: 100%;
     padding: 0.666rem;
     font-size: 1rem;
+    font-family: sans-serif;
     border: 1px solid lightgray;
     border-top: 0 none;
     outline: none;
     background-color: white;
     border-bottom-left-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
+
+    &[type='date'] {
+      text-transform: uppercase;
+    }
   }
 </style>
