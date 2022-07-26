@@ -11,5 +11,5 @@
 
   <CodeHighlighter {html} />
 
-  <XioniArticleList author date id="1383" limit="999" />
+  <XioniArticleList author date id="1383" limit="999" detail-path="/preview" />
 </div>

@@ -33,6 +33,10 @@
   <Sceleton />
 {/if}
 
-<Button class="$mt-2" icon="fas fa-chevron-left" to="/aktuelles">
+<Button
+  class="$mt-2"
+  icon="fas fa-chevron-left"
+  to="/preview/xioni-article-list"
+>
   Zurück zur Übersicht
 </Button>

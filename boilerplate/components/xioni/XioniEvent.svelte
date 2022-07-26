@@ -10,7 +10,7 @@
   export let description = null;
   export let details = null;
   export let ends = null;
-  export let flags = [];
+  // export let flags = [];
   export let id;
   export let image = null;
   export let pdf = null;

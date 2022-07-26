@@ -2,14 +2,19 @@
   import { onMount } from 'svelte';
   import { EVENTS, GROUPS, FETCH_EVENTS, ERROR } from '@/stores/events';
   import { uniqueId } from 'lodash-es';
-  import XioniEvent from './XioniEvent.svelte';
 
   // --- Components -------------------
 
+  import XioniEvent from './XioniEvent.svelte';
+  import Sceleton from './partials/Sceleton.svelte';
+  import Message from '../Message.svelte';
+
   // --- Props ------------------------
 
-  export let module = [];
   export let limit = 100;
+  export let module = [];
+
+  module = module.split(',').map((e) => +e);
 
   // --- Data -------------------------
 
@@ -38,6 +43,8 @@
   {:else}
     {#each listOfEvents as event}
       <XioniEvent {...event} />
+    {:else}
+      <Sceleton />
     {/each}
   {/if}
 </div>

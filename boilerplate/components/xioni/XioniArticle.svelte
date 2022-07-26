@@ -19,6 +19,7 @@
   export let pdf = null;
   export let text = null;
   export let title = null;
+  export let website = null;
 
   // --- CSS Class --------------------
 

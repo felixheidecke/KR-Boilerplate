@@ -8,8 +8,10 @@
 
   // --- Props ------------------------
 
-  export let module = [];
+  export let module;
   export let limit = 100;
+
+  module = module.split(',').map((e) => +e);
 
   // --- Methods ----------------------
 
@@ -115,7 +117,7 @@
         class="$mt"
       />
       <Checkbox
-        class="$mt-2"
+        class="$mt"
         name="Einverständnis"
         required
         label="Ich melde mein Kind verbindlich als Teilnehmer/in verbindlich zur
@@ -124,7 +126,7 @@
       />
 
       <Checkbox
-        class="$mt-2"
+        class="$mt"
         name="Presse"
         label="Ich erlaube die Nutzung des entstandenen Bild- und
         Filmmaterials zur Nutzung und Veröffentlichung auf den Seiten
@@ -154,16 +156,4 @@
       gap: 0.75rem;
     }
   }
-
-  // table {
-  //   width: 100%;
-
-  //   td {
-  //     padding: 0;
-  //   }
-
-  //   td + td {
-  //     padding: 0 0 0 0.5rem;
-  //   }
-  // }
 </style>

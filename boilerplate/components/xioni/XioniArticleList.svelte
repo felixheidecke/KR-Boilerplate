@@ -5,7 +5,7 @@
   // --- Components -----------------------------------
 
   import XioniArticle from './XioniArticle.svelte';
-  import XioniSceleton from './partials/Sceleton.svelte';
+  import Sceleton from './partials/Sceleton.svelte';
   import Button from '../Button.svelte';
 
   // --- Props ----------------------------------------
