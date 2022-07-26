@@ -34,16 +34,16 @@
     transition: all 0.25s;
     user-select: none;
     white-space: nowrap;
+  }
 
-    &:not(:disabled):hover {
-      background-color: darken(white, 5%);
-      box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
-    }
+  :where(.Submit:not(:disabled):hover) {
+    background-color: darken(white, 5%);
+    box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
+  }
 
-    &:disabled {
-      border-color: darkgrey;
-      color: darkgrey;
-      cursor: not-allowed;
-    }
+  :where(.Submit:disabled) {
+    border-color: darkgrey;
+    color: darkgrey;
+    cursor: not-allowed;
   }
 </style>

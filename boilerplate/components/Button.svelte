@@ -57,17 +57,17 @@
     transition: all 0.25s;
     user-select: none;
     white-space: nowrap;
+  }
 
-    &:not(:disabled):hover {
-      background-color: darken(white, 5%);
-      box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
-    }
+  :where(.Button:not(:disabled):hover) {
+    background-color: darken(white, 5%);
+    box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
+  }
 
-    &:disabled {
-      border-color: darkgrey;
-      color: darkgrey;
-      cursor: not-allowed;
-    }
+  :where(.Button:disabled) {
+    border-color: darkgrey;
+    color: darkgrey;
+    cursor: not-allowed;
   }
 
   :where(.Button--reverse) {

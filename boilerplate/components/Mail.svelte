@@ -5,6 +5,8 @@
   export let to;
   export let icon = 'fas fa-envelope';
 
+  if (icon === 'false') icon = false;
+
   const iconName = typeof icon === 'boolean' ? 'far fa-envelope' : icon;
   const obfuscated = to.trim().split('').join('&shy;');
 

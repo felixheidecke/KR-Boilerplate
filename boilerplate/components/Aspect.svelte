@@ -11,7 +11,7 @@
   $: className = classnames(baseName, $$props.class);
 </script>
 
-<section class={className}>
+<div class={className}>
   <div
     class={baseName + '__ratio'}
     style={`padding-top: ${(+y / +x) * 100}%`}
@@ -19,7 +19,7 @@
   <div class={baseName + '__content'}>
     <slot />
   </div>
-</section>
+</div>
 
 <style global>
   :where(.Aspect) {
