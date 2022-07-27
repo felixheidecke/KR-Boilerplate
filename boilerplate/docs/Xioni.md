@@ -3,7 +3,7 @@
 Liste mehrerer Artikel basieren auf einer modul Id
 
 ```HTML
-<XioniArticles
+<XioniArticleList
   id="123"
   button-text="Jetzt weiterlesen"
   detail-path="/news"
@@ -30,10 +30,11 @@ Liste mehrerer Artikel basieren auf einer modul Id
 ## Styling
 
 ```SCSS
-.XioniArticle {
-  &__wrapper { }
-  &__read-more { }
 
+// Wrapper um alle Artikel
+.XioniArticleList { }
+
+.XioniArticle {
   &__title { }
   &__meta { }
   &__author { }
@@ -48,5 +49,7 @@ Liste mehrerer Artikel basieren auf einer modul Id
   &__content-image--left { }
 
   &__pdf { }
+
+  &__read-more { }
 }
 ```

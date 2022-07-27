@@ -58,8 +58,9 @@
 
 <div class="XioniArticleList">
   {#if $ERROR}
-    <h3>Ein Fehler ist aufgetreten</h3>
-    <pre class="XioniArticleList__error">{JSON.stringify($ERROR, null, 2)}</pre>
+    <Message title="Ein Fehler ist aufgetreten" type="error">
+      <div slot="code">{JSON.stringify($ERROR, null, 2)}</div>
+    </Message>
   {:else}
     {#each listOfarticles as article}
       <XioniArticle {...prepareArticle(article)}>
