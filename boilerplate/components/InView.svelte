@@ -1,28 +1,28 @@
 <script>
-  import classnames from 'classnames';
-  import { onMount } from 'svelte';
+  import classnames from 'classnames'
+  import { onMount } from 'svelte'
 
-  export let transition = 'fade';
+  export let transition = 'fade'
 
-  let inView;
-  let wrapper;
-  let isInView = false;
+  let inView
+  let wrapper
+  let isInView = false
 
   onMount(async () => {
-    inView = await import('in-view');
-    isInView = inView.is(wrapper);
-  });
+    inView = await import('in-view')
+    isInView = inView.is(wrapper)
+  })
 
   // --- CSS Classname ----------------
 
-  const baseName = $$props['ex-class'] || 'InView';
+  const baseName = $$props['ex-class'] || 'InView'
 
   $: className = classnames(
     baseName,
     $$props.class,
     !isInView || baseName + '--visible',
     !transition || baseName + '--fade'
-  );
+  )
 </script>
 
 <svelte:window on:scroll|passive={() => (isInView = inView.is(wrapper))} />

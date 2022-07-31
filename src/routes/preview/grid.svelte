@@ -7,7 +7,7 @@
   <Grid size="tablet-1-3">Susi</Grid>
   <Grid size="tablet-1-3">Uwe</Grid>
 </Grid>
-`;
+`
 </script>
 
 <svelte:head>

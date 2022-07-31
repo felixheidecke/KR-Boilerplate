@@ -1,25 +1,25 @@
 <script>
-  import classnames from 'classnames';
-  import Icon from './Icon.svelte';
+  import classnames from 'classnames'
+  import Icon from './Icon.svelte'
 
   // --- Props ------------------------
 
-  export let to = false;
-  export let icon = false;
-  export let disabled = false;
-  export let target = null;
-  export let reverse = false;
+  export let to = false
+  export let icon = false
+  export let disabled = false
+  export let target = null
+  export let reverse = false
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Button';
+  const baseName = $$props['ex-class'] || 'Button'
 
   $: className = classnames(
     baseName,
     $$props.class,
     !reverse || baseName + '--reverse',
     !to || baseName + '--anchor'
-  );
+  )
 </script>
 
 {#if !to}

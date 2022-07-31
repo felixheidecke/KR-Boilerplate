@@ -1,7 +1,7 @@
 <script>
-  import { slide, fade } from 'svelte/transition';
+  import { slide, fade } from 'svelte/transition'
 
-  export let url;
+  export let url
   // const pageTransitionDuration = 333;
 </script>
 

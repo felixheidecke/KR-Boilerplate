@@ -1,5 +1,9 @@
 ul {
   @include reset-list;
+
+  ul {
+    padding-left: 2rem;
+  }
 }
 
 ul.--disc,

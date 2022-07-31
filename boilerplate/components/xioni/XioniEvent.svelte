@@ -1,44 +1,48 @@
 <script>
-  import classnames from 'classnames';
-  import { format } from 'date-fns';
-  import { de } from 'date-fns/locale/index.js';
+  import classnames from 'classnames'
+  import { format } from 'date-fns'
+  import { de } from 'date-fns/locale/index.js'
 
   // --- Components -------------------
 
   // --- Props ------------------------
 
-  export let description = null;
-  export let details = null;
-  export let ends = null;
+  export let description = null
+  export let details = null
+  export let ends = null
   // export let flags = [];
-  export let id;
-  export let image = null;
-  export let pdf = null;
-  export let starts = null;
-  export let website = null;
-  export let title;
+  export let id
+  export let image = null
+  export let pdf = null
+  export let starts = null
+  export let website = null
+  export let title
+
+  // --- Data -------------------------
+
+  const startDate = format(starts * 1000, 'PP', { locale: de })
+  const endDate = format(ends * 1000, 'PP', { locale: de })
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'XioniEvent';
+  const baseName = $$props['ex-class'] || 'XioniEvent'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <div class={className} id={'xioni-event-' + id}>
-  <slot name="prepend" />
-  <h4 class={baseName + '__title'}>
+  <h2 class={baseName + '__title'}>
     {title}
-  </h4>
-  <div class={baseName + '__meta'}>
+  </h2>
+  <h3 class={baseName + '__date'}>
     Vom <time class={baseName + '__starts'}>
-      {format(starts * 1000, 'PP', { locale: de })}
+      {startDate}
     </time>
     bis
     <time class={baseName + '__ends'}>
-      {format(ends * 1000, 'PP', { locale: de })}
+      {endDate}
     </time>
-  </div>
+  </h3>
   {#if image}
     <Picture
       class={baseName + '__image'}
@@ -61,5 +65,5 @@
   {#if website}
     <Link to={website} class={baseName + '__website'} icon="fas fa-link" />
   {/if}
-  <slot name="append" />
+  <slot />
 </div>

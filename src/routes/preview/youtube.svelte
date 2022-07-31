@@ -1,5 +1,5 @@
 <script>
-  let html = '<YouTube id="2vjPBrBU-TM" />';
+  let html = '<YouTube id="2vjPBrBU-TM" />'
 </script>
 
 <svelte:head>

@@ -1,24 +1,23 @@
 <script context="module">
-  export const load = async ({ params }) => ({ props: { id: +params.id } });
+  export const load = async ({ params }) => ({ props: { id: +params.id } })
 </script>
 
 <script>
-  import { ARTICLES, FETCH_ARTICLE, STATE } from '@/stores/articles';
-  import { onMount } from 'svelte';
+  import { ARTICLES, FETCH_ARTICLE, STATE } from '@/stores/articles'
+  import { onMount } from 'svelte'
 
   // --- Props --------
-  export let id;
+  export let id
 
   // --- Computed -----
   $: article =
-    $ARTICLES.find((article) => article.id === id && 'content' in article) ||
-    {};
+    $ARTICLES.find((article) => article.id === id && 'content' in article) || {}
 
   // --- Lifecycle ----
   onMount(async () => {
-    if (article.id) return;
-    await FETCH_ARTICLE(id);
-  });
+    if (article.id) return
+    await FETCH_ARTICLE(id)
+  })
 </script>
 
 <svelte:head>

@@ -1,23 +1,23 @@
 <script>
-  import classnames from 'classnames';
-  import { uniqueId } from 'lodash-es';
+  import classnames from 'classnames'
+  import { uniqueId } from 'lodash-es'
 
   // --- Data -------------------------
 
-  export let label = false;
-  export let name;
-  export let options = [];
-  export let required = false;
-  export let values = options;
-  export let value = values[0];
+  export let label = false
+  export let name
+  export let options = []
+  export let required = false
+  export let values = options
+  export let value = values[0]
 
-  const id = uniqueId(name + '-');
+  const id = uniqueId(name + '-')
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Select';
+  const baseName = $$props['ex-class'] || 'Select'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <div class={className}>

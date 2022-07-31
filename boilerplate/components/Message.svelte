@@ -1,17 +1,17 @@
 <script>
-  import classnames from 'classnames';
-  export let type = null;
-  export let title = 'Hinweis';
+  import classnames from 'classnames'
+  export let type = null
+  export let title = 'Hinweis'
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Message';
+  const baseName = $$props['ex-class'] || 'Message'
 
   $: className = classnames(
     baseName,
     $$props.class,
     !type || baseName + '--' + type
-  );
+  )
 </script>
 
 <div class={className}>

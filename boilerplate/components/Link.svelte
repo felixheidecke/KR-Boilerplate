@@ -1,40 +1,40 @@
 <script>
-  import classnames from 'classnames';
-  import { isExternalLink } from '@/js/utils';
-  import Icon from './Icon.svelte';
+  import classnames from 'classnames'
+  import { isExternalLink } from '@/js/utils'
+  import Icon from './Icon.svelte'
 
   // --- Methods ----------------------
 
   const trimScheme = (link) => {
-    if (!isExternalLink(link)) return link;
+    if (!isExternalLink(link)) return link
 
-    const { hostname, pathname } = new URL(link);
-    return hostname + pathname;
-  };
+    const { hostname, pathname } = new URL(link)
+    return hostname + pathname
+  }
 
   // --- Data -------------------------
 
-  export let to = '';
-  export let target = null;
-  export let icon = false;
-  export let rel = 'follow';
-  export let tag = 'a';
+  export let to = ''
+  export let target = null
+  export let icon = false
+  export let rel = 'follow'
+  export let tag = 'a'
 
   if (isExternalLink(to)) {
-    rel = 'no-follow';
-    target = '_blank';
+    rel = 'no-follow'
+    target = '_blank'
   }
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Link';
+  const baseName = $$props['ex-class'] || 'Link'
 
   $: className = classnames(
     baseName,
     $$props.class,
     !icon || baseName + '--has-icon',
     isExternalLink(to) ? baseName + '--external' : baseName + '--internal'
-  );
+  )
 </script>
 
 {#if icon}

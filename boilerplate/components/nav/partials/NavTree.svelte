@@ -1,15 +1,15 @@
 <script>
-  import classnames from 'classnames';
-  import { page } from '$app/stores';
+  import classnames from 'classnames'
+  import { page } from '$app/stores'
 
-  import SubTree from './NavSubTree.svelte';
+  import SubTree from './NavSubTree.svelte'
 
   // --- Data -------------------------
 
-  export let routes = [];
-  export let baseName = 'Nav';
+  export let routes = []
+  export let baseName = 'Nav'
 
-  let hoverState = false;
+  let hoverState = false
 
   // --- CSS Class --------------------
 
@@ -19,15 +19,15 @@
       route.class,
       !hover || baseName + '__a--hover',
       $page.url.pathname !== route.href || baseName + '__a--active'
-    );
-  };
+    )
+  }
 
   $: ulClassName = (hover) => {
     return classnames(
       baseName + '__ul-ul',
       !hover || baseName + '__ul-ul--visible'
-    );
-  };
+    )
+  }
 </script>
 
 {#each routes as route, i}

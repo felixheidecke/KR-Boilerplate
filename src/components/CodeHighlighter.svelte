@@ -1,17 +1,17 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount } from 'svelte'
 
-  export let html;
-  const refs = {};
+  export let html
+  const refs = {}
 
   onMount(() => {
     const loader = setInterval(() => {
-      if (!hljs) return;
+      if (!hljs) return
 
-      refs.el.innerHTML = hljs.highlightAuto(html.trim()).value;
-      clearInterval(loader);
-    }, 150);
-  });
+      refs.el.innerHTML = hljs.highlightAuto(html.trim()).value
+      clearInterval(loader)
+    }, 150)
+  })
 </script>
 
 <pre bind:this={refs.el} class="CodeHighlighter"><slot /></pre>

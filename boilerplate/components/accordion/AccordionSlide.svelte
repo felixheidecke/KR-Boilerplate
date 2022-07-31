@@ -1,13 +1,13 @@
 <script>
-  import { getContext } from 'svelte';
-  import { slide } from 'svelte/transition';
+  import { getContext } from 'svelte'
+  import { slide } from 'svelte/transition'
 
-  export let title;
+  export let title
 
-  const id = Math.random();
-  const activeItem = getContext('Accordion:activeItem');
+  const id = Math.random()
+  const activeItem = getContext('Accordion:activeItem')
 
-  $: collapsed = id !== $activeItem;
+  $: collapsed = id !== $activeItem
 </script>
 
 <li class="AccordionSlide" on:click={() => ($activeItem = id)}>

@@ -1,13 +1,13 @@
 <script>
-  import { uniqueId } from 'lodash-es';
-  import classnames from 'classnames';
+  import { uniqueId } from 'lodash-es'
+  import classnames from 'classnames'
 
-  export let checked = false;
-  export let label = false;
-  export let name;
-  export let required = false;
+  export let checked = false
+  export let label = false
+  export let name
+  export let required = false
 
-  const id = uniqueId(`checkbox-${name}-`);
+  const id = uniqueId(`checkbox-${name}-`)
 
   // Props ------------
 
@@ -15,17 +15,17 @@
     id,
     name,
     required
-  };
+  }
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Checkbox';
+  const baseName = $$props['ex-class'] || 'Checkbox'
 
   $: className = classnames(
     baseName,
     $$props.class,
     !checked || baseName + '--active'
-  );
+  )
 </script>
 
 <label class={className}>

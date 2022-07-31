@@ -1,25 +1,25 @@
 <script>
-  import classnames from 'classnames';
-  import { uniqueId } from 'lodash-es';
+  import classnames from 'classnames'
+  import { uniqueId } from 'lodash-es'
 
   // --- Data -------------------------
 
-  export let label = false;
-  export let name;
-  export let placeholder = null;
-  export let required = false;
-  export let rows = 4;
-  label = required ? label + '*' : label;
+  export let label = false
+  export let name
+  export let placeholder = null
+  export let required = false
+  export let rows = 4
+  label = required ? label + '*' : label
 
-  const id = uniqueId(`textarea-${name}-`);
+  const id = uniqueId(`textarea-${name}-`)
 
-  let value = '';
+  let value = ''
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Textarea';
+  const baseName = $$props['ex-class'] || 'Textarea'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <div class={className}>

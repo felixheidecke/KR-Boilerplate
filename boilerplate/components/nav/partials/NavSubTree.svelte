@@ -1,11 +1,11 @@
 <script>
-  import classNames from 'classnames';
-  import { page } from '$app/stores';
+  import classNames from 'classnames'
+  import { page } from '$app/stores'
 
-  export let routes = [];
-  export let baseName = 'Nav';
+  export let routes = []
+  export let baseName = 'Nav'
 
-  let hoverState = false;
+  let hoverState = false
 
   $: className = (route, hover) => {
     return classNames(
@@ -13,8 +13,8 @@
       route.class,
       !hover || baseName + '--hover',
       $page.url.pathname !== route.href || baseName + '--active'
-    );
-  };
+    )
+  }
 </script>
 
 {#each routes as route, i}

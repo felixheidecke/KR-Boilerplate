@@ -1,9 +1,9 @@
 <script>
-  import classNames from 'classnames';
+  import classNames from 'classnames'
 
-  export let active = false;
+  export let active = false
 
-  $: className = classNames('Burger', !active || 'Burger--active');
+  $: className = classNames('Burger', !active || 'Burger--active')
 </script>
 
 <button class={className} on:click aria-label="Menü">

@@ -1,44 +1,44 @@
 <script>
-  import classnames from 'classnames';
-  import { onMount, createEventDispatcher } from 'svelte';
-  import { slide } from 'svelte/transition';
-  import Message from '../Message.svelte';
+  import classnames from 'classnames'
+  import { onMount, createEventDispatcher } from 'svelte'
+  import { slide } from 'svelte/transition'
+  import Message from '../Message.svelte'
 
-  const emit = createEventDispatcher();
+  const emit = createEventDispatcher()
 
   // --- Data -------------------------
 
-  export let subject = 'Kontakformular';
-  export let id = 0;
+  export let subject = 'Kontakformular'
+  export let id = 0
 
-  let form;
-  let required = [];
-  let errors = [];
-  let isLoading = false;
-  let isDone = false;
-  let isDoneEl;
+  let form
+  let required = []
+  let errors = []
+  let isLoading = false
+  let isDone = false
+  let isDoneEl
 
   $: if (errors.length) {
-    setTimeout(() => (errors = []), 5000);
+    setTimeout(() => (errors = []), 5000)
   }
 
   // --- Methods ----------------------
 
   const scrollToDoneText = () => {
-    if (!isDoneEl) return;
+    if (!isDoneEl) return
 
     isDoneEl.scrollIntoView({
       behavior: `smooth`
-    });
-  };
+    })
+  }
 
   const submit = async () => {
-    const formData = new FormData(form);
-    const body = new URLSearchParams(formData).toString();
+    const formData = new FormData(form)
+    const body = new URLSearchParams(formData).toString()
 
     // Reset status
-    isLoading = true;
-    errors = [];
+    isLoading = true
+    errors = []
 
     try {
       const response = await fetch('https://api.klickrhein.de/v2/form/', {
@@ -47,34 +47,34 @@
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body
-      });
+      })
 
-      errors = response.ok ? [] : await response.json();
-      isDone = !errors.length;
-      emit('done');
+      errors = response.ok ? [] : await response.json()
+      isDone = !errors.length
+      emit('done')
 
-      setTimeout(scrollToDoneText, 500);
+      setTimeout(scrollToDoneText, 500)
     } catch (error) {
-      console.error(error);
-      isDone = false;
-      emit('error', error);
+      console.error(error)
+      isDone = false
+      emit('error', error)
     } finally {
-      isLoading = false;
+      isLoading = false
     }
-  };
+  }
 
   // collect required entries
   onMount(() => {
     form.querySelectorAll('[required]').forEach((element) => {
-      required = [...required, element.getAttribute('name')];
-    });
-  });
+      required = [...required, element.getAttribute('name')]
+    })
+  })
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Form';
+  const baseName = $$props['ex-class'] || 'Form'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <form class={className} bind:this={form} on:submit|preventDefault={submit}>
@@ -84,13 +84,13 @@
   <input type="text" name="honig" style="position:absolute;left:-9999px;" />
 
   {#if isDone}
-    <section bind:this={isDoneEl} class={baseName + '__done'} transition:slide>
+    <div bind:this={isDoneEl} class={baseName + '__done'} transition:slide>
       <slot name="done" />
-    </section>
+    </div>
   {:else}
-    <section class={baseName + '__body'} transition:slide>
+    <div class={baseName + '__body'} transition:slide>
       <slot />
-    </section>
+    </div>
   {/if}
 
   {#if errors.length}

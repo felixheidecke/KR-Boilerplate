@@ -1,5 +1,5 @@
 <script>
-  import icon from '@/js/use.icon';
+  import icon from '@/js/use.icon'
 
   let html = `
 <ul use:icon={'fas fa-caret-right'}>
@@ -7,7 +7,7 @@
   <li>Consectetur adipisicing</li>
   <li>Dolor sit amet</li>
 </ul>
-`;
+`
 </script>
 
 <svelte:head>

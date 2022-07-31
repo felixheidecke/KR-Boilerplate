@@ -14,7 +14,7 @@
     'swiper',
     'youtube',
     'xioni-article-list'
-  ];
+  ]
 </script>
 
 <svelte:head>

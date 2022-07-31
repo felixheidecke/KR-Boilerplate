@@ -1,39 +1,39 @@
 <script>
-  import classnames from 'classnames';
-  import { createEventDispatcher } from 'svelte';
-  import { fade } from 'svelte/transition';
+  import classnames from 'classnames'
+  import { createEventDispatcher } from 'svelte'
+  import { fade } from 'svelte/transition'
 
-  import Icon from './Icon.svelte';
+  import Icon from './Icon.svelte'
 
-  const emit = createEventDispatcher();
+  const emit = createEventDispatcher()
 
   // --- Props ------------------------
 
-  export let title = false;
-  export let isOpen = false;
+  export let title = false
+  export let isOpen = false
 
   // --- Methods ----------------------
 
   const close = () => {
-    isOpen = false;
-    emit('close');
-  };
+    isOpen = false
+    emit('close')
+  }
 
-  export const open = () => (isOpen = true);
+  export const open = () => (isOpen = true)
 
   const onKeyDown = ({ key }) => {
-    if (key === 'Escape') close();
-  };
+    if (key === 'Escape') close()
+  }
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Modal';
+  const baseName = $$props['ex-class'] || 'Modal'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 {#if isOpen}
-  <section
+  <div
     class={className}
     transition:fade={{ duration: 100 }}
     on:click|self={close}
@@ -52,7 +52,7 @@
         <footer class={baseName + '__footer'}><slot name="footer" /></footer>
       {/if}
     </div>
-  </section>
+  </div>
 {/if}
 
 <svelte:window on:keydown={onKeyDown} />
@@ -74,14 +74,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 32rem;
-    max-width: 90vw;
-    max-height: 80vh;
+    max-width: 80vw;
     background-color: white;
     box-shadow: 0.5rem 0.5rem 1rem rgba(black, 0.25);
     border-radius: 0.5rem;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
   }
 
   :where(.Modal__close-button) {
@@ -105,6 +102,7 @@
   :where(.Modal__body) {
     padding: 1.5rem;
     overflow-y: auto;
+    max-height: 80vh;
 
     & > *:first-child {
       margin-top: 0;

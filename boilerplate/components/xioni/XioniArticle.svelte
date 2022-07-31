@@ -1,31 +1,31 @@
 <script>
-  import classnames from 'classnames';
-  import { format } from 'date-fns';
-  import { de } from 'date-fns/locale/index.js';
+  import classnames from 'classnames'
+  import { format } from 'date-fns'
+  import { de } from 'date-fns/locale/index.js'
 
   // --- Components -------------------
 
-  import Picture from '../Picture.svelte';
-  import Link from '../Link.svelte';
+  import Picture from '../Picture.svelte'
+  import Link from '../Link.svelte'
 
   // --- Props ------------------------
 
-  export let author = null;
-  export let content = null;
-  export let date = null;
-  export let id;
-  export let image = null;
-  export let link = null;
-  export let pdf = null;
-  export let text = null;
-  export let title = null;
-  export let website = null;
+  export let author = null
+  export let content = null
+  export let date = null
+  export let id
+  export let image = null
+  export let link = null
+  export let pdf = null
+  export let text = null
+  export let title = null
+  export let website = null
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'XioniArticle';
+  const baseName = $$props['ex-class'] || 'XioniArticle'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <article class={className} id={'xioni-article-' + id}>

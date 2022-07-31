@@ -4,7 +4,7 @@
 <Button disabled>Disabled</Button>
 <Button icon="fab fa-apple">Apple</Button>
 <Button icon="fab fa-facebook" reverse>Facebook</Button>
-`;
+`
 </script>
 
 <svelte:head>

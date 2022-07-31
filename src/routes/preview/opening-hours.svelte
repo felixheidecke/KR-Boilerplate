@@ -1,13 +1,13 @@
 <script>
   const assetRoot =
-    'https://ssl.webpack.de/wp12578177.server-he.de/kr-boilerplate';
+    'https://ssl.webpack.de/wp12578177.server-he.de/kr-boilerplate'
 
   let html = `
 <OpeningHours
   hours="Mo-Fr 09:00-22:00; Sa-Su 08:00-12:00"
   signOpen="/images/we-are-open.png"
   signClosed="/images/we-are-closed.png"
-/>`;
+/>`
 </script>
 
 <svelte:head>

@@ -1,21 +1,21 @@
 <script>
-  import classnames from 'classnames';
-  import Aspect from './Aspect.svelte';
+  import classnames from 'classnames'
+  import Aspect from './Aspect.svelte'
 
-  export let ratio = '16:9';
-  export let id;
+  export let ratio = '16:9'
+  export let id
   export let allow = [
     'autoplay',
     'clipboard-write',
     'encrypted-media',
     'picture-in-picture'
-  ];
+  ]
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'YouTube';
+  const baseName = $$props['ex-class'] || 'YouTube'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <Aspect class={className} {ratio}>

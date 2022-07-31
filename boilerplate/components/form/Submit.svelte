@@ -1,16 +1,16 @@
 <script>
-  import classnames from 'classnames';
+  import classnames from 'classnames'
 
   // --- Data -------------------------
 
-  export let text = 'Abschicken';
-  export let disabled = false;
+  export let text = 'Abschicken'
+  export let disabled = false
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Submit';
+  const baseName = $$props['ex-class'] || 'Submit'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <button class={className} {disabled} on:click>

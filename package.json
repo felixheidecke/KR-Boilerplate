@@ -16,6 +16,7 @@
     "useTabs": false,
     "singleQuote": true,
     "trailingComma": "none",
+    "semi": false,
     "printWidth": 80,
     "htmlWhitespaceSensitivity": "ignore"
   },

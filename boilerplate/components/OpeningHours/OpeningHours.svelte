@@ -1,38 +1,38 @@
 <script>
-  import classnames from 'classnames';
-  import OpeningHours from './OpeningHours';
-  import { isTrue } from '@/js/utils';
+  import classnames from 'classnames'
+  import OpeningHours from './OpeningHours'
+  import { isTrue } from '@/js/utils'
 
   // --- Data -------------------------
 
-  export let hours;
-  export let signOpen = false;
-  export let signClosed = false;
-  export let interactive = true;
+  export let hours
+  export let signOpen = false
+  export let signClosed = false
+  export let interactive = true
 
-  interactive = isTrue(interactive);
+  interactive = isTrue(interactive)
 
-  let modal;
+  let modal
 
   const { openNow, nextChange, distanceToNextChange, table } = new OpeningHours(
     hours
-  );
+  )
 
   // --- Computed ---------------------
 
   $: signText = openNow
     ? `Wir schließen ${distanceToNextChange}`
-    : `Wir öffnen ${distanceToNextChange}`;
+    : `Wir öffnen ${distanceToNextChange}`
 
   // --- CSS Class
 
-  const baseName = $$props['ex-class'] || 'OpeningHours';
+  const baseName = $$props['ex-class'] || 'OpeningHours'
 
   $: className = classnames(
     baseName,
     $$props.class,
     openNow ? baseName + '--open' : baseName + '--closed'
-  );
+  )
 </script>
 
 <div class={className}>

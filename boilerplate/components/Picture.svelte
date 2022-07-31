@@ -1,26 +1,26 @@
 <script>
-  import classnames from 'classnames';
+  import classnames from 'classnames'
 
   // --- Data -------------------------
 
-  export let src;
-  export let alt = '';
-  export let loading = 'lazy';
-  export let align = false;
+  export let src
+  export let alt = ''
+  export let loading = 'lazy'
+  export let align = false
 
-  export let tablet = false;
-  export let desktop = false;
-  export let widescreen = false;
+  export let tablet = false
+  export let desktop = false
+  export let widescreen = false
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Picture';
+  const baseName = $$props['ex-class'] || 'Picture'
 
   $: className = classnames(
     baseName,
     $$props.class,
     !align || [baseName, '--', align].join('')
-  );
+  )
 </script>
 
 <picture class={className}>
