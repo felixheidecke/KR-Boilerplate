@@ -1,20 +1,20 @@
 <script>
-  import classnames from 'classnames';
-  import Icon from './Icon.svelte';
+  import classnames from 'classnames'
+  import Icon from './Icon.svelte'
 
-  export let to;
-  export let icon = 'fas fa-envelope';
+  export let to
+  export let icon = 'fas fa-envelope'
 
-  if (icon === 'false') icon = false;
+  if (icon === 'false') icon = false
 
-  const iconName = typeof icon === 'boolean' ? 'far fa-envelope' : icon;
-  const obfuscated = to.trim().split('').join('&shy;');
+  const iconName = typeof icon === 'boolean' ? 'far fa-envelope' : icon
+  const obfuscated = to.trim().split('').join('&shy;')
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Mail';
+  const baseName = $$props['ex-class'] || 'Mail'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <a

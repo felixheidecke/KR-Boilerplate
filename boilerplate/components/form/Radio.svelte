@@ -1,25 +1,25 @@
 <script>
-  import classnames from 'classnames';
-  import { uniqueId } from 'lodash-es';
+  import classnames from 'classnames'
+  import { uniqueId } from 'lodash-es'
 
-  export let checked = false;
-  export let group = checked ? value : '';
-  export let label = null;
-  export let name;
-  export let required = false;
-  export let value;
+  export let checked = false
+  export let group = checked ? value : ''
+  export let label = null
+  export let name
+  export let required = false
+  export let value
 
-  const id = uniqueId(`radio-${name}-`);
+  const id = uniqueId(`radio-${name}-`)
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Radio';
+  const baseName = $$props['ex-class'] || 'Radio'
 
   $: className = classnames(
     baseName,
     $$props.class,
     !checked || baseName + '--active'
-  );
+  )
 </script>
 
 <label class={className}>

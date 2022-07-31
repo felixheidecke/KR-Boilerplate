@@ -1,14 +1,14 @@
 <script>
-  import classnames from 'classnames';
-  export let ratio = '16:9';
+  import classnames from 'classnames'
+  export let ratio = '16:9'
 
-  const [x, y] = ratio.split(':');
+  const [x, y] = ratio.split(':')
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Aspect';
+  const baseName = $$props['ex-class'] || 'Aspect'
 
-  $: className = classnames(baseName, $$props.class);
+  $: className = classnames(baseName, $$props.class)
 </script>
 
 <div class={className}>

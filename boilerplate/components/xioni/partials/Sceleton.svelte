@@ -1,6 +1,6 @@
 <script>
-  import { range, random } from 'lodash-es';
-  export let max = 3;
+  import { range, random } from 'lodash-es'
+  export let max = 3
 </script>
 
 <div class="Sceleton" aria-hidden>

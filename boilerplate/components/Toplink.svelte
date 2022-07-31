@@ -1,30 +1,30 @@
 <script>
-  import classnames from 'classnames';
-  import Icon from './Icon.svelte';
+  import classnames from 'classnames'
+  import Icon from './Icon.svelte'
 
-  let isVisible = false;
+  let isVisible = false
 
-  export let name = null;
+  export let name = null
 
   // --- CSS Class --------------------
 
-  const baseName = $$props['ex-class'] || 'Toplink';
+  const baseName = $$props['ex-class'] || 'Toplink'
 
   $: className = classnames(
     baseName,
     $$props.class,
     !isVisible || baseName + '--visible'
-  );
+  )
 
   // --- Methods ----------------------
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   const handleOffset = () => {
-    isVisible = window.scrollY > 200;
-  };
+    isVisible = window.scrollY > 200
+  }
 </script>
 
 <svelte:window on:scroll|passive={handleOffset} />

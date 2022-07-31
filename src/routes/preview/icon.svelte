@@ -3,7 +3,7 @@
 <Icon name="fab fa-apple" />
 <Icon name="fab fa-apple" size="2" />
 <Icon name="fab fa-apple" size="3" />
-`;
+`
 </script>
 
 <svelte:head>

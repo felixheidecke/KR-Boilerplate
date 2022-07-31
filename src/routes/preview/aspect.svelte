@@ -7,7 +7,7 @@
 <Aspect ratio="16:9">
   <h2>16:9</h2>
 </Aspect>
-`;
+`
 </script>
 
 <svelte:head>

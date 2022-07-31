@@ -1,5 +1,5 @@
 <script>
-  let html = `<XioniArticles author date expanded id="1383" />`;
+  let html = `<XioniArticles author date expanded id="1383" />`
 </script>
 
 <svelte:head>

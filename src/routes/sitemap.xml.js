@@ -1,24 +1,24 @@
-import { format } from 'date-fns';
-import { ROUTES } from '@/stores/routes';
-import { uniq } from 'lodash-es';
+import { format } from 'date-fns'
+import { ROUTES } from '@/stores/routes'
+import { uniq } from 'lodash-es'
 
 // --- Data ---------------------------
 
-const hostname = 'http://rheingaueins.de';
+const hostname = 'http://rheingaueins.de'
 
-let pages = [];
+let pages = []
 
 ROUTES.subscribe((data) => {
   data.forEach(({ href, routes }) => {
-    pages.push(href);
+    pages.push(href)
 
     if (routes.length) {
-      pages.push(...routes.map((i) => i.href));
+      pages.push(...routes.map((i) => i.href))
     }
-  });
+  })
 
-  pages = uniq(pages);
-});
+  pages = uniq(pages)
+})
 
 const urls = pages.map((path) => {
   return [
@@ -42,5 +42,5 @@ export async function get() {
       ...urls,
       '</urlset>'
     ].join('\n')
-  };
+  }
 }

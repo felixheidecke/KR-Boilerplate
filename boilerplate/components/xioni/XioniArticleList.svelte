@@ -1,27 +1,27 @@
 <script>
-  import { onMount } from 'svelte';
-  import { ARTICLES, GROUPS, FETCH_ARTICLES, ERROR } from '@/stores/articles';
+  import { onMount } from 'svelte'
+  import { ARTICLES, GROUPS, FETCH_ARTICLES, ERROR } from '@/stores/articles'
 
   // --- Components -----------------------------------
 
-  import XioniArticle from './XioniArticle.svelte';
-  import Sceleton from './partials/Sceleton.svelte';
-  import Button from '../Button.svelte';
+  import XioniArticle from './XioniArticle.svelte'
+  import Sceleton from './partials/Sceleton.svelte'
+  import Button from '../Button.svelte'
 
   // --- Props ----------------------------------------
 
-  export let author = false;
-  export let date = false;
-  export let expanded = false;
-  export let pdf = false;
-  export let id;
-  export let limit = 100;
+  export let author = false
+  export let date = false
+  export let expanded = false
+  export let pdf = false
+  export let id
+  export let limit = 100
 
-  $: buttonText = $$props['button-text'] || '... weiterlesen';
-  $: detailPath = $$props['detail-path'] || '';
+  $: buttonText = $$props['button-text'] || '... weiterlesen'
+  $: detailPath = $$props['detail-path'] || ''
 
-  id = +id;
-  limit = +limit;
+  id = +id
+  limit = +limit
 
   // --- Methods --------------------------------------
 
@@ -39,17 +39,17 @@
       author: author ? article.author : null,
       pdf: pdf ? article.pdf : null,
       content: expanded ? article.content : null
-    };
-  };
+    }
+  }
 
   onMount(async () => {
-    if ($GROUPS.includes(id)) return;
-    await FETCH_ARTICLES(id, { limit, expanded });
-  });
+    if ($GROUPS.includes(id)) return
+    await FETCH_ARTICLES(id, { limit, expanded })
+  })
 
   // --- Data -------------------------------------
 
-  $: listOfarticles = $ARTICLES.filter((a) => a.module === id) || [];
+  $: listOfarticles = $ARTICLES.filter((a) => a.module === id) || []
 </script>
 
 <svelte:head>
@@ -58,9 +58,8 @@
 
 <div class="XioniArticleList">
   {#if $ERROR}
-    <Message title="Ein Fehler ist aufgetreten" type="error">
-      <div slot="code">{JSON.stringify($ERROR, null, 2)}</div>
-    </Message>
+    <h3>Ein Fehler ist aufgetreten</h3>
+    <pre class="XioniArticleList__error">{JSON.stringify($ERROR, null, 2)}</pre>
   {:else}
     {#each listOfarticles as article}
       <XioniArticle {...prepareArticle(article)}>

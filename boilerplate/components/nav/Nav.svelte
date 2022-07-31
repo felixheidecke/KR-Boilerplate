@@ -1,65 +1,65 @@
 <script>
-  import classnames from 'classnames';
-  import { ROUTES } from '@/stores/routes';
-  import { browser } from '$app/env';
-  import { onMount } from 'svelte';
+  import classnames from 'classnames'
+  import { ROUTES } from '@/stores/routes'
+  import { browser } from '$app/env'
+  import { onMount } from 'svelte'
 
-  import './styles/nav-bar.scss';
-  import './styles/nav-slide.scss';
+  import './styles/nav-bar.scss'
+  import './styles/nav-slide.scss'
 
   // --- Components -------------------
 
-  import Tree from './partials/NavTree.svelte';
-  import Burger from './partials/NavBurger.svelte';
+  import Tree from './partials/NavTree.svelte'
+  import Burger from './partials/NavBurger.svelte'
 
   // --- Methods ----------------------
 
-  const hide = () => (hidden = true);
+  const hide = () => (hidden = true)
 
-  const show = () => setTimeout(() => (hidden = false));
+  const show = () => setTimeout(() => (hidden = false))
 
   // --- Data -------------------------
 
-  const Type = { bar: 'bar', slide: 'slide' };
+  const Type = { bar: 'bar', slide: 'slide' }
 
-  export let variant = false;
-  export let breakpoint = '1024px';
+  export let variant = false
+  export let breakpoint = '1024px'
 
-  let active = false;
-  let hidden = true;
-  let type = variant;
+  let active = false
+  let hidden = true
+  let type = variant
 
   // --- Lifecycle --------------------
 
   onMount(() => {
-    if (!breakpoint || !browser || variant) return;
+    if (!breakpoint || !browser || variant) return
 
-    const media = window.matchMedia(`(max-width: ${breakpoint})`);
-    type = media.matches ? Type.slide : Type.bar;
+    const media = window.matchMedia(`(max-width: ${breakpoint})`)
+    type = media.matches ? Type.slide : Type.bar
 
     media.onchange = ({ matches }) => {
-      hide();
-      type = matches ? Type.slide : Type.bar;
-      show();
-    };
-  });
+      hide()
+      type = matches ? Type.slide : Type.bar
+      show()
+    }
+  })
 
   // --- CSS Class --------------------
 
   $: baseName =
     (() => {
-      if (type === Type.slide) return 'NavSlide';
-      if (type === Type.bar) return 'NavBar';
-    })() || 'Nav';
+      if (type === Type.slide) return 'NavSlide'
+      if (type === Type.bar) return 'NavBar'
+    })() || 'Nav'
 
   $: className = classnames(
     $$props['ex-class'] || baseName,
     $$props.class,
     !active || baseName + '--active'
-  );
+  )
 
   // Init
-  show();
+  show()
 </script>
 
 <nav

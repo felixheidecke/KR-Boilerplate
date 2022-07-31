@@ -1,9 +1,9 @@
-import preprocess from 'svelte-preprocess';
-import adapter from '@sveltejs/adapter-static';
-import content from '@originjs/vite-plugin-content';
-import autoImport from 'sveltekit-autoimport';
+import preprocess from 'svelte-preprocess'
+import adapter from '@sveltejs/adapter-static'
+import content from '@originjs/vite-plugin-content'
+import autoImport from 'sveltekit-autoimport'
 
-import { resolve } from 'path';
+import { resolve } from 'path'
 
 export default {
   kit: {
@@ -83,4 +83,4 @@ export default {
       }
     })
   ]
-};
+}

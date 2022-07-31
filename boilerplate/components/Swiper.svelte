@@ -1,29 +1,29 @@
 <script>
-  import classnames from 'classnames';
-  import { onMount } from 'svelte';
-  import { uniqueId } from 'lodash-es';
-  import Glide from '@glidejs/glide';
+  import classnames from 'classnames'
+  import { onMount } from 'svelte'
+  import { uniqueId } from 'lodash-es'
+  import Glide from '@glidejs/glide'
 
   // Components
-  import Icon from './Icon.svelte';
-  import { isTrue } from '@/js/utils';
+  import Icon from './Icon.svelte'
+  import { isTrue } from '@/js/utils'
 
-  let slider;
+  let slider
 
   // Props
-  export let autoplay = 0;
-  export let focusAt = 'center';
-  export let gap = 0;
-  export let hoverpause = true;
-  export let perView = 1;
-  export let speed = 1000; // animationDuration
-  export let startAt = 0;
-  export let type = 'carousel';
+  export let autoplay = 0
+  export let focusAt = 'center'
+  export let gap = 0
+  export let hoverpause = true
+  export let perView = 1
+  export let speed = 1000 // animationDuration
+  export let startAt = 0
+  export let type = 'carousel'
 
-  export let nav = true;
-  export let config = null; // Optional full config model
+  export let nav = true
+  export let config = null // Optional full config model
 
-  const id = uniqueId('swiper-');
+  const id = uniqueId('swiper-')
 
   const glideConfig = config || {
     autoplay: +autoplay,
@@ -34,20 +34,20 @@
     animationDuration: +speed,
     startAt: +startAt,
     type
-  };
+  }
 
-  const swiper = new Glide('#' + id, glideConfig);
+  const swiper = new Glide('#' + id, glideConfig)
 
   onMount(() => {
     slider
       .querySelectorAll('.glide__slides > *')
-      .forEach((slide) => slide.classList.add('glide__slide'));
-    swiper.mount();
-  });
+      .forEach((slide) => slide.classList.add('glide__slide'))
+    swiper.mount()
+  })
 
-  const baseName = $$props['ex-class'] || 'Swiper';
+  const baseName = $$props['ex-class'] || 'Swiper'
 
-  $: className = classnames(baseName, $$props.class, 'glide');
+  $: className = classnames(baseName, $$props.class, 'glide')
 </script>
 
 <div {id} class={className} bind:this={slider}>

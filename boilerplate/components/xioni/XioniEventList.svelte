@@ -1,34 +1,34 @@
 <script>
-  import { onMount } from 'svelte';
-  import { EVENTS, GROUPS, FETCH_EVENTS, ERROR } from '@/stores/events';
-  import { uniqueId } from 'lodash-es';
+  import { onMount } from 'svelte'
+  import { EVENTS, GROUPS, FETCH_EVENTS, ERROR } from '@/stores/events'
+  import { uniqueId } from 'lodash-es'
 
   // --- Components -------------------
 
-  import XioniEvent from './XioniEvent.svelte';
-  import Sceleton from './partials/Sceleton.svelte';
-  import Message from '../Message.svelte';
+  import XioniEvent from './XioniEvent.svelte'
+  import Sceleton from './partials/Sceleton.svelte'
+  import Message from '../Message.svelte'
 
   // --- Props ------------------------
 
-  export let limit = 100;
-  export let module = [];
+  export let limit = 100
+  export let module = []
 
-  module = module.split(',').map((e) => +e);
+  module = module.split(',').map((e) => +e)
 
   // --- Data -------------------------
 
-  const uid = uniqueId();
+  const uid = uniqueId()
 
   $: listOfEvents =
-    $EVENTS.filter((event) => module.includes(event.module)) || [];
+    $EVENTS.filter((event) => module.includes(event.module)) || []
 
   // --- Lifecycle --------------------
 
   onMount(async () => {
-    if ($GROUPS.includes(uid)) return;
-    await FETCH_EVENTS(uid, { module, limit });
-  });
+    if ($GROUPS.includes(uid)) return
+    await FETCH_EVENTS(uid, { module, limit })
+  })
 </script>
 
 <svelte:head>

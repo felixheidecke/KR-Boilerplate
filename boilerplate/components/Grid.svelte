@@ -1,35 +1,35 @@
 <script>
-  import classnames from 'classnames';
+  import classnames from 'classnames'
 
   // --- Props ------------------------
 
-  export let tag = 'div';
-  export let gap = false;
-  export let size = false;
-  export let id = null;
+  export let tag = 'div'
+  export let gap = false
+  export let size = false
+  export let id = null
 
   // --- Methods ----------------------
 
   const sizeToClass = (size) => {
-    if (typeof size !== 'string') return;
+    if (typeof size !== 'string') return
 
     return size
       .split(' ')
       .map((i) => `${baseName}__item--${i}`)
-      .join(' ');
-  };
+      .join(' ')
+  }
 
   // --- CSS Class --------------------
 
-  const baseName = 'Grid';
+  const baseName = 'Grid'
 
   $: className = (() => {
     if (size) {
-      return classnames(baseName + '__item', $$props.class, sizeToClass(size));
+      return classnames(baseName + '__item', $$props.class, sizeToClass(size))
     } else {
-      return classnames(baseName, $$props.class, !gap || baseName + '--gap');
+      return classnames(baseName, $$props.class, !gap || baseName + '--gap')
     }
-  })();
+  })()
 </script>
 
 <svelte:element this={tag} class={className} {id}>

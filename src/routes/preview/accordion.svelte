@@ -13,7 +13,7 @@
     und Radierer.
   </AccordionSlide>
 </Accordion>
-`;
+`
 </script>
 
 <svelte:head>

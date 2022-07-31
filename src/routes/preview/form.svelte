@@ -1,7 +1,7 @@
 <script>
-  import Checkbox from '@/components/form/Checkbox.svelte';
-  import Submit from '@/components/form/Submit.svelte';
-  import Textarea from '@/components/form/Textarea.svelte';
+  import Checkbox from '@/components/form/Checkbox.svelte'
+  import Submit from '@/components/form/Submit.svelte'
+  import Textarea from '@/components/form/Textarea.svelte'
 
   let html = `
 <Form id="4" subject="Loveletter">
@@ -53,7 +53,7 @@
     <p>Dein Liebling wird sich sicher freuen 💕</p>
   </div>
 </Form>
-`;
+`
 </script>
 
 <svelte:head>

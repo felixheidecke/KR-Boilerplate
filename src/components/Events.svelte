@@ -1,41 +1,41 @@
 <script>
-  import { onMount } from 'svelte';
-  import { EVENTS, GROUPS, FETCH_EVENTS, ERROR } from '@/stores/events';
-  import { uniqueId } from 'lodash-es';
-  import { format } from 'date-fns';
-  import { de } from 'date-fns/locale/index.js';
-  import Textarea from '@/components/form/Textarea.svelte';
+  import { onMount } from 'svelte'
+  import { EVENTS, GROUPS, FETCH_EVENTS, ERROR } from '@/stores/events'
+  import { uniqueId } from 'lodash-es'
+  import { format } from 'date-fns'
+  import { de } from 'date-fns/locale/index.js'
+  import Textarea from '@/components/form/Textarea.svelte'
 
   // --- Props ------------------------
 
-  export let module;
-  export let limit = 100;
+  export let module
+  export let limit = 100
 
-  module = module.split(',').map((e) => +e);
+  module = module.split(',').map((e) => +e)
 
   // --- Methods ----------------------
 
   const handleRegisterButton = (event) => {
-    selectedEvent = event;
-    modal.open();
-  };
+    selectedEvent = event
+    modal.open()
+  }
 
   // --- Data -------------------------
 
-  const uid = uniqueId();
+  const uid = uniqueId()
 
-  let modal;
-  let selectedEvent = {};
+  let modal
+  let selectedEvent = {}
 
   $: listOfEvents =
-    $EVENTS.filter((event) => module.includes(event.module)) || [];
+    $EVENTS.filter((event) => module.includes(event.module)) || []
 
   // --- Lifecycle --------------------
 
   onMount(async () => {
-    if ($GROUPS.includes(uid)) return;
-    await FETCH_EVENTS(uid, { module, limit });
-  });
+    if ($GROUPS.includes(uid)) return
+    await FETCH_EVENTS(uid, { module, limit })
+  })
 </script>
 
 <svelte:head>

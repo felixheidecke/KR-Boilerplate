@@ -1,5 +1,5 @@
 <script>
-  let modal = {};
+  let modal = {}
   let html = `
 <Button on:click={modal.open()}>Modal öffnen</Button>
 
@@ -9,7 +9,7 @@
     nix, sieht trotzdem gut aus.
   </p>
   <img src="https://picsum.photos/800/600" alt="Foto" />
-</Modal>`;
+</Modal>`
 </script>
 
 <svelte:head>

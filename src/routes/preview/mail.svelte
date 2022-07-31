@@ -2,7 +2,7 @@
   let html = `
 <Mail to="felix@heidecke.me" /><br />
 <Mail to="felix@heidecke.me" icon="fas fa-at" />
-`;
+`
 </script>
 
 <svelte:head>

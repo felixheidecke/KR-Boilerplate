@@ -1,13 +1,13 @@
 <script context="module">
   // Das Styling für die gesamte Seite
-  import 'style';
-  export const load = async ({ url }) => ({ props: { url } });
+  import 'style'
+  export const load = async ({ url }) => ({ props: { url } })
 </script>
 
 <script>
-  export let url;
+  export let url
 
-  let year = new Date().getFullYear();
+  let year = new Date().getFullYear()
 </script>
 
 <div>

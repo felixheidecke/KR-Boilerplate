@@ -1,13 +1,13 @@
 const createIconElement = (icon) => {
-  const $el = document.createElement('i');
-  $el.setAttribute('class', `Icon ${icon} $mr-1/2`);
+  const $el = document.createElement('i')
+  $el.setAttribute('class', `Icon ${icon} $mr-1/2`)
 
-  return $el;
-};
+  return $el
+}
 
 export default (node, icon = 'fas fa-circle') => {
   node.querySelectorAll('li').forEach((li) => {
-    const $icon = createIconElement(icon);
-    li.prepend($icon.cloneNode());
-  });
-};
+    const $icon = createIconElement(icon)
+    li.prepend($icon.cloneNode())
+  })
+}

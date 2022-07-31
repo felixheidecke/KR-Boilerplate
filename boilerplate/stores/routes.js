@@ -1,11 +1,11 @@
-import { readable } from 'svelte/store';
-import { base } from '$app/paths';
-import { isObject, omit, forEach } from 'lodash-es';
+import { readable } from 'svelte/store'
+import { base } from '$app/paths'
+import { isObject, omit, forEach } from 'lodash-es'
 
-import routes from 'src/routes.yml';
+import routes from 'src/routes.yml'
 
 const normalizeRoute = (routes) => {
-  const normalRoutes = [];
+  const normalRoutes = []
 
   forEach(routes, (item, href) => {
     let route = {
@@ -15,10 +15,10 @@ const normalizeRoute = (routes) => {
       meta: null,
       icon: false,
       routes: []
-    };
+    }
 
     if (href.indexOf('//')) {
-      route.href = base + href;
+      route.href = base + href
     }
 
     if (isObject(item)) {
@@ -29,12 +29,12 @@ const normalizeRoute = (routes) => {
         class: item.class || null,
         meta: item.meta || null,
         routes: normalizeRoute(omit(item, ['name', 'class', 'meta', 'icon']))
-      };
+      }
     }
-    normalRoutes.push(route);
-  });
+    normalRoutes.push(route)
+  })
 
-  return normalRoutes;
-};
+  return normalRoutes
+}
 
-export const ROUTES = readable(normalizeRoute(routes));
+export const ROUTES = readable(normalizeRoute(routes))
