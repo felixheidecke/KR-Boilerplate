@@ -10,56 +10,56 @@
   margin-right: 1rem;
 }
 
-.\$mb {
+.\$mb.\$mb {
   margin-bottom: 1rem;
 }
 
-.\$ml {
+.\$ml.\$ml {
   margin-left: 1rem;
 }
 
-.\$mx {
+.\$mx.\$mx {
   margin: {
     left: 1rem;
     right: 1rem;
   }
 }
 
-.\$my {
+.\$my.\$my {
   margin: {
     top: 1rem;
     bottom: 1rem;
   }
 }
 
-.\$m-0 {
+.\$m-0.\$m-0 {
   margin: 0;
 }
 
-.\$mt-0 {
+.\$mt-0.\$mt-0 {
   margin-top: 0;
 }
 
-.\$mr-0 {
+.\$mr-0.\$mr-0 {
   margin-right: 0;
 }
 
-.\$mb-0 {
+.\$mb-0.\$mb-0 {
   margin-bottom: 0;
 }
 
-.\$ml-0 {
+.\$ml-0.\$ml-0 {
   margin-left: 0;
 }
 
-.\$mx-0 {
+.\$mx-0.\$mx-0 {
   margin: {
     left: 0;
     right: 0;
   }
 }
 
-.\$my-0 {
+.\$my-0.\$my-0 {
   margin: {
     top: 0;
     bottom: 0;
@@ -67,38 +67,34 @@
 }
 
 @each $a, $b in $spacing {
-  .\$m-#{$a} {
+  .\$m-#{$a}.\$m-#{$a} {
     margin: $b;
   }
 
-  .\$m-#{$a} {
-    margin: $b;
-  }
-
-  .\$mt-#{$a} {
+  .\$mt-#{$a}.\$mt-#{$a} {
     margin-top: $b;
   }
 
-  .\$mr-#{$a} {
+  .\$mr-#{$a}.\$mr-#{$a} {
     margin-right: $b;
   }
 
-  .\$mb-#{$a} {
+  .\$mb-#{$a}.\$mb-#{$a} {
     margin-bottom: $b;
   }
 
-  .\$ml-#{$a} {
+  .\$ml-#{$a}.\$ml-#{$a} {
     margin-left: $b;
   }
 
-  .\$mx-#{$a} {
+  .\$mx-#{$a}.\$mx-#{$a} {
     margin: {
       left: $b;
       right: $b;
     }
   }
 
-  .\$my-#{$a} {
+  .\$my-#{$a}.\$my-#{$a} {
     margin: {
       top: $b;
       bottom: $b;
@@ -108,34 +104,34 @@
 
 @each $size, $query in $mediaquery {
   @media #{$query} {
-    .\$m\@#{$size} {
+    .\$m\@#{$size}.\$m\@#{$size} {
       margin: 1rem;
     }
 
-    .\$mt\@#{$size} {
+    .\$mt\@#{$size}.\$mt\@#{$size} {
       margin-top: 1rem;
     }
 
-    .\$mr\@#{$size} {
+    .\$mr\@#{$size}.\$mr\@#{$size} {
       margin-right: 1rem;
     }
 
-    .\$mb\@#{$size} {
+    .\$mb\@#{$size}.\$mb\@#{$size} {
       margin-bottom: 1rem;
     }
 
-    .\$ml\@#{$size} {
+    .\$ml\@#{$size}.\$ml\@#{$size} {
       margin-left: 1rem;
     }
 
-    .\$mx\@#{$size} {
+    .\$mx\@#{$size}.\$mx\@#{$size} {
       margin: {
         left: 1rem;
         right: 1rem;
       }
     }
 
-    .\$my\@#{$size} {
+    .\$my\@#{$size}.\$my\@#{$size} {
       margin: {
         top: 1rem;
         bottom: 1rem;
@@ -143,38 +139,38 @@
     }
 
     @each $a, $b in $spacing {
-      .\$m-#{$a}\@#{$size} {
+      .\$m-#{$a}\@#{$size}.\$m-#{$a}\@#{$size} {
         margin: $b;
       }
 
-      .\$m-#{$a}\@#{$size} {
+      .\$m-#{$a}\@#{$size}.\$m-#{$a}\@#{$size} {
         margin: $b;
       }
 
-      .\$mt-#{$a}\@#{$size} {
+      .\$mt-#{$a}\@#{$size}.\$mt-#{$a}\@#{$size} {
         margin-top: $b;
       }
 
-      .\$mr-#{$a}\@#{$size} {
+      .\$mr-#{$a}\@#{$size}.\$mr-#{$a}\@#{$size} {
         margin-right: $b;
       }
 
-      .\$mb-#{$a}\@#{$size} {
+      .\$mb-#{$a}\@#{$size}.\$mb-#{$a}\@#{$size} {
         margin-bottom: $b;
       }
 
-      .\$ml-#{$a}\@#{$size} {
+      .\$ml-#{$a}\@#{$size}.\$ml-#{$a}\@#{$size} {
         margin-left: $b;
       }
 
-      .\$mx-#{$a}\@#{$size} {
+      .\$mx-#{$a}\@#{$size}.\$mx-#{$a}\@#{$size} {
         margin: {
           left: $b;
           right: $b;
         }
       }
 
-      .\$my-#{$a}\@#{$size} {
+      .\$my-#{$a}\@#{$size}.\$my-#{$a}\@#{$size} {
         margin: {
           top: $b;
           bottom: $b;
