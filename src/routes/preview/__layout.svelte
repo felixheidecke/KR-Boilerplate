@@ -38,7 +38,7 @@
   {/each}
 </ul>
 
-<section class="$p-2">
+<section class="$p $p-2@tablet-up">
   <slot />
 </section>
 

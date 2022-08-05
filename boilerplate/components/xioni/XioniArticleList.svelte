@@ -17,7 +17,7 @@
   export let id
   export let limit = 100
 
-  $: buttonText = $$props['button-text'] || '... weiterlesen'
+  $: buttonText = $$props['button-text'] || 'Weiterlesen'
   $: detailPath = $$props['detail-path'] || ''
 
   id = +id
@@ -68,6 +68,8 @@
             <Button
               to={`${detailPath}/${article.id}-${article.slug}`}
               class="XioniArticle__read-more"
+              icon="fas fa-chevron-right"
+              reverse
             >
               {buttonText}
             </Button>
@@ -89,7 +91,6 @@
 
   :where(.XioniArticle__read-more) {
     clear: both;
-    display: inline-block;
   }
 
   :where(.XioniArticle__error) {

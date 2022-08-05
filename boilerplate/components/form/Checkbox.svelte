@@ -2,10 +2,11 @@
   import { uniqueId } from 'lodash-es'
   import classnames from 'classnames'
 
+  export let name
   export let checked = false
   export let label = false
-  export let name
   export let required = false
+  export let value = 'on'
 
   const id = uniqueId(`checkbox-${name}-`)
 
@@ -33,6 +34,7 @@
     {...inputProps}
     class={baseName + '__input'}
     type="checkbox"
+    {value}
     bind:checked
   />
   <span class={baseName + '__label'}>{@html label}</span>

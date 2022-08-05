@@ -23,7 +23,7 @@
   )
 </script>
 
-<picture class={className}>
+<picture>
   {#if widescreen}
     <source srcset={widescreen} media="(min-width: 1441px)" />
   {/if}
@@ -33,7 +33,7 @@
   {#if tablet}
     <source srcset={tablet} media="(min-width: 768px)" />
   {/if}
-  <img srcset={src} {alt} {loading} />
+  <img class={className} srcset={src} {alt} {loading} />
 </picture>
 
 <style lang="scss" global>

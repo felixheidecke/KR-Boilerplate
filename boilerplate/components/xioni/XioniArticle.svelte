@@ -28,10 +28,20 @@
   $: className = classnames(baseName, $$props.class)
 </script>
 
-<article class={className} id={'xioni-article-' + id}>
+<article data-component class={className} id={'xioni-article-' + id}>
   <slot name="prepend" />
 
-  <h2 class={baseName + '__title'}>
+  {#if image}
+    <Picture
+      class={baseName + '__image'}
+      src={image.thumbSrc}
+      tablet={image.src}
+      alt={image.alt}
+      width="800"
+      height="600"
+    />
+  {/if}
+  <h2 class={baseName + '__title $mt-0@tablet'}>
     {title}
   </h2>
   {#if author || date}
@@ -45,14 +55,6 @@
         </time>
       {/if}
     </div>
-  {/if}
-  {#if image}
-    <Picture
-      class={baseName + '__image'}
-      src={image.thumbSrc}
-      tablet={image.src}
-      alt={image.alt}
-    />
   {/if}
   <div class={baseName + '__teaser'}>
     {@html text}
@@ -92,18 +94,27 @@
 <style global lang="scss">
   :where(.XioniArticle) {
     display: flow-root;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+  }
+
+  :where(.XioniArticle__image) {
+    max-height: 65vw;
+    object-fit: cover;
+
+    @include breakpoint('tablet-up') {
+      float: right;
+      margin: 0 0 1.5rem 1.5rem;
+      width: 280px;
+      height: 210px;
+    }
   }
 
   :where(.XioniArticle__meta) {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 1rem;
-  }
-
-  :where(.XioniArticle__image) {
-    max-width: 10rem;
-    float: left;
-    margin-right: 1.5rem;
+    font-size: 0.875rem;
   }
 
   :where(.XioniArticle__content-image) {

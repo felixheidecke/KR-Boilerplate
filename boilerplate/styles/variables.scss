@@ -29,6 +29,7 @@ $size: (
 );
 
 $spacing: (
+  0: 0,
   '1\\/4': 0.25rem,
   '1\\/2': 0.5rem,
   2: 2rem,
@@ -41,7 +42,7 @@ $spacing: (
 $mediaquery: (
   'mobile': '(max-width: 620px)',
   'tablet': '(min-width: 621px) and (max-width: 1024px)',
-  'tablet-up': '(min-width: 768px)',
+  'tablet-up': '(min-width: 621px)',
   'tablet-down': '(max-width: 1024px)',
   'desktop': '(min-width: 1025px) and (max-width: 1440px)',
   'desktop-up': '(min-width: 1025px)',
