@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { ARTICLES, GROUPS, FETCH_ARTICLES, ERROR } from '@/stores/articles'
+  import { ARTICLES, FETCH_ARTICLES, ERROR } from '@/stores/articles'
 
   // --- Components -----------------------------------
 
@@ -42,14 +42,12 @@
     }
   }
 
-  onMount(async () => {
-    if ($GROUPS.includes(id)) return
-    await FETCH_ARTICLES(id, { limit, expanded })
-  })
+  onMount(() => FETCH_ARTICLES(id, { limit, expanded }))
 
   // --- Data -------------------------------------
 
-  $: listOfarticles = $ARTICLES.filter((a) => a.module === id) || []
+  $: listOfarticles =
+    $ARTICLES.filter((a) => a.module === id).splice(0, limit) || []
 </script>
 
 <svelte:head>

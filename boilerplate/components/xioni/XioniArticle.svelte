@@ -97,8 +97,8 @@
     background-color: rgba(0, 0, 0, 0.05);
     padding: 1rem;
   }
-
   :where(.XioniArticle__image) {
+    width: 100%;
     max-height: 65vw;
     object-fit: cover;
 
@@ -112,9 +112,10 @@
 
   :where(.XioniArticle__meta) {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 0.25rem;
     font-size: 0.875rem;
+    transform: translateY(-1rem);
+    font-style: italic;
   }
 
   :where(.XioniArticle__content-image) {

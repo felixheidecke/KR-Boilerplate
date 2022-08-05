@@ -1,5 +1,7 @@
 import { sortBy, uniq, uniqBy } from 'lodash-es'
 import { writable } from 'svelte/store'
+import { API_BASE_URL } from '@/js/constants'
+import buildUrl from '@/js/build-url'
 
 export const EVENTS = writable([])
 export const GROUPS = writable([])
@@ -21,7 +23,7 @@ export const STATE = writable({
 export const FETCH_EVENTS = async (uid, options) => {
   setLoading()
 
-  const url = buildUrl(options)
+  const url = buildUrl(API_BASE_URL, 'events', options)
   const res = await fetch(url)
   const contents = await res.json()
 
@@ -41,18 +43,6 @@ export const FETCH_EVENTS = async (uid, options) => {
   })
 
   setDone()
-}
-
-const buildUrl = ({ module, commune, limit }) => {
-  const url = new URL('http://api.klickrhein.de:8300/events')
-
-  module?.forEach((id) => url.searchParams.append('module', id))
-
-  commune?.forEach((id) => url.searchParams.append('commune', id))
-
-  if (limit) url.searchParams.append('limit', limit)
-
-  return url
 }
 
 // --- Set STATE helper -----------

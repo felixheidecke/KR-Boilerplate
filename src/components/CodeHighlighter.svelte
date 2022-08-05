@@ -6,7 +6,7 @@
 
   onMount(() => {
     const loader = setInterval(() => {
-      if (!hljs) return
+      if (!hljs || !refs.el) return
 
       refs.el.innerHTML = hljs.highlightAuto(html.trim()).value
       clearInterval(loader)

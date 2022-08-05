@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-  <title>Swiper | Boilerplate</title>
+  <title>XioniArticleList | Boilerplate</title>
 </svelte:head>
 
 <div data-page>
@@ -11,5 +11,5 @@
 
   <CodeHighlighter {html} />
 
-  <XioniArticleList author date id="1383" limit="999" detail-path="/preview" />
+  <XioniArticleList author date id="1383" detail-path="/preview" />
 </div>

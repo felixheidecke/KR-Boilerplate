@@ -1,5 +1,8 @@
 import { uniq, uniqBy, sortBy } from 'lodash-es'
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
+import { API_HOST } from '@/js/constants'
+import buildUrl from '@/js/build-url'
+import { hash } from '@/js/utils'
 
 export const ARTICLES = writable([])
 export const GROUPS = writable([])
@@ -8,8 +11,6 @@ export const STATE = writable({
   isLoading: false,
   hasError: false
 })
-
-const BASE_URL = 'http://api.klickrhein.de:8300'
 
 /**
  * Fetch a list of articles from Xioni API
@@ -20,12 +21,17 @@ const BASE_URL = 'http://api.klickrhein.de:8300'
  * @returns {Promise}
  */
 
-export const FETCH_ARTICLES = async (id, { limit = 100, expanded = false }) => {
+export const FETCH_ARTICLES = async (id, options) => {
+  // Unique key based on params
+  const key = hash({ id, options })
+
+  // Check if the URL has already been fetched
+  if (get(GROUPS).includes(key)) return
+
   setLoading()
 
-  const res = await fetch(
-    `${BASE_URL}/articles/${id}?limit=${limit}&expanded=${expanded}`
-  )
+  const url = buildUrl(API_HOST, '/articles/' + id, options)
+  const res = await fetch(url)
 
   const contents = await res.json()
 
@@ -41,7 +47,7 @@ export const FETCH_ARTICLES = async (id, { limit = 100, expanded = false }) => {
   })
 
   GROUPS.update((groups) => {
-    const update = [...groups, id]
+    const update = [...groups, key]
     return uniq(update)
   })
 
@@ -59,7 +65,8 @@ export const FETCH_ARTICLES = async (id, { limit = 100, expanded = false }) => {
 export const FETCH_ARTICLE = async (id) => {
   setLoading()
 
-  const res = await fetch(`${BASE_URL}/article/${id}`)
+  const url = buildUrl(API_HOST, '/article/' + id)
+  const res = await fetch(url)
 
   if (!res.ok) {
     Promise.reject(res)

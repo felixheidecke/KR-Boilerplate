@@ -14,9 +14,9 @@
     $ARTICLES.find((article) => article.id === id && 'content' in article) || {}
 
   // --- Lifecycle ----
-  onMount(async () => {
+  onMount(() => {
     if (article.id) return
-    await FETCH_ARTICLE(id)
+    FETCH_ARTICLE(id)
   })
 </script>
 

@@ -56,5 +56,6 @@
   :global .layout-nav-item {
     text-decoration: none;
     font-weight: bold;
+    display: block;
   }
 </style>
