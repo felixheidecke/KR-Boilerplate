@@ -28,20 +28,16 @@
   $: className = classnames(baseName, $$props.class)
 </script>
 
-<article data-component class={className} id={'xioni-article-' + id}>
-  <slot name="prepend" />
-
+<article class={className} id={'xioni-article-' + id}>
   {#if image}
     <Picture
       class={baseName + '__image'}
       src={image.thumbSrc}
       tablet={image.src}
       alt={image.alt}
-      width="800"
-      height="600"
     />
   {/if}
-  <h2 class={baseName + '__title $mt-0@tablet'}>
+  <h2 class={baseName + '__title $mt-0@tablet-up'}>
     {title}
   </h2>
   {#if author || date}
@@ -88,7 +84,7 @@
     <Link to={website} class={baseName + '__website'} icon="fas fa-link" />
   {/if}
 
-  <slot name="append" />
+  <slot />
 </article>
 
 <style global lang="scss">

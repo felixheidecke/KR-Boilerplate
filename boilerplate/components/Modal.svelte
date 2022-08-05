@@ -57,7 +57,7 @@
 
 <svelte:window on:keydown={onKeyDown} />
 
-<style lang="scss">
+<style lang="scss" global>
   :where(.Modal) {
     background-color: rgba(black, 0.333);
     position: fixed;
@@ -75,7 +75,6 @@
     transform: translate(-50%, -50%);
     width: 32rem;
     max-width: 80vw;
-    background-color: white;
     box-shadow: 0.5rem 0.5rem 1rem rgba(black, 0.25);
     border-radius: 0.5rem;
     overflow: hidden;
@@ -97,12 +96,14 @@
     font-weight: bold;
     text-align: center;
     border-bottom: 1px solid lightgray;
+    background-color: white;
   }
 
   :where(.Modal__body) {
     padding: 1.5rem;
     overflow-y: auto;
     max-height: 80vh;
+    background-color: white;
 
     & > *:first-child {
       margin-top: 0;

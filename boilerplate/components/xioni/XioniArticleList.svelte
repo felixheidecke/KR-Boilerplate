@@ -61,7 +61,7 @@
   {:else}
     {#each listOfarticles as article}
       <XioniArticle {...prepareArticle(article)}>
-        <span slot="append">
+        <span>
           {#if !expanded}
             <Button
               to={`${detailPath}/${article.id}-${article.slug}`}
