@@ -5,6 +5,8 @@
 }
 
 html {
+  overflow: hidden;
+
   @include breakpoint('mobile') {
     font-size: 14px;
   }
@@ -18,7 +20,8 @@ body {
   @include reset;
   overflow-x: hidden;
   background: #fff;
-  width: 100vw;
+  width: 100%;
+  min-height: 100vh;
   color: #222;
 }
 

@@ -1,7 +1,6 @@
 <script>
   import classnames from 'classnames'
-  import { format } from 'date-fns'
-  import { de } from 'date-fns/locale/index.js'
+  import formatFromToDate from '@/js/format-from-to-date'
 
   // --- Components -------------------
 
@@ -21,10 +20,8 @@
   export let website = null
   export let title
 
-  // --- Data -------------------------
-
-  const startDate = format(starts * 1000, 'PP', { locale: de })
-  const endDate = format(ends * 1000, 'PP', { locale: de })
+  const startDate = starts * 1000
+  const endDate = ends * 1000
 
   // --- CSS Class --------------------
 
@@ -46,13 +43,9 @@
     {title}
   </h2>
   <h3 class={baseName + '__date'}>
-    Vom <time class={baseName + '__starts'}>
-      {startDate}
-    </time>
-    bis
-    <time class={baseName + '__ends'}>
-      {endDate}
-    </time>
+    <date>
+      {@html formatFromToDate(startDate, endDate)}
+    </date>
   </h3>
   <div class={baseName + '__description'}>
     {@html description}

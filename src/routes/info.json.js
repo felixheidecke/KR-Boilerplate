@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs'
 import { resolve } from 'path'
 import { format } from 'date-fns'
+import locale from 'date-fns/locale/de/index.js'
 
 /**
  * Load the contens of the package.json file
@@ -32,7 +33,7 @@ export async function get() {
     },
     body: {
       version,
-      build: format(new Date(), 'PPpp')
+      build: format(new Date(), 'PPpp', { locale })
     }
   }
 }
