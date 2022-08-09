@@ -1,1 +1,1 @@
-export const API_HOST = 'http://api.klickrhein.de:8300'
+export const API_HOST = 'https://api.klickrhein.de:8300'
