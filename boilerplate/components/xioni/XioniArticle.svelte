@@ -47,7 +47,7 @@
       {/if}
       {#if date}
         <time class={baseName + '__date'}>
-          {format(date * 1000, 'PP', { locale: de })}
+          {format(date * 1000, 'PPP', { locale: de })}
         </time>
       {/if}
     </div>

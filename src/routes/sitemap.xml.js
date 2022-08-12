@@ -4,7 +4,7 @@ import { uniq } from 'lodash-es'
 
 // --- Data ---------------------------
 
-const hostname = 'http://rheingaueins.de'
+const hostname = 'http://domain.com'
 
 let pages = []
 
