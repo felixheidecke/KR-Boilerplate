@@ -34,6 +34,10 @@ Liste mehrerer Artikel basieren auf einer modul Id
 // Wrapper um alle Artikel
 .XioniArticleList { }
 
+
+// Wrapper um alle Artikel
+.XioniArticleList { }
+
 .XioniArticle {
   &__title { }
   &__meta { }
@@ -49,6 +53,8 @@ Liste mehrerer Artikel basieren auf einer modul Id
   &__content-image--left { }
 
   &__pdf { }
+
+  &__read-more { }
 
   &__read-more { }
 }

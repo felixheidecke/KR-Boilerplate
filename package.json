@@ -1,6 +1,6 @@
 {
   "name": "krb-svelte",
-  "version": "3.9.0",
+  "version": "3.10.0",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -52,8 +52,8 @@
   },
   "devDependencies": {
     "@originjs/vite-plugin-content": "^1.0.1",
-    "@sveltejs/adapter-static": "next",
-    "@sveltejs/kit": "next",
+    "@sveltejs/adapter-static": "1.0.0-next.39",
+    "@sveltejs/kit": "1.0.0-next.405",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",

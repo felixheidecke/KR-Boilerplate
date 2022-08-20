@@ -35,7 +35,7 @@
 {#if isOpen}
   <div
     class={className}
-    transition:fade={{ duration: 100 }}
+    transition:fade={{ duration: 333 }}
     on:click|self={close}
   >
     <div class={baseName + '__wrapper'}>

@@ -1,4 +1,4 @@
-import { sveltekit } from '@sveltejs/kit/vite';
+import { sveltekit } from '@sveltejs/kit/vite'
 import content from '@originjs/vite-plugin-content'
 import autoImport from 'sveltekit-autoimport'
 
@@ -40,7 +40,8 @@ const config = {
     },
     watch: {
       paths: ['./src/**/*.scss', './src/**/*.svelte', './src/**/*.yml']
-    }
+    },
+    port: 3000
   },
   resolve: {
     alias: {
@@ -50,6 +51,6 @@ const config = {
       style: resolve('./boilerplate/styles/style.scss')
     }
   }
-};
+}
 
-export default config;
+export default config

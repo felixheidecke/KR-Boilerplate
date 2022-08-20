@@ -20,7 +20,7 @@ export default {
       ]
     },
 
-    trailingSlash: 'never',
+    trailingSlash: 'never'
   },
 
   preprocess: [

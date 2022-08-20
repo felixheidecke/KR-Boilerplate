@@ -2,6 +2,10 @@
   &hidden {
     display: none;
   }
+  &invisible {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 @each $size, $query in $mediaquery {
@@ -9,6 +13,10 @@
     .\$\@#{$size} {
       &hidden {
         display: none;
+      }
+      &invisible {
+        opacity: 0;
+        pointer-events: none;
       }
     }
   }

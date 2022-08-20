@@ -8,6 +8,7 @@
   const baseName = $$props['ex-class'] || 'Icon'
 
   $: className = classnames(
+    $$props.class,
     baseName,
     name,
     !(size > 1 && size <= 10) || `fa-${size}x`
