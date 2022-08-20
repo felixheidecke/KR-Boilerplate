@@ -187,6 +187,44 @@ Listen, bei der jedes Element das gleiche Icon vorangestellt werden soll, werden
 </ul>
 ```
 
+# Lightbox
+
+Innerhalb der `<Lightbox />` werden alle `<img data-lightbox="..." />` in die Lightbox augenommen. Dort müssen dann die großen Bilder hinterlegt werden. Das `alt` Attribut wird als Bildtitel in die Lightbox übernommen.
+
+```HTML
+<Lightbox>
+  <img
+    src="https://picsum.photos/id/1/400/300"
+    data-lightbox="https://picsum.photos/id/1/1000/750"
+    alt="Typ am Laptop"
+  />
+  <img
+    src="https://picsum.photos/id/372/400/300"
+    data-lightbox="https://picsum.photos/id/372/1000/750"
+    alt="Baywatch Booth"
+  />
+  <img
+    src="https://picsum.photos/id/1041/400/300"
+    data-lightbox="https://picsum.photos/id/1041/1000/750"
+    alt="Waves"
+  />
+  <img
+    src="https://picsum.photos/id/827/400/300"
+    data-lightbox="https://picsum.photos/id/827/1000/750"
+    alt="Fujiama in the distace"
+  />
+</Lightbox>
+```
+
+### Style
+
+```SCSS
+.Lightbox {
+  &__textbox { }
+  &__active-image { }
+}
+```
+
 # Mail
 
 ```HTML

@@ -31,7 +31,7 @@
     <source srcset={desktop} media="(min-width: 1025px)" />
   {/if}
   {#if tablet}
-    <source srcset={tablet} media="(min-width: 768px)" />
+    <source srcset={tablet} media="(min-width: 621px)" />
   {/if}
   <img class={className} srcset={src} {alt} {loading} />
 </picture>

@@ -1,6 +1,6 @@
 <script>
   let html = `
-  <Lightbox>
+<Lightbox>
   <img
     src="https://picsum.photos/id/1/400/300"
     data-lightbox="https://picsum.photos/id/1/1000/750"

@@ -24,7 +24,7 @@ const getPackageJson = () => {
  * @returns {void}
  */
 
-export async function get() {
+export async function GET() {
   const { version } = getPackageJson()
 
   return {

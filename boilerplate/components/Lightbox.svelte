@@ -21,7 +21,7 @@
         ...images,
         {
           src: image.dataset.lightbox,
-          alt: image.getAttribute('alt')
+          alt: image.getAttribute('alt') || ''
         }
       ]
 
@@ -46,7 +46,7 @@
 
   // Init
   onMount(() => {
-    if (window.innerWidth < 768) return
+    if (window.innerWidth < 620) return
     getImages()
     isMobile = false
   })
@@ -84,8 +84,8 @@
   </Modal>
 
   {#if !isMobile}
-    {#each images as { src }}
-      <img {src} hidden aria-hidden />
+    {#each images as { src, alt }}
+      <img {src} {alt} hidden aria-hidden />
     {/each}
   {/if}
 </div>

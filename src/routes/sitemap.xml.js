@@ -31,7 +31,7 @@ const urls = pages.map((path) => {
 
 // --- Expose -------------------------
 
-export async function get() {
+export async function GET() {
   return {
     headers: {
       'Content-Type': 'application/xml'

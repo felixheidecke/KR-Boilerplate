@@ -6,14 +6,15 @@
     'form',
     'grid',
     'icon',
+    'lightbox',
     'link',
     'mail',
     'modal',
     'opening-hours',
     'picture',
     'swiper',
-    'youtube',
-    'xioni-article-list'
+    'xioni-article-list',
+    'youtube'
   ]
 </script>
 
