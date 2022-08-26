@@ -2,22 +2,12 @@
   &hidden {
     display: none;
   }
-  &invisible {
-    opacity: 0;
-    pointer-events: none;
-  }
 }
 
 @each $size, $query in $mediaquery {
   @media #{$query} {
-    .\$\@#{$size} {
-      &hidden {
-        display: none;
-      }
-      &invisible {
-        opacity: 0;
-        pointer-events: none;
-      }
+    .\$hidden\@#{$size} {
+      display: none;
     }
   }
 }
