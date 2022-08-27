@@ -57,7 +57,12 @@
     <Link to={website} class={baseName + '__website'} icon="fas fa-link" />
   {/if}
   {#if pdf}
-    <Button to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
+    <Button
+      to={pdf.src}
+      target="_blank"
+      class={baseName + '__pdf'}
+      icon="fas fa-file-pdf"
+    >
       {pdf.title}
     </Button>
   {/if}

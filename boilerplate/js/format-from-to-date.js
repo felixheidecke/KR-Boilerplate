@@ -6,9 +6,9 @@ export default function (from, to) {
   const yearsMatch = format(from, 'Y') === format(to, 'Y')
   const monthsMatch = format(from, 'LL') === format(to, 'LL')
 
-  const longFormat = 'iii d.L.yyyy'
-  const mediumFormat = 'iii d.L.'
-  const shortFormat = 'iii d.'
+  const longFormat = 'EEEE d.L.yyyy'
+  const mediumFormat = 'EEEE d.L.'
+  const shortFormat = 'EEEE d.'
 
   let fromFormat
 
