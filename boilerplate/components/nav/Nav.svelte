@@ -1,6 +1,6 @@
 <script>
   import classnames from 'classnames'
-  import { ROUTES } from '@/stores/routes'
+  import { ROUTES, INIT as INIT_ROUTES } from '@/stores/routes'
   import { browser } from '$app/env'
   import { onMount } from 'svelte'
 
@@ -59,10 +59,16 @@
   )
 
   // Init
+  INIT_ROUTES()
   show()
 </script>
 
-<nav class={className} aria-label="main navigation" {hidden} on:click={() => (active = false)}>
+<nav
+  class={className}
+  aria-label="main navigation"
+  class:$hidden={hidden}
+  on:click={() => (active = false)}
+>
   <ul class={baseName + '__ul'}>
     <Tree routes={$ROUTES} {baseName} on:click={() => (active = false)} />
   </ul>

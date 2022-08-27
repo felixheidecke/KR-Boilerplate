@@ -1,6 +1,5 @@
 <script>
   import classnames from 'classnames'
-  import { page } from '$app/stores'
 
   import SubTree from './NavSubTree.svelte'
 
@@ -18,7 +17,7 @@
       baseName + '__a',
       route.class,
       !hover || baseName + '__a--hover',
-      $page.url.pathname !== route.href || baseName + '__a--active'
+      !route.isActive || baseName + '__a--active'
     )
   }
 

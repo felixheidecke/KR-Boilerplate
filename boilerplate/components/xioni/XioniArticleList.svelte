@@ -53,37 +53,35 @@
   <link rel="preconnect" href="https://www.rheingau.de" />
 </svelte:head>
 
-<div class="XioniArticleList">
-  {#if $ERROR}
+{#if $ERROR}
+  <div class="XioniArticleList__error">
     <h3>Ein Fehler ist aufgetreten</h3>
-    <pre class="XioniArticleList__error">{JSON.stringify($ERROR, null, 2)}</pre>
+    <pre>{JSON.stringify($ERROR, null, 2)}</pre>
+  </div>
+{:else}
+  {#each listOfarticles as article}
+    <XioniArticle {...prepareArticle(article)}>
+      <span>
+        {#if !expanded}
+          <Button
+            to={`${detailPath}/${article.id}-${article.slug}`}
+            class="XioniArticle__read-more"
+            icon="fas fa-chevron-right"
+            reverse
+          >
+            {buttonText}
+          </Button>
+        {/if}
+      </span>
+    </XioniArticle>
   {:else}
-    {#each listOfarticles as article}
-      <XioniArticle {...prepareArticle(article)}>
-        <span>
-          {#if !expanded}
-            <Button
-              to={`${detailPath}/${article.id}-${article.slug}`}
-              class="XioniArticle__read-more"
-              icon="fas fa-chevron-right"
-              reverse
-            >
-              {buttonText}
-            </Button>
-          {/if}
-        </span>
-      </XioniArticle>
-    {:else}
-      <Sceleton />
-    {/each}
-  {/if}
-</div>
+    <Sceleton />
+  {/each}
+{/if}
 
 <style lang="scss" global>
-  :where(.XioniArticleList) {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  :where(.XioniArticle) + :where(.XioniArticle) {
+    margin-top: 1rem;
   }
 
   :where(.XioniArticle__read-more) {

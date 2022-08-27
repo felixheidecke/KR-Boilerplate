@@ -1,40 +1,68 @@
-import { readable } from 'svelte/store'
-import { base } from '$app/paths'
-import { isObject, omit, forEach } from 'lodash-es'
-
+import { writable } from 'svelte/store'
+import { page } from '$app/stores'
+import normalizeRoutes from '@/js/normalize-routes'
 import routes from 'src/routes.yml'
 
-const normalizeRoute = (routes) => {
-  const normalRoutes = []
+const { tree, flat } = normalizeRoutes(routes)
 
-  forEach(routes, (item, href) => {
-    let route = {
-      href,
-      name: item,
-      class: null,
-      meta: null,
-      icon: false,
-      routes: []
-    }
+export const ROUTES = writable(tree)
 
-    if (href.indexOf('//')) {
-      route.href = base + href
-    }
+export const ACTIVE_ROUTE = writable({})
 
-    if (isObject(item)) {
-      route = {
-        href,
-        icon: item.icon,
-        name: item.name,
-        class: item.class || null,
-        meta: item.meta || null,
-        routes: normalizeRoute(omit(item, ['name', 'class', 'meta', 'icon']))
-      }
-    }
-    normalRoutes.push(route)
+export const SET_ACTIVE_ROUTE = (activeRoute) => {
+  if (!activeRoute) {
+    ACTIVE_ROUTE.set({})
+    ROUTES.update((routes) => deactivateRouteInTree(routes))
+    return
+  }
+
+  ACTIVE_ROUTE.set({
+    ...activeRoute,
+    isActive: true
   })
 
-  return normalRoutes
+  ROUTES.update((routes) => activateRouteInTree(routes, activeRoute))
 }
 
-export const ROUTES = readable(normalizeRoute(routes))
+// --- Set initial route ----
+
+export const INIT = () => {
+  page.subscribe((page) => {
+    const pathname = page.url.pathname
+    const activeRoute = flat.find((route) => pathname === route.href)
+
+    SET_ACTIVE_ROUTE(activeRoute)
+  })
+}
+
+// --- Functions
+
+const activateRouteInTree = (routes, activeRoute) => {
+  return routes.map((route) => {
+    return {
+      ...route,
+      isActive: route.href === activeRoute.href || route.href === activeRoute.parent,
+      routes: route.routes.map((subroute) => {
+        return {
+          ...subroute,
+          isActive: subroute.href === activeRoute.href
+        }
+      })
+    }
+  })
+}
+
+const deactivateRouteInTree = (routes) => {
+  return routes.map((route) => {
+    return {
+      ...route,
+      isActive: false,
+      routes: route.routes.map((subroute) => {
+        return {
+          ...subroute,
+          isActive: false
+        }
+      })
+    }
+  })
+}

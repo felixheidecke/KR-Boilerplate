@@ -1,6 +1,5 @@
 <script>
   import classNames from 'classnames'
-  import { page } from '$app/stores'
 
   export let routes = []
   export let baseName = 'Nav'
@@ -11,8 +10,8 @@
     return classNames(
       baseName + '__a-a',
       route.class,
-      !hover || baseName + '--hover',
-      $page.url.pathname !== route.href || baseName + '--active'
+      !hover || baseName + '__a-a--hover',
+      !route.isActive || baseName + '__a-a--active'
     )
   }
 </script>

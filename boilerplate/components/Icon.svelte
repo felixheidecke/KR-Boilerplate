@@ -15,7 +15,7 @@
   )
 </script>
 
-<i class={className} aria-hidden on:click />
+<i class={className} aria-hidden="true" on:click />
 
 <style lang="scss" global>
   @import url('https://cdn.klickrhein.de/libs/font-awesome/5.15.4/css/all.min.css');

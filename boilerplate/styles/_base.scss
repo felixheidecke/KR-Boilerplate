@@ -27,9 +27,9 @@ body {
   color: #222;
 }
 
-a,
-a:hover,
-a:active {
+:where(a),
+:where(a:hover),
+:where(a:active) {
   color: currentColor;
 }
 

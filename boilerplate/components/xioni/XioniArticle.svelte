@@ -95,7 +95,7 @@
 
     @include breakpoint('tablet-up') {
       float: right;
-      margin: 0 0 1.5rem 1.5rem;
+      margin-left: 1.5rem;
       width: 280px;
       height: 210px;
     }

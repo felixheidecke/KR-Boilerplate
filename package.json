@@ -1,6 +1,6 @@
 {
   "name": "krb-svelte",
-  "version": "3.10.2",
+  "version": "3.11.0",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
