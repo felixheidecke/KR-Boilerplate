@@ -29,8 +29,8 @@
 
   <Modal title="Ein tolles Foto" bind:this={modal}>
     <p>
-      Schau mal hier, ein tolles Foto dass ich nicht selbst gemacht habe. Macht
-      nix, sieht trotzdem gut aus.
+      Schau mal hier, ein tolles Foto dass ich nicht selbst gemacht habe. Macht nix, sieht trotzdem
+      gut aus.
     </p>
     <img src="https://picsum.photos/800/600" alt="Foto" />
   </Modal>

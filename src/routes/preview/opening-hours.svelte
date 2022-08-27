@@ -1,6 +1,5 @@
 <script>
-  const assetRoot =
-    'https://ssl.webpack.de/wp12578177.server-he.de/kr-boilerplate'
+  const assetRoot = 'https://ssl.webpack.de/wp12578177.server-he.de/kr-boilerplate'
 
   let html = `
 <OpeningHours

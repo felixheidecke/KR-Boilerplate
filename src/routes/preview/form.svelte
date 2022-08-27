@@ -88,18 +88,8 @@
       class="$mb"
     />
 
-    <Radio
-      name="demo"
-      value="Lorem"
-      label="Lorem ipsum dolor sit amet"
-      class="$mb-1/4"
-    />
-    <Radio
-      name="demo"
-      value="Consectetur"
-      label="Consectetur adipisicing elit"
-      class="$mb-1/4"
-    />
+    <Radio name="demo" value="Lorem" label="Lorem ipsum dolor sit amet" class="$mb-1/4" />
+    <Radio name="demo" value="Consectetur" label="Consectetur adipisicing elit" class="$mb-1/4" />
     <Radio
       name="demo"
       value="Perspiciatis"

@@ -24,9 +24,7 @@ export default function (from, to) {
     fromFormat = shortFormat
   }
 
-  return `${format(from, fromFormat, { locale: de })} &ndash; ${format(
-    to,
-    longFormat,
-    { locale: de }
-  )}`
+  return `${format(from, fromFormat, { locale: de })} &ndash; ${format(to, longFormat, {
+    locale: de
+  })}`
 }

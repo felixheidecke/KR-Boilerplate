@@ -59,28 +59,16 @@
   <Modal bind:this={modal}>
     <div class="Lightbox__textbox">
       <div class:$invisible={!(images.length > 2)}>
-        <Icon
-          class="$p $pointer"
-          on:click={() => navigate('<')}
-          name="fas fa-angle-left"
-        />
+        <Icon class="$p $pointer" on:click={() => navigate('<')} name="fas fa-angle-left" />
       </div>
       <p class="$m-0">
         {activeImage.alt}
       </p>
       <div class:$invisible={!(images.length > 2)}>
-        <Icon
-          class="$p $pointer"
-          on:click={() => navigate('>')}
-          name="fas fa-angle-right"
-        />
+        <Icon class="$p $pointer" on:click={() => navigate('>')} name="fas fa-angle-right" />
       </div>
     </div>
-    <img
-      class="Lightbox__active-image"
-      src={activeImage.src}
-      alt={activeImage.alt}
-    />
+    <img class="Lightbox__active-image" src={activeImage.src} alt={activeImage.alt} />
   </Modal>
 
   {#if !isMobile}

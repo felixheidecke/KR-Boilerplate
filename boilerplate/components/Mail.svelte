@@ -17,12 +17,7 @@
   $: className = classnames(baseName, $$props.class)
 </script>
 
-<a
-  name="email"
-  ref="external"
-  on:click={() => (location.href = 'mailto:' + to)}
-  class={className}
->
+<a name="email" ref="external" on:click={() => (location.href = 'mailto:' + to)} class={className}>
   {#if icon}
     <Icon ex-class={baseName + '__icon'} name={iconName} />
   {/if}

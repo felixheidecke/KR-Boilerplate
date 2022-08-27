@@ -23,10 +23,7 @@
   }
 
   $: ulClassName = (hover) => {
-    return classnames(
-      baseName + '__ul-ul',
-      !hover || baseName + '__ul-ul--visible'
-    )
+    return classnames(baseName + '__ul-ul', !hover || baseName + '__ul-ul--visible')
   }
 </script>
 
@@ -36,11 +33,7 @@
     on:mouseenter={() => (hoverState = i)}
     on:mouseleave={() => (hoverState = false)}
   >
-    <a
-      class={linkClassName(route, hoverState === i)}
-      href={route.href}
-      on:click
-    >
+    <a class={linkClassName(route, hoverState === i)} href={route.href} on:click>
       {route.name}
     </a>
 

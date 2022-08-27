@@ -14,9 +14,7 @@
 
   let modal
 
-  const { openNow, nextChange, distanceToNextChange, table } = new OpeningHours(
-    hours
-  )
+  const { openNow, nextChange, distanceToNextChange, table } = new OpeningHours(hours)
 
   // --- Computed ---------------------
 
@@ -39,28 +37,18 @@
   {#if openNow && signOpen}
     <img class={`${baseName}__sign`} src={signOpen} alt="Wir haben geöffnet" />
   {:else if signClosed}
-    <img
-      class={`${baseName}__sign`}
-      src={signClosed}
-      alt="Wir haben geschlossen"
-    />
+    <img class={`${baseName}__sign`} src={signClosed} alt="Wir haben geschlossen" />
   {/if}
 
   <span class={`${baseName}__distance`}>{signText}</span>
   <span class={`${baseName}__next-change`}>{nextChange}</span>
   {#if interactive}
-    <span class={`${baseName}__trigger`} on:click={modal.open}>
-      Öffnungszeiten
-    </span>
+    <span class={`${baseName}__trigger`} on:click={modal.open}>Öffnungszeiten</span>
   {/if}
 </div>
 
 {#if interactive}
-  <Modal
-    bind:this={modal}
-    class={baseName + '__modal'}
-    title="Unsere Öffnungszeiten"
-  >
+  <Modal bind:this={modal} class={baseName + '__modal'} title="Unsere Öffnungszeiten">
     <div class={baseName + '__modal-body'}>
       {#each table as day}
         {day} Uhr

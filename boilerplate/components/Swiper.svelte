@@ -57,25 +57,11 @@
     </div>
   </div>
   {#if isTrue(nav)}
-    <button
-      class={`${baseName}__button ${baseName}__button--prev`}
-      on:click={() => swiper.go('<')}
-    >
-      <Icon
-        ex-class={`${baseName}__button-icon`}
-        name="fas fa-angle-left"
-        size="5"
-      />
+    <button class={`${baseName}__button ${baseName}__button--prev`} on:click={() => swiper.go('<')}>
+      <Icon ex-class={`${baseName}__button-icon`} name="fas fa-angle-left" size="5" />
     </button>
-    <button
-      class={`${baseName}__button ${baseName}__button--next`}
-      on:click={() => swiper.go('>')}
-    >
-      <Icon
-        ex-class={`${baseName}__button-icon`}
-        name="fas fa-angle-right"
-        size="5"
-      />
+    <button class={`${baseName}__button ${baseName}__button--next`} on:click={() => swiper.go('>')}>
+      <Icon ex-class={`${baseName}__button-icon`} name="fas fa-angle-right" size="5" />
     </button>
   {/if}
 </div>

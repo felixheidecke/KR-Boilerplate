@@ -15,11 +15,7 @@
 
   const baseName = $$props['ex-class'] || 'Radio'
 
-  $: className = classnames(
-    baseName,
-    $$props.class,
-    !checked || baseName + '--active'
-  )
+  $: className = classnames(baseName, $$props.class, !checked || baseName + '--active')
 </script>
 
 <label class={className}>

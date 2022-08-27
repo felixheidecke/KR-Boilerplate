@@ -32,12 +32,7 @@
 
 <div data-component class={className} id={'xioni-event-' + id}>
   {#if image}
-    <Picture
-      class={baseName + '__image'}
-      src={image.thumbSrc}
-      tablet={image.src}
-      alt={image.alt}
-    />
+    <Picture class={baseName + '__image'} src={image.thumbSrc} tablet={image.src} alt={image.alt} />
   {/if}
   <h2 class={baseName + '__title $mt-0@tablet-up'}>
     {title}
@@ -57,12 +52,7 @@
     <Link to={website} class={baseName + '__website'} icon="fas fa-link" />
   {/if}
   {#if pdf}
-    <Button
-      to={pdf.src}
-      target="_blank"
-      class={baseName + '__pdf'}
-      icon="fas fa-file-pdf"
-    >
+    <Button to={pdf.src} target="_blank" class={baseName + '__pdf'} icon="fas fa-file-pdf">
       {pdf.title}
     </Button>
   {/if}

@@ -7,11 +7,7 @@
 
   const baseName = $$props['ex-class'] || 'Message'
 
-  $: className = classnames(
-    baseName,
-    $$props.class,
-    !type || baseName + '--' + type
-  )
+  $: className = classnames(baseName, $$props.class, !type || baseName + '--' + type)
 </script>
 
 <div class={className}>

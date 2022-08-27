@@ -30,12 +30,7 @@
 
 <article class={className} id={'xioni-article-' + id}>
   {#if image}
-    <Picture
-      class={baseName + '__image'}
-      src={image.thumbSrc}
-      tablet={image.src}
-      alt={image.alt}
-    />
+    <Picture class={baseName + '__image'} src={image.thumbSrc} tablet={image.src} alt={image.alt} />
   {/if}
   <h2 class={baseName + '__title $mt-0@tablet-up'}>
     {title}

@@ -26,15 +26,7 @@
   {#if label}
     <label class={baseName + '__label'} for={name}>{label}</label>
   {/if}
-  <textarea
-    class={baseName + '__input'}
-    {required}
-    {id}
-    {name}
-    {rows}
-    {placeholder}
-    bind:value
-  />
+  <textarea class={baseName + '__input'} {required} {id} {name} {rows} {placeholder} bind:value />
 </div>
 
 <style global>

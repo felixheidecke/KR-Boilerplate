@@ -10,8 +10,7 @@
   export let id
 
   // --- Computed -----
-  $: article =
-    $ARTICLES.find((article) => article.id === id && 'content' in article) || {}
+  $: article = $ARTICLES.find((article) => article.id === id && 'content' in article) || {}
 
   // --- Lifecycle ----
   onMount(() => {
@@ -32,10 +31,6 @@
   <Sceleton />
 {/if}
 
-<Button
-  class="$mt-2"
-  icon="fas fa-chevron-left"
-  to="/preview/xioni-article-list"
->
+<Button class="$mt-2" icon="fas fa-chevron-left" to="/preview/xioni-article-list">
   Zurück zur Übersicht
 </Button>

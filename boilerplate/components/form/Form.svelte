@@ -94,11 +94,7 @@
   {/if}
 
   {#if errors.length}
-    <Message
-      class={baseName + '__errors'}
-      type="error"
-      title="Fehler aufgetreten"
-    >
+    <Message class={baseName + '__errors'} type="error" title="Fehler aufgetreten">
       <ul>
         {#each errors as { message }}
           <li>{message}</li>

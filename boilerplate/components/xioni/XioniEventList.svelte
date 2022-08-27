@@ -20,8 +20,7 @@
 
   const uid = uniqueId()
 
-  $: listOfEvents =
-    $EVENTS.filter((event) => module.includes(event.module)) || []
+  $: listOfEvents = $EVENTS.filter((event) => module.includes(event.module)) || []
 
   // --- Lifecycle --------------------
 

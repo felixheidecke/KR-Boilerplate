@@ -16,11 +16,7 @@
 
   const baseName = $$props['ex-class'] || 'Picture'
 
-  $: className = classnames(
-    baseName,
-    $$props.class,
-    !align || [baseName, '--', align].join('')
-  )
+  $: className = classnames(baseName, $$props.class, !align || [baseName, '--', align].join(''))
 </script>
 
 <picture>

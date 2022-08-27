@@ -49,14 +49,7 @@
     </svelte:element>
   </span>
 {:else}
-  <svelte:element
-    this={tag}
-    class={className}
-    href={to}
-    {target}
-    {rel}
-    on:click
-  >
+  <svelte:element this={tag} class={className} href={to} {target} {rel} on:click>
     {#if $$slots.default}
       <slot />
     {:else}

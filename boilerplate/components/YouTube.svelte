@@ -4,12 +4,7 @@
 
   export let ratio = '16:9'
   export let id
-  export let allow = [
-    'autoplay',
-    'clipboard-write',
-    'encrypted-media',
-    'picture-in-picture'
-  ]
+  export let allow = ['autoplay', 'clipboard-write', 'encrypted-media', 'picture-in-picture']
 
   // --- CSS Class --------------------
 

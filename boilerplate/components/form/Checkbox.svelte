@@ -22,21 +22,11 @@
 
   const baseName = $$props['ex-class'] || 'Checkbox'
 
-  $: className = classnames(
-    baseName,
-    $$props.class,
-    !checked || baseName + '--active'
-  )
+  $: className = classnames(baseName, $$props.class, !checked || baseName + '--active')
 </script>
 
 <label class={className}>
-  <input
-    {...inputProps}
-    class={baseName + '__input'}
-    type="checkbox"
-    {value}
-    bind:checked
-  />
+  <input {...inputProps} class={baseName + '__input'} type="checkbox" {value} bind:checked />
   <span class={baseName + '__label'}>{@html label}</span>
 </label>
 

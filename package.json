@@ -17,7 +17,7 @@
     "singleQuote": true,
     "trailingComma": "none",
     "semi": false,
-    "printWidth": 80,
+    "printWidth": 100,
     "htmlWhitespaceSensitivity": "ignore"
   },
   "eslintConfig": {

@@ -33,11 +33,7 @@
 </script>
 
 {#if isOpen}
-  <div
-    class={className}
-    transition:fade={{ duration: 333 }}
-    on:click|self={close}
-  >
+  <div class={className} transition:fade={{ duration: 333 }} on:click|self={close}>
     <div class={baseName + '__wrapper'}>
       <button class={baseName + '__close-button'} on:click={close}>
         <Icon name="fas fa-times-circle" />

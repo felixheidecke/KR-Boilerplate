@@ -46,8 +46,7 @@
 
   // --- Data -------------------------------------
 
-  $: listOfarticles =
-    $ARTICLES.filter((a) => a.module === id).splice(0, limit) || []
+  $: listOfarticles = $ARTICLES.filter((a) => a.module === id).splice(0, limit) || []
 </script>
 
 <svelte:head>

@@ -10,11 +10,7 @@
 
   const baseName = $$props['ex-class'] || 'Toplink'
 
-  $: className = classnames(
-    baseName,
-    $$props.class,
-    !isVisible || baseName + '--visible'
-  )
+  $: className = classnames(baseName, $$props.class, !isVisible || baseName + '--visible')
 
   // --- Methods ----------------------
 

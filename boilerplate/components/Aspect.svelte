@@ -12,10 +12,7 @@
 </script>
 
 <div class={className}>
-  <div
-    class={baseName + '__ratio'}
-    style={`padding-top: ${(+y / +x) * 100}%`}
-  />
+  <div class={baseName + '__ratio'} style={`padding-top: ${(+y / +x) * 100}%`} />
   <div class={baseName + '__content'}>
     <slot />
   </div>
