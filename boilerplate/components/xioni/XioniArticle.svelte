@@ -40,6 +40,7 @@
       {#if author}
         <span class={baseName + '__author'}>Von {author}</span>
       {/if}
+      {#if author && date} | {/if}
       {#if date}
         <time class={baseName + '__date'}>
           {format(date * 1000, 'PPP', { locale: de })}
@@ -106,7 +107,6 @@
     gap: 0.25rem;
     font-size: 0.875rem;
     transform: translateY(-1rem);
-    font-style: italic;
   }
 
   :where(.XioniArticle__content-image) {
