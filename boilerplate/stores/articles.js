@@ -50,9 +50,7 @@ export const fetchArticles = async (id, options) => {
       const update = [...groups, key]
       return uniq(update)
     })
-
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error)
   }
 
@@ -70,7 +68,7 @@ export const fetchArticles = async (id, options) => {
 export const fetchArticle = async (id) => {
   console.log('fetchArticle', id)
 
-  if (get(ARTICLES).find(article => article.id === id)) return
+  if (get(ARTICLES).find((article) => article.id === id)) return
 
   setLoading()
 

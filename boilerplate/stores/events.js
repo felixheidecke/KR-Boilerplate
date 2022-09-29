@@ -50,9 +50,7 @@ export const fetchEvents = async (id, options) => {
       const update = [...groups, key]
       return uniq(update)
     })
-  }
-
-  catch (e) {
+  } catch (e) {
     console.error(e)
   }
 
@@ -68,7 +66,7 @@ export const fetchEvents = async (id, options) => {
  */
 
 export const fetchEvent = async (id, force = false) => {
-  if (get(EVENTS).find(event => event.id === id) && !force) return
+  if (get(EVENTS).find((event) => event.id === id) && !force) return
 
   setLoading()
 
@@ -94,7 +92,7 @@ export const fetchEvent = async (id, force = false) => {
 
 /**
  * Pick out a single event
- * 
+ *
  * @param {string | number} id Event id
  */
 

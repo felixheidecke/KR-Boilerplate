@@ -1,11 +1,11 @@
 import { isArray, forEach } from 'lodash-es'
 
 /**
- * 
+ *
  * @param {string} base Hostname
  * @param {string | string[]} path URL path
  * @param {object} params URL params
- * @returns 
+ * @returns
  */
 
 export default function (base, path = '/', params = {}) {

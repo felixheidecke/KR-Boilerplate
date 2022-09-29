@@ -39,8 +39,7 @@ export const fetchMenuCard = async (id, force = false) => {
       menu.set(id, contents)
       return menu
     })
-  }
-  catch (e) {
+  } catch (e) {
     console.error(e)
   }
 
