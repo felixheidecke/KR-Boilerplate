@@ -1,6 +1,8 @@
 <script>
   import classnames from 'classnames'
-  import formatFromToDate from '@/js/format-from-to-date'
+  import { formatFromTo } from '@/js/format-date'
+  import { selectEvent } from '@/stores/events'
+  import { slide } from 'svelte/transition'
 
   // --- Components -------------------
 
@@ -8,17 +10,22 @@
   import Button from '../Button.svelte'
   import Link from '../Link.svelte'
 
-  // --- Props ------------------------
+  // --- Date & Props -----------------
+
+  let expanded = false
 
   export let description = null
   export let details = null
   export let ends = null
   export let id
   export let image = null
+  export let module
   export let pdf = null
   export let starts = null
-  export let website = null
   export let title
+  export let website = null
+  export let flags = []
+  export let registration = false
 
   const startDate = starts * 1000
   const endDate = ends * 1000
@@ -30,7 +37,7 @@
   $: className = classnames(baseName, $$props.class)
 </script>
 
-<div data-component class={className} id={'xioni-event-' + id}>
+<div data-component class={className} data-xioni-mid="{module}/{id}">
   {#if image}
     <Picture class={baseName + '__image'} src={image.thumbSrc} tablet={image.src} alt={image.alt} />
   {/if}
@@ -39,23 +46,41 @@
   </h2>
   <h3 class={baseName + '__date'}>
     <date>
-      {@html formatFromToDate(startDate, endDate)}
+      {@html formatFromTo(startDate, endDate)}
     </date>
   </h3>
   <div class={baseName + '__description'}>
     {@html description}
+    {#if !expanded}
+      <Link tag="span" class="{baseName}__expand" on:click={() => (expanded = true)}>
+        ... weiterlesen
+      </Link>
+    {/if}
   </div>
-  <div class={baseName + '__details'}>
-    {@html details}
-  </div>
+  {#if expanded}
+    <div class={baseName + '__details'} transition:slide>
+      {@html details}
+    </div>
+  {/if}
   {#if website}
     <Link to={website} class={baseName + '__website'} icon="fas fa-link" />
   {/if}
-  {#if pdf}
-    <Button to={pdf.src} target="_blank" class={baseName + '__pdf'} icon="fas fa-file-pdf">
-      {pdf.title}
-    </Button>
-  {/if}
+  <div class="$mt">
+    {#if pdf}
+      <Button to={pdf.src} target="_blank" class={baseName + '__pdf'} icon="fas fa-file-pdf">
+        {pdf.title}
+      </Button>
+    {/if}
+    {#if registration && flags.includes('Anmeldung')}
+      <Button
+        on:click={() => selectEvent(id)}
+        class="{baseName}__register"
+        icon="fas fa-sign-in-alt"
+      >
+        Zur Anmeldung
+      </Button>
+    {/if}
+  </div>
   <slot />
 </div>
 
@@ -64,6 +89,7 @@
     display: flow-root;
     background-color: rgba(0, 0, 0, 0.05);
     padding: 1rem;
+    position: relative;
   }
 
   :where(.XioniEvent__image) {
@@ -77,6 +103,12 @@
       width: 280px;
       height: 210px;
     }
+  }
+
+  :where(.XioniEvent__expand) {
+    transform: translateY(-0.5rem);
+    display: block;
+    text-decoration: underline;
   }
 
   :where(.XioniEvent__meta) {

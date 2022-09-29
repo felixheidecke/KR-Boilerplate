@@ -5,17 +5,21 @@
   export let title
 
   const id = Math.random()
-  const activeItem = getContext('Accordion:activeItem')
+  const activeItem = getContext('Accordion:active-item')
 
   $: collapsed = id !== $activeItem
+
+  const handleClick = () => {
+    activeItem.set($activeItem === id ? null : id)
+  }
 </script>
 
-<li class="AccordionSlide" on:click={() => ($activeItem = id)}>
+<li class="AccordionSlide" on:click={handleClick}>
   <h5 class="AccordionSlide__title">
     {title}
   </h5>
   {#if !collapsed}
-    <div transition:slide class="AccordionSlide__content">
+    <div in:slide class="AccordionSlide__content">
       <slot />
     </div>
   {/if}

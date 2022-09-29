@@ -7,17 +7,17 @@
 
   const emit = createEventDispatcher()
 
-  // --- Props ------------------------
+  // --- Data -------------------------
 
   export let title = false
   export let isOpen = false
 
+  $: if (isOpen) emit('open')
+  else emit('close')
+
   // --- Methods ----------------------
 
-  const close = () => {
-    isOpen = false
-    emit('close')
-  }
+  export const close = () => (isOpen = false)
 
   export const open = () => (isOpen = true)
 
@@ -34,18 +34,18 @@
 
 {#if isOpen}
   <div class={className} transition:fade={{ duration: 333 }} on:click|self={close}>
-    <div class={baseName + '__wrapper'}>
-      <button class={baseName + '__close-button'} on:click={close}>
-        <Icon name="fas fa-times-circle" />
+    <div class="{baseName}__wrapper">
+      <button class="{baseName}__close-button" on:click={close}>
+        <Icon name="fas fa-times" />
       </button>
       {#if title}
-        <header class={baseName + '__header'}>{title}</header>
+        <header class="{baseName}__header">{title}</header>
       {/if}
-      <main class={baseName + '__body'}>
+      <main class="{baseName}__body">
         <slot />
       </main>
       {#if $$slots.footer}
-        <footer class={baseName + '__footer'}><slot name="footer" /></footer>
+        <footer class="{baseName}__footer"><slot name="footer" /></footer>
       {/if}
     </div>
   </div>
@@ -68,9 +68,9 @@
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 32rem;
-    max-width: 80vw;
+    transform: translate(-50%, calc(-50% - 2rem));
+    width: 42rem;
+    max-width: 90vw;
     box-shadow: 0.5rem 0.5rem 1rem rgba(black, 0.25);
     border-radius: 0.5rem;
     overflow: hidden;
@@ -83,8 +83,11 @@
     right: 0rem;
     border: 0 none;
     background: none;
-    padding: 0.5rem;
+    padding: 1rem;
     cursor: pointer;
+    line-height: 0;
+    font-size: 1.25rem;
+    color: #333;
   }
 
   :where(.Modal__header) {
@@ -98,7 +101,7 @@
   :where(.Modal__body) {
     padding: 1.5rem;
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 75vh;
     background-color: white;
 
     & > *:first-child {
@@ -113,5 +116,6 @@
   :where(.Modal__footer) {
     border-top: 1px solid lightgray;
     padding: 1rem 1.5rem;
+    background-color: white;
   }
 </style>

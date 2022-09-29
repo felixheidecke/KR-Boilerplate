@@ -6,10 +6,9 @@ import { hash } from '@/js/utils'
 
 export const ARTICLES = writable([])
 export const GROUPS = writable([])
-export const ERROR = writable(null)
 export const STATE = writable({
   isLoading: false,
-  hasError: false
+  hasErrored: false
 })
 
 /**
@@ -21,7 +20,7 @@ export const STATE = writable({
  * @returns {Promise}
  */
 
-export const FETCH_ARTICLES = async (id, options) => {
+export const fetchArticles = async (id, options) => {
   // Unique key based on params
   const key = hash({ id, options })
 
@@ -30,26 +29,32 @@ export const FETCH_ARTICLES = async (id, options) => {
 
   setLoading()
 
-  const url = buildUrl(API_HOST, '/articles/' + id, options)
-  const res = await fetch(url)
+  try {
+    const url = buildUrl(API_HOST, ['articles', id], options)
+    const res = await fetch(url)
+    const contents = await res.json()
 
-  const contents = await res.json()
+    if (!res.ok) {
+      setErrored()
+      console.error(res)
+      Promise.reject(res)
+    }
 
-  if (!res.ok) {
-    Promise.reject(res)
-    return setError(contents)
+    ARTICLES.update((articles) => {
+      // Make sure to have no douplicates
+      const update = uniqBy(contents.concat(articles), 'id')
+      return sortBy(update, 'date').reverse()
+    })
+
+    GROUPS.update((groups) => {
+      const update = [...groups, key]
+      return uniq(update)
+    })
+
   }
-
-  ARTICLES.update((articles) => {
-    // Make sure to have no douplicates
-    const update = uniqBy(contents.concat(articles), 'id')
-    return sortBy(update, 'date').reverse()
-  })
-
-  GROUPS.update((groups) => {
-    const update = [...groups, key]
-    return uniq(update)
-  })
+  catch (error) {
+    console.error(error)
+  }
 
   setDone()
 }
@@ -62,15 +67,20 @@ export const FETCH_ARTICLES = async (id, options) => {
  * @returns {Promise}
  */
 
-export const FETCH_ARTICLE = async (id) => {
+export const fetchArticle = async (id) => {
+  console.log('fetchArticle', id)
+
+  if (get(ARTICLES).find(article => article.id === id)) return
+
   setLoading()
 
-  const url = buildUrl(API_HOST, '/article/' + id)
+  const url = buildUrl(API_HOST, `article/${id}`)
   const res = await fetch(url)
 
   if (!res.ok) {
+    setErrored()
+    console.error(res)
     Promise.reject(res)
-    return setError()
   }
 
   const content = await res.json()
@@ -87,25 +97,22 @@ export const FETCH_ARTICLE = async (id) => {
 // --- Set STATE helper -----------
 
 const setLoading = () => {
-  ERROR.set(null)
   STATE.set({
     isLoading: true,
-    hasError: false
+    hasErrored: false
   })
 }
 
-const setError = (error) => {
-  ERROR.set(error)
+const setErrored = () => {
   STATE.set({
     isLoading: false,
-    hasError: true
+    hasErrored: true
   })
 }
 
 const setDone = () => {
-  ERROR.set(null)
   STATE.set({
     isLoading: false,
-    hasError: false
+    hasErrored: false
   })
 }

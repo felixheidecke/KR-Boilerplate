@@ -1,11 +1,11 @@
 <script>
   import { onMount } from 'svelte'
-  import { ARTICLES, FETCH_ARTICLES, ERROR } from '@/stores/articles'
+  import { ARTICLES, fetchArticles } from '@/stores/articles'
 
   // --- Components -----------------------------------
 
   import XioniArticle from './XioniArticle.svelte'
-  import Sceleton from './partials/Sceleton.svelte'
+  import Sceleton from '../auxiliary/Sceleton.svelte'
   import Button from '../Button.svelte'
 
   // --- Props ----------------------------------------
@@ -15,12 +15,12 @@
   export let expanded = false
   export let pdf = false
   export let id
-  export let limit = 100
+  export let limit = 50
 
   $: buttonText = $$props['button-text'] || 'Weiterlesen'
   $: detailPath = $$props['detail-path'] || ''
 
-  id = +id
+  const module = +id
   limit = +limit
 
   // --- Methods --------------------------------------
@@ -32,52 +32,45 @@
    * @returns {object} updated article
    */
 
-  const prepareArticle = (article) => {
+  $: prepareArticle = (article) => {
     return {
       ...article,
       date: date ? article.date : null,
       author: author ? article.author : null,
       pdf: pdf ? article.pdf : null,
-      content: expanded ? article.content : null
+      content: expanded ? article.content : []
     }
   }
 
-  onMount(() => FETCH_ARTICLES(id, { limit, expanded }))
+  onMount(() => fetchArticles(module, { limit }))
 
   // --- Data -------------------------------------
 
-  $: listOfarticles = $ARTICLES.filter((a) => a.module === id).splice(0, limit) || []
+  $: listOfarticles = $ARTICLES.filter((event) => event.module === module).splice(0, limit) || []
 </script>
 
 <svelte:head>
   <link rel="preconnect" href="https://www.rheingau.de" />
 </svelte:head>
 
-{#if $ERROR}
-  <div class="XioniArticleList__error">
-    <h3>Ein Fehler ist aufgetreten</h3>
-    <pre>{JSON.stringify($ERROR, null, 2)}</pre>
-  </div>
+{#each listOfarticles as article}
+  <XioniArticle {...prepareArticle(article)}>
+    <span>
+      {#if !expanded}
+        <Button
+          to={`${detailPath}${article.id}-${article.slug}`}
+          class="XioniArticle__read-more"
+          icon="fas fa-chevron-right"
+          reverse
+        >
+          {buttonText}
+        </Button>
+      {/if}
+    </span>
+  </XioniArticle>
 {:else}
-  {#each listOfarticles as article}
-    <XioniArticle {...prepareArticle(article)}>
-      <span>
-        {#if !expanded}
-          <Button
-            to={`${detailPath}/${article.id}-${article.slug}`}
-            class="XioniArticle__read-more"
-            icon="fas fa-chevron-right"
-            reverse
-          >
-            {buttonText}
-          </Button>
-        {/if}
-      </span>
-    </XioniArticle>
-  {:else}
-    <Sceleton />
-  {/each}
-{/if}
+  <Sceleton />
+{/each}
 
 <style lang="scss" global>
   :where(.XioniArticle) + :where(.XioniArticle) {

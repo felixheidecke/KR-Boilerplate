@@ -1,7 +1,6 @@
 <script>
   import classnames from 'classnames'
   import { onMount, createEventDispatcher } from 'svelte'
-  import { slide } from 'svelte/transition'
   import Message from '../Message.svelte'
 
   const emit = createEventDispatcher()
@@ -32,7 +31,9 @@
     })
   }
 
-  const submit = async () => {
+  export const submit = async () => {
+    if (isDone) return
+
     const formData = new FormData(form)
     const body = new URLSearchParams(formData).toString()
 
@@ -84,17 +85,17 @@
   <input type="text" name="honig" style="position:absolute;left:-9999px;" />
 
   {#if isDone}
-    <div bind:this={isDoneEl} class={baseName + '__done'} transition:slide>
+    <div bind:this={isDoneEl} class={baseName + '__done'}>
       <slot name="done" />
     </div>
   {:else}
-    <div class={baseName + '__body'} transition:slide>
+    <div class={baseName + '__body'}>
       <slot />
     </div>
   {/if}
 
   {#if errors.length}
-    <Message class={baseName + '__errors'} type="error" title="Fehler aufgetreten">
+    <Message class="{baseName}__errors $mt" type="error" title="Fehler aufgetreten">
       <ul>
         {#each errors as { message }}
           <li>{message}</li>

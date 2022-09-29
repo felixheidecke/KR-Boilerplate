@@ -1,6 +1,6 @@
 <script>
   import classnames from 'classnames'
-  import { ROUTES, INIT as INIT_ROUTES } from '@/stores/routes'
+  import { ROUTES, initialise as INIT_ROUTES } from '@/stores/routes'
   import { browser } from '$app/env'
   import { onMount } from 'svelte'
 

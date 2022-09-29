@@ -11,7 +11,7 @@
   // --- Props ------------------------
 
   export let author = null
-  export let content = null
+  export let content = []
   export let date = null
   export let id
   export let image = null
@@ -52,7 +52,7 @@
     {@html text}
   </div>
 
-  {#if content}
+  {#if content.length}
     <div class={baseName + '__content'}>
       {#each content as { image, text }}
         {#if image}

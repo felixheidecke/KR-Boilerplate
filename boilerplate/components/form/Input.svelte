@@ -13,7 +13,7 @@
   export let readonly = null
 
   const id = uniqueId(name + '-')
-  const inputProps = {
+  $: inputProps = {
     id,
     max,
     min,
@@ -24,7 +24,7 @@
     readonly
   }
 
-  if (label && required) label += '*'
+  $: if (label && required) label += '*'
 
   // --- CSS Class --------------------
 

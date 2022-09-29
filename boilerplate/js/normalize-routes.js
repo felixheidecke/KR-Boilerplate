@@ -1,4 +1,5 @@
 import { forEach, omit } from 'lodash-es'
+import { basePath } from './utils'
 
 const normalizeRoutes = (routes, parent = null) => {
   let tree = []
@@ -6,7 +7,7 @@ const normalizeRoutes = (routes, parent = null) => {
 
   forEach(routes, (item, href) => {
     const route = {
-      href,
+      href: basePath(href),
       name: item.name || item,
       class: item.class || null,
       meta: item.meta || null,

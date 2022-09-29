@@ -5,11 +5,15 @@ export const isTrue = function (variable) {
   return !!variable
 }
 
+export const isFalse = (variable) => !isTrue(variable)
+
 export const assetPath = function (asset) {
   return `${assets}${asset}`
 }
 
 export const basePath = function (link) {
+  if (!link) return base
+
   return `${base}${link}`
 }
 
@@ -41,6 +45,8 @@ export const formatEuro = (number) => {
 export const isExternalLink = (link) => {
   return !link.search(/(http(s)?|ftp):\/\//) || !link.indexOf('//')
 }
+
+export const isInternalLink = (link) => !isExternalLink(link)
 
 export const hash = (input) => {
   let hash = 0

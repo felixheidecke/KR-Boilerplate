@@ -1,33 +1,27 @@
 <script>
   import { onMount } from 'svelte'
-  import { EVENTS, GROUPS, FETCH_EVENTS, ERROR } from '@/stores/events'
-  import { uniqueId } from 'lodash-es'
+  import { EVENTS, fetchEvents } from '@/stores/events'
 
   // --- Components -------------------
 
   import XioniEvent from './XioniEvent.svelte'
-  import Sceleton from './partials/Sceleton.svelte'
-  import Message from '../Message.svelte'
+  import Sceleton from '../auxiliary/Sceleton.svelte'
 
   // --- Props ------------------------
 
   export let limit = 100
-  export let module = []
+  export let module = ''
+  export let registration = false
 
-  module = module.split(',').map((e) => +e)
+  module = +module
 
   // --- Data -------------------------
 
-  const uid = uniqueId()
-
-  $: listOfEvents = $EVENTS.filter((event) => module.includes(event.module)) || []
+  $: listOfEvents = $EVENTS.filter((event) => event.module === module).splice(0, limit) || []
 
   // --- Lifecycle --------------------
 
-  onMount(async () => {
-    if ($GROUPS.includes(uid)) return
-    await FETCH_EVENTS(uid, { module, limit })
-  })
+  onMount(() => fetchEvents(module, { limit }))
 </script>
 
 <svelte:head>
@@ -35,15 +29,15 @@
 </svelte:head>
 
 <div class="XioniEventList">
-  {#if $ERROR}
-    <Message title="Ein Fehler ist aufgetreten" type="error">
-      <div slot="code">{JSON.stringify($ERROR, null, 2)}</div>
-    </Message>
+  {#each listOfEvents as event}
+    <XioniEvent {...event} {registration} />
   {:else}
-    {#each listOfEvents as event}
-      <XioniEvent {...event} />
-    {:else}
-      <Sceleton />
-    {/each}
-  {/if}
+    <Sceleton />
+  {/each}
 </div>
+
+<style lang="scss" global>
+  :where(.XioniEvent) + :where(.XioniEvent) {
+    margin-top: 1rem;
+  }
+</style>

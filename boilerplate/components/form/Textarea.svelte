@@ -9,11 +9,10 @@
   export let placeholder = null
   export let required = false
   export let rows = 4
+  export let value = ''
   label = required ? label + '*' : label
 
   const id = uniqueId(`textarea-${name}-`)
-
-  let value = ''
 
   // --- CSS Class --------------------
 

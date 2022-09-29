@@ -3,8 +3,8 @@
   import { setContext } from 'svelte'
   import { writable } from 'svelte/store'
 
-  let activeItem = writable(1)
-  setContext('Accordion:activeItem', activeItem)
+  let activeItem = writable(null)
+  setContext('Accordion:active-item', activeItem)
 
   // --- CSS Class --------------------
 

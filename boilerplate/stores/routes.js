@@ -6,10 +6,9 @@ import routes from 'src/routes.yml'
 const { tree, flat } = normalizeRoutes(routes)
 
 export const ROUTES = writable(tree)
-
 export const ACTIVE_ROUTE = writable({})
 
-export const SET_ACTIVE_ROUTE = (activeRoute) => {
+export const setActiveRoute = (activeRoute) => {
   if (!activeRoute) {
     ACTIVE_ROUTE.set({})
     ROUTES.update((routes) => deactivateRouteInTree(routes))
@@ -26,12 +25,12 @@ export const SET_ACTIVE_ROUTE = (activeRoute) => {
 
 // --- Set initial route ----
 
-export const INIT = () => {
+export const initialise = () => {
   page.subscribe((page) => {
     const pathname = page.url.pathname
     const activeRoute = flat.find((route) => pathname === route.href)
 
-    SET_ACTIVE_ROUTE(activeRoute)
+    setActiveRoute(activeRoute)
   })
 }
 

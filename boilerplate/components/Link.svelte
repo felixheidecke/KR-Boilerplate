@@ -8,8 +8,8 @@
   const trimScheme = (link) => {
     if (!isExternalLink(link)) return link
 
-    const { hostname, pathname } = new URL(link)
-    return hostname + pathname
+    const { hostname } = new URL(link)
+    return hostname
   }
 
   // --- Data -------------------------
