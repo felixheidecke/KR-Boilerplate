@@ -1,5 +1,5 @@
 <script>
-  let html = `
+  let code = `
 <Icon name="fab fa-apple" />
 <Icon name="fab fa-apple" size="2" />
 <Icon name="fab fa-apple" size="3" />
@@ -11,8 +11,9 @@
 </svelte:head>
 
 <div data-page>
+  <h2>Icon</h2>
   <h3>Code</h3>
-  <CodeHighlighter {html} />
+  <Code {code} />
 
   <h3>Ergebnis</h3>
   <Icon name="fab fa-apple" />

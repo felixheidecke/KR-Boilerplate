@@ -1,5 +1,5 @@
 <script>
-  let html = `
+  let code = `
 <Lightbox>
   <img
     src="https://picsum.photos/id/1/400/300"
@@ -30,8 +30,9 @@
 </svelte:head>
 
 <div data-page>
+  <h2>Lightbox</h2>
   <h3>Code</h3>
-  <CodeHighlighter {html} />
+  <Code {code} />
 
   <h3>Ergebnis</h3>
   <Lightbox>

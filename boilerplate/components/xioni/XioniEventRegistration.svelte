@@ -16,7 +16,7 @@
       <time class="$font-small">{@html fromToDate}</time>
     </div>
 
-    <Form id={formId} subject="Event Anmeldung ({$event.id})" class="$mt-2">
+    <Form id={formId} subject="Event Anmeldung ({$event.id})" class="$mt-2" attach="csv">
       <input type="hidden" name="Event" value="{$event.title} ({$event.id})" />
       <input type="hidden" name="Datum" value={date.format($event.starts * 1000, 'P')} />
 

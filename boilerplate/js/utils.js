@@ -23,16 +23,6 @@ export const scrollTo = (element) => {
   })
 }
 
-export const fetchJSON = async (url, params) => {
-  if (params) {
-    params = new URLSearchParams(params)
-    url = `${url}?${params}`
-  }
-
-  const res = await fetch(url)
-  return await res.json()
-}
-
 export const formatEuro = (number) => {
   const formatter = new Intl.NumberFormat('de-DE', {
     style: 'currency',
@@ -60,4 +50,9 @@ export const hash = (input) => {
     hash &= hash // Convert to 32bit integer
   }
   return new Uint32Array([hash])[0].toString(36)
+}
+
+export const formToJson = form => {
+  const formData = new FormData(form)
+  return Object.fromEntries(formData)
 }

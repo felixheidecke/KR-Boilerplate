@@ -1,2 +1,38 @@
-/: Start
-/preview/accordion: Components
+/preview/base/accordion:
+  name: Basis
+  /preview/base/accordion: Accordion
+  /preview/base/button-row: Button Row
+  /preview/base/icon: Icon
+  /preview/base/lightbox: Lightbox
+  /preview/base/modal: Modal
+  /preview/base/opening-hours: Opening Hours
+  /preview/base/swiper: Swiper
+  /preview/base/youtube: Youtube
+
+/preview/form:
+  name: Form
+  /preview/form/button: Button
+  /preview/form/checkbox: Checkbox
+  /preview/form/input: Input
+  /preview/form/radio: Radio
+  /preview/form/select: Select
+  /preview/form/textarea: Textarea
+
+/preview/helper/link:
+  name: Helper
+  /preview/helper/link: Link
+  /preview/helper/list: List
+  /preview/helper/mail: Mail
+  /preview/helper/picture: Picture
+
+/preview/layout/aspect:
+  name: Layout
+  /preview/layout/aspect: Aspect
+  /preview/layout/grid: Grid
+
+/preview/xioni/article/list:
+  name: Xioni
+  /preview/xioni/article/list: Articles
+  /preview/xioni/event/list: Events
+  /preview/xioni/event/registration: Event Registration
+  /preview/xioni/menu-card: Menu Card

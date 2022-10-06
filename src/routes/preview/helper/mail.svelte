@@ -1,5 +1,5 @@
 <script>
-  let html = `
+  let code = `
 <Mail to="felix@heidecke.me" /><br />
 <Mail to="felix@heidecke.me" icon="fas fa-at" />
 `
@@ -11,7 +11,7 @@
 
 <div data-page>
   <h3>Code</h3>
-  <CodeHighlighter {html} />
+  <Code {code} />
 
   <h3>Ergebnis</h3>
   <Mail to="felix@heidecke.me" />

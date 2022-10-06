@@ -3,6 +3,7 @@ import { writable, get } from 'svelte/store'
 import { API_HOST } from '@/js/constants'
 import buildUrl from '@/js/build-url'
 import { hash } from '@/js/utils'
+import { fetchJSON } from '@/js/fetch'
 
 export const ARTICLES = writable([])
 export const GROUPS = writable([])
@@ -31,18 +32,17 @@ export const fetchArticles = async (id, options) => {
 
   try {
     const url = buildUrl(API_HOST, ['articles', id], options)
-    const res = await fetch(url)
-    const contents = await res.json()
+    const { data, status } = await fetchJSON(url)
 
-    if (!res.ok) {
+    if (status >= 400) {
       setErrored()
-      console.error(res)
-      Promise.reject(res)
+      console.error(data)
+      Promise.reject(data)
     }
 
     ARTICLES.update((articles) => {
       // Make sure to have no douplicates
-      const update = uniqBy(contents.concat(articles), 'id')
+      const update = uniqBy(data.concat(articles), 'id')
       return sortBy(update, 'date').reverse()
     })
 
@@ -73,19 +73,18 @@ export const fetchArticle = async (id) => {
   setLoading()
 
   const url = buildUrl(API_HOST, `article/${id}`)
-  const res = await fetch(url)
+  const { data, status } = await fetchJSON(url)
 
-  if (!res.ok) {
+  if (status >= 400) {
     setErrored()
-    console.error(res)
-    Promise.reject(res)
+    console.error(data)
+    Promise.reject(data)
   }
 
-  const content = await res.json()
 
   ARTICLES.update((articles) => {
     // Make sure to have no douplicates
-    const update = uniqBy([content].concat(articles), 'id')
+    const update = uniqBy([data].concat(articles), 'id')
     return sortBy(update, 'date').reverse()
   })
 

@@ -2,6 +2,9 @@
   import classnames from 'classnames'
   import { onMount, createEventDispatcher } from 'svelte'
   import Message from '../Message.svelte'
+  import { API_HOST } from '@/js/constants'
+  import { formToJson } from '@/js/utils'
+  import { fetchJSON } from '@/js/fetch'
 
   const emit = createEventDispatcher()
 
@@ -9,6 +12,7 @@
 
   export let subject = 'Kontakformular'
   export let id = 0
+  export let attach = false
 
   let form
   let required = []
@@ -16,10 +20,6 @@
   let isLoading = false
   let isDone = false
   let isDoneEl
-
-  $: if (errors.length) {
-    setTimeout(() => (errors = []), 5000)
-  }
 
   // --- Methods ----------------------
 
@@ -34,30 +34,35 @@
   export const submit = async () => {
     if (isDone) return
 
-    const formData = new FormData(form)
-    const body = new URLSearchParams(formData).toString()
-
     // Reset status
     isLoading = true
     errors = []
 
     try {
-      const response = await fetch('https://api.klickrhein.de/v2/form/', {
+      const { data, status } = await fetchJSON(`${API_HOST}/form`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         },
-        body
+        data: formToJson(form),
+        params: attach === 'csv' ? { attach: 'csv' } : null
       })
 
-      errors = response.ok ? [] : await response.json()
-      isDone = !errors.length
-      emit('done')
+      if (status >= 400) throw responseBody
 
+      if (data.error) {
+        errors = data.message.split(',')
+        isDone = false
+        emit('error', data.error)
+        return
+      }
+
+      isDone = true
+      emit('done')
       setTimeout(scrollToDoneText, 500)
     } catch (error) {
-      console.error(error)
       isDone = false
+      errors = [error]
       emit('error', error)
     } finally {
       isLoading = false

@@ -1,5 +1,5 @@
 <script>
-  let html = `
+  let code = `
 <Swiper autoplay="3500">
   <img src="https://picsum.photos/id/1011/1280/720" alt="Kajak" />
   <img src="https://picsum.photos/id/1015/1280/720" alt="Fjord" />
@@ -14,7 +14,7 @@
 <div data-page>
   <h3>Code</h3>
 
-  <CodeHighlighter {html} />
+  <Code {code} />
 
   <Swiper autoplay="3500">
     <img src="https://picsum.photos/id/1011/1280/720" alt="Kajak" />

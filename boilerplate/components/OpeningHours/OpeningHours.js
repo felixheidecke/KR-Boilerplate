@@ -1,5 +1,6 @@
-import { format, formatDistance as fd } from 'date-fns'
-import { de as locale } from 'date-fns/locale/index.js'
+import { format, formatDistanceToNow as fd } from 'date-fns'
+import { de } from 'date-fns/locale/de/index'
+
 import oh from 'opening_hours'
 
 export const localiseOpeningHours = (openingHours) => {
@@ -17,7 +18,7 @@ export const localiseOpeningHours = (openingHours) => {
 }
 
 const formatDistance = (nextChange) => {
-  const distance = 'in ' + fd(new Date(), nextChange, { locale })
+  const distance = 'in ' + fd(nextChange, { locale: de })
 
   if (distance.includes('Tage')) {
     return distance + 'n'
@@ -61,7 +62,7 @@ class OpeningHours {
   }
 
   get nextChange() {
-    return format(this._nextChange, "EEEE 'um' p 'Uhr'", { locale })
+    return format(this._nextChange, "EEEE 'um' p 'Uhr'", { locale: de })
   }
 
   get distanceToNextChange() {

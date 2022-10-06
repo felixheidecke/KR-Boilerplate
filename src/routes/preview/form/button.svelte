@@ -1,5 +1,5 @@
 <script>
-  let html = `
+  let code = `
 <Button>Button</Button>
 <Button disabled>Disabled</Button>
 <Button icon="fab fa-apple">Apple</Button>
@@ -8,38 +8,20 @@
 </script>
 
 <svelte:head>
-  <title>Button | Boilerplate</title>
+  <title>Button</title>
 </svelte:head>
 
 <div data-page>
+  <h2>Button</h2>
+
   <h3>Code</h3>
-  <CodeHighlighter {html} />
+
+  <Code {code} />
 
   <h3>Ergebnis</h3>
+
   <Button>Button</Button>
   <Button disabled>Disabled</Button>
   <Button icon="fab fa-apple">Apple</Button>
   <Button icon="fab fa-facebook" reverse>Facebook</Button>
 </div>
-
-<style lang="scss">
-  [data-page] :global {
-    .Aspect {
-      max-width: 33vw;
-
-      &__content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-
-    .cornflowerblue {
-      background-color: cornflowerblue;
-    }
-
-    .blueviolet {
-      background-color: blueviolet;
-    }
-  }
-</style>

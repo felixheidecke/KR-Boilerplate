@@ -1,5 +1,5 @@
 <script>
-  let html = `
+  let code = `
 <Accordion>
   <AccordionSlide title="Larkspur">
     Larkspur ist eine Stadt im Marin County im US-Bundesstaat Kalifornien,
@@ -21,8 +21,10 @@
 </svelte:head>
 
 <div data-page>
+  <h2>Accordion</h2>
+
   <h3>Code</h3>
-  <CodeHighlighter {html} />
+  <Code {code} />
 
   <h3>Ergebnis</h3>
   <Accordion>

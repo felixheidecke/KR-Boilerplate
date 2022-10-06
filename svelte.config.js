@@ -15,7 +15,7 @@ export default {
       entries: [
         '*',
         '/sitemap.xml',
-        '/info.json',
+        '/info.json'
         // '/article-0',
         // '/event-0',
       ]

@@ -10,6 +10,8 @@ body {
 }
 
 html {
+  overflow-y: scroll;
+
   @include breakpoint('mobile') {
     font-size: 14px;
   }

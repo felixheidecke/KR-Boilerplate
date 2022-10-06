@@ -1,38 +1,36 @@
-<script context="module">
-  // Das Styling für die gesamte Seite
-  import 'style'
-  export const load = async ({ url }) => ({ props: { url } })
-</script>
-
 <script>
-  export let url
-
-  let year = new Date().getFullYear()
+  import 'style'
+  import { BP_INFO } from '@/stores/bp-info'
 </script>
 
-<div>
+<Nav variant="slide" />
+
+<div data-root>
   <header>
     <h1 class="$m-0">Boilerplate</h1>
-    <Nav />
+    <pre>Version {$BP_INFO.version}</pre>
   </header>
   <main>
-    <PageTransition {url}>
-      <slot />
-    </PageTransition>
+    <slot />
   </main>
   <footer>
-    <small>&copy; Klickrhein {year}</small>
+    <small>Klickrhein Boilerpalte &nbsp;&loz;&nbsp; Build {$BP_INFO.build}</small>
   </footer>
 </div>
 
 <Toplink />
 
 <style lang="scss">
-  div {
-    width: 100vw;
-    height: 100vh;
+  [data-root] {
+    margin: 0 auto;
+    max-width: 1280px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding: {
+      left: 2rem;
+      right: 2rem;
+    }
   }
 
   header,
@@ -45,5 +43,14 @@
 
   main {
     flex-grow: 1;
+  }
+
+  [data-root] :global {
+    .title:before {
+      content: '<';
+    }
+    .title:after {
+      content: ' />';
+    }
   }
 </style>

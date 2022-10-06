@@ -1,6 +1,7 @@
 import { writable, get } from 'svelte/store'
 import { API_HOST } from '@/js/constants'
 import buildUrl from '@/js/build-url'
+import { fetchJSON } from '@/js/fetch'
 
 export const MENU_CARD = writable(new Map())
 export const STATE = writable({
@@ -25,18 +26,16 @@ export const fetchMenuCard = async (id, force = false) => {
 
   try {
     const url = buildUrl(API_HOST, ['menu-card', id])
-    const res = await fetch(url)
+    const { data, status } = await fetchJSON(url)
 
-    const contents = await res.json()
-
-    if (!res.ok) {
+    if (status >= 400) {
       setErrored()
-      console.error(res)
-      Promise.reject(res)
+      console.error(data)
+      Promise.reject(data)
     }
 
     MENU_CARD.update((menu) => {
-      menu.set(id, contents)
+      menu.set(id, data)
       return menu
     })
   } catch (e) {

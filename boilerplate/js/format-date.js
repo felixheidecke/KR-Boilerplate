@@ -1,5 +1,4 @@
 import { format as formatDate } from 'date-fns'
-// import { de } from 'date-fns/locale/index.js'
 import de from 'date-fns/locale/de/index'
 
 export const formatFromTo = (from, to) => {

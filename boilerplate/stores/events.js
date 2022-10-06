@@ -3,6 +3,7 @@ import { get, writable } from 'svelte/store'
 import { API_HOST } from '@/js/constants'
 import buildUrl from '@/js/build-url'
 import { hash } from '@/js/utils'
+import { fetchJSON } from '@/js/fetch'
 
 export const EVENTS = writable([])
 export const SELECTED_EVENT = writable(null)
@@ -32,17 +33,16 @@ export const fetchEvents = async (id, options) => {
 
   try {
     const url = buildUrl(API_HOST, ['events', id], options)
-    const res = await fetch(url)
-    const contents = await res.json()
+    const { data, status } = await fetchJSON(url)
 
-    if (!res.ok) {
+    if (status >= 400) {
       setErrored()
-      console.error(res)
-      Promise.reject(res)
+      console.error(data)
+      Promise.reject(data)
     }
 
     EVENTS.update((events) => {
-      const update = uniqBy(contents.concat(events), 'id')
+      const update = uniqBy(data.concat(events), 'id')
       return sortBy(update, 'starts')
     })
 
@@ -71,19 +71,17 @@ export const fetchEvent = async (id, force = false) => {
   setLoading()
 
   const url = buildUrl(API_HOST, ['event', id])
-  const res = await fetch(url)
+  const { data, status } = await fetchJSON(url)
 
-  if (!res.ok) {
+  if (status >= 400) {
     setErrored()
-    console.error(res)
-    Promise.reject(res)
+    console.error(data)
+    Promise.reject(data)
   }
-
-  const content = await res.json()
 
   EVENTS.update((articles) => {
     // Make sure to have no douplicates
-    const update = uniqBy([content].concat(articles), 'id')
+    const update = uniqBy([data].concat(articles), 'id')
     return sortBy(update, 'date').reverse()
   })
 

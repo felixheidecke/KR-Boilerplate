@@ -1,5 +1,5 @@
 <script>
-  let html = '<YouTube id="2vjPBrBU-TM" />'
+  let code = '<YouTube id="2vjPBrBU-TM" />'
 </script>
 
 <svelte:head>
@@ -8,7 +8,7 @@
 
 <div data-page>
   <h3>Code</h3>
-  <CodeHighlighter {html} />
+  <Code {code} />
 
   <YouTube id="2vjPBrBU-TM" />
 </div>

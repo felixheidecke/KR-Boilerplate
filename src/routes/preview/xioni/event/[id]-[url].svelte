@@ -3,20 +3,17 @@
 </script>
 
 <script>
-  import { ARTICLES, FETCH_ARTICLE, STATE } from '@/stores/articles'
+  import { EVENTS, fetchEvent, STATE } from '@/stores/events'
   import { onMount } from 'svelte'
 
   // --- Props --------
   export let id
 
   // --- Computed -----
-  $: article = $ARTICLES.find((article) => article.id === id && 'content' in article) || {}
+  $: article = $EVENTS.find((event) => event.id === id) || {}
 
   // --- Lifecycle ----
-  onMount(() => {
-    if (article.id) return
-    FETCH_ARTICLE(id)
-  })
+  onMount(() => fetchEvent(id))
 </script>
 
 <svelte:head>
@@ -31,6 +28,6 @@
   <Sceleton />
 {/if}
 
-<Button class="$mt-2" icon="fas fa-chevron-left" to="/preview/xioni-article-list">
+<Button class="$mt-2" icon="fas fa-chevron-left" to="/xioni/article-list">
   Zurück zur Übersicht
 </Button>

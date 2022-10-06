@@ -1,5 +1,5 @@
 <script>
-  let html = `
+  let code = `
 <Aspect ratio="1:1">
   <h2>1:1</h2>
 </Aspect>
@@ -16,7 +16,7 @@
 
 <div data-page>
   <h3>Code</h3>
-  <CodeHighlighter {html} />
+  <Code {code} />
 
   <h3>Ergebnis</h3>
   <Aspect ratio="1:1" class="cornflowerblue">

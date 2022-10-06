@@ -1,5 +1,5 @@
 <script>
-  let html = `
+  let code = `
 <Grid>
   <Grid size="tablet-1-2 desktop-1-3">Frank</Grid>
   <Grid size="tablet-1-2 desktop-2-3">Felix</Grid>
@@ -16,7 +16,7 @@
 
 <div data-page>
   <h3>Code</h3>
-  <CodeHighlighter {html} />
+  <Code {code} />
 
   <h3>Ergebnis</h3>
   <Grid>
