@@ -1,4 +1,14 @@
-<section class="ButtonRow">
+<script>
+  import classNames from 'classnames'
+
+  // --- CSS Class --------------------
+
+  const baseName = $$props['ex-class'] || 'ButtonRow'
+
+  $: className = classNames(baseName, $$props.class)
+</script>
+
+<section data-component class={className}>
   <slot />
 </section>
 

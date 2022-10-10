@@ -19,13 +19,15 @@
   export let ends = null
   export let id
   export let image = null
+  export let images = []
   export let module
   export let pdf = null
   export let starts = null
   export let title
   export let website = null
+  export let ticketshop = null
   export let flags = []
-  export let registration = false
+  export let config = { show: {} }
 
   const startDate = starts * 1000
   const endDate = ends * 1000
@@ -51,36 +53,59 @@
   </h3>
   <div class={baseName + '__description'}>
     {@html description}
-    {#if !expanded}
-      <Link tag="span" class="{baseName}__expand" on:click={() => (expanded = true)}>
-        ... weiterlesen
-      </Link>
-    {/if}
   </div>
   {#if expanded}
-    <div class={baseName + '__details'} transition:slide>
+    <div class={baseName + '__details'}>
       {@html details}
     </div>
+    {#if images.length}
+      <div class={baseName + '__gallery'}>
+        {#each images as { src, alt }}
+          <img {src} {alt} class={baseName + '__gallery-image'} />
+        {/each}
+      </div>
+    {/if}
   {/if}
-  {#if website}
+
+  {#if !expanded && details}
+    <div class="$flex $gap-1/2 $items-center $mb-1/2 $pointer" on:click={() => (expanded = true)}>
+      <Icon name="fas fa-angle-right" /> Weiterlesen
+    </div>
+  {:else if expanded && details}
+    <div class="$flex $gap-1/2 $items-center $mb-1/2 $pointer" on:click={() => (expanded = false)}>
+      <Icon name="fas fa-angle-up" /> Weniger
+    </div>
+  {/if}
+
+  {#if website && config.show.website}
     <Link to={website} class={baseName + '__website'} icon="fas fa-link" />
   {/if}
-  <div class="$mt">
-    {#if pdf}
+  <ButtonRow class="$mt">
+    {#if pdf && config.show.pdf}
       <Button to={pdf.src} target="_blank" class={baseName + '__pdf'} icon="fas fa-file-pdf">
         {pdf.title}
       </Button>
     {/if}
-    {#if registration && flags.includes('Anmeldung')}
+    {#if ticketshop && config.show.ticketshop}
+      <Button
+        to={ticketshop}
+        target="_blank"
+        class={baseName + '__ticketshop'}
+        icon="fas fa-ticket-alt"
+      >
+        Ticketshop
+      </Button>
+    {/if}
+    {#if config.show.registration && flags.includes('Anmeldung')}
       <Button
         on:click={() => selectEvent(id)}
         class="{baseName}__register"
         icon="fas fa-sign-in-alt"
       >
-        Zur Anmeldung
+        Anmelden
       </Button>
     {/if}
-  </div>
+  </ButtonRow>
   <slot />
 </div>
 
@@ -94,21 +119,19 @@
 
   :where(.XioniEvent__image) {
     width: 100%;
-    max-height: 65vw;
     object-fit: cover;
 
     @include breakpoint('tablet-up') {
       float: right;
+      aspect-ratio: 4/3;
       margin: 0 0 1.5rem 1.5rem;
-      width: 280px;
-      height: 210px;
+      width: calc(33.333% - 0.667rem);
     }
   }
 
   :where(.XioniEvent__expand) {
     transform: translateY(-0.5rem);
     display: block;
-    text-decoration: underline;
   }
 
   :where(.XioniEvent__meta) {
@@ -122,6 +145,8 @@
   :where(.XioniEvent__content-image) {
     display: inline-block;
     max-width: 18rem;
+    width: inherit;
+    height: inherit;
   }
 
   :where(.XioniEvent__content-image--right) {
@@ -132,6 +157,13 @@
   :where(.XioniEvent__content-image--left) {
     float: left;
     margin-right: 1rem;
+  }
+
+  :where(.XioniEvent__gallery) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
 
   :where(.XioniEvent__content ul) {

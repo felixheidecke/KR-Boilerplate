@@ -10,6 +10,8 @@
 
   const id = uniqueId(`checkbox-${name}-`)
 
+  $: if (label && required) label += '*'
+
   // Props ------------
 
   const inputProps = {

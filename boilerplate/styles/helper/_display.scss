@@ -1,13 +1,18 @@
-.\$ {
-  &hidden {
-    display: none;
-  }
+.\$hidden.\$hidden {
+  display: none;
+}
+
+.\$block.\$block {
+  display: block;
 }
 
 @each $size, $query in $mediaquery {
   @media #{$query} {
-    .\$hidden\@#{$size} {
+    .\$hidden\@#{$size}.\$hidden\@#{$size} {
       display: none;
+    }
+    .\$block\@#{$size}.\$block\@#{$size} {
+      display: block;
     }
   }
 }

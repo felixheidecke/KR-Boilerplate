@@ -51,7 +51,7 @@
   <Modal bind:this={modal} class={baseName + '__modal'} title="Unsere Öffnungszeiten">
     <div class={baseName + '__modal-body'}>
       {#each table as day}
-        {day} Uhr
+        {day}
         <br />
       {/each}
     </div>

@@ -3,6 +3,7 @@
   import { ROUTES, initialise as INIT_ROUTES } from '@/stores/routes'
   import { browser } from '$app/env'
   import { onMount } from 'svelte'
+  import { throttle } from 'lodash-es'
 
   import './styles/nav-bar.scss'
   import './styles/nav-slide.scss'
@@ -18,13 +19,28 @@
 
   const show = () => setTimeout(() => (hidden = false))
 
+  const handleOffset = throttle(() => {
+    if (!sticky || type === Type.slide) return
+
+    const className = baseName + '--offset'
+    const isOffset = nav.getBoundingClientRect().top === 0
+
+    if (isOffset && !nav.classList.contains(className)) {
+      nav.classList.add(className)
+    } else if (!isOffset && nav.classList.contains(className)) {
+      nav.classList.remove(className)
+    }
+  }, 250)
+
   // --- Data -------------------------
 
   const Type = { bar: 'bar', slide: 'slide' }
 
   export let variant = false
   export let breakpoint = '1024px'
+  export let sticky = false
 
+  let nav
   let active = false
   let hidden = true
   let type = variant
@@ -55,7 +71,8 @@
   $: className = classnames(
     $$props['ex-class'] || baseName,
     $$props.class,
-    !active || baseName + '--active'
+    !active || baseName + '--active',
+    !sticky || baseName + '--sticky'
   )
 
   // Init
@@ -63,7 +80,10 @@
   show()
 </script>
 
+<svelte:window on:scroll|passive={handleOffset} />
+
 <nav
+  bind:this={nav}
   class={className}
   aria-label="main navigation"
   class:$hidden={hidden}

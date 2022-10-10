@@ -22,19 +22,12 @@ Liste mehrerer Artikel basieren auf einer modul Id
 | `button-text` (2) | `...weiterlesen` | Button Text               |
 | `detail-path`     | `''`             | Pfad zur Detailsseite     |
 
-- (\*) Ist Verpflichtend
-
 1. Alle Inhalte der Artikel werden dargestellt. Eine Verlinkung zu einer Detailansicht wird nicht angezeigt.
 2. Verfügbar wenn `expanded`
 
 ## Styling
 
 ```SCSS
-
-// Wrapper um alle Artikel
-.XioniArticleList { }
-
-
 // Wrapper um alle Artikel
 .XioniArticleList { }
 
@@ -55,7 +48,27 @@ Liste mehrerer Artikel basieren auf einer modul Id
   &__pdf { }
 
   &__read-more { }
-
-  &__read-more { }
 }
 ```
+
+# Events
+
+Liste mehrerer Events basieren auf einer modul Id
+
+```HTML
+  <XioniEventList module="15" />
+```
+
+### Attribute
+
+| Attribut       | Standard | Beschreibung               |
+| :------------- | :------- | :------------------------- |
+| `modul` (\*)   | -        | modul ID                   |
+| `limit`        | `100`    | Eventmenge limitieren      |
+| `registration` | `false`  | Eventregistierung anzeigen |
+| `website`      | `true`   | Website Link anzeigen      |
+| `pdf`          | `true`   | PDF Link anzeigen          |
+
+---
+
+(\*) Pflichfeld

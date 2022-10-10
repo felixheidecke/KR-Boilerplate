@@ -1,10 +1,9 @@
 <script>
   import classnames from 'classnames'
-  import Icon from './Icon.svelte'
-
-  let isVisible = false
 
   export let name = null
+
+  let isVisible = false
 
   // --- CSS Class --------------------
 
@@ -26,7 +25,12 @@
 <svelte:window on:scroll|passive={handleOffset} />
 
 <button {name} class={className} on:click={scrollToTop}>
-  <Icon name="fas fa-angle-up" size="5" />
+  <svg class="{baseName}__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+    <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+    <path
+      d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"
+    />
+  </svg>
 </button>
 
 <style lang="scss" global>
@@ -42,6 +46,9 @@
     border: 0 none;
     transform: translateY(120%);
     background-color: gainsboro;
+    display: flex;
+    padding: 1rem;
+    align-items: center;
 
     &:hover {
       opacity: 1;

@@ -1,5 +1,5 @@
 <script>
-  let code = `<XioniEventList module="15" expanded />`
+  let code = `<XioniEventList module="15" />`
 </script>
 
 <svelte:head>
@@ -11,5 +11,5 @@
   <h3>Code</h3>
   <Code {code} />
 
-  <XioniEventList module="15" expanded />
+  <XioniEventList module="15" />
 </div>

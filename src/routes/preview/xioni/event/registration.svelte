@@ -1,9 +1,10 @@
 <script>
   let code = `
-<XioniEventList module="1500" registration />
+<XioniEventList module="757" registration />
 
 <XioniEventRegistration form-id="4">
   <Input name="Name" label="Vor- & Nachname" required class="$mb" />
+  <Input name="Alter" label="Alter" type="number" required class="$mb" />
   <Textarea name="Anschrift" label="Anschrift" required class="$mb" />
 
   <div slot="done">
@@ -23,7 +24,7 @@
 
   <Code {code} />
 
-  <XioniEventList module="1500" registration />
+  <XioniEventList module="1289" registration />
 
   <XioniEventRegistration form-id="4,1">
     <Input name="Name" label="Vor- & Nachname" required class="$mb" />

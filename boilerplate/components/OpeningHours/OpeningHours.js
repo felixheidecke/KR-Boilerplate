@@ -1,26 +1,42 @@
 import { format, formatDistanceToNow as fd } from 'date-fns'
-import { de } from 'date-fns/locale/de/index'
+import de from 'date-fns/locale/de/index'
 
 import oh from 'opening_hours'
 
+const t = {
+  MON: 'Mo.',
+  TUE: 'Di.',
+  WED: 'Mi.',
+  THU: 'Do.',
+  FRI: 'Fr.',
+  SAT: 'Sa.',
+  SUN: 'So.',
+  CLOSED: 'geschlossen',
+  HOLIDAY: 'Feiertags',
+  O_CLOCK: 'Uhr',
+  DAYS: 'Tage',
+  AT: 'um',
+  IN: 'in'
+}
+
 export const localiseOpeningHours = (openingHours) => {
   return openingHours
-    .replace(/Mo/g, 'Mo.')
-    .replace(/Tu/g, 'Di.')
-    .replace(/We/g, 'Mi.')
-    .replace(/Th/g, 'Do.')
-    .replace(/Fr/g, 'Fr.')
-    .replace(/Sa/g, 'Sa.')
-    .replace(/Su/g, 'So.')
+    .replace(/Mo/g, t.MON)
+    .replace(/Tu/g, t.TUE)
+    .replace(/We/g, t.WED)
+    .replace(/Th/g, t.THU)
+    .replace(/Fr/g, t.FRI)
+    .replace(/Sa/g, t.SAT)
+    .replace(/Su/g, t.SUN)
     .replace(/-/g, ' - ')
-    .replace(/off/g, 'geschlossen')
-    .replace(/PH/g, 'Feiertags')
+    .replace(/off/g, t.CLOSED)
+    .replace(/PH/g, t.HOLIDAY)
 }
 
 const formatDistance = (nextChange) => {
-  const distance = 'in ' + fd(nextChange, { locale: de })
+  const distance = `${t.IN} ${fd(nextChange, { locale: de })}`
 
-  if (distance.includes('Tage')) {
+  if (distance.includes(t.DAYS)) {
     return distance + 'n'
   }
 
@@ -62,7 +78,7 @@ class OpeningHours {
   }
 
   get nextChange() {
-    return format(this._nextChange, "EEEE 'um' p 'Uhr'", { locale: de })
+    return format(this._nextChange, `EEEE '${t.AT}' p '${t.O_CLOCK}'`, { locale: de })
   }
 
   get distanceToNextChange() {
@@ -71,7 +87,14 @@ class OpeningHours {
 
   get table() {
     const localised = localiseOpeningHours(this._hours)
-    return localised.split(';').map((i) => i.trim())
+    return localised.split(';').map((i) => {
+      let hour = i.trim()
+
+      if (!hour.includes(t.CLOSED))
+        hour += ` ${t.O_CLOCK}`
+
+      return hour
+    })
   }
 }
 

@@ -1,0 +1,31 @@
+.\$flex.\$flex {
+  display: flex;
+}
+
+.\$flex-reverse.\$flex-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.\$flex-column.\$flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.\$gap.\$gap {
+  gap: 1rem;
+}
+
+.\$items-center.\$items-center {
+  align-items: center;
+}
+
+.\$content-center.\$content-center {
+  justify-content: center;
+}
+
+@each $a, $b in $spacing {
+  .\$gap-#{$a}.\$gap-#{$a} {
+    gap: $b;
+  }
+}

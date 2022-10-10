@@ -57,16 +57,26 @@
     <slot />
   </div>
   <Modal bind:this={modal}>
+    <div
+      class="Lightbox__navigate Lightbox__navigate--prev"
+      class:$invisible={!(images.length > 2)}
+      on:click={() => navigate('<')}
+    >
+      <Icon name="fas fa-angle-left" size="2" />
+    </div>
+
+    <div
+      class="Lightbox__navigate Lightbox__navigate--next"
+      class:$invisible={!(images.length > 2)}
+      on:click={() => navigate('>')}
+    >
+      <Icon name="fas fa-angle-right" size="2" />
+    </div>
+
     <div class="Lightbox__textbox">
-      <div class:$invisible={!(images.length > 2)}>
-        <Icon class="$p $pointer" on:click={() => navigate('<')} name="fas fa-angle-left" />
-      </div>
       <p class="$m-0">
         {activeImage.alt}
       </p>
-      <div class:$invisible={!(images.length > 2)}>
-        <Icon class="$p $pointer" on:click={() => navigate('>')} name="fas fa-angle-right" />
-      </div>
     </div>
     <img class="Lightbox__active-image" src={activeImage.src} alt={activeImage.alt} />
   </Modal>
@@ -88,15 +98,47 @@
       right: 0;
       bottom: 0;
       background-color: rgba(black, 0.666);
-      padding: 0.5rem;
+      padding: 1rem;
       color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: center;
+    }
+
+    &__navigate {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(black, 0.666);
+      color: white;
+      opacity: 0.333;
+      transition: opacity 333ms, padding 500ms;
+      padding: 1rem;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+        padding: {
+          left: 2rem;
+          right: 2rem;
+        }
+      }
+    }
+
+    &__navigate--prev {
+      left: 0;
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+
+    &__navigate--next {
+      right: 0;
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
     }
 
     &__active-image {
       display: block;
+      user-select: none;
+      pointer-events: none;
     }
   }
 
@@ -110,6 +152,7 @@
 
     .Modal__body {
       padding: 0;
+      overflow: hidden;
     }
 
     img[data-lightbox] {
