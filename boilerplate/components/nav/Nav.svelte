@@ -27,7 +27,7 @@
 
     if (isOffset && !nav.classList.contains(className)) {
       nav.classList.add(className)
-    } else if (!isOffset && nav.classList.contains(className)) {
+    } else if ((!isOffset && nav.classList.contains(className)) || window.pageYOffset === 0) {
       nav.classList.remove(className)
     }
   }, 250)
