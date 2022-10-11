@@ -8,9 +8,9 @@
   $: className = classNames(baseName, $$props.class)
 </script>
 
-<section data-component class={className}>
+<div data-component class={className}>
   <slot />
-</section>
+</div>
 
 <style lang="scss">
   .ButtonRow {
@@ -49,6 +49,7 @@
 
       .Button {
         justify-content: center;
+        width: 100%;
       }
 
       .Button + .Button {

@@ -41,8 +41,8 @@
   }
 
   :where(.Checkbox__label) {
-    user-select: none;
     font-size: 0.85rem;
+    width: 100%;
   }
 
   :where(.Checkbox__input) {

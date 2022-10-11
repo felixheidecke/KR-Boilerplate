@@ -27,14 +27,18 @@
     {#if icon}
       <Icon ex-class={baseName + '__icon'} name={icon} />
     {/if}
-    <slot />
+    <span class="{baseName}__text">
+      <slot />
+    </span>
   </button>
 {:else}
   <a href={to} {target} class={className} on:click>
     {#if icon}
       <Icon ex-class={baseName + '__icon'} name={icon} />
     {/if}
-    <slot />
+    <span class="{baseName}__text">
+      <slot />
+    </span>
   </a>
 {/if}
 
@@ -57,6 +61,11 @@
     transition: all 0.25s;
     user-select: none;
     white-space: nowrap;
+  }
+
+  :where(.Button__text) {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   :where(.Button:not(:disabled):hover) {

@@ -59,12 +59,14 @@
   :where(.Input__input) {
     width: 100%;
     padding: 0.666rem;
+    margin: 0;
     font-size: 1rem;
     font-family: sans-serif;
     border: 1px solid lightgray;
     border-top: 0 none;
     outline: none;
     background-color: white;
+    border-radius: 0;
     border-bottom-left-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
 

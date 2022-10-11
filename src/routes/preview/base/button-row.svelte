@@ -1,10 +1,10 @@
 <script>
   let code = `
-  <ButtonRow>
-    <Button icon="fas fa-file-pdf">PDF download</Button>
-    <Button icon="fas fa-id-card">Registrierun</Button>
-    <Button>Jetzt klicken</Button>
-  </ButtonRow>
+<ButtonRow>
+  <Button icon="fas fa-file-pdf">PDF download</Button>
+  <Button icon="fas fa-id-card">Registrierun</Button>
+  <Button>Jetzt klicken</Button>
+</ButtonRow>
 `
 </script>
 
