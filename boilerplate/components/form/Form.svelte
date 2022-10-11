@@ -24,7 +24,7 @@
   // --- Methods ----------------------
 
   const scrollToDoneText = () => {
-    if (!isDoneEl) return
+    if (!isDoneEl || !$$slots.done) return
 
     isDoneEl.scrollIntoView({
       behavior: `smooth`
