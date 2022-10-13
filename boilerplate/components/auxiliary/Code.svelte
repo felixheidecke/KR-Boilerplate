@@ -23,11 +23,11 @@
 
   .Code--script::before {
     content: '<script>';
-    color: magenta;
+    color: #00ffcf;
   }
 
   .Code--script::after {
     content: '</script>';
-    color: magenta;
+    color: #00ffcf;
   }
 </style>

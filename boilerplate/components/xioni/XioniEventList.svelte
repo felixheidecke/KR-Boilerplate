@@ -13,6 +13,7 @@
   export let module
   export let limit = 100
   module = +module
+  limit = +limit
 
   // What to show
   export let registration = false

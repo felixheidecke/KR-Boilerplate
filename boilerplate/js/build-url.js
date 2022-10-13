@@ -8,20 +8,22 @@ import { isArray, forEach } from 'lodash-es'
  * @returns
  */
 
-export default function (base, path = '/', params = {}) {
+export default function (base, path = '/', params = false) {
   if (isArray(path)) {
     path = path.join('/')
   }
 
   const url = new URL(path, base)
 
-  forEach(params, (value, key) => {
-    if (isArray(value)) {
-      value.forEach((val) => url.searchParams.append(key, val))
-    } else {
-      url.searchParams.append(key, value)
-    }
-  })
+  if (params) {
+    forEach(params, (value, key) => {
+      if (isArray(value)) {
+        value.forEach((val) => url.searchParams.append(key, val))
+      } else {
+        url.searchParams.append(key, value)
+      }
+    })
+  }
 
   return url
 }
