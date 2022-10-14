@@ -5,7 +5,7 @@
   // --- Data -------------------------
 
   export let label = false
-  export let name
+  export let name = 'select'
   export let options = []
   export let required = false
   export let values = options

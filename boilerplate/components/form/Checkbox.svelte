@@ -2,9 +2,9 @@
   import { uniqueId } from 'lodash-es'
   import classnames from 'classnames'
 
-  export let name
   export let checked = false
   export let label = false
+  export let name = 'checkbox'
   export let required = false
   export let value = 'on'
 

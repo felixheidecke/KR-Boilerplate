@@ -2,7 +2,7 @@
   import classnames from 'classnames'
   import { onMount, createEventDispatcher } from 'svelte'
   import Message from '../Message.svelte'
-  import { API_HOST } from '@/js/constants'
+  import { API_URL } from '@/js/constants'
   import { formToJson } from '@/js/utils'
   import { fetchJSON } from '@/js/fetch'
 
@@ -39,7 +39,8 @@
     errors = []
 
     try {
-      const { data, status } = await fetchJSON(`${API_HOST}/form`, {
+      const url = [API_URL, 'form'].join('/')
+      const { data, status } = await fetchJSON(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

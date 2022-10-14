@@ -1,7 +1,6 @@
 import { uniq, uniqBy, sortBy } from 'lodash-es'
 import { writable, get } from 'svelte/store'
-import { API_HOST } from '@/js/constants'
-import buildUrl from '@/js/build-url'
+import { API_URL } from '@/js/constants'
 import { hash } from '@/js/utils'
 import { fetchJSON } from '@/js/fetch'
 
@@ -31,8 +30,8 @@ export const fetchArticles = async (id, options) => {
   setLoading()
 
   try {
-    const url = buildUrl(API_HOST, ['articles', id], options)
-    const { data, status } = await fetchJSON(url)
+    const url = [API_URL, 'articles', id].join('/')
+    const { data, status } = await fetchJSON(url, { options })
 
     if (status >= 400) {
       setErrored()
@@ -66,13 +65,11 @@ export const fetchArticles = async (id, options) => {
  */
 
 export const fetchArticle = async (id) => {
-  console.log('fetchArticle', id)
-
   if (get(ARTICLES).find((article) => article.id === id)) return
 
   setLoading()
 
-  const url = buildUrl(API_HOST, `article/${id}`)
+  const url = [API_URL, 'article', id].join('/')
   const { data, status } = await fetchJSON(url)
 
   if (status >= 400) {

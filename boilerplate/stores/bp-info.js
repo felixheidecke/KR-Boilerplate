@@ -5,5 +5,5 @@ import { browser } from '$app/env'
 export const BP_INFO = readable({ version: 'dev', build: 'dev' }, (set) => {
   if (!browser) return
 
-  fetchJSON('/info.json').then(({ data }) => set(data))
+  fetchJSON(document.location.origin + '/info.json').then(({ data }) => set(data))
 })

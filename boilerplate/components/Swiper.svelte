@@ -19,6 +19,7 @@
   export let speed = 1000 // animationDuration
   export let startAt = 0
   export let type = 'carousel'
+  export let images = []
 
   export let nav = true
   export let config = null // Optional full config model
@@ -53,7 +54,13 @@
 <div {id} class={className} bind:this={slider}>
   <div class="glide__track" data-glide-el="track">
     <div class="glide__slides">
-      <slot />
+      {#if images.length}
+        {#each images as { src, alt }}
+          <img {src} {alt} />
+        {/each}
+      {:else}
+        <slot />
+      {/if}
     </div>
   </div>
   {#if isTrue(nav)}

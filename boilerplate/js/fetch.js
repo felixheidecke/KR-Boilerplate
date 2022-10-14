@@ -1,7 +1,15 @@
-export const fetchJSON = async (url, { method, params, headers, data } = {}) => {
+/**
+ *
+ * @param {URL} base URL
+ * @param {object} fetchParams URL params
+ * @returns
+ */
+
+export const fetchJSON = async (url, { method, headers, params, data } = {}) => {
+
   if (params) {
-    params = new URLSearchParams(params)
-    url = `${url}?${params}`
+    url = new URL(url)
+    url.search = new URLSearchParams(params)
   }
 
   try {

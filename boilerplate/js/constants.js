@@ -1,1 +1,1 @@
-export const API_HOST = 'https://api.klickrhein.de:8303'
+export const API_URL = 'https://api.klickrhein.de/v3' // No trailing "/" please

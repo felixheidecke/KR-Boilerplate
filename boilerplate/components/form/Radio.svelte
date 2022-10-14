@@ -5,7 +5,7 @@
   export let checked = false
   export let group = checked ? value : ''
   export let label = null
-  export let name
+  export let name = 'radio'
   export let required = false
   export let value
 

@@ -1,6 +1,5 @@
 import { writable, get } from 'svelte/store'
-import { API_HOST } from '@/js/constants'
-import buildUrl from '@/js/build-url'
+import { API_URL } from '@/js/constants'
 import { fetchJSON } from '@/js/fetch'
 
 export const MENU_CARD = writable(new Map())
@@ -25,7 +24,7 @@ export const fetchMenuCard = async (id, force = false) => {
   setLoading()
 
   try {
-    const url = buildUrl(API_HOST, ['menu-card', id])
+    const url = [API_URL, 'menu-card', id].join('/')
     const { data, status } = await fetchJSON(url)
 
     if (status >= 400) {

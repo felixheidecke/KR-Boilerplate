@@ -5,12 +5,12 @@
   export let label = null
   export let max = null
   export let min = null
-  export let name
+  export let name = 'input'
   export let placeholder = null
+  export let readonly = null
   export let required = false
   export let type = 'text'
   export let value = ''
-  export let readonly = null
 
   const id = uniqueId(name + '-')
   $: inputProps = {

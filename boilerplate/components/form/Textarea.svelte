@@ -5,7 +5,7 @@
   // --- Data -------------------------
 
   export let label = false
-  export let name
+  export let name = 'textarea'
   export let placeholder = null
   export let required = false
   export let rows = 4
