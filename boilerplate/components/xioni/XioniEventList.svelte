@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { EVENTS, fetchEvents } from '@/stores/events'
+  import { EVENTS, fetchEvents, STATE } from '@/stores/events'
 
   // --- Components -------------------
 
@@ -46,9 +46,10 @@
 <div class="XioniEventList">
   {#each listOfEvents as event}
     <XioniEvent {...event} {config} />
-  {:else}
-    <Sceleton />
   {/each}
+  {#if STATE.isLoading}
+    <Sceleton />
+  {/if}
 </div>
 
 <style lang="scss" global>
