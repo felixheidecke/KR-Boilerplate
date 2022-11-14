@@ -73,11 +73,13 @@
       <Icon name="fas fa-angle-right" size="2" />
     </div>
 
-    <div class="Lightbox__textbox">
-      <p class="$m-0">
-        {activeImage.alt}
-      </p>
-    </div>
+    {#if activeImage.alt}
+      <div class="Lightbox__textbox">
+        <p class="$m-0">
+          {activeImage.alt}
+        </p>
+      </div>
+    {/if}
     <img class="Lightbox__active-image" src={activeImage.src} alt={activeImage.alt} />
   </Modal>
 
