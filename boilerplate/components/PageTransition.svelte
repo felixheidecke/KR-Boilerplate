@@ -4,7 +4,7 @@
 </script>
 
 {#key url}
-  <div in:blur={{ duration: 250 }}>
+  <div class="PageTransition" in:blur={{ duration: 250 }}>
     <slot />
   </div>
 {/key}
