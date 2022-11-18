@@ -7,10 +7,7 @@ import { fetchJSON } from '@/js/fetch'
 export const EVENTS = writable([])
 export const SELECTED_EVENT = writable(null)
 export const GROUPS = writable([])
-export const STATE = writable({
-  isLoading: false,
-  hasErrored: false
-})
+export const IS_LOADING = writable(false)
 
 /**
  * Fetch a list of articles from Xioni API
@@ -21,23 +18,22 @@ export const STATE = writable({
  * @returns {Promise}
  */
 
-export const fetchEvents = async (id, options) => {
+export const fetchEvents = async (id, params) => {
   // Unique key based on params
-  const key = hash({ id, options })
+  const key = hash({ id, params })
 
   // Check if the URL has already been fetched
   if (get(GROUPS).includes(key)) return
 
-  setLoading()
+  IS_LOADING.set(true)
 
   try {
     const url = [API_URL, 'events', id].join('/')
-    const { data, status } = await fetchJSON(url, { options })
+    const { data, status } = await fetchJSON(url, { params })
 
     if (status >= 400) {
-      setErrored()
-      console.error(data)
-      Promise.reject(data)
+      IS_LOADING.set(false)
+      throw new Error(buildHttpErrorMessage(`fetching module ${id}`, status))
     }
 
     EVENTS.update((events) => {
@@ -49,11 +45,11 @@ export const fetchEvents = async (id, options) => {
       const update = [...groups, key]
       return uniq(update)
     })
-  } catch (e) {
-    console.error(e)
+  } catch (error) {
+    console.error(error)
   }
 
-  setDone()
+  IS_LOADING.set(false)
 }
 
 /**
@@ -67,24 +63,27 @@ export const fetchEvents = async (id, options) => {
 export const fetchEvent = async (id, force = false) => {
   if (get(EVENTS).find((event) => event.id === id) && !force) return
 
-  setLoading()
+  IS_LOADING.set(true)
 
-  const url = [API_URL, 'event', id].join('/')
-  const { data, status } = await fetchJSON(url)
+  try {
+    const url = [API_URL, 'event', id].join('/')
+    const { data, status } = await fetchJSON(url)
 
-  if (status >= 400) {
-    setErrored()
-    console.error(data)
-    Promise.reject(data)
+    if (status >= 400) {
+      IS_LOADING.set(false)
+      throw new Error(buildHttpErrorMessage(`fetching id ${id}`, status))
+    }
+
+    EVENTS.update((articles) => {
+      // Make sure to have no douplicates
+      const update = uniqBy([data].concat(articles), 'id')
+      return sortBy(update, 'date').reverse()
+    })
+  } catch (error) {
+    console.error(error)
   }
 
-  EVENTS.update((articles) => {
-    // Make sure to have no douplicates
-    const update = uniqBy([data].concat(articles), 'id')
-    return sortBy(update, 'date').reverse()
-  })
-
-  setDone()
+  IS_LOADING.set(false)
 }
 
 /**
@@ -105,27 +104,4 @@ export const selectEvent = (id) => {
 
 export const resetSelection = () => {
   SELECTED_EVENT.set(null)
-}
-
-// --- Set STATE helper -----------
-
-const setLoading = () => {
-  STATE.set({
-    isLoading: true,
-    hasErrored: false
-  })
-}
-
-const setErrored = () => {
-  STATE.set({
-    isLoading: false,
-    hasErrored: true
-  })
-}
-
-const setDone = () => {
-  STATE.set({
-    isLoading: false,
-    hasErrored: false
-  })
 }

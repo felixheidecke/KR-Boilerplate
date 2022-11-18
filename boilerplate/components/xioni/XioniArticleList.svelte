@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { ARTICLES, fetchArticles } from '@/stores/articles'
+  import { ARTICLES, IS_LOADING, fetchArticles } from '@/stores/articles'
 
   // --- Components -----------------------------------
 
@@ -15,7 +15,7 @@
   export let expanded = false
   export let pdf = false
   export let id
-  export let limit = 50
+  export let limit = 100
 
   $: buttonText = $$props['button-text'] || 'Weiterlesen'
   $: detailPath = $$props['detail-path'] || ''
@@ -32,7 +32,7 @@
    * @returns {object} updated article
    */
 
-  $: prepareArticle = (article) => {
+  const prepareArticle = (article) => {
     return {
       ...article,
       date: date ? article.date : null,
@@ -46,31 +46,35 @@
 
   // --- Data -------------------------------------
 
-  $: listOfarticles = $ARTICLES.filter((event) => event.module === module).splice(0, limit) || []
+  $: articles = $ARTICLES.filter((event) => event.module === module).splice(0, limit) || []
 </script>
 
 <svelte:head>
   <link rel="preconnect" href="https://www.rheingau.de" />
 </svelte:head>
 
-{#each listOfarticles as article}
-  <XioniArticle {...prepareArticle(article)}>
-    <span>
-      {#if !expanded}
-        <Button
-          to={`${detailPath}${article.id}-${article.slug}`}
-          class="XioniArticle__read-more"
-          icon="fas fa-chevron-right"
-          reverse
-        >
-          {buttonText}
-        </Button>
-      {/if}
-    </span>
-  </XioniArticle>
-{:else}
+{#if $IS_LOADING}
   <Sceleton />
-{/each}
+{:else}
+  {#each articles as article}
+    <XioniArticle {...prepareArticle(article)}>
+      <span>
+        {#if !expanded}
+          <Button
+            to={`${detailPath}${article.id}-${article.slug}`}
+            class="XioniArticle__read-more"
+            icon="fas fa-chevron-right"
+            reverse
+          >
+            {buttonText}
+          </Button>
+        {/if}
+      </span>
+    </XioniArticle>
+  {:else}
+    <p class="XioniArticleList__is-empty">Keine Artikel gefunden …</p>
+  {/each}
+{/if}
 
 <style lang="scss" global>
   :where(.XioniArticle) + :where(.XioniArticle) {
@@ -84,6 +88,14 @@
   :where(.XioniArticle__error) {
     background-color: rgba(red, 0.125);
     border: 1px dashed red;
+    padding: 1rem;
+  }
+
+  :where(.XioniArticleList__is-empty) {
+    text-align: center;
+    font-style: italic;
+    background-color: rgb(234, 234, 234);
+    border-radius: 1rem;
     padding: 1rem;
   }
 </style>

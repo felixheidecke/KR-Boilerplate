@@ -15,11 +15,13 @@
   module = +module
   limit = +limit
 
-  // What to show
+  // What to show and what to hide
   export let registration = false
   export let website = true
   export let pdf = true
   export let ticketshop = true
+
+  // --- Data -------------------------
 
   const config = {
     show: {
@@ -30,9 +32,7 @@
     }
   }
 
-  // --- Data -------------------------
-
-  $: listOfEvents = $EVENTS.filter((event) => event.module === module).splice(0, limit) || []
+  $: events = $EVENTS.filter((event) => event.module === module).splice(0, limit) || []
 
   // --- Lifecycle --------------------
 
@@ -44,7 +44,7 @@
 </svelte:head>
 
 <div class="XioniEventList">
-  {#each listOfEvents as event}
+  {#each events as event}
     <XioniEvent {...event} {config} />
   {/each}
   {#if STATE.isLoading}

@@ -11,5 +11,5 @@
   <h3>Code</h3>
   <Code {code} />
 
-  <XioniEventList module="15" />
+  <XioniEventList module="1289" limit="1" />
 </div>

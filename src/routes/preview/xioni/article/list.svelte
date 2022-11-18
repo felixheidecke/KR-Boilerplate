@@ -1,21 +1,5 @@
 <script>
-  const toggle = {
-    author: true,
-    date: true,
-    expanded: false
-  }
-
-  $: code = (() => {
-    const code = ['<XioniArticleList', 'id="1383"']
-
-    if (toggle.author) code.push('author')
-    if (toggle.date) code.push('date')
-    if (toggle.expanded) code.push('expanded')
-
-    code.push('\\>')
-
-    return code.join(' ')
-  })()
+  const code = '<XioniArticleList author date id="1383" />'
 </script>
 
 <svelte:head>
@@ -29,22 +13,15 @@
 
   <Code {code} />
 
-  <h3>Varianten</h3>
-
-  <Checkbox label="Mit Author" bind:checked={toggle.author} />
-  <Checkbox label="Mit Datum" class="$mt-1/2" bind:checked={toggle.date} />
-  <Checkbox label="Ausgeklappt" class="$mt-1/2" bind:checked={toggle.expanded} />
+  <p>
+    <Link to="https://github.com/felixheidecke/KR-Boilerplate/wiki/Xioni#artikel-liste">
+      Zur Dokumentation
+    </Link>
+  </p>
 
   <h3>Ergebnis</h3>
 
-  <XioniArticleList
-    config={{ limit: 5 }}
-    author={toggle.author}
-    date={toggle.date}
-    expanded={toggle.expanded}
-    id="1383"
-    detail-path="/preview/xioni/article/"
-  />
+  <XioniArticleList author date id="1383" detail-path="/preview/xioni/article/" />
 </div>
 
 <style>

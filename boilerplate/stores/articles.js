@@ -3,13 +3,11 @@ import { writable, get } from 'svelte/store'
 import { API_URL } from '@/js/constants'
 import { hash } from '@/js/utils'
 import { fetchJSON } from '@/js/fetch'
+import { buildHttpErrorMessage } from '@/js/utils/build-message'
 
 export const ARTICLES = writable([])
 export const GROUPS = writable([])
-export const STATE = writable({
-  isLoading: false,
-  hasErrored: false
-})
+export const IS_LOADING = writable(false)
 
 /**
  * Fetch a list of articles from Xioni API
@@ -20,23 +18,22 @@ export const STATE = writable({
  * @returns {Promise}
  */
 
-export const fetchArticles = async (id, options) => {
+export const fetchArticles = async (id, params) => {
   // Unique key based on params
-  const key = hash({ id, options })
+  const key = hash({ id, params })
 
   // Check if the URL has already been fetched
   if (get(GROUPS).includes(key)) return
 
-  setLoading()
+  IS_LOADING.set(true)
 
   try {
     const url = [API_URL, 'articles', id].join('/')
-    const { data, status } = await fetchJSON(url, { options })
+    const { data, status } = await fetchJSON(url, { params })
 
     if (status >= 400) {
-      setErrored()
-      console.error(data)
-      Promise.reject(data)
+      IS_LOADING.set(false)
+      throw new Error(buildHttpErrorMessage(`fetching module ${id}`, status))
     }
 
     ARTICLES.update((articles) => {
@@ -53,7 +50,7 @@ export const fetchArticles = async (id, options) => {
     console.error(error)
   }
 
-  setDone()
+  IS_LOADING.set(false)
 }
 
 /**
@@ -67,45 +64,25 @@ export const fetchArticles = async (id, options) => {
 export const fetchArticle = async (id) => {
   if (get(ARTICLES).find((article) => article.id === id)) return
 
-  setLoading()
+  IS_LOADING.set(true)
 
-  const url = [API_URL, 'article', id].join('/')
-  const { data, status } = await fetchJSON(url)
+  try {
+    const url = [API_URL, 'article', id].join('/')
+    const { data, status } = await fetchJSON(url)
 
-  if (status >= 400) {
-    setErrored()
-    console.error(data)
-    Promise.reject(data)
+    if (status >= 400) {
+      IS_LOADING.set(false)
+      throw new Error(buildHttpErrorMessage(`fetching id ${id}`, status))
+    }
+
+    ARTICLES.update((articles) => {
+      // Make sure to have no douplicates
+      const update = uniqBy([data].concat(articles), 'id')
+      return sortBy(update, 'date').reverse()
+    })
+  } catch (error) {
+    console.error(error)
   }
 
-  ARTICLES.update((articles) => {
-    // Make sure to have no douplicates
-    const update = uniqBy([data].concat(articles), 'id')
-    return sortBy(update, 'date').reverse()
-  })
-
-  setDone()
-}
-
-// --- Set STATE helper -----------
-
-const setLoading = () => {
-  STATE.set({
-    isLoading: true,
-    hasErrored: false
-  })
-}
-
-const setErrored = () => {
-  STATE.set({
-    isLoading: false,
-    hasErrored: true
-  })
-}
-
-const setDone = () => {
-  STATE.set({
-    isLoading: false,
-    hasErrored: false
-  })
+  IS_LOADING.set(false)
 }
