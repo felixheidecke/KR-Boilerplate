@@ -52,7 +52,7 @@ export const hash = (input) => {
   return new Uint32Array([hash])[0].toString(36)
 }
 
-export const formToJson = form => {
+export const formToJson = (form) => {
   const formData = new FormData(form)
   return Object.fromEntries(formData)
 }

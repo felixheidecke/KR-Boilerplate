@@ -6,7 +6,6 @@
  */
 
 export const fetchJSON = async (url, { method, headers, params, data } = {}) => {
-
   if (params) {
     url = new URL(url)
     url.search = new URLSearchParams(params)
@@ -23,7 +22,6 @@ export const fetchJSON = async (url, { method, headers, params, data } = {}) => 
       data: await res.json(),
       status: res.status
     }
-
   } catch (error) {
     console.error(error)
   }

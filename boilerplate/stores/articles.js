@@ -78,7 +78,6 @@ export const fetchArticle = async (id) => {
     Promise.reject(data)
   }
 
-
   ARTICLES.update((articles) => {
     // Make sure to have no douplicates
     const update = uniqBy([data].concat(articles), 'id')

@@ -90,8 +90,7 @@ class OpeningHours {
     return localised.split(';').map((i) => {
       let hour = i.trim()
 
-      if (!hour.includes(t.CLOSED))
-        hour += ` ${t.O_CLOCK}`
+      if (!hour.includes(t.CLOSED)) hour += ` ${t.O_CLOCK}`
 
       return hour
     })
