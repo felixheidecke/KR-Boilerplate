@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { ARTICLES, IS_LOADING, fetchArticles } from '@/stores/articles'
+  import { ARTICLES, STATE, fetchArticles } from '@/stores/articles'
 
   // --- Components -----------------------------------
 
@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://www.rheingau.de" />
 </svelte:head>
 
-{#if $IS_LOADING}
+{#if $STATE.loading}
   <Sceleton />
 {:else}
   {#each articles as article}

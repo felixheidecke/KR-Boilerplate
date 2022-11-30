@@ -7,7 +7,7 @@ import { buildHttpErrorMessage } from '@/js/utils/build-message'
 
 export const ARTICLES = writable([])
 export const GROUPS = writable([])
-export const IS_LOADING = writable(false)
+export const STATE = writable({ loading: false })
 
 /**
  * Fetch a list of articles from Xioni API
@@ -25,14 +25,14 @@ export const fetchArticles = async (id, params) => {
   // Check if the URL has already been fetched
   if (get(GROUPS).includes(key)) return
 
-  IS_LOADING.set(true)
+  STATE.set({ loading: true })
 
   try {
     const url = [API_URL, 'articles', id].join('/')
     const { data, status } = await fetchJSON(url, { params })
 
     if (status >= 400) {
-      IS_LOADING.set(false)
+      STATE.set({ loading: false })
       throw new Error(buildHttpErrorMessage(`fetching module ${id}`, status))
     }
 
@@ -50,7 +50,7 @@ export const fetchArticles = async (id, params) => {
     console.error(error)
   }
 
-  IS_LOADING.set(false)
+  STATE.set({ loading: false })
 }
 
 /**
@@ -64,14 +64,14 @@ export const fetchArticles = async (id, params) => {
 export const fetchArticle = async (id) => {
   if (get(ARTICLES).find((article) => article.id === id)) return
 
-  IS_LOADING.set(true)
+  STATE.set({ loading: true })
 
   try {
     const url = [API_URL, 'article', id].join('/')
     const { data, status } = await fetchJSON(url)
 
     if (status >= 400) {
-      IS_LOADING.set(false)
+      STATE.set({ loading: false })
       throw new Error(buildHttpErrorMessage(`fetching id ${id}`, status))
     }
 
@@ -84,5 +84,5 @@ export const fetchArticle = async (id) => {
     console.error(error)
   }
 
-  IS_LOADING.set(false)
+  STATE.set({ loading: false })
 }

@@ -7,7 +7,7 @@ import { fetchJSON } from '@/js/fetch'
 export const EVENTS = writable([])
 export const SELECTED_EVENT = writable(null)
 export const GROUPS = writable([])
-export const IS_LOADING = writable(false)
+export const STATE = writable({ loading: false })
 
 /**
  * Fetch a list of articles from Xioni API
@@ -25,14 +25,14 @@ export const fetchEvents = async (id, params) => {
   // Check if the URL has already been fetched
   if (get(GROUPS).includes(key)) return
 
-  IS_LOADING.set(true)
+  STATE.set({ loading: true })
 
   try {
     const url = [API_URL, 'events', id].join('/')
     const { data, status } = await fetchJSON(url, { params })
 
     if (status >= 400) {
-      IS_LOADING.set(false)
+      STATE.set({ loading: false })
       throw new Error(buildHttpErrorMessage(`fetching module ${id}`, status))
     }
 
@@ -49,7 +49,7 @@ export const fetchEvents = async (id, params) => {
     console.error(error)
   }
 
-  IS_LOADING.set(false)
+  STATE.set({ loading: false })
 }
 
 /**
@@ -63,14 +63,14 @@ export const fetchEvents = async (id, params) => {
 export const fetchEvent = async (id, force = false) => {
   if (get(EVENTS).find((event) => event.id === id) && !force) return
 
-  IS_LOADING.set(true)
+  STATE.set({ loading: true })
 
   try {
     const url = [API_URL, 'event', id].join('/')
     const { data, status } = await fetchJSON(url)
 
     if (status >= 400) {
-      IS_LOADING.set(false)
+      STATE.set({ loading: false })
       throw new Error(buildHttpErrorMessage(`fetching id ${id}`, status))
     }
 
@@ -83,7 +83,7 @@ export const fetchEvent = async (id, force = false) => {
     console.error(error)
   }
 
-  IS_LOADING.set(false)
+  STATE.set({ loading: false })
 }
 
 /**
