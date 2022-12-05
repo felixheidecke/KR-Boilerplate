@@ -19,7 +19,7 @@
     {title}
   </h5>
   {#if !collapsed}
-    <div in:slide class="AccordionSlide__content">
+    <div in:slide out:slide class="AccordionSlide__content">
       <slot />
     </div>
   {/if}
