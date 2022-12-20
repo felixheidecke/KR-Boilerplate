@@ -34,7 +34,9 @@
     <li class="{baseName}__category">
       <div class="{baseName}__category-description">
         <h3 class="{baseName}__category-name">{category.name}</h3>
-        {@html category.description}
+        {#if category.description}
+          {@html category.description}
+        {/if}
       </div>
       <ul class="{baseName}__dishes">
         {#each category.items as dish}
