@@ -1,6 +1,6 @@
 {
   "name": "krb-svelte",
-  "version": "3.15.3",
+  "version": "3.15.4",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -38,7 +38,8 @@
       }
     ],
     "settings": {
-      "svelte3/missing-declaration": "off"
+      "svelte3/missing-declaration": "off",
+      "svelte3/a11y-click-events-have-key-events": "off"
     },
     "parserOptions": {
       "sourceType": "module",
@@ -57,14 +58,14 @@
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
-    "npm-check-updates": "^16.0.6",
-    "prettier": "^2.7.1",
-    "prettier-plugin-svelte": "^2.7.1",
+    "npm-check-updates": "^16.6.2",
+    "prettier": "^2.8.2",
+    "prettier-plugin-svelte": "^2.9.0",
     "sass": "^1.54.9",
-    "svelte": "^3.50.1",
+    "svelte": "^3.55.0",
     "svelte-preprocess": "^4.10.7",
-    "sveltekit-autoimport": "^1.6.9",
-    "vite": "^3.0.9"
+    "sveltekit-autoimport": "^1.6.10",
+    "vite": "^3.2.5"
   },
   "type": "module",
   "dependencies": {

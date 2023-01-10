@@ -2,6 +2,12 @@ import preprocess from 'svelte-preprocess'
 import adapter from '@sveltejs/adapter-static'
 
 export default {
+  onwarn: (warning, handler) => {
+    if (warning.code.startsWith('a11y-')) {
+      return
+    }
+    handler(warning)
+  },
   kit: {
     adapter: adapter({
       pages: 'htdocs',
