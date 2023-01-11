@@ -1,27 +1,27 @@
-$el: ".#{$prefix}button";
+$el: '.#{$prefix}button';
 
 #{$el} {
   background-color: $button-background-color;
-  border-radius   : 3px;
-  border          : 1px solid $button-border-color;
-  box-sizing      : border-box;
-  color           : $button-color;
-  cursor          : pointer;
-  display         : inline-flex;
-  font-family     : inherit;
-  padding         : 4px 12px;
-  text-align      : center;
-  text-decoration : none;
-  transition      : all .25s;
-  user-select     : none;
-  vertical-align  : middle;
-  white-space     : nowrap;
+  border-radius: 3px;
+  border: 1px solid $button-border-color;
+  box-sizing: border-box;
+  color: $button-color;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  padding: 4px 12px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.25s;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
 
   &:focus,
   &:hover {
-    color           : $button-color;
+    color: $button-color;
     background-color: darken($button-background-color, 5%);
-    box-shadow      : 0 0 3px rgba(black, 0.5);
+    box-shadow: 0 0 3px rgba(black, 0.5);
   }
 
   &.-has-icon {
@@ -29,7 +29,7 @@ $el: ".#{$prefix}button";
     display: inline-flex;
     align-items: center;
 
-    > i[class*="fa-"] {
+    > i[class*='fa-'] {
       margin-right: 12px;
     }
   }
@@ -38,7 +38,7 @@ $el: ".#{$prefix}button";
     display: inline-flex;
     align-items: center;
 
-    > i[class*="fa-"] {
+    > i[class*='fa-'] {
       margin-left: 12px;
       order: 2;
     }

@@ -1,9 +1,9 @@
-$el: ".#{$prefix}list";
+$el: '.#{$prefix}list';
 
 #{$el} {
   @extend p;
   padding-left: $grid-spacing;
-  margin-left : $grid-spacing / 1.5;
+  margin-left: calc($grid-spacing / 1.5);
 
   > li {
     position: relative;
@@ -12,7 +12,7 @@ $el: ".#{$prefix}list";
       display: none;
     }
 
-    > i[class*="fa-"] {
+    > i[class*='fa-'] {
       position: absolute;
       transform: translate(-150%, 6px);
     }

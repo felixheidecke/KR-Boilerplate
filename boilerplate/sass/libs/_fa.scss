@@ -1,11 +1,11 @@
 @if $font-awesome-enabled {
-	.fa {
-		&-push {
-			margin-right: $grid-spacing / 2;
+  .fa {
+    &-push {
+      margin-right: calc($grid-spacing / 2);
 
-			&-sm {
-				margin-right: $grid-spacing / 4;
-			}
-		}
-	}
+      &-sm {
+        margin-right: calc($grid-spacing / 4);
+      }
+    }
+  }
 }

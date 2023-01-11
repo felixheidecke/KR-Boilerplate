@@ -1,7 +1,7 @@
 @if $link-external-enabled {
-    $el                  : ".#{$prefix}link-external";
+  $el: '.#{$prefix}link-external';
 
-    #{$el} i[class*="fa-"] {
-        margin-right: $grid-spacing / 3;
-    }
+  #{$el} i[class*='fa-'] {
+    margin-right: calc($grid-spacing / 3);
+  }
 }

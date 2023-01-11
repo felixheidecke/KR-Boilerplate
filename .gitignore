@@ -22,3 +22,4 @@ src/boilerplate/build
 
 .vscode
 .DS_Store
+.sync_*

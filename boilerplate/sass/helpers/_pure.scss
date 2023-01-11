@@ -3,29 +3,29 @@
 @import url('https://cdn.klickrhein.de/libs/pure/1.0.0/grids-responsive-min.css');
 
 .pure-g.pure-padded-children {
-	margin: {
-		left : -$grid-spacing;
-		right: -$grid-spacing;
-	};
+  margin: {
+    left: -$grid-spacing;
+    right: -$grid-spacing;
+  }
 
-	> [class*="pure-u"] {
-		padding: {
-			left : $grid-spacing;
-			right: $grid-spacing;
-		};
-	}
+  > [class*='pure-u'] {
+    padding: {
+      left: $grid-spacing;
+      right: $grid-spacing;
+    }
+  }
 
-	&-halved {
-		margin: {
-			left : -$grid-spacing / 2;
-			right: -$grid-spacing / 2;
-		};
+  &-halved {
+    margin: {
+      left: calc($grid-spacing / 2 * -1);
+      right: calc($grid-spacing / 2 * -1);
+    }
 
-		> [class*="pure-u"] {
-			padding: {
-				left : $grid-spacing / 2;
-				right: $grid-spacing / 2;
-			};
-		}
-	}
+    > [class*='pure-u'] {
+      padding: {
+        left: calc($grid-spacing / 2);
+        right: calc($grid-spacing / 2);
+      }
+    }
+  }
 }
