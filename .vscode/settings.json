@@ -1,0 +1,20 @@
+{
+	"workbench.editor.labelFormat": "short",
+	"svelte.plugin.svelte.compilerWarnings": {
+		"missing-declaration": "ignore",
+		"a11y-click-events-have-key-events": "ignore"
+	},
+	"search.exclude": {
+		// "**/boilerplate": true
+	},
+	"files.exclude": {
+		".svelte-kit": false,
+		".eslint*": true,
+		".prettier*": true,
+		".npmrc": true,
+		"Desktop.ini": true,
+		".owncloudsync.log": true,
+		".sync_*": true
+	},
+	"editor.rulers": [100]
+}

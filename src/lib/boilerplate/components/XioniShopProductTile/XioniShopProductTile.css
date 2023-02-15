@@ -1,0 +1,62 @@
+:where(.XioniShopProductTile) {
+	display: block;
+	max-width: 28rem;
+	width: 100%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.125);
+	border-radius: 0.5rem;
+	padding: 1rem;
+	transition: transform 333ms ease;
+}
+
+:where(.XioniShopProductTile:hover) {
+	transform: translateY(-0.333rem);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+}
+
+:where(.XioniShopProductTile__data) {
+	text-align: center;
+}
+
+:where(.XioniShopProductTile__image-wrapper) {
+	position: relative;
+}
+
+:where(.XioniShopProductTile__image) {
+	aspect-ratio: 1;
+	object-fit: contain;
+	margin-bottom: 1rem;
+	width: 100%;
+}
+
+:where(.XioniShopProductTile__name) {
+	--max-lines: 2;
+
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: var(--max-lines);
+	text-decoration: none;
+	overflow: hidden;
+	font-weight: bold;
+	margin-bottom: 0.25rem;
+}
+
+:where(.XioniShopProductTile__category) {
+	display: block;
+	font-weight: normal;
+	font-style: italic;
+	margin-bottom: 0.25rem;
+}
+
+:where(.XioniShopProductTile__price) {
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	font-size: 1.125rem;
+	font-weight: bold;
+}
+
+:where(.XioniShopProductTile__tax) {
+	font-size: 0.75rem;
+	font-style: italic;
+}

@@ -1,0 +1,10 @@
+:where(.Mail) {
+	cursor: pointer;
+	display: inline-flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+:where(.Mail__address) {
+	text-decoration: underline;
+}

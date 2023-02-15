@@ -1,0 +1,32 @@
+:where(.FormSelect) {
+	display: flex;
+	flex-direction: column;
+}
+
+:where(.FormSelect__label) {
+	display: block;
+	background: #eee;
+	padding: 0.25rem 0.666rem;
+	font-size: 0.8rem;
+	border: 1px solid lightgray;
+	border-bottom: 0 none;
+	border-top-left-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
+	user-select: none;
+}
+
+:where(.FormSelect__input) {
+	width: 100%;
+	padding: 0.666rem;
+	font-size: 1rem;
+	border: 1px solid lightgray;
+	border-radius: 0.25rem;
+	appearance: none;
+	background-color: white;
+}
+
+:where(.FormSelect__label + .FormSelect__input) {
+	border-top: 0 none;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}

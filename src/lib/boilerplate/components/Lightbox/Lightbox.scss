@@ -1,0 +1,66 @@
+.Lightbox {
+	&__textbox {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(black, 0.666);
+		padding: 1rem;
+		color: white;
+		text-align: center;
+	}
+
+	&__navigate {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background-color: rgba(black, 0.666);
+		color: white;
+		opacity: 0.333;
+		transition: opacity 333ms, padding 500ms;
+		padding: 1rem;
+
+		&:hover {
+			cursor: pointer;
+			opacity: 1;
+			padding: {
+				left: 2rem;
+				right: 2rem;
+			}
+		}
+	}
+
+	&__navigate--prev {
+		left: 0;
+		border-top-right-radius: 0.5rem;
+		border-bottom-right-radius: 0.5rem;
+	}
+
+	&__navigate--next {
+		right: 0;
+		border-top-left-radius: 0.5rem;
+		border-bottom-left-radius: 0.5rem;
+	}
+
+	&__active-image {
+		display: block;
+		user-select: none;
+		pointer-events: none;
+	}
+}
+
+// --- Gobal ------------------------
+
+:global(.Lightbox .Modal__wrapper) {
+	width: fit-content;
+	height: fit-content;
+}
+
+:global(.Lightbox .Modal__body) {
+	padding: 0;
+	overflow: hidden;
+}
+
+:global(.Lightbox img[data-lightbox]) {
+	cursor: pointer;
+}

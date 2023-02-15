@@ -1,0 +1,36 @@
+@import '../../node_modules/@glidejs/glide/dist/css/glide.core.min.css';
+
+:where(.Swiper) {
+	overflow: hidden;
+}
+
+:where(.Swiper__button) {
+	padding: 4rem;
+	border: 0 none;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	color: white;
+	transition: transform 0.33s, opacity 0.33s;
+}
+
+:where(.Swiper__button--prev) {
+	background: linear-gradient(90deg, rgba(black, 0.25) 0%, transparent 100%);
+	left: 0;
+
+	&:not(:hover) {
+		transform: translateX(-33.333%);
+		opacity: 0;
+	}
+}
+
+:where(.Swiper__button--next) {
+	background: linear-gradient(-90deg, rgba(black, 0.25) 0%, transparent 100%);
+	right: 0;
+
+	&:not(:hover) {
+		transform: translateX(33.333%);
+		opacity: 0;
+	}
+}

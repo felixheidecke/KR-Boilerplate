@@ -1,0 +1,10 @@
+:where(.XioniShopNav__ul) {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+:where(.XioniShopNav__a) {
+	white-space: nowrap;
+	/* text-decoration: none; */
+}

@@ -1,0 +1,53 @@
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+html {
+	overflow-y: scroll;
+
+	@include breakpoint('mobile') {
+		font-size: 14px;
+	}
+
+	@include breakpoint('tablet-up') {
+		font-size: 16px;
+	}
+}
+
+body {
+	@include reset;
+	background: #fff;
+	width: 100%;
+	min-height: 100vh;
+	color: #222;
+}
+
+:where(a),
+:where(a:hover),
+:where(a:active) {
+	color: currentColor;
+}
+
+abbr {
+	cursor: help;
+}
+
+blockquote {
+	margin: 1rem 0;
+	padding: 0.01px 1rem;
+	background: lightgray;
+
+	@include breakpoint('tablet-up') {
+		margin: {
+			left: 2rem;
+			right: 2rem;
+		}
+	}
+}
+
+:where(img) {
+	max-width: 100%;
+	height: auto;
+}

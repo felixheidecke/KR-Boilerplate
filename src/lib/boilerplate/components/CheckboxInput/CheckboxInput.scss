@@ -1,0 +1,16 @@
+:where(.InputCheckbox) {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	cursor: pointer;
+}
+
+:where(.InputCheckbox__label) {
+	font-size: 0.85rem;
+	width: 100%;
+}
+
+:where(.InputCheckbox__input) {
+	margin: 0;
+	padding: 0;
+}

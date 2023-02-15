@@ -1,0 +1,18 @@
+:where(.XioniAlbum) {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	row-gap: 1rem;
+}
+
+:where(.XioniAlbum__item) {
+	width: 120px;
+}
+
+:where(.XioniAlbum__image) {
+	transition: transform 200ms ease;
+}
+
+:where(.XioniAlbum__image:hover) {
+	transform: scale(1.1);
+}

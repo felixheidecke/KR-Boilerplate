@@ -1,0 +1,51 @@
+.\$flex.\$flex {
+  display: flex;
+}
+
+.\$flex-reverse.\$flex-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.\$flex-column.\$flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.\$gap.\$gap {
+  gap: 1rem;
+}
+
+.\$items-center.\$items-center {
+  align-items: center;
+}
+
+.\$items-start.\$items-start {
+  align-items: start;
+}
+
+.\$items-end.\$items-end {
+  align-items: end;
+}
+
+.\$content-center.\$content-center {
+  justify-content: center;
+}
+
+.\$space-between.\$space-between {
+  justify-content: space-between;
+}
+
+.\$content-left.\$content-left {
+  justify-content: left;
+}
+
+.\$content-right.\$content-right {
+  justify-content: right;
+}
+
+@each $a, $b in $spacing {
+  .\$gap-#{$a}.\$gap-#{$a} {
+    gap: $b;
+  }
+}

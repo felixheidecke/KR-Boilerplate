@@ -1,0 +1,35 @@
+{
+  "Svelte template": {
+    "scope": "svelte",
+    "prefix": "svelte",
+    "body": [
+      "<svelte:head>",
+      "  <title>$1</title>",
+      "</svelte:head>",
+      "",
+      "<div data-comp>",
+      "  $2",
+      "</div>",
+      "",
+      "<style lang=\"scss\">",
+      "  $3",
+      "</style>"
+    ],
+    "description": "Svelte File"
+  },
+  "Comment": {
+    "scope": "svelte",
+    "prefix": "cc",
+    "body": [
+      "// --- $1 -----------------------------"
+    ]
+  },
+  "Svelte load function": {
+    "scope": "typescript",
+    "prefix": "load",
+    "body": [
+      "import type { PageLoad } from './$types'",
+      "export const load: PageLoad = (params) => {}"
+    ]
+  }
+}

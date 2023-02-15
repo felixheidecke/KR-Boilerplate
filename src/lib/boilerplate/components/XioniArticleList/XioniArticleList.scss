@@ -1,0 +1,21 @@
+:where(.XioniArticle) + :where(.XioniArticle) {
+	margin-top: 1rem;
+}
+
+:where(.XioniArticle__read-more) {
+	clear: both;
+}
+
+:where(.XioniArticle__error) {
+	background-color: rgba(red, 0.125);
+	border: 1px dashed red;
+	padding: 1rem;
+}
+
+:where(.XioniArticleList__is-empty) {
+	text-align: center;
+	font-style: italic;
+	background-color: rgb(234, 234, 234);
+	border-radius: 1rem;
+	padding: 1rem;
+}

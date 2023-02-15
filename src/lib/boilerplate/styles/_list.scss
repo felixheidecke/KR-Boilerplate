@@ -1,0 +1,29 @@
+:where(ul) {
+	@include reset-list;
+}
+
+ul.--disc,
+ul.--dash {
+	padding-left: 1rem;
+	margin-left: 0.75rem;
+
+	&.--dash > li {
+		&::marker {
+			display: none;
+		}
+
+		&::before {
+			content: '-';
+			transform: translateX(-1rem);
+			position: absolute;
+		}
+	}
+
+	&.--disc {
+		list-style: disc;
+	}
+}
+
+ul li .-icon {
+	margin-right: 0.333rem;
+}

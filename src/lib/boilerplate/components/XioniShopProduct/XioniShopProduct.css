@@ -1,0 +1,37 @@
+:where(.XioniShopProduct) {
+	display: inline-block;
+	width: 100%;
+}
+
+:where(.XioniShopProduct__image) {
+	float: left;
+	width: 100%;
+	aspect-ratio: 3/4;
+	object-fit: contain;
+}
+
+:where(.XioniShopProduct__price-box) {
+	margin-bottom: 1rem;
+}
+
+:where(.XioniShopProduct__price) {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+:where(.XioniShopProduct__tax) {
+	font-size: 0.875rem;
+	font-style: italic;
+}
+
+:where(.XioniShopProduct__quantity) {
+	font-style: italic;
+}
+
+:where(.XioniShopProduct__add-to-cart-button) {
+	margin-bottom: 1rem;
+}
+
+:where(.XioniShopProduct__legal-info) {
+	font-style: italic;
+}

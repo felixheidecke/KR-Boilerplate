@@ -1,0 +1,25 @@
+:where(.OpeningHours) {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+:where(.OpeningHours__distance) {
+	font-weight: bold;
+}
+
+:where(.OpeningHours__next-change) {
+	font-size: map-get($size, small);
+}
+
+:where(.OpeningHours__trigger) {
+	font-size: map-get($size, small);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+:where(.OpeningHours__modal-body) {
+	text-align: center;
+	line-height: 2rem;
+}
