@@ -13,3 +13,7 @@
 :where(.AccordionSlide__content) {
 	padding: 1rem;
 }
+
+.AccordionSlide__content > *:last-child {
+	margin-bottom: 0;
+}

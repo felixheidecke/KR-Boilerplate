@@ -1,5 +1,5 @@
 <script>
-	import './button-row.scss'
+	import './ButtonRow.scss'
 	import classNames from 'classnames'
 
 	// --- CSS Class --------------------

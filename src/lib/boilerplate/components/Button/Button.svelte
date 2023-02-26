@@ -4,7 +4,7 @@
 
 	// --- Components --------------------------------------------------------------------------------
 
-	import Icon from '../icon/icon.svelte'
+	import Icon from '../Icon/Icon.svelte'
 
 	// --- Props -------------------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@
 	export let icon: string | undefined = undefined
 	export let disabled = false
 	export let target: '_blank' | '_self' | undefined = undefined
-	export let reverse = false
+	export let isLoading = false
 
 	// --- Data --------------------------------------------------------------------------------------
 
@@ -20,8 +20,8 @@
 	const className = classnames(
 		baseName,
 		$$props.class,
-		!reverse || baseName + '--reverse',
-		!to || baseName + '--anchor'
+		!to || baseName + '--anchor',
+		!isLoading || baseName + '--loading'
 	)
 </script>
 

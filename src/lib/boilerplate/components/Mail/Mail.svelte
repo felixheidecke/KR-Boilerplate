@@ -1,8 +1,7 @@
 <script>
 	import './mail.css'
 	import classnames from 'classnames'
-	import isMatchWithOptions from 'date-fns/fp/isMatchWithOptions'
-	import Icon from './Icon.svelte'
+	import Icon from '../Icon/Icon.svelte'
 
 	export let to
 	export let icon = 'fas fa-envelope'

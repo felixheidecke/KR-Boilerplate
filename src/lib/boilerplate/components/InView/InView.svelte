@@ -1,15 +1,16 @@
-<script>
-	import './in-view.scss'
+<script lang="ts">
+	import './InView.scss'
 	import classnames from 'classnames'
 	import { onMount } from 'svelte'
+	import type { InViewTransition } from './InView.types'
 
-	export let transition = 'fade'
+	export let transition: InViewTransition = 'fade'
 
-	let inView
-	let wrapper
+	let inView: any
+	let wrapper: HTMLElement
 	let isInView = false
 
-	onMount(async () => {
+	onMount(async function () {
 		inView = await import('in-view')
 		isInView = inView.is(wrapper)
 	})

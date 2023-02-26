@@ -1,7 +1,8 @@
-<script>
-	import './message.scss'
+<script lang="ts">
+	import './Message.scss'
 	import classnames from 'classnames'
-	export let type = null
+
+	export let type: 'error' | 'info' | 'success' | undefined = undefined
 	export let title = 'Hinweis'
 
 	// --- CSS Class --------------------

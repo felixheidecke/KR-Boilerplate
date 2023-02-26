@@ -1,4 +1,4 @@
-:where(.Burger) {
+:where(.NavBurger) {
 	align-items: center;
 	background: none;
 	border: 0 none;
@@ -15,7 +15,7 @@
 	font-weight: bold;
 	font-size: 1rem;
 }
-:where(.Burger__svg) {
+:where(.NavBurger__svg) {
 	width: 1.5rem;
 	height: 1.5rem;
 	fill: currentColor;

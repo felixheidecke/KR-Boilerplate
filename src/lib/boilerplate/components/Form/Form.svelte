@@ -4,7 +4,7 @@
 	import { XIONI_API_URL } from '$lib/boilerplate/constants'
 	import classnames from 'classnames'
 	import FetchJson from '$lib/boilerplate/libraries/fetch-json'
-	import Message from '../message/message.svelte'
+	import Message from '../Message/Message.svelte'
 
 	const emit = createEventDispatcher()
 	const fetchJson = FetchJson()
@@ -67,7 +67,7 @@
 			setTimeout(scrollToDoneText, 500)
 		} catch (error) {
 			isDone = false
-			errors = [error]
+			errors = [error as string]
 			emit('error', error)
 		} finally {
 			isLoading = false
@@ -77,7 +77,7 @@
 	// collect required entries
 	onMount(() => {
 		form.querySelectorAll('[required]').forEach((element) => {
-			required = [...required, element.getAttribute('name')]
+			required = [...required, element.getAttribute('name') || '']
 		})
 	})
 
@@ -99,9 +99,7 @@
 			<slot name="done" />
 		</div>
 	{:else}
-		<div class={baseName + '__body'}>
-			<slot />
-		</div>
+		<slot />
 	{/if}
 
 	{#if errors.length}

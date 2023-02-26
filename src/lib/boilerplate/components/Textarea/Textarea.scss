@@ -1,9 +1,9 @@
-:where(.FormTextarea) {
+:where(.Textarea) {
 	display: flex;
 	flex-direction: column;
 }
 
-:where(.FormTextarea__label) {
+:where(.Textarea__label) {
 	display: block;
 	background: #eee;
 	padding: 0.25rem 0.666rem;
@@ -15,11 +15,11 @@
 	user-select: none;
 }
 
-:where(.FormTextarea__label + .FormTextarea__input) {
+:where(.Textarea__label + .Textarea__input) {
 	border-top: 0 none;
 }
 
-:where(.FormTextarea__input) {
+:where(.Textarea__input) {
 	width: 100%;
 	padding: 0.666rem;
 	margin: 0;

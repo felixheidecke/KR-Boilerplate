@@ -1,26 +1,51 @@
-<script lang="ts" context="module">
-	// --- Types -------------------------------------------------------------------------------------
-
-	export enum NavType {
-		SLIDE = 'slide',
-		BAR = 'bar'
-	}
-</script>
-
 <script lang="ts">
 	import './Nav.scss'
 	import classnames from 'classnames'
-	import { ROUTES, ACTIVE_ROUTE } from '$lib/boilerplate/libraries/routes/index'
 
 	import { browser } from '$app/environment'
 	import { onMount } from 'svelte'
 	import { throttle } from 'lodash-es'
 
-	// --- Components --------------------------------------------------------------------------------
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
+	import type { Route, Routes } from '$lib/routes/routes.types'
+	enum NavType {
+		SLIDE = 'slide',
+		BAR = 'bar'
+	}
+
+	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Burger from '../NavBurger/NavBurger.svelte'
 
-	// --- Methods -----------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
+
+	export let routes: Routes
+	export let activeRoute: Route | null = null
+	export let variant: NavType | undefined = undefined
+	export let breakpoint = '1024px'
+	export let sticky = false
+
+	// --- [ Logic ] ---------------------------------------------------------------------------------
+
+	let nav: HTMLElement
+	let active = false
+	let hidden = true
+	let type = variant
+	let hoverState: number = -1
+
+	$: baseName =
+		(() => {
+			if (type === NavType.SLIDE) return 'NavSlide'
+			if (type === NavType.BAR) return 'NavBar'
+		})() || 'Nav'
+
+	$: className = classnames(
+		$$props['ex-class'] || baseName,
+		$$props.class,
+		!active || baseName + '--active',
+		!sticky || baseName + '--sticky'
+	)
 
 	function hide(): void {
 		hidden = true
@@ -43,30 +68,6 @@
 		}
 	}
 
-	// --- Data --------------------------------------------------------------------------------------
-
-	export let variant: NavType | undefined = undefined
-	export let breakpoint = '1024px'
-	export let sticky = false
-
-	let nav: HTMLElement
-	let active = false
-	let hidden = true
-	let type = variant
-
-	$: baseName =
-		(() => {
-			if (type === NavType.SLIDE) return 'NavSlide'
-			if (type === NavType.BAR) return 'NavBar'
-		})() || 'Nav'
-
-	$: className = classnames(
-		$$props['ex-class'] || baseName,
-		$$props.class,
-		!active || baseName + '--active',
-		!sticky || baseName + '--sticky'
-	)
-
 	// --- Lifecycle ---------------------------------------------------------------------------------
 
 	onMount(() => {
@@ -82,7 +83,6 @@
 		}
 	})
 
-	// ACTIVE_ROUTE.init()
 	show()
 </script>
 
@@ -96,32 +96,39 @@
 	on:click={() => (active = false)}
 >
 	<ul class={baseName + '__ul'}>
-		{#each $ROUTES as route, i}
-			<li class={baseName + '__li'}>
-				<a
+		{#each routes as route, i}
+			<li
+				class={baseName + '__li'}
+				on:mouseenter={() => (hoverState = i)}
+				on:mouseleave={() => (hoverState = -1)}
+			>
+				<svelte:element
+					this={route.path ? 'a' : 'span'}
 					id="route-{i}"
-					class={classnames(baseName + '__a', $ACTIVE_ROUTE !== route || '__a--active')}
+					class={classnames(
+						route.path ? baseName + '__a' : baseName + '__span',
+						activeRoute?.path !== route.path || baseName + '__a--active'
+					)}
 					href={route.path}
-					on:click={() => ACTIVE_ROUTE.set(route.path)}
 				>
 					{route.name}
-				</a>
+				</svelte:element>
 
 				{#if !!route.routes?.length}
-					<ul class={baseName + '__ul-ul'}>
+					<ul
+						class={classnames(
+							baseName + '__ul-ul',
+							hoverState !== i || baseName + '__ul-ul--visible'
+						)}
+					>
 						{#each route.routes as subRoute, o}
 							<li
 								class={classnames(
 									baseName + '__li-li',
-									$ACTIVE_ROUTE !== route || '__li-li--active'
+									activeRoute?.path !== subRoute.path || baseName + '__li-li--active'
 								)}
 							>
-								<a
-									id="route-{i}-{o}"
-									class={baseName + '__a-a'}
-									href={subRoute.path}
-									on:click={() => ACTIVE_ROUTE.set(subRoute.path)}
-								>
+								<a id="route-{i}-{o}" class={baseName + '__a-a'} href={subRoute.path}>
 									{subRoute.name}
 								</a>
 							</li>

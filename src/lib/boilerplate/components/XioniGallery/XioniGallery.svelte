@@ -4,8 +4,8 @@
 	// --- Props -------------------------------------------------------------------------------------
 
 	export let gallery: XioniGallery
-	export let detailPath: ''
-	export let linkDelimiter: '_'
+	export let detailPath = ''
+	export let linkDelimiter = '_'
 
 	// --- Data --------------------------------------------------------------------------------------
 

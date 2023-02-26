@@ -1,9 +1,10 @@
-import type { XioniShopProduct, XioniShopCategory } from './products.types'
+import type { XioniShopCategory } from './categories.types'
+import type { XioniShopProduct } from './products.types'
 
-export function makeProductLink(product: XioniShopProduct) {
-	return `/shop/${product.slug}-$p${product.id}`
+export function makeProductLink(basePath: '/shop/', { slug, id }: XioniShopProduct) {
+	return basePath + slug + '_p' + id
 }
 
-export function makeCategoryLink(category: XioniShopCategory) {
-	return `/shop/${category.slug}-$c${category.id}`
+export function makeCategoryLink(basePath: '/shop/', { slug, id }: XioniShopCategory) {
+	return basePath + slug + '_k' + id
 }

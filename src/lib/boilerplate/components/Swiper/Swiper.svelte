@@ -6,8 +6,7 @@
 	// import Glide from '@glidejs/glide'
 	import Glide from '@glidejs/glide/dist/glide.modular.esm'
 	// Components
-	import Icon from './Icon.svelte'
-	import { isTrue } from '@/js/utils/helper'
+	import Icon from '../Icon/Icon.svelte'
 
 	let slider
 
@@ -31,7 +30,7 @@
 		autoplay: +autoplay,
 		focusAt,
 		gap: +gap,
-		hoverpause: isTrue(hoverpause),
+		hoverpause,
 		perView: +perView,
 		animationDuration: +speed,
 		startAt: +startAt,
@@ -64,7 +63,7 @@
 			{/if}
 		</div>
 	</div>
-	{#if isTrue(nav)}
+	{#if nav}
 		<button
 			aria-label="Vorheriges Bild zeigen"
 			class={`${baseName}__button ${baseName}__button--prev`}

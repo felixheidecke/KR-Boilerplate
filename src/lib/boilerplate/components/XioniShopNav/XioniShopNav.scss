@@ -1,10 +1,19 @@
 :where(.XioniShopNav__ul) {
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
 	gap: 0.5rem;
 }
 
 :where(.XioniShopNav__a) {
 	white-space: nowrap;
 	/* text-decoration: none; */
+}
+
+:where(.XioniShopNav__category-select) {
+	border: 0 none;
+	font-size: 1rem;
+	text-decoration: underline;
+	outline: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 }

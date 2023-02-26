@@ -1,29 +1,19 @@
 @import '$lib/boilerplate/styles/variables';
 
 :where(.XioniArticle) {
-	display: flow-root;
-	background-color: rgba(0, 0, 0, 0.05);
-	padding: 1rem;
+	margin: 2rem 0;
 }
 
 :where(.XioniArticle__image) {
 	width: 100%;
-	max-height: 65vw;
-	object-fit: cover;
-
-	@include breakpoint('tablet-up') {
-		float: right;
-		margin-left: 1.5rem;
-		width: 280px;
-		height: 210px;
-	}
+	display: block !important;
 }
 
-:where(.XioniArticle__meta) {
+:where(.XioniArticle__metadata) {
 	display: flex;
-	gap: 0.25rem;
-	font-size: 0.875rem;
-	transform: translateY(-1rem);
+	margin: 1rem 0;
+	gap: 1rem;
+	font-size: 0.85rem;
 }
 
 :where(.XioniArticle__content-image) {

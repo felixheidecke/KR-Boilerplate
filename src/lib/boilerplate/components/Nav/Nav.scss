@@ -114,12 +114,18 @@
 	z-index: 0;
 }
 
-:where(.NavBar__a) {
+:where(.NavBar__a),
+:where(.NavBar__span) {
 	font-weight: bold;
 	padding: 0.5rem 1rem;
 	white-space: nowrap;
 	text-decoration: none;
 	transition: background-color 0.25s;
+	user-select: none;
+}
+
+:where(.NavBar__span) {
+	cursor: default;
 }
 
 :where(.NavBar__ul-ul) {

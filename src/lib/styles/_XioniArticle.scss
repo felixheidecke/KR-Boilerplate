@@ -1,0 +1,38 @@
+.XioniArticle {
+	display: flex;
+	flex-direction: column;
+}
+
+.XioniArticle__image {
+	order: -3;
+	padding: 1rem;
+	box-shadow: 0 0 0.75rem rgba(black, 0.333);
+}
+
+.XioniArticle__title {
+	order: -2;
+	text-align: center;
+}
+
+.XioniArticle__teaser {
+	order: -1;
+	text-align: center;
+}
+
+.XioniArticle__metadata {
+	justify-content: center;
+	margin: 1rem 0 2rem;
+	width: calc(100% + 2rem);
+	transform: translateX(-1rem);
+	padding: 1rem;
+	gap: 2rem;
+	font-size: 0.9rem;
+	border: {
+		top: 1px solid lightgray;
+		bottom: 1px solid lightgray;
+	}
+}
+
+.XioniArticle__content p {
+	line-height: 1.75rem;
+}

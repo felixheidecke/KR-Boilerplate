@@ -1,5 +1,16 @@
+<!--
+
+  <XioniArticle> Parameter:
+  *************************
+
+	"article"        [Object]
+	"basePath"?      [String] = ''
+
+-->
 <script>
 	export let data
+
+	const { article } = data
 </script>
 
-<XioniArticle article={data.article} basePath="/article-list/" />
+<XioniArticle {article} basePath="/article-list/" />

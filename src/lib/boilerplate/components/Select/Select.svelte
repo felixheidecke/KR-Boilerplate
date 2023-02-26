@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import './select.scss'
 	import classnames from 'classnames'
 	import { uniqueId } from 'lodash-es'
@@ -7,9 +7,9 @@
 
 	export let label = false
 	export let name = 'select'
-	export let options = []
+	export let options: string[] = []
 	export let required = false
-	export let values = options
+	export let values: Array<string | number> = options
 	export let value = values[0]
 
 	const id = uniqueId(name + '-')
