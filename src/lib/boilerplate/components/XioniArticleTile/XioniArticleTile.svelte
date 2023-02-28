@@ -26,9 +26,14 @@
 	const link = basePath + slug + linkDelimiter + id
 </script>
 
-<div class="XioniArticleTile" on:click={() => goto(link)}>
+<div class="XioniArticleTile">
 	{#if image}
-		<img class="XioniArticleTile__image" src={image.thumbSrc} alt={image.alt} />
+		<img
+			class="XioniArticleTile__image $pointer"
+			src={image.thumbSrc}
+			alt={image.alt}
+			on:click={() => goto(link)}
+		/>
 	{/if}
 	<h5 class="XioniArticleTile__title">
 		{title}
@@ -50,7 +55,7 @@
 	<div class="XioniArticleTile__text">
 		{@html text}
 	</div>
-	<Link to={link} class="XioniArticleTile__link $row-reverse" icon="fas fa-angle-right">
+	<Link to={link} class="XioniArticleTile__link $pointer $row-reverse" icon="fas fa-angle-right">
 		{linkText}
 	</Link>
 </div>

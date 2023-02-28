@@ -8,7 +8,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { Route, Routes } from '$lib/boilerplate/routes/routes.types'
+	import type { Route, Routes } from '$lib/boilerplate/libraries/make-routes/types'
 	enum NavType {
 		SLIDE = 'slide',
 		BAR = 'bar'
