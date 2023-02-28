@@ -1,5 +1,5 @@
 import { page } from '$app/stores'
-import type { Route, Routes } from '$lib/routes/routes.types'
+import type { Route, Routes } from '$lib/boilerplate/routes/routes.types'
 import { derived, readable, type Readable } from 'svelte/store'
 
 export function MakeRoutes(routes: Routes) {

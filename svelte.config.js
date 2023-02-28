@@ -12,7 +12,10 @@ const config = {
 			fallback: false,
 			strict: false,
 			precompress: false
-		})
+		}),
+		alias: {
+			$variables: './src/lib/styles/variables.scss'
+		}
 	}
 }
 

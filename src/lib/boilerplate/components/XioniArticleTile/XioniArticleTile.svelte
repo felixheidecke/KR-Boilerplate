@@ -22,7 +22,7 @@
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
-	const { title, id, slug, image, text, author, date } = article
+	const { title, id, slug, date, image, text, author } = article
 	const link = basePath + slug + linkDelimiter + id
 </script>
 
@@ -34,10 +34,12 @@
 		{title}
 	</h5>
 	<ul class="XioniArticleTile__metadata">
-		<li class="XioniArticleTile__author">
-			<Icon name="far fa-user" class="$mr-1/4" />
-			Von {author}
-		</li>
+		{#if author}
+			<li class="XioniArticleTile__author">
+				<Icon name="far fa-user" class="$mr-1/4" />
+				Von {author}
+			</li>
+		{/if}
 		<li class="XioniArticleTile__date">
 			<Icon name="far fa-calendar-alt" class="$mr-1/4" />
 			<time datetime={date.toLocaleDateString('de')}>

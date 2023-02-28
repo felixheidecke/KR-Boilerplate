@@ -1,10 +1,10 @@
-import { fromUnixTime } from 'date-fns'
 import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
 import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import type { XioniArticle, XioniArticles } from './article.types'
 
 export default (fetchFn: typeof fetch = fetch) => {
 	const fetchJSON = FetchJSON(fetchFn)
+
 	/**
 	 * Get all articles by module
 	 *
@@ -20,8 +20,16 @@ export default (fetchFn: typeof fetch = fetch) => {
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		if ('expanded' in filter) {
-			Object.assign(params, { expanded: 1 })
+		if ('full' in filter) {
+			Object.assign(params, { full: filter.full })
+		}
+
+		if ('inactive' in filter) {
+			Object.assign(params, { inactive: filter.inactive })
+		}
+
+		if ('active' in filter) {
+			Object.assign(params, { active: filter.active })
 		}
 
 		const response = await fetchJSON([XIONI_API_URL, 'articles', module], { params })
@@ -76,7 +84,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 	function articleAdapter(rawArticle: any) {
 		return {
 			...rawArticle,
-			date: fromUnixTime(rawArticle.date)
+			date: new Date(rawArticle.date)
 		}
 	}
 

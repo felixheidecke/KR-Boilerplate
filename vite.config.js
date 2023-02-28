@@ -14,7 +14,7 @@ const config = {
 					flat: true
 				}
 			],
-			include: ['./src/routes/**/*.svelte', './src/lib/boilerplate/components/**/*.svelte']
+			include: ['./src/**/*.svelte']
 		}),
 		sveltekit()
 	],

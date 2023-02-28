@@ -8,7 +8,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { Route, Routes } from '$lib/routes/routes.types'
+	import type { Route, Routes } from '$lib/boilerplate/routes/routes.types'
 	enum NavType {
 		SLIDE = 'slide',
 		BAR = 'bar'
@@ -98,7 +98,7 @@
 	<ul class={baseName + '__ul'}>
 		{#each routes as route, i}
 			<li
-				class={baseName + '__li'}
+				class={classnames(baseName + '__li', route.class)}
 				on:mouseenter={() => (hoverState = i)}
 				on:mouseleave={() => (hoverState = -1)}
 			>
@@ -125,7 +125,8 @@
 							<li
 								class={classnames(
 									baseName + '__li-li',
-									activeRoute?.path !== subRoute.path || baseName + '__li-li--active'
+									activeRoute?.path !== subRoute.path || baseName + '__li-li--active',
+									subRoute.class
 								)}
 							>
 								<a id="route-{i}-{o}" class={baseName + '__a-a'} href={subRoute.path}>

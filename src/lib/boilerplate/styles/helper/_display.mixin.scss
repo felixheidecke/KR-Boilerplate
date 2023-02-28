@@ -1,25 +1,25 @@
 @mixin hidden {
-  display: none;
+	display: none;
 }
 
-@mixin hidden--mobile {
-  @media #{map-get($mediaquery, 'mobile')} {
-    display: none;
-  }
+@mixin hidden-mobile {
+	@media #{map-get($mediaquery, 'mobile')} {
+		display: none;
+	}
 }
 
-@mixin hidden--tablet {
-  @media #{map-get($mediaquery, 'tablet')} {
-    display: none;
-  }
+@mixin hidden-tablet {
+	@media #{map-get($mediaquery, 'tablet')} {
+		display: none;
+	}
 }
 
-@mixin hidden--tablet-up {
-  @media #{map-get($mediaquery, 'tablet-up')} {
-    display: none;
-  }
+@mixin hidden-tablet-up {
+	@media #{map-get($mediaquery, 'tablet-up')} {
+		display: none;
+	}
 }
 
 @mixin block {
-  display: block;
+	display: block;
 }
