@@ -1,6 +1,6 @@
 {
   "name": "krb-svelte",
-  "version": "3.15.4",
+  "version": "3.15.5",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -52,24 +52,24 @@
     }
   },
   "devDependencies": {
-    "@originjs/vite-plugin-content": "^1.0.1",
+    "@originjs/vite-plugin-content": "^1.0.3",
     "@sveltejs/adapter-static": "1.0.0-next.39",
     "@sveltejs/kit": "1.0.0-next.405",
-    "eslint": "^8.23.1",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-svelte3": "^4.0.0",
-    "npm-check-updates": "^16.6.2",
-    "prettier": "^2.8.2",
+    "npm-check-updates": "^16.7.10",
+    "prettier": "^2.8.4",
     "prettier-plugin-svelte": "^2.9.0",
-    "sass": "^1.54.9",
-    "svelte": "^3.55.0",
+    "sass": "^1.58.3",
+    "svelte": "^3.55.1",
     "svelte-preprocess": "^4.10.7",
     "sveltekit-autoimport": "^1.6.10",
     "vite": "^3.2.5"
   },
   "type": "module",
   "dependencies": {
-    "@glidejs/glide": "^3.5.2",
+    "@glidejs/glide": "^3.6.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "in-view": "^0.6.1",
