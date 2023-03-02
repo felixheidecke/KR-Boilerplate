@@ -8,34 +8,26 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Picture from '../picture/picture.svelte'
-	import Link from '../link/link.svelte'
-	import Icon from '../icon/icon.svelte'
-	import Grid from '../grid/grid.svelte'
-	import Lightbox from '../lightbox/lightbox.svelte'
+	import Picture from '../Picture/Picture.svelte'
+	import Link from '../Link/Link.svelte'
+	import Icon from '../Icon/Icon.svelte'
+	import Grid from '../Grid/Grid.svelte'
+	import Lightbox from '../Lightbox/Lightbox.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const {
-		description,
-		details,
-		ends,
-		image,
-		images,
-		pdf,
-		starts,
-		title,
-		website,
-		ticketshop,
-		flags
-	} = $$props.event as XioniEvent
+	const { description, details, ends, image, pdf, flags, starts, title, website, ticketshop } =
+		$$props.event as XioniEvent
+
+	const images = $$props.event.images || []
+	// const flags = $$props.event.flags || []
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
 	let lightbox: Lightbox // ref
 
 	const activeEvent = getContext('active-xioni-event') as Writable<XioniEvent | null>
-	const allowRegistration = flags.includes('Anmeldung')
+	const allowRegistration = flags ? flags.includes('Anmeldung') : false
 
 	// Classname
 	const baseName = $$props['ex-class'] || 'XioniEvent'

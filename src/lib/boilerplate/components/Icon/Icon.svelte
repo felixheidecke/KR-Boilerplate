@@ -1,8 +1,10 @@
-<script>
-	import './icon.css'
+<script lang="ts">
+	import './Icon.css'
 	import classnames from 'classnames'
 	export let name = 'fas fa-carrot'
-	export let size = false
+	export let size: number | string | false = false
+
+	size = +size
 
 	// --- CSS Class --------------------
 

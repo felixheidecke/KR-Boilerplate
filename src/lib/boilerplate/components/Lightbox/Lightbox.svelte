@@ -1,8 +1,10 @@
 <script lang="ts">
 	import './lightbox.scss'
 	import { onMount } from 'svelte'
-	import Icon from '../icon/icon.svelte'
-	import Modal from '../modal/modal.svelte'
+	import Icon from '../Icon/Icon.svelte'
+	import Modal from '../Modal/Modal.svelte'
+
+	type Images = { src: string; alt: string }[]
 
 	// Refs
 	let lightbox: HTMLElement
@@ -10,12 +12,13 @@
 
 	// --- Data -------------------------
 
-	export let images: { src: string; alt: string }[] = []
+	export let images = [] as Images
 
-	let index = 0
+	let lightboxImages = images as Images
+	let index = -1
 	let isMobile = true
 
-	$: activeImage = images[index] || {}
+	$: activeImage = lightboxImages[index] || {}
 
 	// --- Methods ----------------------
 
@@ -27,28 +30,22 @@
 
 	function getImages() {
 		lightbox.querySelectorAll('img[data-lightbox]').forEach((image, i) => {
-			images = [
-				{
-					src: image.getAttribute('data-lightbox') || '',
-					alt: image.getAttribute('alt') || ''
-				}
-			]
-
-			image.addEventListener('click', () => {
-				index = i
-
-				modal.open()
+			lightboxImages.push({
+				src: image.getAttribute('data-lightbox') || '',
+				alt: image.getAttribute('alt') || ''
 			})
+
+			image.addEventListener('click', () => open(i))
 		})
 	}
 
 	function navigate(dir: '>' | '<') {
 		if (dir === '>') {
-			index = index + 1 >= images.length ? 0 : index + 1
+			index = index + 1 >= lightboxImages.length ? 0 : index + 1
 			return
 		}
 		if (dir === '<') {
-			index = index === 0 ? images.length - 1 : index - 1
+			index = index === 0 ? lightboxImages.length - 1 : index - 1
 			return
 		}
 	}
@@ -69,7 +66,7 @@
 	<Modal bind:this={modal}>
 		<div
 			class="Lightbox__navigate Lightbox__navigate--prev"
-			class:$invisible={!(images.length > 2)}
+			class:$invisible={!(lightboxImages.length > 2)}
 			on:click={() => navigate('<')}
 		>
 			<Icon name="fas fa-angle-left" size="2" />
@@ -77,7 +74,7 @@
 
 		<div
 			class="Lightbox__navigate Lightbox__navigate--next"
-			class:$invisible={!(images.length > 2)}
+			class:$invisible={!(lightboxImages.length > 2)}
 			on:click={() => navigate('>')}
 		>
 			<Icon name="fas fa-angle-right" size="2" />
@@ -94,7 +91,7 @@
 	</Modal>
 
 	{#if !isMobile}
-		{#each images as { src, alt }}
+		{#each lightboxImages as { src, alt }}
 			<img {src} {alt} hidden aria-hidden />
 		{/each}
 	{/if}

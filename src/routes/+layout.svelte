@@ -2,7 +2,7 @@
 	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
 
-	import { ROUTES, ACTIVE_ROUTE } from '$lib/routes/routes'
+	import { ROUTES, ACTIVE_ROUTE } from '$lib/boilerplate/stores/routes'
 </script>
 
 <nav>
