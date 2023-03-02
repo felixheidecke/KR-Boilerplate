@@ -1,4 +1,3 @@
-import { fromUnixTime } from 'date-fns'
 import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
 import type { XioniEvent, XioniEvents } from './event.types'
@@ -53,8 +52,8 @@ export default (fetchFn: typeof fetch = fetch) => {
 	function eventsAdapter(rawEvent: any): XioniEvent {
 		const event = {
 			...rawEvent,
-			starts: fromUnixTime(rawEvent.starts),
-			ends: fromUnixTime(rawEvent.ends)
+			starts: new Date(rawEvent.starts),
+			ends: new Date(rawEvent.ends)
 		}
 
 		if (rawEvent.website) {

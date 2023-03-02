@@ -13,7 +13,10 @@ export default (fetchFn: typeof fetch = fetch) => {
 	 * @returns XioniArticles
 	 */
 
-	async function getAll(module: number, filter: { limit?: number; expanded?: boolean } = {}) {
+	async function getAll(
+		module: number,
+		filter: { limit?: number; full?: boolean; inactive?: boolean; active?: boolean } = {}
+	) {
 		const params = {}
 
 		if ('limit' in filter) {
@@ -32,11 +35,11 @@ export default (fetchFn: typeof fetch = fetch) => {
 			Object.assign(params, { active: filter.active })
 		}
 
-		const response = await fetchJSON([XIONI_API_URL, 'articles', module], { params })
+		const { data, ok } = await fetchJSON([XIONI_API_URL, 'articles', module], { params })
 
-		if (!response.ok) return
+		if (!ok) return
 
-		return response.data.map(articleAdapter) as XioniArticles
+		return data.map(articleAdapter) as XioniArticles
 	}
 
 	/**
@@ -46,12 +49,18 @@ export default (fetchFn: typeof fetch = fetch) => {
 	 * @returns XioniArticle
 	 */
 
-	async function getOne(id: number) {
-		const response = await fetchJSON([XIONI_API_URL, 'article', id])
+	async function getOne(id: number, filter: { full?: boolean } = {}) {
+		const params = {}
 
-		if (!response.ok) return
+		if ('full' in filter) {
+			Object.assign(params, { full: filter.full })
+		}
 
-		return articleAdapter(response.data) as XioniArticle
+		const { data, ok } = await fetchJSON([XIONI_API_URL, 'article', id], { params })
+
+		if (!ok) return
+
+		return articleAdapter(data) as XioniArticle
 	}
 
 	/**
@@ -62,15 +71,11 @@ export default (fetchFn: typeof fetch = fetch) => {
 	 * @returns XioniArticles
 	 */
 
-	async function getByCategory(category: number, limit?: number) {
-		const params = {}
+	async function getByCategory(category: number, filter: { limit?: number } = {}) {
+		const params = { category }
 
-		if (category) {
-			Object.assign(params, { category })
-		}
-
-		if (limit) {
-			Object.assign(params, { limit })
+		if ('filter' in filter) {
+			Object.assign(params, { limit: filter.limit })
 		}
 
 		const { data, ok } = await fetchJSON([XIONI_API_URL, 'articles'], { params })
@@ -80,7 +85,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 		return data.map(articleAdapter) as XioniArticles
 	}
 
-	// Helper
+	// Remap response data
 	function articleAdapter(rawArticle: any) {
 		return {
 			...rawArticle,
