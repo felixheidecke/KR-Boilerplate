@@ -15,7 +15,7 @@
 	<title>List | Boilerplate</title>
 </svelte:head>
 
-<h1 class="component-title">Icon</h1>
+<h1 class="$text-center $my-3">Icon</h1>
 
 <Icon name="fas fa-walking" />
 <Icon name="fas fa-walking" size="2" />

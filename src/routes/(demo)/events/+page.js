@@ -1,7 +1,26 @@
-import xioniEventsApi from '$lib/boilerplate/libraries/xioni/event'
+import EventApi from '$lib/boilerplate/libraries/xioni/event'
 
-export const load = async ({ fetch }) => ({
-	events: await xioniEventsApi(fetch).getAll(1289, {
-		endsAfter: 'today'
-	})
-})
+/*
+
+  getMany() Parameter:
+  ********************
+
+  "eventModule"?               [Number|String]
+  "eventConfig"?               [Object|undefined]
+	"eventConfig.startsBefore?"  [String|Date]
+	"eventConfig.startsAfter?"   [String|Date]
+	"eventConfig.endsBefore?"    [String|Date]
+	"eventConfig.endsAfter?"     [String|Date]
+
+*/
+
+const eventModule = 1289
+const eventConfig = { endsAfter: 'today' }
+
+export const load = async ({ fetch }) => {
+	const getEvents = EventApi(fetch).getMany
+
+	return {
+		events: await getEvents(eventModule, eventConfig)
+	}
+}

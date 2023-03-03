@@ -13,7 +13,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 	 * @returns XioniEvents
 	 */
 
-	async function getAll(
+	async function getMany(
 		module: number,
 		filter: {
 			limit?: number
@@ -85,7 +85,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 	}
 
 	return {
-		getAll,
+		getMany,
 		getOne
 	}
 }

@@ -15,8 +15,6 @@
 	import { writable } from 'svelte/store'
 	import { setContext } from 'svelte'
 
-	// --- Data --------------------------------------------------------------------------------------
-
 	export let data
 
 	const { event } = data

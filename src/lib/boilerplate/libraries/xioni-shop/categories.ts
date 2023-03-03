@@ -10,7 +10,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns List of Categories
 	 */
 
-	async function getAll() {
+	async function getMany() {
 		const { ok, data: categories } = await fetchJSON([XIONI_API_URL, 'shop', module, 'categories'])
 
 		if (!ok) return
@@ -34,7 +34,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	}
 
 	return {
-		getAll,
+		getMany,
 		getOne
 	}
 }

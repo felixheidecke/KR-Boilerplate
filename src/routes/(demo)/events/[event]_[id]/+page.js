@@ -1,7 +1,20 @@
-import xioniEventsApi from '$lib/boilerplate/libraries/xioni/event'
+import EventApi from '$lib/boilerplate/libraries/xioni/event'
 
-export const load = async ({ fetch, params }) => ({
-	event: await xioniEventsApi(fetch).getOne(params.id)
-})
+/*
+
+  getOne() Parameter:
+  *******************
+
+  "eventId"?  [Number|String]
+
+*/
+
+export const load = async ({ fetch, params }) => {
+	const getEvent = EventApi(fetch).getOne
+
+	return {
+		event: await getEvent(params.id)
+	}
+}
 
 export const prerender = false

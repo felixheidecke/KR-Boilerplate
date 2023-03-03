@@ -12,7 +12,7 @@
 	<title>Mail | Boilerplate</title>
 </svelte:head>
 
-<h1 class="component-title">Mail</h1>
+<h1 class="$text-center $my-3">Mail</h1>
 
 <Mail to="felix@heidecke.me" />
 <br />

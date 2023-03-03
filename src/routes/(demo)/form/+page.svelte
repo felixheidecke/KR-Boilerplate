@@ -1,3 +1,5 @@
+<h1 class="$text-center $my-3">Formular</h1>
+
 <Form subject="Kundenanfrage" id="4" attach="csv">
 	<div class="customer-form-body">
 		<Input name="fistname" label="Vorname" placeholder="Max" />

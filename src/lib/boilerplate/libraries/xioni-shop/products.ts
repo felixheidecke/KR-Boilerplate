@@ -11,7 +11,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns List of Products
 	 */
 
-	async function getAll(limit?: number) {
+	async function getMany(limit?: number) {
 		const params = {}
 
 		if (limit && limit > 0) {
@@ -93,7 +93,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	}
 
 	return {
-		getAll,
+		getMany,
 		getOne,
 		getByCategory,
 		getFromFrontpage

@@ -12,7 +12,7 @@
 	<title>Picture | Message</title>
 </svelte:head>
 
-<h1 class="component-title">Message</h1>
+<h1 class="$text-center $my-3">Message</h1>
 
 <Message title="Das hat geklappt" type="success">
 	<p>

@@ -20,7 +20,6 @@
 		$$props.event as XioniEvent
 
 	const images = $$props.event.images || []
-	// const flags = $$props.event.flags || []
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 

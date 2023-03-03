@@ -13,7 +13,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 	 * @returns XioniArticles
 	 */
 
-	async function getAll(
+	async function getMany(
 		module: number,
 		filter: { limit?: number; full?: boolean; inactive?: boolean; active?: boolean } = {}
 	) {
@@ -94,7 +94,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 	}
 
 	return {
-		getAll,
+		getMany,
 		getOne,
 		getByCategory
 	}

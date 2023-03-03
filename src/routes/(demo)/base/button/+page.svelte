@@ -9,7 +9,8 @@
   "target"?    ['_blank' | '_self' | Undefined]
 
 -->
-<h1 class="component-title">Button</h1>
+
+<h1 class="$text-center $my-3">Button</h1>
 
 <ul>
 	<li><Button>Hallo</Button></li>
@@ -17,7 +18,9 @@
 	<li class="$mt"><Button icon="fas fa-skating" class="$row-reverse">Schlittschuh</Button></li>
 </ul>
 
-<h2 class="component-title">ButtonRow</h2>
+<hr />
+
+<h2 class="$text-center $my-3">ButtonRow</h2>
 
 <ButtonRow>
 	<Button>Hallo</Button>

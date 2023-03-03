@@ -15,7 +15,7 @@
 	const { events } = data
 </script>
 
-<h1 class="$text-center $my-2">Unsere Events in 2023</h1>
+<h1 class="$text-center $my-3">Events</h1>
 
 <Grid tag="ul" gap rowGap>
 	{#each events as event}

@@ -17,13 +17,16 @@
 .XioniArticle__teaser {
 	order: -1;
 	text-align: center;
+
+	p {
+		font-size: 1.25rem;
+		line-height: 2rem;
+	}
 }
 
 .XioniArticle__metadata {
 	justify-content: center;
 	margin: 1rem 0 2rem;
-	width: calc(100% + 2rem);
-	transform: translateX(-1rem);
 	padding: 1rem;
 	gap: 2rem;
 	font-size: 0.9rem;
