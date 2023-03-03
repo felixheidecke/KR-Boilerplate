@@ -13,11 +13,28 @@ export default (fetchFn: typeof fetch = fetch) => {
 	 * @returns XioniEvents
 	 */
 
-	async function getAll(module: number, filter: { limit?: number } = {}) {
+	async function getAll(
+		module: number,
+		filter: {
+			limit?: number
+			startsBefore?: string | Date
+			startsAfter?: string | Date
+			endsBefore?: string | Date
+			endsAfter?: string | Date
+		} = {}
+	) {
 		const params = {}
 
 		if ('limit' in filter) {
 			Object.assign(params, { limit: filter.limit })
+		}
+
+		if (filter.endsBefore) {
+			Object.assign(params, { endsBefore: parseDate(filter.endsBefore) })
+		}
+
+		if (filter.endsAfter) {
+			Object.assign(params, { endsAfter: parseDate(filter.endsAfter) })
 		}
 
 		const { ok, data } = await fetchJSON([XIONI_API_URL, 'events', module], { params })
@@ -71,4 +88,12 @@ export default (fetchFn: typeof fetch = fetch) => {
 		getAll,
 		getOne
 	}
+}
+
+function parseDate(date: string | Date) {
+	if (date === 'today') {
+		return new Date().toDateString()
+	}
+
+	return date
 }
