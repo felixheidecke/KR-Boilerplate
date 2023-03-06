@@ -105,10 +105,12 @@
 				<svelte:element
 					this={route.path ? 'a' : 'span'}
 					id="route-{i}"
-					class={classnames(
-						route.path ? baseName + '__a' : baseName + '__span',
-						activeRoute?.path !== route.path || baseName + '__a--active'
-					)}
+					class={route.path
+						? classnames(
+								baseName + '__a',
+								activeRoute?.path !== route.path || baseName + '__a--active'
+						  )
+						: baseName + '__span'}
 					href={route.path}
 				>
 					{route.name}

@@ -7,15 +7,15 @@ import EventApi from '$lib/boilerplate/libraries/xioni/event'
 
   "eventModule"?               [Number|String]
   "eventConfig"?               [Object|undefined]
-	"eventConfig.startsBefore?"  [String|Date]
-	"eventConfig.startsAfter?"   [String|Date]
-	"eventConfig.endsBefore?"    [String|Date]
-	"eventConfig.endsAfter?"     [String|Date]
+	"eventConfig.startsBefore?"  [Date]
+	"eventConfig.startsAfter?"   [Date]
+	"eventConfig.endsBefore?"    [Date]
+	"eventConfig.endsAfter?"     [Date]
 
 */
 
 const eventModule = 1289
-const eventConfig = { endsAfter: 'today' }
+const eventConfig = { endsAfter: new Date() }
 
 export const load = async ({ fetch }) => {
 	const getEvents = EventApi(fetch).getMany

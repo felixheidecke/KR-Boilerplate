@@ -15,7 +15,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 
 	async function getMany(
 		module: number,
-		filter: { limit?: number; full?: boolean; inactive?: boolean; active?: boolean } = {}
+		filter: { limit?: number; full?: boolean; status?: 'live' | 'archived' } = {}
 	) {
 		const params = {}
 
@@ -27,12 +27,8 @@ export default (fetchFn: typeof fetch = fetch) => {
 			Object.assign(params, { full: filter.full })
 		}
 
-		if ('inactive' in filter) {
-			Object.assign(params, { inactive: filter.inactive })
-		}
-
-		if ('active' in filter) {
-			Object.assign(params, { active: filter.active })
+		if ('status' in filter) {
+			Object.assign(params, { status: filter.status })
 		}
 
 		const { data, ok } = await fetchJSON([XIONI_API_URL, 'articles', module], { params })

@@ -17,10 +17,10 @@ export default (fetchFn: typeof fetch = fetch) => {
 		module: number,
 		filter: {
 			limit?: number
-			startsBefore?: string | Date
-			startsAfter?: string | Date
-			endsBefore?: string | Date
-			endsAfter?: string | Date
+			startsBefore?: Date
+			startsAfter?: Date
+			endsBefore?: Date
+			endsAfter?: Date
 		} = {},
 		callback: Function | undefined = undefined
 	) {
@@ -30,12 +30,20 @@ export default (fetchFn: typeof fetch = fetch) => {
 			Object.assign(params, { limit: filter.limit })
 		}
 
+		if (filter.startsBefore) {
+			Object.assign(params, { startsBefore: filter.startsBefore.toDateString() })
+		}
+
+		if (filter.startsAfter) {
+			Object.assign(params, { startsAfter: filter.startsAfter.toDateString() })
+		}
+
 		if (filter.endsBefore) {
-			Object.assign(params, { endsBefore: parseDate(filter.endsBefore) })
+			Object.assign(params, { endsBefore: filter.endsBefore.toDateString() })
 		}
 
 		if (filter.endsAfter) {
-			Object.assign(params, { endsAfter: parseDate(filter.endsAfter) })
+			Object.assign(params, { endsAfter: filter.endsAfter.toDateString() })
 		}
 
 		const { ok, data } = await fetchJSON([XIONI_API_URL, 'events', module], { params })
@@ -105,12 +113,4 @@ function eventAdapter(rawEvent: any): XioniEvent {
 	}
 
 	return event
-}
-
-function parseDate(date: string | Date) {
-	if (date === 'today') {
-		return new Date().toDateString()
-	}
-
-	return date
 }
