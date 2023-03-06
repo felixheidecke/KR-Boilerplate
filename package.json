@@ -1,6 +1,6 @@
 {
 	"name": "boilerplate.ts",
-	"version": "4.0.7",
+	"version": "4.0.8",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -15,14 +15,14 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-static": "^2.0.1",
-		"@sveltejs/kit": "^1.8.5",
+		"@sveltejs/kit": "^1.10.0",
 		"@types/lodash-es": "^4.17.6",
-		"@typescript-eslint/eslint-plugin": "^5.53.0",
-		"@typescript-eslint/parser": "^5.53.0",
+		"@typescript-eslint/eslint-plugin": "^5.54.0",
+		"@typescript-eslint/parser": "^5.54.0",
 		"eslint": "^8.35.0",
-		"eslint-config-prettier": "^8.6.0",
+		"eslint-config-prettier": "^8.7.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"npm-check-updates": "^16.7.9",
+		"npm-check-updates": "^16.7.10",
 		"prettier": "^2.8.4",
 		"prettier-plugin-svelte": "^2.9.0",
 		"sass": "^1.58.3",
@@ -40,6 +40,7 @@
 		"classnames": "^2.3.2",
 		"date-fns": "^2.29.3",
 		"lodash-es": "^4.17.21",
+		"opening_hours": "^3.8.0",
 		"svelte-preprocess": "^5.0.1"
 	}
 }

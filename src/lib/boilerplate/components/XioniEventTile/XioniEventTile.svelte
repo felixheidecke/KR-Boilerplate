@@ -26,9 +26,14 @@
 	const link = basePath + slug + linkDelimiter + id
 </script>
 
-<div class="XioniEventTile" on:click={() => goto(link)}>
+<div class="XioniEventTile">
 	{#if image}
-		<img class="XioniEventTile__image" src={image.thumbSrc} alt={image.alt} />
+		<img
+			class="XioniEventTile__image"
+			src={image.thumbSrc}
+			alt={image.alt}
+			on:click={() => goto(link)}
+		/>
 	{/if}
 	<h5 class="XioniEventTile__title">
 		{title}

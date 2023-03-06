@@ -1,12 +1,12 @@
 <script>
 	import { format } from '$lib/boilerplate/utils/format-date'
 
-	const { pageTile } = $$props.data
+	const { title, name } = $$props.data.stammdaten
 	const lastUpdated = format(new Date('1983-6-5'), 'PPPP')
 </script>
 
 <svelte:head>
-	<title>Datenschutz | {pageTile}</title>
+	<title>Datenschutz | {title}</title>
 </svelte:head>
 
 <h1>Datenschutz</h1>
@@ -20,7 +20,7 @@
 <hr />
 
 <p class="$text-right $font-small $font-italic">
-	Stand: {lastUpdated}
+	Stand: {lastUpdated} | {name}
 </p>
 
 <style lang="scss">

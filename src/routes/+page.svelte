@@ -1,9 +1,9 @@
 <script>
-	const { pageTitle } = $$props.data
+	const { title, name } = $$props.data
 </script>
 
 <svelte:head>
-	<title>{pageTitle}</title>
+	<title>Willkommen | {title} | {name}</title>
 </svelte:head>
 
 <div class="$text-center">

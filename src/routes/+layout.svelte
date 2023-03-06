@@ -1,21 +1,35 @@
 <script>
 	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
-
 	import { ROUTES, ACTIVE_ROUTE } from '$lib/boilerplate/stores/routes'
+
+	const { title, web } = $$props.data.stammdaten
+	$: path = $$props.data.url.pathname
+	$: routes = $ROUTES
+	$: activeRoute = $ACTIVE_ROUTE
 </script>
 
-<nav>
-	<Nav routes={$ROUTES} activeRoute={$ACTIVE_ROUTE} />
-</nav>
-<main class="layout-wrapper">
-	<slot />
+<svelte:head>
+	<meta name="theme-color" content="#333" />
+	<meta property="og:url" content={web} />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content="…" />
+	<meta property="og:image" content="…" />
+</svelte:head>
+
+<header>
+	<Nav {routes} {activeRoute} />
+</header>
+
+<main class="layout-wrapper $mx-auto $p-2">
+	<PageTransition {path}>
+		<slot />
+	</PageTransition>
 </main>
 
 <style>
 	.layout-wrapper {
-		max-width: 960px;
-		margin: 0 auto;
-		padding: 2rem;
+		max-width: 60rem;
 	}
 </style>

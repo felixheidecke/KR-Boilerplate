@@ -1,11 +1,11 @@
 <script>
-  import { blur } from 'svelte/transition'
-  export let url
-  export let tag = 'div'
+	import { blur } from 'svelte/transition'
+	export let path
+	export let tag = 'div'
 </script>
 
-{#key url}
-  <svelte:element this={tag} class="PageTransition" in:blur={{ duration: 250 }}>
-    <slot />
-  </svelte:element>
+{#key path}
+	<svelte:element this={tag} class="PageTransition" in:blur={{ duration: 250 }}>
+		<slot />
+	</svelte:element>
 {/key}

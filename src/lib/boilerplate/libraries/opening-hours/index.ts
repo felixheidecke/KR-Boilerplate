@@ -1,6 +1,6 @@
 import { format, formatDistanceToNow } from 'date-fns'
 import de from 'date-fns/locale/de/index'
-import openingHours from 'opening_hours'
+import openingHours, { type nominatim_object } from 'opening_hours'
 
 enum T {
 	MON = 'Mo.',
@@ -19,7 +19,7 @@ enum T {
 }
 
 export default class {
-	private nominatim: any | { address: {} }
+	private nominatim = { address: {} } as nominatim_object
 	private hours
 	private parsed
 

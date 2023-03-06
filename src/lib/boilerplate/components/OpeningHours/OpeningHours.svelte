@@ -1,22 +1,21 @@
 <script lang="ts">
-	import './opening-hours.scss'
+	import './OpeningHours.css'
+
 	import classnames from 'classnames'
-	import OpeningHours from '@/js/opening-hours'
-	import { isTrue } from '@/js/utils/helper'
+	import OpeningHours from '$lib/boilerplate/libraries/opening-hours'
 
 	// --- Components --------------------------------------------------------------------------------
 
-	import Modal from '../Modal.svelte'
+	import Modal from '../Modal/Modal.svelte'
 
 	// --- Data --------------------------------------------------------------------------------------
 
-	export let hours
-	export let signOpen = false
-	export let signClosed = false
+	export let hours: string
+	export let signOpen: string | undefined = undefined
+	export let signClosed: string | undefined = undefined
+	export let interactive = false
 
-	const interactive = isTrue($$props.interactive)
-
-	let modal: HTMLElement
+	let modal: Modal
 
 	const { openNow, nextChange, distanceToNextChange, table } = new OpeningHours(hours)
 
@@ -40,7 +39,7 @@
 <div class={className}>
 	{#if openNow && signOpen}
 		<img class={`${baseName}__sign`} src={signOpen} alt="Wir haben geöffnet" />
-	{:else if signClosed}
+	{:else if !openNow && signClosed}
 		<img class={`${baseName}__sign`} src={signClosed} alt="Wir haben geschlossen" />
 	{/if}
 

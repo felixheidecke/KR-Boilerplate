@@ -21,7 +21,8 @@ export default (fetchFn: typeof fetch = fetch) => {
 			startsAfter?: string | Date
 			endsBefore?: string | Date
 			endsAfter?: string | Date
-		} = {}
+		} = {},
+		callback: Function | undefined = undefined
 	) {
 		const params = {}
 
@@ -41,7 +42,14 @@ export default (fetchFn: typeof fetch = fetch) => {
 
 		if (!ok) return
 
-		return data.map(eventsAdapter) as XioniEvents
+		const events = data.map(eventAdapter) as XioniEvents
+
+		if (callback) {
+			callback(events)
+			return
+		}
+
+		return events
 	}
 
 	/**
@@ -51,34 +59,16 @@ export default (fetchFn: typeof fetch = fetch) => {
 	 * @returns XioniEvents
 	 */
 
-	async function getOne(id: number) {
+	async function getOne(id: number, callback: Function | undefined = undefined) {
 		const { ok, data } = await fetchJSON([XIONI_API_URL, 'event', id])
 
 		if (!ok) return
 
-		return eventsAdapter(data)
-	}
+		const event = eventAdapter(data)
 
-	/**
-	 * Set propper Date() and URL() Object where nessesary
-	 *
-	 * @param rawEvent
-	 * @returns Xioni XioniEvent
-	 */
-
-	function eventsAdapter(rawEvent: any): XioniEvent {
-		const event = {
-			...rawEvent,
-			starts: new Date(rawEvent.starts),
-			ends: new Date(rawEvent.ends)
-		}
-
-		if (rawEvent.website) {
-			event.website = new URL(rawEvent.website)
-		}
-
-		if (rawEvent.ticketshop) {
-			event.ticketshop = new URL(rawEvent.ticketshop)
+		if (callback) {
+			callback(event)
+			return
 		}
 
 		return event
@@ -88,6 +78,33 @@ export default (fetchFn: typeof fetch = fetch) => {
 		getMany,
 		getOne
 	}
+}
+
+// --- [ Helper ] ----------------------------------------------------------------------------------
+
+/**
+ * Set propper Date() and URL() Object where nessesary
+ *
+ * @param rawEvent
+ * @returns Xioni XioniEvent
+ */
+
+function eventAdapter(rawEvent: any): XioniEvent {
+	const event = {
+		...rawEvent,
+		starts: new Date(rawEvent.starts),
+		ends: new Date(rawEvent.ends)
+	}
+
+	if (rawEvent.website) {
+		event.website = new URL(rawEvent.website)
+	}
+
+	if (rawEvent.ticketshop) {
+		event.ticketshop = new URL(rawEvent.ticketshop)
+	}
+
+	return event
 }
 
 function parseDate(date: string | Date) {

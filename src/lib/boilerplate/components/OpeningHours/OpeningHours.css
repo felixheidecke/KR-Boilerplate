@@ -10,11 +10,11 @@
 }
 
 :where(.OpeningHours__next-change) {
-	font-size: map-get($size, small);
+	font-size: 0.8rem;
 }
 
 :where(.OpeningHours__trigger) {
-	font-size: map-get($size, small);
+	font-size: 0.8rem;
 	text-decoration: underline;
 	cursor: pointer;
 }
