@@ -1,0 +1,3 @@
+:where(.Address__name) {
+	font-weight: bold;
+}

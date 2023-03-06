@@ -4,9 +4,6 @@
 	import { ROUTES, ACTIVE_ROUTE } from '$lib/boilerplate/stores/routes'
 
 	const { title, web } = $$props.data.stammdaten
-	$: path = $$props.data.url.pathname
-	$: routes = $ROUTES
-	$: activeRoute = $ACTIVE_ROUTE
 </script>
 
 <svelte:head>
@@ -19,11 +16,11 @@
 </svelte:head>
 
 <header>
-	<Nav {routes} {activeRoute} />
+	<Nav routes={$ROUTES} activeRoute={$ACTIVE_ROUTE} />
 </header>
 
 <main class="layout-wrapper $mx-auto $p-2">
-	<PageTransition {path}>
+	<PageTransition path={$$props.data.url.pathname}>
 		<slot />
 	</PageTransition>
 </main>
