@@ -17,7 +17,7 @@
 
 <h1 class="$text-center $my-3">Artikel</h1>
 
-<Grid tag="ul" gap rowGap>
+<Grid tag="ul" gap>
 	{#each articles as article}
 		<Grid tag="li" size="1-2">
 			<XioniArticleTile {article} basePath="/artikel/" />

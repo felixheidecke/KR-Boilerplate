@@ -17,7 +17,7 @@
 
 <h1 class="$text-center $my-3">Events</h1>
 
-<Grid tag="ul" gap rowGap>
+<Grid tag="ul" gap>
 	{#each events as event}
 		<Grid tag="li" size="1-2">
 			<XioniEventTile {event} basePath="/events/" />

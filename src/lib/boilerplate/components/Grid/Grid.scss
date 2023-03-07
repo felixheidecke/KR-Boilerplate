@@ -1,5 +1,17 @@
 @import '$lib/boilerplate/styles/variables.scss';
 
+@mixin colGap {
+	width: calc(100% + 1rem);
+	transform: translateX(-0.5rem);
+
+	> [class*='Grid__item'] {
+		padding: {
+			left: 0.5rem;
+			right: 0.5rem;
+		}
+	}
+}
+
 .Grid {
 	display: flex;
 	flex-wrap: wrap;
@@ -7,15 +19,12 @@
 }
 
 .Grid--gap {
-	width: calc(100% + 1rem);
-	transform: translateX(-0.5rem);
+	row-gap: 1rem;
+	@include colGap;
+}
 
-	[class*='Grid__item'] {
-		padding: {
-			left: 0.5rem;
-			right: 0.5rem;
-		}
-	}
+.Grid--column-gap {
+	@include colGap;
 }
 
 .Grid--row-gap {

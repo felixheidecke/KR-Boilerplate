@@ -2,25 +2,27 @@
 	import './grid.scss'
 	import classnames from 'classnames'
 
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
 	type Tag = 'div' | 'ul' | 'li' | 'section' | 'main' | 'aside'
-	type Gap = string | boolean
-	type Size = string | boolean
+	type Gap = 'row' | 'column' | boolean
+	type Size = string | undefined
 	type Id = string
 
-	// --- Props ------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let tag: Tag = 'div'
-	export let gap: Gap | undefined = undefined
-	export let rowGap: Gap | undefined = undefined
-	export let size: Size | undefined = undefined
+	export let gap: Gap = false
+	export let size: Size = undefined
 	export let id: Id | undefined = undefined
 
-	$: rowGap = $$props['row-gap']
+	// --- [ Logic ] ---------------------------------------------------------------------------------
 
-	// --- Methods ----------------------
+	const baseName = $$props['ex-class'] || 'Grid'
+	const className = !size ? createParentClassName() : createChildClassName()
 
 	function sizeToClass(size: Size) {
-		if (!size || size === true) return
+		if (!size) return
 
 		return size
 			.split(' ')
@@ -28,21 +30,23 @@
 			.join(' ')
 	}
 
-	// --- CSS Class --------------------
+	function createChildClassName() {
+		return classnames(baseName + '__item', sizeToClass(size), $$props.class)
+	}
 
-	const baseName = 'Grid'
-	const className = (() => {
-		if (size) {
-			return classnames(baseName + '__item', $$props.class, sizeToClass(size))
-		} else {
-			return classnames(
-				baseName,
-				$$props.class,
-				!gap || baseName + '--gap',
-				!rowGap || baseName + '--row-gap'
-			)
+	function createParentClassName() {
+		const className = [baseName]
+
+		if (gap === 'column') {
+			className.push(baseName + '--column-gap')
+		} else if (gap === 'row') {
+			className.push(baseName + '--row-gap')
+		} else if (gap) {
+			className.push(baseName + '--gap')
 		}
-	})()
+
+		return classnames(...className, $$props.class)
+	}
 </script>
 
 <svelte:element this={tag} class={className} {id}>

@@ -25,7 +25,7 @@
 <XioniEvent class="$mt-2" {event} />
 
 <XioniEventRegistration formId={4}>
-	<Grid tag="ul" gap rowGap class="$mb">
+	<Grid tag="ul" gap class="$mb">
 		<Grid tag="li" size="1-2">
 			<Input name="Vorname" label="Vorname" required />
 		</Grid>
