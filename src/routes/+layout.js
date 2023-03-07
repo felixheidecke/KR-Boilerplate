@@ -6,3 +6,5 @@ export const load = ({ url }) => {
 		stammdaten
 	}
 }
+
+export const prerender = true
