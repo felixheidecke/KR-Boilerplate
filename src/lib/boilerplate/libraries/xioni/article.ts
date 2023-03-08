@@ -15,7 +15,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 
 	async function getMany(
 		module: number,
-		filter: { limit?: number; full?: boolean; status?: 'live' | 'archived' } = {}
+		filter: { limit?: number; full?: false; status?: 'live' | 'archived' } = {}
 	) {
 		const params = {}
 

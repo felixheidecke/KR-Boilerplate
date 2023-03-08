@@ -15,10 +15,10 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
+	export let article: XioniArticle
 	export let basePath = ''
 	export let linkDelimiter = '_'
 	export let linkText = 'Weiterlesen'
-	export let article: XioniArticle
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 

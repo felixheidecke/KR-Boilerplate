@@ -10,7 +10,7 @@ export const GET = function () {
 	const response = new Response(JSON.stringify(data))
 
 	response.headers.set('content-type', 'application/json')
-	response.headers.set('cache-control', 'max-age=3600')
+	response.headers.set('cache-control', 'max-age=60')
 
 	return response
 } satisfies RequestHandler
