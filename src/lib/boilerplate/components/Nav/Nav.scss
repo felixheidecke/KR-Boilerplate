@@ -49,7 +49,8 @@
 	color: white;
 }
 
-:where(.NavSlide__a) {
+:where(.NavSlide__a),
+:where(.NavSlide__span) {
 	font-size: 1.25rem;
 	font-weight: bold;
 	padding: 0.5rem 1rem;

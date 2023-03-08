@@ -26,7 +26,6 @@
 
 .XioniArticle__metadata {
 	justify-content: center;
-	margin: 1rem 0 2rem;
 	padding: 1rem;
 	gap: 2rem;
 	font-size: 0.9rem;
@@ -36,6 +35,10 @@
 	}
 }
 
-.XioniArticle__content p {
-	line-height: 1.75rem;
+.XioniArticle__content {
+	margin-top: 2rem;
+
+	p {
+		line-height: 1.75rem;
+	}
 }

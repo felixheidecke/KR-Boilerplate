@@ -4,4 +4,8 @@
 
 <XioniArticle {article} />
 
-<Link to="./">Zurück zur Übersicht</Link>
+<hr />
+
+<div class="$text-center">
+	<Link icon="fas fa-reply" to="./">Zurück zur Übersicht</Link>
+</div>

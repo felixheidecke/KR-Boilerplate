@@ -11,6 +11,7 @@
 	import Picture from '../Picture/Picture.svelte'
 	import Link from '../Link/Link.svelte'
 	import Icon from '../Icon/Icon.svelte'
+	import Button from '../Button/Button.svelte'
 
 	// --- Props ------------------------
 
@@ -19,7 +20,7 @@
 	const baseName = $$props['ex-class'] || 'XioniArticle'
 	const className = classnames(baseName, $$props.class)
 
-	const hasMetadata = author || date || pdf || website
+	const hasMetadata = author || date || website
 </script>
 
 <article class={className} id={'xioni-article-' + id}>
@@ -42,14 +43,6 @@
 				<li>
 					<Icon name="far fa-calendar-alt" class="$mr-1/4" />
 					<time class={baseName + '__date'}>{format(date, 'PPP', { locale: de })}</time>
-				</li>
-			{/if}
-
-			{#if pdf}
-				<li>
-					<Link to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
-						{pdf.title}
-					</Link>
 				</li>
 			{/if}
 
@@ -83,5 +76,9 @@
 		</div>
 	{/if}
 
-	<slot />
+	{#if pdf}
+		<Button to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
+			{pdf.title}
+		</Button>
+	{/if}
 </article>
