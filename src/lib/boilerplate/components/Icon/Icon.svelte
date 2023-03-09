@@ -1,10 +1,10 @@
 <script lang="ts">
 	import './Icon.css'
-	import classnames from 'classnames'
-	export let name = 'fas fa-carrot'
-	export let size: number | string | false = false
 
-	size = +size
+	import classnames from 'classnames'
+
+	export let name = 'fas fa-carrot'
+	export let size: number | string = 0
 
 	// --- CSS Class --------------------
 
@@ -14,7 +14,7 @@
 		$$props.class,
 		baseName,
 		name,
-		!(size > 1 && size <= 10) || `fa-${size}x`
+		!(+size > 1 && +size <= 10) || `fa-${size}x`
 	)
 </script>
 

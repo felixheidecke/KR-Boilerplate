@@ -5,7 +5,7 @@
 		"a11y-click-events-have-key-events": "ignore"
 	},
 	"search.exclude": {
-		"**/boilerplate": true
+		// "**/boilerplate": true
 	},
 	"files.exclude": {
 		".svelte-kit": true,
