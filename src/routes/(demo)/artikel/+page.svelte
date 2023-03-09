@@ -1,18 +1,7 @@
-<!--
-
-  <XioniArticleTile> Parameter:
-  *****************************
-
-	"article"        [Object]
-	"basePath"?      [String] = ''
-	"linkDelimiter"? [String] = '_'
-	"linkText"?      [String] = 'Weiterlesen'
-
--->
 <script>
-	export let data
+	import './+page.css'
 
-	const { articles } = data
+	const { articles } = $$props.data
 </script>
 
 <h1 class="$text-center $my-3">Artikel</h1>

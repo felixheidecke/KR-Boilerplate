@@ -1,17 +1,22 @@
 <script lang="ts">
 	import './picture.css'
+
+	import { PicturePropsLoading, type PictureProps } from './Picture.types'
 	import classnames from 'classnames'
 
-	// --- Data -------------------------
+	// --- Props -------------------------
 
-	export let src: string
-	export let alt = ''
-	export let loading: 'lazy' | 'eager' = 'lazy'
-	export let align: 'left' | 'right' | undefined = undefined
+	// export let src: PictureProps['src']
+	// export let tablet: PictureProps['tablet'] = undefined
+	// export let desktop: PictureProps['desktop'] = undefined
+	// export let widescreen: PictureProps['widescreen'] = undefined
+	// export let alt: PictureProps['alt'] = ''
 
-	export let tablet: string | undefined = undefined
-	export let desktop: string | undefined = undefined
-	export let widescreen: string | undefined = undefined
+	$: ({ src, tablet, desktop, widescreen, alt, loading, align, id } = {
+		loading: PicturePropsLoading.LAZY,
+		alt: '',
+		...$$props
+	} as PictureProps)
 
 	// --- CSS Class --------------------
 
@@ -24,7 +29,7 @@
 	)
 </script>
 
-<picture>
+<picture {id}>
 	{#if widescreen}
 		<source srcset={widescreen} media="(min-width: 1441px)" />
 	{/if}

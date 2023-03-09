@@ -1,27 +1,27 @@
 @mixin font-small {
-  font-size: 0.875rem;
-  line-height: 1.45rem;
+	font-size: 0.875rem;
+	line-height: 1.45rem;
 }
 
 @mixin font-smaller {
-  font-size: 0.75rem;
-  line-height: 1.45rem;
+	font-size: 0.75rem;
+	line-height: 1.45rem;
 }
 
 @mixin font-large {
-  font-size: 1.125rem;
-  line-height: 1.65rem;
+	font-size: 1.125rem;
+	line-height: 1.65rem;
 }
 
 @mixin font-larger {
-  font-size: 1.25rem;
-  line-height: 1.65rem;
+	font-size: 1.25rem;
+	line-height: 1.65rem;
 }
 
 @mixin font-bold {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 @mixin font-italic {
-  font-style: italic;
+	font-style: italic;
 }

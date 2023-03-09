@@ -1,31 +1,31 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "npm",
-      "script": "dev",
-      "group": "build",
-      "problemMatcher": [],
-      "label": "Watcher",
-      "detail": "Wiederholtes kompilieren wenn sich Dateien ändern"
-    },
-    {
-      "type": "npm",
-      "script": "build",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": [],
-      "label": "Build",
-      "detail": "Einmaliges kompilieren"
-    },
-    {
-      "type": "npm",
-      "script": "install",
-      "problemMatcher": [],
-      "label": "Install",
-      "detail": "Boilerplate Daten installieren"
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "Watcher",
+			"detail": "Wiederholtes kompilieren wenn sich Dateien ändern"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "Build",
+			"detail": "Einmaliges kompilieren"
+		},
+		{
+			"type": "npm",
+			"script": "install",
+			"problemMatcher": [],
+			"label": "Install",
+			"detail": "Boilerplate Daten installieren"
+		}
+	]
 }

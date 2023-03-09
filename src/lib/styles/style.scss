@@ -1,3 +1,6 @@
 @import 'variables';
 
-@import 'XioniArticle', 'XioniArticleTile', 'Nav';
+html,
+body {
+	color: $c-dark;
+}

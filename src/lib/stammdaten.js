@@ -1,6 +1,6 @@
 export default {
 	name: 'Musterfirma GmbH',
-	title: 'Muster mustergültig',
+	title: 'Mustergültige Muster und Formen',
 	street: '',
 	town: '',
 	phone: '',

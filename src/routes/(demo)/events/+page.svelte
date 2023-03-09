@@ -1,18 +1,5 @@
-<!--
-
-  <XioniEventTile> Parameter:
-  ***************************
-
-	"event"  		      [Object]
-	"basePath"? 		  [String]
-	"linkDelimiter"?  [String] = '_'
-	"linkText"?       [String] = 'Mehr erfahren'
-
--->
 <script>
-	export let data
-
-	const { events } = data
+	const { events } = $$props.data
 </script>
 
 <h1 class="$text-center $my-3">Events</h1>
@@ -24,3 +11,5 @@
 		</Grid>
 	{/each}
 </Grid>
+
+<!-- Dokumentation: https://ogy.de/a1y1 -->

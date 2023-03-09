@@ -1,0 +1,23 @@
+.XioniArticleTile {
+	background-color: transparent;
+	box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.125);
+	padding: 0;
+}
+
+.XioniArticleTile__link {
+	transform: translateY(-1rem);
+}
+
+.XioniArticleTile__metadata {
+	padding: 0 1rem 1rem;
+	gap: 1rem;
+	font-size: 0.9rem;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+}
+
+.XioniArticleTile__title,
+.XioniArticleTile__text,
+.XioniArticleTile__link {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}

@@ -6,7 +6,7 @@
 .XioniArticle__image {
 	order: -3;
 	padding: 1rem;
-	box-shadow: 0 0 0.75rem rgba(black, 0.333);
+	box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.333);
 }
 
 .XioniArticle__title {
@@ -17,11 +17,11 @@
 .XioniArticle__teaser {
 	order: -1;
 	text-align: center;
+}
 
-	p {
-		font-size: 1.25rem;
-		line-height: 2rem;
-	}
+.XioniArticle__teaser p {
+	font-size: 1.25rem;
+	line-height: 2rem;
 }
 
 .XioniArticle__metadata {
@@ -29,16 +29,14 @@
 	padding: 1rem;
 	gap: 2rem;
 	font-size: 0.9rem;
-	border: {
-		top: 1px solid lightgray;
-		bottom: 1px solid lightgray;
-	}
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
 }
 
 .XioniArticle__content {
 	margin-top: 2rem;
+}
 
-	p {
-		line-height: 1.75rem;
-	}
+.XioniArticle__content p {
+	line-height: 1.75rem;
 }
