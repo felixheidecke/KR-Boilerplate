@@ -1,32 +1,37 @@
-<script>
-	import './mail.css'
+<script lang="ts">
+	import './Mail.css'
+
 	import classnames from 'classnames'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
+	import type { MailProps } from './Mail.types'
+
+	// --- [ Components ] ----------------------------------------------------------------------------
+
 	import Icon from '../Icon/Icon.svelte'
 
-	export let to
-	export let icon = 'fas fa-envelope'
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	if (icon === 'false') icon = false
+	export let to: MailProps['to']
+	export let icon: MailProps['icon'] = 'fas fa-envelope'
 
-	const iconName = typeof icon === 'boolean' ? 'far fa-envelope' : icon
-	const obfuscated = to.trim().split('').join('&shy;')
+	// --- [ Logic ] ---------------------------------------------------------------------------------
 
-	// --- CSS Class --------------------
-
+	const obfuscatedEmail = to.replaceAll('@', '&#64;').replaceAll('.de', '&#8228;&#100;&#101;')
 	const baseName = $$props['ex-class'] || 'Mail'
-
-	$: className = classnames(baseName, $$props.class)
+	const className = classnames(baseName, $$props.class)
 </script>
 
-<a name="email" ref="external" on:click={() => (location.href = 'mailto:' + to)} class={className}>
+<a href="/#" on:click|preventDefault={() => (location.href = 'mailto:' + to)} class={className}>
 	{#if icon}
-		<Icon ex-class={baseName + '__icon'} name={iconName} />
+		<Icon ex-class={baseName + '__icon'} name={icon} />
 	{/if}
 	<span class={baseName + '__address'}>
 		{#if $$slots.default}
 			<slot />
 		{:else}
-			{@html obfuscated}
+			{@html obfuscatedEmail}
 		{/if}
 	</span>
 </a>

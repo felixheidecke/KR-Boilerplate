@@ -1,45 +1,48 @@
-<script>
+<script lang="ts">
 	import './Input.scss'
+
 	import classnames from 'classnames'
 	import { uniqueId } from 'lodash-es'
 
-	export let label = null
-	export let max = null
-	export let min = null
-	export let name = 'input'
-	export let placeholder = null
-	export let readonly = null
-	export let required = false
-	export let type = 'text'
-	export let value = ''
+	// --- [ Types ] ---------------------------------------------------------------------------------
 
+	import { type InputProps, ImputPropsType } from './Input.types'
+
+	// --- [ Props ] ---------------------------------------------------------------------------------
+
+	export let label: InputProps['label'] = ''
+	export let max: InputProps['max'] = undefined
+	export let min: InputProps['min'] = undefined
+	export let name: InputProps['name'] = 'input'
+	export let placeholder: InputProps['placeholder'] = 'input'
+	export let readonly: InputProps['readonly'] = false
+	export let required: InputProps['required'] = false
+	export let type: InputProps['type'] = ImputPropsType.TEXT
+	export let value: InputProps['value'] = ''
+
+	// --- [ Logic ] ---------------------------------------------------------------------------------
+
+	const baseName = $$props['ex-class'] || 'Input'
+	const className = classnames(baseName, $$props.class)
 	const id = uniqueId(name + '-')
-	$: inputProps = {
-		id,
+	const inputProps = {
 		max,
 		min,
 		name,
 		placeholder,
 		required,
-		type,
-		readonly
+		readonly,
+		type
 	}
 
-	$: if (label && required) label += '*'
-
-	// --- CSS Class --------------------
-
-	const baseName = $$props['ex-class'] || 'Input'
-
-	$: className = classnames(baseName, $$props.class)
+	$: if (label && required) {
+		label += '*'
+	}
 </script>
 
-<div class={className}>
+<div {id} class={className}>
 	{#if label}
 		<label class={baseName + '__label'} for={id}>{label}</label>
 	{/if}
 	<input class={baseName + '__input'} {...inputProps} bind:value />
 </div>
-
-<style global lang="scss">
-</style>

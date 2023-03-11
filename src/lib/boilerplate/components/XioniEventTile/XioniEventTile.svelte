@@ -6,7 +6,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/event.types'
+	import type { XioniEventTileProps } from './XioniEventTile.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -15,10 +15,10 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let basePath = ''
-	export let linkDelimiter = '_'
-	export let linkText = 'Mehr erfahren'
-	export let event: XioniEvent
+	export let basePath: XioniEventTileProps['basePath'] = ''
+	export let linkDelimiter: XioniEventTileProps['linkDelimiter'] = '_'
+	export let linkText: XioniEventTileProps['linkText'] = 'Mehr erfahren'
+	export let event: XioniEventTileProps['event']
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 

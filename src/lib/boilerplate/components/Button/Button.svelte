@@ -5,14 +5,21 @@
 	// --- Components --------------------------------------------------------------------------------
 
 	import Icon from '../Icon/Icon.svelte'
+	import type { ButtonProps } from './Button.types'
 
 	// --- Props -------------------------------------------------------------------------------------
 
-	export let to: string | undefined = undefined
-	export let icon: string | undefined = undefined
-	export let disabled = false
-	export let target: '_blank' | '_self' | undefined = undefined
-	export let isLoading = false
+	// export let to: string | undefined = undefined
+	// export let icon: string | undefined = undefined
+	// export let disabled = false
+	// export let target: '_blank' | '_self' | undefined = undefined
+	// export let isLoading = false
+
+	$: ({ to, icon, disabled, target, isLoading } = {
+		disabled: false,
+		isLoading: false,
+		...$$props
+	} as ButtonProps)
 
 	// --- Data --------------------------------------------------------------------------------------
 
@@ -20,6 +27,7 @@
 	const className = classnames(
 		baseName,
 		$$props.class,
+		!disabled || baseName + '--disabled',
 		!to || baseName + '--anchor',
 		!isLoading || baseName + '--loading'
 	)

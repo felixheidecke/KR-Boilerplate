@@ -1,26 +1,31 @@
 <script lang="ts">
-	import './lightbox.scss'
+	import './Lightbox.scss'
+
 	import { onMount } from 'svelte'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
+	import type { LightboxProps } from './Lightbox.types'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
 	import Icon from '../Icon/Icon.svelte'
 	import Modal from '../Modal/Modal.svelte'
 
-	type Images = { src: string; alt: string }[]
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	// Refs
+	export let images = [] as LightboxProps['images']
+	export let id = ''
+
+	// --- [ Logic ] ---------------------------------------------------------------------------------
+
 	let lightbox: HTMLElement
 	let modal: Modal
-
-	// --- Data -------------------------
-
-	export let images = [] as Images
-
-	let lightboxImages = images as Images
+	let lightboxImages = images
 	let index = -1
 	let isMobile = true
 
 	$: activeImage = lightboxImages[index] || {}
-
-	// --- Methods ----------------------
 
 	export function open(i: number = -1): void {
 		if (i >= 0) index = i
@@ -59,7 +64,7 @@
 	})
 </script>
 
-<div class="Lightbox">
+<div class="Lightbox" {id}>
 	<div bind:this={lightbox}>
 		<slot />
 	</div>

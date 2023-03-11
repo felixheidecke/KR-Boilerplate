@@ -3,6 +3,7 @@
 	display: inline-flex;
 	gap: 0.5rem;
 	align-items: center;
+	text-decoration: none;
 }
 
 :where(.Mail__address) {

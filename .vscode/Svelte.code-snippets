@@ -16,23 +16,5 @@
 			"</style>"
 		],
 		"description": "Svelte File"
-	},
-	"Comment": {
-		"scope": "svelte",
-		"prefix": "cc",
-		"body": ["// --- $1 -----------------------------"]
-	},
-	"Svelte load function (ts)": {
-		"scope": "typescript",
-		"prefix": "load",
-		"body": [
-			"import type { PageLoad } from './$types'",
-			"export const load: PageLoad = (params) => {}"
-		]
-	},
-	"Svelte load function (ja)": {
-		"scope": "javascript",
-		"prefix": "load",
-		"body": ["export const load = (params) => {$1}"]
 	}
 }

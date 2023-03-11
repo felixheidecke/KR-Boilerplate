@@ -2,46 +2,47 @@
 	import './Link.css'
 	import classnames from 'classnames'
 
-	// --- Components --------------------------------------------------------------------------------
+	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Icon from '../Icon/Icon.svelte'
 
-	// --- Props -------------------------------------------------------------------------------------
+	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	export let to: string
-	export let target: '_self' | '_blank' | undefined = undefined
-	export let icon: string | undefined = undefined
-	export let rel: 'no-follow' | 'follow' = 'follow'
-	export let tag: 'a' | 'button' = 'a'
+	import { LinkPropsRel, LinkPropsTag, LinkPropsTarget, type LinkProps } from './Link.types'
 
-	// --- Methods -----------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export const isExternalLink = (link: string) => {
-		return !link.search(/(http(s)?|ftp):\/\//) || !link.indexOf('//')
-	}
+	export let to: LinkProps['to']
+	export let target: LinkProps['target'] = undefined
+	export let icon: LinkProps['icon'] = undefined
+	export let rel: LinkProps['rel'] = LinkPropsRel.FOLLOW
+	export let tag: LinkProps['tag'] = LinkPropsTag.ANCHOR
 
-	const trimScheme = (link: string) => {
-		if (!isExternalLink(link)) return link
-
-		const { hostname } = new URL(link)
-		return hostname
-	}
-
-	// --- Data --------------------------------------------------------------------------------------
+	// --- [ Logic ] ---------------------------------------------------------------------------------
 
 	if (isExternalLink(to)) {
-		rel = 'no-follow'
-		target = '_blank'
+		rel = LinkPropsRel.NO_REFERRER
+		target = LinkPropsTarget.BLANK
 	}
 
 	const baseName = $$props['ex-class'] || 'Link'
-
-	$: className = classnames(
+	const className = classnames(
 		baseName,
 		$$props.class,
 		!icon || baseName + '--has-icon',
 		isExternalLink(to) ? baseName + '--external' : baseName + '--internal'
 	)
+
+	function isExternalLink(link: string) {
+		return !link.search(/(http(s)?|ftp):\/\//) || !link.indexOf('//')
+	}
+
+	function trimScheme(link: string) {
+		if (!isExternalLink(link)) return link
+
+		const { hostname } = new URL(link)
+		return hostname
+	}
 </script>
 
 {#if icon}

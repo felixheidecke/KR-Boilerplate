@@ -1,4 +1,4 @@
-# <XioniEventTile> (Component)
+# \<XioniEventTile> (Component)
 
 Event Kachel zur Darstellung mehrerer Events in eine Übersicht/Liste
 
@@ -10,7 +10,7 @@ Event Kachel zur Darstellung mehrerer Events in eine Übersicht/Liste
 | `linkText`      | `String`     | Mehr erfahren | Dertail-Link Text                 |
 | `class`         | `String`     |               | CSS Klasse                        |
 
-# <XioniEvent> (Component)
+# \<XioniEvent> (Component)
 
 Volle Darstellung eines einzelnene Events
 
