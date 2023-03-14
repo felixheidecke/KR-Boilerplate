@@ -10,14 +10,6 @@ Event Kachel zur Darstellung mehrerer Events in eine Übersicht/Liste
 | `linkText`      | `String`     | Mehr erfahren | Dertail-Link Text                         |
 | `class`         | `String`     |               | CSS Klasse                                |
 
-# \<XioniEvent> (Component)
-
-Volle Darstellung eines einzelnene Events
-
-| Parameter    | Typ          | Standard | Beschreibung                              |
-| ------------ | ------------ | -------- | ----------------------------------------- |
-| `event` (\*) | `XioniEvent` |          | Veranstaltung (Siehe https://ogy.de/k4ya) |
-
 ## Slots
 
 keine
