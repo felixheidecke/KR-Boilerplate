@@ -7,28 +7,26 @@ export interface XioniEvent {
 	ends: Date
 	description: string
 	details: string
-	image: {
+	image?: {
 		src: string
 		thumbSrc: string
 		alt: string
-	} | null
-	pdf: {
+	}
+	pdf?: {
 		src: string
 		name: string
 		title: string
-	} | null
-	website: URL | null
-	ticketshop: URL | null
+	}
+	website?: URL
+	ticketshop?: URL
 	organizer: string
 	coordinates?: {
 		lat: number
 		lng: number
-	} | null
+	}
 	images: {
 		src: string
 		alt: string
 	}[]
 	flags: string[]
 }
-
-export type XioniEvents = XioniEvent[]

@@ -6,7 +6,7 @@
 
 <Grid tag="ul" gap>
 	{#each events as event}
-		<Grid tag="li" size="1-2">
+		<Grid tag="li" size="tablet-1-2">
 			<XioniEventTile {event} basePath="/events/" />
 		</Grid>
 	{/each}

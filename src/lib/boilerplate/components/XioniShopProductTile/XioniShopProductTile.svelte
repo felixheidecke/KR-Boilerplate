@@ -1,17 +1,19 @@
 <script lang="ts">
 	import './XioniShopProductTile.css'
+
 	import classnames from 'classnames'
 	import { goto } from '$app/navigation'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
 	import type { XioniShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
 
-	// --- Components --------------------------------------------------------------------------------
-
-	// --- Props -------------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let link: string
 	const { id, name, category, price, VAT, image } = $$props.product as XioniShopProduct
 
-	// --- Data --------------------------------------------------------------------------------------
+	// --- [ Logic ] ---------------------------------------------------------------------------------
 
 	const baseName = $$props['ex-class'] || 'XioniShopProductTile'
 	const className = classnames(baseName, $$props.class)

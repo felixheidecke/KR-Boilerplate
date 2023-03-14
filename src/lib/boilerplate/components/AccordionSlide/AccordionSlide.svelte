@@ -1,5 +1,6 @@
 <script lang="ts">
-	import './AccordionSlide.scss'
+	import './AccordionSlide.css'
+
 	import classnames from 'classnames'
 	import { getContext } from 'svelte'
 	import { slide } from 'svelte/transition'

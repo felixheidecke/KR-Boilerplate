@@ -38,12 +38,10 @@
 	<h5 class="XioniEventTile__title">
 		{title}
 	</h5>
-	<ul class="XioniEventTile__metadata">
-		<li class="XioniEventTile__date">
-			<Icon name="far fa-calendar-alt" class="$mr-1/4" />
-			<time>{@html formatFromTo(starts, ends)}</time>
-		</li>
-	</ul>
+	<span class="XioniEventTile__date">
+		<Icon name="far fa-calendar-alt" class="XioniEventTile__date-icon $mr-1/4" />
+		<time>{@html formatFromTo(starts, ends)}</time>
+	</span>
 	<div class="XioniEventTile__description">
 		{@html description}
 	</div>

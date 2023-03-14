@@ -1,16 +1,3 @@
-<!--
-
-  <XioniEvent> Parameter:
-  ***********************
-
-	"event" 	[Object]
-
-  <XioniEventRegistration> Parameter:
-  ***********************************
-
-	"formId"  [Number | String]
-
--->
 <script>
 	import { writable } from 'svelte/store'
 	import { setContext } from 'svelte'

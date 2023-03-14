@@ -1,12 +1,12 @@
-# \<Component>
+# \<AccordionSlide>
 
-Description
+Akkordeon im Zusammenspiel mit \<Accordion>
 
 ## Parameter
 
 | Parameter | Typ      | Default | Beschreibung |
 | --------- | -------- | ------- | ------------ |
-| `id`      | `string` |         |              |
+| `title`   | `string` |         | Slide Titel  |
 | `class`   | `string` |         |              |
 
 ## Slots
@@ -16,8 +16,8 @@ Description
 ## Styles
 
 ```CSS
-.Component {
-  &__element   {}
-  &--modifier  {}
+.AccordionSlide {
+  &__title   {}
+  &__content {}
 }
 ```

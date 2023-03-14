@@ -1,11 +1,3 @@
-<!--
-
-  <AccordionSlide> Parameter:
-  ***************************
-
-  "title"  [String]
-
--->
 <h1 class="$text-center $my-3">Accordion</h1>
 
 <Accordion>

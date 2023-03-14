@@ -1,16 +1,19 @@
 import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
-import type { XioniEvent, XioniEvents } from './event.types'
+import type { XioniEvent } from './event.types'
 
 export default (fetchFn: typeof fetch = fetch) => {
 	const fetchJSON = FetchJSON(fetchFn)
 
 	/**
-	 * Get all XioniEvents by module
+	 * Get all Events by module
 	 *
 	 * @param module Module id
-	 * @param limit Limit number of XioniEvents
-	 * @returns XioniEvents
+	 * @param filter.limit Maximale Anzahl an Artikeln
+	 * @param filter.startsBefore Event startet vor Datum
+	 * @param filter.startsAfter Event startet nach Datum
+	 * @param filter.endsBefore Event endet vor Datum
+	 * @param filter.endsAfter Event endet nach Datum
 	 */
 
 	async function getMany(
@@ -50,7 +53,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 
 		if (!ok) return
 
-		const events = data.map(eventAdapter) as XioniEvents
+		const events = data.map(eventAdapter) as XioniEvent[]
 
 		if (callback) {
 			callback(events)
@@ -61,10 +64,10 @@ export default (fetchFn: typeof fetch = fetch) => {
 	}
 
 	/**
-	 * Get a single XioniEvents
+	 * Get a single XioniEvent
 	 *
-	 * @param id XioniEvents id
-	 * @returns XioniEvents
+	 * @param id XioniEvent id
+	 * @returns XioniEvent
 	 */
 
 	async function getOne(id: number, callback: Function | undefined = undefined) {
