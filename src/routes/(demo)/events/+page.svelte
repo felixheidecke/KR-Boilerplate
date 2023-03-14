@@ -1,4 +1,6 @@
 <script>
+	import './+page.css'
+
 	const { events } = $$props.data
 </script>
 

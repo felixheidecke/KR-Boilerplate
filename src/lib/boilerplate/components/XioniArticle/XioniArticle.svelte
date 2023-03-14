@@ -34,21 +34,21 @@
 	{#if hasMetadata}
 		<ul class={baseName + '__metadata'}>
 			{#if author}
-				<li>
+				<li class={baseName + '__author'}>
 					<Icon name="far fa-user" class="$mr-1/4" />
-					<span class={baseName + '__author'}>Von {author}</span>
+					<span>Von {author}</span>
 				</li>
 			{/if}
 			{#if date}
-				<li>
+				<li class={baseName + '__date'}>
 					<Icon name="far fa-calendar-alt" class="$mr-1/4" />
-					<time class={baseName + '__date'}>{format(date, 'PPP', { locale: de })}</time>
+					<time>{format(date, 'PPP', { locale: de })}</time>
 				</li>
 			{/if}
 
 			{#if website}
-				<li>
-					<Link to={website.toString()} class={baseName + '__website'} icon="fas fa-link" />
+				<li class={baseName + '__website'}>
+					<Link to={website.toString()} icon="fas fa-link" />
 				</li>
 			{/if}
 		</ul>

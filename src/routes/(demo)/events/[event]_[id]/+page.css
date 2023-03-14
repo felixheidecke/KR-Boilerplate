@@ -1,0 +1,42 @@
+.XioniEvent {
+	display: flex;
+	flex-direction: column;
+}
+
+.XioniEvent__image-wrapper {
+	order: -3;
+	padding: 1rem;
+	box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.333);
+}
+
+.XioniEvent__title {
+	order: -2;
+	text-align: center;
+}
+
+.XioniEvent__description {
+	order: -1;
+	text-align: center;
+}
+
+.XioniEvent__description p {
+	font-size: 1.25rem;
+	line-height: 2rem;
+}
+
+.XioniEvent__metadata {
+	justify-content: center;
+	padding: 1rem;
+	gap: 2rem;
+	font-size: 0.9rem;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+}
+
+.XioniEvent__content {
+	margin-top: 2rem;
+}
+
+.XioniEvent__content p {
+	line-height: 1.75rem;
+}

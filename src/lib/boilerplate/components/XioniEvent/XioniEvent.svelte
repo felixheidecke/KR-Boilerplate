@@ -13,10 +13,11 @@
 	import Icon from '../Icon/Icon.svelte'
 	import Grid from '../Grid/Grid.svelte'
 	import Lightbox from '../Lightbox/Lightbox.svelte'
+	import Button from '../Button/Button.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const { description, details, ends, image, pdf, flags, starts, title, website, ticketshop } =
+	const { id, description, details, ends, image, pdf, flags, starts, title, website, ticketshop } =
 		$$props.event as XioniEvent
 
 	const images = $$props.event.images || []
@@ -49,7 +50,7 @@
 	<Lightbox bind:this={lightbox} {images} />
 {/if}
 
-<div class={className}>
+<div class={className} id={'xioni-event-' + id}>
 	{#if image || images?.length}
 		<div class="{baseName}__image-wrapper">
 			{#if image}
@@ -92,52 +93,47 @@
 		{title}
 	</h1>
 
-	<div class={baseName + '__description'}>
-		{@html description}
-	</div>
-
-	<ul class={baseName + '__info-list'}>
-		<li class={baseName + '__info-list-item'}>
+	<ul class={baseName + '__metadata'}>
+		<li class={baseName + '__date'}>
 			<Icon name="fas fa-calendar" class="$mr-1/2" />
-			<date class="$font-italic">
+			<date>
 				{@html formatFromTo(starts, ends)}
 			</date>
 		</li>
 
 		{#if allowRegistration}
-			<li on:click={() => activeEvent.set($$props.event)}>
+			<li on:click={() => activeEvent.set($$props.event)} class={baseName + '__registration'}>
 				<Icon name="fas fa-ticket-alt" class="$mr-1/2" />
 				<span class="$underline $pointer">Jetzt anmelden</span>
 			</li>
 		{/if}
 
 		{#if ticketshop && !allowRegistration}
-			<li class={baseName + '__info-list-item'}>
-				<Link to={ticketshop.toString()} class={baseName + '__ticketshop'} icon="fas fa-ticket-alt">
-					Zum Ticketshop
-				</Link>
+			<li class={baseName + '__ticketshop'}>
+				<Link to={ticketshop.toString()} icon="fas fa-ticket-alt">Zum Ticketshop</Link>
 			</li>
 		{/if}
 
 		{#if website}
-			<li class={baseName + '__info-list-item'}>
+			<li class={baseName + '__website'}>
 				<Link icon="fas fa-globe" to={website.toString()} />
-			</li>
-		{/if}
-
-		{#if pdf}
-			<li class={baseName + '__info-list-item'}>
-				<Link to={pdf.src} target="_blank" icon="fas fa-file-pdf">
-					{pdf.title}
-				</Link>
 			</li>
 		{/if}
 	</ul>
 
+	<div class={baseName + '__description'}>
+		{@html description}
+	</div>
+
 	{#if details}
-		<div class={baseName + '__details'}>
+		<div class={baseName + '__content'}>
 			{@html details}
 		</div>
 	{/if}
-	<slot />
+
+	{#if pdf}
+		<Button to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
+			{pdf.title}
+		</Button>
+	{/if}
 </div>

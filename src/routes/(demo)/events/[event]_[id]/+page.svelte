@@ -1,4 +1,6 @@
 <script>
+	import './+page.css'
+
 	import { writable } from 'svelte/store'
 	import { setContext } from 'svelte'
 
@@ -25,4 +27,8 @@
 	</Grid>
 </XioniEventRegistration>
 
-<Link class="$inline-block $mt-3 $mb-2" to="./" icon="fas fa-arrow-left">Zurück</Link>
+<hr />
+
+<div class="$text-center">
+	<Link icon="fas fa-reply" to="./">Zurück zur Übersicht</Link>
+</div>
