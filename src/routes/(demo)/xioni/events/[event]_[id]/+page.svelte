@@ -1,6 +1,4 @@
 <script>
-	import './+page.css'
-
 	import { writable } from 'svelte/store'
 	import { setContext } from 'svelte'
 
@@ -27,8 +25,6 @@
 	</Grid>
 </XioniEventRegistration>
 
-<hr />
-
-<div class="$text-center">
+<div class="$text-center $mt-2">
 	<Link icon="fas fa-reply" to="./">Zurück zur Übersicht</Link>
 </div>

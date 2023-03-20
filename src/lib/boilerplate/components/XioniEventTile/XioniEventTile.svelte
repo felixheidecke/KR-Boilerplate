@@ -11,10 +11,10 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '../Link/Link.svelte'
-	import Icon from '../Icon/Icon.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
+	export let tag: XioniEventTileProps['tag'] = 'div'
 	export let basePath: XioniEventTileProps['basePath'] = ''
 	export let linkDelimiter: XioniEventTileProps['linkDelimiter'] = '_'
 	export let linkText: XioniEventTileProps['linkText'] = 'Mehr erfahren'
@@ -26,7 +26,7 @@
 	const link = basePath + slug + linkDelimiter + id
 </script>
 
-<div class="XioniEventTile">
+<svelte:element this={tag} class="XioniEventTile">
 	{#if image}
 		<img
 			class="XioniEventTile__image"
@@ -35,17 +35,16 @@
 			on:click={() => goto(link)}
 		/>
 	{/if}
-	<h5 class="XioniEventTile__title">
+	<h3 class="XioniEventTile__title">
 		{title}
-	</h5>
-	<span class="XioniEventTile__date">
-		<Icon name="far fa-calendar-alt" class="XioniEventTile__date-icon $mr-1/4" />
-		<time>{@html formatFromTo(starts, ends)}</time>
-	</span>
+	</h3>
+	<time datetime={starts.toLocaleDateString('de-DE')} class="XioniEventTile__date">
+		{@html formatFromTo(starts, ends)}
+	</time>
 	<div class="XioniEventTile__description">
 		{@html description}
 	</div>
 	<Link to={link} class="XioniEventTile__link $row-reverse" icon="fas fa-angle-right">
 		{linkText}
 	</Link>
-</div>
+</svelte:element>

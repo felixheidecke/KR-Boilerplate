@@ -16,7 +16,7 @@ html {
 	}
 }
 
-body {
+:where(body) {
 	@include reset;
 	background: #fff;
 	width: 100%;
@@ -34,14 +34,14 @@ abbr {
 	cursor: help;
 }
 
-hr {
+:where(hr) {
 	margin: 2rem 0 calc(2rem - 1px);
 	padding: 0;
 	border: 0;
 	border-bottom: 1px solid lightgray;
 }
 
-blockquote {
+:where(blockquote) {
 	margin: 1rem 0;
 	padding: 0.01px 1rem;
 	background: lightgray;

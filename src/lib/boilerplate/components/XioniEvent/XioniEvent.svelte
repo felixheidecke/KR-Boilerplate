@@ -13,7 +13,6 @@
 	import Icon from '../Icon/Icon.svelte'
 	import Grid from '../Grid/Grid.svelte'
 	import Lightbox from '../Lightbox/Lightbox.svelte'
-	import Button from '../Button/Button.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -89,18 +88,25 @@
 		</div>
 	{/if}
 
-	<h1 class={baseName + '__title'}>
+	<h2 class={baseName + '__title'}>
 		{title}
-	</h1>
+	</h2>
+
+	<date datetime={starts.toDateString()} class={baseName + '__date'}>
+		{@html formatFromTo(starts, ends)}
+	</date>
+
+	<div class={baseName + '__description'}>
+		{@html description}
+	</div>
+
+	{#if details}
+		<div class={baseName + '__content'}>
+			{@html details}
+		</div>
+	{/if}
 
 	<ul class={baseName + '__metadata'}>
-		<li class={baseName + '__date'}>
-			<Icon name="fas fa-calendar" class="$mr-1/2" />
-			<date>
-				{@html formatFromTo(starts, ends)}
-			</date>
-		</li>
-
 		{#if allowRegistration}
 			<li on:click={() => activeEvent.set($$props.event)} class={baseName + '__registration'}>
 				<Icon name="fas fa-ticket-alt" class="$mr-1/2" />
@@ -119,21 +125,11 @@
 				<Link icon="fas fa-globe" to={website.toString()} />
 			</li>
 		{/if}
+
+		{#if pdf}
+			<li class={baseName + '__pdf'}>
+				<Link icon="fas fa-file-pdf" to={pdf.src}>{pdf.title}</Link>
+			</li>
+		{/if}
 	</ul>
-
-	<div class={baseName + '__description'}>
-		{@html description}
-	</div>
-
-	{#if details}
-		<div class={baseName + '__content'}>
-			{@html details}
-		</div>
-	{/if}
-
-	{#if pdf}
-		<Button to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
-			{pdf.title}
-		</Button>
-	{/if}
 </div>

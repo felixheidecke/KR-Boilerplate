@@ -1,6 +1,4 @@
 <script>
-	import './+page.css'
-
 	const { articles } = $$props.data
 </script>
 
@@ -9,7 +7,7 @@
 <Grid tag="ul" gap>
 	{#each articles as article}
 		<Grid tag="li" size="1-2">
-			<XioniArticleTile {article} basePath="/artikel/" />
+			<XioniArticleTile {article} basePath="/xioni/artikel/" />
 		</Grid>
 	{/each}
 </Grid>

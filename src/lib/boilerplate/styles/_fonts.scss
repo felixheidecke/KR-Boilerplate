@@ -44,8 +44,8 @@ body {
 	font-family: 'Open Sans', Arial, sans-serif;
 }
 
-h1,
-.h1 {
+:where(h1),
+:where(.h1) {
 	font-size: 2.5rem;
 	line-height: 3.25rem;
 	margin: {
@@ -54,8 +54,8 @@ h1,
 	}
 }
 
-h2,
-.h2 {
+:where(h2),
+:where(.h2) {
 	font-size: 2rem;
 	line-height: 2rem;
 	margin: {
@@ -64,8 +64,8 @@ h2,
 	}
 }
 
-h3,
-.h3 {
+:where(h3),
+:where(.h3) {
 	font-size: 1.5rem;
 	line-height: 1.75rem;
 	margin: {
@@ -74,10 +74,10 @@ h3,
 	}
 }
 
-h4,
-.h4,
-p,
-.p {
+:where(h4),
+:where(.h4),
+:where(p),
+:where(.p) {
 	font-size: 1rem;
 	line-height: 1.5rem;
 	margin: {

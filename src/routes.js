@@ -40,20 +40,20 @@ export default [
 		name: 'Xioni',
 		routes: [
 			{
-				path: '/artikel',
+				path: '/xioni/artikel',
 				name: 'Artikel'
 			},
 			{
-				path: '/gallerie',
+				path: '/xioni/gallerie',
 				name: 'Gallerie'
 			},
 
 			{
-				path: '/speisekarte',
+				path: '/xioni/speisekarte',
 				name: 'Speisekarte'
 			},
 			{
-				path: '/events',
+				path: '/xioni/events',
 				name: 'Events'
 			}
 		]

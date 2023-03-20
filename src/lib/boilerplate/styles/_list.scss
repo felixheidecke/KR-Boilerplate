@@ -1,4 +1,5 @@
-:where(ul) {
+:where(ul),
+:where(ol) {
 	@include reset-list;
 }
 

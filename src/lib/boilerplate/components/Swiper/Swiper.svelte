@@ -3,8 +3,7 @@
 	import classnames from 'classnames'
 	import { onMount } from 'svelte'
 	import { uniqueId } from 'lodash-es'
-	// import Glide from '@glidejs/glide'
-	import Glide from '@glidejs/glide/dist/glide.modular.esm'
+	import Glide from '@glidejs/glide'
 	// Components
 	import Icon from '../Icon/Icon.svelte'
 
@@ -14,9 +13,8 @@
 	export let autoplay = 0
 	export let focusAt = 'center'
 	export let gap = 0
-	export let hoverpause = true
 	export let perView = 1
-	export let speed = 1000 // animationDuration
+	export let speed = 1500 // animationDuration
 	export let startAt = 0
 	export let type = 'carousel'
 	export let images = []
@@ -24,31 +22,27 @@
 	export let nav = true
 	export let config = null // Optional full config model
 
+	let swiper
+	const baseName = $$props['ex-class'] || 'Swiper'
+	const className = classnames(baseName, $$props.class, 'glide')
 	const id = uniqueId('swiper-')
-
 	const glideConfig = config || {
 		autoplay: +autoplay,
 		focusAt,
 		gap: +gap,
-		hoverpause,
 		perView: +perView,
 		animationDuration: +speed,
 		startAt: +startAt,
 		type
 	}
 
-	const swiper = new Glide('#' + id, glideConfig)
-
 	onMount(() => {
+		swiper = new Glide('#' + id, glideConfig)
 		slider
 			.querySelectorAll('.glide__slides > *')
 			.forEach((slide) => slide.classList.add('glide__slide'))
 		swiper.mount()
 	})
-
-	const baseName = $$props['ex-class'] || 'Swiper'
-
-	$: className = classnames(baseName, $$props.class, 'glide')
 </script>
 
 <div {id} class={className} bind:this={slider}>
