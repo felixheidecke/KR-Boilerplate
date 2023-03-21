@@ -1,7 +1,8 @@
 @import '$lib/boilerplate/styles/variables';
 
-:where(.XioniArticle) {
-	margin: 2rem 0;
+:where(.XioniArticle__author),
+:where(.XioniArticle__date) {
+	font-size: 0.9rem;
 }
 
 :where(.XioniArticle__image) {

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './XioniEventTile.css'
 
+	import { LOCALE } from '$lib/boilerplate/constants'
 	import { formatFromTo } from '$lib/boilerplate/utils/format-date'
 	import { goto } from '$app/navigation'
 
@@ -35,12 +36,14 @@
 			on:click={() => goto(link)}
 		/>
 	{/if}
-	<h3 class="XioniEventTile__title">
+	<h2 class="XioniEventTile__title">
 		{title}
+	</h2>
+	<h3 class="XioniEventTile__date">
+		<time datetime={starts.toLocaleDateString(LOCALE)}>
+			{@html formatFromTo(starts, ends)}
+		</time>
 	</h3>
-	<time datetime={starts.toLocaleDateString('de-DE')} class="XioniEventTile__date">
-		{@html formatFromTo(starts, ends)}
-	</time>
 	<div class="XioniEventTile__description">
 		{@html description}
 	</div>

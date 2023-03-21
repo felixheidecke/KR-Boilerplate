@@ -3,6 +3,7 @@
 	display: flow-root;
 	position: relative;
 	background-color: #eee;
+	width: 100%;
 }
 
 :where(.XioniEventTile__image) {

@@ -4,4 +4,4 @@
 
 <h1 class="$text-center $my-3">Gallerie</h1>
 
-<XioniGallery {gallery} detailPath="/xioni/gallerie/" />
+<XioniGallery {gallery} basePath="/xioni/gallerie/" />

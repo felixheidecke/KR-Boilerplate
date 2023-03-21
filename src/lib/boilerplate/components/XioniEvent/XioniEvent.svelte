@@ -45,7 +45,7 @@
 	})()
 </script>
 
-{#if images}
+{#if images.length}
 	<Lightbox bind:this={lightbox} {images} />
 {/if}
 

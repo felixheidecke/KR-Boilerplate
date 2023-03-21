@@ -4,7 +4,7 @@
 	// --- Props -------------------------------------------------------------------------------------
 
 	export let gallery: XioniGallery
-	export let detailPath = ''
+	export let basePath = ''
 	export let linkDelimiter = '_'
 
 	// --- Data --------------------------------------------------------------------------------------
@@ -12,7 +12,7 @@
 	const baseClass = $$props['ex-class'] || 'XioniGallery'
 
 	function makeLink(slug: string, id: number | string) {
-		return detailPath + slug + linkDelimiter + id
+		return basePath + slug + linkDelimiter + id
 	}
 
 	// --- Lifecycle ---------------------------------------------------------------------------------

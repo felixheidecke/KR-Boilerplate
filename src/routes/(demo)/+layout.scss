@@ -1,127 +1,160 @@
-body {
-	background-color: #e7e7e7;
-}
+body.pretty {
+	background-color: #f5dfd6;
 
-/* --- [ XIONI EVENT TILE ] --------------------------------------------------------------------- */
+	/* --- [ NAV ] ---------------------------------------------------------------------------------- */
 
-.XioniEventTile {
-	padding: 0;
-	background: white;
-	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
-	transition: box-shadow 0.25s;
+	.NavBar {
+		&__ul-ul {
+			background: white;
+			box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+			border-radius: 0.25rem;
+		}
 
-	&:hover {
-		box-shadow: 0 0 2rem rgba(0, 0, 0, 0.333);
-	}
-
-	&__title {
-		margin-top: 1rem;
-		margin-left: 1rem;
-	}
-
-	&__date,
-	&__description,
-	&__link {
-		margin-left: 1rem;
-	}
-}
-
-/* --- [ XIONI EVENT ] -------------------------------------------------------------------------- */
-
-.XioniEvent {
-	padding: 1rem 1rem 2rem;
-	background: white;
-	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
-
-	&__date {
-		font-size: 1rem;
-		font-style: italic;
-	}
-
-	&__title,
-	&__date,
-	&__description,
-	&__content,
-	&__metadata {
-		padding: {
-			left: 1rem;
-			right: 1rem;
+		&__a-a {
+			padding: 0.75rem 1.25rem;
 		}
 	}
-}
 
-/* --- [ XIONI ARTICLE TILE ] ------------------------------------------------------------------- */
+	/* --- [ XIONI EVENT TILE ] --------------------------------------------------------------------- */
 
-.XioniArticleTile {
-	background-color: white;
-	padding: 0;
-	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
-	transition: box-shadow 0.25s;
+	.XioniEventTile {
+		padding: 0;
+		background: white;
+		box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+		transition: box-shadow 0.25s;
 
-	&:hover {
-		box-shadow: 0 0 2rem rgba(0, 0, 0, 0.333);
+		&:hover {
+			box-shadow: 0 0 2rem rgba(0, 0, 0, 0.333);
+		}
+
+		&__title {
+			margin-top: 1rem;
+			margin-left: 1rem;
+		}
+
+		&__date,
+		&__description,
+		&__link {
+			margin-left: 1rem;
+		}
 	}
 
-	&__link {
-		transform: translateY(-1rem);
+	/* --- [ XIONI EVENT ] -------------------------------------------------------------------------- */
+
+	.XioniEvent {
+		padding: 1rem 1rem 2rem;
+		background: white;
+		box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+
+		&__date {
+			font-size: 1rem;
+			font-style: italic;
+		}
+
+		&__title,
+		&__date,
+		&__description,
+		&__content,
+		&__metadata {
+			padding: {
+				left: 1rem;
+				right: 1rem;
+			}
+		}
 	}
 
-	&__metadata {
-		padding: 0 1rem 1rem;
+	/* --- [ XIONI ARTICLE TILE ] ------------------------------------------------------------------- */
+
+	.XioniArticleTile {
+		background-color: white;
+		padding: 0;
+		box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+		transition: box-shadow 0.25s;
+
+		&:hover {
+			box-shadow: 0 0 2rem rgba(0, 0, 0, 0.333);
+		}
+
+		&__link {
+			transform: translateY(-1rem);
+		}
+
+		&__metadata {
+			padding: 0 1rem 1rem;
+			gap: 1rem;
+			font-size: 0.9rem;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+		}
+
+		&__title,
+		&__text,
+		&__link {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+	}
+
+	/* --- [ XIONI ARTICLE ] ------------------------------------------------------------------------ */
+
+	.XioniArticle {
+		display: flex;
+		flex-direction: column;
+		background: white;
+		box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+		border-radius: 0.25rem;
 		gap: 1rem;
-		font-size: 0.9rem;
-		border-bottom: 1px solid rgba(0, 0, 0, 0.075);
-	}
+		padding-bottom: 2rem;
 
-	&__title,
-	&__text,
-	&__link {
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
-}
-
-/* --- [ XIONI ARTICLE TILE ] ------------------------------------------------------------------- */
-
-.XioniArticle {
-	display: flex;
-	flex-direction: column;
-
-	&__image {
-		order: -3;
-		padding: 1rem;
-		box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.333);
-	}
-
-	&__title {
-		order: -2;
-		text-align: center;
-	}
-
-	&__teaser {
-		order: -1;
-		text-align: center;
-
-		p {
-			font-size: 1.25rem;
-			line-height: 2rem;
+		&__image {
+			order: -3;
 		}
-	}
 
-	&__metadata {
-		justify-content: center;
-		padding: 1rem;
-		gap: 2rem;
-		font-size: 0.9rem;
-		border-top: 1px solid lightgray;
-		border-bottom: 1px solid lightgray;
-	}
+		&__title {
+			order: -2;
+			text-align: center;
+			margin: 0 2rem;
+		}
 
-	&__content {
-		margin-top: 2rem;
+		&__teaser {
+			order: -1;
+			text-align: center;
+			margin: 0 6rem;
 
-		p {
-			line-height: 1.75rem;
+			p {
+				font-size: 1.25rem;
+				line-height: 2rem;
+			}
+
+			p:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		&__content,
+		&__pdf {
+			margin: 0 2rem;
+		}
+
+		&__metadata {
+			justify-content: center;
+			margin: 0;
+			padding: 1rem;
+			gap: 2rem;
+			font-size: 0.9rem;
+			border-top: 1px solid lightgray;
+			border-bottom: 1px solid lightgray;
+		}
+
+		&__content {
+			padding: 1rem 0;
+
+			p {
+				line-height: 1.75rem;
+			}
+
+			p:last-child {
+				margin-bottom: 0;
+			}
 		}
 	}
 }
