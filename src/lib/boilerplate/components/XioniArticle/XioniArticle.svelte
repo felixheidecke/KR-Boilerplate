@@ -27,9 +27,9 @@
 	{#if image}
 		<img class={baseName + '__image'} src={image.src} alt={image.alt} />
 	{/if}
-	<h1 class={baseName + '__title'}>
+	<h2 class={baseName + '__title'}>
 		{title}
-	</h1>
+	</h2>
 
 	{#if hasMetadata}
 		<ul class={baseName + '__metadata'}>

@@ -92,9 +92,11 @@
 		{title}
 	</h2>
 
-	<date datetime={starts.toDateString()} class={baseName + '__date'}>
-		{@html formatFromTo(starts, ends)}
-	</date>
+	<h3 class={baseName + '__date'}>
+		<date datetime={starts.toDateString()}>
+			{@html formatFromTo(starts, ends)}
+		</date>
+	</h3>
 
 	<div class={baseName + '__description'}>
 		{@html description}
