@@ -15,4 +15,4 @@
 	<li>Eine extra Zeile</li>
 </Address>
 
-<!-- Dokumentation: https://ogy.de/9wtv -->
+<Link to="https://ogy.de/9wtv" icon="fab fa-github">Zur Dokumentation</Link>

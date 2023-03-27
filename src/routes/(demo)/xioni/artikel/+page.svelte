@@ -4,10 +4,8 @@
 
 <h1 class="$text-center $my-3">Artikel</h1>
 
-<Grid tag="ul" gap>
+<ol class="$flex $flex-column $gap">
 	{#each articles as article}
-		<Grid tag="li" size="1-2">
-			<XioniArticleTile {article} basePath="/xioni/artikel/" />
-		</Grid>
+		<XioniArticleTile tag="li" {article} basePath="/xioni/artikel/" />
 	{/each}
-</Grid>
+</ol>

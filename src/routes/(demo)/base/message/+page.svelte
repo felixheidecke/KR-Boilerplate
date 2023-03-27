@@ -1,17 +1,3 @@
-<!--
-
-  <Message> Parameter:
-  ********************
-
-  "title"  [string]
-  "type"?  [string | undefined]
-
--->
-
-<svelte:head>
-	<title>Picture | Message</title>
-</svelte:head>
-
 <h1 class="$text-center $my-3">Message</h1>
 
 <Message title="Das hat geklappt" type="success">

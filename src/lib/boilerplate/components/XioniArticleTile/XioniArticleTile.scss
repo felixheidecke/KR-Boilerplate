@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+:where(.XioniArticleTile) {
+	padding: 1rem;
+	display: flow-root;
+	position: relative;
+	background-color: #eee;
+	width: 100%;
+}
+
+:where(.XioniArticleTile__image) {
+	aspect-ratio: 4/3;
+	object-fit: cover;
+	cursor: pointer;
+	margin: 0 0 1rem;
+
+	@include breakpoint('tablet-up') {
+		float: right;
+		margin: 0 0 0 1rem;
+		max-width: 40%;
+	}
+}
+
+:where(.XioniArticleTile__metadata) {
+	font-size: 0.85rem;
+	display: flex;
+	gap: 1rem;
+}
+
+:where(.XioniArticleTile__title) {
+	display: block;
+	font-size: 1.25rem;
+	margin: 0 0 0.5rem;
+}
+
+:where(.XioniArticleTile__text) {
+	margin: 1rem 0 2.5rem;
+}
+
+:where(.XioniArticleTile__link) {
+	position: absolute;
+	bottom: 1rem;
+}

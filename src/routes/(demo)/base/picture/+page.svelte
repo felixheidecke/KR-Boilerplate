@@ -1,7 +1,3 @@
-<svelte:head>
-	<title>Picture | Boilerplate</title>
-</svelte:head>
-
 <h1>Picture</h1>
 
 <Picture

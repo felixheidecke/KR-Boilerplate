@@ -1,15 +1,16 @@
 <script lang="ts">
-	import type { XioniGallery } from '$lib/boilerplate/libraries/xioni/gallery.types'
+	import type { XioniGalleryProps } from './XioniGallery.types'
 
 	// --- Props -------------------------------------------------------------------------------------
 
-	export let gallery: XioniGallery
-	export let basePath = ''
-	export let linkDelimiter = '_'
+	export let gallery: XioniGalleryProps['gallery']
+	export let basePath: XioniGalleryProps['basePath'] = ''
+	export let linkDelimiter: XioniGalleryProps['linkDelimiter'] = '_'
+	export let exClass: XioniGalleryProps['exClass'] = ''
 
 	// --- Data --------------------------------------------------------------------------------------
 
-	const baseClass = $$props['ex-class'] || 'XioniGallery'
+	const baseClass = exClass || 'XioniGallery'
 
 	function makeLink(slug: string, id: number | string) {
 		return basePath + slug + linkDelimiter + id

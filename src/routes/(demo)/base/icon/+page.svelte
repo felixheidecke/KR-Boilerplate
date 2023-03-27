@@ -1,19 +1,6 @@
-<!--
-
-  <Icon> Parameter:
-  *****************
-
-  "name"   [string]
-  "size"?  [string | number]
-
--->
 <script>
 	import icon from '$lib/boilerplate/actions/icon'
 </script>
-
-<svelte:head>
-	<title>List | Boilerplate</title>
-</svelte:head>
 
 <h1 class="$text-center $my-3">Icon</h1>
 

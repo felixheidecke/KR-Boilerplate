@@ -1,12 +1,13 @@
 <script lang="ts">
-	import './XioniArticleTile.css'
+	import './XioniArticleTile.scss'
 
 	import { format } from '$lib/boilerplate/utils/format-date'
 	import { goto } from '$app/navigation'
+	import classNames from 'classnames'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/article.types'
+	import type { XioniArticleTileProps } from './XioniArticleTile.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -15,47 +16,52 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let article: XioniArticle
-	export let basePath = ''
-	export let linkDelimiter = '_'
-	export let linkText = 'Weiterlesen'
+	export let article: XioniArticleTileProps['article']
+	export let basePath: XioniArticleTileProps['basePath'] = ''
+	export let exClass: XioniArticleTileProps['exClass'] = ''
+	export let id: XioniArticleTileProps['id'] = ''
+	export let linkDelimiter: XioniArticleTileProps['linkDelimiter'] = '_'
+	export let linkText: XioniArticleTileProps['linkText'] = 'Weiterlesen'
+	export let tag: XioniArticleTileProps['tag'] = 'div'
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
-	const { title, id, slug, date, image, text, author } = article
-	const link = basePath + slug + linkDelimiter + id
+	const { title, date, image, text, author } = article
+	const link = basePath + article.slug + linkDelimiter + article.id
+	const baseName = exClass || 'XioniArticleTile'
+	const className = classNames(baseName, $$props.class)
 </script>
 
-<div class="XioniArticleTile">
+<svelte:element this={tag} {id} class={baseName}>
 	{#if image}
 		<img
-			class="XioniArticleTile__image $pointer"
+			class="{className}__image"
 			src={image.thumbSrc}
 			alt={image.alt}
 			on:click={() => goto(link)}
 		/>
 	{/if}
-	<h5 class="XioniArticleTile__title">
+	<h5 class="{className}__title">
 		{title}
 	</h5>
-	<ul class="XioniArticleTile__metadata">
+	<ul class="{className}__metadata">
 		{#if author}
-			<li class="XioniArticleTile__author">
+			<li class="{className}__author">
 				<Icon name="far fa-user" class="$mr-1/4" />
 				Von {author}
 			</li>
 		{/if}
-		<li class="XioniArticleTile__date">
+		<li class="{className}__date">
 			<Icon name="far fa-calendar-alt" class="$mr-1/4" />
 			<time datetime={date.toLocaleDateString('de')}>
 				{format(date, 'd. LLLL Y')}
 			</time>
 		</li>
 	</ul>
-	<div class="XioniArticleTile__text">
+	<div class="{className}__text">
 		{@html text}
 	</div>
-	<Link to={link} class="XioniArticleTile__link $pointer $row-reverse" icon="fas fa-angle-right">
+	<Link to={link} class="{className}__link $pointer $row-reverse" icon="fas fa-angle-right">
 		{linkText}
 	</Link>
-</div>
+</svelte:element>

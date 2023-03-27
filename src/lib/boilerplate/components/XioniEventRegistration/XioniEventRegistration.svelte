@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/event.types'
 	import * as date from '$lib/boilerplate/utils/format-date'
+	import classNames from 'classnames'
 	import { getContext } from 'svelte'
 	import type { Writable } from 'svelte/store'
 
@@ -19,14 +20,16 @@
 	let form: Form
 
 	const event = getContext('active-xioni-event') as Writable<XioniEvent | null>
+	const baseName = $$props['ex-class'] || 'XioniEventRegistration'
+	const className = classNames(baseName, $$props.class)
 </script>
 
-<Modal title="Anmeldung" isOpen={!!$event} on:close={() => event.set(null)}>
+<Modal title="Anmeldung" class={baseName} isOpen={!!$event} on:close={() => event.set(null)}>
 	{#if $event}
-		<div class="$text-center">
-			<h4 class="$text-center $font-large $mb-1/4">{$event.title}</h4>
+		<header class="{className}__header">
+			<h4 class="{className}__title">{$event.title}</h4>
 			<time class="$font-small">{@html date.formatFromTo($event.starts, $event.ends)}</time>
-		</div>
+		</header>
 
 		<Form
 			id={formId}
