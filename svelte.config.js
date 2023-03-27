@@ -9,7 +9,7 @@ const config = {
 		adapter: adapter({
 			pages: 'htdocs',
 			assets: 'htdocs',
-			fallback: null,
+			fallback: '200.html',
 			strict: false,
 			precompress: false
 		}),
