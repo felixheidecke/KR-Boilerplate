@@ -26,8 +26,7 @@
 			src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
 			alt={image?.alt || 'Kein Produktbild'}
 			title={image?.alt || 'Kein Produktbild'}
-			loading="lazy"
-		/>
+			loading="lazy" />
 
 		<div class="{baseName}__data">
 			<h4 class="$m-0 $p-0">

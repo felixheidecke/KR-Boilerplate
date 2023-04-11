@@ -1,16 +1,22 @@
 import { format as formatDate } from 'date-fns'
 import de from 'date-fns/locale/de/index'
 
+const longFormat = 'EEEE d. LLLL yyyy'
+const mediumFormat = 'EEEE d. LLLL'
+const shortFormat = 'EEEE d.'
+
 export function formatFromTo(from: Date, to: Date) {
-	if (!from || !to) throw 'no date'
+	if (!from) {
+		throw new Error('date missing')
+	}
+
+	if (!to) {
+		return formatDate(to, longFormat)
+	}
 
 	const daysMatch = formatDate(from, 'd') === formatDate(to, 'd')
 	const yearsMatch = formatDate(from, 'Y') === formatDate(to, 'Y')
 	const monthsMatch = formatDate(from, 'LL') === formatDate(to, 'LL')
-
-	const longFormat = 'EEEE d. LLLL yyyy'
-	const mediumFormat = 'EEEE d. LLLL'
-	const shortFormat = 'EEEE d.'
 
 	let fromFormat
 
@@ -26,7 +32,7 @@ export function formatFromTo(from: Date, to: Date) {
 		fromFormat = shortFormat
 	}
 
-	return `${format(from, fromFormat)} &ndash; ${format(to, longFormat)}`
+	return `${format(from, fromFormat)} - ${format(to, longFormat)}`
 }
 
 export function format(date: Date, pattern: string): string {

@@ -6,7 +6,7 @@ const createIconElement = (icon: string): HTMLElement => {
 }
 
 export default (node: HTMLElement, icon = 'fas fa-circle') => {
-	node.querySelectorAll(':scope > li').forEach((li) => {
+	node.querySelectorAll(':scope > li').forEach(li => {
 		const $icon = createIconElement(icon)
 		li.prepend($icon.cloneNode())
 	})

@@ -2,7 +2,7 @@
 	import icon from '$lib/boilerplate/actions/icon'
 </script>
 
-<h1 class="$text-center $my-3">Icon</h1>
+<h1>Icon</h1>
 
 <Icon name="fas fa-walking" />
 <Icon name="fas fa-walking" size="2" />

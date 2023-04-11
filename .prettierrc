@@ -6,6 +6,8 @@
 	"plugins": ["prettier-plugin-svelte"],
 	"pluginSearchDirs": ["."],
 	"semi": false,
-	"htmlWhitespaceSensitivity": "ignore",
+	"htmlWhitespaceSensitivity": "css",
+	"bracketSameLine": true,
+	"arrowParens": "avoid",
 	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }

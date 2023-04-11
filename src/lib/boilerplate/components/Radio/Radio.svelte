@@ -28,7 +28,6 @@
 		{value}
 		class={baseName + '__input'}
 		type="radio"
-		bind:group
-	/>
+		bind:group />
 	<span class={baseName + '__label'}>{@html label}</span>
 </label>

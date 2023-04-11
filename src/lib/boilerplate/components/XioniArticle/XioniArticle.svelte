@@ -66,8 +66,7 @@
 						src={image.src}
 						ex-class={baseName + '__content-image'}
 						alt={image.alt}
-						align={image.align}
-					/>
+						align={image.align} />
 				{/if}
 				{#if text}
 					{@html text}

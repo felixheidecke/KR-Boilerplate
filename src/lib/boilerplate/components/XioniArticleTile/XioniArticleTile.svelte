@@ -38,8 +38,7 @@
 			class="{className}__image"
 			src={image.thumbSrc}
 			alt={image.alt}
-			on:click={() => goto(link)}
-		/>
+			on:click={() => goto(link)} />
 	{/if}
 	<h5 class="{className}__title">
 		{title}

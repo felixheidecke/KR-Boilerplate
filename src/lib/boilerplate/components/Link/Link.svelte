@@ -12,11 +12,14 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let to: LinkProps['to']
+	export let to: LinkProps['to'] = ''
 	export let target: LinkProps['target'] = undefined
 	export let icon: LinkProps['icon'] = undefined
 	export let rel: LinkProps['rel'] = LinkPropsRel.FOLLOW
 	export let tag: LinkProps['tag'] = LinkPropsTag.ANCHOR
+	export let exClass = ''
+
+	const href = to || undefined
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -25,7 +28,7 @@
 		target = LinkPropsTarget.BLANK
 	}
 
-	const baseName = $$props['ex-class'] || 'Link'
+	const baseName = exClass || 'Link'
 	const className = classnames(
 		baseName,
 		$$props.class,
@@ -34,7 +37,7 @@
 	)
 
 	function isExternalLink(link: string) {
-		return !link.search(/(http(s)?|ftp):\/\//) || !link.indexOf('//')
+		return link.startsWith('https://') || link.startsWith('http://')
 	}
 
 	function trimScheme(link: string) {
@@ -48,7 +51,7 @@
 {#if icon}
 	<span class={className}>
 		<Icon ex-class={baseName + '__icon'} name={icon} />
-		<svelte:element this={tag} href={to} {target} {rel} on:click>
+		<svelte:element this={tag} {href} {target} {rel} on:click>
 			{#if $$slots.default}
 				<slot />
 			{:else}
@@ -57,7 +60,7 @@
 		</svelte:element>
 	</span>
 {:else}
-	<svelte:element this={tag} class={className} href={to} {target} {rel} on:click>
+	<svelte:element this={tag} class={className} {href} {target} {rel} on:click>
 		{#if $$slots.default}
 			<slot />
 		{:else}

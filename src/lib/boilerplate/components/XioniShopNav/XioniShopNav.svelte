@@ -27,8 +27,7 @@
 			Kategorie: <select
 				bind:value={categorySelection}
 				on:change={gotoCategory}
-				class="{baseName}__category-select"
-			>
+				class="{baseName}__category-select">
 				<option value="home">Vorgestellte Weine</option>
 				{#each categories as { name, slug, id }}
 					<option value={slug + '_k' + id}>{name}</option>

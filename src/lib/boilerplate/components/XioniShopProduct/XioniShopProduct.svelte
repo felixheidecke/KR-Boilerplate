@@ -43,8 +43,7 @@
 				<img
 					class="{baseName}__image $mb-2@mobile"
 					src={image.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
-					alt={name}
-				/>
+					alt={name} />
 			</Grid>
 			<Grid size="tablet-2-3">
 				<div class="$font-bold">
@@ -67,8 +66,7 @@
 				<Button
 					on:click={addToCartHandler}
 					class="{baseName}__add-to-cart-button"
-					icon="fas fa-cart-arrow-down"
-				>
+					icon="fas fa-cart-arrow-down">
 					In den Warenkorb
 				</Button>
 

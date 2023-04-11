@@ -9,7 +9,8 @@ export enum LinkPropsRel {
 
 export enum LinkPropsTag {
 	ANCHOR = 'a',
-	BUTTON = 'button'
+	BUTTON = 'button',
+	SPAN = 'span'
 }
 
 export interface LinkProps {

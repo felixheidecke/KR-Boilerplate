@@ -1,8 +1,9 @@
 import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
+import { formatFromTo } from '$lib/boilerplate/utils/format-date'
 import type { XioniEvent } from './event.types'
 
-export default (fetchFn: typeof fetch = fetch) => {
+export default function XioniEventApi(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = FetchJSON(fetchFn)
 
 	/**
@@ -14,6 +15,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 	 * @param filter.startsAfter Event startet nach Datum
 	 * @param filter.endsBefore Event endet vor Datum
 	 * @param filter.endsAfter Event endet nach Datum
+	 * @param filter.full Get all of the data
 	 */
 
 	async function getMany(
@@ -101,10 +103,14 @@ export default (fetchFn: typeof fetch = fetch) => {
  */
 
 function eventAdapter(rawEvent: any): XioniEvent {
+	const starts = new Date(rawEvent.starts)
+	const ends = new Date(rawEvent.ends)
+
 	const event = {
 		...rawEvent,
-		starts: new Date(rawEvent.starts),
-		ends: new Date(rawEvent.ends)
+		starts,
+		ends,
+		duration: formatFromTo(starts, ends)
 	}
 
 	if (rawEvent.website) {
@@ -117,3 +123,7 @@ function eventAdapter(rawEvent: any): XioniEvent {
 
 	return event
 }
+
+export const getMany = XioniEventApi().getMany
+
+export const getOne = XioniEventApi().getOne

@@ -14,9 +14,9 @@
 	export let max: InputProps['max'] = undefined
 	export let min: InputProps['min'] = undefined
 	export let name: InputProps['name'] = 'input'
-	export let placeholder: InputProps['placeholder'] = 'input'
-	export let readonly: InputProps['readonly'] = false
-	export let required: InputProps['required'] = false
+	export let placeholder: InputProps['placeholder'] = ''
+	export let readonly: InputProps['readonly'] = undefined
+	export let required: InputProps['required'] = undefined
 	export let type: InputProps['type'] = ImputPropsType.TEXT
 	export let value: InputProps['value'] = ''
 

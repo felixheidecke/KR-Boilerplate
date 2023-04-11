@@ -1,6 +1,13 @@
 @import '$lib/boilerplate/styles/variables.scss';
 
-@mixin colGap {
+.Grid {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.Grid--gap {
+	row-gap: 1rem;
 	width: calc(100% + 1rem);
 	transform: translateX(-0.5rem);
 
@@ -12,23 +19,30 @@
 	}
 }
 
-.Grid {
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
+.Grid--gap-2 {
+	row-gap: 2rem;
+	width: calc(100% + 2rem);
+	transform: translateX(-1rem);
+
+	> [class*='Grid__item'] {
+		padding: {
+			left: 1rem;
+			right: 1rem;
+		}
+	}
 }
 
-.Grid--gap {
-	row-gap: 1rem;
-	@include colGap;
-}
+.Grid--gap-3 {
+	row-gap: 3rem;
+	width: calc(100% + 3rem);
+	transform: translateX(-1.5rem);
 
-.Grid--column-gap {
-	@include colGap;
-}
-
-.Grid--row-gap {
-	row-gap: 1rem;
+	> [class*='Grid__item'] {
+		padding: {
+			left: 1.5rem;
+			right: 1.5rem;
+		}
+	}
 }
 
 .Grid__item {

@@ -1,4 +1,4 @@
-<h1 class="$text-center $my-3">Button</h1>
+<h1>Button</h1>
 
 <ul>
 	<li><Button>Hallo</Button></li>

@@ -57,8 +57,7 @@
 					ex-class={baseName + '__image'}
 					src={image.src}
 					tablet={image.src}
-					alt={image.alt}
-				/>
+					alt={image.alt} />
 			{/if}
 			{#if images.length}
 				<Grid gap>
@@ -69,16 +68,14 @@
 								{src}
 								{alt}
 								loading="lazy"
-								on:click={() => lightbox.open(index)}
-							/>
+								on:click={() => lightbox.open(index)} />
 						</Grid>
 					{/each}
 					{#if images.length > maxImages}
 						<Grid size="1-5" class="$mt">
 							<div
 								class={baseName + '__piucture-row-overflow-indicator $pointer'}
-								on:click={() => lightbox.open(4)}
-							>
+								on:click={() => lightbox.open(4)}>
 								+{images.length - maxImages}
 							</div>
 						</Grid>

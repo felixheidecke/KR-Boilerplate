@@ -1,4 +1,4 @@
-<h1 class="$text-center $my-3">Formular</h1>
+<h1>Formular</h1>
 
 <Form subject="Kundenanfrage" id="4" attach="csv">
 	<div class="customer-form-body">
@@ -15,8 +15,7 @@
 		<Select
 			name="topping"
 			label="Welcher Belag soll es sein?"
-			options={['Schinken', 'Salami', 'Käse']}
-		/>
+			options={['Schinken', 'Salami', 'Käse']} />
 		<Textarea label="Ihre Nachricht an uns" name="message" />
 
 		<Button class="customer-form-submit">Abschicken</Button>

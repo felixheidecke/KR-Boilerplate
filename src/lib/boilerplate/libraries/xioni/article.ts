@@ -2,7 +2,7 @@ import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
 import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import type { XioniArticle, XioniArticles } from './article.types'
 
-export default (fetchFn: typeof fetch = fetch) => {
+export default function XioniArticleApi(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = FetchJSON(fetchFn)
 
 	/**
@@ -95,3 +95,9 @@ export default (fetchFn: typeof fetch = fetch) => {
 		getByCategory
 	}
 }
+
+export const getMany = XioniArticleApi().getMany
+
+export const getOne = XioniArticleApi().getOne
+
+export const getByCategory = XioniArticleApi().getByCategory

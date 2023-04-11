@@ -2,13 +2,16 @@
 	display: flex;
 }
 
+.\$inline-flex.\$inline-flex {
+	display: inline-flex;
+}
+
 .\$row-reverse.\$row-reverse {
 	flex-direction: row-reverse;
 	justify-content: flex-end;
 }
 
 .\$flex-column.\$flex-column {
-	display: flex;
 	flex-direction: column;
 }
 

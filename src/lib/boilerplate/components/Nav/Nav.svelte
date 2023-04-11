@@ -93,15 +93,13 @@
 	class={className}
 	aria-label="main navigation"
 	class:$hidden={hidden}
-	on:click={() => (active = false)}
->
+	on:click={() => (active = false)}>
 	<ul class={baseName + '__ul'}>
 		{#each routes as route, i}
 			<li
 				class={classnames(baseName + '__li', route.class)}
 				on:mouseenter={() => (hoverState = i)}
-				on:mouseleave={() => (hoverState = -1)}
-			>
+				on:mouseleave={() => (hoverState = -1)}>
 				<svelte:element
 					this={route.path ? 'a' : 'span'}
 					id="route-{i}"
@@ -111,8 +109,7 @@
 								activeRoute?.path !== route.path || baseName + '__a--active'
 						  )
 						: baseName + '__span'}
-					href={route.path}
-				>
+					href={route.path}>
 					{route.name}
 				</svelte:element>
 
@@ -121,16 +118,14 @@
 						class={classnames(
 							baseName + '__ul-ul',
 							hoverState !== i || baseName + '__ul-ul--visible'
-						)}
-					>
+						)}>
 						{#each route.routes as subRoute, o}
 							<li
 								class={classnames(
 									baseName + '__li-li',
 									activeRoute?.path !== subRoute.path || baseName + '__li-li--active',
 									subRoute.class
-								)}
-							>
+								)}>
 								<a id="route-{i}-{o}" class={baseName + '__a-a'} href={subRoute.path}>
 									{subRoute.name}
 								</a>

@@ -2,7 +2,7 @@ import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import fetchJson from '$lib/boilerplate/libraries/fetch-json'
 import type { XioniMenuCard } from './menuCard.types'
 
-export default (fetchFn: typeof fetch = fetch) => {
+export default function XioniMenuCardApi(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = fetchJson(fetchFn)
 	/**
 	 * Get a Menu Card
@@ -21,3 +21,5 @@ export default (fetchFn: typeof fetch = fetch) => {
 		get
 	}
 }
+
+export const get = XioniMenuCardApi().get

@@ -1,54 +1,46 @@
 <script lang="ts">
-	import './grid.scss'
+	import './Grid.scss'
 	import classnames from 'classnames'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	type Tag = 'div' | 'ul' | 'li' | 'section' | 'main' | 'aside'
-	type Gap = 'row' | 'column' | boolean
-	type Size = string | undefined
-	type Id = string
+	import type { GridProps } from './Grid.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let tag: Tag = 'div'
-	export let gap: Gap = false
-	export let size: Size = undefined
-	export let id: Id | undefined = undefined
+	export let tag: GridProps['tag'] = 'div'
+	export let gap: GridProps['gap'] = false
+	export let size: GridProps['size'] = undefined
+	export let id: GridProps['id'] = undefined
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
-	const baseName = $$props['ex-class'] || 'Grid'
-	const className = !size ? createParentClassName() : createChildClassName()
+	$: className = !size ? createParentClassName(gap) : createChildClassName(size)
 
-	function sizeToClass(size: Size) {
-		if (!size) return
-
-		return size
-			.split(' ')
-			.map((i) => `${baseName}__item--${i}`)
-			.join(' ')
+	function createChildClassName(size: GridProps['size']) {
+		return classnames(
+			'Grid__item',
+			!size?.length ||
+				size
+					.split(' ')
+					.map(i => `Grid__item--${i}`)
+					.join(' ')
+		)
 	}
 
-	function createChildClassName() {
-		return classnames(baseName + '__item', sizeToClass(size), $$props.class)
-	}
+	function createParentClassName(gap: GridProps['gap']) {
+		const className = ['Grid']
 
-	function createParentClassName() {
-		const className = [baseName]
-
-		if (gap === 'column') {
-			className.push(baseName + '--column-gap')
-		} else if (gap === 'row') {
-			className.push(baseName + '--row-gap')
+		if (typeof gap === 'number') {
+			className.push(`Grid--gap-${gap}`)
 		} else if (gap) {
-			className.push(baseName + '--gap')
+			className.push('Grid--gap')
 		}
 
-		return classnames(...className, $$props.class)
+		return classnames(...className)
 	}
 </script>
 
-<svelte:element this={tag} class={className} {id}>
+<svelte:element this={tag} {id} class={classnames(className, $$props.class)}>
 	<slot />
 </svelte:element>

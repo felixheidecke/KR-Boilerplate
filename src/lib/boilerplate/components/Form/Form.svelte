@@ -76,7 +76,7 @@
 
 	// collect required entries
 	onMount(() => {
-		form.querySelectorAll('[required]').forEach((element) => {
+		form.querySelectorAll('[required]').forEach(element => {
 			required = [...required, element.getAttribute('name') || '']
 		})
 	})

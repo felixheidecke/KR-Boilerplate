@@ -41,8 +41,7 @@
 						<td class="$px-1/2">
 							<select
 								class="{baseName}__update-quantity-input"
-								on:change={(el) => handleUpdateQuantity(el, id)}
-							>
+								on:change={el => handleUpdateQuantity(el, id)}>
 								{#each range(100) as value}
 									<option {value} selected={value === quantity}>{value}</option>
 								{/each}

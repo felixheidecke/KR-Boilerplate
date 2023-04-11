@@ -36,8 +36,7 @@
 			bind:this={form}
 			subject="Event Anmeldung ({$event.id})"
 			class="$mt-2"
-			attach="csv"
-		>
+			attach="csv">
 			<input type="hidden" name="Event" value="{$event.title} ({$event.id})" />
 			<input type="hidden" name="Datum" value={date.format($event.starts, 'P')} />
 

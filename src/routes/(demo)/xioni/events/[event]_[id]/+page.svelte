@@ -2,9 +2,7 @@
 	import { writable } from 'svelte/store'
 	import { setContext } from 'svelte'
 
-	export let data
-
-	const { event } = data
+	const { event } = $$props.data
 
 	setContext('active-xioni-event', writable(null))
 </script>

@@ -1,0 +1,53 @@
+@import '$variables';
+
+:where(.XioniEventTile) {
+	padding: 1rem;
+	display: flow-root;
+	position: relative;
+	background-color: #eee;
+	width: 100%;
+}
+
+:where(.XioniEventTile__image) {
+	margin-bottom: 1rem;
+
+	@include breakpoint('tablet-up') {
+		max-width: 15rem;
+		aspect-ratio: 1/1;
+		object-fit: cover;
+		float: right;
+		margin-left: 2rem;
+	}
+}
+
+:where(.XioniEventTile__metadata) {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	@include breakpoint('tablet-up') {
+		flex-direction: row;
+		gap: 1rem;
+	}
+}
+
+:where(.XioniEventTile__title) {
+	display: block;
+	font-size: 1.25rem;
+	margin: 0 0 0.5rem;
+}
+
+:where(.XioniEventTile__date) {
+	display: block;
+	font-size: 1rem;
+	margin: 0 0 0.5rem;
+}
+
+:where(.XioniEventTile__gallery) {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+:where(.XioniEventTile__gallery-image) {
+	display: block;
+}

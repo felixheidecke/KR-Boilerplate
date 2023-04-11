@@ -19,14 +19,19 @@
 	<Nav routes={$ROUTES} activeRoute={$ACTIVE_ROUTE} />
 </header>
 
-<main class="layout-wrapper $mx-auto $p-2">
+<main class="layout-wrapper $mx-auto $p $p-2@tablet-up">
 	<PageTransition path={$$props.data.url.pathname}>
 		<slot />
 	</PageTransition>
 </main>
 
-<style>
+<style lang="scss">
+	@import '$variables';
 	.layout-wrapper {
-		max-width: 60rem;
+		max-width: 32rem;
+
+		@include breakpoint('tablet-up') {
+			max-width: 60rem;
+		}
 	}
 </style>

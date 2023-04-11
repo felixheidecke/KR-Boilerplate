@@ -66,7 +66,7 @@ export default class {
 	get table(): string[] {
 		const localised = this.localiseOpeningHours(this.hours)
 
-		return localised.split(';').map((i) => {
+		return localised.split(';').map(i => {
 			let hour = i.trim()
 
 			if (!hour.includes(T.CLOSED)) hour += ` ${T.O_CLOCK}`

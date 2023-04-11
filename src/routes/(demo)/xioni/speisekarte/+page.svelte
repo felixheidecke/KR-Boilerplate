@@ -1,15 +1,9 @@
-<!--
-
-  <XioniMenuCard> Parameter:
-  **************************
-
-  "menuCard"  [Object]
-
--->
 <script>
-	export let data
-
-	const { menuCard } = data
+	import { get as getMenuCard } from '$lib/boilerplate/libraries/xioni/menuCard'
 </script>
 
-<XioniMenuCard {menuCard} />
+<h1>Speisekarte</h1>
+
+{#await getMenuCard(831) then menuCard}
+	<XioniMenuCard {menuCard} />
+{/await}

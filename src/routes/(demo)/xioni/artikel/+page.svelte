@@ -1,11 +1,13 @@
 <script>
-	const { articles } = $$props.data
+	import { getMany as getArticles } from '$lib/boilerplate/libraries/xioni/article'
 </script>
 
-<h1 class="$text-center $my-3">Artikel</h1>
+<h1>Artikel</h1>
 
-<ol class="$flex $flex-column $gap">
-	{#each articles as article}
-		<XioniArticleTile tag="li" {article} basePath="/xioni/artikel/" />
-	{/each}
-</ol>
+{#await getArticles(1383) then articles}
+	<ol class="$flex $flex-column $gap">
+		{#each articles as article}
+			<XioniArticleTile tag="li" {article} basePath="/xioni/artikel/" />
+		{/each}
+	</ol>
+{/await}

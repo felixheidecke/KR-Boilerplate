@@ -21,6 +21,10 @@ export default [
 			{
 				path: '/base/message',
 				name: 'Message'
+			},
+			{
+				path: '/base/grid',
+				name: 'Grid'
 			}
 		]
 	},
@@ -55,6 +59,14 @@ export default [
 			{
 				path: '/xioni/events',
 				name: 'Events'
+			},
+			{
+				path: '/xioni/events-toggle',
+				name: 'Events (Toggle)'
+			},
+			{
+				path: '/xioni/events-expanded',
+				name: 'Events (Expanded)'
 			}
 		]
 	}

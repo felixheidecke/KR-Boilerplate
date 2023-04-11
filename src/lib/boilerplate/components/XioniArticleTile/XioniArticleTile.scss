@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import '$variables';
 
 :where(.XioniArticleTile) {
 	padding: 1rem;
@@ -9,15 +9,14 @@
 }
 
 :where(.XioniArticleTile__image) {
-	aspect-ratio: 4/3;
-	object-fit: cover;
-	cursor: pointer;
-	margin: 0 0 1rem;
+	margin-bottom: 1rem;
 
 	@include breakpoint('tablet-up') {
+		max-width: 15rem;
+		aspect-ratio: 1/1;
+		object-fit: cover;
 		float: right;
-		margin: 0 0 0 1rem;
-		max-width: 40%;
+		margin-left: 2rem;
 	}
 }
 
@@ -34,10 +33,5 @@
 }
 
 :where(.XioniArticleTile__text) {
-	margin: 1rem 0 2.5rem;
-}
-
-:where(.XioniArticleTile__link) {
-	position: absolute;
-	bottom: 1rem;
+	margin: 1rem 0 0;
 }

@@ -2,7 +2,7 @@ import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
 import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import type { XioniAlbum, XioniGallery } from './gallery.types'
 
-export default (fetchFn: typeof fetch = fetch) => {
+export default function XioniGalleryApi(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = FetchJSON(fetchFn)
 
 	/**
@@ -40,3 +40,7 @@ export default (fetchFn: typeof fetch = fetch) => {
 		getAlbum
 	}
 }
+
+export const get = XioniGalleryApi().get
+
+export const getAlbum = XioniGalleryApi().getAlbum

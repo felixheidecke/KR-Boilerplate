@@ -1,4 +1,4 @@
-<h1 class="$text-center $my-3">Accordion</h1>
+<h1>Accordion</h1>
 
 <Accordion>
 	<AccordionSlide title="Charybdis">

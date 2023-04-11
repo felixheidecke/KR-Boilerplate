@@ -5,6 +5,7 @@ export interface XioniEvent {
 	title: string
 	starts: Date
 	ends: Date
+	duration: string
 	description: string
 	details: string
 	image?: {
@@ -19,14 +20,14 @@ export interface XioniEvent {
 	}
 	website?: URL
 	ticketshop?: URL
-	organizer: string
+	organizer?: string
 	coordinates?: {
 		lat: number
 		lng: number
 	}
-	images: {
+	images?: {
 		src: string
 		alt: string
 	}[]
-	flags: string[]
+	flags?: 'Anmeldung'[]
 }
