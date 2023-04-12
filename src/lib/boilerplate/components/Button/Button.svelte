@@ -9,11 +9,11 @@
 
 	// --- Props -------------------------------------------------------------------------------------
 
-	export let to: string | undefined = undefined
-	export let icon: string | undefined = undefined
-	export let disabled = false
-	export let target: '_blank' | '_self' | undefined = undefined
-	export let isLoading = false
+	export let to: ButtonProps['to'] = undefined
+	export let icon: ButtonProps['icon'] = undefined
+	export let disabled: ButtonProps['disabled'] = false
+	export let target: ButtonProps['target'] = undefined
+	export let isLoading: ButtonProps['isLoading'] = false
 
 	// --- Data --------------------------------------------------------------------------------------
 

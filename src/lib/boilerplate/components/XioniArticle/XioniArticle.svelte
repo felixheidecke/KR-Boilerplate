@@ -12,14 +12,25 @@
 	import Link from '../Link/Link.svelte'
 	import Icon from '../Icon/Icon.svelte'
 	import Button from '../Button/Button.svelte'
+	import { ButtonPropsTarget } from '../Button/Button.types'
 
 	// --- Props ------------------------
 
-	const { author, content, date, id, image, pdf, text, title, website } =
-		$$props.article as XioniArticle
+	// prettier-ignore
+	const {
+		author,
+		content,
+		date,
+		id,
+		image,
+		pdf,
+		text,
+		title,
+		website
+	} = $$props.article as XioniArticle
+
 	const baseName = $$props['ex-class'] || 'XioniArticle'
 	const className = classnames(baseName, $$props.class)
-
 	const hasMetadata = author || date || website
 </script>
 
@@ -76,7 +87,11 @@
 	{/if}
 
 	{#if pdf}
-		<Button to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
+		<Button
+			to={pdf.src}
+			target={ButtonPropsTarget.BLANK}
+			class={baseName + '__pdf'}
+			icon="fas fa-file-pdf">
 			{pdf.title}
 		</Button>
 	{/if}

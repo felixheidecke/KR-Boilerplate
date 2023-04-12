@@ -1,5 +1,6 @@
 export enum LinkPropsTarget {
-	BLANK = '_blank'
+	BLANK = '_blank',
+	SELF = '_self'
 }
 
 export enum LinkPropsRel {

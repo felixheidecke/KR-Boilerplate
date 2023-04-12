@@ -19,7 +19,6 @@
 	export let article: XioniArticleTileProps['article']
 	export let basePath: XioniArticleTileProps['basePath'] = ''
 	export let exClass: XioniArticleTileProps['exClass'] = ''
-	export let id: XioniArticleTileProps['id'] = ''
 	export let linkDelimiter: XioniArticleTileProps['linkDelimiter'] = '_'
 	export let linkText: XioniArticleTileProps['linkText'] = 'Weiterlesen'
 	export let tag: XioniArticleTileProps['tag'] = 'div'
@@ -32,7 +31,7 @@
 	const className = classNames(baseName, $$props.class)
 </script>
 
-<svelte:element this={tag} {id} class={baseName}>
+<svelte:element this={tag} class={baseName}>
 	{#if image}
 		<img
 			class="{className}__image"

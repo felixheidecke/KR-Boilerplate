@@ -11,7 +11,6 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let ratio: YoutubeProps['ratio'] = [16, 9]
-	export let id: YoutubeProps['id']
 	export let videoId: YoutubeProps['videoId']
 	export let allow: YoutubeProps['allow'] = [YoutubePropsAllow.ENCRYPTED_MEDIA]
 
@@ -21,7 +20,7 @@
 	const className = classnames(baseName, $$props.class)
 </script>
 
-<Aspect {id} class={className} ratio={ratio.join(':')}>
+<Aspect class={className} ratio={ratio.join(':')}>
 	<iframe
 		class={baseName + '__frame'}
 		src={'https://www.youtube-nocookie.com/embed/' + videoId}

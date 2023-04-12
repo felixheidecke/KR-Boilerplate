@@ -17,7 +17,7 @@
 	export let icon: LinkProps['icon'] = undefined
 	export let rel: LinkProps['rel'] = LinkPropsRel.FOLLOW
 	export let tag: LinkProps['tag'] = LinkPropsTag.ANCHOR
-	export let exClass = ''
+	export let exClass = undefined
 
 	const href = to || undefined
 

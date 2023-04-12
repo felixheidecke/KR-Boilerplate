@@ -15,7 +15,6 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let images = [] as LightboxProps['images']
-	export let id = ''
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -64,7 +63,7 @@
 	})
 </script>
 
-<div class="Lightbox" {id}>
+<div class="Lightbox">
 	<div bind:this={lightbox}>
 		<slot />
 	</div>

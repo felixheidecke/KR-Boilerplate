@@ -1,7 +1,8 @@
 import type { Component } from '../component.types'
 
 export enum ButtonPropsTarget {
-	BLANK = '_blank'
+	BLANK = '_blank',
+	SELF = '_self'
 }
 
 export interface ButtonProps extends Component {

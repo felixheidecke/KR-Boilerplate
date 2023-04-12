@@ -13,11 +13,23 @@
 	import Icon from '../Icon/Icon.svelte'
 	import Grid from '../Grid/Grid.svelte'
 	import Lightbox from '../Lightbox/Lightbox.svelte'
+	import { LinkPropsTarget } from '../Link/Link.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const { id, description, details, ends, image, pdf, flags, starts, title, website, ticketshop } =
-		$$props.event as XioniEvent
+	const {
+		description,
+		details,
+		ends,
+		image,
+		pdf,
+		flags,
+		starts,
+		title,
+		website,
+		ticketshop,
+		organizer
+	} = $$props.event as XioniEvent
 
 	const images = $$props.event.images || []
 
@@ -49,7 +61,11 @@
 	<Lightbox bind:this={lightbox} {images} />
 {/if}
 
-<div class={className} id={'xioni-event-' + id}>
+<div class={className} itemscope itemtype="https://schema.org/Event">
+	<meta itemprop="startDate" content={starts.toUTCString()} />
+	<meta itemprop="endDate" content={ends.toUTCString()} />
+	<meta itemprop="organizer" content={organizer} />
+
 	{#if image || images?.length}
 		<div class="{baseName}__image-wrapper">
 			{#if image}
@@ -85,7 +101,7 @@
 		</div>
 	{/if}
 
-	<h2 class={baseName + '__title'}>
+	<h2 itemprop="name" class={baseName + '__title'}>
 		{title}
 	</h2>
 
@@ -95,7 +111,7 @@
 		</date>
 	</h3>
 
-	<div class={baseName + '__description'}>
+	<div itemprop="description" class={baseName + '__description'}>
 		{@html description}
 	</div>
 
@@ -127,7 +143,7 @@
 
 		{#if pdf}
 			<li class={baseName + '__pdf'}>
-				<Link icon="fas fa-file-pdf" to={pdf.src}>{pdf.title}</Link>
+				<Link icon="fas fa-file-pdf" target={LinkPropsTarget.BLANK} to={pdf.src}>{pdf.title}</Link>
 			</li>
 		{/if}
 	</ul>
