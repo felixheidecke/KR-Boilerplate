@@ -37,7 +37,7 @@
 	<meta itemprop="organizer" content={organizer} />
 
 	{#if image}
-		<img itemprop="image" class="{baseName}__image" src={image.thumbSrc} alt={image.alt} />
+		<img itemprop="image" class="{baseName}__image" src={image.thumbSrc} alt={image.alt || title} />
 	{/if}
 
 	<h2 itemprop="name" class="{baseName}__title">
