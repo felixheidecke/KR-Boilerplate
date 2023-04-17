@@ -1,9 +1,11 @@
 <script>
-	import { get as getMenuCard } from '$lib/boilerplate/libraries/xioni/menuCard'
+	import { get } from '$lib/boilerplate/libraries/xioni/menuCard'
+
+	const getMenuCard = get(831)
 </script>
 
 <h1>Speisekarte</h1>
 
-{#await getMenuCard(831) then menuCard}
+{#await getMenuCard then menuCard}
 	<XioniMenuCard {menuCard} />
 {/await}

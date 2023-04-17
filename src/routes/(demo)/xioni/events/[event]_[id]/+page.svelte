@@ -10,17 +10,20 @@
 <XioniEvent class="$mt-2" {event} />
 
 <XioniEventRegistration formId={4}>
-	<Grid tag="ul" gap class="$mb">
-		<Grid tag="li" size="1-2">
-			<Input name="Vorname" label="Vorname" required />
-		</Grid>
-		<Grid tag="li" size="1-2">
-			<Input name="Nachname" label="Nachname" required />
-		</Grid>
-		<Grid tag="li" size>
-			<Input name="Strasse" label="Straße & Hausnummer" required />
-		</Grid>
-	</Grid>
+	<Input name="Name" label="Name" placeholder="Vor- und Nachname" class="$mt" required />
+	<Textarea name="Anschrift" label="Anschrift" class="$mt" required />
+	<Input name="Telefon" label="Telefonnummer" class="$mt" required />
+	<Input type="Email" name="Email" label="E-Mail-Adresse" class="$mt" required />
+	<Textarea name="Nachricht" label="Nachricht" class="$mt" />
+	<Checkbox
+		name="datenschutz"
+		label="Ich habe die <a href='/datenschutz'>Datenschutzerklärung</a> zur Kenntnis genommen und stimme zu, dass meine Angaben und Daten zur Beantwortung meiner Anfrage elektronisch erhoben und gespeichert werden."
+		value="akzeptiert"
+		class="$mt"
+		required />
+	<div slot="done">
+		<p>Vielen Dank für Ihre Anmeldung.</p>
+	</div>
 </XioniEventRegistration>
 
 <div class="$text-center $mt-2">
