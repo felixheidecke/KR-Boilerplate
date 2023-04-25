@@ -2,6 +2,7 @@
 	import './XioniEventTile.scss'
 
 	import { LOCALE } from '$lib/boilerplate/constants'
+	import { goto } from '$app/navigation'
 	import classNames from 'classnames'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
@@ -37,7 +38,12 @@
 	<meta itemprop="organizer" content={organizer} />
 
 	{#if image}
-		<img itemprop="image" class="{baseName}__image" src={image.thumbSrc} alt={image.alt || title} />
+		<img
+			itemprop="image"
+			class="{baseName}__image"
+			src={image.thumbSrc}
+			alt={image.alt || title}
+			on:click={() => goto(link)} />
 	{/if}
 
 	<h2 itemprop="name" class="{baseName}__title">

@@ -2,7 +2,8 @@
 	import { writable } from 'svelte/store'
 	import { setContext } from 'svelte'
 
-	const { event } = $$props.data
+	// const { event } = $$props.data                // Event mit Datum
+	const event = { ...$$props.data, website: null } // Event ohne Datum
 
 	setContext('active-xioni-event', writable(null))
 </script>

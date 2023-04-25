@@ -10,6 +10,7 @@
 
 :where(.XioniEventTile__image) {
 	margin-bottom: 1rem;
+	cursor: pointer;
 
 	@include breakpoint('tablet-up') {
 		width: 12.5rem;

@@ -10,9 +10,10 @@
 
 :where(.XioniArticleTile__image) {
 	margin-bottom: 1rem;
+	cursor: pointer;
 
 	@include breakpoint('tablet-up') {
-		max-width: 15rem;
+		width: 12.5rem;
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		float: right;
