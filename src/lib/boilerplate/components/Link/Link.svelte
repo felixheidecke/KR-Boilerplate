@@ -17,6 +17,7 @@
 	export let icon: LinkProps['icon'] = undefined
 	export let rel: LinkProps['rel'] = LinkPropsRel.FOLLOW
 	export let tag: LinkProps['tag'] = LinkPropsTag.ANCHOR
+	export let label: LinkProps['label'] = ''
 	export let exClass = undefined
 
 	const href = to || undefined
@@ -51,7 +52,7 @@
 {#if icon}
 	<span class={className}>
 		<Icon ex-class={baseName + '__icon'} name={icon} />
-		<svelte:element this={tag} {href} {target} {rel} on:click>
+		<svelte:element this={tag} {href} {target} {rel} aria-label={label} on:click>
 			{#if $$slots.default}
 				<slot />
 			{:else}
@@ -60,7 +61,7 @@
 		</svelte:element>
 	</span>
 {:else}
-	<svelte:element this={tag} class={className} {href} {target} {rel} on:click>
+	<svelte:element this={tag} class={className} {href} {target} {rel} aria-label={label} on:click>
 		{#if $$slots.default}
 			<slot />
 		{:else}

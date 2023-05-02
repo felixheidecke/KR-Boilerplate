@@ -15,7 +15,7 @@
 	<Textarea name="Anschrift" label="Anschrift" class="$mt" required />
 	<Input name="Telefon" label="Telefonnummer" class="$mt" required />
 	<Input type="Email" name="Email" label="E-Mail-Adresse" class="$mt" required />
-	<Textarea name="Nachricht" label="Nachricht" class="$mt" />
+	<Textarea rows="2" name="Nachricht" label="Nachricht" class="$mt" />
 	<Checkbox
 		name="datenschutz"
 		label="Ich habe die <a href='/datenschutz'>Datenschutzerklärung</a> zur Kenntnis genommen und stimme zu, dass meine Angaben und Daten zur Beantwortung meiner Anfrage elektronisch erhoben und gespeichert werden."

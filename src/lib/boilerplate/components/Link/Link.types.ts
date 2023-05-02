@@ -16,6 +16,7 @@ export enum LinkPropsTag {
 
 export interface LinkProps {
 	to: string
+	label?: string
 	target?: LinkPropsTarget
 	icon?: string
 	rel?: LinkPropsRel

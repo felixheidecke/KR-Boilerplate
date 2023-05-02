@@ -8,11 +8,11 @@
 
 <svelte:head>
 	<meta name="theme-color" content="#333" />
-	<meta property="og:url" content={web} />
+	<meta property="og:url" content="https://{web}" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content="…" />
-	<meta property="og:image" content="…" />
+	<meta property="og:image" content="/images/og-image.jpg" />
 </svelte:head>
 
 <header>
@@ -24,6 +24,8 @@
 		<slot />
 	</PageTransition>
 </main>
+
+<Toplink />
 
 <style lang="scss">
 	@import '$variables';

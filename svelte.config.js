@@ -5,7 +5,12 @@ import { vitePreprocess } from '@sveltejs/kit/vite'
 const config = {
 	preprocess: vitePreprocess(),
 
+	output: {
+		preloadStrategy: 'preload-mjs'
+	},
+
 	kit: {
+		inlineStyleThreshold: 10000,
 		adapter: adapter({
 			pages: 'htdocs',
 			assets: 'htdocs',

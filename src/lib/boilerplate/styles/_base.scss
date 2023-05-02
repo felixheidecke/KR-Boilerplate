@@ -44,7 +44,6 @@ abbr {
 :where(blockquote) {
 	margin: 1rem 0;
 	padding: 0.01px 1rem;
-	background: lightgray;
 
 	@include breakpoint('tablet-up') {
 		margin: {

@@ -9,30 +9,38 @@ export default function (fetchFn: typeof fetch = fetch) {
 			url = url.join('/')
 		}
 
-		const newURL = new URL(url)
+		const remoteURL = new URL(url)
 		const method = params.method || FetchMethods.GET
 		const headers = { 'Content-Type': 'application/json', ...params.headers }
 		const body = params.data ? JSON.stringify(params.data) : undefined
 
 		if (params.params && Object.keys(params.params).length) {
-			newURL.search = new URLSearchParams(params.params as any).toString()
+			remoteURL.search = new URLSearchParams(params.params as any).toString()
 		}
 
 		try {
-			const response = await fetchFn(newURL.toString(), {
+			const response = await fetchFn(remoteURL.toString(), {
 				method,
 				headers,
 				body
 			})
 
+			const isJsonContent = response.headers.get('content-type')?.startsWith('application/json')
+
 			return {
-				data: await response.json(),
+				url: response.url,
+				data: isJsonContent ? await response.json() : await response.text(),
 				status: response.status,
-				ok: response.status < 400
+				ok: response.status < 400 && !!isJsonContent
 			}
 		} catch (error) {
 			console.error(error)
-			throw `Failed to fetch ${url.toString()}`
+
+			return {
+				url: remoteURL.toString(),
+				status: 500,
+				ok: false
+			}
 		}
 	}
 }

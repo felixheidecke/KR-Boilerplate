@@ -25,7 +25,7 @@
 
 <svelte:window on:scroll|passive={handleOffset} />
 
-<button {name} class={className} on:click={scrollToTop}>
+<button {name} class={className} on:click={scrollToTop} aria-label="Scroll to top">
 	<svg class="{baseName}__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
 		<!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
 		<path

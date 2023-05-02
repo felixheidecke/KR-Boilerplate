@@ -2,9 +2,6 @@
 	import { blur } from 'svelte/transition'
 	import type { PageTransitionProps } from './PageTransition.types'
 
-	// export let path: URL['pathname']
-	// export let tag = 'div'
-
 	$: ({ path, tag } = {
 		tag: 'div',
 		...$$props

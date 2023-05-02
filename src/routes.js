@@ -1,5 +1,13 @@
 export default [
+	{
+		path: '/',
+		name: 'Home'
+	},
 	...demoPaths(), // Demo Inhalte. Zeile 2 kann gelöscht werden
+	// {
+	// 	path: '/beispiel',
+	// 	name: 'Beispiel'
+	// },
 	{
 		path: '/impressum',
 		name: 'Impressum',
@@ -15,10 +23,6 @@ export default [
 // Demo Inhalte. Zeile 15 - 90 kann gelöscht werden.
 function demoPaths() {
 	return [
-		{
-			path: '/',
-			name: 'Home'
-		},
 		{
 			name: 'Basis',
 			routes: [
@@ -85,6 +89,10 @@ function demoPaths() {
 					name: 'Events (Expanded)'
 				}
 			]
+		},
+		{
+			path: '/projekte',
+			name: 'Projekte'
 		}
 	]
 }
