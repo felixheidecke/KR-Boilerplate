@@ -4,6 +4,7 @@
 	import { LOCALE } from '$lib/boilerplate/constants'
 	import { goto } from '$app/navigation'
 	import classNames from 'classnames'
+	import { format } from '$lib/boilerplate/utils/format-date'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
@@ -33,8 +34,8 @@
 </script>
 
 <svelte:element this={tag} class={className} itemscope itemtype="https://schema.org/Event">
-	<meta itemprop="startDate" content={starts.toUTCString()} />
-	<meta itemprop="endDate" content={ends.toUTCString()} />
+	<meta itemprop="startDate" content={format(starts, 'yyyy-MM-dd')} />
+	<meta itemprop="endDate" content={format(ends, 'yyyy-MM-dd')} />
 	<meta itemprop="organizer" content={organizer} />
 
 	{#if image}
