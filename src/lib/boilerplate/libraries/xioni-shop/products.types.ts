@@ -1,15 +1,15 @@
-export enum XioniShopProductQuantityUnit {
+export enum ShopProductQuantityUnit {
 	LITER = 'l',
 	KILOGRAM = 'kg',
 	PIECE = 'ea'
 }
 
-export enum XioniShopProductWeightUnit {
+export enum ShopProductWeightUnit {
 	CUSTOM = 'custom',
 	KILOGRAM = 'kg'
 }
 
-export interface XioniShopProduct {
+export interface ShopProduct {
 	id: number
 	module: number
 	name: string
@@ -38,12 +38,12 @@ export interface XioniShopProduct {
 	quantity: {
 		value: number
 		formatted: string
-		unit: XioniShopProductQuantityUnit
+		unit: ShopProductQuantityUnit
 	}
 	weight: {
 		value: number
 		formatted: string
-		unit: XioniShopProductWeightUnit
+		unit: ShopProductWeightUnit
 	}
 	price: {
 		value: number
@@ -59,4 +59,4 @@ export interface XioniShopProduct {
 	}
 }
 
-export type XioniShopProducts = XioniShopProduct[]
+export type ShopProducts = ShopProduct[]

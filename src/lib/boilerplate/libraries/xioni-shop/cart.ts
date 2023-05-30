@@ -5,7 +5,7 @@ import type { XioniShopCart, XioniShopCartProduct } from './cart.types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export default (module: number, fetchFn: typeof fetch = fetch) => {
+export default function ShopCart(module: number, fetchFn: typeof fetch = fetch) {
 	const fetchJSON = fetchJson(fetchFn)
 
 	/**
@@ -14,7 +14,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns Cart
 	 */
 
-	async function get() {
+	async function getCart() {
 		const { ok, data: cart } = await fetchJSON([XIONI_API_URL, 'shop', module, 'cart'], {
 			method: FetchMethods.POST,
 			data: {}
@@ -34,7 +34,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns Cart
 	 */
 
-	async function updateQuantity(quantity: number, id: number) {
+	async function updateItemQuantity(quantity: number, id: number) {
 		const { ok, data: cart } = await fetchJSON([XIONI_API_URL, 'shop', module, 'cart/update'], {
 			method: FetchMethods.UPDATE,
 			params: { quantity, id }
@@ -54,7 +54,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 */
 
 	async function addItem(id: number) {
-		const { ok, data: cart } = await fetchJSON([XIONI_API_URL, 'shop', module, 'cart/add'], {
+		const { ok, data: cart } = await fetchJSON([XIONI_API_URL, 'shop', module, 'cart/update'], {
 			method: FetchMethods.PATCH,
 			params: { id }
 		})
@@ -65,8 +65,8 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	}
 
 	return {
-		get,
-		updateQuantity,
+		getCart,
+		updateItemQuantity,
 		addItem
 	}
 }

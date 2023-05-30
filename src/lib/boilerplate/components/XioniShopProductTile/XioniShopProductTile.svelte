@@ -2,7 +2,6 @@
 	import './XioniShopProductTile.css'
 
 	import classnames from 'classnames'
-	import { goto } from '$app/navigation'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
@@ -20,7 +19,7 @@
 </script>
 
 {#if id}
-	<div data-component class={className} on:click={() => goto(link)}>
+	<div data-component class={className} on:click>
 		<img
 			class="{baseName}__image"
 			src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}

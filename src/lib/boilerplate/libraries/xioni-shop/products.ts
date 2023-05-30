@@ -1,8 +1,8 @@
 import { XIONI_API_URL } from '../../constants'
 import fetchJson from '../fetch-json'
-import type { XioniShopProduct, XioniShopProducts } from './products.types'
+import type { ShopProduct, ShopProducts } from './products.types'
 
-export default (module: number, fetchFn: typeof fetch = fetch) => {
+export default function ShopProducts(module: number, fetchFn: typeof fetch = fetch) {
 	const fetchJSON = fetchJson(fetchFn)
 	/**
 	 * Get all products
@@ -11,7 +11,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns List of Products
 	 */
 
-	async function getMany(limit?: number) {
+	async function getProducts(limit?: number) {
 		const params = {}
 
 		if (limit && limit > 0) {
@@ -24,7 +24,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 
 		if (!ok) return
 
-		return products as XioniShopProducts
+		return products as ShopProduct[]
 	}
 
 	/**
@@ -34,12 +34,12 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns Product
 	 */
 
-	async function getOne(id: number) {
-		const { ok, data: products } = await fetchJSON([XIONI_API_URL, 'shop', module, 'product', id])
+	async function getProduct(id: number) {
+		const { ok, data: product } = await fetchJSON([XIONI_API_URL, 'shop', module, 'product', id])
 
 		if (!ok) return
 
-		return products as XioniShopProduct
+		return product as ShopProduct
 	}
 
 	/**
@@ -50,7 +50,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns List of Products
 	 */
 
-	async function getByCategory(category: number, filter: { limit?: number } = {}) {
+	async function getProductsByCategory(category: number, filter: { limit?: number } = {}) {
 		const params = {}
 
 		if (filter.limit && filter.limit > 0) {
@@ -64,7 +64,7 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 
 		if (!ok) return
 
-		return products as XioniShopProducts
+		return products as ShopProduct[]
 	}
 
 	/**
@@ -74,9 +74,9 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns List of Products
 	 */
 
-	async function getFromFrontpage(filter: { limit?: number } = {}) {
+	async function getProductHighlights(filter: { limit?: number } = {}) {
 		const params = {
-			filter: 'frontpage'
+			filter: 'highlight'
 		}
 
 		if (filter.limit && filter.limit > 0) {
@@ -89,13 +89,13 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 
 		if (!ok) return
 
-		return products as XioniShopProducts
+		return products as ShopProduct[]
 	}
 
 	return {
-		getMany,
-		getOne,
-		getByCategory,
-		getFromFrontpage
+		getProduct,
+		getProductHighlights,
+		getProducts,
+		getProductsByCategory
 	}
 }
