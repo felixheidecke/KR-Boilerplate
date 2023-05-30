@@ -22,6 +22,7 @@
 
 	export let routes: Routes
 	export let activeRoute: Route | null = null
+	export let activeParent: Route | undefined = undefined
 	export let variant: NavType | undefined = undefined
 	export let breakpoint = '1024px'
 	export let sticky = false
@@ -103,12 +104,11 @@
 				<svelte:element
 					this={route.path ? 'a' : 'span'}
 					id="route-{i}"
-					class={route.path
-						? classnames(
-								baseName + '__a',
-								activeRoute?.path !== route.path || baseName + '__a--active'
-						  )
-						: baseName + '__span'}
+					class={classnames(
+						baseName + '__a',
+						activeRoute?.path !== route.path || baseName + '__a--active',
+						activeParent?.name !== route.name || baseName + '__a--current'
+					)}
 					href={route.path}>
 					{route.name}
 				</svelte:element>
@@ -120,13 +120,15 @@
 							hoverState !== i || baseName + '__ul-ul--visible'
 						)}>
 						{#each route.routes as subRoute, o}
-							<li
-								class={classnames(
-									baseName + '__li-li',
-									activeRoute?.path !== subRoute.path || baseName + '__li-li--active',
-									subRoute.class
-								)}>
-								<a id="route-{i}-{o}" class={baseName + '__a-a'} href={subRoute.path}>
+							<li class={baseName + '__li-li'}>
+								<a
+									id="route-{i}-{o}"
+									class={classnames(
+										baseName + '__a-a',
+										activeRoute?.path !== subRoute.path || baseName + '__a-a--active',
+										subRoute.class
+									)}
+									href={subRoute.path}>
 									{subRoute.name}
 								</a>
 							</li>

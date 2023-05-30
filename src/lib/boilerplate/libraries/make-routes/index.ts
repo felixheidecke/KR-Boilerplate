@@ -21,3 +21,15 @@ export function MakeActiveRoute(routes: Routes) {
 		set(activeRoute as Route | null)
 	}) as Readable<Route | null>
 }
+
+export function MakeParentRoute(routes: Routes, activeRoute: Readable<Route | null>) {
+	return derived(activeRoute, ($activeRoute, set) => {
+		if (!$activeRoute) return set(null)
+
+		const parent = routes.find(route => {
+			return route.routes?.includes($activeRoute)
+		})
+
+		set(parent as Route)
+	}) as Readable<Route | null>
+}
