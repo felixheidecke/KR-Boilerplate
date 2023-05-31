@@ -106,8 +106,8 @@
 					id="route-{i}"
 					class={classnames(
 						baseName + '__a',
-						activeRoute?.path !== route.path || baseName + '__a--active',
-						activeParent?.name !== route.name || baseName + '__a--current'
+						activeRoute?.path === route.path && route.path ? baseName + '__a--active' : null,
+						activeParent?.name === route.name ? baseName + '__a--current' : null
 					)}
 					href={route.path}>
 					{route.name}
