@@ -12,9 +12,11 @@ export default function XioniMenuCardApi(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function get(module: number) {
-		const response = await fetchJSON([XIONI_API_URL, 'menu-card', module])
+		const { ok, data: menuCard } = await fetchJSON([XIONI_API_URL, 'menu-card', module])
 
-		return response.data as XioniMenuCard
+		if (!ok) return null
+
+		return menuCard as XioniMenuCard
 	}
 
 	return {

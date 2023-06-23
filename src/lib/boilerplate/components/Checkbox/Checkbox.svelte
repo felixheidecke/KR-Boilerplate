@@ -29,7 +29,13 @@
 </script>
 
 <label class={className}>
-	<input {...inputProps} class={baseName + '__input'} type="checkbox" {value} bind:checked />
+	<input
+		{...inputProps}
+		class={baseName + '__input'}
+		type="checkbox"
+		{value}
+		bind:checked
+		on:change />
 	<span class={baseName + '__label'}>{@html label}</span>
 </label>
 

@@ -2,7 +2,5 @@ export interface Route {
 	name: string
 	path?: string
 	class?: string
-	routes?: Routes
+	routes?: Route[]
 }
-
-export type Routes = Route[]

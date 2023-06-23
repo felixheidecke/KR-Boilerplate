@@ -1,8 +1,8 @@
 import { XIONI_API_URL } from '../../constants'
 import fetchJson from '../fetch-json'
-import type { ShopProduct, ShopProducts } from './products.types'
+import type { ShopProduct } from './products.types'
 
-export default function ShopProducts(module: number, fetchFn: typeof fetch = fetch) {
+export default function MakeShopProducts(module: number, fetchFn: typeof fetch = fetch) {
 	const fetchJSON = fetchJson(fetchFn)
 	/**
 	 * Get all products
@@ -22,9 +22,7 @@ export default function ShopProducts(module: number, fetchFn: typeof fetch = fet
 			params
 		})
 
-		if (!ok) return
-
-		return products as ShopProduct[]
+		return ok ? (products as ShopProduct[]) : null
 	}
 
 	/**
@@ -35,11 +33,9 @@ export default function ShopProducts(module: number, fetchFn: typeof fetch = fet
 	 */
 
 	async function getProduct(id: number) {
-		const { ok, data: product } = await fetchJSON([XIONI_API_URL, 'shop', module, 'product', id])
+		const { ok, data: product } = await fetchJSON([XIONI_API_URL, 'shop', module, 'products', id])
 
-		if (!ok) return
-
-		return product as ShopProduct
+		return ok ? (product as ShopProduct) : null
 	}
 
 	/**
@@ -58,13 +54,11 @@ export default function ShopProducts(module: number, fetchFn: typeof fetch = fet
 		}
 
 		const { ok, data: products } = await fetchJSON(
-			[XIONI_API_URL, 'shop', module, 'category', category, 'products'],
+			[XIONI_API_URL, 'shop', module, 'categories', category, 'products'],
 			{ params }
 		)
 
-		if (!ok) return
-
-		return products as ShopProduct[]
+		return ok ? (products as ShopProduct[]) : null
 	}
 
 	/**
@@ -87,9 +81,7 @@ export default function ShopProducts(module: number, fetchFn: typeof fetch = fet
 			params
 		})
 
-		if (!ok) return
-
-		return products as ShopProduct[]
+		return ok ? (products as ShopProduct[]) : null
 	}
 
 	return {

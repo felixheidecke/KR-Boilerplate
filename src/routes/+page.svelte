@@ -1,9 +1,9 @@
 <script>
-	const { title, name } = $$props.data
+	const { stammdaten } = $$props.data
 </script>
 
 <svelte:head>
-	<title>Willkommen | {title} | {name}</title>
+	<title>Willkommen | {stammdaten.title} | {stammdaten.name}</title>
 </svelte:head>
 
 <div class="$text-center">

@@ -1,8 +1,8 @@
 import { XIONI_API_URL } from '../../constants'
 import fetchJson from '../fetch-json'
-import type { XioniShopCategories, XioniShopCategory } from './categories.types'
+import type { ShopCategory } from './categories.types'
 
-export default function ShopCategories(module: number, fetchFn: typeof fetch = fetch) {
+export default function MakeShopCategories(module: number, fetchFn: typeof fetch = fetch) {
 	const fetchJSON = fetchJson(fetchFn)
 	/**
 	 * Get all Categories in the store
@@ -15,7 +15,7 @@ export default function ShopCategories(module: number, fetchFn: typeof fetch = f
 
 		if (!ok) return
 
-		return categories as XioniShopCategories
+		return categories as ShopCategory[]
 	}
 
 	/**
@@ -25,7 +25,7 @@ export default function ShopCategories(module: number, fetchFn: typeof fetch = f
 	 * @returns A Category
 	 */
 
-	async function getCategory(id: number | string) {
+	async function getCategory(id: number) {
 		const { ok, data: category } = await fetchJSON([
 			XIONI_API_URL,
 			'shop',
@@ -36,7 +36,7 @@ export default function ShopCategories(module: number, fetchFn: typeof fetch = f
 
 		if (!ok) return
 
-		return category as XioniShopCategory
+		return category as ShopCategory
 	}
 
 	return {

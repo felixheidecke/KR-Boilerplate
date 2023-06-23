@@ -1,10 +1,11 @@
-export interface XioniShopCart {
-	products: XioniShopCartProduct[]
+export interface ShopCart {
+	products: ShopCartProduct[]
 	gross: {
 		value: number
 		formatted: string
 	}
-	additional?: {
+	additionalCost?: {
+		title: string
 		value: number
 		formatted: string
 	}
@@ -18,14 +19,14 @@ export interface XioniShopCart {
 	}
 }
 
-export interface XioniShopCartProduct {
+export interface ShopCartProduct {
 	id: number
 	module: number
 	name: string
 	slug: string
-	code: string
+	code?: string
 	EAN?: string
-	frontpage: boolean
+	isHighlight: boolean
 	price: {
 		value: number
 		formatted: string

@@ -30,7 +30,9 @@
 		if (!isDoneEl || !$$slots.done) return
 
 		isDoneEl.scrollIntoView({
-			behavior: `smooth`
+			behavior: `smooth`,
+			block: 'end',
+			inline: 'nearest'
 		})
 	}
 
@@ -50,13 +52,13 @@
 			const { data, status } = await fetchJson([XIONI_API_URL, 'form'], {
 				method: FetchMethods.POST,
 				data: getFormData(),
-				params: attach === 'csv' ? { attach: 'csv' } : null
+				params: attach === 'csv' ? { attach: 'csv' } : undefined
 			})
 
 			if (status >= 400) throw data
 
-			if (data.error) {
-				errors = data.message.split(',')
+			if (data && 'error' in data && 'message' in data) {
+				errors = (data.message as string).split(',')
 				isDone = false
 				emit('error', data.error)
 				return

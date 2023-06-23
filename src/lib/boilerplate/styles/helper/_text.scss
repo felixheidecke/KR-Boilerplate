@@ -3,6 +3,11 @@
 		text-decoration: underline;
 	}
 
+	&decoration-double-underline {
+		text-decoration: underline;
+		text-decoration-style: double;
+	}
+
 	&decoration-none {
 		text-decoration: none;
 	}
@@ -17,5 +22,11 @@
 
 	&text-right {
 		text-align: right;
+	}
+
+	&overflow-ellipsis {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 }

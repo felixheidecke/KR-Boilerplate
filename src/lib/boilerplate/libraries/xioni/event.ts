@@ -55,7 +55,7 @@ export default function XioniEventApi(fetchFn: typeof fetch = fetch) {
 
 		if (!ok) return
 
-		const events = data.map(eventAdapter) as XioniEvent[]
+		const events = (data as object[]).map(eventAdapter) as XioniEvent[]
 
 		if (callback) {
 			callback(events)
@@ -72,16 +72,15 @@ export default function XioniEventApi(fetchFn: typeof fetch = fetch) {
 	 * @returns XioniEvent
 	 */
 
-	async function getOne(id: number, callback: Function | undefined = undefined) {
+	async function getOne(id: number, callback: Function = undefined as unknown as Function) {
 		const { ok, data } = await fetchJSON([XIONI_API_URL, 'event', id])
 
-		if (!ok) return
+		if (!ok) return null
 
 		const event = eventAdapter(data)
 
 		if (callback) {
 			callback(event)
-			return
 		}
 
 		return event

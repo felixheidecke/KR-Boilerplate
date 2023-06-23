@@ -1,12 +1,12 @@
-import { page } from '$app/stores'
-import type { Route, Routes } from './types'
 import { derived, readable, type Readable } from 'svelte/store'
+import { page } from '$app/stores'
+import type { Route } from './types'
 
-export function MakeRoutes(routes: Routes) {
+export function MakeRoutes(routes: Route[]) {
 	return readable(routes)
 }
 
-export function MakeActiveRoute(routes: Routes) {
+export function MakeActiveRoute(routes: Route[]) {
 	const flatRoutes = [...routes]
 
 	routes.forEach(({ routes }) => {
@@ -22,7 +22,7 @@ export function MakeActiveRoute(routes: Routes) {
 	}) as Readable<Route | null>
 }
 
-export function MakeParentRoute(routes: Routes, activeRoute: Readable<Route | null>) {
+export function MakeParentRoute(routes: Route[], activeRoute: Readable<Route | null>) {
 	return derived(activeRoute, ($activeRoute, set) => {
 		if (!$activeRoute) return set(null)
 

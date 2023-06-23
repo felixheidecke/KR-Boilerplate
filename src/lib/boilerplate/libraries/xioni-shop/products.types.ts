@@ -14,11 +14,11 @@ export interface ShopProduct {
 	module: number
 	name: string
 	slug: string
-	code: string
+	code?: string
 	EAN?: string
-	frontpage: boolean
-	description: string
-	teaser: string
+	isHighlight: boolean
+	description?: string
+	teaser?: string
 	legalInfo?: string
 	image?: {
 		src: string
@@ -30,17 +30,17 @@ export interface ShopProduct {
 		name: string
 		title: string
 	}
-	category: {
+	category?: {
 		id: number
 		name: string
 		slug: string
 	}
-	quantity: {
+	quantity?: {
 		value: number
 		formatted: string
 		unit: ShopProductQuantityUnit
 	}
-	weight: {
+	weight?: {
 		value: number
 		formatted: string
 		unit: ShopProductWeightUnit
@@ -53,10 +53,8 @@ export interface ShopProduct {
 		value: number
 		formatted: string
 	}
-	pricePerUnit: {
+	pricePerUnit?: {
 		value: number
 		formatted: string
 	}
 }
-
-export type ShopProducts = ShopProduct[]

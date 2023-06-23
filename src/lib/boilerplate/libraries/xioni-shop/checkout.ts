@@ -3,7 +3,7 @@ import fetchJson from '../fetch-json'
 import { FetchMethods } from '../fetch-json/types'
 import type { XioniShopCheckoutOrder } from './checkout.types'
 
-export default function ShopCheckout(module: number, fetchFn: typeof fetch = fetch) {
+export default function MakeShopCheckout(module: number, fetchFn: typeof fetch = fetch) {
 	const fetchJSON = fetchJson(fetchFn)
 	/**
 	 * Create an ivoiced or prepaid Order

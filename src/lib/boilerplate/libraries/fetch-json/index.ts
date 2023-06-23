@@ -25,21 +25,26 @@ export default function (fetchFn: typeof fetch = fetch) {
 				body
 			})
 
-			const isJsonContent = response.headers.get('content-type')?.startsWith('application/json')
+			const isJsonContent = response.headers.get('content-type')?.includes('application/json')
+
+			if (!isJsonContent) {
+				console.error(response.text())
+			}
 
 			return {
-				url: response.url,
-				data: isJsonContent ? await response.json() : await response.text(),
+				data: isJsonContent ? await response.json() : null,
+				ok: response.status < 400 && !!isJsonContent,
 				status: response.status,
-				ok: response.status < 400 && !!isJsonContent
+				url: response.url
 			}
 		} catch (error) {
 			console.error(error)
 
 			return {
-				url: remoteURL.toString(),
+				data: '',
+				ok: false,
 				status: 500,
-				ok: false
+				url: remoteURL.toString()
 			}
 		}
 	}

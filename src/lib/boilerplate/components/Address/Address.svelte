@@ -1,11 +1,11 @@
 <script lang="ts">
 	import './Address.css'
+	import classNames from 'classnames'
 
 	import Link from '../Link/Link.svelte'
 	import Mail from '../Mail/Mail.svelte'
 
 	import type { AddressProps } from './Address.types'
-	import classNames from 'classnames'
 
 	export let name: AddressProps['name']
 	export let title: AddressProps['title'] = ''
@@ -22,7 +22,7 @@
 
 <ol class={className}>
 	<li class="{baseName}__name">{name}</li>
-	{#if phone}
+	{#if title}
 		<li class="{baseName}__title">{title}</li>
 	{/if}
 	<li class="{baseName}__street">{street}</li>

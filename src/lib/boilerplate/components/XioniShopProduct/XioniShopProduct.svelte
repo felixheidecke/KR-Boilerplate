@@ -10,12 +10,24 @@
 	import Grid from '../Grid/Grid.svelte'
 	import Modal from '../Modal/Modal.svelte'
 	import Button from '../Button/Button.svelte'
-	import type { XioniShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
+	import type { ShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
+	import Link from '../Link/Link.svelte'
 
 	// --- Props -------------------------------------------------------------------------------------
 
-	const { id, name, teaser, description, legalInfo, pricePerUnit, quantity, price, VAT, image } =
-		$$props.product as XioniShopProduct
+	const {
+		id,
+		name,
+		teaser,
+		category,
+		description,
+		legalInfo,
+		pricePerUnit,
+		quantity,
+		price,
+		VAT,
+		image
+	} = $$props.product as ShopProduct
 
 	// --- Data --------------------------------------------------------------------------------------
 
@@ -34,7 +46,10 @@
 
 {#if id}
 	<div class={className}>
-		<h2 class="{baseName}__name $mb-2">
+		{#if category}
+			<Link to="/shop/{category.slug}_c{category.id}">{category?.name}</Link>
+		{/if}
+		<h2 class="{baseName}__name $mb-2 $mt-1/2">
 			{name}
 		</h2>
 
@@ -42,7 +57,7 @@
 			<Grid size="tablet-1-3">
 				<img
 					class="{baseName}__image $mb-2@mobile"
-					src={image.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
+					src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
 					alt={name} />
 			</Grid>
 			<Grid size="tablet-2-3">

@@ -5,7 +5,7 @@ export enum XioniShopCheckoutOrderType {
 
 export interface XioniShopCheckoutOrder {
 	type: XioniShopCheckoutOrderType
-	invoice: {
+	invoice?: {
 		salutation: string
 		firstname: string
 		name: string

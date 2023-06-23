@@ -14,8 +14,8 @@ export interface FetchParams {
 }
 
 export interface FetchResponse {
-	data?: object | string
-	ok: boolean
+	data: object | object[] | string
 	status: number
+	ok: boolean
 	url: string
 }

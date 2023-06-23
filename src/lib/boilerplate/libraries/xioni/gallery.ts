@@ -15,7 +15,7 @@ export default function XioniGalleryApi(fetchFn: typeof fetch = fetch) {
 	async function get(module: number) {
 		const { ok, data: gallery } = await fetchJSON([XIONI_API_URL, 'gallery', module])
 
-		if (!ok) return
+		if (!ok) return null
 
 		return gallery as XioniGallery
 	}
@@ -30,7 +30,7 @@ export default function XioniGalleryApi(fetchFn: typeof fetch = fetch) {
 	async function getAlbum(id: number) {
 		const { ok, data: album } = await fetchJSON([XIONI_API_URL, 'gallery/album', id])
 
-		if (!ok) return
+		if (!ok) return null
 
 		return album as XioniAlbum
 	}

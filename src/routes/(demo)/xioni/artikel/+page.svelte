@@ -8,7 +8,7 @@
 
 {#await getArticles then articles}
 	<ol class="$flex $flex-column $gap">
-		{#each articles as article}
+		{#each articles || [] as article}
 			<XioniArticleTile tag="li" {article} basePath="/xioni/artikel/" />
 		{/each}
 	</ol>

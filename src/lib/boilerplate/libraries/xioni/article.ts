@@ -1,9 +1,8 @@
-import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
-import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import type { XioniArticle, XioniArticles } from './article.types'
+import XioniFetch from '../xioni-fetch'
 
 export default function XioniArticleApi(fetchFn: typeof fetch = fetch) {
-	const fetchJSON = FetchJSON(fetchFn)
+	const xioniFetch = XioniFetch(fetchFn)
 
 	/**
 	 * Get all articles by module
@@ -31,11 +30,11 @@ export default function XioniArticleApi(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { status: filter.status })
 		}
 
-		const { data, ok } = await fetchJSON([XIONI_API_URL, 'articles', module], { params })
+		const artciles = await xioniFetch(['articles', module], { params })
 
-		if (!ok) return
+		if (!artciles.ok) return null
 
-		return data.map(articleAdapter) as XioniArticles
+		return (artciles.data as object[]).map(articleAdapter) as XioniArticles
 	}
 
 	/**
@@ -52,11 +51,11 @@ export default function XioniArticleApi(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { full: filter.full })
 		}
 
-		const { data, ok } = await fetchJSON([XIONI_API_URL, 'article', id], { params })
+		const article = await xioniFetch(['article', id], { params })
 
-		if (!ok) return
+		if (!article.ok) return
 
-		return articleAdapter(data) as XioniArticle
+		return articleAdapter(article.data) as XioniArticle
 	}
 
 	/**
@@ -74,11 +73,11 @@ export default function XioniArticleApi(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		const { data, ok } = await fetchJSON([XIONI_API_URL, 'articles'], { params })
+		const { data, ok } = await xioniFetch(['articles'], { params })
 
 		if (!ok) return
 
-		return data.map(articleAdapter) as XioniArticles
+		return (data as object[]).map(articleAdapter) as XioniArticles
 	}
 
 	// Remap response data

@@ -2,7 +2,7 @@ import { XIONI_API_URL } from '../../constants'
 import fetchJson from '../fetch-json'
 import type { XioniShopInfo } from './info.types'
 
-export default function ShopInfo(module: number, fetchFn: typeof fetch = fetch) {
+export default function MakeShopInfo(module: number, fetchFn: typeof fetch = fetch) {
 	const fetchJSON = fetchJson(fetchFn)
 	/**
 	 * Get all infos about the including shipping charges
@@ -11,11 +11,11 @@ export default function ShopInfo(module: number, fetchFn: typeof fetch = fetch) 
 	 */
 
 	async function get() {
-		const { ok, data: order } = await fetchJSON([XIONI_API_URL, 'shop', module, 'info'])
+		const { ok, data } = await fetchJSON([XIONI_API_URL, 'shop', module, 'info'])
 
 		if (!ok) return
 
-		return order as XioniShopInfo
+		return data as XioniShopInfo
 	}
 
 	return {

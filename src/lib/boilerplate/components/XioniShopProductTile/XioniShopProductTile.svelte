@@ -5,12 +5,11 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
+	import type { ShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let link: string
-	const { id, name, category, price, VAT, image } = $$props.product as XioniShopProduct
+	const { id, name, category, price, VAT, image } = $$props.product as ShopProduct
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -29,9 +28,6 @@
 
 		<div class="{baseName}__data">
 			<h4 class="$m-0 $p-0">
-				<!-- <Link to={link} ex-class="{baseName}__name">
-					{name}
-				</Link> -->
 				{name}
 			</h4>
 			{#if category}

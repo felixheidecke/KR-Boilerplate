@@ -1,9 +1,9 @@
 <script>
-	const { title } = $$props.data.stammdaten
+	const { stammdaten } = $$props.data
 </script>
 
 <svelte:head>
-	<title>Impressum | {title}</title>
+	<title>Impressum | {stammdaten.title}</title>
 </svelte:head>
 
 <div>

@@ -1,26 +1,26 @@
 <script>
 	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
-	import { ROUTES, ACTIVE_ROUTE } from '$lib/boilerplate/stores/routes'
+	import { ROUTES, ACTIVE_ROUTE, ACTIVE_PARENT } from '$lib/boilerplate/stores/routes'
 
-	const { title, web } = $$props.data.stammdaten
+	const { stammdaten, url } = $$props.data
 </script>
 
 <svelte:head>
 	<meta name="theme-color" content="#333" />
-	<meta property="og:url" content="https://{web}" />
+	<meta property="og:url" content="https://{stammdaten.web}" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content={title} />
+	<meta property="og:title" content={stammdaten.title} />
 	<meta property="og:description" content="…" />
 	<meta property="og:image" content="/images/og-image.jpg" />
 </svelte:head>
 
 <header>
-	<Nav routes={$ROUTES} activeRoute={$ACTIVE_ROUTE} />
+	<Nav routes={$ROUTES} activeRoute={$ACTIVE_ROUTE} activeParent={$ACTIVE_PARENT} />
 </header>
 
 <main class="layout-wrapper $mx-auto $p $p-2@tablet-up">
-	<PageTransition path={$$props.data.url.pathname}>
+	<PageTransition path={url.pathname}>
 		<slot />
 	</PageTransition>
 </main>

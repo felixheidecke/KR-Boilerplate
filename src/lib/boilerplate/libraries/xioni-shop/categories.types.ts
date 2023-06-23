@@ -1,9 +1,7 @@
-export interface XioniShopCategory {
+export interface ShopCategory {
 	id: number
 	name: string
 	slug: string
 	description: string
 	productCount: number
 }
-
-export type XioniShopCategories = XioniShopCategory[]

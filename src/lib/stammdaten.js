@@ -1,11 +1,11 @@
 export default {
 	name: 'Musterfirma GmbH',
 	title: 'Mustergültige Muster und Formen',
-	owner: '',
-	street: '',
-	town: '',
+	owner: 'Max Mustermann',
+	street: 'Musterstraße 1a',
+	town: '98765 Musterstadt',
 	phone: '',
 	fax: '',
-	email: '',
+	email: 'info@musterfirma.de',
 	web: 'musterfirma.de'
 }

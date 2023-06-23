@@ -11,7 +11,7 @@ export interface XioniShopInfo {
 
 export interface XioniShopInfoShipping {
 	description: string
-	rates: {
+	rates?: {
 		weight: { value: number; formatted: string }
 		price: { value: number; formatted: string }
 	}

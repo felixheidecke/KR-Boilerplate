@@ -91,6 +91,10 @@ function demoPaths() {
 			]
 		},
 		{
+			path: '/shop',
+			name: 'Shop'
+		},
+		{
 			path: '/projekte',
 			name: 'Projekte'
 		}

@@ -1,13 +1,12 @@
 import type { RequestHandler } from '@sveltejs/kit'
 import pkg from '$lib/../../package.json'
-import { LOCALE } from '$lib/boilerplate/constants'
 
 export const prerender = true
 export const GET = function () {
 	const data = {
 		name: pkg.name,
 		version: pkg.version,
-		build: new Date().toLocaleString(LOCALE)
+		build: new Date().toString()
 	}
 	const response = new Response(JSON.stringify(data))
 

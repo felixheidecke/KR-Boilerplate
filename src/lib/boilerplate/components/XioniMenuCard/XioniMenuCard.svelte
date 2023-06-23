@@ -18,7 +18,9 @@
 		<li class="{baseClassName}__category">
 			<div class="{baseClassName}__category-description">
 				<h3 class="{baseClassName}__category-name">{category.name}</h3>
-				{@html category.description}
+				{#if category.description}
+					{@html category.description}
+				{/if}
 			</div>
 			<ul class="{baseClassName}__dishes">
 				{#each category.items as dish}
@@ -27,6 +29,13 @@
 						<div class="{baseClassName}__dish-price">
 							{formatPrice(dish.price)}
 						</div>
+						{#if dish.image}
+							<img
+								src={dish.image.src}
+								alt={dish.image.alt}
+								class="{baseClassName}__dish-image"
+								loading="lazy" />
+						{/if}
 						{#if dish.description}
 							<div class="{baseClassName}__dish-description">
 								{@html dish.description}

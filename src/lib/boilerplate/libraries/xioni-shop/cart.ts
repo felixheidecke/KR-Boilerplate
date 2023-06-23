@@ -1,12 +1,12 @@
-import fetchJson from '../fetch-json'
-import { XIONI_API_URL } from '../../constants'
 import { FetchMethods } from '../fetch-json/types'
-import type { XioniShopCart, XioniShopCartProduct } from './cart.types'
+import XioniFetch from '../xioni-fetch'
+
+import type { ShopCart, ShopCartProduct } from './cart.types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export default function ShopCart(module: number, fetchFn: typeof fetch = fetch) {
-	const fetchJSON = fetchJson(fetchFn)
+export default (module: number, fetchFn: typeof fetch = fetch) => {
+	const xioniFetch = XioniFetch(fetchFn)
 
 	/**
 	 * Get the cart contents
@@ -15,34 +15,34 @@ export default function ShopCart(module: number, fetchFn: typeof fetch = fetch) 
 	 */
 
 	async function getCart() {
-		const { ok, data: cart } = await fetchJSON([XIONI_API_URL, 'shop', module, 'cart'], {
+		const { ok, data: cart } = await xioniFetch(['shop', module, 'cart'], {
 			method: FetchMethods.POST,
 			data: {}
 		})
 
 		if (!ok) return
 
-		return cart as XioniShopCartProduct
+		return cart as ShopCartProduct
 	}
 
 	/**
 	 * Set the amount of a given product in cart
 	 * setting "0" removes it from the cart
 	 *
-	 * @param quantity amount
 	 * @param id Product ID
+	 * @param quantity amount
 	 * @returns Cart
 	 */
 
-	async function updateItemQuantity(quantity: number, id: number) {
-		const { ok, data: cart } = await fetchJSON([XIONI_API_URL, 'shop', module, 'cart/update'], {
-			method: FetchMethods.UPDATE,
-			params: { quantity, id }
+	async function updateQuantity(id: number, quantity: number) {
+		const { ok, data: cart } = await xioniFetch(['shop', module, 'cart/update'], {
+			method: FetchMethods.PATCH,
+			data: { quantity, id }
 		})
 
 		if (!ok) return
 
-		return cart as XioniShopCart
+		return cart as ShopCart
 	}
 
 	/**
@@ -54,19 +54,19 @@ export default function ShopCart(module: number, fetchFn: typeof fetch = fetch) 
 	 */
 
 	async function addItem(id: number) {
-		const { ok, data: cart } = await fetchJSON([XIONI_API_URL, 'shop', module, 'cart/update'], {
+		const { ok, data: cart } = await xioniFetch(['shop', module, 'cart/add'], {
 			method: FetchMethods.PATCH,
 			params: { id }
 		})
 
 		if (!ok) return
 
-		return cart as XioniShopCart
+		return cart as ShopCart
 	}
 
 	return {
 		getCart,
-		updateItemQuantity,
+		updateQuantity,
 		addItem
 	}
 }
