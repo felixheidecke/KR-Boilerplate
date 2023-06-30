@@ -35,12 +35,12 @@ export interface ShopProduct {
 		name: string
 		slug: string
 	}
-	quantity?: {
+	quantity: {
 		value: number
 		formatted: string
 		unit: ShopProductQuantityUnit
 	}
-	weight?: {
+	weight: {
 		value: number
 		formatted: string
 		unit: ShopProductWeightUnit
@@ -53,7 +53,7 @@ export interface ShopProduct {
 		value: number
 		formatted: string
 	}
-	pricePerUnit?: {
+	pricePerUnit: {
 		value: number
 		formatted: string
 	}

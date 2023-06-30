@@ -32,3 +32,13 @@
 		text-transform: uppercase;
 	}
 }
+
+:where(.Input--has-error .Input__label) {
+	background: #ffeded;
+	border-color: darken(red, 10);
+	color: darken(red, 10);
+}
+
+:where(.Input--has-error .Input__input) {
+	border-color: darken(red, 10);
+}

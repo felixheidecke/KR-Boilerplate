@@ -23,9 +23,7 @@
 </script>
 
 <div class={className}>
-	{#if !$CART}
-		<LoadSpinner />
-	{:else if $CART.products.length}
+	{#if $CART.products.length}
 		<table class="{baseName}__table">
 			<thead class="$font-bold">
 				<tr>

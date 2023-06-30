@@ -3,14 +3,15 @@
 	import classnames from 'classnames'
 	import { createEventDispatcher } from 'svelte'
 
-	const emit = createEventDispatcher()
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
+	import type { ShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
 
 	// --- Components --------------------------------------------------------------------------------
 
 	import Grid from '../Grid/Grid.svelte'
 	import Modal from '../Modal/Modal.svelte'
 	import Button from '../Button/Button.svelte'
-	import type { ShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
 	import Link from '../Link/Link.svelte'
 
 	// --- Props -------------------------------------------------------------------------------------
@@ -37,6 +38,8 @@
 	const className = classnames(baseName, $$props.class)
 
 	// --- Methods -----------------------------------------------------------------------------------
+
+	const emit = createEventDispatcher()
 
 	function addToCartHandler() {
 		emit('addToCart', id)
@@ -72,10 +75,12 @@
 						inkl. {VAT.formatted} MwSt.
 					</span>
 					<br />
-					<span class="{baseName}__quantity">
-						{quantity.formatted}
-						{#if quantity.value !== 1} / {pricePerUnit.formatted}{/if}
-					</span>
+					{#if quantity.value > 0}
+						<span class="{baseName}__quantity">
+							{quantity.formatted}
+							{#if quantity.value !== 1} / {pricePerUnit.formatted}{/if}
+						</span>
+					{/if}
 				</div>
 
 				<Button
@@ -85,7 +90,9 @@
 					In den Warenkorb
 				</Button>
 
-				{@html description}
+				{#if description}
+					{@html description}
+				{/if}
 
 				{#if legalInfo}
 					<div class="{baseName}__legal-info">
@@ -102,14 +109,26 @@
 			wurde dem Warenkorb hinzugefügt.
 		</p>
 		<p>Wie soll es weiter gehen?</p>
-		<div slot="footer" class="$flex $items-center $space-between">
-			<Button on:click={modal.close} to="/shop" icon="fas fa-shopping-bag">Weiter Shoppen</Button>
-			<Button on:click={modal.close} to="/shop/warenkorb" icon="fas fa-cash-register">
-				Zur Kasse
-			</Button>
+		<div slot="footer">
+			<Button on:click={modal.close} class="button__continue-shopping" to="/shop"
+				>Weiter Einkaufen</Button>
+			<Button on:click={modal.close} class="button__to-checkout" to="/shop/checkout/address"
+				>Zur Kasse</Button>
+			<Button on:click={modal.close} class="button__to-cart" to="/shop/checkout/cart"
+				>Warenkorb ansehen</Button>
 		</div>
 	</Modal>
 {/if}
 
 <style global>
+	:global(.button__to-checkout) {
+		background-color: #333;
+		color: white;
+		float: right;
+	}
+
+	:global(.button__to-cart) {
+		float: right;
+		margin-right: 0.5rem;
+	}
 </style>

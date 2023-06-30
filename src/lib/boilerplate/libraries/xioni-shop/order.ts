@@ -16,18 +16,20 @@ export default function MakeShopOrder(module: number, fetchFn: typeof fetch = fe
 	 * @returns Cart
 	 */
 
-	async function getReciept(transactionId: string) {
-		const { ok, data: cart } = await xioniFetch(['shop', module, 'order', transactionId], {
-			method: FetchMethods.GET
-		})
+	// async function getReciept(transactionId: string) {
+	// 	const { ok, data } = await xioniFetch(['shop', module, 'order', transactionId], {
+	// 		method: FetchMethods.GET
+	// 	})
 
-		if (!ok) return
+	// 	if (!ok || !data) {
+	// 		throw new Error('Fetch Failed')
+	// 	}
 
-		return {
-			...cart,
-			date: new Date(cart.date)
-		} as ShopRecieptOrder
-	}
+	// 	return {
+	// 		...data,
+	// 		date: new Date(data.date)
+	// 	} as ShopRecieptOrder
+	// }
 
 	/**
 	 * Set the amount of a given product in cart
@@ -39,14 +41,14 @@ export default function MakeShopOrder(module: number, fetchFn: typeof fetch = fe
 	 */
 
 	async function updateQuantity(quantity: number, id: number) {
-		const { ok, data: cart } = await xioniFetch([XIONI_API_URL, 'shop', module, 'cart/update'], {
+		const { ok, data } = await xioniFetch(['shop', module, 'cart/update'], {
 			method: FetchMethods.UPDATE,
 			params: { quantity, id }
 		})
 
-		if (!ok) return
+		if (!ok || !data) throw new Error('')
 
-		return cart as ShopCart
+		return data as ShopCart
 	}
 
 	/**
@@ -68,9 +70,25 @@ export default function MakeShopOrder(module: number, fetchFn: typeof fetch = fe
 		return cart as ShopCart
 	}
 
+	async function validateAddress(address: { [key: string]: string }, type: 'invoice' | 'shipping') {
+		const path = ['shop', module, 'order/validate-address']
+		const { ok, data } = await xioniFetch(path, {
+			method: FetchMethods.POST,
+			data: address,
+			params: { type }
+		})
+
+		if (!ok || !data) {
+			throw new Error('Faild loading ' + path)
+		}
+
+		return data as { valid: boolean; errors?: { [key: string]: string } }
+	}
+
 	return {
-		getReciept,
+		// getReciept,
 		updateQuantity,
+		validateAddress,
 		addItem
 	}
 }

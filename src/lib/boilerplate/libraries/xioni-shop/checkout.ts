@@ -1,10 +1,10 @@
-import { XIONI_API_URL } from '../../constants'
-import fetchJson from '../fetch-json'
 import { FetchMethods } from '../fetch-json/types'
+import XioniFetch from '../xioni-fetch'
 import type { XioniShopCheckoutOrder } from './checkout.types'
 
 export default function MakeShopCheckout(module: number, fetchFn: typeof fetch = fetch) {
-	const fetchJSON = fetchJson(fetchFn)
+	const xioniFetch = XioniFetch(fetchFn)
+
 	/**
 	 * Create an ivoiced or prepaid Order
 	 *
@@ -13,14 +13,15 @@ export default function MakeShopCheckout(module: number, fetchFn: typeof fetch =
 	 */
 
 	async function createOrder(data: any) {
-		const { ok, data: order } = await fetchJSON([XIONI_API_URL, 'shop', module, 'order/create'], {
+		const url = ['shop', module, 'order/create']
+		const { ok, data: order } = await xioniFetch(url, {
 			method: FetchMethods.POST,
 			data
 		})
 
 		if (!ok) return
 
-		return order as XioniShopCheckoutOrder
+		return order as unknown as XioniShopCheckoutOrder
 	}
 
 	/**
@@ -30,16 +31,16 @@ export default function MakeShopCheckout(module: number, fetchFn: typeof fetch =
 	 */
 
 	async function createPaypalOrder() {
-		const { ok, data: order } = await fetchJSON(
-			[XIONI_API_URL, 'shop', module, 'order/paypal/create'],
-			{
-				method: FetchMethods.POST
-			}
-		)
+		const path = ['shop', module, 'order/paypal/create']
+		const { ok, data: order } = await xioniFetch(path, {
+			method: FetchMethods.POST
+		})
 
-		if (!ok) return
+		if (!ok || !order) {
+			throw new Error('Faild loading ' + path)
+		}
 
-		return order as any
+		return order as unknown
 	}
 
 	/**
@@ -50,15 +51,15 @@ export default function MakeShopCheckout(module: number, fetchFn: typeof fetch =
 	 */
 
 	async function capturePaypalOrder(id: string) {
-		const { ok, data: order } = await fetchJSON(
-			[XIONI_API_URL, 'shop', module, 'order/paypal/capture'],
-			{
-				method: FetchMethods.POST,
-				params: { id }
-			}
-		)
+		const path = ['shop', module, 'order/paypal/capture']
+		const { ok, data: order } = await xioniFetch(path, {
+			method: FetchMethods.POST,
+			params: { id }
+		})
 
-		if (!ok) return
+		if (!ok || !order) {
+			throw new Error('Faild loading ' + path)
+		}
 
 		return order.id as string
 	}

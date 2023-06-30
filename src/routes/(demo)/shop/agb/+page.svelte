@@ -38,8 +38,8 @@
 	Anklicken des Links "Aktualisieren" ändern oder die Produkte aus dem Warenkorb entfernen.
 </p>
 <p>
-	b. Wenn Sie die Produkte im Warenkorb kaufen wollen, klicken Sie auf <Link to="/shop/warenkorb"
-		>den Warenkorb</Link
+	b. Wenn Sie die Produkte im Warenkorb kaufen wollen, klicken Sie auf <Link
+		to="/shop/checkout/cart">den Warenkorb</Link
 	>.
 </p>
 <p>

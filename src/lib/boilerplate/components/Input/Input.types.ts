@@ -15,4 +15,5 @@ export interface InputProps {
 	required?: boolean
 	type?: ImputPropsType
 	value: string
+	error?: string
 }

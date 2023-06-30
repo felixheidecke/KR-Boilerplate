@@ -1,12 +1,17 @@
 import { FetchMethods } from '../fetch-json/types'
+import type { ShopCart } from './cart.types'
 import XioniFetch from '../xioni-fetch'
-
-import type { ShopCart, ShopCartProduct } from './cart.types'
+import localStorage from '$lib/boilerplate/utils/local-storage'
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export default (module: number, fetchFn: typeof fetch = fetch) => {
+export default function MakeShopCart(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
+	const {
+		read: readToken,
+		write: writeToken,
+		remove: resetToken
+	} = localStorage('kr-shop-token-' + module)
 
 	/**
 	 * Get the cart contents
@@ -15,14 +20,19 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 */
 
 	async function getCart() {
-		const { ok, data: cart } = await xioniFetch(['shop', module, 'cart'], {
+		const path = ['shop', module, 'cart']
+		const { data, ok } = await xioniFetch(path, {
 			method: FetchMethods.POST,
-			data: {}
+			data: {
+				token: readToken() ?? ''
+			}
 		})
 
-		if (!ok) return
+		if (!ok || !data) {
+			throw new Error('Faild loading ' + path)
+		}
 
-		return cart as ShopCartProduct
+		return data.cart as ShopCart
 	}
 
 	/**
@@ -34,15 +44,24 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 * @returns Cart
 	 */
 
-	async function updateQuantity(id: number, quantity: number) {
-		const { ok, data: cart } = await xioniFetch(['shop', module, 'cart/update'], {
+	async function updateItemQuantity(id: number, quantity: number) {
+		const path = ['shop', module, 'cart/update']
+		const { ok, data } = await xioniFetch(path, {
 			method: FetchMethods.PATCH,
-			data: { quantity, id }
+			data: {
+				id,
+				quantity,
+				token: readToken() ?? ''
+			}
 		})
 
-		if (!ok) return
+		if (!ok) {
+			throw new Error('Faild loading ' + path)
+		}
 
-		return cart as ShopCart
+		writeToken(data.token)
+
+		return data.cart as ShopCart
 	}
 
 	/**
@@ -54,19 +73,25 @@ export default (module: number, fetchFn: typeof fetch = fetch) => {
 	 */
 
 	async function addItem(id: number) {
-		const { ok, data: cart } = await xioniFetch(['shop', module, 'cart/add'], {
+		const path = ['shop', module, 'cart/add']
+		const { ok, data } = await xioniFetch(path, {
 			method: FetchMethods.PATCH,
 			params: { id }
 		})
 
-		if (!ok) return
+		if (!ok) {
+			throw new Error('Faild loading ' + path)
+		}
 
-		return cart as ShopCart
+		writeToken(data.token)
+
+		return data.cart as ShopCart
 	}
 
 	return {
 		getCart,
-		updateQuantity,
-		addItem
+		updateItemQuantity,
+		addItem,
+		resetCart: resetToken
 	}
 }

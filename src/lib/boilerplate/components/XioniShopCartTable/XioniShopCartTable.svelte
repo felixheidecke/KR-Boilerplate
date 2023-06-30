@@ -19,7 +19,7 @@
 	}
 </script>
 
-<table class="$w-full">
+<table class="$w-full {$$props.class}">
 	<thead>
 		<tr>
 			<th>Produkt</th>
@@ -31,7 +31,7 @@
 	<tbody>
 		{#each products || [] as product}
 			<tr>
-				<td>{product.name} <em>({product.code})</em></td>
+				<td> {product.name} <em>({product.code})</em></td>
 				<td>
 					{#if quantitySelector}
 						<Select
@@ -44,7 +44,7 @@
 						{product.quantity}
 					{/if}
 				</td>
-				<td class="$text-right $font-small">{product.price.formatted}</td>
+				<td class="$text-right">{product.price.formatted}</td>
 				<td class="$text-right">{product.total.formatted}</td>
 			</tr>
 		{/each}
@@ -71,3 +71,24 @@
 		</tr>
 	</tfoot>
 </table>
+
+<style>
+	table {
+		width: 100%;
+	}
+
+	thead {
+		background-color: lightgray;
+	}
+
+	th,
+	td {
+		padding: 0.5rem;
+	}
+
+	:global(.select-quantity) {
+		text-align: center;
+		padding: 0.333rem;
+		max-width: 2.5rem;
+	}
+</style>

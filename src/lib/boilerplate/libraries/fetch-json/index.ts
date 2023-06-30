@@ -18,34 +18,17 @@ export default function (fetchFn: typeof fetch = fetch) {
 			remoteURL.search = new URLSearchParams(params.params as any).toString()
 		}
 
-		try {
-			const response = await fetchFn(remoteURL.toString(), {
-				method,
-				headers,
-				body
-			})
+		const response = await fetchFn(remoteURL.toString(), {
+			method,
+			headers,
+			body
+		})
 
-			const isJsonContent = response.headers.get('content-type')?.includes('application/json')
-
-			if (!isJsonContent) {
-				console.error(response.text())
-			}
-
-			return {
-				data: isJsonContent ? await response.json() : null,
-				ok: response.status < 400 && !!isJsonContent,
-				status: response.status,
-				url: response.url
-			}
-		} catch (error) {
-			console.error(error)
-
-			return {
-				data: '',
-				ok: false,
-				status: 500,
-				url: remoteURL.toString()
-			}
+		return {
+			data: await response.json(),
+			ok: response.status < 400,
+			status: response.status,
+			url: response.url
 		}
 	}
 }

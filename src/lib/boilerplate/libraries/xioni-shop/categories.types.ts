@@ -3,5 +3,4 @@ export interface ShopCategory {
 	name: string
 	slug: string
 	description: string
-	productCount: number
 }

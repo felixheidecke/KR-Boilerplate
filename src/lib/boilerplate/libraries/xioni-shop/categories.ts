@@ -1,9 +1,8 @@
-import { XIONI_API_URL } from '../../constants'
-import fetchJson from '../fetch-json'
+import XioniFetch from '../xioni-fetch'
 import type { ShopCategory } from './categories.types'
 
 export default function MakeShopCategories(module: number, fetchFn: typeof fetch = fetch) {
-	const fetchJSON = fetchJson(fetchFn)
+	const xioniFetch = XioniFetch(fetchFn)
 	/**
 	 * Get all Categories in the store
 	 *
@@ -11,11 +10,14 @@ export default function MakeShopCategories(module: number, fetchFn: typeof fetch
 	 */
 
 	async function getCategories() {
-		const { ok, data: categories } = await fetchJSON([XIONI_API_URL, 'shop', module, 'categories'])
+		const path = ['shop', module, 'categories']
+		const { ok, data } = await xioniFetch(path)
 
-		if (!ok) return
+		if (!ok) {
+			throw new Error('Faild loading ' + path)
+		}
 
-		return categories as ShopCategory[]
+		return data as ShopCategory[]
 	}
 
 	/**
@@ -26,17 +28,14 @@ export default function MakeShopCategories(module: number, fetchFn: typeof fetch
 	 */
 
 	async function getCategory(id: number) {
-		const { ok, data: category } = await fetchJSON([
-			XIONI_API_URL,
-			'shop',
-			module,
-			'categories',
-			id
-		])
+		const path = ['shop', module, 'categories', id]
+		const { ok, data } = await xioniFetch(path)
 
-		if (!ok) return
+		if (!ok) {
+			throw new Error('Faild loading ' + path)
+		}
 
-		return category as ShopCategory
+		return data as ShopCategory
 	}
 
 	return {

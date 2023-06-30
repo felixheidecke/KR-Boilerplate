@@ -1,20 +1,19 @@
-import { CART, CATEGORIES } from './stores'
-import MakeShopCart from '$lib/boilerplate/libraries/xioni-shop/cart'
 import MakeShopCategories from '$lib/boilerplate/libraries/xioni-shop/categories'
+import sessionStorage from '$lib/boilerplate/utils/session-storage'
+import { CART } from './_stores/cart'
+import { module } from './config'
 
 export const prerender = false
 
 export const load = async function ({ fetch }) {
-	const module = 1005
-	const { getCart } = MakeShopCart(module, fetch)
 	const { getCategories } = MakeShopCategories(module, fetch)
-	const [cart, categories] = await Promise.all([getCart(), getCategories()])
 
-	if (cart) CART.set(cart)
+	CART.fetchCart()
 
-	if (categories) CATEGORIES.set(categories)
+	const store = sessionStorage(`__kr-xioni/s:${module}/c`)
+	const categories = store.read() || store.write(await getCategories())
 
 	return {
-		module
+		categories
 	}
 }

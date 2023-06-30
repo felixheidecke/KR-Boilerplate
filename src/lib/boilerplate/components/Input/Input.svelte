@@ -19,11 +19,12 @@
 	export let required: InputProps['required'] = undefined
 	export let type: InputProps['type'] = ImputPropsType.TEXT
 	export let value: InputProps['value'] = ''
+	export let error: InputProps['error'] = ''
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
 	const baseName = $$props['ex-class'] || 'Input'
-	const className = classnames(baseName, $$props.class)
+	$: className = classnames(baseName, $$props.class, !!error ? baseName + '--has-error' : null)
 	const id = uniqueId(name + '-')
 	const inputProps = {
 		max,
@@ -34,15 +35,15 @@
 		readonly,
 		type
 	}
-
-	$: if (label && required) {
-		label += '*'
-	}
 </script>
 
 <div {id} class={className}>
 	{#if label}
-		<label class={baseName + '__label'} for={id}>{label}</label>
+		<label class={baseName + '__label'} for={id}>
+			{label}
+
+			{#if required}*{/if}
+		</label>
 	{/if}
 	<input class={baseName + '__input'} {...inputProps} bind:value />
 </div>

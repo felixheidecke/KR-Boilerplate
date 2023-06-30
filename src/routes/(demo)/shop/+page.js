@@ -1,17 +1,16 @@
 import MakeShopProducts from '$lib/boilerplate/libraries/xioni-shop/products'
-import { get } from 'svelte/store'
-import { CATEGORY, PRODUCT_HIGHLIGHTS } from './stores'
+import sessionStorage from '$lib/boilerplate/utils/session-storage'
+import { module } from './config.js'
 
 export const prerender = false
 
-export const load = async function ({ fetch, parent }) {
-	CATEGORY.set({})
+export const load = async function ({ fetch }) {
+	const { getProductHighlights } = MakeShopProducts(module, fetch)
 
-	// Do not double fetch
-	if (get(PRODUCT_HIGHLIGHTS)?.length) return
+	const store = sessionStorage('xioni:getProductHighlights(' + module + ')')
+	const products = store.read() || store.write(await getProductHighlights())
 
-	const { module } = await parent()
-	const shopProducts = MakeShopProducts(module, fetch)
-
-	PRODUCT_HIGHLIGHTS.set(await shopProducts.getProductHighlights())
+	return {
+		products
+	}
 }

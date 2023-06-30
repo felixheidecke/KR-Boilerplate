@@ -30,10 +30,10 @@
 <style lang="scss">
 	@import '$variables';
 	.layout-wrapper {
-		max-width: 32rem;
+		max-width: 36rem;
 
 		@include breakpoint('tablet-up') {
-			max-width: 60rem;
+			max-width: 84rem;
 		}
 	}
 </style>
