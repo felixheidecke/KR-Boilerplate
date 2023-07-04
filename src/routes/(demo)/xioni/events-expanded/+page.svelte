@@ -1,13 +1,12 @@
 <script>
 	import '$lib/boilerplate/components/XioniEventTile/XioniEventTile.scss'
-	import { getMany } from '$lib/boilerplate/libraries/xioni/event'
 
-	const getEvents = getMany(1289, { endsAfter: new Date() })
+	const { events } = $$props.data
 </script>
 
 <h1>Events <i>(Expanded)</i></h1>
 
-{#await getEvents then events}
+<Client browser>
 	<ol class="$flex $flex-column $gap">
 		{#each events as event}
 			<li class="XioniEventTile">
@@ -61,4 +60,4 @@
 			</li>
 		{/each}
 	</ol>
-{/await}
+</Client>

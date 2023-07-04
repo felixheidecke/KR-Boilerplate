@@ -10,7 +10,7 @@
 
 	export let tag: GridProps['tag'] = 'div'
 	export let gap: GridProps['gap'] = false
-	export let size: GridProps['size'] = undefined
+	export let size: GridProps['size'] = false
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -19,8 +19,8 @@
 	function createChildClassName(size: GridProps['size']) {
 		return classnames(
 			'Grid__item',
-			!size?.length ||
-				size
+			!('' + size) ||
+				('' + size)
 					.split(' ')
 					.map(i => `Grid__item--${i}`)
 					.join(' ')

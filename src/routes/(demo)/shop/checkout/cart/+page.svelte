@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CART } from '../../_stores/cart'
+	import { CART } from '../../_stores'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 

@@ -1,11 +1,9 @@
 <script>
-	import { get } from '$lib/boilerplate/libraries/xioni/menuCard'
-
-	const getMenuCard = get(831)
+	const { menuCard } = $$props.data
 </script>
 
 <h1>Speisekarte</h1>
 
-{#await getMenuCard then menuCard}
+<Client browser>
 	<XioniMenuCard {menuCard} />
-{/await}
+</Client>

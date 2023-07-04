@@ -1,4 +1,5 @@
 export interface ShopRecieptOrder {
+	transactionId: string
 	date: Date
 	address: {
 		company: string

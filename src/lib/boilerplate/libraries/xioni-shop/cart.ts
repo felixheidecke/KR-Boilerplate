@@ -1,17 +1,14 @@
-import { FetchMethods } from '../fetch-json/types'
-import type { ShopCart } from './cart.types'
 import XioniFetch from '../xioni-fetch'
-import localStorage from '$lib/boilerplate/utils/local-storage'
+import { isClientError } from './utils'
+import { FetchMethods } from '../fetch-json/types'
+
+import type { ShopCart } from './cart.types'
+import type { ErrorResponse } from './types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
 export default function MakeShopCart(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
-	const {
-		read: readToken,
-		write: writeToken,
-		remove: resetToken
-	} = localStorage('kr-shop-token-' + module)
 
 	/**
 	 * Get the cart contents
@@ -20,19 +17,9 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	 */
 
 	async function getCart() {
-		const path = ['shop', module, 'cart']
-		const { data, ok } = await xioniFetch(path, {
-			method: FetchMethods.POST,
-			data: {
-				token: readToken() ?? ''
-			}
-		})
+		const { data } = await xioniFetch(['shop', module, 'cart'])
 
-		if (!ok || !data) {
-			throw new Error('Faild loading ' + path)
-		}
-
-		return data.cart as ShopCart
+		return data as ShopCart
 	}
 
 	/**
@@ -45,23 +32,19 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	 */
 
 	async function updateItemQuantity(id: number, quantity: number) {
-		const path = ['shop', module, 'cart/update']
-		const { ok, data } = await xioniFetch(path, {
-			method: FetchMethods.PATCH,
+		const { status, data } = await xioniFetch(['shop', module, 'cart'], {
+			method: FetchMethods.POST,
 			data: {
 				id,
-				quantity,
-				token: readToken() ?? ''
+				quantity
 			}
 		})
 
-		if (!ok) {
-			throw new Error('Faild loading ' + path)
+		if (isClientError(status)) {
+			return { success: false, data } as ErrorResponse
+		} else {
+			return { success: true, data } as { success: true; data: ShopCart }
 		}
-
-		writeToken(data.token)
-
-		return data.cart as ShopCart
 	}
 
 	/**
@@ -73,25 +56,21 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	 */
 
 	async function addItem(id: number) {
-		const path = ['shop', module, 'cart/add']
-		const { ok, data } = await xioniFetch(path, {
-			method: FetchMethods.PATCH,
-			params: { id }
+		const { status, data } = await xioniFetch(['shop', module, 'cart'], {
+			method: FetchMethods.POST,
+			data: { id }
 		})
 
-		if (!ok) {
-			throw new Error('Faild loading ' + path)
+		if (isClientError(status)) {
+			return { success: false, data } as ErrorResponse
+		} else {
+			return { success: true, data } as { success: true; data: ShopCart }
 		}
-
-		writeToken(data.token)
-
-		return data.cart as ShopCart
 	}
 
 	return {
 		getCart,
 		updateItemQuantity,
-		addItem,
-		resetCart: resetToken
+		addItem
 	}
 }

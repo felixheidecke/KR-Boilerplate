@@ -26,5 +26,3 @@ export interface XioniArticle {
 		}
 	}[]
 }
-
-export type XioniArticles = XioniArticle[]

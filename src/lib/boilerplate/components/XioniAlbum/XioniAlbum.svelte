@@ -3,7 +3,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniAlbum } from '$lib/boilerplate/libraries/xioni/gallery.types'
+	import type { XioniAlbum } from '$lib/boilerplate/libraries/xioni/galleries.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 

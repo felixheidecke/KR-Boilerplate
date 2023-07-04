@@ -1,10 +1,11 @@
-import { XIONI_API_URL } from '$lib/boilerplate/constants'
-import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
 import { formatFromTo } from '$lib/boilerplate/utils/format-date'
-import type { XioniEvent } from './event.types'
+import { FetchResponseStatus } from '../fetch-json/types'
+import XioniFetch from '../xioni-fetch'
+import type { XioniEvent } from './events.types'
+import type { XioniResponse } from './types'
 
-export default function XioniEventApi(fetchFn: typeof fetch = fetch) {
-	const fetchJSON = FetchJSON(fetchFn)
+export default function XioniEvents(fetchFn: typeof fetch = fetch) {
+	const xioniFetch = XioniFetch(fetchFn)
 
 	/**
 	 * Get all Events by module
@@ -15,10 +16,9 @@ export default function XioniEventApi(fetchFn: typeof fetch = fetch) {
 	 * @param filter.startsAfter Event startet nach Datum
 	 * @param filter.endsBefore Event endet vor Datum
 	 * @param filter.endsAfter Event endet nach Datum
-	 * @param filter.full Get all of the data
 	 */
 
-	async function getMany(
+	async function getEvents(
 		module: number,
 		filter: {
 			limit?: number
@@ -26,9 +26,8 @@ export default function XioniEventApi(fetchFn: typeof fetch = fetch) {
 			startsAfter?: Date
 			endsBefore?: Date
 			endsAfter?: Date
-		} = {},
-		callback: Function | undefined = undefined
-	) {
+		} = {}
+	): Promise<XioniResponse<XioniEvent[]>> {
 		const params = {}
 
 		if ('limit' in filter) {
@@ -51,18 +50,13 @@ export default function XioniEventApi(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { endsAfter: filter.endsAfter.toDateString() })
 		}
 
-		const { ok, data } = await fetchJSON([XIONI_API_URL, 'events', module], { params })
+		const { status, data } = await xioniFetch(['events', module], { params })
 
-		if (!ok) return
-
-		const events = (data as object[]).map(eventAdapter) as XioniEvent[]
-
-		if (callback) {
-			callback(events)
-			return
+		if (status === FetchResponseStatus.CLIENT_ERROR) {
+			return { success: false, data }
+		} else {
+			return { success: true, data: data.map(eventAdapter) }
 		}
-
-		return events
 	}
 
 	/**
@@ -72,23 +66,19 @@ export default function XioniEventApi(fetchFn: typeof fetch = fetch) {
 	 * @returns XioniEvent
 	 */
 
-	async function getOne(id: number, callback: Function = undefined as unknown as Function) {
-		const { ok, data } = await fetchJSON([XIONI_API_URL, 'event', id])
+	async function getEvent(id: number): Promise<XioniResponse<XioniEvent>> {
+		const { status, data } = await xioniFetch(['event', id])
 
-		if (!ok) return null
-
-		const event = eventAdapter(data)
-
-		if (callback) {
-			callback(event)
+		if (status === FetchResponseStatus.CLIENT_ERROR) {
+			return { success: false, data }
+		} else {
+			return { success: true, data: eventAdapter(data) }
 		}
-
-		return event
 	}
 
 	return {
-		getMany,
-		getOne
+		getEvents,
+		getEvent
 	}
 }
 
@@ -123,6 +113,6 @@ function eventAdapter(rawEvent: any): XioniEvent {
 	return event
 }
 
-export const getMany = XioniEventApi().getMany
+export const getEvents = XioniEvents().getEvents
 
-export const getOne = XioniEventApi().getOne
+export const getEvent = XioniEvents().getEvent

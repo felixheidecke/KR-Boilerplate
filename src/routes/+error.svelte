@@ -2,17 +2,24 @@
 	import { page } from '$app/stores'
 </script>
 
-<h3>🥵 Fehler {$page.status} ist aufgetreten!</h3>
+<div class="$text-center">
+	<h3>🥵 Fehler {$page.status} ist aufgetreten!</h3>
+	<hr />
 
-<h4>Ist aber nicht so schlimm.</h4>
+	<p class="$font-large">{$page.error.message}</p>
 
-<p>
-	Kehren Sie einfach wieder zur <Link to="/">Startseite</Link> zurück.<br />
-	Dort geht es weiter, als sei nichts geschehen.
-</p>
+	<hr />
 
-<hr />
+	<p>
+		<strong>Ist aber nicht so schlimm.</strong><br />
+		Kehren Sie einfach wieder zur <Link to="/">Startseite</Link> zurück.<br />
+		Dort geht es weiter, als sei nichts geschehen.
+	</p>
+</div>
 
-<Message title="Error Code {$page.status}" type="error">
-	<p class="$m-0">{$page.error.message}</p>
-</Message>
+<style>
+	hr {
+		max-width: 26rem;
+		margin: 0 auto;
+	}
+</style>

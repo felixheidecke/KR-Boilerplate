@@ -2,7 +2,7 @@
 	import './XioniMenuCard.scss'
 	import classnames from 'classnames'
 	import formatPrice from '$lib/boilerplate/utils/format-price'
-	import type { XioniMenuCard } from '$lib/boilerplate/libraries/xioni/menuCard.types'
+	import type { XioniMenuCard } from '$lib/boilerplate/libraries/xioni/menuCards.types'
 
 	// --- Props -------------------------------------------------------------------------------------
 
@@ -27,7 +27,7 @@
 					<li class="{baseClassName}__dish">
 						<h4 class="{baseClassName}__dish-title">{dish.name}</h4>
 						<div class="{baseClassName}__dish-price">
-							{formatPrice(dish.price)}
+							{dish.price.formatted}
 						</div>
 						{#if dish.image}
 							<img

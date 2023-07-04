@@ -1,14 +1,8 @@
 <script>
 	import { goto } from '$app/navigation'
-	import { INVOICE_ADDRESS } from '../../_stores/address'
-	import { CART, CART_STATE } from '../../_stores/cart'
-	import { StoreState } from '../../_stores/types'
+	import { INVOICE_ADDRESS, CART } from '../../_stores'
 
-	const address = $INVOICE_ADDRESS.address
-
-	if ($CART_STATE === StoreState.DONE && !$CART.products.length) {
-		goto('/shop')
-	}
+	const address = { ...$INVOICE_ADDRESS }
 </script>
 
 <h1 class="h2">Zusammenfassung</h1>

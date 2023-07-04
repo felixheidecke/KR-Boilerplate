@@ -9,7 +9,7 @@
 	export let name = 'textarea'
 	export let placeholder: string | null = null
 	export let required = false
-	export let rows = 4
+	export let rows: string | number = 4
 	export let value = ''
 
 	const id = uniqueId(`textarea-${name}-`)

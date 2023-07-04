@@ -1,7 +1,7 @@
 <script>
 	import { format } from '$lib/boilerplate/utils/format-date'
+	import stammdaten from '$lib/stammdaten'
 
-	const { stammdaten } = $$props.data
 	const lastUpdated = format(new Date('1983-6-5'), 'PPPP')
 </script>
 

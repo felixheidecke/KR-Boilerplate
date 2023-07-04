@@ -4,7 +4,7 @@
 	import classnames from 'classnames'
 	import { format } from 'date-fns'
 	import { de } from 'date-fns/locale/index.js'
-	import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/article.types'
+	import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/articles.types'
 
 	// --- Components -------------------
 

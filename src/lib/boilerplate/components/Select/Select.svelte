@@ -5,7 +5,7 @@
 
 	// --- Data -------------------------
 
-	export let label = false
+	export let label = ''
 	export let name = 'select'
 	export let options: Array<string | number> = []
 	export let required = false

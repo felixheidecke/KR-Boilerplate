@@ -4,7 +4,7 @@
 	import { getContext } from 'svelte'
 	import classnames from 'classnames'
 	import type { Writable } from 'svelte/store'
-	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/event.types'
+	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 <script>
-	const { stammdaten } = $$props.data
+	import stammdaten from '$lib/stammdaten'
 </script>
 
 <svelte:head>

@@ -2,8 +2,9 @@
 	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
 	import { ROUTES, ACTIVE_ROUTE, ACTIVE_PARENT } from '$lib/boilerplate/stores/routes'
+	import stammdaten from '$lib/stammdaten'
 
-	const { stammdaten, url } = $$props.data
+	const { url } = $$props.data
 </script>
 
 <svelte:head>

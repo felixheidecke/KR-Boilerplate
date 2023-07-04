@@ -1,4 +1,4 @@
-import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/article.types'
+import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/articles.types'
 import type { Component } from '../component.types'
 
 export interface XioniArticleTileProps extends Component {

@@ -1,4 +1,4 @@
-import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/event.types'
+import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
 import type { Component } from '../component.types'
 
 export interface XioniEventTileProps extends Component {

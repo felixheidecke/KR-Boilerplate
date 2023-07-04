@@ -1,29 +1,46 @@
-<script>
-	import { CART } from '../../_stores/cart'
-	import { SHIPPING_ADDRESS, INVOICE_ADDRESS } from '../../_stores/address'
+<script lang="ts">
+	import MakeShopOrder from '$lib/boilerplate/libraries/xioni-shop/order'
+	import { module } from '../../config'
+	import { INVOICE_ADDRESS, SHIPPING_ADDRESS, CART } from '../../_stores'
+	import { goto } from '$app/navigation'
+
+	const shopOrder = MakeShopOrder(module)
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Checkbox from '$lib/boilerplate/components/Checkbox/Checkbox.svelte'
 	import Input from '$lib/boilerplate/components/Input/Input.svelte'
 	import Message from '$lib/boilerplate/components/Message/Message.svelte'
-	import { goto } from '$app/navigation'
+	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
+	import Select from '$lib/boilerplate/components/Select/Select.svelte'
+	import Textarea from '$lib/boilerplate/components/Textarea/Textarea.svelte'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
+	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
+	import Button from '$lib/boilerplate/components/Button/Button.svelte'
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
 	let showDeliveryAddressForm = false
-	let invoiceAddress = $INVOICE_ADDRESS.address
-	let shippingAddress = $SHIPPING_ADDRESS.address
+	let invoiceAddress = { ...$INVOICE_ADDRESS }
+	let invoiceAddressErrors = {} as { [key: string]: string }
+	let shippingAddress = { ...$SHIPPING_ADDRESS }
+	let shippingAddressErrors = {} as { [key: string]: string }
 
 	function toggleShippingForm() {
 		showDeliveryAddressForm = !showDeliveryAddressForm
 	}
 
 	async function validateAddress() {
-		await INVOICE_ADDRESS.validate(invoiceAddress)
+		const { success, data } = await shopOrder.setAddress(invoiceAddress, 'invoice')
 
-		if ($INVOICE_ADDRESS.isValid) {
+		if (success) {
+			INVOICE_ADDRESS.set(invoiceAddress)
+			invoiceAddressErrors = {}
 			goto('/shop/checkout/summary')
+		} else {
+			invoiceAddressErrors = data.payload?.address as any
 		}
 	}
 </script>
@@ -40,7 +57,7 @@
 <h2 class="h3">Rechnungsanschrift</h2>
 
 <Grid gap>
-	<Grid size>
+	<Grid size="1">
 		<Input bind:value={invoiceAddress.company} name="company" label="Firma" />
 	</Grid>
 	<Grid size="1-5">
@@ -51,7 +68,7 @@
 			bind:value={invoiceAddress.firstname}
 			name="firstname"
 			label="Vorname"
-			error={$INVOICE_ADDRESS.errors.firstname}
+			error={invoiceAddressErrors.firstname}
 			required />
 	</Grid>
 	<Grid size="2-5">
@@ -59,7 +76,7 @@
 			bind:value={invoiceAddress.name}
 			name="lastname"
 			label="Nachname"
-			error={$INVOICE_ADDRESS.errors.name}
+			error={invoiceAddressErrors.name}
 			required />
 	</Grid>
 	<Grid size>
@@ -67,7 +84,7 @@
 			bind:value={invoiceAddress.address}
 			name="address"
 			label="Straße & Hausnummer"
-			error={$INVOICE_ADDRESS.errors.address}
+			error={invoiceAddressErrors.address}
 			required />
 	</Grid>
 	<Grid size="1-3">
@@ -75,7 +92,7 @@
 			bind:value={invoiceAddress.zip}
 			name="zip"
 			label="PLZ"
-			error={$INVOICE_ADDRESS.errors.zip}
+			error={invoiceAddressErrors.zip}
 			required />
 	</Grid>
 	<Grid size="2-3">
@@ -83,27 +100,27 @@
 			bind:value={invoiceAddress.city}
 			name="city"
 			label="Ort"
-			error={$INVOICE_ADDRESS.errors.city}
+			error={invoiceAddressErrors.city}
 			required />
 	</Grid>
-	<Grid size>
+	<Grid size="1">
 		<Input
-			type="phone"
+			type={ImputPropsType.TEL}
 			bind:value={invoiceAddress.phone}
 			name="phone"
 			label="Telefonnummer"
-			error={$INVOICE_ADDRESS.errors.phone}
+			error={invoiceAddressErrors.phone}
 			required />
 	</Grid>
-	<Grid size>
+	<Grid size="1">
 		<Input
 			bind:value={invoiceAddress.email}
-			error={$INVOICE_ADDRESS.errors.email}
+			error={invoiceAddressErrors.email}
 			name="email"
 			label="E-Mail-Adresse"
 			required />
 	</Grid>
-	<Grid size>
+	<Grid size="1">
 		<Textarea bind:value={invoiceAddress.message} rows="2" name="message" label="Nachricht" />
 	</Grid>
 </Grid>
@@ -139,10 +156,10 @@
 	</Grid>
 {/if}
 
-{#if Object.keys($INVOICE_ADDRESS.errors).length}
-	<Message title={false} type="error" class="$font-small $mb">
+{#if Object.keys(shippingAddressErrors).length}
+	<Message title="" type="error" class="$font-small $mb">
 		<ul>
-			{#each Object.values($INVOICE_ADDRESS.errors) as error}
+			{#each Object.values(shippingAddressErrors) as error}
 				<li>{error}</li>
 			{/each}
 		</ul>

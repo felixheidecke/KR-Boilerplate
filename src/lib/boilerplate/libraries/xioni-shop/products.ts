@@ -20,12 +20,7 @@ export default function MakeShopProducts(module: number, fetchFn: typeof fetch =
 			Object.assign(params, { limit })
 		}
 
-		const path = ['shop', module, 'products']
-		const { ok, data } = await xioniFetch(path, { params })
-
-		if (!ok || !data) {
-			throw new Error('Faild loading ' + path)
-		}
+		const { data } = await xioniFetch(['shop', module, 'products'], { params })
 
 		return data as ShopProduct[]
 	}
@@ -38,12 +33,7 @@ export default function MakeShopProducts(module: number, fetchFn: typeof fetch =
 	 */
 
 	async function getProduct(id: number) {
-		const path = ['shop', module, 'products', id]
-		const { ok, data } = await xioniFetch(path)
-
-		if (!ok || !data) {
-			throw new Error('Faild loading ' + path)
-		}
+		const { data } = await xioniFetch(['shop', module, 'products', id])
 
 		return data as ShopProduct
 	}
@@ -63,12 +53,10 @@ export default function MakeShopProducts(module: number, fetchFn: typeof fetch =
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		const path = [XIONI_API_URL, 'shop', module, 'categories', category, 'products']
-		const { ok, data } = await fetchJSON(path, { params })
-
-		if (!ok || !data) {
-			throw new Error('Faild loading ' + path)
-		}
+		const { data } = await fetchJSON(
+			[XIONI_API_URL, 'shop', module, 'categories', category, 'products'],
+			{ params }
+		)
 
 		return data as ShopProduct[]
 	}
@@ -89,12 +77,7 @@ export default function MakeShopProducts(module: number, fetchFn: typeof fetch =
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		const path = [XIONI_API_URL, 'shop', module, 'products']
-		const { ok, data } = await fetchJSON(path, { params })
-
-		if (!ok || !data) {
-			throw new Error('Faild loading ' + path)
-		}
+		const { data } = await fetchJSON([XIONI_API_URL, 'shop', module, 'products'], { params })
 
 		return data as ShopProduct[]
 	}

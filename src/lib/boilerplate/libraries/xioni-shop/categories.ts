@@ -10,12 +10,7 @@ export default function MakeShopCategories(module: number, fetchFn: typeof fetch
 	 */
 
 	async function getCategories() {
-		const path = ['shop', module, 'categories']
-		const { ok, data } = await xioniFetch(path)
-
-		if (!ok) {
-			throw new Error('Faild loading ' + path)
-		}
+		const { data } = await xioniFetch(['shop', module, 'categories'])
 
 		return data as ShopCategory[]
 	}
@@ -28,12 +23,7 @@ export default function MakeShopCategories(module: number, fetchFn: typeof fetch
 	 */
 
 	async function getCategory(id: number) {
-		const path = ['shop', module, 'categories', id]
-		const { ok, data } = await xioniFetch(path)
-
-		if (!ok) {
-			throw new Error('Faild loading ' + path)
-		}
+		const { data } = await xioniFetch(['shop', module, 'categories', id])
 
 		return data as ShopCategory
 	}

@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
 	import './Checkbox.scss'
 	import { uniqueId } from 'lodash-es'
 	import classnames from 'classnames'
 
 	export let checked = false
-	export let label = false
+	export let label = ''
 	export let name = 'checkbox'
 	export let required = false
 	export let value = 'on'
