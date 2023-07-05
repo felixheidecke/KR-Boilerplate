@@ -1,0 +1,3 @@
+[submodule "src/routes/(examples)"]
+	path = src/routes/(examples)
+	url = https://github.com/felixheidecke/KR-Boilerplate-Examples.git
