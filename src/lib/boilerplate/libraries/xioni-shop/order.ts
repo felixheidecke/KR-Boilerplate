@@ -1,9 +1,8 @@
 import XioniFetch from '../xioni-fetch'
-import { isClientError } from './utils'
-import { FetchMethods } from '../fetch-json/types'
+import { FetchMethods, FetchResponseStatus } from '../fetch-json/types'
 
 import type { ShopRecieptOrder } from './order.types'
-import type { ErrorResponse } from './types'
+import type { XioniResponse } from '../xioni/types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
@@ -16,34 +15,30 @@ export default function MakeShopOrder(module: number, fetchFn: typeof fetch = fe
 	 * @returns Cart
 	 */
 
-	async function getSummary(transactionId: string) {
+	async function getSummary(transactionId: string): Promise<XioniResponse<ShopRecieptOrder>> {
 		const { data, status } = await xioniFetch(['shop', module, 'order', transactionId])
 
-		if (isClientError(status)) {
-			return { success: false, data } as ErrorResponse
+		if (status === FetchResponseStatus.SUCCESS) {
+			return [undefined, { ...data, date: new Date(data.date) }]
 		} else {
-			return { success: true, data: { ...data, date: new Date(data.date) } } as {
-				success: true
-				data: ShopRecieptOrder
-			}
+			return [data, undefined]
 		}
 	}
 
-	async function setAddress(address: { [key: string]: string }, type: 'invoice' | 'shipping') {
+	async function setAddress(
+		address: { [key: string]: string },
+		type: 'invoice' | 'shipping'
+	): Promise<XioniResponse<true>> {
 		const { data, status } = await xioniFetch(['shop', module, 'order/address'], {
 			method: FetchMethods.POST,
 			data: address,
 			params: { type }
 		})
 
-		if (isClientError(status)) {
-			return { success: false, data } as ErrorResponse
-		} else {
-			return { success: true } as { success: true; data: undefined }
-		}
+		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
 	}
 
-	async function createOrder(address: { [key: string]: string }) {
+	async function createOrder(address: { [key: string]: string }): Promise<XioniResponse<string>> {
 		const { data, status } = await xioniFetch(['shop', module, 'order'], {
 			method: FetchMethods.POST,
 			data: {
@@ -51,10 +46,10 @@ export default function MakeShopOrder(module: number, fetchFn: typeof fetch = fe
 			}
 		})
 
-		if (isClientError(status)) {
-			return { success: false, data } as ErrorResponse
+		if (status === FetchResponseStatus.SUCCESS) {
+			return [undefined, data.transactionId]
 		} else {
-			return { success: true, data: data.transactionId } as { success: true; data: string }
+			return [data, undefined]
 		}
 	}
 

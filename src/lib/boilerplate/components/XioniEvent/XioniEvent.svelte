@@ -111,9 +111,11 @@
 		</date>
 	</h3>
 
-	<div itemprop="description" class={baseName + '__description'}>
-		{@html description}
-	</div>
+	{#if description}
+		<div itemprop="description" class={baseName + '__description'}>
+			{@html description}
+		</div>
+	{/if}
 
 	{#if details}
 		<div class={baseName + '__content'}>

@@ -20,21 +20,16 @@
 	<Nav routes={$ROUTES} activeRoute={$ACTIVE_ROUTE} activeParent={$ACTIVE_PARENT} />
 </header>
 
-<main class="layout-wrapper $mx-auto $p $p-2@tablet-up">
+<main>
 	<PageTransition path={url.pathname}>
 		<slot />
 	</PageTransition>
 </main>
-
 <Toplink />
 
-<style lang="scss">
-	@import '$variables';
-	.layout-wrapper {
-		max-width: 36rem;
-
-		@include breakpoint('tablet-up') {
-			max-width: 84rem;
-		}
+<style>
+	main {
+		max-width: 80rem;
+		margin: 0 auto;
 	}
 </style>

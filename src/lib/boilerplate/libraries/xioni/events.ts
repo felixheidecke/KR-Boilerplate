@@ -52,10 +52,10 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 
 		const { status, data } = await xioniFetch(['events', module], { params })
 
-		if (status === FetchResponseStatus.CLIENT_ERROR) {
-			return { success: false, data }
+		if (status === FetchResponseStatus.SUCCESS) {
+			return [undefined, data.map(eventAdapter)]
 		} else {
-			return { success: true, data: data.map(eventAdapter) }
+			return [data, undefined]
 		}
 	}
 
@@ -69,10 +69,10 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 	async function getEvent(id: number): Promise<XioniResponse<XioniEvent>> {
 		const { status, data } = await xioniFetch(['event', id])
 
-		if (status === FetchResponseStatus.CLIENT_ERROR) {
-			return { success: false, data }
+		if (status === FetchResponseStatus.SUCCESS) {
+			return [undefined, eventAdapter(data)]
 		} else {
-			return { success: true, data: eventAdapter(data) }
+			return [data, undefined]
 		}
 	}
 

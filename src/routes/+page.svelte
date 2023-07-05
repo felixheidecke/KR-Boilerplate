@@ -7,7 +7,9 @@
 </svelte:head>
 
 <div class="$text-center">
-	<img src="https://media.giphy.com/media/l378ryVoDmMwKoSt2/giphy.gif" alt="Hund auf Skateboard" />
+	<img
+		src="https://media2.giphy.com/media/3ov9jO6MzE4Ft7MWv6/giphy.gif"
+		alt="Hot Dog Magic Sticker" />
 </div>
 
 <style lang="scss">

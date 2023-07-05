@@ -57,9 +57,11 @@
 		</time>
 	</h3>
 
-	<div itemprop="description" class="{baseName}__description">
-		{@html description}
-	</div>
+	{#if description}
+		<div itemprop="description" class="{baseName}__description">
+			{@html description}
+		</div>
+	{/if}
 
 	<Link to={link} class="{baseName}__link $row-reverse" icon="fas fa-angle-right">
 		{linkText}

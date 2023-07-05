@@ -16,7 +16,7 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 
 	async function getArticles(
 		module: number,
-		filter: { limit?: number; full?: false; status?: 'live' | 'archived' } = {}
+		filter: { limit?: number; parts?: 'content'; status?: 'live' | 'archived' } = {}
 	): Promise<XioniResponse<XioniArticle[]>> {
 		const params = {}
 
@@ -24,8 +24,8 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		if ('full' in filter) {
-			Object.assign(params, { full: filter.full })
+		if ('parts' in filter) {
+			Object.assign(params, { parts: filter.parts })
 		}
 
 		if ('status' in filter) {
@@ -34,10 +34,10 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 
 		const { status, data } = await xioniFetch(['articles', module], { params })
 
-		if (status === FetchResponseStatus.CLIENT_ERROR) {
-			return { success: false, data }
+		if (status === FetchResponseStatus.SUCCESS) {
+			return [undefined, data.map(articleAdapter)]
 		} else {
-			return { success: true, data: data.map(articleAdapter) }
+			return [data, undefined]
 		}
 	}
 
@@ -60,10 +60,10 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 
 		const { status, data } = await xioniFetch(['article', id], { params })
 
-		if (status === FetchResponseStatus.CLIENT_ERROR) {
-			return { success: false, data }
+		if (status === FetchResponseStatus.SUCCESS) {
+			return [undefined, articleAdapter(data)]
 		} else {
-			return { success: true, data: articleAdapter(data) }
+			return [data, undefined]
 		}
 	}
 
@@ -87,10 +87,10 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 
 		const { status, data } = await xioniFetch(['articles'], { params })
 
-		if (status === FetchResponseStatus.CLIENT_ERROR) {
-			return { success: false, data }
+		if (status === FetchResponseStatus.SUCCESS) {
+			return [undefined, data.map(articleAdapter)]
 		} else {
-			return { success: true, data: data.map(articleAdapter) }
+			return [data, undefined]
 		}
 	}
 

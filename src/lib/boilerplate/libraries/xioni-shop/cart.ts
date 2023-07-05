@@ -1,11 +1,7 @@
 import XioniFetch from '../xioni-fetch'
-import { isClientError } from './utils'
-import { FetchMethods } from '../fetch-json/types'
-
+import type { XioniResponse } from '../xioni/types'
 import type { ShopCart } from './cart.types'
-import type { ErrorResponse } from './types'
-
-// --- Factory -------------------------------------------------------------------------------------
+import { FetchMethods, FetchResponseStatus } from '../fetch-json/types'
 
 export default function MakeShopCart(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
@@ -16,10 +12,10 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	 * @returns Cart
 	 */
 
-	async function getCart() {
-		const { data } = await xioniFetch(['shop', module, 'cart'])
+	async function getCart(): Promise<XioniResponse<ShopCart>> {
+		const { status, data } = await xioniFetch(['shop', module, 'cart'])
 
-		return data as ShopCart
+		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
 	}
 
 	/**
@@ -31,7 +27,10 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	 * @returns Cart
 	 */
 
-	async function updateItemQuantity(id: number, quantity: number) {
+	async function updateItemQuantity(
+		id: number,
+		quantity: number
+	): Promise<XioniResponse<ShopCart>> {
 		const { status, data } = await xioniFetch(['shop', module, 'cart'], {
 			method: FetchMethods.POST,
 			data: {
@@ -40,11 +39,7 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 			}
 		})
 
-		if (isClientError(status)) {
-			return { success: false, data } as ErrorResponse
-		} else {
-			return { success: true, data } as { success: true; data: ShopCart }
-		}
+		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
 	}
 
 	/**
@@ -55,17 +50,12 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	 * @returns Cart
 	 */
 
-	async function addItem(id: number) {
+	async function addItem(id: number): Promise<XioniResponse<ShopCart>> {
 		const { status, data } = await xioniFetch(['shop', module, 'cart'], {
 			method: FetchMethods.POST,
 			data: { id }
 		})
-
-		if (isClientError(status)) {
-			return { success: false, data } as ErrorResponse
-		} else {
-			return { success: true, data } as { success: true; data: ShopCart }
-		}
+		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
 	}
 
 	return {
