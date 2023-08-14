@@ -1,19 +1,22 @@
 <script lang="ts">
 	import './XioniEvent.scss'
+
 	import { formatFromTo } from '$lib/boilerplate/utils/format-date'
-	import { getContext } from 'svelte'
+	import { formatISO } from 'date-fns'
 	import classnames from 'classnames'
-	import type { Writable } from 'svelte/store'
+	import { createEventDispatcher } from 'svelte'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
 	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Picture from '../Picture/Picture.svelte'
-	import Link from '../Link/Link.svelte'
-	import Icon from '../Icon/Icon.svelte'
 	import Grid from '../Grid/Grid.svelte'
 	import Lightbox from '../Lightbox/Lightbox.svelte'
-	import { LinkPropsTarget } from '../Link/Link.types'
+	import ButtonRow from '../ButtonRow/ButtonRow.svelte'
+	import Button from '../Button/Button.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -33,11 +36,11 @@
 
 	const images = $$props.event.images || []
 
-	// --- [ Logic ] ---------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
 
 	let lightbox: Lightbox // ref
 
-	const activeEvent = getContext('active-xioni-event') as Writable<XioniEvent | null>
+	const emit = createEventDispatcher()
 	const allowRegistration = flags ? flags.includes('Anmeldung') : false
 
 	// Classname
@@ -62,8 +65,8 @@
 {/if}
 
 <div class={className} itemscope itemtype="https://schema.org/Event">
-	<meta itemprop="startDate" content={starts.toUTCString()} />
-	<meta itemprop="endDate" content={ends.toUTCString()} />
+	<meta itemprop="startDate" content={formatISO(starts, { representation: 'date' })} />
+	<meta itemprop="endDate" content={formatISO(starts, { representation: 'date' })} />
 	<meta itemprop="organizer" content={organizer} />
 
 	{#if image || images?.length}
@@ -123,30 +126,28 @@
 		</div>
 	{/if}
 
-	<ul class={baseName + '__metadata'}>
+	<ButtonRow class={baseName + '__metadata'}>
 		{#if allowRegistration}
-			<li on:click={() => activeEvent.set($$props.event)} class={baseName + '__registration'}>
-				<Icon name="fas fa-ticket-alt" class="$mr-1/2" />
-				<span class="$underline $pointer">Jetzt anmelden</span>
-			</li>
+			<Button
+				icon="fas fa-ticket-alt"
+				on:click={() => emit('click', 'registration')}
+				class={baseName + '__registration'}>Jetzt anmelden</Button>
 		{/if}
 
 		{#if ticketshop && !allowRegistration}
-			<li class={baseName + '__ticketshop'}>
-				<Link to={ticketshop.toString()} icon="fas fa-ticket-alt">Zum Ticketshop</Link>
-			</li>
+			<Button
+				to={ticketshop.toString()}
+				on:click={() => emit('click', 'ticketshop')}
+				icon="fas fa-ticket-alt">Zum Ticketshop</Button>
 		{/if}
 
 		{#if website}
-			<li class={baseName + '__website'}>
-				<Link icon="fas fa-globe" to={website.toString()} />
-			</li>
+			<Button icon="fas fa-globe" on:click={() => emit('click', 'website')} to={website.toString()}
+				>{website.hostname}</Button>
 		{/if}
 
 		{#if pdf}
-			<li class={baseName + '__pdf'}>
-				<Link icon="fas fa-file-pdf" target={LinkPropsTarget.BLANK} to={pdf.src}>{pdf.title}</Link>
-			</li>
+			<Button icon="fas fa-file-pdf" to={pdf.src}>{pdf.title}</Button>
 		{/if}
-	</ul>
+	</ButtonRow>
 </div>

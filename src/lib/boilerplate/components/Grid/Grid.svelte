@@ -11,6 +11,7 @@
 	export let tag: GridProps['tag'] = 'div'
 	export let gap: GridProps['gap'] = false
 	export let size: GridProps['size'] = false
+	export let id: string | undefined = undefined
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -40,6 +41,6 @@
 	}
 </script>
 
-<svelte:element this={tag} class={classnames(className, $$props.class)}>
+<svelte:element this={tag} {id} class={classnames(className, $$props.class)}>
 	<slot />
 </svelte:element>

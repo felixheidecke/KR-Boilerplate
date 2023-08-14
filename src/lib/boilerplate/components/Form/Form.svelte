@@ -65,7 +65,7 @@
 			}
 
 			isDone = true
-			emit('done')
+			emit('submit')
 			setTimeout(scrollToDoneText, 500)
 		} catch (error) {
 			isDone = false

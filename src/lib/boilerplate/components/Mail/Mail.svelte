@@ -23,7 +23,7 @@
 	const className = classnames(baseName, $$props.class)
 </script>
 
-<a href="/#" on:click|preventDefault={() => (location.href = 'mailto:' + to)} class={className}>
+<span on:click|preventDefault={() => (location.href = 'mailto:' + to)} class={className}>
 	{#if icon}
 		<Icon ex-class={baseName + '__icon'} name={icon} />
 	{/if}
@@ -34,4 +34,4 @@
 			{@html obfuscatedEmail}
 		{/if}
 	</span>
-</a>
+</span>

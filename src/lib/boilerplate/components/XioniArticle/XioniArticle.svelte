@@ -9,10 +9,10 @@
 	// --- Components -------------------
 
 	import Picture from '../Picture/Picture.svelte'
-	import Link from '../Link/Link.svelte'
 	import Icon from '../Icon/Icon.svelte'
 	import Button from '../Button/Button.svelte'
 	import { ButtonPropsTarget } from '../Button/Button.types'
+	import ButtonRow from '../ButtonRow/ButtonRow.svelte'
 
 	// --- Props ------------------------
 
@@ -56,12 +56,6 @@
 					<time>{format(date, 'PPP', { locale: de })}</time>
 				</li>
 			{/if}
-
-			{#if website}
-				<li class={baseName + '__website'}>
-					<Link to={website.toString()} icon="fas fa-link" />
-				</li>
-			{/if}
 		</ul>
 	{/if}
 
@@ -86,13 +80,20 @@
 		</div>
 	{/if}
 
-	{#if pdf}
-		<Button
-			to={pdf.src}
-			target={ButtonPropsTarget.BLANK}
-			class={baseName + '__pdf'}
-			icon="fas fa-file-pdf">
-			{pdf.title}
-		</Button>
-	{/if}
+	<ButtonRow>
+		{#if pdf}
+			<Button
+				to={pdf.src}
+				target={ButtonPropsTarget.BLANK}
+				class={baseName + '__pdf'}
+				icon="fas fa-file-pdf">
+				{pdf.title}
+			</Button>
+		{/if}
+
+		{#if website}
+			<Button to={website.toString()} target={ButtonPropsTarget.BLANK} icon="fas fa-link"
+				>{website.host}</Button>
+		{/if}
+	</ButtonRow>
 </article>

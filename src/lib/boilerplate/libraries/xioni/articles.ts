@@ -16,19 +16,19 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 
 	async function getArticles(
 		module: number,
-		filter: { limit?: number; parts?: 'content'; status?: 'live' | 'archived' } = {}
+		filter: { limit?: number; parts?: 'content'[]; status?: 'live' | 'archived' } = {}
 	): Promise<XioniResponse<XioniArticle[]>> {
 		const params = {}
 
-		if ('limit' in filter) {
+		if (filter.limit) {
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		if ('parts' in filter) {
-			Object.assign(params, { parts: filter.parts })
+		if (filter.parts) {
+			Object.assign(params, { parts: filter.parts.join() })
 		}
 
-		if ('status' in filter) {
+		if (filter.status) {
 			Object.assign(params, { status: filter.status })
 		}
 
@@ -95,10 +95,11 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 	}
 
 	// Remap response data
-	function articleAdapter(rawArticle: any) {
+	function articleAdapter(article: any) {
 		return {
-			...rawArticle,
-			date: new Date(rawArticle.date)
+			...article,
+			date: new Date(article.date),
+			website: article.website ? new URL(article.website) : undefined
 		}
 	}
 

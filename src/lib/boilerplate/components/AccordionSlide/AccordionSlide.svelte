@@ -23,7 +23,7 @@
 	$: className = classnames(baseName, $$props.class)
 </script>
 
-<li class={className} on:click={handleClick}>
+<li class={className} on:click={handleClick} on:keypress>
 	<h5 class="{baseName}__title">
 		{title}
 	</h5>

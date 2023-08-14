@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte'
 	import type { InViewTransition } from './InView.types'
 
-	export let transition: InViewTransition = 'fade'
+	export let transition: string | InViewTransition = 'fade'
 
 	let inView: any
 	let wrapper: HTMLElement
@@ -17,18 +17,11 @@
 
 	// --- CSS Classname ----------------
 
-	const baseName = $$props['ex-class'] || 'InView'
-
-	$: className = classnames(
-		baseName,
-		$$props.class,
-		!isInView || baseName + '--visible',
-		!transition || baseName + '--fade'
-	)
+	$: className = classnames('InView', $$props.class, !transition || 'InView--' + transition)
 </script>
 
 <svelte:window on:scroll|passive={() => (isInView = inView.is(wrapper))} />
 
-<div bind:this={wrapper} class={className}>
+<div bind:this={wrapper} class={className} class:InView--visible={isInView}>
 	<slot />
 </div>

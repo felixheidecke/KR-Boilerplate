@@ -16,6 +16,7 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 	 * @param filter.startsAfter Event startet nach Datum
 	 * @param filter.endsBefore Event endet vor Datum
 	 * @param filter.endsAfter Event endet nach Datum
+	 * @param filter.parts Event data items to load
 	 */
 
 	async function getEvents(
@@ -26,6 +27,7 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 			startsAfter?: Date
 			endsBefore?: Date
 			endsAfter?: Date
+			parts?: Array<'images' | 'flags'>
 		} = {}
 	): Promise<XioniResponse<XioniEvent[]>> {
 		const params = {}
@@ -48,6 +50,10 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 
 		if (filter.endsAfter) {
 			Object.assign(params, { endsAfter: filter.endsAfter.toDateString() })
+		}
+
+		if (filter.parts) {
+			Object.assign(params, { parts: filter.parts.join() })
 		}
 
 		const { status, data } = await xioniFetch(['events', module], { params })

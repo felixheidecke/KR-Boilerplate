@@ -19,22 +19,28 @@
 
 :where(.XioniArticle__content-image) {
 	display: inline-block;
-	max-width: 18rem;
+	max-width: calc(100% / 3) !important;
 }
 
 :where(.XioniArticle__content-image--right) {
 	float: right;
 	margin-left: 1rem;
+	clear: left;
 }
 
 :where(.XioniArticle__content-image--left) {
 	float: left;
 	margin-right: 1rem;
+	clear: left;
 }
 
 :where(.XioniArticle__content ul) {
 	list-style-type: disc;
 	padding-left: 2rem;
+}
+
+:where(.XioniArticle__content) {
+	display: flow-root;
 }
 
 :where(.XioniArticle__pdf) {

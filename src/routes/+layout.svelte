@@ -1,10 +1,10 @@
 <script>
 	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
+
+	import { page } from '$app/stores'
 	import { ROUTES, ACTIVE_ROUTE, ACTIVE_PARENT } from '$lib/boilerplate/stores/routes'
 	import stammdaten from '$lib/stammdaten'
-
-	const { url } = $$props.data
 </script>
 
 <svelte:head>
@@ -21,7 +21,7 @@
 </header>
 
 <main>
-	<PageTransition path={url.pathname}>
+	<PageTransition path={$page.url.pathname}>
 		<slot />
 	</PageTransition>
 </main>

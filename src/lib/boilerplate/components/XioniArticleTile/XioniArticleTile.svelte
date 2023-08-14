@@ -36,13 +36,16 @@
 	{#if image}
 		<img
 			class="{className}__image"
+			class:$pointer={!!content}
 			src={image.thumbSrc}
 			alt={image.alt}
-			on:click={() => goto(link)} />
+			on:click={() => {
+				if (content) goto(link)
+			}} />
 	{/if}
-	<h5 class="{className}__title">
+	<h2 class="{className}__title">
 		{title}
-	</h5>
+	</h2>
 	<ul class="{className}__metadata">
 		{#if author}
 			<li class="{className}__author">

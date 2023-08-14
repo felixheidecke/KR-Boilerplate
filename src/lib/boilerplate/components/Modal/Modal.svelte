@@ -3,7 +3,7 @@
 	import classnames from 'classnames'
 	import { createEventDispatcher } from 'svelte'
 	import { fade } from 'svelte/transition'
-	import Icon from '../icon/icon.svelte'
+	import Icon from '../Icon/Icon.svelte'
 
 	const emit = createEventDispatcher()
 
@@ -18,7 +18,6 @@
 	// --- Methods ----------------------
 
 	export const close = () => (isOpen = false)
-
 	export const open = () => (isOpen = true)
 
 	const onKeyDown = ({ key }: KeyboardEvent) => {

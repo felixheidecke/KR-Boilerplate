@@ -16,7 +16,7 @@
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
-	const baseName = $$props['ex-class'] || 'YouTube'
+	const baseName = $$props['ex-class'] || 'Youtube'
 	const className = classnames(baseName, $$props.class)
 </script>
 
@@ -24,7 +24,7 @@
 	<iframe
 		class={baseName + '__frame'}
 		src={'https://www.youtube-nocookie.com/embed/' + videoId}
-		title="YouTube video player"
+		title="Youtube video player"
 		frameborder="0"
 		allow={allow.join('; ')}
 		allowfullscreen

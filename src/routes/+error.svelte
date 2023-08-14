@@ -2,6 +2,10 @@
 	import { page } from '$app/stores'
 </script>
 
+<svelte:head>
+	<meta name="robots" content="noindex" />
+</svelte:head>
+
 <div class="$text-center">
 	<h3>🥵 Fehler {$page.status} ist aufgetreten!</h3>
 	<hr />

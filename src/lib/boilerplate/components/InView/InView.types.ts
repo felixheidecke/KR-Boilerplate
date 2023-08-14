@@ -1,1 +1,1 @@
-export type InViewTransition = 'fade'
+export type InViewTransition = 'fade' | 'scale'
