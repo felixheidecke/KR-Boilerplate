@@ -1,26 +1,32 @@
 <script lang="ts">
-	import './AccordionSlide.css'
+	import './AccordionSlide.scss'
 
-	import classnames from 'classnames'
 	import { getContext } from 'svelte'
 	import { slide } from 'svelte/transition'
+	import classnames from 'classnames'
 	import type { Writable } from 'svelte/store'
+
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let title: string
 
+	// -----------------------------------------------------------------------------------------------
+
 	const id = Math.random()
 	const activeItem = getContext('Accordion:active-item') as Writable<null | number>
+	const baseName = $$props['ex-class'] || 'AccordionSlide'
 
 	$: collapsed = id !== $activeItem
+	$: className = classnames(
+		baseName,
+		$$props.class,
+		!!collapsed || `${baseName}--expanded`,
+		!collapsed || `${baseName}--collapsed`
+	)
 
 	const handleClick = () => {
 		activeItem.set($activeItem === id ? null : id)
 	}
-
-	// --- CSS Class --------------------
-
-	const baseName = $$props['ex-class'] || 'AccordionSlide'
-	$: className = classnames(baseName, $$props.class)
 </script>
 
 <li class={className} on:click={handleClick} on:keypress>

@@ -1,48 +1,37 @@
 <script lang="ts">
 	import './Link.css'
+
 	import classnames from 'classnames'
+	import isExternalURL from '$lib/boilerplate/utils/isExternalURL'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Icon from '../Icon/Icon.svelte'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import { LinkPropsRel, LinkPropsTag, LinkPropsTarget, type LinkProps } from './Link.types'
-
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let to: LinkProps['to'] = ''
-	export let target: LinkProps['target'] = undefined
-	export let icon: LinkProps['icon'] = undefined
-	export let rel: LinkProps['rel'] = LinkPropsRel.FOLLOW
-	export let tag: LinkProps['tag'] = LinkPropsTag.ANCHOR
-	export let label: LinkProps['label'] = ''
+	export let to: string | undefined = undefined
+	export let target: '_self' | '_blank' = '_self'
+	export let icon = ''
+	export let rel: 'follow' | 'nofollow' = 'follow'
+	export let label = ''
 	export let exClass = undefined
 
-	const href = to || undefined
+	// -----------------------------------------------------------------------------------------------
 
-	// --- [ Logic ] ---------------------------------------------------------------------------------
-
-	if (isExternalLink(to)) {
-		rel = LinkPropsRel.NO_REFERRER
-		target = LinkPropsTarget.BLANK
+	if (to && isExternalURL(to)) {
+		rel = 'nofollow'
+		target = '_blank'
 	}
 
+	const tag = to ? 'a' : 'span'
 	const baseName = exClass || 'Link'
-	const className = classnames(
-		baseName,
-		$$props.class,
-		!icon || baseName + '--has-icon',
-		isExternalLink(to) ? baseName + '--external' : baseName + '--internal'
-	)
+	const className = classnames(baseName, $$props.class, !icon || baseName + '--has-icon')
 
-	function isExternalLink(link: string) {
-		return link.startsWith('https://') || link.startsWith('http://')
-	}
+	function trimScheme(link: typeof to) {
+		if (!link) return ''
 
-	function trimScheme(link: string) {
-		if (!isExternalLink(link)) return link
+		if (!isExternalURL(link)) return link
 
 		const { hostname } = new URL(link)
 		return hostname
@@ -52,7 +41,7 @@
 {#if icon}
 	<span class={className}>
 		<Icon ex-class={baseName + '__icon'} name={icon} />
-		<svelte:element this={tag} {href} {target} {rel} aria-label={label} on:click>
+		<svelte:element this={tag} href={to} {target} {rel} aria-label={label} on:click>
 			{#if $$slots.default}
 				<slot />
 			{:else}
@@ -61,7 +50,7 @@
 		</svelte:element>
 	</span>
 {:else}
-	<svelte:element this={tag} class={className} {href} {target} {rel} aria-label={label} on:click>
+	<svelte:element this={tag} class={className} href={to} {target} {rel} aria-label={label} on:click>
 		{#if $$slots.default}
 			<slot />
 		{:else}

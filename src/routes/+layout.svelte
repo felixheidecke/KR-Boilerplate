@@ -2,9 +2,8 @@
 	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
 
-	import { page } from '$app/stores'
-	import { ROUTES, ACTIVE_ROUTE, ACTIVE_PARENT } from '$lib/boilerplate/stores/routes'
-	import stammdaten from '$lib/stammdaten'
+	import routes from '$routes'
+	import stammdaten from '$stammdaten'
 </script>
 
 <svelte:head>
@@ -17,11 +16,11 @@
 </svelte:head>
 
 <header>
-	<Nav routes={$ROUTES} activeRoute={$ACTIVE_ROUTE} activeParent={$ACTIVE_PARENT} />
+	<Nav {routes} />
 </header>
 
 <main>
-	<PageTransition path={$page.url.pathname}>
+	<PageTransition>
 		<slot />
 	</PageTransition>
 </main>

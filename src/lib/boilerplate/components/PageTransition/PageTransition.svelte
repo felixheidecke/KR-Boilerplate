@@ -1,14 +1,11 @@
 <script lang="ts">
 	import { blur } from 'svelte/transition'
-	import type { PageTransitionProps } from './PageTransition.types'
+	import { page } from '$app/stores'
 
-	$: ({ path, tag } = {
-		tag: 'div',
-		...$$props
-	} as PageTransitionProps)
+	export let tag = 'div'
 </script>
 
-{#key path}
+{#key $page.url.pathname}
 	<svelte:element this={tag} class="PageTransition" in:blur={{ duration: 250 }}>
 		<slot />
 	</svelte:element>

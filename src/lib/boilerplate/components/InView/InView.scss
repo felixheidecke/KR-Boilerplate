@@ -7,13 +7,36 @@
 	}
 }
 
+:where(.InView--fade-rtl) {
+	transform: translateX(10%);
+	opacity: 0;
+	transition: {
+		delay: 100ms;
+		property: opacity, transform;
+		duration: 333ms;
+	}
+}
+
+:where(.InView--fade-ltr) {
+	transform: translateX(-10%);
+	opacity: 0;
+	transition: {
+		delay: 100ms;
+		property: opacity, transform;
+		duration: 500ms;
+	}
+}
+
+:where(.InView--fade-ltr.InView--visible),
+:where(.InView--fade-rtl.InView--visible),
 :where(.InView--fade.InView--visible) {
+	transform: translate(0, 0);
 	opacity: 1;
 }
 
 :where(.InView--scale) {
 	transform: scale(0.75);
-	opacity: 0.75;
+	opacity: 0;
 	transition: {
 		delay: 100ms;
 		property: transform, opacity;

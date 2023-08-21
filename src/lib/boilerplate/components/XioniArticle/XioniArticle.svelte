@@ -11,7 +11,6 @@
 	import Picture from '../Picture/Picture.svelte'
 	import Icon from '../Icon/Icon.svelte'
 	import Button from '../Button/Button.svelte'
-	import { ButtonPropsTarget } from '../Button/Button.types'
 	import ButtonRow from '../ButtonRow/ButtonRow.svelte'
 
 	// --- Props ------------------------
@@ -82,18 +81,13 @@
 
 	<ButtonRow>
 		{#if pdf}
-			<Button
-				to={pdf.src}
-				target={ButtonPropsTarget.BLANK}
-				class={baseName + '__pdf'}
-				icon="fas fa-file-pdf">
+			<Button to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
 				{pdf.title}
 			</Button>
 		{/if}
 
 		{#if website}
-			<Button to={website.toString()} target={ButtonPropsTarget.BLANK} icon="fas fa-link"
-				>{website.host}</Button>
+			<Button to={website.toString()} icon="fas fa-link">{website.host}</Button>
 		{/if}
 	</ButtonRow>
 </article>

@@ -3,34 +3,31 @@
 	import { uniqueId } from 'lodash-es'
 	import classnames from 'classnames'
 
+	// --- [ Props ] ---------------------------------------------------------------------------------
+
 	export let checked = false
 	export let label = ''
 	export let name = 'checkbox'
 	export let required = false
 	export let value = 'on'
 
-	const id = uniqueId(`input-checkbox-${name}-`)
+	// -----------------------------------------------------------------------------------------------
 
-	$: if (label && required) label += '*'
-
-	// Props ------------
-
-	const inputProps = {
-		id,
-		name,
-		required
+	if (label && required) {
+		label += '*'
 	}
 
-	// --- CSS Class --------------------
+	const id = uniqueId(`input-checkbox-${name}-`)
 
-	const baseName = $$props['ex-class'] || 'Checkbox'
-
+	$: baseName = $$props['ex-class'] || 'Checkbox'
 	$: className = classnames(baseName, $$props.class, !checked || baseName + '--active')
 </script>
 
 <label class={className}>
 	<input
-		{...inputProps}
+		{id}
+		{name}
+		{required}
 		class={baseName + '__input'}
 		type="checkbox"
 		{value}

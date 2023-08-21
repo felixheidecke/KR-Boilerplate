@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FetchMethods } from '$lib/boilerplate/libraries/fetch-json/types'
+	import { FetchMethods, FetchResponseStatus } from '$lib/boilerplate/libraries/fetch-json/types'
 	import { onMount, createEventDispatcher } from 'svelte'
 	import { XIONI_API_URL } from '$lib/boilerplate/constants'
 	import classnames from 'classnames'
@@ -55,7 +55,7 @@
 				params: attach === 'csv' ? { attach: 'csv' } : undefined
 			})
 
-			if (status >= 400) throw data
+			if (status !== FetchResponseStatus.SUCCESS) throw data
 
 			if (data && 'error' in data && 'message' in data) {
 				errors = (data.message as string).split(',')
@@ -107,7 +107,7 @@
 	{#if errors.length}
 		<Message class="{baseName}__errors $mt" type="error" title="Fehler aufgetreten">
 			<ul>
-				{#each errors as { message }}
+				{#each errors as message}
 					<li>{message}</li>
 				{/each}
 			</ul>

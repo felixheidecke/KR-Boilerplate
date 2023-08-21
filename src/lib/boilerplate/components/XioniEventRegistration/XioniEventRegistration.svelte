@@ -29,8 +29,8 @@
 <Modal title="Anmeldung" bind:this={modal} class={baseName} on:open on:close>
 	{#if event}
 		<header class="{className}__header">
-			<h4 class="{className}__title">{event.title}</h4>
-			<time class="$font-small">{@html date.formatFromTo(event.starts, event.ends)}</time>
+			<h3 class="{className}__title">{event.title}</h3>
+			<time>{@html date.formatFromTo(event.starts, event.ends)}</time>
 		</header>
 
 		<Form id={formId} subject="Event Anmeldung ({event.id})" class="$mt-2" attach="csv">

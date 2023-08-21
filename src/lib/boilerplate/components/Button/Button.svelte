@@ -1,21 +1,28 @@
 <script lang="ts">
 	import './Button.scss'
-	import classnames from 'classnames'
 
-	// --- Components --------------------------------------------------------------------------------
+	import classnames from 'classnames'
+	import isExternalURL from '$lib/boilerplate/utils/isExternalURL'
+
+	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Icon from '../Icon/Icon.svelte'
-	import type { ButtonProps } from './Button.types'
 
-	// --- Props -------------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let to: ButtonProps['to'] = undefined
-	export let icon: ButtonProps['icon'] = undefined
-	export let disabled: ButtonProps['disabled'] = false
-	export let target: ButtonProps['target'] = undefined
-	export let isLoading: ButtonProps['isLoading'] = false
+	export let to: string | undefined = undefined
+	export let icon = ''
+	export let rel: 'follow' | 'nofollow' = 'follow'
+	export let disabled = false
+	export let target: '_self' | '_blank' = '_self'
+	export let isLoading = false
 
-	// --- Data --------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
+
+	if (to && isExternalURL(to)) {
+		rel = 'nofollow'
+		target = '_blank'
+	}
 
 	const baseName = $$props['ex-class'] || 'Button'
 	const className = classnames(

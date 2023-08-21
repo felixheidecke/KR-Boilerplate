@@ -3,12 +3,13 @@
 	import classnames from 'classnames'
 
 	import { browser } from '$app/environment'
+	import { page } from '$app/stores'
 	import { onMount } from 'svelte'
 	import { throttle } from 'lodash-es'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { Route, Routes } from '$lib/boilerplate/libraries/make-routes/types'
+	import type { Route } from '$lib/boilerplate/libraries/make-routes/types'
 	enum NavType {
 		SLIDE = 'slide',
 		BAR = 'bar'
@@ -20,9 +21,7 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let routes: Routes
-	export let activeRoute: Route | null = null
-	export let activeParent: Route | undefined = undefined
+	export let routes: Route[]
 	export let variant: NavType | undefined = undefined
 	export let breakpoint = '1024px'
 	export let sticky = false
@@ -56,7 +55,7 @@
 		setTimeout(() => (hidden = false))
 	}
 
-	function handleOffset(): void {
+	function handleOffset() {
 		if (!sticky || type === NavType.SLIDE) return
 
 		const className = baseName + '--offset'
@@ -69,7 +68,17 @@
 		}
 	}
 
-	// --- Lifecycle ---------------------------------------------------------------------------------
+	$: isCurrentPath = (target: URL['pathname'] | undefined) => {
+		if (!target || target === '/') return false
+
+		return $page.url.pathname.includes(target)
+	}
+
+	$: isActivePath = (target: URL['pathname'] | undefined) => {
+		if (!target) return false
+
+		return $page.url.pathname === target
+	}
 
 	onMount(() => {
 		if (!breakpoint || !browser || variant) return
@@ -106,8 +115,8 @@
 					id="route-{i}"
 					class={classnames(
 						baseName + '__a',
-						activeRoute?.path === route.path && route.path ? baseName + '__a--active' : null,
-						activeParent?.name === route.name ? baseName + '__a--current' : null
+						isActivePath(route.path) ? baseName + '__a--active' : null,
+						isCurrentPath(route.path) ? baseName + '__a--current' : null
 					)}
 					href={route.path}>
 					{route.name}
@@ -125,7 +134,7 @@
 									id="route-{i}-{o}"
 									class={classnames(
 										baseName + '__a-a',
-										activeRoute?.path !== subRoute.path || baseName + '__a-a--active',
+										isActivePath(subRoute.path) ? baseName + '__a-a--active' : undefined,
 										subRoute.class
 									)}
 									href={subRoute.path}>

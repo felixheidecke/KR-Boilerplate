@@ -63,38 +63,36 @@
 	})
 </script>
 
-<div class="Lightbox">
-	<div bind:this={lightbox}>
-		<slot />
-	</div>
-	<Modal bind:this={modal}>
-		<div
-			class="Lightbox__navigate Lightbox__navigate--prev"
-			class:$invisible={!(lightboxImages.length > 2)}
-			on:click={() => navigate('<')}>
-			<Icon name="fas fa-angle-left" size="2" />
-		</div>
-
-		<div
-			class="Lightbox__navigate Lightbox__navigate--next"
-			class:$invisible={!(lightboxImages.length > 2)}
-			on:click={() => navigate('>')}>
-			<Icon name="fas fa-angle-right" size="2" />
-		</div>
-
-		{#if activeImage.alt}
-			<div class="Lightbox__textbox">
-				<p class="$m-0">
-					{activeImage.alt}
-				</p>
-			</div>
-		{/if}
-		<img class="Lightbox__active-image" src={activeImage.src} alt={activeImage.alt} />
-	</Modal>
-
-	{#if !isMobile}
-		{#each lightboxImages as { src, alt }}
-			<img {src} {alt} hidden aria-hidden />
-		{/each}
-	{/if}
+<div class="Lightbox" bind:this={lightbox}>
+	<slot />
 </div>
+<Modal class="Lightbox__modal" bind:this={modal}>
+	<div
+		class="Lightbox__navigate Lightbox__navigate--prev"
+		class:$invisible={!(lightboxImages.length > 2)}
+		on:click={() => navigate('<')}>
+		<Icon name="fas fa-angle-left" size="2" />
+	</div>
+
+	<div
+		class="Lightbox__navigate Lightbox__navigate--next"
+		class:$invisible={!(lightboxImages.length > 2)}
+		on:click={() => navigate('>')}>
+		<Icon name="fas fa-angle-right" size="2" />
+	</div>
+
+	{#if activeImage.alt}
+		<div class="Lightbox__textbox">
+			<p class="$m-0">
+				{activeImage.alt}
+			</p>
+		</div>
+	{/if}
+	<img class="Lightbox__active-image" src={activeImage.src} alt={activeImage.alt} />
+</Modal>
+
+{#if !isMobile}
+	{#each lightboxImages as { src, alt }}
+		<img {src} {alt} hidden aria-hidden />
+	{/each}
+{/if}

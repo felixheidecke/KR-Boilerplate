@@ -2,19 +2,23 @@
 	import './Address.css'
 	import classNames from 'classnames'
 
+	// --- [ Components ] ----------------------------------------------------------------------------
+
 	import Link from '../Link/Link.svelte'
 	import Mail from '../Mail/Mail.svelte'
 
-	import type { AddressProps } from './Address.types'
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let name: AddressProps['name']
-	export let title: AddressProps['title'] = ''
-	export let street: AddressProps['street']
-	export let town: AddressProps['town']
-	export let phone: AddressProps['phone'] = ''
-	export let email: AddressProps['email'] = ''
-	export let web: AddressProps['web'] = ''
+	export let name: string
+	export let title = ''
+	export let street: string
+	export let town: string
+	export let phone = ''
+	export let email = ''
+	export let web = ''
 	export let exClass = ''
+
+	// -----------------------------------------------------------------------------------------------
 
 	const baseName = exClass || 'Address'
 	const className = classNames(baseName, $$props.class)
