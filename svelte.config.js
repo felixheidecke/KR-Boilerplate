@@ -4,11 +4,9 @@ import { vitePreprocess } from '@sveltejs/kit/vite'
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: vitePreprocess(),
-
 	output: {
 		preloadStrategy: 'preload-mjs'
 	},
-
 	kit: {
 		inlineStyleThreshold: 10000,
 		adapter: adapter({
@@ -18,6 +16,9 @@ const config = {
 			strict: false,
 			precompress: false
 		}),
+		paths: {
+			relative: false
+		},
 		alias: {
 			$variables: './src/lib/styles/variables.scss',
 			$routes: './src/routes.js',

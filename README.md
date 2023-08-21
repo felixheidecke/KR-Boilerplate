@@ -1,6 +1,6 @@
 # Patch Notes
 
-## Version `4.11.0`
+## Version `4.11.1`
 
 - Bump Minor & Patch versions of dependencies
 - Add `$routes` & `$stammdaten` aliases
@@ -35,16 +35,6 @@ passt `activeRoute` and `activeParent` as props
 ### `PageTransition.svelte`
 
 - Prop `path` removed.
-
-### Picture.svelte
-
-Add `width`, `height` and `caption` props.
-
-```TS
-width: string | number | undefined = undefined
-height: string | number | undefined = undefined
-caption: string = ''
-```
 
 _(`width` is required for inline image with caption to work propperly)_
 
