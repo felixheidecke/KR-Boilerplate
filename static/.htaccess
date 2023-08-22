@@ -10,9 +10,6 @@
 RewriteEngine On
 RewriteBase /
 
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.*)$ %{REQUEST_FILENAME}.html
-
 RewriteRule ^200\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

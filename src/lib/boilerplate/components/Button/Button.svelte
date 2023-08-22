@@ -14,7 +14,7 @@
 	export let icon = ''
 	export let rel: 'follow' | 'nofollow' = 'follow'
 	export let disabled = false
-	export let target: '_self' | '_blank' = '_self'
+	export let target: '_blank' | undefined = undefined
 	export let isLoading = false
 
 	// -----------------------------------------------------------------------------------------------

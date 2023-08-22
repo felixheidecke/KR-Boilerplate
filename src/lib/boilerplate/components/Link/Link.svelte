@@ -11,7 +11,7 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let to: string | undefined = undefined
-	export let target: '_self' | '_blank' = '_self'
+	export let target: '_blank' | undefined = undefined
 	export let icon = ''
 	export let rel: 'follow' | 'nofollow' = 'follow'
 	export let label = ''

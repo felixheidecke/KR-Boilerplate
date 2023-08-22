@@ -1,5 +1,10 @@
 # Patch Notes
 
+## Version `4.11.2`
+
+- Revert default `target="_self"` to undefined in `Button.svelte` & `Link.svelte`
+- Remove superfluous rewrite condition form `.htaccess`
+
 ## Version `4.11.1`
 
 - Bump Minor & Patch versions of dependencies
