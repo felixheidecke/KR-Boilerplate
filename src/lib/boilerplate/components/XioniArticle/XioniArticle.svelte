@@ -1,56 +1,51 @@
 <script lang="ts">
 	import './XioniArticle.scss'
 
-	import classnames from 'classnames'
 	import { format } from 'date-fns'
+	import cn from 'classnames'
 	import de from 'date-fns/locale/de/index.js'
 	import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/articles.types'
 
-	// --- Components -------------------
-
-	import Picture from '../Picture/Picture.svelte'
+	// --- [ Components ] ----------------------------------------------------------------------------
 	import Icon from '../Icon/Icon.svelte'
 	import Button from '../Button/Button.svelte'
 	import ButtonRow from '../ButtonRow/ButtonRow.svelte'
 
-	// --- Props ------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
+	export let article: XioniArticle
+	export let id: string | undefined = undefined
 
-	// prettier-ignore
-	const {
-		author,
-		content,
-		date,
-		id,
-		image,
-		pdf,
-		text,
-		title,
-		website
-	} = $$props.article as XioniArticle
-
-	const baseName = $$props['ex-class'] || 'XioniArticle'
-	const className = classnames(baseName, $$props.class)
+	// -----------------------------------------------------------------------------------------------
+	const { author, content, date, image, pdf, text, title, website } = article
 	const hasMetadata = author || date || website
 </script>
 
-<article class={className} id={'xioni-article-' + id}>
+<article class={cn('XioniArticle', $$props.class)} {id}>
 	{#if image}
-		<img class={baseName + '__image'} src={image.src} alt={image.alt} />
+		<figure class="XioniArticle__wrapper">
+			<img class="XioniArticle__image" src={image.src} alt={image.alt} />
+			{#if image.alt}
+				<figcaption class="XioniArticle__image-caption">
+					{image.alt}
+				</figcaption>
+			{/if}
+		</figure>
 	{/if}
-	<h2 class={baseName + '__title'}>
+
+	<h2 class="XioniArticle__title">
 		{title}
 	</h2>
 
 	{#if hasMetadata}
-		<ul class={baseName + '__metadata'}>
+		<ul class="XioniArticle__metadata">
 			{#if author}
-				<li class={baseName + '__author'}>
+				<li class="XioniArticle__author">
 					<Icon name="far fa-user" class="$mr-1/4" />
 					<span>Von {author}</span>
 				</li>
 			{/if}
 			{#if date}
-				<li class={baseName + '__date'}>
+				<li class="XioniArticle__date">
 					<Icon name="far fa-calendar-alt" class="$mr-1/4" />
 					<time>{format(date, 'PPP', { locale: de })}</time>
 				</li>
@@ -58,19 +53,25 @@
 		</ul>
 	{/if}
 
-	<div class={baseName + '__teaser'}>
+	<div class="XioniArticle__teaser">
 		{@html text}
 	</div>
 
 	{#if content}
-		<div class={baseName + '__content'}>
+		<div class="XioniArticle__content">
 			{#each content as { image, text }}
 				{#if image}
-					<Picture
-						src={image.src}
-						ex-class={baseName + '__content-image'}
-						alt={image.alt}
-						align={image.align} />
+					<figure
+						class="XioniArticle__content-image"
+						class:XioniArticle__content-image--left={image.align === 'left'}
+						class:XioniArticle__content-image--right={image.align === 'right'}>
+						<img src={image.src} alt={image.alt} />
+						{#if image.alt}
+							<figcaption class="XioniArticle__content-image-caption">
+								{image.alt}
+							</figcaption>
+						{/if}
+					</figure>
 				{/if}
 				{#if text}
 					{@html text}
@@ -79,9 +80,9 @@
 		</div>
 	{/if}
 
-	<ButtonRow>
+	<ButtonRow class="XioniArticle__button-row">
 		{#if pdf}
-			<Button to={pdf.src} class={baseName + '__pdf'} icon="fas fa-file-pdf">
+			<Button to={pdf.src} class={'XioniArticle__pdf'} icon="fas fa-file-pdf">
 				{pdf.title}
 			</Button>
 		{/if}

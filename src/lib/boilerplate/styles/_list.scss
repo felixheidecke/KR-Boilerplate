@@ -8,7 +8,8 @@ ul.--dash {
 	padding-left: 1rem;
 	margin-left: 0.75rem;
 
-	&.--dash > li {
+	&.--dash > li,
+	&.--disc > li {
 		&::marker {
 			display: none;
 		}
@@ -20,7 +21,11 @@ ul.--dash {
 		}
 	}
 
-	&.--disc {
-		list-style: disc;
+	&.--dash > li::before {
+		content: '-';
+	}
+
+	&.--disc > li::before {
+		content: '•';
 	}
 }

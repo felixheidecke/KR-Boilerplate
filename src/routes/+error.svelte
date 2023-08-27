@@ -1,10 +1,12 @@
 <script>
+	import { browser } from '$app/environment'
+	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
-</script>
 
-<svelte:head>
-	<meta name="robots" content="noindex" />
-</svelte:head>
+	if (browser && !$page.url.searchParams.has('error')) {
+		goto('?error=' + $page.status)
+	}
+</script>
 
 <div class="$text-center">
 	<h3>🥵 Fehler {$page.status} ist aufgetreten!</h3>

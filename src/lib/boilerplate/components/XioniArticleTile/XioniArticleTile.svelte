@@ -4,38 +4,29 @@
 	import { format } from '$lib/boilerplate/utils/format-date'
 	import { goto } from '$app/navigation'
 	import { LOCALE } from '$lib/boilerplate/constants'
-	import classNames from 'classnames'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniArticleTileProps } from './XioniArticleTile.types'
+	import cn from 'classnames'
+	import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/articles.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
-
 	import Link from '../Link/Link.svelte'
 	import Icon from '../Icon/Icon.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
+	export let article: XioniArticle
+	export let basePath: string = ''
+	export let linkDelimiter: string = '_'
+	export let linkText: string = 'Weiterlesen'
+	export let tag: string = 'div'
 
-	export let article: XioniArticleTileProps['article']
-	export let basePath: XioniArticleTileProps['basePath'] = ''
-	export let exClass: XioniArticleTileProps['exClass'] = ''
-	export let linkDelimiter: XioniArticleTileProps['linkDelimiter'] = '_'
-	export let linkText: XioniArticleTileProps['linkText'] = 'Weiterlesen'
-	export let tag: XioniArticleTileProps['tag'] = 'div'
-
-	// --- [ Logic ] ---------------------------------------------------------------------------------
-
+	// -----------------------------------------------------------------------------------------------
 	const { title, date, image, text, author, content } = article
 	const link = basePath + article.slug + linkDelimiter + article.id
-	const baseName = exClass || 'XioniArticleTile'
-	const className = classNames(baseName, $$props.class)
 </script>
 
-<svelte:element this={tag} class={baseName}>
+<svelte:element this={tag} class={cn('XioniArticleTile', $$props.class)}>
 	{#if image}
 		<img
-			class="{className}__image"
+			class="XioniArticleTile__image"
 			class:$pointer={!!content}
 			src={image.thumbSrc}
 			alt={image.alt}
@@ -43,28 +34,28 @@
 				if (content) goto(link)
 			}} />
 	{/if}
-	<h2 class="{className}__title">
+	<h2 class="XioniArticleTile__title">
 		{title}
 	</h2>
-	<ul class="{className}__metadata">
+	<ul class="XioniArticleTile__metadata">
 		{#if author}
-			<li class="{className}__author">
+			<li class="XioniArticleTile__author">
 				<Icon name="far fa-user" class="$mr-1/4" />
 				Von {author}
 			</li>
 		{/if}
-		<li class="{className}__date">
+		<li class="XioniArticleTile__date">
 			<Icon name="far fa-calendar-alt" class="$mr-1/4" />
 			<time datetime={date.toLocaleDateString(LOCALE)}>
 				{format(date, 'd. LLLL Y')}
 			</time>
 		</li>
 	</ul>
-	<div class="{className}__text">
+	<div class="XioniArticleTile__text">
 		{@html text}
 	</div>
 	{#if content}
-		<Link to={link} class="{className}__link $pointer $row-reverse" icon="fas fa-angle-right">
+		<Link to={link} class="XioniArticleTile__link $pointer $row-reverse" icon="fas fa-angle-right">
 			{linkText}
 		</Link>
 	{/if}

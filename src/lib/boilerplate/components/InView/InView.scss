@@ -1,29 +1,30 @@
-:where(.InView--fade) {
+:where(.InView) {
 	opacity: 0;
+}
+
+:where(.InView--fade) {
 	transition: {
-		delay: 100ms;
+		delay: 250ms;
 		property: opacity;
-		duration: 333ms;
+		duration: 3s;
 	}
 }
 
 :where(.InView--fade-rtl) {
 	transform: translateX(10%);
-	opacity: 0;
 	transition: {
-		delay: 100ms;
+		delay: 150ms;
 		property: opacity, transform;
-		duration: 333ms;
+		duration: 2s;
 	}
 }
 
 :where(.InView--fade-ltr) {
 	transform: translateX(-10%);
-	opacity: 0;
 	transition: {
-		delay: 100ms;
+		delay: 150ms;
 		property: opacity, transform;
-		duration: 500ms;
+		duration: 2s;
 	}
 }
 
@@ -36,11 +37,10 @@
 
 :where(.InView--scale) {
 	transform: scale(0.75);
-	opacity: 0;
 	transition: {
-		delay: 100ms;
+		delay: 150ms;
 		property: transform, opacity;
-		duration: 500ms;
+		duration: 2s;
 	}
 }
 

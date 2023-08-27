@@ -1,0 +1,17 @@
+@import '$variables';
+
+:where(.Container) {
+	width: 100%;
+	margin: {
+		left: auto;
+		right: auto;
+	}
+
+	@include breakpoint('mobile') {
+		max-width: 32rem;
+	}
+
+	@include breakpoint('tablet-up') {
+		max-width: 60rem;
+	}
+}

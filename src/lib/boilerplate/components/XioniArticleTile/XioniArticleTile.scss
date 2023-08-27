@@ -9,15 +9,15 @@
 }
 
 :where(.XioniArticleTile__image) {
-	margin-bottom: 1rem;
-	cursor: pointer;
+	display: block;
+	margin: 0;
 
 	@include breakpoint('tablet-up') {
 		width: 12.5rem;
 		aspect-ratio: 1/1;
 		object-fit: cover;
-		float: right;
 		margin-left: 2rem;
+		float: right;
 	}
 }
 

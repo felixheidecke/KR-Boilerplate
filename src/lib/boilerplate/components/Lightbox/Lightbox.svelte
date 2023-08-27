@@ -70,6 +70,7 @@
 	<div
 		class="Lightbox__navigate Lightbox__navigate--prev"
 		class:$invisible={!(lightboxImages.length > 2)}
+		on:keydown
 		on:click={() => navigate('<')}>
 		<Icon name="fas fa-angle-left" size="2" />
 	</div>
@@ -77,6 +78,7 @@
 	<div
 		class="Lightbox__navigate Lightbox__navigate--next"
 		class:$invisible={!(lightboxImages.length > 2)}
+		on:keydown
 		on:click={() => navigate('>')}>
 		<Icon name="fas fa-angle-right" size="2" />
 	</div>
