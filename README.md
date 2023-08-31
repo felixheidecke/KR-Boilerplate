@@ -1,5 +1,10 @@
 # Patch Notes
 
+## Version `4.12.1`
+
+- Fix apple-touch-icon.png name
+- Fix not centered figcaption
+
 ## Version `4.12.0`
 
 - Update Dependencies
