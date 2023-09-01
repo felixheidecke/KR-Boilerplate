@@ -1,22 +1,24 @@
 <script lang="ts">
-	import './picture.css'
-
-	import type { PictureProps } from './Picture.types'
+	import './Picture.css'
 	import classnames from 'classnames'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let align: PictureProps['align'] = undefined
-	export let alt: PictureProps['alt'] = ''
-	export let desktop: PictureProps['desktop'] = undefined
-	export let loading: PictureProps['loading'] = 'lazy'
-	export let src: PictureProps['src']
-	export let tablet: PictureProps['tablet'] = undefined
-	export let widescreen: PictureProps['widescreen'] = undefined
+	export let src: string
+	export let tablet = ''
+	export let desktop = ''
+	export let widescreen = ''
+	export let width: number | string | undefined = undefined
+	export let height: number | string | undefined = undefined
+	export let align: 'left' | 'right' | undefined = undefined
+	export let alt = ''
+	export let loading: HTMLImageElement['loading'] | undefined = undefined
+	export let placeholder = ''
 
 	// -----------------------------------------------------------------------------------------------
 
 	const baseName = $$props['ex-class'] || 'Picture'
+	const style = placeholder ? `background-image:url(${placeholder})` : undefined
 
 	$: className = classnames(
 		baseName,
@@ -35,5 +37,12 @@
 	{#if tablet}
 		<source srcset={tablet} media="(min-width: 621px)" />
 	{/if}
-	<img class={className} srcset={src} {alt} {loading} />
+	<img
+		class={className}
+		srcset={src}
+		{width}
+		{height}
+		{alt}
+		loading={placeholder ? 'lazy' : loading}
+		{style} />
 </picture>

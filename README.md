@@ -1,5 +1,11 @@
 # Patch Notes
 
+## Version `4.12.2`
+
+- Add `width`, `height` & `placeholder` props to `Picture` component
+- Add `placeholder` prop to `Figure` component
+- Minor improvements
+
 ## Version `4.12.1`
 
 - Fix apple-touch-icon.png name

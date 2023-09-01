@@ -1,19 +1,20 @@
-<script>
+<script lang="ts">
 	import './Radio.scss'
 	import classnames from 'classnames'
 	import { uniqueId } from 'lodash-es'
 
+	// --- [ Props ] ---------------------------------------------------------------------------------
+
 	export let checked = false
+	export let value: string
 	export let group = checked ? value : ''
-	export let label = null
+	export let label = ''
 	export let name = 'radio'
 	export let required = false
-	export let value
+
+	// -----------------------------------------------------------------------------------------------
 
 	const id = uniqueId(`radio-${name}-`)
-
-	// --- CSS Class --------------------
-
 	const baseName = $$props['ex-class'] || 'InputRadio'
 
 	$: className = classnames(baseName, $$props.class, !checked || baseName + '--active')
@@ -29,5 +30,7 @@
 		class={baseName + '__input'}
 		type="radio"
 		bind:group />
-	<span class={baseName + '__label'}>{@html label}</span>
+	{#if label}
+		<span class={baseName + '__label'}>{@html label}</span>
+	{/if}
 </label>

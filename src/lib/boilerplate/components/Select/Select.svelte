@@ -3,7 +3,7 @@
 	import classnames from 'classnames'
 	import { uniqueId } from 'lodash-es'
 
-	// --- Data -------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let label = ''
 	export let name = 'select'
@@ -13,10 +13,9 @@
 	export let value = values[0]
 	export let disabled = false
 
+	// -----------------------------------------------------------------------------------------------
+
 	const id = uniqueId(name + '-')
-
-	// --- CSS Class --------------------
-
 	const baseName = $$props['ex-class'] || 'FormSelect'
 </script>
 

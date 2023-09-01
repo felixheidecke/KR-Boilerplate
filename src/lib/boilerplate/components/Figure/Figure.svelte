@@ -1,21 +1,32 @@
 <script lang="ts">
-	import classNames from 'classnames'
 	import './Figure.css'
+	import classNames from 'classnames'
+
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let src: string
-	export let alt: string = ''
+	export let alt = ''
 	export let width: string | number | undefined = undefined
 	export let height: string | number | undefined = undefined
-	export let caption: string = ''
-	export let loading: HTMLImageElement['loading'] = 'eager'
+	export let caption = ''
+	export let loading: HTMLImageElement['loading'] | undefined = undefined
+	export let placeholder = ''
 
-	// CSS classes
+	// -----------------------------------------------------------------------------------------------
+
+	const style = placeholder ? `background-image:url(${placeholder})` : undefined
 	const baseClass = $$props['ex-class'] || 'Figure'
-	const className = classNames(baseClass, $$props.class)
 </script>
 
-<figure class={className}>
-	<img class="{baseClass}__image" {src} {alt} {width} {height} {loading} />
+<figure class={classNames(baseClass, $$props.class)}>
+	<img
+		class="{baseClass}__image"
+		{src}
+		{alt}
+		{width}
+		{height}
+		{style}
+		loading={placeholder ? 'lazy' : loading} />
 	{#if caption}
 		<figcaption class="{baseClass}__caption">
 			{caption}
