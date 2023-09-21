@@ -31,7 +31,7 @@
 
 		isDoneEl.scrollIntoView({
 			behavior: `smooth`,
-			block: 'end',
+			block: 'center',
 			inline: 'nearest'
 		})
 	}
@@ -66,7 +66,7 @@
 
 			isDone = true
 			emit('success')
-			setTimeout(scrollToDoneText, 500)
+			setTimeout(scrollToDoneText, 100)
 		} catch (error) {
 			isDone = false
 			errors = [error as string]
