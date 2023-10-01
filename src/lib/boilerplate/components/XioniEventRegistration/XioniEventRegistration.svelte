@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
-	import * as date from '$lib/boilerplate/utils/format-date'
-	import classNames from 'classnames'
+	import * as date from '$lib/boilerplate/utils/formatDate'
+	import classnames from 'classnames'
+
+	import type { XioniCMS } from '$lib/boilerplate/xioni/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -11,8 +12,9 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let formId: number | string
-	export let event: XioniEvent | undefined = undefined
+	export let to: number | string
+	export let event: XioniCMS.Event
+	export let baseName = 'XioniEventRegistration'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -20,20 +22,22 @@
 
 	export const open = () => modal.open()
 	export const close = () => modal.close()
-
-	// CSS Classnames
-	const baseName = $$props['ex-class'] || 'XioniEventRegistration'
-	const className = classNames(baseName, $$props.class)
 </script>
 
-<Modal title="Anmeldung" bind:this={modal} class={baseName} on:open on:close>
+<Modal
+	bind:this={modal}
+	on:open
+	on:close
+	title="Anmeldung"
+	{...$$restProps}
+	class={classnames(baseName, $$props.class)}>
 	{#if event}
-		<header class="{className}__header">
-			<h3 class="{className}__title">{event.title}</h3>
+		<header class="{baseName}__header">
+			<h3 class="{baseName}__title">{event.title}</h3>
 			<time>{@html date.formatFromTo(event.starts, event.ends)}</time>
 		</header>
 
-		<Form id={formId} subject="Event Anmeldung ({event.id})" class="$mt-2" attach="csv">
+		<Form {to} subject="Event Anmeldung ({event.id})" attachBodyAsCSV class="$mt-2">
 			<input type="hidden" name="Event" value="{event.title} ({event.id})" />
 			<input type="hidden" name="Datum" value={date.format(event.starts, 'P')} />
 

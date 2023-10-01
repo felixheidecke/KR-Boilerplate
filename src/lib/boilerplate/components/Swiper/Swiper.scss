@@ -12,7 +12,9 @@
 	top: 0;
 	bottom: 0;
 	color: white;
-	transition: transform 0.33s, opacity 0.33s;
+	transition:
+		transform 0.33s,
+		opacity 0.33s;
 }
 
 :where(.Swiper__button--prev) {

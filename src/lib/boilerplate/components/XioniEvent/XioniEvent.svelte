@@ -1,14 +1,14 @@
 <script lang="ts">
 	import './XioniEvent.scss'
 
-	import { formatFromTo } from '$lib/boilerplate/utils/format-date'
+	import { createEventDispatcher } from 'svelte'
+	import { formatFromTo } from '$lib/boilerplate/utils/formatDate'
 	import { formatISO } from 'date-fns'
 	import classnames from 'classnames'
-	import { createEventDispatcher } from 'svelte'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -20,9 +20,14 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
+	export let baseName = 'XioniEvent'
+	export let event: XioniCMS.Event
+
+	// -----------------------------------------------------------------------------------------------
+
 	const {
+		teaser,
 		description,
-		details,
 		ends,
 		image,
 		pdf,
@@ -32,22 +37,13 @@
 		website,
 		ticketshop,
 		organizer
-	} = $$props.event as XioniEvent
-
-	const images = $$props.event.images || []
-
-	// -----------------------------------------------------------------------------------------------
+	} = event
 
 	let lightbox: Lightbox // ref
 
+	const images = $$props.event.images || []
 	const emit = createEventDispatcher()
-	const allowRegistration = flags ? flags.includes('Anmeldung') : false
-
-	// Classname
-	const baseName = $$props['ex-class'] || 'XioniEvent'
-	const className = classnames(baseName, $$props.class)
-
-	// Images
+	const allowRegistration = flags ? flags.includes('anmeldung') : false
 	const maxImages = 5
 	const imageRow = (function () {
 		if (images.length === maxImages) {
@@ -64,7 +60,11 @@
 	<Lightbox bind:this={lightbox} {images} />
 {/if}
 
-<div class={className} itemscope itemtype="https://schema.org/Event">
+<div
+	itemscope
+	itemtype="https://schema.org/Event"
+	{...$$restProps}
+	class={classnames(baseName, $$props.class)}>
 	<meta itemprop="startDate" content={formatISO(starts, { representation: 'date' })} />
 	<meta itemprop="endDate" content={formatISO(starts, { representation: 'date' })} />
 	<meta itemprop="organizer" content={organizer} />
@@ -82,6 +82,7 @@
 				<Grid gap>
 					{#each imageRow as { src, alt }, index}
 						<Grid size="1-5" class="$mt">
+							<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 							<img
 								class={baseName + '__piucture-row-image $pointer'}
 								{src}
@@ -92,6 +93,7 @@
 					{/each}
 					{#if images.length > maxImages}
 						<Grid size="1-5" class="$mt">
+							<!-- svelte-ignore a11y-no-static-element-interactions -->
 							<div
 								class={baseName + '__piucture-row-overflow-indicator $pointer'}
 								on:click={() => lightbox.open(4)}>
@@ -114,30 +116,30 @@
 		</date>
 	</h3>
 
-	{#if description}
-		<div itemprop="description" class={baseName + '__description'}>
-			{@html description}
-		</div>
+	{#if teaser}
+		<p class={baseName + '__teaser'}>
+			{@html teaser}
+		</p>
 	{/if}
 
-	{#if details}
-		<div class={baseName + '__content'}>
-			{@html details}
-		</div>
+	{#if description}
+		<p itemprop="description" class={baseName + '__description'}>
+			{@html description}
+		</p>
 	{/if}
 
 	<ButtonRow class={baseName + '__metadata'}>
 		{#if allowRegistration}
 			<Button
 				icon="fas fa-ticket-alt"
-				on:click={() => emit('click', 'registration')}
+				on:click={() => emit('registrationButtonClick')}
 				class={baseName + '__registration'}>Jetzt anmelden</Button>
 		{/if}
 
 		{#if ticketshop && !allowRegistration}
 			<Button
 				to={ticketshop.toString()}
-				on:click={() => emit('click', 'ticketshop')}
+				on:click={() => emit('ticketshopButtonClick')}
 				icon="fas fa-ticket-alt">Zum Ticketshop</Button>
 		{/if}
 

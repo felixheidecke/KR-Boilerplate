@@ -8,10 +8,10 @@
 	}
 
 	@include breakpoint('mobile') {
-		max-width: 32rem;
+		max-width: 512px;
 	}
 
 	@include breakpoint('tablet-up') {
-		max-width: 60rem;
+		max-width: 960px;
 	}
 }

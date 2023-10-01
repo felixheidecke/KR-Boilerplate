@@ -1,134 +1,133 @@
 <script lang="ts">
-	import './XioniShopProduct.css'
-	import classnames from 'classnames'
+	import './XioniShopProduct.scss'
+
 	import { createEventDispatcher } from 'svelte'
+	import { IS_MOBILE } from '$lib/boilerplate/utils/breakpoints'
+	import { page } from '$app/stores'
+	import classnames from 'classnames'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
+	import type { XioniShop } from '$lib/boilerplate/xioni/types'
 
-	import type { ShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
-
-	// --- Components --------------------------------------------------------------------------------
+	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Grid from '../Grid/Grid.svelte'
 	import Modal from '../Modal/Modal.svelte'
 	import Button from '../Button/Button.svelte'
 	import Link from '../Link/Link.svelte'
 
-	// --- Props -------------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
+	export let product: XioniShop.Product
+	export let baseName = 'XioniShopProduct'
+	export let basePath: string = $page.url.pathname + '../'
+
+	// -----------------------------------------------------------------------------------------------
+
+	const emit = createEventDispatcher()
 	const {
-		id,
 		name,
 		teaser,
-		category,
+		path,
 		description,
-		legalInfo,
+		legal,
 		pricePerUnit,
 		quantity,
 		price,
-		VAT,
-		image
-	} = $$props.product as ShopProduct
+		vat,
+		image,
+		code,
+		ean
+	} = product
 
-	// --- Data --------------------------------------------------------------------------------------
-
-	let modal: Modal // ref
-
-	const baseName = $$props['ex-class'] || 'XioniShopProduct'
-	const className = classnames(baseName, $$props.class)
-
-	// --- Methods -----------------------------------------------------------------------------------
-
-	const emit = createEventDispatcher()
+	let productImageModal: Modal
 
 	function addToCartHandler() {
-		emit('addToCart', id)
-		modal.open()
+		emit('addToCart', product.id)
+	}
+
+	function imageClickHandler() {
+		if ($IS_MOBILE) return
+
+		productImageModal.open()
 	}
 </script>
 
-{#if id}
-	<div class={className}>
-		{#if category}
-			<Link to="/shop/{category.slug}_c{category.id}">{category?.name}</Link>
-		{/if}
+{#if product.id}
+	<div class={classnames(baseName, $$props.class)}>
+		<ul class="{baseName}__breadcrubs">
+			{#each path || [] as { id, name, slug }}
+				<li class="{baseName}__breadcrubs-crub">
+					<Link to="{basePath}{slug}-c-{id}">{name}</Link>
+				</li>
+			{/each}
+		</ul>
 		<h2 class="{baseName}__name $mb-2 $mt-1/2">
 			{name}
 		</h2>
 
+		<ul class="$flex $gap">
+			{#if code}
+				<li class="$mb-2">Art.-Nr.: {code}</li>
+			{/if}
+			{#if ean}
+				<li>EAN: {ean}</li>
+			{/if}
+		</ul>
+
 		<Grid gap>
-			<Grid size="tablet-1-3">
+			<Grid size="tablet-2-5">
+				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 				<img
 					class="{baseName}__image $mb-2@mobile"
-					src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
-					alt={name} />
+					src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+					alt={name}
+					on:click={imageClickHandler} />
 			</Grid>
-			<Grid size="tablet-2-3">
-				<div class="$font-bold">
-					{@html teaser}
-				</div>
-				<div class="{baseName}__price-box">
-					<span class="{baseName}__price" data-price={price.value}>
-						{price.formatted}
-					</span>
-					<span class="{baseName}__tax $pl-1/2" data-vat={VAT.value}>
-						inkl. {VAT.formatted} MwSt.
-					</span>
-					<br />
-					{#if quantity.value > 0}
-						<span class="{baseName}__quantity">
-							{quantity.formatted}
-							{#if quantity.value !== 1} / {pricePerUnit.formatted}{/if}
+			<Grid size="tablet-3-5">
+				{#if teaser}
+					<p class="{baseName}__teaser">{@html teaser}</p>
+				{/if}
+				{#if price}
+					<div class="{baseName}__price-box">
+						<span class="{baseName}__price" data-price={price.value}>
+							{price.formatted}
 						</span>
-					{/if}
-				</div>
+						<span class="{baseName}__tax $pl-1/2" data-vat={vat.value}>
+							inkl. {vat.formatted} MwSt.
+						</span>
+						<br />
+						{#if quantity.value > 1 && pricePerUnit}
+							<span class="{baseName}__quantity $font-larger">
+								{quantity.formatted} / {pricePerUnit.formatted}
+							</span>
+						{/if}
+					</div>
 
-				<Button
-					on:click={addToCartHandler}
-					class="{baseName}__add-to-cart-button"
-					icon="fas fa-cart-arrow-down">
-					In den Warenkorb
-				</Button>
-
-				{#if description}
-					{@html description}
+					<Button
+						on:click={addToCartHandler}
+						class="{baseName}__add-to-cart-button"
+						icon="fas fa-cart-arrow-down">
+						In den Warenkorb
+					</Button>
 				{/if}
 
-				{#if legalInfo}
-					<div class="{baseName}__legal-info">
-						{@html legalInfo}
-					</div>
+				{#if description}
+					<p class="{baseName}__description">{@html description}</p>
+				{/if}
+
+				{#if legal}
+					<p class="{baseName}__legal-info">
+						{@html legal}
+					</p>
 				{/if}
 			</Grid>
 		</Grid>
 	</div>
 
-	<Modal bind:this={modal} title="Shop">
-		<p>
-			<strong>{name}</strong>
-			wurde dem Warenkorb hinzugefügt.
-		</p>
-		<p>Wie soll es weiter gehen?</p>
-		<div slot="footer">
-			<Button on:click={modal.close} class="button__continue-shopping" to="/shop"
-				>Weiter Einkaufen</Button>
-			<Button on:click={modal.close} class="button__to-checkout" to="/shop/checkout/address"
-				>Zur Kasse</Button>
-			<Button on:click={modal.close} class="button__to-cart" to="/shop/checkout/cart"
-				>Warenkorb ansehen</Button>
-		</div>
+	<Modal bind:this={productImageModal} title={name}>
+		<img
+			class="{baseName}__image-presentation"
+			src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+			alt={name} />
 	</Modal>
 {/if}
-
-<style global>
-	:global(.button__to-checkout) {
-		background-color: #333;
-		color: white;
-		float: right;
-	}
-
-	:global(.button__to-cart) {
-		float: right;
-		margin-right: 0.5rem;
-	}
-</style>

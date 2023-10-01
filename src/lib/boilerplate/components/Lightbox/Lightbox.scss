@@ -22,7 +22,9 @@
 	background-color: rgba(black, 0.666);
 	color: white;
 	opacity: 0.333;
-	transition: opacity 333ms, padding 500ms;
+	transition:
+		opacity 333ms,
+		padding 500ms;
 	padding: 1rem;
 }
 
@@ -56,12 +58,11 @@
 
 :where(.Lightbox img[data-lightbox]) {
 	cursor: pointer;
-	transition: opacity 0.5s;
+}
 
-	&:hover {
-		opacity: 0.25;
-		cursor: pointer;
-	}
+.Lightbox__modal {
+	max-width: 100%;
+	max-width: 1280px;
 }
 
 .Lightbox__modal .Modal__wrapper {

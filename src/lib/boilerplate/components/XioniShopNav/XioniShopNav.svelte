@@ -1,34 +1,50 @@
 <script lang="ts">
-	import './XioniShopNav.scss'
-	import type { ShopCategory } from '$lib/boilerplate/libraries/xioni-shop/categories.types'
-
-	import { goto } from '$app/navigation'
+	import './XioniShopNav.css'
+	import { page } from '$app/stores'
 	import classnames from 'classnames'
 
-	// --- Data --------------------------------------------------------------------------------------
+	import type { XioniShop } from '$lib/boilerplate/xioni/types'
 
-	export let category: ShopCategory
-	export let categories: ShopCategory[]
-	export let basePath = '/shop/'
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const baseName = $$props['ex-class'] || 'XioniShopNav'
-	const className = classnames(baseName, $$props.class)
+	export let activeGroup: XioniShop.Group | undefined
+	export let groups: XioniShop.Group[]
+	export let basePath: string = '/'
+	export let baseName = 'XioniShopNav'
 
-	let categorySelection: string
+	// -----------------------------------------------------------------------------------------------
 
-	function gotoCategory() {
-		goto(basePath + categorySelection)
+	function makeLink(slug: string, id: number | string) {
+		return basePath + `${slug}-c-${id}/`
 	}
 </script>
 
-<nav class={className}>
-	Kategorie: <select
-		bind:value={categorySelection}
-		on:change={gotoCategory}
-		class="{baseName}__category-select">
-		<option value="">Startseite</option>
-		{#each categories as { name, slug, id }}
-			<option selected={category.id == id} value={slug + '_c' + id}>{name}</option>
+<nav class={classnames(baseName, $$props.class)}>
+	<ul class="{baseName}__ul $_flex $_flex-wrap $_gap-1/2 $_flex-column@desktop">
+		{#each groups as { id, slug, name, subgroups }}
+			<li class="{baseName}__li">
+				<a
+					href={makeLink(slug, id)}
+					class={classnames(baseName + '__a', id !== activeGroup?.id || baseName + '__a--active')}>
+					{name}
+				</a>
+				{#if subgroups.length}
+					<ul class="{baseName}__ul-ul $ml-1/2 $font-small">
+						{#each subgroups as { id, slug, name }}
+							<li class="{baseName}__li-li">
+								<a
+									href={makeLink(slug, id)}
+									class={classnames(
+										baseName + '__a-a',
+										id !== activeGroup?.id || baseName + '__a-a--active'
+									)}>
+									{name}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				{/if}
+			</li>
 		{/each}
-	</select>
+	</ul>
 </nav>

@@ -1,162 +1,169 @@
-:where(.NavSlide) {
-	position: fixed;
-	top: 0;
-	right: 0;
-	width: 100vw;
-	min-height: 100vh;
-	z-index: 1;
-	transition: background-color 0.5s;
-}
+@import '$variables';
 
-:where(.NavSlide:not(.NavSlide--active)) {
-	background-color: transparent;
-	user-select: none;
-	pointer-events: none;
-}
+$Nav-breakpoint: 1024px !default;
 
-:where(.NavSlide--active) {
-	background-color: rgba(black, 0.666);
-}
+@media (width < $Nav-breakpoint) {
+	:where(.Nav) {
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: 100vw;
+		min-height: 100vh;
+		z-index: 1;
+		transition: background-color 0.5s;
+	}
 
-:where(.NavSlide__ul) {
-	align-items: center;
-	display: inline-flex;
-	flex-direction: column;
-	gap: 1rem;
-	justify-content: center;
-	max-width: 30rem;
-	min-height: 100vh;
-	margin: 0;
-	padding: 2rem;
-	position: absolute;
-	right: 0;
-	transform: translateX(100%);
-	transition: transform 0.5s;
-	width: 100%;
-	background-color: #777;
-}
-
-:where(.NavSlide--active .NavSlide__ul) {
-	transform: translateX(0);
-}
-
-:where(.NavSlide__li) {
-	display: inline-flex;
-	justify-content: center;
-	width: fit-content;
-	flex-direction: column;
-	max-width: 28rem;
-	color: white;
-}
-
-:where(.NavSlide__a),
-:where(.NavSlide__span) {
-	font-size: 1.25rem;
-	font-weight: bold;
-	padding: 0.5rem 1rem;
-	text-align: center;
-	text-decoration: none;
-	white-space: nowrap;
-}
-
-:where(.NavSlide__ul-ul) {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	margin: 0;
-	padding: 0;
-}
-
-:where(.NavSlide__li-li) {
-	display: flex;
-	justify-content: center;
-}
-
-:where(.NavSlide__a-a) {
-	font-size: 1rem;
-	padding: 0.5rem;
-	text-decoration: none;
-}
-
-// --- NAV BAR -------------------------------------------------------------------------------------
-
-:where(.NavBar) {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	position: relative;
-	z-index: 1;
-}
-
-:where(.NavBar--sticky) {
-	position: sticky;
-	top: 0;
-	transition: background-color 250ms;
-}
-
-:where(.NavBar--offset) {
-	background-color: rgb(200, 200, 200);
-}
-
-:where(.NavBar__ul) {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	position: relative;
-	display: flex;
-	justify-content: center;
-	height: 2.5rem;
-}
-
-:where(.NavBar__li) {
-	position: relative;
-	display: inherit;
-	z-index: 0;
-}
-
-:where(.NavBar__a),
-:where(.NavBar__span) {
-	font-weight: bold;
-	padding: 0.5rem 1rem;
-	white-space: nowrap;
-	text-decoration: none;
-	transition: background-color 0.25s;
-	user-select: none;
-}
-
-:where(.NavBar__span) {
-	cursor: default;
-}
-
-:where(.NavBar__ul-ul) {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	left: 50%;
-	position: absolute;
-	top: 2.5rem;
-	transform: translate(-50%, 0);
-	z-index: -1;
-	transition: transform 250ms, opacity 333ms;
-	transition-delay: 50ms;
-	background-color: rgb(225, 225, 225);
-
-	&:not(.NavBar__ul-ul--visible) {
-		transform: translate(-50%, -0.25rem);
+	:where(.Nav:not(.Nav--active)) {
+		background-color: transparent;
+		user-select: none;
 		pointer-events: none;
-		opacity: 0;
+	}
+
+	:where(.Nav--active) {
+		background-color: rgba(black, 0.666);
+	}
+
+	:where(.Nav__ul) {
+		align-items: center;
+		display: inline-flex;
+		flex-direction: column;
+		gap: 1rem;
+		justify-content: center;
+		max-width: 30rem;
+		min-height: 100vh;
+		margin: 0;
+		padding: 2rem;
+		position: absolute;
+		right: 0;
+		transition: transform 0.5s;
+		width: 100%;
+		background-color: #777;
+	}
+
+	:where(.Nav:not(.Nav--active) .Nav__ul) {
+		transform: translateX(100%);
+	}
+
+	:where(.Nav__li) {
+		display: inline-flex;
+		justify-content: center;
+		width: fit-content;
+		flex-direction: column;
+		max-width: 28rem;
+		color: white;
+	}
+
+	:where(.Nav__a),
+	:where(.Nav__span) {
+		font-size: 1.25rem;
+		font-weight: bold;
+		padding: 0.5rem 1rem;
+		text-align: center;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	:where(.Nav__ul-ul) {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: 0;
+		padding: 0;
+	}
+
+	:where(.Nav__li-li) {
+		display: flex;
+		justify-content: center;
+	}
+
+	:where(.Nav__a-a) {
+		font-size: 1rem;
+		padding: 0.5rem;
+		text-decoration: none;
 	}
 }
 
-:where(.NavBar__li-li) {
-	display: flex;
-}
+@media (width >= $Nav-breakpoint) {
+	:where(.Nav) {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		position: relative;
+		z-index: 1;
+	}
 
-:where(.NavBar__a-a) {
-	font-size: 1rem;
-	padding: 0.5rem 2rem;
-	white-space: nowrap;
-	width: 100%;
-	text-decoration: none;
+	:where(.Nav--sticky) {
+		position: sticky;
+		top: 0;
+		transition: background-color 250ms;
+	}
+
+	:where(.Nav--offset) {
+		background-color: rgb(200, 200, 200);
+	}
+
+	:where(.Nav__ul) {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		height: 2.5rem;
+	}
+
+	:where(.Nav__li) {
+		position: relative;
+		display: inherit;
+		z-index: 0;
+	}
+
+	:where(.Nav__a),
+	:where(.Nav__span) {
+		font-weight: bold;
+		padding: 0.5rem 1rem;
+		white-space: nowrap;
+		text-decoration: none;
+		transition: background-color 0.25s;
+		user-select: none;
+	}
+
+	:where(.Nav__span) {
+		cursor: default;
+	}
+
+	:where(.Nav__ul-ul) {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		left: 50%;
+		position: absolute;
+		top: 2.5rem;
+		transform: translate(-50%, 0);
+		z-index: -1;
+		transition:
+			transform 250ms,
+			opacity 333ms;
+		transition-delay: 50ms;
+		background-color: rgb(225, 225, 225);
+
+		&:not(.Nav__ul-ul--visible) {
+			transform: translate(-50%, -0.25rem);
+			pointer-events: none;
+			opacity: 0;
+		}
+	}
+
+	:where(.Nav__li-li) {
+		display: flex;
+	}
+
+	:where(.Nav__a-a) {
+		font-size: 1rem;
+		padding: 0.5rem 2rem;
+		white-space: nowrap;
+		width: 100%;
+		text-decoration: none;
+	}
 }

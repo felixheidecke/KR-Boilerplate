@@ -10,12 +10,13 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let to: string | undefined = undefined
-	export let icon = ''
-	export let rel: 'follow' | 'nofollow' = 'follow'
+	export let baseName = 'Button'
 	export let disabled = false
-	export let target: '_blank' | undefined = undefined
+	export let icon = ''
 	export let isLoading = false
+	export let rel: 'follow' | 'nofollow' = 'follow'
+	export let target: '_blank' | undefined = undefined
+	export let to: string | undefined = undefined
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -24,7 +25,6 @@
 		target = '_blank'
 	}
 
-	const baseName = $$props['ex-class'] || 'Button'
 	const className = classnames(
 		baseName,
 		disabled ? baseName + '--disabled' : null,
@@ -34,7 +34,7 @@
 </script>
 
 {#if !to}
-	<button class={classnames(className, $$props.class)} {disabled} on:click>
+	<button on:click {disabled} {...$$restProps} class={classnames(className, $$props.class)}>
 		{#if icon}
 			<Icon ex-class={baseName + '__icon'} name={icon} />
 		{/if}
@@ -43,7 +43,7 @@
 		</span>
 	</button>
 {:else}
-	<a href={to} {target} class={classnames(className, $$props.class)} on:click>
+	<a on:click href={to} {target} {...$$restProps} class={classnames(className, $$props.class)}>
 		{#if icon}
 			<Icon ex-class={baseName + '__icon'} name={icon} />
 		{/if}

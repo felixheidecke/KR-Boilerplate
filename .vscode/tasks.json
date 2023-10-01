@@ -12,18 +12,18 @@
 		{
 			"type": "npm",
 			"script": "build",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"group": "build",
 			"problemMatcher": [],
 			"label": "Build",
 			"detail": "Einmaliges kompilieren"
 		},
 		{
-			"type": "npm",
-			"script": "install",
+			"command": "npm",
 			"problemMatcher": [],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"args": ["install", "--legacy-peer-deps"],
 			"label": "Install",
 			"detail": "Boilerplate Daten installieren"
 		}

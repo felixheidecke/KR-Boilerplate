@@ -1,0 +1,15 @@
+:where(.XioniShopNav__ul) {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 0.5rem;
+}
+
+:where(.XioniShopNav__a-a--active),
+:where(.XioniShopNav__a--active) {
+	font-weight: bold;
+}
+
+:where(.XioniShopNav__a) {
+	white-space: nowrap;
+}

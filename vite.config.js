@@ -1,7 +1,8 @@
 import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vite';
 import autoImport from 'sveltekit-autoimport'
 
-const config = {
+export default defineConfig({
 	plugins: [
 		autoImport({
 			components: [
@@ -21,6 +22,4 @@ const config = {
 	server: {
 		port: 3000
 	}
-}
-
-export default config
+});

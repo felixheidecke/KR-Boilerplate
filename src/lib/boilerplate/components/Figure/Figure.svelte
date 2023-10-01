@@ -11,14 +11,14 @@
 	export let caption = ''
 	export let loading: HTMLImageElement['loading'] | undefined = undefined
 	export let placeholder = ''
+	export let baseClass = 'Figure'
 
 	// -----------------------------------------------------------------------------------------------
 
 	const style = placeholder ? `background-image:url(${placeholder})` : undefined
-	const baseClass = $$props['ex-class'] || 'Figure'
 </script>
 
-<figure class={classNames(baseClass, $$props.class)}>
+<figure {...$$restProps} class={classNames(baseClass, $$props.class)}>
 	<img
 		class="{baseClass}__image"
 		{src}

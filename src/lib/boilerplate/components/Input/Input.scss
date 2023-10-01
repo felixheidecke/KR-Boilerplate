@@ -33,6 +33,11 @@
 	}
 }
 
+:where(.Input--read-only .Input__input) {
+	background: #eee;
+	color: gray;
+}
+
 :where(.Input--has-error .Input__label) {
 	background: #ffeded;
 	border-color: darken(red, 10);

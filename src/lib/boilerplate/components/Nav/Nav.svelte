@@ -1,18 +1,18 @@
 <script lang="ts">
 	import './Nav.scss'
-	import classnames from 'classnames'
 
-	import { browser } from '$app/environment'
+	import classnames from 'classnames'
 	import { page } from '$app/stores'
-	import { onMount } from 'svelte'
 	import { throttle } from 'lodash-es'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { Route } from '$lib/boilerplate/libraries/make-routes/types'
-	enum NavType {
-		SLIDE = 'slide',
-		BAR = 'bar'
+	type Route = {
+		path?: string
+		name: string
+		class?: string
+		routes?: Route[]
+		target?: '_blank'
 	}
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -22,42 +22,23 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let routes: Route[]
-	export let variant: NavType | undefined = undefined
-	export let breakpoint = '1024px'
 	export let sticky = false
+	export let baseName = 'Nav'
 
 	// -----------------------------------------------------------------------------------------------
 
 	let nav: HTMLElement
 	let active = false
-	let hidden = true
-	let type = variant
 	let hoverState: number = -1
 
-	$: baseName =
-		(() => {
-			if (type === NavType.SLIDE) return 'NavSlide'
-			if (type === NavType.BAR) return 'NavBar'
-		})() || 'Nav'
-
 	$: className = classnames(
-		$$props['ex-class'] || baseName,
+		baseName,
 		$$props.class,
 		!active || baseName + '--active',
 		!sticky || baseName + '--sticky'
 	)
 
-	function hide(): void {
-		hidden = true
-	}
-
-	function show(): void {
-		setTimeout(() => (hidden = false))
-	}
-
 	function handleOffset() {
-		if (!sticky || type === NavType.SLIDE) return
-
 		const className = baseName + '--offset'
 		const isOffset = nav.getBoundingClientRect().top === 0
 
@@ -79,30 +60,15 @@
 
 		return $page.url.pathname === target
 	}
-
-	onMount(() => {
-		if (!breakpoint || !browser || variant) return
-
-		const media = window.matchMedia(`(max-width: ${breakpoint})`)
-		type = media.matches ? NavType.SLIDE : NavType.BAR
-
-		media.onchange = ({ matches }) => {
-			hide()
-			type = matches ? NavType.SLIDE : NavType.BAR
-			show()
-		}
-	})
-
-	show()
 </script>
 
 <svelte:window on:scroll|passive={() => throttle(handleOffset, 250)} />
 
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <nav
 	bind:this={nav}
 	class={className}
 	aria-label="main navigation"
-	class:$hidden={hidden}
 	on:click={() => (active = false)}>
 	<ul class={baseName + '__ul'}>
 		{#each routes as route, i}
@@ -118,7 +84,8 @@
 						isActivePath(route.path) ? baseName + '__a--active' : null,
 						isCurrentPath(route.path) ? baseName + '__a--current' : null
 					)}
-					href={route.path}>
+					href={route.path}
+					target={route.target}>
 					{route.name}
 				</svelte:element>
 
@@ -137,7 +104,8 @@
 										isActivePath(subRoute.path) ? baseName + '__a-a--active' : undefined,
 										subRoute.class
 									)}
-									href={subRoute.path}>
+									href={subRoute.path}
+									target={subRoute.target}>
 									{subRoute.name}
 								</a>
 							</li>
@@ -148,6 +116,5 @@
 		{/each}
 	</ul>
 </nav>
-{#if type === NavType.SLIDE}
-	<Burger {active} on:click={() => (active = !active)} />
-{/if}
+
+<Burger {active} on:click={() => (active = !active)} />

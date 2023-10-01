@@ -2,9 +2,10 @@
 	import './XioniArticle.scss'
 
 	import { format } from 'date-fns'
-	import cn from 'classnames'
-	import de from 'date-fns/locale/de/index.js'
-	import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/articles.types'
+	import { de } from 'date-fns/locale'
+	import classnames from 'classnames'
+
+	import type { XioniCMS } from '$lib/boilerplate/xioni/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 	import Icon from '../Icon/Icon.svelte'
@@ -12,40 +13,41 @@
 	import ButtonRow from '../ButtonRow/ButtonRow.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
-	export let article: XioniArticle
-	export let id: string | undefined = undefined
+
+	export let article: XioniCMS.Article
+	export let baseName = 'XioniArticle'
 
 	// -----------------------------------------------------------------------------------------------
-	const { author, content, date, image, pdf, text, title, website } = article
+	const { author, date, content, image, pdf, teaser, title, website } = article
 	const hasMetadata = author || date || website
 </script>
 
-<article class={cn('XioniArticle', $$props.class)} {id}>
+<article {...$$restProps} class={classnames(baseName, $$props.class)}>
 	{#if image}
-		<figure class="XioniArticle__wrapper">
-			<img class="XioniArticle__image" src={image.src} alt={image.alt} />
+		<figure class="{baseName}__wrapper">
+			<img class="{baseName}__image" src={image.src} alt={image.alt} />
 			{#if image.alt}
-				<figcaption class="XioniArticle__image-caption">
+				<figcaption class="{baseName}__image-caption">
 					{image.alt}
 				</figcaption>
 			{/if}
 		</figure>
 	{/if}
 
-	<h2 class="XioniArticle__title">
+	<h1 class="{baseName}__title">
 		{title}
-	</h2>
+	</h1>
 
 	{#if hasMetadata}
-		<ul class="XioniArticle__metadata">
+		<ul class="{baseName}__metadata">
 			{#if author}
-				<li class="XioniArticle__author">
+				<li class="{baseName}__author">
 					<Icon name="far fa-user" class="$mr-1/4" />
 					<span>Von {author}</span>
 				</li>
 			{/if}
 			{#if date}
-				<li class="XioniArticle__date">
+				<li class="{baseName}__date">
 					<Icon name="far fa-calendar-alt" class="$mr-1/4" />
 					<time>{format(date, 'PPP', { locale: de })}</time>
 				</li>
@@ -53,36 +55,46 @@
 		</ul>
 	{/if}
 
-	<div class="XioniArticle__teaser">
-		{@html text}
-	</div>
+	<p class="{baseName}__teaser">
+		{@html teaser}
+	</p>
 
-	{#if content}
-		<div class="XioniArticle__content">
-			{#each content as { image, text }}
-				{#if image}
-					<figure
-						class="XioniArticle__content-image"
-						class:XioniArticle__content-image--left={image.align === 'left'}
-						class:XioniArticle__content-image--right={image.align === 'right'}>
-						<img src={image.src} alt={image.alt} />
-						{#if image.alt}
-							<figcaption class="XioniArticle__content-image-caption">
-								{image.alt}
-							</figcaption>
-						{/if}
-					</figure>
+	{#if content?.length}
+		<div class="{baseName}__content">
+			{#each content as { image, title, text }}
+				{#if title}
+					<h3 class="{baseName}__content-title">
+						{title}
+					</h3>
 				{/if}
-				{#if text}
-					{@html text}
+				{#if text || image}
+					<p class="{baseName}__content-text">
+						{#if image}
+							<figure
+								class={classnames(
+									`${baseName}__content-image `,
+									`${baseName}__content-image--${image.align}`
+								)}>
+								<img src={image.src} alt={image.alt} />
+								{#if image.alt}
+									<figcaption class="{baseName}__content-image-caption">
+										{image.alt}
+									</figcaption>
+								{/if}
+							</figure>
+						{/if}
+						{#if text}
+							{@html text}
+						{/if}
+					</p>
 				{/if}
 			{/each}
 		</div>
 	{/if}
 
-	<ButtonRow class="XioniArticle__button-row">
+	<ButtonRow class="{baseName}__button-row">
 		{#if pdf}
-			<Button to={pdf.src} class={'XioniArticle__pdf'} icon="fas fa-file-pdf">
+			<Button to={pdf.src} class="{baseName}__pdf" icon="fas fa-file-pdf">
 				{pdf.title}
 			</Button>
 		{/if}

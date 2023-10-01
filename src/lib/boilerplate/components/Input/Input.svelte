@@ -24,7 +24,12 @@
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
 	const baseName = $$props['ex-class'] || 'Input'
-	$: className = classnames(baseName, $$props.class, !!error ? baseName + '--has-error' : null)
+	$: className = classnames(
+		baseName,
+		$$props.class,
+		!!error ? baseName + '--has-error' : null,
+		!!readonly ? baseName + '--read-only' : null
+	)
 	const id = uniqueId(name + '-')
 	const inputProps = {
 		max,

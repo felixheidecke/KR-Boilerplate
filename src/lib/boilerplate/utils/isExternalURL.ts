@@ -1,4 +1,4 @@
-export default function isExternalURL(url: string | URL) {
+export default function (url: string | URL) {
 	const pathname = typeof url !== 'string' ? url.pathname : url.trim()
 
 	return (

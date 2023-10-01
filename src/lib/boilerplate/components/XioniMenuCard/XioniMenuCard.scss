@@ -5,17 +5,22 @@
 	padding: 0;
 }
 
-:where(.XioniMenuCard__category + .XioniMenuCard__category) {
+:where(.XioniMenuCard__group + .XioniMenuCard__group) {
 	margin-top: 2rem;
 }
 
-:where(.XioniMenuCard__category-title) {
+:where(.XioniMenuCard__group-title) {
 	text-align: center;
 }
 
 :where(.XioniMenuCard__dish) {
 	display: inline-block;
 	width: 100%;
+	border-bottom: 1px solid rgba($c-gray, 0.25);
+
+	&:last-of-type {
+		border: none;
+	}
 }
 
 :where(.XioniMenuCard__dish + .XioniMenuCard__dish) {
@@ -38,4 +43,6 @@
 	float: left;
 	clear: both;
 	width: 100%;
+	font-style: italic;
+	color: $c-dark;
 }

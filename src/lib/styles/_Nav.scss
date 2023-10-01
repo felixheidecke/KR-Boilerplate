@@ -1,0 +1,9 @@
+.Nav {
+	@media (width < $Nav-breakpoint) {
+		// Mobile navigation styles
+	}
+
+	@media (width >= $Nav-breakpoint) {
+		// Desktop navigation styles
+	}
+}

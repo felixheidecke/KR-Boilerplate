@@ -1,6 +1,5 @@
-@import '$lib/boilerplate/styles/variables.scss';
-
 .Grid {
+	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
@@ -87,10 +86,10 @@
 }
 
 $gridquery: (
-	'mobile': #{map-get($mediaquery, 'mobile')},
-	'tablet': #{map-get($mediaquery, 'tablet-up')},
-	'desktop': #{map-get($mediaquery, 'desktop-up')},
-	'widescreen': #{map-get($mediaquery, 'widescreen')}
+	'mobile': '(max-width: 640px)',
+	'tablet': '(min-width: 641px)',
+	'desktop': '(min-width: 1025px)',
+	'widescreen': '(min-width: 1441px)'
 );
 
 .Grid__item {

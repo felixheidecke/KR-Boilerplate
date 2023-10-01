@@ -1,53 +1,50 @@
 <script lang="ts">
-	import './modal.scss'
+	import './Modal.scss'
+
 	import classnames from 'classnames'
-	import { createEventDispatcher } from 'svelte'
-	import { fade } from 'svelte/transition'
-	import Icon from '../Icon/Icon.svelte'
+	import { createEventDispatcher, onMount } from 'svelte'
 
-	const emit = createEventDispatcher()
-
-	// --- Data -------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let title: string | null = null
-	export let isOpen = false
+	export let isOpen: boolean = false
 
-	$: if (isOpen) emit('open')
-	else emit('close')
+	// -----------------------------------------------------------------------------------------------
 
-	// --- Methods ----------------------
+	const emit = createEventDispatcher()
+	const baseName = $$props['ex-class'] || 'Modal'
+	let modal: HTMLDialogElement
 
-	export const close = () => (isOpen = false)
-	export const open = () => (isOpen = true)
+	export function close() {
+		modal.close()
+		emit('close')
+	}
 
-	const onKeyDown = ({ key }: KeyboardEvent) => {
+	export function open() {
+		modal.showModal()
+		emit('open')
+	}
+
+	function onKeyDown({ key }: KeyboardEvent) {
 		if (key === 'Escape') close()
 	}
 
-	// --- CSS Class --------------------
-
-	const baseName = $$props['ex-class'] || 'Modal'
-
-	$: className = classnames(baseName, $$props.class)
+	onMount(() => {
+		if (isOpen) open()
+	})
 </script>
 
-{#if isOpen}
-	<div class={className} transition:fade={{ duration: 333 }} on:click|self={close}>
-		<div class="{baseName}__wrapper">
-			<button class="{baseName}__close-button" on:click={close}>
-				<Icon name="fas fa-times" />
-			</button>
-			{#if title}
-				<header class="{baseName}__header">{title}</header>
-			{/if}
-			<main class="{baseName}__body">
-				<slot />
-			</main>
-			{#if $$slots.footer}
-				<footer class="{baseName}__footer"><slot name="footer" /></footer>
-			{/if}
-		</div>
-	</div>
-{/if}
+<dialog bind:this={modal} class={classnames(baseName, $$props.class)}>
+	<button class="{baseName}__close-button" on:click={close}>Schließen</button>
+	{#if title}
+		<header class="{baseName}__header">{title}</header>
+	{/if}
+	<main class="{baseName}__body">
+		<slot />
+	</main>
+	{#if $$slots.footer}
+		<footer class="{baseName}__footer"><slot name="footer" /></footer>
+	{/if}
+</dialog>
 
 <svelte:window on:keydown={onKeyDown} />

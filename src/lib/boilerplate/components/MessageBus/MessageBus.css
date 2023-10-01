@@ -1,0 +1,16 @@
+:where(.MessageBus) {
+	position: fixed;
+	top: 1rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 100;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 100%;
+	max-width: 24rem;
+}
+
+:where(.MessageBus--message) {
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.33);
+}

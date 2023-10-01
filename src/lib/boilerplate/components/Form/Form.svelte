@@ -1,32 +1,32 @@
 <script lang="ts">
-	import { FetchMethods, FetchResponseStatus } from '$lib/boilerplate/libraries/fetch-json/types'
 	import { onMount, createEventDispatcher } from 'svelte'
-	import { XIONI_API_URL } from '$lib/boilerplate/constants'
+	import { useFormMail } from '$lib/boilerplate/xioni/formmail/FormMail'
 	import classnames from 'classnames'
-	import FetchJson from '$lib/boilerplate/libraries/fetch-json'
-	import Message from '../Message/Message.svelte'
 
-	const emit = createEventDispatcher()
-	const fetchJson = FetchJson()
+	// --- [ Components ] ----------------------------------------------------------------------------
+
+	import Message from '../Message/Message.svelte'
 
 	// --- Props -------------------------------------------------------------------------------------
 
 	export let subject = 'Kontakformular'
-	export let id: number | string = 0
-	export let attach: string | false = false
+	export let to: number | string = 4
+	export let attachBodyAsCSV: boolean = false
+	export let baseName = 'Form'
 
-	// --- Data --------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
 
-	let form: HTMLFormElement
-	let required: string[] = []
-	let errors: string[] = []
-	let isLoading = false
-	let isDone = false
+	const emit = createEventDispatcher()
+	const formMail = useFormMail()
+
+	let formEl: HTMLFormElement
+	let formErrors: string[] = []
+	let formFieldsRequired: string[] = []
+	let isFormDone = false
+	let isFormLoading = false
 	let isDoneEl: HTMLElement
 
-	// --- Methods -----------------------------------------------------------------------------------
-
-	const scrollToDoneText = () => {
+	function scrollToDoneText() {
 		if (!isDoneEl || !$$slots.done) return
 
 		isDoneEl.scrollIntoView({
@@ -36,67 +36,48 @@
 		})
 	}
 
-	const getFormData = () => {
-		const formData = new FormData(form)
+	function getFormData() {
+		const formData = new FormData(formEl)
 		return Object.fromEntries(formData)
 	}
 
-	export const submit = async () => {
-		if (isDone) return
+	export function submit() {
+		if (isFormDone) return
 
-		// Reset status
-		isLoading = true
-		errors = []
+		isFormLoading = true
+		formErrors = []
 
-		try {
-			const { data, status } = await fetchJson([XIONI_API_URL, 'form'], {
-				method: FetchMethods.POST,
-				data: getFormData(),
-				params: attach === 'csv' ? { attach: 'csv' } : undefined
+		formMail
+			.send(to, subject, formFieldsRequired, getFormData(), { attachBodyAsCSV })
+			.then(() => {
+				isFormDone = true
+
+				scrollToDoneText()
+				emit('success')
 			})
+			.catch(error => {
+				formErrors = error.details.body
 
-			if (status !== FetchResponseStatus.SUCCESS) throw data
-
-			if (data && 'error' in data && 'message' in data) {
-				errors = (data.message as string).split(',')
-				isDone = false
-				emit('error', data.error)
-				return
-			}
-
-			isDone = true
-			emit('success')
-			setTimeout(scrollToDoneText, 100)
-		} catch (error) {
-			isDone = false
-			errors = [error as string]
-			emit('error', error)
-		} finally {
-			isLoading = false
-		}
+				emit('error', error.details)
+			})
+			.finally(() => {
+				isFormLoading = false
+			})
 	}
 
-	// collect required entries
 	onMount(() => {
-		form.querySelectorAll('[required]').forEach(element => {
-			required = [...required, element.getAttribute('name') || '']
+		// collect required entries
+		formEl.querySelectorAll('[required]').forEach(element => {
+			formFieldsRequired = [...formFieldsRequired, element.getAttribute('name') || '']
 		})
 	})
-
-	// --- CSS Class --------------------
-
-	const baseName = $$props['ex-class'] || 'Form'
-
-	$: className = classnames(baseName, $$props.class)
 </script>
 
-<form class={className} bind:this={form} on:submit|preventDefault={submit}>
-	<input type="hidden" name="subject" value={subject} />
-	<input type="hidden" name="id" value={id} />
-	<input type="hidden" name="required" value={required.join(',')} />
-	<input type="text" name="honig" style="position:absolute;left:-9999px;" />
-
-	{#if isDone}
+<form
+	class={classnames(baseName, $$props.class)}
+	bind:this={formEl}
+	on:submit|preventDefault={submit}>
+	{#if isFormDone}
 		<div bind:this={isDoneEl} class={baseName + '__done'}>
 			<slot name="done" />
 		</div>
@@ -104,10 +85,10 @@
 		<slot />
 	{/if}
 
-	{#if errors.length}
+	{#if formErrors.length}
 		<Message class="{baseName}__errors $mt" type="error" title="Fehler aufgetreten">
 			<ul>
-				{#each errors as message}
+				{#each formErrors as message}
 					<li>{message}</li>
 				{/each}
 			</ul>

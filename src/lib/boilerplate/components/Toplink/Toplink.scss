@@ -2,17 +2,20 @@
 	position: fixed;
 	right: 0.5rem;
 	bottom: 0.5rem;
-	height: 5rem;
-	width: 5rem;
+	height: 4rem;
+	width: 4rem;
 	cursor: pointer;
-	opacity: 0.5;
-	transition: opacity 0.5s, transform 0.5s;
+	opacity: 0.75;
 	border: 0 none;
 	transform: translateY(120%);
 	background-color: gainsboro;
 	display: flex;
 	padding: 1rem;
 	align-items: center;
+	transition: {
+		opacity: 0.5s;
+		transform: 0.5s;
+	}
 
 	&:hover {
 		opacity: 1;
