@@ -5,7 +5,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { ShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
+	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
 
 	// --- Components --------------------------------------------------------------------------------
 
@@ -26,9 +26,9 @@
 		pricePerUnit,
 		quantity,
 		price,
-		VAT,
+		vat,
 		image
-	} = $$props.product as ShopProduct
+	} = $$props.product as XioniShop.Product
 
 	// --- Data --------------------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@
 {#if id}
 	<div class={className}>
 		{#if category}
-			<Link to="/shop/{category.slug}_c{category.id}">{category?.name}</Link>
+			<Link to="/shop/{category.name}_c{category.id}">{category?.name}</Link>
 		{/if}
 		<h2 class="{baseName}__name $mb-2 $mt-1/2">
 			{name}
@@ -71,14 +71,15 @@
 					<span class="{baseName}__price" data-price={price.value}>
 						{price.formatted}
 					</span>
-					<span class="{baseName}__tax $pl-1/2" data-vat={VAT.value}>
-						inkl. {VAT.formatted} MwSt.
+					<span class="{baseName}__tax $pl-1/2" data-vat={vat.value}>
+						inkl. {vat.formatted} MwSt.
 					</span>
 					<br />
 					{#if quantity.value > 0}
 						<span class="{baseName}__quantity">
 							{quantity.formatted}
-							{#if quantity.value !== 1} / {pricePerUnit.formatted}{/if}
+							{#if quantity.value !== 1}
+								/ {pricePerUnit.formatted}{/if}
 						</span>
 					{/if}
 				</div>
@@ -114,7 +115,7 @@
 				>Weiter Einkaufen</Button>
 			<Button on:click={modal.close} class="button__to-checkout" to="/shop/checkout/address"
 				>Zur Kasse</Button>
-			<Button on:click={modal.close} class="button__to-cart" to="/shop/checkout/cart"
+			<Button on:click={modal.close} class="button__to-cart" to="/shop/cart"
 				>Warenkorb ansehen</Button>
 		</div>
 	</Modal>

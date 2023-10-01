@@ -20,9 +20,9 @@
 </header>
 
 <main>
-	<PageTransition>
-		<slot />
-	</PageTransition>
+	<!-- <PageTransition> -->
+	<slot />
+	<!-- </PageTransition> -->
 </main>
 <Toplink />
 

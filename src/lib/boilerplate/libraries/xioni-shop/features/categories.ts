@@ -1,9 +1,9 @@
-import XioniFetch from '../xioni-fetch'
-import type { XioniResponse } from '../xioni/types'
-import type { ShopCategory } from './categories.types'
-import { FetchResponseStatus } from '../fetch-json/types'
+import { FetchResponseStatus } from '../../fetch-json/types'
+import type { XioniShop } from '../types'
+import type { XioniResponse } from '../../xioni/types'
+import XioniFetch from '../../xioni-fetch'
 
-export default function MakeShopCategories(module: number, fetchFn: typeof fetch = fetch) {
+export function CategoriesFactory(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
 	/**
 	 * Get all Categories in the store
@@ -11,7 +11,7 @@ export default function MakeShopCategories(module: number, fetchFn: typeof fetch
 	 * @returns List of Categories
 	 */
 
-	async function getCategories(): Promise<XioniResponse<ShopCategory[]>> {
+	async function getCategories(): Promise<XioniResponse<XioniShop.Category[]>> {
 		const { status, data } = await xioniFetch(['shop', module, 'categories'])
 
 		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
@@ -24,7 +24,7 @@ export default function MakeShopCategories(module: number, fetchFn: typeof fetch
 	 * @returns A Category
 	 */
 
-	async function getCategory(id: number): Promise<XioniResponse<ShopCategory>> {
+	async function getCategory(id: number): Promise<XioniResponse<XioniShop.Category>> {
 		const { status, data } = await xioniFetch(['shop', module, 'categories', id])
 
 		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]

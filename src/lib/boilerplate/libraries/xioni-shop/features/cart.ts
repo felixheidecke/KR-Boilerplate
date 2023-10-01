@@ -1,9 +1,10 @@
-import XioniFetch from '../xioni-fetch'
-import type { XioniResponse } from '../xioni/types'
-import type { ShopCart } from './cart.types'
-import { FetchMethods, FetchResponseStatus } from '../fetch-json/types'
+import XioniFetch from '../../xioni-fetch'
+import type { XioniResponse } from '../../xioni/types'
+import { FetchMethods, FetchResponseStatus } from '../../fetch-json/types'
+import type { XioniShop } from '../types'
+import { readLocalCart, updateLocalCart, writeLocalCart } from '../local-cart'
 
-export default function MakeShopCart(module: number, fetchFn: typeof fetch = fetch) {
+export function CartFactory(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
 
 	/**
@@ -12,8 +13,11 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	 * @returns Cart
 	 */
 
-	async function getCart(): Promise<XioniResponse<ShopCart>> {
-		const { status, data } = await xioniFetch(['shop', module, 'cart'])
+	async function getCart(): Promise<XioniResponse<XioniShop.Cart>> {
+		const { status, data } = await xioniFetch(['shop', module, 'cart'], {
+			method: FetchMethods.PUT,
+			data: readLocalCart(module)
+		})
 
 		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
 	}
@@ -30,13 +34,10 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	async function updateItemQuantity(
 		id: number,
 		quantity: number
-	): Promise<XioniResponse<ShopCart>> {
+	): Promise<XioniResponse<XioniShop.Cart>> {
 		const { status, data } = await xioniFetch(['shop', module, 'cart'], {
-			method: FetchMethods.POST,
-			data: {
-				id,
-				quantity
-			}
+			method: FetchMethods.PUT,
+			data: updateLocalCart(module, { [id]: quantity })
 		})
 
 		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
@@ -50,17 +51,22 @@ export default function MakeShopCart(module: number, fetchFn: typeof fetch = fet
 	 * @returns Cart
 	 */
 
-	async function addItem(id: number): Promise<XioniResponse<ShopCart>> {
+	async function addItem(id: number): Promise<XioniResponse<XioniShop.Cart>> {
 		const { status, data } = await xioniFetch(['shop', module, 'cart'], {
-			method: FetchMethods.POST,
-			data: { id }
+			method: FetchMethods.PUT,
+			data: updateLocalCart(module, { [id]: 1 })
 		})
 		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
+	}
+
+	function resetCart() {
+		writeLocalCart(module, {})
 	}
 
 	return {
 		getCart,
 		updateItemQuantity,
-		addItem
+		addItem,
+		resetCart
 	}
 }

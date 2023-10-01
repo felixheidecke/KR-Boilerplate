@@ -5,11 +5,11 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { ShopProduct } from '$lib/boilerplate/libraries/xioni-shop/products.types'
+	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const { id, name, category, price, VAT, image } = $$props.product as ShopProduct
+	const { id, name, category, price, vat, image } = $$props.product as XioniShop.Product
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -18,12 +18,13 @@
 </script>
 
 {#if id}
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div data-component class={className} on:click>
 		<img
 			class="{baseName}__image"
 			src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
-			alt={image?.alt || 'Kein Produktbild'}
-			title={image?.alt || 'Kein Produktbild'}
+			alt={name || 'Kein Produktbild'}
+			title={name || 'Kein Produktbild'}
 			loading="lazy" />
 
 		<div class="{baseName}__data">
@@ -39,7 +40,7 @@
 				{price.formatted}
 			</div>
 			<div class="{baseName}__tax">
-				inkl. {VAT.formatted} MwSt.
+				inkl. {vat.formatted} MwSt.
 			</div>
 		</div>
 	</div>

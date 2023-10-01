@@ -1,12 +1,11 @@
-import XioniFetch from '../xioni-fetch'
-import { FetchMethods, FetchResponseStatus } from '../fetch-json/types'
-
+import { FetchMethods, FetchResponseStatus } from '../../fetch-json/types'
+import XioniFetch from '../../xioni-fetch'
+import type { XioniResponse } from '../../xioni/types'
 import type { ShopRecieptOrder } from './order.types'
-import type { XioniResponse } from '../xioni/types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export default function MakeShopOrder(module: number, fetchFn: typeof fetch = fetch) {
+export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
 
 	/**

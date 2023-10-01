@@ -3,23 +3,29 @@
 	import { createEventDispatcher } from 'svelte'
 
 	import Select from '../Select/Select.svelte'
+	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+	import Button from '../Button/Button.svelte'
+	import Icon from '../Icon/Icon.svelte'
 
-	import type { ShopCart } from '$lib/boilerplate/libraries/xioni-shop/cart.types'
-
-	export let products: ShopCart['products']
-	export let additionalCost: ShopCart['additionalCost']
-	export let shipping: ShopCart['shipping']
-	export let total: ShopCart['total']
+	export let products: XioniShop.Cart['products']
+	export let supplementalCost: XioniShop.Cart['supplementalCost']
+	export let shippingCost: XioniShop.Cart['shippingCost']
+	export let total: XioniShop.Cart['total']
 	export let quantitySelector = false
+	export let readOnly = false
 
 	const emit = createEventDispatcher()
 
 	async function update(productId: number, { target }: any) {
 		emit('product-quantity-update', { productId, quantity: +target.value })
 	}
+
+	// async function remove(productId: number) {
+	// 	emit('product-quantity-update', { productId, quantity: 0 })
+	// }
 </script>
 
-<table class="$w-full {$$props.class}">
+<table class="XioniShopCartTable $w-full {$$props.class}">
 	<thead>
 		<tr>
 			<th>Produkt</th>
@@ -29,37 +35,39 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each products || [] as product}
+		{#each products || [] as { product, total, quantity }}
 			<tr>
-				<td> {product.name} <em>({product.code})</em></td>
+				<td> {product.name} <small>({product.code})</small></td>
 				<td>
 					{#if quantitySelector}
 						<Select
-							options={['Entfernen', ...range(1, 11)]}
+							options={range(0, 11)}
 							values={range(0, 11)}
-							value={product.quantity}
+							value={quantity}
 							class="select-quantity"
+							disabled={readOnly}
 							on:change={event => update(product.id, event)} />
 					{:else}
 						{product.quantity}
 					{/if}
 				</td>
 				<td class="$text-right">{product.price.formatted}</td>
-				<td class="$text-right">{product.total.formatted}</td>
+				<td class="$text-right">{total.formatted}</td>
 			</tr>
 		{/each}
 	</tbody>
 	<tfoot>
-		{#if additionalCost}
+		{#if supplementalCost}
 			<tr>
-				<td colspan="3">{additionalCost.title} <em>(pauschal)</em></td>
-				<td class="$text-right">{additionalCost.formatted}</td>
+				<td>{supplementalCost.title}</td>
+				<td class="$text-right" colspan="2"><small>(pauschal)</small> </td>
+				<td class="$text-right">{supplementalCost.formatted}</td>
 			</tr>
 		{/if}
-		{#if shipping}
+		{#if shippingCost}
 			<tr>
 				<td colspan="3">Versandkosten</td>
-				<td class="$text-right">{shipping.formatted}</td>
+				<td class="$text-right">{shippingCost.formatted}</td>
 			</tr>
 		{/if}
 		<tr aria-hidden>

@@ -1,13 +1,14 @@
 <script lang="ts">
 	import classnames from 'classnames'
 	import { range } from 'lodash-es'
-	import { onMount } from 'svelte'
-
-	// Shop3
-	import { cart } from '$lib/boilerplate/libraries/xioni/shop3/'
 
 	// Components
 	import LoadSpinner from '../Auxiliary/LoadSpinner.svelte'
+	import type { CartFactory } from '$lib/boilerplate/libraries/xioni-shop'
+
+	// Props
+
+	export let cart: ReturnType<typeof CartFactory>
 
 	// --- Data --------------------------------------------------------------------------------------
 

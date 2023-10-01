@@ -1,6 +1,7 @@
 export enum FetchMethods {
 	GET = 'GET',
 	POST = 'POST',
+	PUT = 'PUT',
 	UPDATE = 'UPDATE',
 	PATCH = 'PATCH',
 	DELETE = 'DELETE'

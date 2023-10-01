@@ -1,9 +1,9 @@
-import XioniFetch from '../xioni-fetch'
-import type { XioniShopCheckoutOrder } from './checkout.types'
-import type { XioniResponse } from '../xioni/types'
-import { FetchMethods, FetchResponseStatus } from '../fetch-json/types'
+import { FetchMethods, FetchResponseStatus } from '../../fetch-json/types'
+import type { XioniResponse } from '../../xioni/types'
+import type { XioniShop } from '../types'
+import XioniFetch from '../../xioni-fetch'
 
-export default function MakeShopCheckout(module: number, fetchFn: typeof fetch = fetch) {
+export default function XioniShopCheckoutFactory(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
 
 	/**
@@ -13,7 +13,7 @@ export default function MakeShopCheckout(module: number, fetchFn: typeof fetch =
 	 * @returns
 	 */
 
-	async function createOrder(payload: any): Promise<XioniResponse<XioniShopCheckoutOrder>> {
+	async function createOrder(payload: any): Promise<XioniResponse<XioniShop.CheckoutOrder>> {
 		const url = ['shop', module, 'order/create']
 		const { status, data } = await xioniFetch(url, {
 			method: FetchMethods.POST,

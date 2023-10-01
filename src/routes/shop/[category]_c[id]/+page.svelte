@@ -1,0 +1,37 @@
+<script lang="ts">
+	// --- [ Components ] ----------------------------------------------------------------------------
+
+	import Client from '$lib/boilerplate/components/Client/Client.svelte'
+	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
+	import Link from '$lib/boilerplate/components/Link/Link.svelte'
+	import XioniShopProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
+	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+
+	export let data
+
+	$: category = data.category as XioniShop.Category
+	$: products = data.products as XioniShop.Product[]
+</script>
+
+<Client browser>
+	<h1>
+		{category.name || 'Kategorie'}
+	</h1>
+
+	{#if category.description}
+		{@html category.description}
+	{/if}
+
+	<Grid gap>
+		{#each products as product, index (product.id)}
+			<Grid size="1-3" data-index={index}>
+				<Link class="$decoration-none" to="/shop/{product.slug}_p{product.id}">
+					<XioniShopProductTile {product} />
+				</Link>
+			</Grid>
+		{/each}
+	</Grid>
+</Client>
