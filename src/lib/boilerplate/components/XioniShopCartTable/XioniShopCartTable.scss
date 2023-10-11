@@ -1,0 +1,11 @@
+@import '$variables';
+// :where(.XioniShopCartTable) {}
+@include breakpoint('mobile') {
+	th,
+	td {
+		padding: 0.5rem 0.15rem;
+		&:first-of-type {
+			word-break: break-word;
+		}
+	}
+}

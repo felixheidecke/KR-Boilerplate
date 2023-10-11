@@ -1,17 +1,19 @@
-import { CART } from './stores'
-import { Cart, Categories } from './api'
-import xioniLoader from '$lib/boilerplate/utils/xioni-loader'
-import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+import { CART } from './shop.stores'
+import { cartApi, groupsApi } from './shop.api'
+import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
 
+export const prerender = false
+export const ssr = false
+export const trailingSlash = 'always'
 export const load = async function () {
-	const [categories, cart] = await Promise.all([
-		xioniLoader(Categories.getCategories()) as Promise<XioniShop.Category[]>,
-		xioniLoader(Cart.getCart()) as Promise<XioniShop.Cart>
+	const [groups, cart] = await Promise.all([
+		xioniLoader(groupsApi.getGroups()),
+		xioniLoader(cartApi.getCart())
 	])
 
 	CART.set(cart)
 
-	return { categories }
+	return {
+		groups
+	}
 }
-
-export const prerender = false

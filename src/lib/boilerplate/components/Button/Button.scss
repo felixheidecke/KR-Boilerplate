@@ -29,8 +29,9 @@
 }
 
 :where(.Button:disabled) {
-	border-color: darkgrey;
-	color: darkgrey;
+	border-color: darkgrey !important;
+	background-color: darkgrey !important;
+	color: white !important;
 	cursor: not-allowed;
 }
 

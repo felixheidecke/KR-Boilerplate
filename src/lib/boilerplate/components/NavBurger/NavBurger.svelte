@@ -2,12 +2,17 @@
 	import './NavBurger.scss'
 	import classNames from 'classnames'
 
-	export let active = false
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	$: className = classNames('NavBurger', !active || 'NavBurger--active')
+	export let active = false
+	export let baseName = 'NavBurger'
+
+	// -----------------------------------------------------------------------------------------------
+
+	$: className = classNames(baseName, !active || 'NavBurger--active')
 </script>
 
-<button class={className} on:click aria-label="Menü">
+<button on:click aria-label="Menü" {...$$restProps} class={className}>
 	<!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
 	{#if active}
 		<svg class="NavBurger__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">

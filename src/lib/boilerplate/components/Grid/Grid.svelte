@@ -2,25 +2,22 @@
 	import './Grid.scss'
 	import classnames from 'classnames'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { GridProps } from './Grid.types'
-
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let tag: GridProps['tag'] = 'div'
-	export let gap: GridProps['gap'] = false
-	export let size: GridProps['size'] = false
+	export let tag: string = 'div'
+	export let gap: number | string | boolean = 0
+	export let size: string | boolean = false
 	export let id: string | undefined = undefined
+	export let index: number | string | undefined = undefined
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
-	$: className = !size ? createParentClassName(gap) : createChildClassName(size)
+	$: className = !size ? createParentClassName() : createChildClassName()
 
-	function createChildClassName(size: GridProps['size']) {
+	function createChildClassName() {
 		return classnames(
 			'Grid__item',
-			!('' + size) ||
+			!size ||
 				('' + size)
 					.split(' ')
 					.map(i => `Grid__item--${i}`)
@@ -28,10 +25,10 @@
 		)
 	}
 
-	function createParentClassName(gap: GridProps['gap']) {
+	function createParentClassName() {
 		const className = ['Grid']
 
-		if (typeof gap === 'number') {
+		if (gap && typeof gap === 'number') {
 			className.push(`Grid--gap-${gap}`)
 		} else if (gap) {
 			className.push('Grid--gap')
@@ -41,6 +38,6 @@
 	}
 </script>
 
-<svelte:element this={tag} {id} class={classnames(className, $$props.class)}>
+<svelte:element this={tag} {id} class={classnames(className, $$props.class)} data-index={index}>
 	<slot />
 </svelte:element>

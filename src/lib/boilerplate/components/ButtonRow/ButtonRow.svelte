@@ -2,13 +2,11 @@
 	import './ButtonRow.scss'
 	import classNames from 'classnames'
 
-	// --- CSS Class --------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const baseName = $$props['ex-class'] || 'ButtonRow'
-
-	$: className = classNames(baseName, $$props.class)
+	const baseName = 'ButtonRow'
 </script>
 
-<div data-component class={className}>
+<div class={classNames(baseName, $$props.class)}>
 	<slot />
 </div>

@@ -1,26 +1,23 @@
 <script lang="ts">
 	import classnames from 'classnames'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-	import { YoutubePropsAllow, type YoutubeProps } from './Youtube.types'
-
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Aspect from '../Aspect/Aspect.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let ratio: YoutubeProps['ratio'] = [16, 9]
-	export let videoId: YoutubeProps['videoId']
-	export let allow: YoutubeProps['allow'] = [YoutubePropsAllow.ENCRYPTED_MEDIA]
+	export let ratio: [number, number] = [16, 9]
+	export let videoId: string
+	export let allow: Array<
+		'autoplay' | 'clipboard-write' | 'encrypted-media' | 'picture-in-picture'
+	> = ['encrypted-media']
+	export let baseName = 'Youtube'
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
-
-	const baseName = $$props['ex-class'] || 'Youtube'
-	const className = classnames(baseName, $$props.class)
 </script>
 
-<Aspect class={className} ratio={ratio.join(':')}>
+<Aspect ratio={ratio.join(':')} {...$$restProps} class={classnames(baseName, $$props.class)}>
 	<iframe
 		class={baseName + '__frame'}
 		src={'https://www.youtube-nocookie.com/embed/' + videoId}

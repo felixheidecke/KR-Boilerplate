@@ -2,17 +2,13 @@
 	import './Toplink.scss'
 	import classnames from 'classnames'
 
-	// --- Data --------------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let name = null
+	export let baseName = 'Toplink'
+
+	// -----------------------------------------------------------------------------------------------
 
 	let isVisible = false
-
-	const baseName = $$props['ex-class'] || 'Toplink'
-
-	$: className = classnames(baseName, $$props.class, !isVisible || baseName + '--visible')
-
-	// --- Methods -----------------------------------------------------------------------------------
 
 	function scrollToTop() {
 		window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -21,11 +17,13 @@
 	function handleOffset() {
 		isVisible = window.scrollY > 200
 	}
+
+	$: className = classnames(baseName, $$props.class, !isVisible || baseName + '--visible')
 </script>
 
 <svelte:window on:scroll|passive={handleOffset} />
 
-<button {name} class={className} on:click={scrollToTop} aria-label="Scroll to top">
+<button on:click={scrollToTop} aria-label="Scroll to top" {...$$restProps} class={className}>
 	<svg class="{baseName}__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
 		<!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
 		<path

@@ -1,5 +1,6 @@
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import adapter from '@sveltejs/adapter-static'
-import { vitePreprocess } from '@sveltejs/kit/vite'
+import pkg from './package.json' assert { type: 'json' }
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -8,7 +9,7 @@ const config = {
 		preloadStrategy: 'preload-mjs'
 	},
 	kit: {
-		inlineStyleThreshold: 10000,
+		inlineStyleThreshold: 25_000,
 		adapter: adapter({
 			pages: 'htdocs',
 			assets: 'htdocs',
@@ -16,14 +17,14 @@ const config = {
 			strict: false,
 			precompress: false
 		}),
-		paths: {
-			relative: false
-		},
 		alias: {
-			$variables: './src/lib/styles/variables.scss',
+			$variables: './src/lib/styles/_variables.scss',
 			$routes: './src/routes.js',
 			$stammdaten: './src/lib/stammdaten.js'
-		}
+		},
+		version: {
+			name: `Boilerplate: ${pkg.version}; Built: ${new Date().toString()}`
+		},
 	}
 }
 

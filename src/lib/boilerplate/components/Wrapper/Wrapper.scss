@@ -1,0 +1,36 @@
+.Wrapper {
+	width: 100%;
+	max-width: 1024px;
+
+	padding: {
+		left: 1rem;
+		right: 1rem;
+	}
+
+	margin: {
+		left: auto;
+		right: auto;
+	}
+
+	&--smaller {
+		max-width: 512px;
+	}
+
+	&--small {
+		max-width: 768px;
+	}
+
+	&--large {
+		max-width: 1280px;
+	}
+
+	&--responsive {
+		@media (max-width: calc(1024px - 1px)) {
+			max-width: 768px;
+		}
+
+		@media (max-width: calc(768px - 1px)) {
+			max-width: 512px;
+		}
+	}
+}

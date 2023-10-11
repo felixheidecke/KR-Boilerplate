@@ -1,188 +1,121 @@
 <script>
-	import Address from '$lib/boilerplate/components/Address/Address.svelte'
-
-	const { stammdaten, info } = $$props.data
-
-	const shippingRates = info.shippingRates || []
-	const shippingCharges = info.shippingCharges
-	const freeShippingThreshold = info.shippingCharges?.freeShippingThreshold
-	const additionalCost = info.shippingCharges?.additionalCost
+	import stammdaten from '$lib/stammdaten'
 </script>
 
 <svelte:head>
-	<title>Allgemeine Geschäftsbedingungen</title>
+	<title>AGB | {stammdaten.title}</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<h2>Allgemeine Geschäftsbedingungen</h2>
+<h1>Allgemeine Geschäftsbedingungen</h1>
+<h4>1. Geltungsbereich</h4>
 <p>
-	1. Mit der Auftragserteilung erkennt der Käufer die folgenden allgemeinen Geschäftsbedingungen an.
-	Sie sind Bestandteil des Vertrages. Abweichende Geschäftsbedingungen des Käufers erkennen wir
-	nicht an.
-</p>
-<h2>Zustandekommen des Vertrags, Bestellungen</h2>
-<p>
-	1.1 Mit Ihrer Bestellung geben Sie ein verbindliches Angebot an uns ab, mit Ihnen einen Vertrag zu
-	schließen. Wir können dieses Angebot annehmen, indem wir Ihnen nach Eingang Ihrer Bestellung eine
-	Auftragsbestätigung per E-Mail zusenden. Mit der Zusendung dieser Auftragsbestätigung kommt der
-	Vertrag zustande.
+	Für alle Bestellungen über unseren Online-Shop durch Verbraucher und Unternehmer gelten die
+	nachfolgenden AGB.
 </p>
 <p>
-	1.2 Bei der Bestellung über unseren Onlineshop umfasst der Bestellvorgang für Verbraucher
-	insgesamt die folgenden 4 Schritte
+	Verbraucher ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschließt, die
+	überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet
+	werden können. Unternehmer ist eine natürliche oder juristische Person oder eine rechtsfähige
+	Personengesellschaft, die bei Abschluss eines Rechtsgeschäfts in Ausübung ihrer gewerblichen oder
+	selbständigen beruflichen Tätigkeit handelt.
 </p>
 <p>
-	a. Sie wählen die Produkte aus und können sie durch das Anklicken des Links "Einkaufen" in den
-	Warenkorb legen. Den Inhalt des Warenkorbs können Sie jederzeit durch Anklicken des Links
-	"Warenkorb" oder "Einkaufen" unverbindlich ansehen. Sie können Ihre Bestellung im Warenkorb durch
-	Anklicken des Links "Aktualisieren" ändern oder die Produkte aus dem Warenkorb entfernen.
+	Gegenüber Unternehmern gilt: Verwendet der Unternehmer entgegenstehende oder ergänzende Allgemeine
+	Geschäftsbedingungen, wird deren Geltung hiermit widersprochen; sie werden nur dann
+	Vertragsbestandteil, wenn wir dem ausdrücklich zugestimmt haben.
+</p>
+<h4>2. Vertragspartner, Vertragsschluss, Korrekturmöglichkeiten</h4>
+<p>Der Kaufvertrag kommt zustande mit Weber Fahrzeugtechnik GbR.</p>
+<p>
+	Die Darstellung der Produkte im Online-Shop stellt kein rechtlich bindendes Angebot, sondern einen
+	unverbindlichen Online-Katalog dar. Sie können unsere Produkte zunächst unverbindlich in den
+	Warenkorb legen und Ihre Eingaben vor Absenden Ihrer verbindlichen Bestellung jederzeit
+	korrigieren, indem Sie die hierfür im Bestellablauf vorgesehenen und erläuterten Korrekturhilfen
+	nutzen. Durch Anklicken des Bestellbuttons geben Sie ein verbindliches Angebot über die im
+	Warenkorb enthaltenen Waren ab. Die Bestätigung des Zugangs Ihrer Bestellung erfolgt per E-Mail
+	unmittelbar nach dem Absenden der Bestellung.
+</p>
+<p>Wir nehmen Ihr Angebot innerhalb von zwei Tagen an, indem wir eine Annahmeerklärung in separater E-Mail abgeben oder	gegebenenfalls die Zahlungstransaktion durch unseren Dienstleister oder den ausgewählten
+	Zahlungsdienstleister durchgeführt wird. Der Durchführungszeitpunkt der Zahlungstransaktion
+	richtet sich nach der jeweils ausgewählten Zahlungsart (s. unter „Bezahlung“).
 </p>
 <p>
-	b. Wenn Sie die Produkte im Warenkorb kaufen wollen, klicken Sie auf <Link to="/shop/cart"
-		>den Warenkorb</Link
-	>.
+	Die für Sie relevante Alternative richtet sich danach, welches der aufgezählten Ereignisse als
+	erstes eintritt.
+</p>
+<h4>3. Vertragssprache, Vertragstextspeicherung</h4>
+<p>Die für den Vertragsschluss zur Verfügung stehende(n) Sprache(n): Deutsch</p>
+<p>
+	Wir speichern den Vertragstext und senden Ihnen die Bestelldaten und unsere AGB in Textform zu.
+	Den Vertragstext können Sie in unserem Kunden-Login einsehen.
+</p>
+<h4>4. Lieferbedingungen</h4>
+<p>
+	Zuzüglich zu den angegebenen Produktpreisen kommen noch Versandkosten hinzu. Näheres zur Höhe der
+	Versandkosten erfahren Sie bei den Angeboten.
 </p>
 <p>
-	c. Geben Sie Ihre Kundendaten einschließlich Rechnungsanschrift und eventuell abweichender
-	Lieferadresse ein, und klicken Sie bitte auf den Link "weiter".
+	Sie haben grundsätzlich die Möglichkeit der Abholung bei {stammdaten.name},
+	{stammdaten.street}, {stammdaten.town} - Deutschland zu den nachfolgend angegebenen
+	Geschäftszeiten: Montag bis Freitag, 7:30 bis 18 Uhr
+</p>
+<p>Wir liefern nicht an Packstationen!</p>
+<h4>5. Bezahlung</h4>
+<p>In unserem Shop stehen Ihnen grundsätzlich die folgenden Zahlungsarten zur Verfügung:</p>
+<p>Vorkasse</p>
+<p>
+	Bei Auswahl der Zahlungsart Vorkasse nennen wir Ihnen unsere Bankverbindung in separater E-Mail
+	und liefern die Ware nach Zahlungseingang.
+</p>
+<p>Paypal</p>
+<h4>6. Widerrufsrecht</h4>
+<p>
+	Verbrauchern steht das gesetzliche Widerrufsrecht, wie in der Widerrufsbelehrung beschrieben, zu.
+	Unternehmern wird kein freiwilliges Widerrufsrecht eingeräumt.
+</p>
+<h4>7. Eigentumsvorbehalt</h4>
+<p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
+<p>
+	Für Unternehmer gilt ergänzend: Wir behalten uns das Eigentum an der Ware bis zur vollständigen
+	Begleichung aller Forderungen aus einer laufenden Geschäftsbeziehung vor. Sie dürfen die
+	Vorbehaltsware im ordentlichen Geschäftsbetrieb weiterveräußern; sämtliche aus diesem
+	Weiterverkauf entstehenden Forderungen treten Sie – unabhängig von einer Verbindung oder
+	Vermischung der Vorbehaltsware mit einer neuen Sache - in Höhe des Rechnungsbetrages an uns im
+	Voraus ab, und wir nehmen diese Abtretung an. Sie bleiben zur Einziehung der Forderungen
+	ermächtigt, wir dürfen Forderungen jedoch auch selbst einziehen, soweit Sie Ihren
+	Zahlungsverpflichtungen nicht nachkommen. Die uns zustehenden Sicherheiten werden wir auf Ihr
+	Verlangen insoweit freigeben, als der realisierbare Wert der Sicherheiten den Wert der offenen
+	Forderungen um mehr als 10 % übersteigt.
+</p>
+<h4>8. Transportschäden</h4>
+<p>
+	Für Verbraucher gilt: Werden Waren mit offensichtlichen Transportschäden angeliefert, so
+	reklamieren Sie solche Fehler bitte möglichst sofort beim Zusteller und nehmen Sie bitte
+	unverzüglich Kontakt zu uns auf. Die Versäumung einer Reklamation oder Kontaktaufnahme hat für
+	Ihre gesetzlichen Ansprüche und deren Durchsetzung, insbesondere Ihre Gewährleistungsrechte,
+	keinerlei Konsequenzen. Sie helfen uns aber, unsere eigenen Ansprüche gegenüber dem Frachtführer
+	bzw. der Transportversicherung geltend machen zu können.
+</p>
+<h4>9. Mängelhaftungsrecht</h4>
+<p>
+	Soweit nicht nachstehend ausdrücklich anders vereinbart, gilt das gesetzliche Mängelhaftungsrecht.
 </p>
 <p>
-	d. Dadurch erhalten Sie eine Übersicht über die von Ihnen bestellten Waren und die von Ihnen
-	eingegebenen Kontaktdaten.
+	Die nachstehenden Einschränkungen und Fristverkürzungen gelten nicht für Ansprüche aufgrund von
+	Schäden, die durch uns, unsere gesetzlichen Vertreter oder Erfüllungsgehilfen verursacht wurden
 </p>
+<p>bei Verletzung des Lebens, des Körpers oder der Gesundheit</p>
+<p>bei vorsätzlicher oder grob fahrlässiger Pflichtverletzung sowie Arglist</p>
 <p>
-	(1). Sollten Sie Ihre Angaben ändern oder löschen wollen, klicken Sie auf den Link "Bearbeiten".
+	bei Verletzung wesentlicher Vertragspflichten, deren Erfüllung die ordnungsgemäße Durchführung des
+	Vertrages überhaupt erst ermöglicht und auf deren Einhaltung der Vertragspartner regelmäßig
+	vertrauen darf (Kardinalpflichten)
 </p>
+<h4>10. Streitschlichtung</h4>
 <p>
-	(2). Wenn keine weiteren Änderungen erforderlich sind, bestätigen Sie bitte unsere AGB. Klicken
-	Sie dann auf den Link "jetzt kaufen", um die Bestellung abzuschließen.
+	Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <Link
+		to="https://ec.europa.eu/consumers/odr" />
+	. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+	teilzunehmen.
 </p>
-<p>
-	2. Unsere Angebote erfolgen freibleibend und unverbindlich, Sonderabschlüsse und sonstige
-	Vereinbarungen bedürfen unserer Bestätigung.
-</p>
-<p>
-	3. Die Preise verstehen sich inklusive Glas, Verpackung und der derzeit gültigen Mehrwertsteuer.
-</p>
-
-<h2>Versandkosten innerhalb Deutschland</h2>
-
-<p>
-	Beträgt der Gesamtwarenwert mindestens 360,00&nbsp;EUR, so erfolgt die Lieferung innerhalb
-	Deutschlands frei Haus.
-</p>
-
-{#if shippingRates.length}
-	<h4>Versandkosten</h4>
-
-	{#if info.shippingCharges}
-		{@html info.shippingCharges.description}
-	{/if}
-
-	<ol style="list-style: disc;" class="$pl-2">
-		{#each shippingRates as { weight, price }}
-			<li class="$mb-1/4"><b>{price.formatted}</b> bis einschl. {weight.formatted}</li>
-		{/each}
-	</ol>
-{/if}
-
-{#if additionalCost}
-	<p>
-		Zuzüglich <strong>
-			{additionalCost.formatted}
-			{additionalCost.title}
-		</strong>
-	</p>
-{/if}
-
-{#if freeShippingThreshold}
-	<p>Freier Versand <strong>ab {freeShippingThreshold.formatted}</strong></p>
-{/if}
-
-<p>
-	4. Alle Rechnungsbeträge sind ohne Abzug sofort fällig. Bei Zahlungsverzug erlauben wir uns,
-	bankübliche Zinsen zu berechnen.
-</p>
-<p>
-	5. Bei Vertragsabschlüssen mit Verbrauchern behalten wir uns das Eigentum an der Ware bis zur
-	vollständigen Zahlung des Kaufpreises vor, bei Vertragsabschlüssen mit Unternehmen bis zur
-	vollständigen Begleichung aller Forderungen aus der laufenden Geschäftsbeziehung.
-</p>
-<p>6. Wir leisten Gewährleistung nach den gesetzlichen Rechten.</p>
-<p>
-	6.1 Weine können Weinstein ausscheiden. Dieses sind kleine Kristalle, die geschmacksneutral sind.
-	Diese Weinsteinausscheidung hat keine negative Auswirkung auf Qualität, Geschmack und Haltbarkeit
-	des Weines und ist kein Grund zur Reklamation.
-</p>
-<h3>Lieferung</h3>
-<p>
-	<span style="color:red">Wir liefern per ...</span>
-</p>
-<h3>Zahlung</h3>
-<p>
-	Lieferung erfolgt gegen Vorauskasse unter Angabe der Auftragsnummer auf folgendes Konto:<br />
-	<span style="color:red">IBAN DE03 9999 7777 3333 5555 22</span>
-</p>
-<h3>Jugendschutz</h3>
-<p>
-	Nach §9 des Jugendschutzgesetzes ist es untersagt, Branntwein, branntweinhaltige Getränke oder
-	Lebensmittel, die Branntwein in nicht nur geringer Menge enthalten, an Kinder und Jugendliche
-	abzugeben. Nach §9 des JuSchG ist darüber hinaus auch untersagt, andere alkoholische Getränke an
-	Kinder und Jugendliche unter 16 Jahren abzugeben (so z.B. Wein, Bier und Sekt). Mit Anerkennung
-	der AGB bestätigen Sie, dass Sie mindestens 16 Jahre (Bestellung von Wein und Sekt) bzw. 18 Jahre
-	(Bestellung von Spirituosen) alt sind.
-</p>
-
-<h2>Widerrufsbelehrung</h2>
-<h3>Widerrufsrecht</h3>
-<p>
-	Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.
-</p>
-<p>
-	Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter
-	Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat.
-</p>
-<p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns</p>
-
-<Address {...stammdaten} email={undefined} web={undefined} />
-
-<p>
-	mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder eine E-Mail)
-	über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte
-	Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.
-</p>
-<p>
-	Sie können das Muster-Widerrufsformular oder eine andere eindeutige Erklärung downloaden,
-	ausfüllen und übermitteln. Machen Sie von dieser Möglichkeit Gebrauch, so werden wir Ihnen
-	unverzüglich (z. B. per E-Mail) eine Bestätigung über den Eingang eines solchen Widerrufs
-	übermitteln.
-</p>
-<p>
-	Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des
-	Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.
-</p>
-<h3>Folgen des Widerrufs</h3>
-<p>
-	Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten
-	haben, einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus
-	ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstigste
-	Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag
-	zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist.
-	Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen
-	Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart;
-	in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet. Wir können die
-	Rückzahlung verweigern, bis wir die Waren wieder zurückerhalten haben oder bis Sie den Nachweis
-	erbracht haben, dass Sie die Waren zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt
-	ist. Sie haben die Waren unverzüglich und in jedem Fall spätestens binnen vierzehn Tagen ab dem
-	Tag, an dem Sie uns über den Widerruf dieses Vertrags unterrichten, an uns zurückzusenden oder zu
-	übergeben. Die Frist ist gewahrt, wenn Sie die Waren vor Ablauf der Frist von vierzehn Tagen
-	absenden. Sie tragen die unmittelbaren Kosten der Rücksendung der Waren. Sie müssen für einen
-	etwaigen Wertverlust der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der
-	Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen
-	zurückzuführen ist.
-</p>
-<p>
-	<Link to="pdf/MusterWiderrufsformular.pdf" icon="fas fa-file-pdf" target="_blank"
-		>Widerrufsformular</Link>
-</p>
-<p><em>Ende der Widerrufsbelehrung</em></p>

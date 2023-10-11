@@ -1,11 +1,6 @@
 <script lang="ts">
 	import './Lightbox.scss'
-
 	import { onMount } from 'svelte'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { LightboxProps } from './Lightbox.types'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
@@ -14,7 +9,10 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let images = [] as LightboxProps['images']
+	export let images: {
+		src: string
+		alt: string
+	}[] = []
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -22,7 +20,6 @@
 	let modal: Modal
 	let lightboxImages = images
 	let index = -1
-	let isMobile = true
 
 	$: activeImage = lightboxImages[index] || {}
 
@@ -55,18 +52,14 @@
 	}
 
 	// Init
-	onMount(() => {
-		if (window.innerWidth < 620 || images.length) return
-
-		getImages()
-		isMobile = false
-	})
+	onMount(getImages)
 </script>
 
 <div class="Lightbox" bind:this={lightbox}>
 	<slot />
 </div>
 <Modal class="Lightbox__modal" bind:this={modal}>
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="Lightbox__navigate Lightbox__navigate--prev"
 		class:$invisible={!(lightboxImages.length > 2)}
@@ -75,6 +68,7 @@
 		<Icon name="fas fa-angle-left" size="2" />
 	</div>
 
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="Lightbox__navigate Lightbox__navigate--next"
 		class:$invisible={!(lightboxImages.length > 2)}
@@ -93,8 +87,6 @@
 	<img class="Lightbox__active-image" src={activeImage.src} alt={activeImage.alt} />
 </Modal>
 
-{#if !isMobile}
-	{#each lightboxImages as { src, alt }}
-		<img {src} {alt} hidden aria-hidden />
-	{/each}
-{/if}
+{#each lightboxImages as { src, alt }}
+	<img {src} {alt} hidden aria-hidden loading="lazy" />
+{/each}

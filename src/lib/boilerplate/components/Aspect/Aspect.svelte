@@ -5,11 +5,11 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let ratio = '16:9'
+	export let baseName = 'Aspect'
 
 	// -----------------------------------------------------------------------------------------------
 
 	const [x, y] = ratio.split(':')
-	const baseName = $$props['ex-class'] || 'Aspect'
 	const className = classnames(baseName, $$props.class)
 </script>
 

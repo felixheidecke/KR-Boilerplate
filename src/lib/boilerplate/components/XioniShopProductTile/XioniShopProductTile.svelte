@@ -3,45 +3,43 @@
 
 	import classnames from 'classnames'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const { id, name, category, price, vat, image } = $$props.product as XioniShop.Product
+	export let product: XioniShop.Product
+	export let className = 'XioniShopProductTile'
 
-	// --- [ Logic ] ---------------------------------------------------------------------------------
-
-	const baseName = $$props['ex-class'] || 'XioniShopProductTile'
-	const className = classnames(baseName, $$props.class)
+	const { name, teaser, price, vat, image } = product
 </script>
 
-{#if id}
+{#if product.id}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div data-component class={className} on:click>
+	<div on:click {...$$restProps} class={classnames(className, $$props.class)}>
 		<img
-			class="{baseName}__image"
-			src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
+			class="{className}__image"
+			src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
 			alt={name || 'Kein Produktbild'}
 			title={name || 'Kein Produktbild'}
 			loading="lazy" />
 
-		<div class="{baseName}__data">
+		<div class="{className}__data">
 			<h4 class="$m-0 $p-0">
 				{name}
 			</h4>
-			{#if category}
-				<h5 class="$m-0 $p-0">
-					<span class="{baseName}__category">{category.name}</span>
-				</h5>
+			{#if teaser}
+				<p class="{className}__teaser">
+					{@html teaser}
+				</p>
 			{/if}
-			<div class="{baseName}__price">
-				{price.formatted}
-			</div>
-			<div class="{baseName}__tax">
-				inkl. {vat.formatted} MwSt.
-			</div>
+			{#if price}
+				<div class="{className}__price $font-larger">
+					{price.formatted}
+				</div>
+				<div class="{className}__tax">
+					inkl. {vat.formatted} MwSt.
+				</div>
+			{/if}
 		</div>
 	</div>
 {/if}

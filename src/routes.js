@@ -4,6 +4,10 @@ export default [
 		name: 'Home'
 	},
 	{
+		path: '/shop',
+		name: 'Shop'
+	},
+	{
 		path: '/impressum',
 		name: 'Impressum',
 		class: '$hidden@desktop-up'

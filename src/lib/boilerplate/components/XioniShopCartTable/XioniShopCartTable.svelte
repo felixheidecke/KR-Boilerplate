@@ -1,31 +1,38 @@
 <script lang="ts">
-	import { range } from 'lodash-es'
+	import './XioniShopCartTable.scss'
+
 	import { createEventDispatcher } from 'svelte'
+	import { range } from 'lodash-es'
+	import classNames from 'classnames'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
+
+	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Select from '../Select/Select.svelte'
-	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
-	import Button from '../Button/Button.svelte'
-	import Icon from '../Icon/Icon.svelte'
+
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let products: XioniShop.Cart['products']
 	export let supplementalCost: XioniShop.Cart['supplementalCost']
-	export let shippingCost: XioniShop.Cart['shippingCost']
+	export let shipping: XioniShop.Cart['shipping']
 	export let total: XioniShop.Cart['total']
 	export let quantitySelector = false
 	export let readOnly = false
+	export let baseName = 'XioniShopCartTable'
+
+	// -----------------------------------------------------------------------------------------------
 
 	const emit = createEventDispatcher()
 
-	async function update(productId: number, { target }: any) {
+	function update(productId: number, { target }: any) {
 		emit('product-quantity-update', { productId, quantity: +target.value })
 	}
-
-	// async function remove(productId: number) {
-	// 	emit('product-quantity-update', { productId, quantity: 0 })
-	// }
 </script>
 
-<table class="XioniShopCartTable $w-full {$$props.class}">
+<table {...$$restProps} class={classNames(baseName, $$props.class)}>
 	<thead>
 		<tr>
 			<th>Produkt</th>
@@ -37,18 +44,20 @@
 	<tbody>
 		{#each products || [] as { product, total, quantity }}
 			<tr>
-				<td> {product.name} <small>({product.code})</small></td>
+				<td width="66%">
+					{product.name}
+					{#if product.code}
+						<small>({product.code})</small>{/if}</td>
 				<td>
 					{#if quantitySelector}
 						<Select
 							options={range(0, 11)}
 							values={range(0, 11)}
 							value={quantity}
-							class="select-quantity"
 							disabled={readOnly}
 							on:change={event => update(product.id, event)} />
 					{:else}
-						{product.quantity}
+						{quantity}
 					{/if}
 				</td>
 				<td class="$text-right">{product.price.formatted}</td>
@@ -57,46 +66,38 @@
 		{/each}
 	</tbody>
 	<tfoot>
-		{#if supplementalCost}
-			<tr>
-				<td>{supplementalCost.title}</td>
-				<td class="$text-right" colspan="2"><small>(pauschal)</small> </td>
-				<td class="$text-right">{supplementalCost.formatted}</td>
-			</tr>
-		{/if}
-		{#if shippingCost}
-			<tr>
-				<td colspan="3">Versandkosten</td>
-				<td class="$text-right">{shippingCost.formatted}</td>
-			</tr>
-		{/if}
 		<tr aria-hidden>
 			<td colspan="4"><hr class="$m-0" /></td>
 		</tr>
-		<tr class="$font-bold">
-			<td colspan="3">Gesamtpreis <em>(inkl. MwSt.)</em></td>
-			<td class="$text-right $decoration-double-underline">{total.formatted}</td>
+		{#if supplementalCost}
+			<tr>
+				<td colspan="3" class="$text-right $font-bold">{supplementalCost.title}:</td>
+				<td class="$text-right">{supplementalCost.formatted}</td>
+			</tr>
+		{/if}
+		{#if shipping}
+			<tr>
+				<td colspan="3" class="$text-right $font-bold">Versand:</td>
+				<td class="$text-right">{shipping.price.formatted}</td>
+			</tr>
+		{/if}
+		<tr>
+			<td colspan="3" class="$text-right $font-bold"
+				>Gesamt:
+				<span class="$font-small $font-italic">(inkl. MwSt.)</span></td>
+			<td class="$text-right $font-bold $decoration-double-underline">{total.formatted}</td>
 		</tr>
 	</tfoot>
 </table>
 
-<style>
-	table {
-		width: 100%;
-	}
+<style lang="scss">
+	.XioniShopCartTable {
+		:global(.Select) {
+			max-width: 4rem;
+		}
 
-	thead {
-		background-color: lightgray;
-	}
-
-	th,
-	td {
-		padding: 0.5rem;
-	}
-
-	:global(.select-quantity) {
-		text-align: center;
-		padding: 0.333rem;
-		max-width: 2.5rem;
+		:global(.Select__input) {
+			text-align: center;
+		}
 	}
 </style>

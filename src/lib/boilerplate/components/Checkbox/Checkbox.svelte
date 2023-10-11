@@ -1,5 +1,6 @@
 <script lang="ts">
 	import './Checkbox.scss'
+
 	import { uniqueId } from 'lodash-es'
 	import classnames from 'classnames'
 
@@ -10,6 +11,7 @@
 	export let name = 'checkbox'
 	export let required = false
 	export let value = 'on'
+	export let baseName = 'Checkbox'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -19,11 +21,10 @@
 
 	const id = uniqueId(`input-checkbox-${name}-`)
 
-	$: baseName = $$props['ex-class'] || 'Checkbox'
 	$: className = classnames(baseName, $$props.class, !checked || baseName + '--active')
 </script>
 
-<label class={className}>
+<label {...$$restProps} class={className}>
 	<input
 		{id}
 		{name}
@@ -35,6 +36,3 @@
 		on:change />
 	<span class={baseName + '__label'}>{@html label}</span>
 </label>
-
-<style global>
-</style>

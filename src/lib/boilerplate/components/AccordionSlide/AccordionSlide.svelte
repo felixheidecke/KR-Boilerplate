@@ -9,12 +9,12 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let title: string
+	export let baseName = 'AccordionSlide'
 
 	// -----------------------------------------------------------------------------------------------
 
 	const id = Math.random()
 	const activeItem = getContext('Accordion:active-item') as Writable<null | number>
-	const baseName = $$props['ex-class'] || 'AccordionSlide'
 
 	$: collapsed = id !== $activeItem
 	$: className = classnames(
@@ -24,12 +24,13 @@
 		!collapsed || `${baseName}--collapsed`
 	)
 
-	const handleClick = () => {
+	function handleClick() {
 		activeItem.set($activeItem === id ? null : id)
 	}
 </script>
 
-<li class={className} on:click={handleClick} on:keypress>
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+<li on:click={handleClick} on:keypress {...$$restProps} class={className}>
 	<h5 class="{baseName}__title">
 		{title}
 	</h5>
