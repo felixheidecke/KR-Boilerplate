@@ -1,11 +1,5 @@
 <script>
-	import { browser } from '$app/environment'
-	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
-
-	if (browser && !$page.url.searchParams.has('error')) {
-		goto('?error=' + $page.status)
-	}
 </script>
 
 <div class="$text-center">

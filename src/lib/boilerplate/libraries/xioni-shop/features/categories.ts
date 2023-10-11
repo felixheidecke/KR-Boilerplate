@@ -2,6 +2,7 @@ import { FetchResponseStatus } from '../../fetch-json/types'
 import type { XioniShop } from '../types'
 import type { XioniResponse } from '../../xioni/types'
 import XioniFetch from '../../xioni-fetch'
+import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
 
 export function CategoriesFactory(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
@@ -12,9 +13,11 @@ export function CategoriesFactory(module: number, fetchFn: typeof fetch = fetch)
 	 */
 
 	async function getCategories(): Promise<XioniResponse<XioniShop.Category[]>> {
-		const { status, data } = await xioniFetch(['shop', module, 'categories'])
+		const response = await xioniFetch(['shop', module, 'categories'])
 
-		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
+		return response.status === FetchResponseStatus.SUCCESS
+			? [response.data as XioniShop.Category[], undefined]
+			: [undefined, response as XioniFetchErrorResponse]
 	}
 
 	/**
@@ -25,9 +28,11 @@ export function CategoriesFactory(module: number, fetchFn: typeof fetch = fetch)
 	 */
 
 	async function getCategory(id: number): Promise<XioniResponse<XioniShop.Category>> {
-		const { status, data } = await xioniFetch(['shop', module, 'categories', id])
+		const response = await xioniFetch(['shop', module, 'categories', id])
 
-		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
+		return response.status === FetchResponseStatus.SUCCESS
+			? [response.data as XioniShop.Category, undefined]
+			: [undefined, response as XioniFetchErrorResponse]
 	}
 
 	return {

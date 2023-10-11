@@ -1,19 +1,25 @@
 <script lang="ts">
-	import './XioniShopNav.scss'
+	import './XioniShopNav.css'
 
 	import { goto } from '$app/navigation'
 	import classnames from 'classnames'
+
+	// --- [ Types ] ---------------------------------------------------------------------------------
+
 	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
 
-	// --- Data --------------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let category: XioniShop.Category
 	export let categories: XioniShop.Category[]
 	export let basePath = '/shop/'
 
+	// -----------------------------------------------------------------------------------------------
+
 	const baseName = $$props['ex-class'] || 'XioniShopNav'
 	const className = classnames(baseName, $$props.class)
 
+	// Bindings
 	let categorySelection: string
 
 	function gotoCategory() {

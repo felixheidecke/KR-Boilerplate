@@ -1,3 +1,3 @@
-import type { XioniFetchClientErrorResponse } from '../xioni-fetch/types'
+import type { XioniFetchErrorResponse } from '../xioni-fetch/types'
 
-export type XioniResponse<T> = [XioniFetchClientErrorResponse, undefined] | [undefined, T]
+export type XioniResponse<T = unknown> = [T, undefined] | [undefined, XioniFetchErrorResponse]

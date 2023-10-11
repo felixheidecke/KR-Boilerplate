@@ -11,35 +11,34 @@
 
 	const { id, name, category, price, vat, image } = $$props.product as XioniShop.Product
 
-	// --- [ Logic ] ---------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
 
-	const baseName = $$props['ex-class'] || 'XioniShopProductTile'
-	const className = classnames(baseName, $$props.class)
+	const className = 'XioniShopProductTile'
 </script>
 
 {#if id}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div data-component class={className} on:click>
+	<div class={classnames(className, $$props.class)} on:click>
 		<img
-			class="{baseName}__image"
+			class="{className}__image"
 			src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
 			alt={name || 'Kein Produktbild'}
 			title={name || 'Kein Produktbild'}
 			loading="lazy" />
 
-		<div class="{baseName}__data">
+		<div class="{className}__data">
 			<h4 class="$m-0 $p-0">
 				{name}
 			</h4>
 			{#if category}
 				<h5 class="$m-0 $p-0">
-					<span class="{baseName}__category">{category.name}</span>
+					<span class="{className}__category">{category.name}</span>
 				</h5>
 			{/if}
-			<div class="{baseName}__price">
+			<div class="{className}__price">
 				{price.formatted}
 			</div>
-			<div class="{baseName}__tax">
+			<div class="{className}__tax">
 				inkl. {vat.formatted} MwSt.
 			</div>
 		</div>

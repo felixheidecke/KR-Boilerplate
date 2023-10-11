@@ -3,13 +3,19 @@
 	import classnames from 'classnames'
 
 	export let type: 'error' | 'info' | 'success' | undefined = undefined
-	export let title = 'Hinweis'
+	export let title: string | undefined = undefined
+	export let inline = false
 
 	// --- CSS Class --------------------
 
 	const baseName = $$props['ex-class'] || 'Message'
 
-	$: className = classnames(baseName, $$props.class, !type || baseName + '--' + type)
+	$: className = classnames(
+		baseName,
+		$$props.class,
+		!type || baseName + '--' + type,
+		!inline || baseName + '--inline'
+	)
 </script>
 
 <div class={className}>

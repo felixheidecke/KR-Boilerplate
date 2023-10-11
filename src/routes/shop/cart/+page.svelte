@@ -6,35 +6,34 @@
 
 	import Button from '$lib/boilerplate/components/Button/Button.svelte'
 	import Client from '$lib/boilerplate/components/Client/Client.svelte'
-	import XioniShopCartTable from '$lib/boilerplate/components/XioniShopCartTable/XioniShopCartTable.svelte'
+	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
+	import CartTable from '$lib/boilerplate/components/XioniShopCartTable/XioniShopCartTable.svelte'
 
 	// -----------------------------------------------------------------------------------------------
 
 	let isLoading: boolean = false
-	const module: number = $$props.data.module
 
-	async function updateCart(id: number, quantity: number) {
+	function updateCart(id: number, quantity: number) {
 		isLoading = true
-		const [error, cart] = await Cart.updateItemQuantity(id, quantity)
 
-		if (error) {
-			console.error(error)
-			return
-		}
-
-		CART.set(cart)
-		isLoading = false
+		Cart.updateItemQuantity(id, quantity)
+		Cart.$event
+			.once('updated', cart => {
+				isLoading = false
+				CART.set(cart)
+			})
+			.once('error', () => (isLoading = false))
 	}
 </script>
 
 <h1>Warenkorb</h1>
 <Client browser>
-	{#if !$CART.products.length}
+	{#if !$CART.products?.length}
 		<h4>Ihr Warenkorb ist noch leer.</h4>
 		<Link to="/shop" icon="fas fa-store">Zum Shop</Link>
 	{:else}
-		<XioniShopCartTable
+		<CartTable
 			products={$CART.products}
 			supplementalCost={$CART.supplementalCost}
 			shippingCost={$CART.shippingCost}
@@ -43,6 +42,16 @@
 			readOnly={isLoading}
 			on:product-quantity-update={({ detail }) => updateCart(detail.productId, detail.quantity)} />
 
-		<Button to="/shop/checkout/address">Weiter zur Kasse</Button>
+		<Grid gap>
+			<Grid size="1-2">
+				<Button icon="fas fa-angle-left" class="$mt-2" to="/shop">Zurück zum Shop</Button>
+			</Grid>
+			<Grid size="1-2" class="$text-right">
+				<Button
+					icon="fas fa-angle-right"
+					class="Button--primary $mt-2 $row-reverse"
+					to="/shop/checkout/address">Weiter zur Kasse</Button>
+			</Grid>
+		</Grid>
 	{/if}
 </Client>

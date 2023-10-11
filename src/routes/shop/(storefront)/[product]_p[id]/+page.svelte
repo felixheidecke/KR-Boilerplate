@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { CART } from '../stores'
-	import { Cart } from '../api'
+	import { CART } from '../../stores'
+	import { Cart } from '../../api'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -12,8 +12,10 @@
 
 	export let data
 
+	// -----------------------------------------------------------------------------------------------
+
 	async function addToCart(id: number) {
-		const [error, cart] = await Cart.addItem(id)
+		const [cart, error] = await Cart.addItem(id)
 
 		if (error) {
 			console.error(error)

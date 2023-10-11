@@ -1,6 +1,6 @@
 {
 	"name": "boilerplate.ts",
-	"version": "4.12.2",
+	"version": "5.0.0.Beta",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -39,6 +39,7 @@
 		"axios": "^1.5.0",
 		"classnames": "^2.3.2",
 		"date-fns": "^2.30.0",
+		"eventemitter3": "^5.0.1",
 		"in-view": "^0.6.1",
 		"lodash-es": "^4.17.21",
 		"opening_hours": "^3.8.0",

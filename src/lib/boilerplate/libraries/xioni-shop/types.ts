@@ -37,16 +37,49 @@ export namespace XioniShop {
 		description?: string
 	}
 
-	export interface CheckoutOrder {
-		type: 'Rechnung' | 'Vorkasse'
-		invoice?: {
-			salutation: string
+	export interface Order {
+		paymentType: string
+		date?: Date
+		transactionId?: string
+		total: {
+			value: number
+			formatted: string
+		}
+		shippingCost: {
+			value: number
+			formatted: string
+		}
+		cart: {
+			id: number
+			name: string
+			code: string
+			quantity: number
+			price: {
+				value: number
+				formatted: string
+			}
+			total: {
+				value: number
+				formatted: string
+			}
+		}[]
+		message: string
+		address: {
+			company?: string
+			salutation: 'Herr' | 'Frau'
 			firstname: string
 			name: string
 			address: string
 			zip: string
 			city: string
 			email: string
+			phone: string
+			shipmentCompany?: string
+			shipmentName?: string
+			shipmentAddress?: string
+			shipmentZip?: string
+			shipmentCity?: string
+			shipmentPhone?: string
 		}
 	}
 

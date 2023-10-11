@@ -1,7 +1,7 @@
-export interface XioniFetchClientErrorResponse {
+import type { FetchResponse } from '../fetch-json/types'
+
+export type XioniFetchErrorResponse = FetchResponse<{
 	message: string
-	error: string
-	statusCode: number
 	code?: string
-	payload?: { [key: string]: string }
-}
+	payload?: [string, string][]
+}>

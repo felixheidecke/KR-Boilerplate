@@ -11,8 +11,10 @@ export default function (fetchFn: typeof fetch = fetch) {
 
 		const remoteURL = new URL(url)
 		const method = params.method || FetchMethods.GET
-		const headers = { 'Content-Type': 'application/json', ...params.headers }
 		const body = params.data ? JSON.stringify(params.data) : undefined
+		const headers = !body
+			? { ...params.headers }
+			: { 'Content-Type': 'application/json', ...params.headers }
 
 		if (params.params && Object.keys(params.params).length) {
 			remoteURL.search = new URLSearchParams(params.params as any).toString()

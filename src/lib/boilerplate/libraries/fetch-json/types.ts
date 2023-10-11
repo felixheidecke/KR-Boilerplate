@@ -14,8 +14,8 @@ export interface FetchParams {
 	data?: object
 }
 
-export interface FetchResponse {
-	data: any
+export interface FetchResponse<T = unknown> {
+	data: T
 	status: FetchResponseStatus
 	statusCode: number
 	url: string

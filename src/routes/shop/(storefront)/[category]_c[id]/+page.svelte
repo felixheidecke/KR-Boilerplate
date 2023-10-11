@@ -6,27 +6,22 @@
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import XioniShopProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let data
-
-	$: category = data.category as XioniShop.Category
-	$: products = data.products as XioniShop.Product[]
 </script>
 
 <Client browser>
 	<h1>
-		{category.name || 'Kategorie'}
+		{data.category.name || 'Kategorie'}
 	</h1>
 
-	{#if category.description}
-		{@html category.description}
+	{#if data.category.description}
+		{@html data.category.description}
 	{/if}
 
 	<Grid gap>
-		{#each products as product, index (product.id)}
+		{#each data.products as product, index (product.id)}
 			<Grid size="1-3" data-index={index}>
 				<Link class="$decoration-none" to="/shop/{product.slug}_p{product.id}">
 					<XioniShopProductTile {product} />

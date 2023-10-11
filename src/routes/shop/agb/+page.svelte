@@ -1,10 +1,15 @@
 <script>
+	// --- [ Components ] ----------------------------------------------------------------------------
+
 	import Address from '$lib/boilerplate/components/Address/Address.svelte'
+
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	const { stammdaten, info } = $$props.data
 
+	// -----------------------------------------------------------------------------------------------
+
 	const shippingRates = info.shippingRates || []
-	const shippingCharges = info.shippingCharges
 	const freeShippingThreshold = info.shippingCharges?.freeShippingThreshold
 	const additionalCost = info.shippingCharges?.additionalCost
 </script>

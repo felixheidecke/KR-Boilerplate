@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { shopPath } from './config.js'
+	import { shopPath } from '../config.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -7,6 +7,8 @@
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import ShopProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
+
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let data
 </script>

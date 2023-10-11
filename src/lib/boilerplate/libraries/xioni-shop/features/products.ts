@@ -29,8 +29,8 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 		})
 
 		return status === FetchResponseStatus.SUCCESS
-			? [undefined, data as XioniShop.Product[]]
-			: [data as XioniFetchClientErrorResponse, undefined]
+			? [data as XioniShop.Product[], undefined]
+			: [undefined, data as XioniFetchClientErrorResponse]
 	}
 
 	/**
@@ -44,8 +44,8 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 		const { status, data } = await xioniFetch(['shop', module, 'products', id])
 
 		return status === FetchResponseStatus.SUCCESS
-			? [undefined, data as XioniShop.Product]
-			: [data as XioniFetchClientErrorResponse, undefined]
+			? [data as XioniShop.Product, undefined]
+			: [undefined, data as XioniFetchClientErrorResponse]
 	}
 
 	/**
@@ -66,8 +66,8 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 		)
 
 		return status === FetchResponseStatus.SUCCESS
-			? [undefined, data as XioniShop.Product[]]
-			: [data as XioniFetchClientErrorResponse, undefined]
+			? [data as XioniShop.Product[], undefined]
+			: [undefined, data as XioniFetchClientErrorResponse]
 	}
 
 	/**
@@ -88,8 +88,8 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 		const { status, data } = await xioniFetch(['shop', module, 'products'], { params })
 
 		return status === FetchResponseStatus.SUCCESS
-			? [undefined, data as XioniShop.Product[]]
-			: [data as XioniFetchClientErrorResponse, undefined]
+			? [data as XioniShop.Product[], undefined]
+			: [undefined, data as XioniFetchClientErrorResponse]
 	}
 
 	return {
