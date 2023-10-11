@@ -52,16 +52,12 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { endsAfter: filter.endsAfter.toDateString() })
 		}
 
-		if (filter.parts) {
-			Object.assign(params, { parts: filter.parts.join() })
-		}
+		const response = await xioniFetch(['cms/events', module], { params })
 
-		const { status, data } = await xioniFetch(['events', module], { params })
-
-		if (status === FetchResponseStatus.SUCCESS) {
-			return [undefined, data.map(eventAdapter)]
+		if (response.status === FetchResponseStatus.SUCCESS) {
+			return [response.data.map(eventAdapter), undefined]
 		} else {
-			return [data, undefined]
+			return [undefined, response]
 		}
 	}
 
@@ -73,12 +69,12 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getEvent(id: number): Promise<XioniResponse<XioniEvent>> {
-		const { status, data } = await xioniFetch(['event', id])
+		const response = await xioniFetch(['cms/event', id])
 
-		if (status === FetchResponseStatus.SUCCESS) {
-			return [undefined, eventAdapter(data)]
+		if (response.status === FetchResponseStatus.SUCCESS) {
+			return [eventAdapter(response.data), undefined]
 		} else {
-			return [data, undefined]
+			return [undefined, response]
 		}
 	}
 

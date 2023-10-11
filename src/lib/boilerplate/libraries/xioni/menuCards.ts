@@ -14,9 +14,11 @@ export default function XioniMenuCard(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getMenuCard(module: number): Promise<XioniResponse<XioniMenuCard>> {
-		const { status, data } = await fetchJSON([XIONI_API_URL, 'menu-card', module])
+		const response = await fetchJSON([XIONI_API_URL, 'cms/menu-card', module])
 
-		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
+		return response.status === FetchResponseStatus.SUCCESS
+			? [response.data, undefined]
+			: [undefined, response]
 	}
 
 	return {

@@ -16,7 +16,7 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 
 	async function getArticles(
 		module: number,
-		filter: { limit?: number; parts?: 'content'[]; status?: 'live' | 'archived' } = {}
+		filter: { limit?: number; status?: 'live' | 'archived' } = {}
 	): Promise<XioniResponse<XioniArticle[]>> {
 		const params = {}
 
@@ -24,20 +24,16 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		if (filter.parts) {
-			Object.assign(params, { parts: filter.parts.join() })
-		}
-
 		if (filter.status) {
 			Object.assign(params, { status: filter.status })
 		}
 
-		const { status, data } = await xioniFetch(['articles', module], { params })
+		const response = await xioniFetch(['cms/articles', module], { params })
 
-		if (status === FetchResponseStatus.SUCCESS) {
-			return [undefined, data.map(articleAdapter)]
+		if (response.status === FetchResponseStatus.SUCCESS) {
+			return [response.data.map(articleAdapter), undefined]
 		} else {
-			return [data, undefined]
+			return [undefined, response]
 		}
 	}
 
@@ -54,16 +50,12 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 	): Promise<XioniResponse<XioniArticle>> {
 		const params = {}
 
-		if ('full' in filter) {
-			Object.assign(params, { full: filter.full })
-		}
+		const response = await xioniFetch(['cms/article', id])
 
-		const { status, data } = await xioniFetch(['article', id], { params })
-
-		if (status === FetchResponseStatus.SUCCESS) {
-			return [undefined, articleAdapter(data)]
+		if (response.status === FetchResponseStatus.SUCCESS) {
+			return [articleAdapter(response.data), undefined]
 		} else {
-			return [data, undefined]
+			return [undefined, response]
 		}
 	}
 
@@ -85,12 +77,12 @@ export default function XioniArticles(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		const { status, data } = await xioniFetch(['articles'], { params })
+		const response = await xioniFetch(['articles'], { params })
 
-		if (status === FetchResponseStatus.SUCCESS) {
-			return [undefined, data.map(articleAdapter)]
+		if (response.status === FetchResponseStatus.SUCCESS) {
+			return [response.data.map(articleAdapter), undefined]
 		} else {
-			return [data, undefined]
+			return [undefined, response]
 		}
 	}
 

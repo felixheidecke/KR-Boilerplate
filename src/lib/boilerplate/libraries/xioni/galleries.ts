@@ -15,9 +15,11 @@ export default function XioniGallery(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getGallery(module: number): Promise<XioniResponse<XioniGallery>> {
-		const { status, data } = await fetchJSON([XIONI_API_URL, 'gallery', module])
+		const response = await fetchJSON([XIONI_API_URL, 'cms/gallery', module])
 
-		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
+		return response.status === FetchResponseStatus.SUCCESS
+			? [response.data, undefined]
+			: [undefined, response]
 	}
 
 	/**
@@ -28,9 +30,11 @@ export default function XioniGallery(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getAlbum(id: number): Promise<XioniResponse<XioniAlbum>> {
-		const { status, data } = await fetchJSON([XIONI_API_URL, 'gallery/album', id])
+		const response = await fetchJSON([XIONI_API_URL, 'cms/gallery/album', id])
 
-		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
+		return response.status === FetchResponseStatus.SUCCESS
+			? [response.data, undefined]
+			: [undefined, response]
 	}
 
 	return {
