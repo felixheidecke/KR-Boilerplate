@@ -1,5 +1,10 @@
 # Patch Notes
 
+## Version `4.12.3`
+
+- Remove unused Axios lib
+- Update dependencies
+
 ## Version `4.12.2`
 
 - Add `width`, `height` & `placeholder` props to `Picture` component
