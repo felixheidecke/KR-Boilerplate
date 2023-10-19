@@ -38,8 +38,9 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function updateOrder(update: {
 		address?: XioniShop.Order['address']
+		shippingAddress?: XioniShop.Order['shippingAddress'] | null
 		paymentType?: XioniShop.Order['paymentType']
-		message?: XioniShop.Order['message']
+		message?: XioniShop.Order['message'] | null
 	}): Promise<XioniResponse<XioniShop.Order>> {
 		const response = await xioniFetch(['shop', module, 'order'], {
 			method: FetchMethods.PATCH,

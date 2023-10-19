@@ -74,12 +74,14 @@ export namespace XioniShop {
 			city: string
 			email: string
 			phone: string
-			shipmentCompany?: string
-			shipmentName?: string
-			shipmentAddress?: string
-			shipmentZip?: string
-			shipmentCity?: string
-			shipmentPhone?: string
+		}
+		shippingAddress?: {
+			company?: string
+			name: string
+			address: string
+			zip: string
+			city: string
+			phone: string
 		}
 	}
 
@@ -93,7 +95,7 @@ export namespace XioniShop {
 		isHighlight: boolean
 		description?: string
 		teaser?: string
-		legalInfo?: string
+		legal?: string
 		image?: {
 			src: string
 			largeSrc: string

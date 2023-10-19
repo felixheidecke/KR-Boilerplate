@@ -4,13 +4,15 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Client from '$lib/boilerplate/components/Client/Client.svelte'
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import XioniShopProduct from '$lib/boilerplate/components/XioniShopProduct/XioniShopProduct.svelte'
+	import messages from '$lib/messages'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let data
+
+	const { product } = data
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -18,20 +20,17 @@
 		const [cart, error] = await Cart.addItem(id)
 
 		if (error) {
-			console.error(error)
-			return
+			messages.add(error.data.message, { type: 'error' })
+		} else {
+			CART.set(cart)
 		}
-
-		CART.set(cart)
 	}
 </script>
 
-<Client browser>
-	{#if data.product}
-		<XioniShopProduct product={data.product} on:addToCart={({ detail: id }) => addToCart(id)} />
+{#if product}
+	<XioniShopProduct {product} on:addToCart={({ detail: id }) => addToCart(id)} />
 
-		<div class="$text-center">
-			<Link icon="fas fa-reply" on:click={() => history.back()}>Zurück</Link>
-		</div>
-	{/if}
-</Client>
+	<div class="$text-center">
+		<Link icon="fas fa-reply" on:click={() => history.back()}>Zurück</Link>
+	</div>
+{/if}

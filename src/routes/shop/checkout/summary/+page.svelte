@@ -22,6 +22,7 @@
 	let showRedirectInfo = false
 	$: products = $CART.products || {}
 	$: address = $ORDER.address || {}
+	$: shippingAddress = $ORDER.shippingAddress || null
 
 	function handleErrors(errors: any) {
 		console.log(errors)
@@ -49,23 +50,23 @@
 	})
 </script>
 
-<h1 class="h2 $text-center">Zusammenfassung</h1>
+<h2>Zusammenfassung</h2>
 
 {#if showRedirectInfo}
-	<Message title="Bitte warten" type="success">Sie werden in kürze Weitergeleitet.</Message>
+	<Message title="Bitte warten" type="success">Sie werden in Kürze weitergeleitet.</Message>
 {:else if isEmpty(products)}
 	<Message title="Ihr Warenkorb ist leer!" type="error">
-		<Link to="/shop">Zurück zum Shop</Link>
+		<Link to="/shop">zurück zum Shop</Link>
 	</Message>
 {:else if isEmpty(address)}
 	<Message title="Rechnungs- und Lieferadresse fehlt!" type="error">
-		<Link to="/shop/checkout/address">Jetzt Adresse eingeben</Link>
+		<Link to="/shop/checkout/address">jetzt Adresse eingeben</Link>
 	</Message>
 {:else}
 	<p>Bitte überprüfen Sie die Daten auf Richtigkeit, bevor Sie die Bestellung abschließen.</p>
 
 	<Grid gap>
-		<Grid size="1-2">
+		<Grid size="tablet-1-2">
 			<h3>Rechnungsadresse</h3>
 			{#if address.company}
 				{address.company}<br />
@@ -83,15 +84,19 @@
 			{/if}
 			E-Mail: {address.email}
 		</Grid>
-		<Grid size="1-2">
+		<Grid size="tablet-1-2">
 			<h3>Versandadresse</h3>
-			{#if address.shipmentCompany}
-				{address.shipmentCompany}<br />
+			{#if shippingAddress}
+				{#if shippingAddress.company}
+					{shippingAddress.company}<br />
+				{/if}
+				<strong>{shippingAddress.name}</strong><br />
+				{shippingAddress.address}<br />
+				{shippingAddress.zip}
+				{shippingAddress.city}
+			{:else}
+				<i>Entsprich Rechnungsadresse</i>
 			{/if}
-			<strong>{address.shipmentName}</strong><br />
-			{address.shipmentAddress}<br />
-			{address.shipmentZip}
-			{address.shipmentCity}
 		</Grid>
 		<Grid size>
 			<Link icon="fas fa-pen" to="./address">anpassen</Link>

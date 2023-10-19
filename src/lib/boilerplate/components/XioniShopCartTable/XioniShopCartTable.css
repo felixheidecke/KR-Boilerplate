@@ -1,4 +1,5 @@
 :where(.XioniShopCartTable) {
+	width: 100%;
 	border: 1px solid lightgray;
 }
 

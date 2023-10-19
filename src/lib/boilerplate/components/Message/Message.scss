@@ -5,6 +5,7 @@
 	border: 1px solid #7c7c7c;
 	color: darken(rgb(34, 34, 34), 0.666);
 	text-align: center;
+	position: relative;
 }
 
 :where(.Message__title) {
@@ -37,4 +38,17 @@
 
 :where(.Message--inline .Message__title) {
 	margin: 0;
+}
+
+:where(.Message--closable) {
+	padding-right: 1.25rem;
+}
+
+:where(.Message__close-button) {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(33%, -33%);
+	padding: 0.5rem;
+	cursor: pointer;
 }

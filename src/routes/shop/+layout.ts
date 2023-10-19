@@ -2,8 +2,6 @@ import { Cart, Categories } from './api'
 import xioniLoader from '$lib/boilerplate/utils/xioni-loader'
 import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
 
-Cart.$event.on('success', () => console.log('WUFF'))
-
 export const load = async function () {
 	Cart.getCart()
 

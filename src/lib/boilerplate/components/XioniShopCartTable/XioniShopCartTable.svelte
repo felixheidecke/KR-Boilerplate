@@ -30,7 +30,7 @@
 	}
 </script>
 
-<table class="XioniShopCartTable $w-full {$$props.class}">
+<table class="XioniShopCartTable">
 	<thead>
 		<tr>
 			<th>Produkt</th>
@@ -63,17 +63,17 @@
 				<td class="$text-right">{total.formatted}</td>
 			</tr>
 		{/each}
-		{#if supplementalCost}
-			<tr>
-				<td colspan="3">{supplementalCost.title}</td>
-				<td class="$text-right">{supplementalCost.formatted}</td>
-			</tr>
-		{/if}
 	</tbody>
 	<tfoot>
 		<tr aria-hidden>
 			<td colspan="4"><hr class="$m-0" /></td>
 		</tr>
+		{#if supplementalCost}
+			<tr>
+				<td colspan="3" class="$text-right $font-bold">{supplementalCost.title}:</td>
+				<td class="$text-right">{supplementalCost.formatted}</td>
+			</tr>
+		{/if}
 		<tr>
 			<td colspan="3" class="$text-right $font-bold">Versand:</td>
 			<td class="$text-right">{shippingCost.formatted}</td>

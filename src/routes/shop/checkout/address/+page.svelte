@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { ORDER, CART } from '../../stores'
 	import { goto } from '$app/navigation'
+	import { isEmpty, omitBy } from 'lodash-es'
+	import { onDestroy, onMount } from 'svelte'
+	import { ORDER, CART } from '../../stores'
 	import { shopPath } from '../../config'
 	import { Order } from '../../api'
-	import { onDestroy, onMount } from 'svelte'
+	import MESSAGES from '$lib/messages'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -22,51 +24,40 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	let showShippingAddressForm = false
-	let formErrors = new Map()
-
 	// Form bindings
-	let address = { ...($ORDER.address || null) }
-	let message = ''
+	let address = { ...$ORDER.address } || {}
+	let shippingAddress = { ...$ORDER.shippingAddress } || {}
+	let message = $ORDER.message || ''
 
-	function handleErrors(errors: XioniFetchErrorResponse) {
-		formErrors = new Map(errors.data.payload)
+	let showShippingForm = !!$ORDER.shippingAddress
+	let formErrors = {} as { [key: string]: string[] }
+
+	function toggleShippingForm() {
+		if (showShippingForm) {
+			showShippingForm = false
+			shippingAddress = {}
+		} else {
+			showShippingForm = true
+		}
 	}
 
-	function handleUpdated() {
-		goto(shopPath + '/checkout/summary')
-	}
+	async function updateCart() {
+		const addressData = omitBy(address, isEmpty) as any
+		const shippingAddressData = omitBy(shippingAddress, isEmpty) as any
 
-	function updateCart() {
-		if (!showShippingAddressForm) {
-			populateShippingAddress
+		const [_, errors] = await Order.updateOrder({
+			address: addressData,
+			shippingAddress: !isEmpty(shippingAddress) ? shippingAddressData : null,
+			message: message.trim() || null
+		})
+
+		if (errors) {
+			formErrors = errors.data.payload as unknown as typeof formErrors
+			return
 		}
 
-		Order.updateOrder({ address, message })
+		goto(shopPath + '/checkout/summary')
 	}
-
-	function populateShippingAddress() {
-		address.shipmentCompany = address.company
-		address.shipmentName = `${address.firstname} ${address.name}`
-		address.shipmentZip = address.zip
-		address.shipmentAddress = address.address
-		address.shipmentCity = address.city
-		address.shipmentPhone = address.phone
-	}
-
-	onMount(() => {
-		// prettier-ignore
-		Order.$event
-			.on('error', handleErrors)
-			.on('updated', handleUpdated)
-	})
-
-	onDestroy(() => {
-		// prettier-ignore
-		Order.$event
-			.off('error', handleErrors)
-			.off('updated', handleUpdated)
-	})
 </script>
 
 <h1 class="h2">Kasse</h1>
@@ -75,10 +66,20 @@
 	Der Gesamtrechnungsbetrag von <span class="$decoration-double-underline">
 		{$CART.total?.formatted}
 	</span>
-	wird per Vorauskasse beglichen.<br />
+	wird per Vorkasse beglichen.
 </p>
 
 <h2 class="h3">Rechnungsanschrift</h2>
+
+{#if formErrors.address}
+	<Message title="⛔️ Eingabefehler" type="error" class="$mb">
+		<ul>
+			{#each formErrors.address as error}
+				<li>{error}</li>
+			{/each}
+		</ul>
+	</Message>
+{/if}
 
 <Grid gap>
 	<Grid size="1">
@@ -88,39 +89,19 @@
 		<Select bind:value={address.salutation} options={['Herr', 'Frau']} label="Anrede" />
 	</Grid>
 	<Grid size="2-5">
-		<Input
-			bind:value={address.firstname}
-			name="firstname"
-			label="Vorname"
-			error={formErrors.get('firstname')}
-			required />
+		<Input bind:value={address.firstname} name="firstname" label="Vorname" required />
 	</Grid>
 	<Grid size="2-5">
-		<Input
-			bind:value={address.name}
-			name="lastname"
-			label="Nachname"
-			error={formErrors.get('name')}
-			required />
+		<Input bind:value={address.name} name="lastname" label="Nachname" required />
 	</Grid>
 	<Grid size>
-		<Input
-			bind:value={address.address}
-			name="address"
-			label="Straße & Hausnummer"
-			error={formErrors.get('address')}
-			required />
+		<Input bind:value={address.address} name="address" label="Straße & Hausnummer" required />
 	</Grid>
 	<Grid size="1-3">
-		<Input bind:value={address.zip} name="zip" label="PLZ" error={formErrors.get('zip')} required />
+		<Input bind:value={address.zip} name="zip" label="PLZ" required />
 	</Grid>
 	<Grid size="2-3">
-		<Input
-			bind:value={address.city}
-			name="city"
-			label="Ort"
-			error={formErrors.get('city')}
-			required />
+		<Input bind:value={address.city} name="city" label="Ort" required />
 	</Grid>
 	<Grid size="1">
 		<Input
@@ -128,65 +109,67 @@
 			bind:value={address.phone}
 			name="phone"
 			label="Telefonnummer"
-			error={formErrors.get('phone')}
 			required />
 	</Grid>
 	<Grid size="1">
-		<Input
-			bind:value={address.email}
-			error={formErrors.get('email')}
-			name="email"
-			label="E-Mail-Adresse"
-			required />
-	</Grid>
-	<Grid size="1">
-		<Textarea bind:value={message} rows="2" name="message" label="Nachricht" />
+		<Input bind:value={address.email} name="email" label="E-Mail-Adresse" required />
 	</Grid>
 </Grid>
 
 <Checkbox
 	class="$my"
-	checked={!showShippingAddressForm}
-	on:change={() => (showShippingAddressForm = !showShippingAddressForm)}
+	checked={!showShippingForm}
+	on:change={toggleShippingForm}
 	label="Lieferadresse entspricht der Rechnungsadresse" />
 
-{#if showShippingAddressForm}
+{#if showShippingForm}
 	<h2 class="h3">Lieferadresse</h2>
+
+	{#if formErrors.shippingAddress}
+		<Message title="⛔️ Eingabefehler" type="error" class="$mb">
+			<ul>
+				{#each formErrors.shippingAddress as error}
+					<li>{error}</li>
+				{/each}
+			</ul>
+		</Message>
+	{/if}
 
 	<Grid gap>
 		<Grid size>
-			<Input bind:value={address.shipmentCompany} label="Firma" />
+			<Input bind:value={shippingAddress.company} label="Firma" />
 		</Grid>
 		<Grid size>
-			<Input bind:value={address.shipmentName} label="Vor- und Nachname" required />
+			<Input bind:value={shippingAddress.name} label="Vor- und Nachname" required />
 		</Grid>
 		<Grid size>
-			<Input bind:value={address.shipmentAddress} label="Straße & Hausnummer" required />
+			<Input bind:value={shippingAddress.address} label="Straße & Hausnummer" required />
 		</Grid>
 		<Grid size="1-3">
-			<Input bind:value={address.shipmentZip} label="PLZ" required />
+			<Input bind:value={shippingAddress.zip} name="zip" label="PLZ" required />
 		</Grid>
 		<Grid size="2-3">
-			<Input bind:value={address.shipmentCity} label="Ort" required />
+			<Input bind:value={shippingAddress.city} label="Ort" required />
 		</Grid>
 	</Grid>
 {/if}
 
-{#if formErrors.size}
-	<Message title="" type="error" class="$font-small $mb">
-		<ul>
-			{#each formErrors as [_, error]}
-				<li>{error}</li>
-			{/each}
-		</ul>
+<div class="$mt-3">
+	<h3 class="h4">Ihre Nachricht</h3>
 
-		Bitte füllen Sie alle Felder korrekt aus.</Message>
-{/if}
+	{#if formErrors.message}
+		<Message title="" type="error" class="$mb">
+			{formErrors.message[0]}
+		</Message>
+	{/if}
+
+	<Textarea bind:value={message} rows="4" name="message" label="Nachricht" />
+</div>
 
 <div class="$mt-2">
-	<Button icon="fas fa-angle-left" class="$mt-2" to="/shop">Zurück zum Shop</Button>
+	<Button icon="fas fa-angle-left" to="/shop">zurück zum Shop</Button>
 	<Button
 		icon="fas fa-angle-right"
 		class="Button--primary $float-right $row-reverse"
-		on:click={updateCart}>Weiter zur Zusammenfassung</Button>
+		on:click={updateCart}>weiter zur Zusammenfassung</Button>
 </div>

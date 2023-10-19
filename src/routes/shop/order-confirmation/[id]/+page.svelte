@@ -17,77 +17,67 @@
 	const address = order.address
 </script>
 
-<div>
-	<h1 class="h3">Vielen Dank für Ihre Bestellung</h1>
+<h3>Vielen Dank für Ihre Bestellung</h3>
 
-	<Grid>
-		<Grid size="1-2">
-			<ol>
-				{#if address.company}
-					<li class="$mb-1/4">{address.company}</li>
-				{/if}
-				<li class="$mb-1/4">
-					<strong>{address.salutation} {address.firstname} {address.name}</strong>
-				</li>
-				<li>{address.address}</li>
-				<li>{address.zip} {address.city}</li>
-			</ol>
-		</Grid>
-		<Grid size="1-2" class="$text-right">
-			<ul>
-				<li>
-					Transaktion: {order.transactionId?.toUpperCase()}
-				</li>
-				<li>
-					Datum: {date}
-				</li>
-				<li>
-					Zahlart: {order.paymentType}
-				</li>
-			</ul>
-		</Grid>
-		<Grid size>
-			<table class="$w-full">
-				<thead>
-					<tr>
-						<th>Produkt</th>
-						<th>Menge</th>
-						<th>Preis</th>
-						<th>Gesamt</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each order.cart as product}
-						<tr>
-							<td>{product.name}</td>
-							<td class="$text-center">{product.quantity}</td>
-							<td class="$text-right">{product.price.formatted}</td>
-							<td class="$text-right">{product.total.formatted}</td>
-						</tr>
-					{/each}
-				</tbody>
-				<tfoot>
-					{#if order.shippingCost}
-						<tr>
-							<td colspan="3" class="$pt $text-right $font-bold">Versandkosten</td>
-							<td class="$pt $text-right">{order.shippingCost.formatted}</td>
-						</tr>
-					{/if}
-					<tr>
-						<td colspan="3" class="$pt $text-right $font-bold">Gesamt</td>
-						<td class="$pt $text-right">{order.total.formatted}</td>
-					</tr>
-				</tfoot>
-			</table>
-		</Grid>
+<Grid>
+	<Grid size="1-2">
+		<ol>
+			{#if address.company}
+				<li class="$mb-1/4">{address.company}</li>
+			{/if}
+			<li class="$mb-1/4">
+				<strong>{address.salutation} {address.firstname} {address.name}</strong>
+			</li>
+			<li>{address.address}</li>
+			<li>{address.zip} {address.city}</li>
+		</ol>
 	</Grid>
-	<Button icon="fas fa-print" on:click={() => window.print()}>Drucken</Button>
-</div>
-
-<style>
-	div {
-		max-width: 48rem;
-		margin: 0 auto;
-		padding: 1rem;
-	}
-</style>
+	<Grid size="1-2" class="$text-right">
+		<ul>
+			<li>
+				Transaktion: {order.transactionId?.toUpperCase()}
+			</li>
+			<li>
+				Datum: {date}
+			</li>
+			<li>
+				Zahlart: {order.paymentType}
+			</li>
+		</ul>
+	</Grid>
+	<Grid size>
+		<table class="$w-full">
+			<thead>
+				<tr>
+					<th class="$text-left">Produkt</th>
+					<th>Menge</th>
+					<th class="$text-right">Preis</th>
+					<th class="$text-right">Gesamt</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each order.cart as product}
+					<tr>
+						<td>{product.name}</td>
+						<td class="$text-center">{product.quantity}</td>
+						<td class="$text-right">{product.price.formatted}</td>
+						<td class="$text-right">{product.total.formatted}</td>
+					</tr>
+				{/each}
+			</tbody>
+			<tfoot>
+				{#if order.shippingCost}
+					<tr>
+						<td colspan="3" class="$pt $text-right $font-bold">Versandkosten</td>
+						<td class="$pt $text-right">{order.shippingCost.formatted}</td>
+					</tr>
+				{/if}
+				<tr>
+					<td colspan="3" class="$pt $text-right $font-bold">Gesamt</td>
+					<td class="$pt $text-right">{order.total.formatted}</td>
+				</tr>
+			</tfoot>
+		</table>
+	</Grid>
+</Grid>
+<Button icon="fas fa-print" on:click={() => window.print()}>Drucken</Button>

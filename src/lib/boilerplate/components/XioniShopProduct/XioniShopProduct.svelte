@@ -23,7 +23,7 @@
 		teaser,
 		category,
 		description,
-		legalInfo,
+		legal,
 		pricePerUnit,
 		quantity,
 		price,
@@ -32,6 +32,8 @@
 	} = $$props.product as XioniShop.Product
 
 	// -----------------------------------------------------------------------------------------------
+
+	console.log($$props.product)
 
 	// Refs
 	let modal: Modal
@@ -91,25 +93,21 @@
 					{@html description}
 				{/if}
 
-				{#if legalInfo}
+				{#if legal}
 					<div class="{baseClass}__legal-info">
-						{@html legalInfo}
+						{@html legal}
 					</div>
 				{/if}
 			</Grid>
 		</Grid>
 	</div>
 
-	<Modal bind:this={modal} title="Shop">
-		<p>
-			<strong>{name}</strong>
-			wurde dem Warenkorb hinzugefügt.
-		</p>
-		<p>Wie soll es weiter gehen?</p>
+	<Modal bind:this={modal} title={name}>
+		<p>wurde dem Warenkorb hinzugefügt.</p>
+		<p>Wie soll es weitergehen?</p>
 		<div slot="footer">
-			<Button on:click={modal.close} to="/shop">Weiter Einkaufen</Button>
-			<Button on:click={modal.close} class="Button--primary $float-right" to="/shop/cart"
-				>Zum Warenkorb</Button>
+			<Button on:click={modal.close} to="/shop">weiter einkaufen</Button>
+			<Button on:click={modal.close} class="$float-right" to="/shop/cart">zum Warenkorb</Button>
 		</div>
 	</Modal>
 {/if}

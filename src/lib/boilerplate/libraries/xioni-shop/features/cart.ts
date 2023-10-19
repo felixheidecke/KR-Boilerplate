@@ -72,8 +72,6 @@ export function CartFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function addItem(id: number): Promise<XioniResponse<XioniShop.Cart>> {
-		event.emit('loading')
-
 		const response = await xioniFetch(['shop', module, 'cart'], {
 			method: FetchMethods.PUT,
 			data: { [id]: 1 }

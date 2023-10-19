@@ -16,5 +16,15 @@ export default [
 		path: '/datenschutz',
 		name: 'Datenschutz',
 		class: '$hidden@desktop-up'
+	},
+	{
+		path: '/shop/agb',
+		name: 'AGB',
+		class: '$hidden@desktop-up'
+	},
+	{
+		path: '/shop/widerrufsrecht',
+		name: 'Widerrufsrecht',
+		class: '$hidden@desktop-up'
 	}
 ]

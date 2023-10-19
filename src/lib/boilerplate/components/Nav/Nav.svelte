@@ -9,10 +9,16 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { Route } from '$lib/boilerplate/libraries/make-routes/types'
 	enum NavType {
 		SLIDE = 'slide',
 		BAR = 'bar'
+	}
+
+	type Route = {
+		path?: string
+		name: string
+		class?: string
+		routes?: Route[]
 	}
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -98,6 +104,7 @@
 
 <svelte:window on:scroll|passive={() => throttle(handleOffset, 250)} />
 
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <nav
 	bind:this={nav}
 	class={className}

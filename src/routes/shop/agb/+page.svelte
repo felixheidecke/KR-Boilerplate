@@ -1,17 +1,11 @@
 <script>
-	// --- [ Components ] ----------------------------------------------------------------------------
-
-	import Address from '$lib/boilerplate/components/Address/Address.svelte'
-
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const { stammdaten, info } = $$props.data
+	export let data
+
+	const { info } = data
 
 	// -----------------------------------------------------------------------------------------------
-
-	const shippingRates = info.shippingRates || []
-	const freeShippingThreshold = info.shippingCharges?.freeShippingThreshold
-	const additionalCost = info.shippingCharges?.additionalCost
 </script>
 
 <svelte:head>
@@ -19,6 +13,12 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
+<pre hidden>{JSON.stringify(info, 2, null)}</pre>
+
+<h1>Muster - Test - MUSTER - T E S T - muster - M U S T E R</h1>
+<hr />
+<h2>Marius: Kannst du uns eure AGB schicken?</h2>
+<hr />
 <h2>Allgemeine Geschäftsbedingungen</h2>
 <p>
 	1. Mit der Auftragserteilung erkennt der Käufer die folgenden allgemeinen Geschäftsbedingungen an.
@@ -77,7 +77,7 @@
 	Deutschlands frei Haus.
 </p>
 
-{#if shippingRates.length}
+<!-- {#if info.shippingCost.rates.length}
 	<h4>Versandkosten</h4>
 
 	{#if info.shippingCharges}
@@ -85,7 +85,7 @@
 	{/if}
 
 	<ol style="list-style: disc;" class="$pl-2">
-		{#each shippingRates as { weight, price }}
+		{#each info.shippingCost.rates as { weight, price }}
 			<li class="$mb-1/4"><b>{price.formatted}</b> bis einschl. {weight.formatted}</li>
 		{/each}
 	</ol>
@@ -102,7 +102,7 @@
 
 {#if freeShippingThreshold}
 	<p>Freier Versand <strong>ab {freeShippingThreshold.formatted}</strong></p>
-{/if}
+{/if} -->
 
 <p>
 	4. Alle Rechnungsbeträge sind ohne Abzug sofort fällig. Bei Zahlungsverzug erlauben wir uns,
@@ -128,66 +128,3 @@
 	Lieferung erfolgt gegen Vorauskasse unter Angabe der Auftragsnummer auf folgendes Konto:<br />
 	<span style="color:red">IBAN DE03 9999 7777 3333 5555 22</span>
 </p>
-<h3>Jugendschutz</h3>
-<p>
-	Nach §9 des Jugendschutzgesetzes ist es untersagt, Branntwein, branntweinhaltige Getränke oder
-	Lebensmittel, die Branntwein in nicht nur geringer Menge enthalten, an Kinder und Jugendliche
-	abzugeben. Nach §9 des JuSchG ist darüber hinaus auch untersagt, andere alkoholische Getränke an
-	Kinder und Jugendliche unter 16 Jahren abzugeben (so z.B. Wein, Bier und Sekt). Mit Anerkennung
-	der AGB bestätigen Sie, dass Sie mindestens 16 Jahre (Bestellung von Wein und Sekt) bzw. 18 Jahre
-	(Bestellung von Spirituosen) alt sind.
-</p>
-
-<h2>Widerrufsbelehrung</h2>
-<h3>Widerrufsrecht</h3>
-<p>
-	Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.
-</p>
-<p>
-	Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter
-	Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat.
-</p>
-<p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns</p>
-
-<Address {...stammdaten} email={undefined} web={undefined} />
-
-<p>
-	mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder eine E-Mail)
-	über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte
-	Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.
-</p>
-<p>
-	Sie können das Muster-Widerrufsformular oder eine andere eindeutige Erklärung downloaden,
-	ausfüllen und übermitteln. Machen Sie von dieser Möglichkeit Gebrauch, so werden wir Ihnen
-	unverzüglich (z. B. per E-Mail) eine Bestätigung über den Eingang eines solchen Widerrufs
-	übermitteln.
-</p>
-<p>
-	Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des
-	Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.
-</p>
-<h3>Folgen des Widerrufs</h3>
-<p>
-	Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten
-	haben, einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus
-	ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstigste
-	Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag
-	zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist.
-	Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen
-	Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart;
-	in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet. Wir können die
-	Rückzahlung verweigern, bis wir die Waren wieder zurückerhalten haben oder bis Sie den Nachweis
-	erbracht haben, dass Sie die Waren zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt
-	ist. Sie haben die Waren unverzüglich und in jedem Fall spätestens binnen vierzehn Tagen ab dem
-	Tag, an dem Sie uns über den Widerruf dieses Vertrags unterrichten, an uns zurückzusenden oder zu
-	übergeben. Die Frist ist gewahrt, wenn Sie die Waren vor Ablauf der Frist von vierzehn Tagen
-	absenden. Sie tragen die unmittelbaren Kosten der Rücksendung der Waren. Sie müssen für einen
-	etwaigen Wertverlust der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der
-	Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen
-	zurückzuführen ist.
-</p>
-<p>
-	<Link to="pdf/MusterWiderrufsformular.pdf" icon="fas fa-file-pdf" target="_blank"
-		>Widerrufsformular</Link>
-</p>
-<p><em>Ende der Widerrufsbelehrung</em></p>

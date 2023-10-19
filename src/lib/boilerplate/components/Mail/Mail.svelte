@@ -3,18 +3,14 @@
 
 	import classnames from 'classnames'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { MailProps } from './Mail.types'
-
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Icon from '../Icon/Icon.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let to: MailProps['to']
-	export let icon: MailProps['icon'] = 'fas fa-envelope'
+	export let to: string
+	export let icon: string | undefined = 'fas fa-envelope'
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -23,6 +19,7 @@
 	const className = classnames(baseName, $$props.class)
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <span on:click|preventDefault={() => (location.href = 'mailto:' + to)} class={className}>
 	{#if icon}
 		<Icon ex-class={baseName + '__icon'} name={icon} />

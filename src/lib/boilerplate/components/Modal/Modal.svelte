@@ -1,38 +1,49 @@
 <script lang="ts">
 	import './modal.scss'
+
 	import classnames from 'classnames'
 	import { createEventDispatcher } from 'svelte'
 	import { fade } from 'svelte/transition'
+
+	// --- [ Components ] ----------------------------------------------------------------------------
+
 	import Icon from '../Icon/Icon.svelte'
 
-	const emit = createEventDispatcher()
-
-	// --- Data -------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let title: string | null = null
 	export let isOpen = false
 
-	$: if (isOpen) emit('open')
-	else emit('close')
+	// -----------------------------------------------------------------------------------------------
 
-	// --- Methods ----------------------
-
-	export const close = () => (isOpen = false)
-	export const open = () => (isOpen = true)
-
-	const onKeyDown = ({ key }: KeyboardEvent) => {
-		if (key === 'Escape') close()
-	}
-
-	// --- CSS Class --------------------
-
+	const emit = createEventDispatcher()
 	const baseName = $$props['ex-class'] || 'Modal'
 
-	$: className = classnames(baseName, $$props.class)
+	$: if (isOpen) {
+		emit('open')
+	} else {
+		emit('close')
+	}
+
+	export function close() {
+		isOpen = false
+	}
+
+	export function open() {
+		isOpen = true
+	}
+
+	function onKeyDown({ key }: KeyboardEvent) {
+		if (key === 'Escape') close()
+	}
 </script>
 
 {#if isOpen}
-	<div class={className} transition:fade={{ duration: 333 }} on:click|self={close}>
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<div
+		class={classnames(baseName, $$props.class)}
+		transition:fade={{ duration: 333 }}
+		on:click|self={close}>
 		<div class="{baseName}__wrapper">
 			<button class="{baseName}__close-button" on:click={close}>
 				<Icon name="fas fa-times" />

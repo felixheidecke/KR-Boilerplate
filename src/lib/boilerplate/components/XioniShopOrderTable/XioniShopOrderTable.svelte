@@ -22,12 +22,12 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each cart as product}
+		{#each cart || [] as { name, quantity, price, total }}
 			<tr>
-				<td>{product.name}</td>
-				<td>{product.quantity}</td>
-				<td>{product.price.formatted}</td>
-				<td>{product.total.formatted}</td>
+				<td>{name}</td>
+				<td>{quantity}</td>
+				<td>{price.formatted}</td>
+				<td>{total.formatted}</td>
 			</tr>
 		{/each}
 		{#if shippingCost}

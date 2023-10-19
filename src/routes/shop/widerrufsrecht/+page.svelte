@@ -1,9 +1,9 @@
 <script>
-	const { stammdaten } = $$props.data
+	import stammdaten from '$lib/stammdaten'
 </script>
 
 <svelte:head>
-	<title>Allgemeine Geschäftsbedingungen</title>
+	<title>Allgemeine Geschäftsbedingungen | {stammdaten.title}</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
@@ -17,8 +17,7 @@
 	Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat.
 </p>
 <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns</p>
-
-<Address {...stammdaten} email={undefined} web={undefined} />
+<Address {...stammdaten} phone={undefined} />
 
 <p>
 	mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief oder eine E-Mail)
@@ -56,7 +55,6 @@
 	zurückzuführen ist.
 </p>
 <p>
-	<Link to="pdf/MusterWiderrufsformular.pdf" icon="fas fa-file-pdf" target="_blank"
-		>Widerrufsformular</Link>
+	<Link to="/pdf/MusterWiderrufsformular.pdf" icon="fas fa-file-pdf">Widerrufsformular</Link>
 </p>
 <p><em>Ende der Widerrufsbelehrung</em></p>

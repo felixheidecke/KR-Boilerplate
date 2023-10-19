@@ -4,6 +4,7 @@
 
 	import routes from '$routes'
 	import stammdaten from '$stammdaten'
+	import MESSAGES from '$lib/messages'
 </script>
 
 <svelte:head>
@@ -18,17 +19,10 @@
 <header>
 	<Nav {routes} />
 </header>
-
-<main>
-	<!-- <PageTransition> -->
+<Container>
 	<slot />
-	<!-- </PageTransition> -->
-</main>
+</Container>
 <Toplink />
-
-<style>
-	main {
-		max-width: 80rem;
-		margin: 0 auto;
-	}
-</style>
+<Client browser>
+	<MessageBus messages={MESSAGES} />
+</Client>
