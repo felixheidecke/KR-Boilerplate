@@ -8,6 +8,7 @@ import { uniqueId } from 'lodash-es'
 
 export namespace MessageBus {
 	export interface Message {
+		title?: string
 		message: string
 		config?: {
 			type?: ComponentProps<MessageComponent>['type']
@@ -23,7 +24,7 @@ export namespace MessageBus {
 export const MESSAGE_BUS = function () {
 	const { subscribe, set, update } = writable(new Map() as Map<string, MessageBus.Message>)
 
-	function add(message: MessageBus.Message['message'], config: MessageBus.Message['config'] = {}) {
+	function add(message: string, title?: string, config: MessageBus.Message['config'] = {}) {
 		const id = uniqueId()
 		config = {
 			type: 'info',
@@ -32,7 +33,7 @@ export const MESSAGE_BUS = function () {
 		}
 
 		update(messages => {
-			messages.set(id, { message, config })
+			messages.set(id, { title, message, config })
 
 			return messages
 		})

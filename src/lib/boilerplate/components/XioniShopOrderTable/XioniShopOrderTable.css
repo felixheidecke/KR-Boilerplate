@@ -1,13 +1,1 @@
-:where(.XioniShopCartTable) {
-	width: 100%;
-	border: 1px solid lightgray;
-}
-
-:where(.XioniShopCartTable thead) {
-	background-color: lightgray;
-}
-
-:where(.XioniShopCartTable th),
-:where(.XioniShopCartTable td) {
-	padding: 0.5rem;
-}
+/* :where(.XioniShopCartTable) { } */

@@ -1,25 +1,21 @@
 <script lang="ts">
+	import { shopPath } from '../config.js'
+
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
-	import XioniShopProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
+	import ShopProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let data
 </script>
 
-<h1>{data.category.name || 'Kategorie'}</h1>
-
-{#if data.category.description}
-	{@html data.category.description}
-{/if}
-
 <ol>
 	{#each data.products as product, index}
 		<li data-index={index}>
-			<Link class="$decoration-none" to="/shop/{product.slug}_p{product.id}">
-				<XioniShopProductTile {product} />
+			<Link class="$decoration-none" to="{shopPath}/{product.id}p-{product.slug}">
+				<ShopProductTile {product} />
 			</Link>
 		</li>
 	{/each}

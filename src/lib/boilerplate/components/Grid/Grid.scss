@@ -1,6 +1,7 @@
 @import '$lib/boilerplate/styles/variables.scss';
 
 .Grid {
+	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;

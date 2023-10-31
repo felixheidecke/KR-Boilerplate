@@ -21,6 +21,7 @@
 	{#each $messages as message}
 		<li in:blur={{ duration: blurDuration }} out:blur={{ duration: blurDuration }}>
 			<Message
+				title={message[1].title}
 				type={message[1].config?.type}
 				class="MessageBus--message"
 				closable

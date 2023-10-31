@@ -1,5 +1,5 @@
 <script lang="ts">
-	import './XioniShopOrderTable.css'
+	// import './XioniShopOrderTable.css'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 

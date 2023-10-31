@@ -4,10 +4,10 @@
 	import { ORDER, CART } from '../../stores'
 	import { isEmpty } from 'lodash-es'
 	import { onDestroy, onMount } from 'svelte'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
+	import messages from '$lib/messages'
 
 	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/libraries/xioni-fetch/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -19,41 +19,48 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	let showRedirectInfo = false
+	let shopPendingMessage = false
+
 	$: products = $CART.products || {}
 	$: address = $ORDER.address || {}
 	$: shippingAddress = $ORDER.shippingAddress || null
 
-	function handleErrors(errors: any) {
-		console.log(errors)
+	function orderErrorHandler(error: XioniFetchErrorResponse) {
+		shopPendingMessage = false
+
+		if (error.statusCode !== 412) {
+			messages.reset()
+			messages.add((error.data.payload || [])?.join('\n'), error.data.message)
+		}
 	}
 
-	function handleCreated({ transactionId }: XioniShop.Order) {
-		showRedirectInfo = true
-		setTimeout(() => {
-			goto('/shop/order-confirmation/' + transactionId)
-		}, 1500)
+	function orderCreatedHandler({ transactionId }: XioniShop.Order) {
+		goto('/shop/order-confirmation/' + transactionId)
+	}
+
+	function orderCreatingHandler() {
+		shopPendingMessage = true
 	}
 
 	onMount(() => {
-		// prettier-ignore
 		Order.$event
-			.on('errors', handleErrors)
-			.on('created', handleCreated)
+			.on('creating', orderCreatingHandler)
+			.on('error', orderErrorHandler)
+			.on('created', orderCreatedHandler)
 	})
 
 	onDestroy(() => {
 		// prettier-ignore
 		Order.$event
-			.off('errors', handleErrors)
-			.off('created', handleCreated)
+			.off('error', orderErrorHandler)
+			.off('created', orderCreatedHandler)
 	})
 </script>
 
 <h2>Zusammenfassung</h2>
 
-{#if showRedirectInfo}
-	<Message title="Bitte warten" type="success">Sie werden in Kürze weitergeleitet.</Message>
+{#if shopPendingMessage}
+	<Message title="Bitte warten" type="success">Einen Moment Gedult bitte.</Message>
 {:else if isEmpty(products)}
 	<Message title="Ihr Warenkorb ist leer!" type="error">
 		<Link to="/shop">zurück zum Shop</Link>

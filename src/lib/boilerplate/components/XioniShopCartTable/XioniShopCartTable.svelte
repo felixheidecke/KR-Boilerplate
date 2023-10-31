@@ -30,7 +30,7 @@
 	}
 </script>
 
-<table class="XioniShopCartTable">
+<table data-component class="XioniShopCartTable">
 	<thead>
 		<tr>
 			<th>Produkt</th>
@@ -86,3 +86,15 @@
 		</tr>
 	</tfoot>
 </table>
+
+<style lang="scss">
+	[data-component] {
+		:global(.Select) {
+			max-width: 4rem;
+		}
+
+		:global(.Select__input) {
+			text-align: center;
+		}
+	}
+</style>

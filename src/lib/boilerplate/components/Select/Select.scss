@@ -1,9 +1,9 @@
-:where(.FormSelect) {
+:where(.Select) {
 	display: flex;
 	flex-direction: column;
 }
 
-:where(.FormSelect__label) {
+:where(.Select__label) {
 	display: block;
 	background: #eee;
 	padding: 0.25rem 0.666rem;
@@ -15,7 +15,7 @@
 	user-select: none;
 }
 
-:where(.FormSelect__input) {
+:where(.Select__input) {
 	width: 100%;
 	padding: 0.666rem;
 	font-size: 1rem;
@@ -25,7 +25,7 @@
 	background-color: white;
 }
 
-:where(.FormSelect__label + .FormSelect__input) {
+:where(.Select__label + .Select__input) {
 	border-top: 0 none;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;

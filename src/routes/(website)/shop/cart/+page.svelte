@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { CART } from '../stores'
 	import { Cart } from '../api'
+	import { CART } from '../stores'
+	import { onDestroy, onMount } from 'svelte'
 	import messages from '$lib/messages'
+
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/libraries/xioni-fetch/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -14,19 +17,33 @@
 
 	let isLoading: boolean = false
 
-	async function updateCart(id: number, quantity: number) {
+	function updatingHandler() {
 		isLoading = true
+	}
 
-		const [cart, error] = await Cart.updateItemQuantity(id, quantity)
-
-		if (error) {
-			messages.add(error.data.message, { type: 'error' })
-		} else {
-			CART.set(cart)
-		}
-
+	function updatedHandler() {
+		messages.reset()
 		isLoading = false
 	}
+
+	function errordHandler(error: XioniFetchErrorResponse) {
+		messages.add(error.data.message, { type: 'error' })
+		isLoading = false
+	}
+
+	onMount(function () {
+		Cart.$event
+			.on('updating', updatingHandler)
+			.on('updated', updatedHandler)
+			.on('error', errordHandler)
+	})
+
+	onDestroy(function () {
+		Cart.$event
+			.off('updating', updatingHandler)
+			.off('updated', updatedHandler)
+			.off('error', errordHandler)
+	})
 </script>
 
 <h1>Warenkorb</h1>
@@ -42,7 +59,8 @@
 			total={$CART.total}
 			quantitySelector
 			readOnly={isLoading}
-			on:product-quantity-update={({ detail }) => updateCart(detail.productId, detail.quantity)} />
+			on:product-quantity-update={({ detail }) =>
+				Cart.updateItemQuantity(detail.productId, detail.quantity)} />
 
 		<div class="$mt-2">
 			<Button icon="fas fa-angle-left" to="/shop">zurück zum Shop</Button>

@@ -22,7 +22,7 @@
 <Container>
 	<slot />
 </Container>
-<Toplink />
 <Client browser>
+	<Toplink />
 	<MessageBus messages={MESSAGES} />
 </Client>

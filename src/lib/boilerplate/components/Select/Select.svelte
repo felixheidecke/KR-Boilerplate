@@ -16,7 +16,7 @@
 	// -----------------------------------------------------------------------------------------------
 
 	const id = uniqueId(name + '-')
-	const baseName = $$props['ex-class'] || 'FormSelect'
+	const baseName = $$props['ex-class'] || 'Select'
 </script>
 
 <div class={baseName}>

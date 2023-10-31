@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { isEmpty, omitBy } from 'lodash-es'
-	import { onDestroy, onMount } from 'svelte'
 	import { ORDER, CART } from '../../stores'
 	import { shopPath } from '../../config'
 	import { Order } from '../../api'
-	import MESSAGES from '$lib/messages'
+	import { IS_MOBILE } from '$lib/boilerplate/stores/breakpoints'
+	import { onDestroy, onMount } from 'svelte'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -24,13 +24,14 @@
 
 	// -----------------------------------------------------------------------------------------------
 
+	let isLoading = false
+	let showShippingForm = !!$ORDER.shippingAddress
+	let formErrors = {} as { [key: string]: string[] }
+
 	// Form bindings
 	let address = { ...$ORDER.address } || {}
 	let shippingAddress = { ...$ORDER.shippingAddress } || {}
 	let message = $ORDER.message || ''
-
-	let showShippingForm = !!$ORDER.shippingAddress
-	let formErrors = {} as { [key: string]: string[] }
 
 	function toggleShippingForm() {
 		if (showShippingForm) {
@@ -42,22 +43,41 @@
 	}
 
 	async function updateCart() {
+		isLoading = true
 		const addressData = omitBy(address, isEmpty) as any
 		const shippingAddressData = omitBy(shippingAddress, isEmpty) as any
 
-		const [_, errors] = await Order.updateOrder({
+		await Order.updateOrder({
 			address: addressData,
 			shippingAddress: !isEmpty(shippingAddress) ? shippingAddressData : null,
 			message: message.trim() || null
 		})
 
-		if (errors) {
-			formErrors = errors.data.payload as unknown as typeof formErrors
-			return
-		}
+		isLoading = false
+	}
 
+	async function errorHandler(error: XioniFetchErrorResponse) {
+		console.log(error.data.payload)
+
+		if (!error.data.payload) return
+
+		formErrors = error.data.payload as any
+
+		await Promise.resolve()
+		document.querySelector('.Message')?.scrollIntoView({ behavior: 'smooth' })
+	}
+
+	function successHandler() {
 		goto(shopPath + '/checkout/summary')
 	}
+
+	onMount(function () {
+		Order.$event.on('error', errorHandler).once('updated', successHandler)
+	})
+
+	onDestroy(function () {
+		Order.$event.off('error', errorHandler).off('updated', successHandler)
+	})
 </script>
 
 <h1 class="h2">Kasse</h1>
@@ -85,22 +105,22 @@
 	<Grid size="1">
 		<Input bind:value={address.company} name="company" label="Firma" />
 	</Grid>
-	<Grid size="1-5">
+	<Grid size="tablet-1-5">
 		<Select bind:value={address.salutation} options={['Herr', 'Frau']} label="Anrede" />
 	</Grid>
-	<Grid size="2-5">
+	<Grid size="tablet-2-5">
 		<Input bind:value={address.firstname} name="firstname" label="Vorname" required />
 	</Grid>
-	<Grid size="2-5">
+	<Grid size="tablet-2-5">
 		<Input bind:value={address.name} name="lastname" label="Nachname" required />
 	</Grid>
 	<Grid size>
 		<Input bind:value={address.address} name="address" label="Straße & Hausnummer" required />
 	</Grid>
-	<Grid size="1-3">
+	<Grid size="1-4 tablet-1-3">
 		<Input bind:value={address.zip} name="zip" label="PLZ" required />
 	</Grid>
-	<Grid size="2-3">
+	<Grid size="3-4 tablet-2-3">
 		<Input bind:value={address.city} name="city" label="Ort" required />
 	</Grid>
 	<Grid size="1">
@@ -145,10 +165,10 @@
 		<Grid size>
 			<Input bind:value={shippingAddress.address} label="Straße & Hausnummer" required />
 		</Grid>
-		<Grid size="1-3">
+		<Grid size="1-4 tablet-1-3">
 			<Input bind:value={shippingAddress.zip} name="zip" label="PLZ" required />
 		</Grid>
-		<Grid size="2-3">
+		<Grid size="3-4 tablet-2-3">
 			<Input bind:value={shippingAddress.city} label="Ort" required />
 		</Grid>
 	</Grid>
@@ -166,10 +186,13 @@
 	<Textarea bind:value={message} rows="4" name="message" label="Nachricht" />
 </div>
 
-<div class="$mt-2">
-	<Button icon="fas fa-angle-left" to="/shop">zurück zum Shop</Button>
-	<Button
-		icon="fas fa-angle-right"
-		class="Button--primary $float-right $row-reverse"
-		on:click={updateCart}>weiter zur Zusammenfassung</Button>
-</div>
+<Button
+	icon={isLoading ? 'fas fa-spinner fa-pulse' : 'fas fa-angle-right'}
+	class={[
+		{
+			'$mt $w-full $content-center': $IS_MOBILE
+		},
+		'Button--primary $mt-2 $float-right $row-reverse'
+	]}
+	disabled={isLoading}
+	on:click={updateCart}>weiter zur Zusammenfassung</Button>
