@@ -1,4 +1,4 @@
-import type { FetchResponse } from '../fetch-json/types'
+import type { FetchResponse } from '../../utils/fetch-json/types'
 
 export type XioniFetchErrorResponse = FetchResponse<{
 	message: string

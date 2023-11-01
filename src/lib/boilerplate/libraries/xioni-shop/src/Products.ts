@@ -1,12 +1,9 @@
-import { FetchResponseStatus } from '../../fetch-json/types'
-import XioniFetch from '../../xioni-fetch'
-import type { XioniFetchClientErrorResponse } from '../../xioni-fetch/types'
-import type { XioniResponse } from '../../xioni/types'
-import type { XioniShop } from '../types'
+import { FetchResponseStatus } from '../../../utils/fetch-json/types'
+import { XioniFetch } from '../../xioni-fetch'
 
-type PartsProp = Array<'text' | 'pdf' | 'quantity' | 'weight'>
-type LimitProp = number
-type HighlightsProp = boolean
+import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
+import type { XioniResponse } from '../../xioni-cms/types'
+import type { XioniShop } from '../types'
 
 export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
@@ -18,19 +15,17 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getProducts({
-		limit,
-		parts
+		limit
 	}: {
-		limit?: LimitProp
-		parts?: PartsProp
+		limit?: number
 	}): Promise<XioniResponse<XioniShop.Product[]>> {
 		const { status, data } = await xioniFetch(['shop', module, 'products'], {
-			params: { limit, parts }
+			params: { limit }
 		})
 
 		return status === FetchResponseStatus.SUCCESS
 			? [data as XioniShop.Product[], undefined]
-			: [undefined, data as XioniFetchClientErrorResponse]
+			: [undefined, data as XioniFetchErrorResponse]
 	}
 
 	/**
@@ -45,7 +40,7 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 
 		return status === FetchResponseStatus.SUCCESS
 			? [data as XioniShop.Product, undefined]
-			: [undefined, data as XioniFetchClientErrorResponse]
+			: [undefined, data as XioniFetchErrorResponse]
 	}
 
 	/**
@@ -58,7 +53,7 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function getProductsByCategory(
 		category: number,
-		config: { limit?: LimitProp; parts?: PartsProp } = {}
+		config: { limit?: number } = {}
 	): Promise<XioniResponse<XioniShop.Product[]>> {
 		const { status, data } = await xioniFetch(
 			['shop', module, 'categories', category, 'products'],
@@ -67,7 +62,7 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 
 		return status === FetchResponseStatus.SUCCESS
 			? [data as XioniShop.Product[], undefined]
-			: [undefined, data as XioniFetchClientErrorResponse]
+			: [undefined, data as XioniFetchErrorResponse]
 	}
 
 	/**
@@ -78,18 +73,18 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getProductHighlights(
-		config: { limit?: LimitProp; parts?: PartsProp } = {}
+		config: { limit?: number } = {}
 	): Promise<XioniResponse<XioniShop.Product[]>> {
 		const params = {
 			...config,
-			highlight: true as HighlightsProp
+			highlight: true
 		}
 
 		const { status, data } = await xioniFetch(['shop', module, 'products'], { params })
 
 		return status === FetchResponseStatus.SUCCESS
 			? [data as XioniShop.Product[], undefined]
-			: [undefined, data as XioniFetchClientErrorResponse]
+			: [undefined, data as XioniFetchErrorResponse]
 	}
 
 	return {

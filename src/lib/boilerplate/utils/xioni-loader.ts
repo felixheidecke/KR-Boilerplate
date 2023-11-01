@@ -1,5 +1,5 @@
 import { error as svelteError } from '@sveltejs/kit'
-import type { XioniResponse } from '../libraries/xioni/types'
+import type { XioniResponse } from '../libraries/xioni-cms/types'
 
 export default async function xioniLoader(xioniResponse: Promise<XioniResponse>) {
 	const [data, error] = await xioniResponse

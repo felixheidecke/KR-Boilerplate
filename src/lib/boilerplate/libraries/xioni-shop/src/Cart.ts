@@ -1,9 +1,9 @@
-import { FetchMethods, FetchResponseStatus } from '../../fetch-json/types'
-import XioniFetch from '../../xioni-fetch'
+import { FetchMethods, FetchResponseStatus } from '../../../utils/fetch-json/types'
+import { XioniFetch } from '../../xioni-fetch'
 import EventEmitter from 'eventemitter3'
 
 import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
-import type { XioniResponse } from '../../xioni/types'
+import type { XioniResponse } from '../../xioni-cms/types'
 import type { XioniShop } from '../types'
 
 export function CartFactory(module: number, fetchFn: typeof fetch = fetch) {
@@ -17,22 +17,24 @@ export function CartFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getCart(): Promise<XioniResponse<XioniShop.Cart>> {
-		event.emit('loading')
+		const context = { emitter: 'getCart' }
+
+		event.emit('loading', context)
 
 		const response = await xioniFetch(['shop', module, 'cart'])
 
 		if (response.status === FetchResponseStatus.SUCCESS) {
 			const cart = response.data as XioniShop.Cart
 
-			event.emit('loaded', cart)
-			event.emit('finally')
+			event.emit('loaded', cart, context)
+			event.emit('finally', context)
 
 			return [cart, undefined]
 		} else {
 			const error = response as XioniFetchErrorResponse
 
-			event.emit('error', error)
-			event.emit('finally')
+			event.emit('error', error, context)
+			event.emit('finally', context)
 
 			return [undefined, error]
 		}
@@ -51,7 +53,9 @@ export function CartFactory(module: number, fetchFn: typeof fetch = fetch) {
 		id: number,
 		quantity: number
 	): Promise<XioniResponse<XioniShop.Cart>> {
-		event.emit('updating')
+		const context = { emitter: 'updateItemQuantity' }
+
+		event.emit('updating', context)
 
 		const response = await xioniFetch(['shop', module, 'cart'], {
 			method: FetchMethods.PUT,
@@ -61,13 +65,15 @@ export function CartFactory(module: number, fetchFn: typeof fetch = fetch) {
 		if (response.status === FetchResponseStatus.SUCCESS) {
 			const cart = response.data as XioniShop.Cart
 
-			event.emit('updated', cart)
+			event.emit('updated', cart, context)
+			event.emit('finally', context)
 
 			return [cart, undefined]
 		} else {
 			const error = response as XioniFetchErrorResponse
 
-			event.emit('error', error)
+			event.emit('error', error, context)
+			event.emit('finally', context)
 
 			return [undefined, error]
 		}
@@ -82,7 +88,9 @@ export function CartFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function addItem(id: number): Promise<XioniResponse<XioniShop.Cart>> {
-		event.emit('updating')
+		const context = { emitter: 'addItem' }
+
+		event.emit('updating', context)
 
 		const response = await xioniFetch(['shop', module, 'cart'], {
 			method: FetchMethods.PUT,
@@ -92,12 +100,16 @@ export function CartFactory(module: number, fetchFn: typeof fetch = fetch) {
 		if (response.status === FetchResponseStatus.SUCCESS) {
 			const cart = response.data as XioniShop.Cart
 
-			event.emit('updated', cart)
+			event.emit('updated', cart, context)
+			event.emit('finally', context)
+
 			return [cart, undefined]
 		} else {
 			const error = response as XioniFetchErrorResponse
 
-			event.emit('error', error)
+			event.emit('error', error, context)
+			event.emit('finally', context)
+
 			return [undefined, error]
 		}
 	}

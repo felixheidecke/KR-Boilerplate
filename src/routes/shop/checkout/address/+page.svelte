@@ -57,8 +57,6 @@
 	}
 
 	async function errorHandler(error: XioniFetchErrorResponse) {
-		console.log(error.data.payload)
-
 		if (!error.data.payload) return
 
 		formErrors = error.data.payload as any

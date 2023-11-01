@@ -1,12 +1,16 @@
-import { FetchMethods, FetchResponseStatus, type FetchResponse } from '../../fetch-json/types'
-import XioniFetch from '../../xioni-fetch'
+import {
+	FetchMethods,
+	FetchResponseStatus,
+	type FetchResponse
+} from '../../../utils/fetch-json/types'
 import EventEmitter from 'eventemitter3'
+import { XioniFetch } from '../../xioni-fetch'
 
 // --- Types ---------------------------------------------------------------------------------------
 
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
-import type { XioniResponse } from '../../xioni/types'
+import type { XioniResponse } from '../../xioni-cms/types'
 import type { XioniShop } from '../types'
+import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
@@ -21,22 +25,24 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function createOrder(): Promise<XioniResponse<XioniShop.Order>> {
-		event.emit('creating')
+		const context = { emitter: 'createOrder' }
+
+		event.emit('creating', context)
 
 		const response = await xioniFetch(['shop', module, 'order'], { method: FetchMethods.POST })
 
 		if (response.status === FetchResponseStatus.SUCCESS) {
 			const order = orderAdapter(response.data) as XioniShop.Order
 
-			event.emit('created', order)
-			event.emit('finally')
+			event.emit('created', order, context)
+			event.emit('finally', context)
 
 			return [order, undefined]
 		} else {
 			const error = response as XioniFetchErrorResponse
 
-			event.emit('error', error)
-			event.emit('finally')
+			event.emit('error', error, context)
+			event.emit('finally', context)
 
 			return [undefined, error]
 		}
@@ -48,7 +54,9 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 		paymentType?: XioniShop.Order['paymentType']
 		message?: XioniShop.Order['message'] | null
 	}): Promise<XioniResponse<XioniShop.Order>> {
-		event.emit('updating')
+		const context = { emitter: 'updateOrder' }
+
+		event.emit('updating', context)
 
 		const response = await xioniFetch(['shop', module, 'order'], {
 			method: FetchMethods.PATCH,
@@ -58,22 +66,24 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 		if (response.status === FetchResponseStatus.SUCCESS) {
 			const order = orderAdapter(response.data) as XioniShop.Order
 
-			event.emit('updated', order)
-			event.emit('finally')
+			event.emit('updated', order, context)
+			event.emit('finally', context)
 
 			return [order, undefined]
 		} else {
 			const error = response as XioniFetchErrorResponse
 
-			event.emit('error', error)
-			event.emit('finally')
+			event.emit('error', error, context)
+			event.emit('finally', context)
 
 			return [undefined, error]
 		}
 	}
 
 	async function getOrder(id?: string | number): Promise<XioniResponse<XioniShop.Order>> {
-		event.emit('loading')
+		const context = { emitter: 'getOrder' }
+
+		event.emit('loading', context)
 
 		const url = id ? ['shop', module, 'order', id] : ['shop', module, 'order']
 		const response = (await xioniFetch(url)) as FetchResponse<any>
@@ -81,15 +91,15 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 		if (response.status === FetchResponseStatus.SUCCESS) {
 			const order = orderAdapter(response.data) as XioniShop.Order
 
-			event.emit('loaded', order)
-			event.emit('finally')
+			event.emit('loaded', order, context)
+			event.emit('finally', context)
 
 			return [order, undefined]
 		} else {
 			const error = response as XioniFetchErrorResponse
 
-			event.emit('error', error)
-			event.emit('finally')
+			event.emit('error', error, context)
+			event.emit('finally', context)
 
 			return [undefined, error]
 		}

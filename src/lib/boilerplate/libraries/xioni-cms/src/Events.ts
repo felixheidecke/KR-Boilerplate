@@ -1,11 +1,14 @@
+import { FetchResponseStatus } from '../../../utils/fetch-json/types'
 import { formatFromTo } from '$lib/boilerplate/utils/format-date'
-import { FetchResponseStatus } from '../fetch-json/types'
-import XioniFetch from '../xioni-fetch'
-import type { XioniEvent } from './events.types'
-import type { XioniResponse } from './types'
+import { XioniFetch } from '../../xioni-fetch'
+import EventEmitter from 'eventemitter3'
 
-export default function XioniEvents(fetchFn: typeof fetch = fetch) {
+import type { XioniCMS, XioniResponse } from '../types'
+import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
+
+export function EventsFactory(fetchFn: typeof fetch = fetch) {
 	const xioniFetch = XioniFetch(fetchFn)
+	const event = new EventEmitter()
 
 	/**
 	 * Get all Events by module
@@ -16,7 +19,6 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 	 * @param filter.startsAfter Event startet nach Datum
 	 * @param filter.endsBefore Event endet vor Datum
 	 * @param filter.endsAfter Event endet nach Datum
-	 * @param filter.parts Event data items to load
 	 */
 
 	async function getEvents(
@@ -27,10 +29,12 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 			startsAfter?: Date
 			endsBefore?: Date
 			endsAfter?: Date
-			parts?: Array<'images' | 'flags'>
 		} = {}
-	): Promise<XioniResponse<XioniEvent[]>> {
+	): Promise<XioniResponse<XioniCMS.Event[]>> {
+		const context = { emitter: 'getEvents' }
 		const params = {}
+
+		event.emit('loading', context)
 
 		if ('limit' in filter) {
 			Object.assign(params, { limit: filter.limit })
@@ -55,9 +59,19 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 		const response = await xioniFetch(['cms/events', module], { params })
 
 		if (response.status === FetchResponseStatus.SUCCESS) {
-			return [response.data.map(eventAdapter), undefined]
+			const events = (response.data as []).map(eventAdapter) as XioniCMS.Event[]
+
+			event.emit('loaded', events, context)
+			event.emit('finally', context)
+
+			return [events, undefined]
 		} else {
-			return [undefined, response]
+			const error = response as XioniFetchErrorResponse
+
+			event.emit('error', error, context)
+			event.emit('finally', context)
+
+			return [undefined, error]
 		}
 	}
 
@@ -68,19 +82,34 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
 	 * @returns XioniEvent
 	 */
 
-	async function getEvent(id: number): Promise<XioniResponse<XioniEvent>> {
+	async function getEvent(id: number): Promise<XioniResponse<XioniCMS.Event>> {
+		const context = { emitter: 'getEvent' }
+
+		event.emit('loading', context)
+
 		const response = await xioniFetch(['cms/event', id])
 
 		if (response.status === FetchResponseStatus.SUCCESS) {
-			return [eventAdapter(response.data), undefined]
+			const data = eventAdapter(response.data) as XioniCMS.Event
+
+			event.emit('loaded', data, context)
+			event.emit('finally', context)
+
+			return [data, undefined]
 		} else {
-			return [undefined, response]
+			const error = response as XioniFetchErrorResponse
+
+			event.emit('error', error, context)
+			event.emit('finally', context)
+
+			return [undefined, error]
 		}
 	}
 
 	return {
 		getEvents,
-		getEvent
+		getEvent,
+		$event: event
 	}
 }
 
@@ -93,7 +122,7 @@ export default function XioniEvents(fetchFn: typeof fetch = fetch) {
  * @returns Xioni XioniEvent
  */
 
-function eventAdapter(rawEvent: any): XioniEvent {
+function eventAdapter(rawEvent: any): XioniCMS.Event {
 	const starts = new Date(rawEvent.starts)
 	const ends = new Date(rawEvent.ends)
 
@@ -114,7 +143,3 @@ function eventAdapter(rawEvent: any): XioniEvent {
 
 	return event
 }
-
-export const getEvents = XioniEvents().getEvents
-
-export const getEvent = XioniEvents().getEvent

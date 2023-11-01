@@ -1,21 +1,23 @@
 <script lang="ts">
-	import { FetchMethods, FetchResponseStatus } from '$lib/boilerplate/libraries/fetch-json/types'
+	import { FetchMethods, FetchResponseStatus } from '$lib/boilerplate/utils/fetch-json/types'
 	import { onMount, createEventDispatcher } from 'svelte'
 	import { XIONI_API_URL } from '$lib/boilerplate/constants'
 	import classnames from 'classnames'
-	import FetchJson from '$lib/boilerplate/libraries/fetch-json'
+	import FetchJson from '$lib/boilerplate/utils/fetch-json'
 	import Message from '../Message/Message.svelte'
+	import FormMailFactory from '$lib/boilerplate/libraries/xioni/formMail'
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/libraries/xioni-fetch/types'
 
 	const emit = createEventDispatcher()
-	const fetchJson = FetchJson()
+	const formMail = FormMailFactory()
 
-	// --- Props -------------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let subject = 'Kontakformular'
 	export let id: number | string = 0
 	export let attach: string | false = false
 
-	// --- Data --------------------------------------------------------------------------------------
+	// --- [ Data ] ----------------------------------------------------------------------------------
 
 	let form: HTMLFormElement
 	let required: string[] = []
@@ -40,6 +42,8 @@
 		const formData = new FormData(form)
 		return Object.fromEntries(formData)
 	}
+
+	function submitt() {}
 
 	export const submit = async () => {
 		if (isDone) return
@@ -66,7 +70,6 @@
 
 			isDone = true
 			emit('success')
-			setTimeout(scrollToDoneText, 100)
 		} catch (error) {
 			isDone = false
 			errors = [error as string]
@@ -76,25 +79,45 @@
 		}
 	}
 
+	function creatingHandler() {
+		isLoading = true
+	}
+
+	function createdHandler() {
+		setTimeout(scrollToDoneText, 100)
+	}
+
+	function errorHandler(error: XioniFetchErrorResponse) {
+		error.data.payload
+	}
+
+	function finallyHandler() {
+		isLoading = false
+	}
+
 	// collect required entries
 	onMount(() => {
+		formMail.$event.on('creating', creatingHandler)
+		formMail.$event.on('finally', finallyHandler)
+		formMail.$event.on('error', errorHandler)
+		formMail.$event.on('created', createdHandler)
+
 		form.querySelectorAll('[required]').forEach(element => {
 			required = [...required, element.getAttribute('name') || '']
 		})
 	})
 
-	// --- CSS Class --------------------
-
 	const baseName = $$props['ex-class'] || 'Form'
-
-	$: className = classnames(baseName, $$props.class)
 </script>
 
-<form class={className} bind:this={form} on:submit|preventDefault={submit}>
+<form
+	class={classnames(baseName, $$props.class)}
+	bind:this={form}
+	on:submit|preventDefault={submit}>
 	<input type="hidden" name="subject" value={subject} />
 	<input type="hidden" name="id" value={id} />
-	<input type="hidden" name="required" value={required.join(',')} />
-	<input type="text" name="honig" style="position:absolute;left:-9999px;" />
+	<input type="hidden" name="_required" value={required.join(',')} />
+	<input type="text" name="_honig" style="position:absolute;left:-9999px;" />
 
 	{#if isDone}
 		<div bind:this={isDoneEl} class={baseName + '__done'}>

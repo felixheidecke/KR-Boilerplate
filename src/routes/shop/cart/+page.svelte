@@ -27,7 +27,7 @@
 	}
 
 	function errordHandler(error: XioniFetchErrorResponse) {
-		messages.add(error.data.message, { type: 'error' })
+		messages.add(error.data.message, undefined, { type: 'error' })
 		isLoading = false
 	}
 

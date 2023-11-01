@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { Order } from '../../api'
-	import { ORDER, CART } from '../../stores'
 	import { isEmpty } from 'lodash-es'
 	import { onDestroy, onMount } from 'svelte'
+	import { Order } from '../../api'
+	import { ORDER, CART } from '../../stores'
 	import messages from '$lib/messages'
 
 	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'

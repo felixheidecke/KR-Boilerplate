@@ -1,8 +1,8 @@
 import { XIONI_API_URL } from '$lib/boilerplate/constants'
-import FetchJson from '../fetch-json'
-import { FetchResponseStatus, type FetchParams } from '../fetch-json/types'
+import FetchJson from '../../utils/fetch-json'
+import { FetchResponseStatus, type FetchParams } from '../../utils/fetch-json/types'
 
-export default function XioniFetch(fetchFn: typeof fetch = fetch) {
+export function XioniFetch(fetchFn: typeof fetch = fetch) {
 	const fetchJson = FetchJson(fetchFn)
 
 	return async function (path: string | Array<string | number>, params: FetchParams = {}) {
