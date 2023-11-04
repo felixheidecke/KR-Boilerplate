@@ -16,12 +16,12 @@ export namespace MessageBus {
 		}
 	}
 
-	export type Store = ReturnType<typeof MESSAGE_BUS>
+	export type Store = ReturnType<typeof MESSAGES>
 }
 
 // -------------------------------------------------------------------------------------------------
 
-export const MESSAGE_BUS = function () {
+export const MESSAGES = function () {
 	const { subscribe, set, update } = writable(new Map() as Map<string, MessageBus.Message>)
 
 	function add(message: string, title?: string, config: MessageBus.Message['config'] = {}) {

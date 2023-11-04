@@ -113,6 +113,10 @@ export function EventsFactory(fetchFn: typeof fetch = fetch) {
 	}
 }
 
+export const getEvents = EventsFactory().getEvents
+
+export const getEvent = EventsFactory().getEvent
+
 // --- [ Helper ] ----------------------------------------------------------------------------------
 
 /**

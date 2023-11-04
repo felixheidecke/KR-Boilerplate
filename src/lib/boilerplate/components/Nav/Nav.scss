@@ -138,7 +138,9 @@
 	top: 2.5rem;
 	transform: translate(-50%, 0);
 	z-index: -1;
-	transition: transform 250ms, opacity 333ms;
+	transition:
+		transform 250ms,
+		opacity 333ms;
 	transition-delay: 50ms;
 	background-color: rgb(225, 225, 225);
 

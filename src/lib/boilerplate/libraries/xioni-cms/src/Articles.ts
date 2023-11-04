@@ -60,10 +60,7 @@ export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
 	 * @returns An article
 	 */
 
-	async function getArticle(
-		id: number,
-		filter: { full?: boolean } = {}
-	): Promise<XioniResponse<XioniCMS.Article>> {
+	async function getArticle(id: number): Promise<XioniResponse<XioniCMS.Article>> {
 		const context = { emitter: 'getArticle' }
 
 		event.emit('loading', context)
@@ -108,7 +105,7 @@ export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		const response = await fetchJSON(['articles'], { params })
+		const response = await fetchJSON(['cms/articles'], { params })
 
 		if (response.status === FetchResponseStatus.SUCCESS) {
 			const articles = articleAdapter(response.data) as XioniCMS.Article[]
@@ -143,3 +140,9 @@ export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
 		$event: event
 	}
 }
+
+export const getArticles = ArticlesFactory().getArticles
+
+export const getArticle = ArticlesFactory().getArticle
+
+export const getArticlesByCategory = ArticlesFactory().getArticlesByCategory

@@ -6,7 +6,9 @@
 	width: 5rem;
 	cursor: pointer;
 	opacity: 0.5;
-	transition: opacity 0.5s, transform 0.5s;
+	transition:
+		opacity 0.5s,
+		transform 0.5s;
 	border: 0 none;
 	transform: translateY(120%);
 	background-color: gainsboro;
