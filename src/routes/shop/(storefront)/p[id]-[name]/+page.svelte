@@ -2,6 +2,7 @@
 	import { Cart } from '../../api'
 	import { onDestroy, onMount } from 'svelte'
 	import messages from '$lib/messages'
+	import stammdaten from '$stammdaten'
 
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/libraries/xioni-fetch/types'
 
@@ -34,6 +35,11 @@
 		Cart.$event.off('updated', updatedHandler).off('error', errordHandler)
 	})
 </script>
+
+<svelte:head>
+	<meta name="description" content="Kaufen Sie {product.name} in unserem Online Shop." />
+	<title>{product.name} | {stammdaten.name} Online Shop</title>
+</svelte:head>
 
 {#if product}
 	<Product {product} on:addToCart={({ detail: id }) => Cart.addItem(id)} />

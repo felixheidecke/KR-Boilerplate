@@ -58,3 +58,9 @@
 	font-size: 0.75rem;
 	font-style: italic;
 }
+
+:where(.XioniShopProductTile__teaser) > p {
+	display: inline;
+	font-size: 0.875rem;
+	line-height: 1.45rem;
+}

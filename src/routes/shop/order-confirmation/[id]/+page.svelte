@@ -20,9 +20,9 @@
 
 <ol class="$mt-4">
 	{#if address.company}
-		<li class="$mb-1/4">{address.company}</li>
+		<li>{address.company}</li>
 	{/if}
-	<li class="$mb-1/4">
+	<li>
 		<strong>{address.salutation} {address.firstname} {address.name}</strong>
 	</li>
 	<li>{address.address}</li>
@@ -38,12 +38,8 @@
 	<Grid size="1-2" class="$text-right">
 		<ul>
 			<li>Transaktion: <code>{order.transactionId?.toUpperCase()}</code></li>
-			<li class="$mt-1/4">
-				Datum: {date}
-			</li>
-			<li class="$mt-1/4">
-				Zahlart: {order.paymentType}
-			</li>
+			<li>Datum: {date}</li>
+			<li>Zahlart: {order.paymentType}</li>
 		</ul>
 	</Grid>
 	<Grid size class="$mt-2">
@@ -89,7 +85,7 @@
 	Rechnungsdatum an folgende genannte Bankverbindung.
 </p>
 
-<p class="$font-small">
+<p>
 	Name des Kontoinhaber<br />
 	DE 70 5500 0000 1234 5678 00<br />
 	Verwendungszweck: <code>{order.transactionId?.toUpperCase()}</code>
@@ -99,9 +95,9 @@
 	<p>Nach vollständiger Zahlung wird die Waren wie gewünscht an nachfolgende Adresse verschickt:</p>
 	<ol>
 		{#if shippingAddress.company}
-			<li class="$mb-1/4">{shippingAddress.company}</li>
+			<li>{shippingAddress.company}</li>
 		{/if}
-		<li class="$mb-1/4">
+		<li>
 			<strong>{shippingAddress.name}</strong>
 		</li>
 		<li>{shippingAddress.address}</li>
@@ -117,3 +113,9 @@
 </p>
 
 <Button class="$mt-4" icon="fas fa-print" on:click={() => window.print()}>Drucken</Button>
+
+<style>
+	li + li {
+		margin-top: 0.25rem;
+	}
+</style>

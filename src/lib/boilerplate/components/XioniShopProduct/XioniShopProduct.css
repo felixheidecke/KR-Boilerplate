@@ -6,8 +6,7 @@
 :where(.XioniShopProduct__image) {
 	float: left;
 	width: 100%;
-	aspect-ratio: 3/4;
-	object-fit: contain;
+	max-height: 640px;
 }
 
 :where(.XioniShopProduct__price-box) {

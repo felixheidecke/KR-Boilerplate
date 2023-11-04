@@ -108,6 +108,7 @@ export namespace XioniShop {
 		category?: {
 			id: number
 			name: string
+			slug: string
 		}
 		quantity: {
 			value: number

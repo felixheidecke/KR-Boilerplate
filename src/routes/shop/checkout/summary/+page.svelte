@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { isEmpty } from 'lodash-es'
-	import { onDestroy, onMount } from 'svelte'
 	import { Order } from '../../api'
 	import { ORDER, CART } from '../../stores'
+	import { isEmpty } from 'lodash-es'
+	import { onDestroy, onMount } from 'svelte'
 	import messages from '$lib/messages'
 
 	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
@@ -60,7 +60,7 @@
 <h2>Zusammenfassung</h2>
 
 {#if shopPendingMessage}
-	<Message title="Bitte warten" type="success">Einen Moment Gedult bitte.</Message>
+	<Message title="Bitte warten" type="success">Sie werden in Kürze weitergeleitet.</Message>
 {:else if isEmpty(products)}
 	<Message title="Ihr Warenkorb ist leer!" type="error">
 		<Link to="/shop">zurück zum Shop</Link>
@@ -92,7 +92,7 @@
 			E-Mail: {address.email}
 		</Grid>
 		<Grid size="tablet-1-2">
-			<h3>Versandadresse</h3>
+			<h3>Lieferadresse</h3>
 			{#if shippingAddress}
 				{#if shippingAddress.company}
 					{shippingAddress.company}<br />
@@ -102,7 +102,7 @@
 				{shippingAddress.zip}
 				{shippingAddress.city}
 			{:else}
-				<i>Entsprich Rechnungsadresse</i>
+				<i>Entspricht Rechnungsadresse</i>
 			{/if}
 		</Grid>
 		<Grid size>
@@ -121,10 +121,10 @@
 	<Link icon="fas fa-pen" class="$mt" to="/shop/cart">anpassen</Link>
 
 	<div class="$mt-2">
-		<Button icon="fas fa-angle-left" to="/shop">Zurück zum Shop</Button>
+		<Button icon="fas fa-angle-left" to="/shop">zurück zum Shop</Button>
 		<Button
 			icon="fas fa-angle-right"
 			class="Button--primary $float-right $row-reverse"
-			on:click={Order.createOrder}>Jetzt kostenpflichtig bestellen</Button>
+			on:click={Order.createOrder}>jetzt kostenpflichtig bestellen</Button>
 	</div>
 {/if}

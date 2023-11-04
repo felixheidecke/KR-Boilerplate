@@ -48,7 +48,7 @@
 {#if id}
 	<div class={classnames(baseClass, $$props.class)}>
 		{#if category}
-			<Link to="/shop/{category.name}_c{category.id}">{category?.name}</Link>
+			<Link to="/shop/c{category.id}-{category.slug}">{category.name}</Link>
 		{/if}
 		<h2 class="{baseClass}__name $mb-2 $mt-1/2">
 			{name}
@@ -62,9 +62,9 @@
 					alt={name} />
 			</Grid>
 			<Grid size="tablet-2-3">
-				<div class="$font-bold">
+				{#if teaser}
 					{@html teaser}
-				</div>
+				{/if}
 				<div class="{baseClass}__price-box">
 					<span class="{baseClass}__price" data-price={price.value}>
 						{price.formatted}
@@ -74,7 +74,7 @@
 					</span>
 					<br />
 					{#if quantity.value > 1 && pricePerUnit}
-						<span class="{baseClass}__quantity">
+						<span class="{baseClass}__quantity $font-larger">
 							{quantity.formatted} / {pricePerUnit.formatted}
 						</span>
 					{/if}

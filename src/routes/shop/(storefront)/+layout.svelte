@@ -4,13 +4,18 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Client from '$lib/boilerplate/components/Client/Client.svelte'
-	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import Button from '$lib/boilerplate/components/Button/Button.svelte'
+	import Client from '$lib/boilerplate/components/Client/Client.svelte'
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
+	import Link from '$lib/boilerplate/components/Link/Link.svelte'
+	import stammdaten from '$stammdaten'
 
 	const { categories } = $$props.data
 </script>
+
+<svelte:head>
+	<title>{stammdaten.name} Online Shop</title>
+</svelte:head>
 
 <Client browser>
 	<Grid gap={2} tag="section" class="$flex-column@tablet-down">
@@ -60,7 +65,7 @@
 				<ol class="$flex $flex-wrap $gap-1/2 $flex-column@desktop">
 					{#each categories as { id, slug, name }}
 						<li>
-							<Link to="{shopPath}/{id}c-{slug}">
+							<Link to="{shopPath}/c{id}-{slug}">
 								{name}
 							</Link>
 						</li>
@@ -70,18 +75,3 @@
 		</Grid>
 	</Grid>
 </Client>
-
-<style lang="scss">
-	@import '$variables';
-
-	ol li {
-		white-space: nowrap;
-	}
-
-	@include breakpoint('tablet-up') {
-		.sidebar {
-			top: 1rem;
-			position: sticky;
-		}
-	}
-</style>

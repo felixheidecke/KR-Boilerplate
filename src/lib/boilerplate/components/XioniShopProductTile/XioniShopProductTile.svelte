@@ -9,7 +9,7 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const { id, name, category, price, vat, image } = $$props.product as XioniShop.Product
+	const { id, name, teaser, price, vat, image } = $$props.product as XioniShop.Product
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -30,12 +30,12 @@
 			<h4 class="$m-0 $p-0">
 				{name}
 			</h4>
-			{#if category}
-				<h5 class="$m-0 $p-0">
-					<span class="{className}__category">{category.name}</span>
-				</h5>
+			{#if teaser}
+				<div class="{className}__teaser">
+					{@html teaser}
+				</div>
 			{/if}
-			<div class="{className}__price">
+			<div class="{className}__price $font-larger">
 				{price.formatted}
 			</div>
 			<div class="{className}__tax">

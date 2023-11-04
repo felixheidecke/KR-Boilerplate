@@ -57,7 +57,7 @@ export function ProductsFactory(module: number, fetchFn: typeof fetch = fetch) {
 	): Promise<XioniResponse<XioniShop.Product[]>> {
 		const { status, data } = await xioniFetch(
 			['shop', module, 'categories', category, 'products'],
-			{ params: { config } }
+			{ params: config }
 		)
 
 		return status === FetchResponseStatus.SUCCESS

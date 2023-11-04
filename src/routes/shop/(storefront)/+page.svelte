@@ -14,7 +14,7 @@
 <ol>
 	{#each data.products as product, index}
 		<li data-index={index}>
-			<Link class="$decoration-none" to="{shopPath}/{product.id}p-{product.slug}">
+			<Link class="$decoration-none" to="{shopPath}/p{product.id}-{product.slug}">
 				<ProductTile {product} />
 			</Link>
 		</li>
