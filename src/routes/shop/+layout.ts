@@ -1,8 +1,8 @@
 import { Cart, Categories } from './api'
 import { Products } from './api'
-import xioniLoader from '$lib/boilerplate/utils/xioni-loader'
+import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
 
-import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types'
 
 export const load = async function () {
 	const [categories, products] = await Promise.all([

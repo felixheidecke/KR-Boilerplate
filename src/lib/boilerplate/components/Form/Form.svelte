@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { FetchMethods, FetchResponseStatus } from '$lib/boilerplate/utils/fetch-json/types'
 	import { onMount, createEventDispatcher } from 'svelte'
 	import { XIONI_API_URL } from '$lib/boilerplate/constants'
 	import classnames from 'classnames'
 	import FetchJson from '$lib/boilerplate/utils/fetch-json'
 	import Message from '../Message/Message.svelte'
-	import FormMailFactory from '$lib/boilerplate/libraries/xioni/formMail'
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/libraries/xioni-fetch/types'
+	import { FormMailFactory } from '$lib/boilerplate/xioni/cms-api'
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	const emit = createEventDispatcher()
 	const formMail = FormMailFactory()
+	const fetchJson = FetchJson()
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -53,13 +53,13 @@
 		errors = []
 
 		try {
-			const { data, status } = await fetchJson([XIONI_API_URL, 'form'], {
-				method: FetchMethods.POST,
+			const { data, status } = (await fetchJson([XIONI_API_URL, 'form'], {
+				method: 'POST',
 				data: getFormData(),
 				params: attach === 'csv' ? { attach: 'csv' } : undefined
-			})
+			})) as any
 
-			if (status !== FetchResponseStatus.SUCCESS) throw data
+			if (status !== 'success') throw data
 
 			if (data && 'error' in data && 'message' in data) {
 				errors = (data.message as string).split(',')

@@ -1,7 +1,9 @@
 import { error as svelteError } from '@sveltejs/kit'
-import type { XioniResponse } from '../libraries/xioni-cms/types'
+import type { XioniFetchErrorResponse } from './xioniFetch'
 
-export default async function xioniLoader(xioniResponse: Promise<XioniResponse>) {
+export default async function xioniLoader(
+	xioniResponse: Promise<[unknown, undefined] | [undefined, XioniFetchErrorResponse]>
+) {
 	const [data, error] = await xioniResponse
 
 	if (error && error.statusCode !== 412) {

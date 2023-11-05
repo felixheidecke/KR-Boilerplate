@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { format } from '$lib/boilerplate/utils/format-date.js'
+	import { format } from '$lib/boilerplate/utils/formatDate.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 

@@ -1,12 +1,11 @@
-import { FetchResponseStatus } from '../../../utils/fetch-json/types'
-import { XioniFetch } from '../../xioni-fetch'
 import EventEmitter from 'eventemitter3'
+import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniCMS, XioniResponse } from '../types'
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import type { XioniCMS, XioniCMSData } from '../types'
 
 export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
-	const fetchJSON = XioniFetch(fetchFn)
+	const fetchJson = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
 	/**
@@ -20,7 +19,7 @@ export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
 	async function getArticles(
 		module: number,
 		filter: { limit?: number; status?: 'live' | 'archived' } = {}
-	): Promise<XioniResponse<XioniCMS.Article[]>> {
+	): Promise<XioniCMSData<XioniCMS.Article[]>> {
 		const context = { emitter: 'getArticles' }
 		const params = {}
 
@@ -34,9 +33,9 @@ export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { status: filter.status })
 		}
 
-		const response = await fetchJSON(['cms/articles', module], { params })
+		const response = await fetchJson(['cms/articles', module], { params })
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const articles = (response.data as []).map(articleAdapter) as XioniCMS.Article[]
 
 			event.emit('loaded', articles, context)
@@ -60,14 +59,14 @@ export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
 	 * @returns An article
 	 */
 
-	async function getArticle(id: number): Promise<XioniResponse<XioniCMS.Article>> {
+	async function getArticle(id: number): Promise<XioniCMSData<XioniCMS.Article>> {
 		const context = { emitter: 'getArticle' }
 
 		event.emit('loading', context)
 
-		const response = await fetchJSON(['cms/article', id])
+		const response = await fetchJson(['cms/article', id])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const article = articleAdapter(response.data) as XioniCMS.Article
 
 			event.emit('loaded', article, context)
@@ -95,7 +94,7 @@ export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
 	async function getArticlesByCategory(
 		category: number,
 		filter: { limit?: number } = {}
-	): Promise<XioniResponse<XioniCMS.Article[]>> {
+	): Promise<XioniCMSData<XioniCMS.Article[]>> {
 		const params = { category }
 		const context = { emitter: 'getArticlesByCategory' }
 
@@ -105,9 +104,9 @@ export function ArticlesFactory(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { limit: filter.limit })
 		}
 
-		const response = await fetchJSON(['cms/articles'], { params })
+		const response = await fetchJson(['cms/articles'], { params })
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const articles = articleAdapter(response.data) as XioniCMS.Article[]
 
 			event.emit('loaded', articles, context)

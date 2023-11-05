@@ -1,21 +1,13 @@
-import {
-	FetchMethods,
-	FetchResponseStatus,
-	type FetchResponse
-} from '../../../utils/fetch-json/types'
 import EventEmitter from 'eventemitter3'
-import { XioniFetch } from '../../xioni-fetch'
+import { xioniFetch } from '../../utils/xioniFetch'
 
-// --- Types ---------------------------------------------------------------------------------------
-
-import type { XioniResponse } from '../../xioni-cms/types'
-import type { XioniShop } from '../types'
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
+import type { XioniShop, XioniShopData } from '../types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 
 // --- Factory -------------------------------------------------------------------------------------
 
 export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
-	const xioniFetch = XioniFetch(fetchFn)
+	const fetch = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
 	/**
@@ -24,14 +16,14 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns Cart
 	 */
 
-	async function createOrder(): Promise<XioniResponse<XioniShop.Order>> {
+	async function createOrder(): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'createOrder' }
 
 		event.emit('creating', context)
 
-		const response = await xioniFetch(['shop', module, 'order'], { method: FetchMethods.POST })
+		const response = await fetch(['shop', module, 'order'], { method: 'POST' })
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const order = orderAdapter(response.data) as XioniShop.Order
 
 			event.emit('created', order, context)
@@ -53,17 +45,17 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 		shippingAddress?: XioniShop.Order['shippingAddress'] | null
 		paymentType?: XioniShop.Order['paymentType']
 		message?: XioniShop.Order['message'] | null
-	}): Promise<XioniResponse<XioniShop.Order>> {
+	}): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'updateOrder' }
 
 		event.emit('updating', context)
 
-		const response = await xioniFetch(['shop', module, 'order'], {
-			method: FetchMethods.PATCH,
+		const response = await fetch(['shop', module, 'order'], {
+			method: 'PATCH',
 			data: update
 		})
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const order = orderAdapter(response.data) as XioniShop.Order
 
 			event.emit('updated', order, context)
@@ -80,15 +72,14 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 		}
 	}
 
-	async function getOrder(id?: string | number): Promise<XioniResponse<XioniShop.Order>> {
+	async function getOrder(id?: string | number): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'getOrder' }
 
 		event.emit('loading', context)
 
-		const url = id ? ['shop', module, 'order', id] : ['shop', module, 'order']
-		const response = (await xioniFetch(url)) as FetchResponse<any>
+		const response = await fetch(['shop', module, 'order', id])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const order = orderAdapter(response.data) as XioniShop.Order
 
 			event.emit('loaded', order, context)
@@ -111,13 +102,10 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns Order ID
 	 */
 
-	async function createPaypalOrder(): Promise<XioniResponse<unknown>> {
-		const path = ['shop', module, 'order/paypal/create']
-		const response = (await xioniFetch(path, {
-			method: FetchMethods.POST
-		})) as FetchResponse<any>
+	async function createPaypalOrder(): Promise<XioniShopData<unknown>> {
+		const response = await fetch(['shop', module, 'order/paypal/create'], { method: 'POST' })
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			return [orderAdapter(response.data), undefined]
 		} else {
 			return [undefined, response as XioniFetchErrorResponse]
@@ -131,14 +119,14 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns
 	 */
 
-	async function capturePaypalOrder(id: string): Promise<XioniResponse<string>> {
+	async function capturePaypalOrder(id: string): Promise<XioniShopData<string>> {
 		const path = ['shop', module, 'order/paypal/capture']
-		const response = await xioniFetch(path, {
-			method: FetchMethods.POST,
+		const response = await fetch(path, {
+			method: 'POST',
 			params: { id }
 		})
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			return [response.data as any, undefined]
 		} else {
 			return [undefined, response as XioniFetchErrorResponse]

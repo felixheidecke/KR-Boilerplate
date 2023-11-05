@@ -1,13 +1,12 @@
-import { FetchResponseStatus } from '../../../utils/fetch-json/types'
-import { formatFromTo } from '$lib/boilerplate/utils/format-date'
-import { XioniFetch } from '../../xioni-fetch'
 import EventEmitter from 'eventemitter3'
+import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniCMS, XioniResponse } from '../types'
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import type { XioniCMS, XioniCMSData } from '../types'
+import { formatFromTo } from '$lib/boilerplate/utils/formatDate'
 
 export function EventsFactory(fetchFn: typeof fetch = fetch) {
-	const xioniFetch = XioniFetch(fetchFn)
+	const fetchJson = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
 	/**
@@ -30,7 +29,7 @@ export function EventsFactory(fetchFn: typeof fetch = fetch) {
 			endsBefore?: Date
 			endsAfter?: Date
 		} = {}
-	): Promise<XioniResponse<XioniCMS.Event[]>> {
+	): Promise<XioniCMSData<XioniCMS.Event[]>> {
 		const context = { emitter: 'getEvents' }
 		const params = {}
 
@@ -56,9 +55,9 @@ export function EventsFactory(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { endsAfter: filter.endsAfter.toDateString() })
 		}
 
-		const response = await xioniFetch(['cms/events', module], { params })
+		const response = await fetchJson(['cms/events', module], { params })
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const events = (response.data as []).map(eventAdapter) as XioniCMS.Event[]
 
 			event.emit('loaded', events, context)
@@ -82,14 +81,14 @@ export function EventsFactory(fetchFn: typeof fetch = fetch) {
 	 * @returns XioniEvent
 	 */
 
-	async function getEvent(id: number): Promise<XioniResponse<XioniCMS.Event>> {
+	async function getEvent(id: number): Promise<XioniCMSData<XioniCMS.Event>> {
 		const context = { emitter: 'getEvent' }
 
 		event.emit('loading', context)
 
-		const response = await xioniFetch(['cms/event', id])
+		const response = await fetchJson(['cms/event', id])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const data = eventAdapter(response.data) as XioniCMS.Event
 
 			event.emit('loaded', data, context)

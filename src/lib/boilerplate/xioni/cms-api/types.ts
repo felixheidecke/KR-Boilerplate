@@ -1,6 +1,6 @@
-import type { XioniFetchErrorResponse } from '../xioni-fetch/types'
+import type { XioniFetchErrorResponse } from '../utils/xioniFetch'
 
-export type XioniResponse<T = unknown> = [T, undefined] | [undefined, XioniFetchErrorResponse]
+export type XioniCMSData<T = unknown> = [T, undefined] | [undefined, XioniFetchErrorResponse]
 
 export namespace XioniCMS {
 	export interface Article {

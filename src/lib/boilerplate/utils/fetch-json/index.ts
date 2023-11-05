@@ -1,4 +1,4 @@
-import { FetchMethods, FetchResponseStatus, type FetchParams, type FetchResponse } from './types'
+import type { FetchParams, FetchResponse } from './types'
 
 export default function (fetchFn: typeof fetch = fetch) {
 	return async function (
@@ -10,7 +10,7 @@ export default function (fetchFn: typeof fetch = fetch) {
 		}
 
 		const remoteURL = new URL(url)
-		const method = params.method || FetchMethods.GET
+		const method = params.method || 'GET'
 		const body = params.data ? JSON.stringify(params.data) : undefined
 		const headers = !body
 			? { ...params.headers }
@@ -38,14 +38,14 @@ export default function (fetchFn: typeof fetch = fetch) {
 
 function getStatus(statusCode: number) {
 	if (statusCode < 200) {
-		return FetchResponseStatus.INFORMAL
+		return 'informal'
 	} else if (statusCode < 300) {
-		return FetchResponseStatus.SUCCESS
+		return 'success'
 	} else if (statusCode < 400) {
-		return FetchResponseStatus.REDIRECT
+		return 'redirect'
 	} else if (statusCode < 500) {
-		return FetchResponseStatus.CLIENT_ERROR
+		return 'client-error'
 	} else {
-		return FetchResponseStatus.SERVER_ERROR
+		return 'server-error'
 	}
 }

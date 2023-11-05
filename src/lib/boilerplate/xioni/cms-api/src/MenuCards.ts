@@ -1,13 +1,11 @@
-import { FetchResponseStatus } from '../../../utils/fetch-json/types'
-import { XIONI_API_URL } from '$lib/boilerplate/constants'
-import { XioniFetch } from '../../xioni-fetch'
 import EventEmitter from 'eventemitter3'
+import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniCMS, XioniResponse } from '../types'
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import type { XioniCMS, XioniCMSData } from '../types'
 
 export default function XioniMenuCard(fetchFn: typeof fetch = fetch) {
-	const fetchJSON = XioniFetch(fetchFn)
+	const fetchJSON = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
 	/**
@@ -17,14 +15,14 @@ export default function XioniMenuCard(fetchFn: typeof fetch = fetch) {
 	 * @returns Menu Card
 	 */
 
-	async function getMenuCard(module: number): Promise<XioniResponse<XioniCMS.MenuCard>> {
+	async function getMenuCard(module: number): Promise<XioniCMSData<XioniCMS.MenuCard>> {
 		const context = { emitter: 'getMenuCard' }
 
 		event.emit('loading', context)
 
-		const response = await fetchJSON([XIONI_API_URL, 'cms/menu-card', module])
+		const response = await fetchJSON(['cms/menu-card', module])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const data = response.data as XioniCMS.MenuCard
 
 			event.emit('loaded', data, context)

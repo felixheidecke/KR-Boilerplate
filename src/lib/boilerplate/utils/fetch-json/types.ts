@@ -1,14 +1,5 @@
-export enum FetchMethods {
-	GET = 'GET',
-	POST = 'POST',
-	PUT = 'PUT',
-	UPDATE = 'UPDATE',
-	PATCH = 'PATCH',
-	DELETE = 'DELETE'
-}
-
 export interface FetchParams {
-	method?: FetchMethods
+	method?: 'GET' | 'POST' | 'PUT' | 'UPDATE' | 'PATCH' | 'DELETE'
 	headers?: object
 	params?: object
 	data?: object
@@ -16,15 +7,7 @@ export interface FetchParams {
 
 export interface FetchResponse<T = unknown> {
 	data: T
-	status: FetchResponseStatus
+	status: 'informal' | 'success' | 'redirect' | 'client-error' | 'server-error'
 	statusCode: number
 	url: string
-}
-
-export enum FetchResponseStatus {
-	INFORMAL = 'informal',
-	SUCCESS = 'success',
-	REDIRECT = 'redirect',
-	CLIENT_ERROR = 'client-error',
-	SERVER_ERROR = 'server-error'
 }

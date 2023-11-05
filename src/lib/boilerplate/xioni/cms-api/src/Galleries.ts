@@ -1,12 +1,11 @@
-import { FetchResponseStatus } from '../../../utils/fetch-json/types'
-import { XioniFetch } from '../../xioni-fetch'
 import EventEmitter from 'eventemitter3'
+import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniCMS, XioniResponse } from '../types'
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import type { XioniCMS, XioniCMSData } from '../types'
 
 export function GalleryFactory(fetchFn: typeof fetch = fetch) {
-	const fetchJSON = XioniFetch(fetchFn)
+	const fetchJSON = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
 	/**
@@ -16,14 +15,14 @@ export function GalleryFactory(fetchFn: typeof fetch = fetch) {
 	 * @returns Gallery
 	 */
 
-	async function getGallery(module: number): Promise<XioniResponse<XioniCMS.Gallery>> {
+	async function getGallery(module: number): Promise<XioniCMSData<XioniCMS.Gallery>> {
 		const context = { emitter: 'getGallery' }
 
 		event.emit('loading', context)
 
 		const response = await fetchJSON(['cms/gallery', module])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const gallery = response.data as XioniCMS.Gallery
 
 			event.emit('loaded', gallery, context)
@@ -47,13 +46,13 @@ export function GalleryFactory(fetchFn: typeof fetch = fetch) {
 	 * @returns Album
 	 */
 
-	async function getAlbum(id: number): Promise<XioniResponse<XioniCMS.Album>> {
+	async function getAlbum(id: number): Promise<XioniCMSData<XioniCMS.Album>> {
 		const context = { emitter: 'getAlbum' }
 		event.emit('loading', context)
 
 		const response = await fetchJSON(['cms/album', id])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const album = response.data as XioniCMS.Album
 
 			event.emit('loaded', album, context)

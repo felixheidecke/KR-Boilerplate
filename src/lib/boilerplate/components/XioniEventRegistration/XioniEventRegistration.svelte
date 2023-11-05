@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
-	import * as date from '$lib/boilerplate/utils/format-date'
+	import * as date from '$lib/boilerplate/utils/formatDate'
 	import classNames from 'classnames'
 
 	// --- [ Components ] ----------------------------------------------------------------------------

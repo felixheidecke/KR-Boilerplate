@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import stammdaten from '$stammdaten'
+	import { shopPath } from '../../config.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -11,7 +12,7 @@
 
 	export let data
 
-	const { category, products } = data
+	$: ({ products, category } = data)
 </script>
 
 <svelte:head>
@@ -26,9 +27,9 @@
 {/if}
 
 <Grid gap tag="ol">
-	{#each products as product}
-		<Grid tag="li" size="tablet-1-2">
-			<Link class="$decoration-none" to="/shop/p{product.id}-{product.slug}">
+	{#each products as product, index (product.id)}
+		<Grid tag="li" size="tablet-1-2" {index}>
+			<Link class="$decoration-none" to="{shopPath}/p{product.id}-{product.slug}">
 				<XioniShopProductTile {product} />
 			</Link>
 		</Grid>

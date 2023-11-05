@@ -5,26 +5,21 @@
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import ProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
+	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let data
+
+	$: ({ products } = data)
 </script>
 
-<ol>
-	{#each data.products as product, index}
-		<li data-index={index}>
+<Grid gap tag="ol">
+	{#each products as product, index (product.id)}
+		<Grid tag="li" size="tablet-1-2" {index}>
 			<Link class="$decoration-none" to="{shopPath}/p{product.id}-{product.slug}">
 				<ProductTile {product} />
 			</Link>
-		</li>
+		</Grid>
 	{/each}
-</ol>
-
-<style>
-	ol {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-		gap: 1rem;
-	}
-</style>
+</Grid>

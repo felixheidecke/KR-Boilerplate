@@ -1,13 +1,11 @@
-import { FetchResponseStatus } from '../../../utils/fetch-json/types'
-import { XioniFetch } from '../../xioni-fetch'
 import EventEmitter from 'eventemitter3'
+import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
-import type { XioniResponse } from '../../xioni-cms/types'
-import type { XioniShop } from '../types'
+import type { XioniShop, XioniShopData } from '../types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 
 export function InfoFactory(module: number, fetchFn: typeof fetch = fetch) {
-	const xioniFetch = XioniFetch(fetchFn)
+	const fetch = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
 	/**
@@ -16,14 +14,14 @@ export function InfoFactory(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns Informations
 	 */
 
-	async function getInfo(): Promise<XioniResponse<XioniShop.Info>> {
+	async function getInfo(): Promise<XioniShopData<XioniShop.Info>> {
 		const context = { emitter: 'getInfo' }
 
 		event.emit('loading', context)
 
-		const response = await xioniFetch(['shop', module, 'info'])
+		const response = await fetch(['shop', module, 'info'])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const data = response.data as XioniShop.Info
 
 			event.emit('loaded', data, context)

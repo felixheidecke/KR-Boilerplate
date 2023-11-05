@@ -1,13 +1,11 @@
-import { FetchResponseStatus } from '../../../utils/fetch-json/types'
-import { XioniFetch } from '../../xioni-fetch'
 import EventEmitter from 'eventemitter3'
+import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
-import type { XioniResponse } from '../../xioni-cms/types'
-import type { XioniShop } from '../types'
+import type { XioniShop, XioniShopData } from '../types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 
 export function CategoriesFactory(module: number, fetchFn: typeof fetch = fetch) {
-	const xioniFetch = XioniFetch(fetchFn)
+	const fetch = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 	/**
 	 * Get all Categories in the store
@@ -15,14 +13,14 @@ export function CategoriesFactory(module: number, fetchFn: typeof fetch = fetch)
 	 * @returns List of Categories
 	 */
 
-	async function getCategories(): Promise<XioniResponse<XioniShop.Category[]>> {
+	async function getCategories(): Promise<XioniShopData<XioniShop.Category[]>> {
 		const context = { emitter: 'getCategories' }
 
 		event.emit('loading', context)
 
-		const response = await xioniFetch(['shop', module, 'categories'])
+		const response = await fetch(['shop', module, 'categories'])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const category = response.data as XioniShop.Category[]
 
 			event.emit('loaded', category, context)
@@ -46,14 +44,14 @@ export function CategoriesFactory(module: number, fetchFn: typeof fetch = fetch)
 	 * @returns A Category
 	 */
 
-	async function getCategory(id: number): Promise<XioniResponse<XioniShop.Category>> {
+	async function getCategory(id: number): Promise<XioniShopData<XioniShop.Category>> {
 		const context = { emitter: 'getCategory' }
 
 		event.emit('loading', context)
 
-		const response = await xioniFetch(['shop', module, 'categories', id])
+		const response = await fetch(['shop', module, 'categories', id])
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			const category = response.data as XioniShop.Category
 
 			event.emit('loaded', category, context)

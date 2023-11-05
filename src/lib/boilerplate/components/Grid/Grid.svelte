@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { uniqueId } from 'lodash-es'
 	import './Grid.scss'
 	import classnames from 'classnames'
 
@@ -8,6 +9,7 @@
 	export let gap: number | string | boolean = 0
 	export let size: string | boolean = false
 	export let id: string | undefined = undefined
+	export let index: number | string | undefined = undefined
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -37,6 +39,6 @@
 	}
 </script>
 
-<svelte:element this={tag} {id} class={classnames(className, $$props.class)}>
+<svelte:element this={tag} {id} class={classnames(className, $$props.class)} data-index={index}>
 	<slot />
 </svelte:element>

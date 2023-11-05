@@ -20,7 +20,7 @@
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
 	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/libraries/xioni-fetch/types'
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// -----------------------------------------------------------------------------------------------
 

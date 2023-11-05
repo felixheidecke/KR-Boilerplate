@@ -1,0 +1,40 @@
+import { XIONI_API_URL } from '$lib/boilerplate/constants'
+import { isEmpty, isNull, isUndefined, omitBy } from 'lodash-es'
+import FetchJson from '../../utils/fetch-json'
+
+// --- [ Types ] -----------------------------------------------------------------------------------
+
+import type { FetchParams, FetchResponse } from '../../utils/fetch-json/types'
+
+export type XioniFetchResponse<T = unknown> = FetchResponse<T>
+
+export type XioniFetchErrorResponse = FetchResponse<{
+	message: string
+	code?: string
+	payload?: [string, string][]
+}>
+
+/**
+ * Fetch Factory
+ * @param fetchFn fetch function
+ * @returns
+ */
+
+export function xioniFetch(fetchFn: typeof fetch = fetch) {
+	const fetch = FetchJson(fetchFn)
+
+	/**
+	 * Fetch JSON data from api.klickrhein.de
+	 * @param path Array items will form path: ['foo','bar'] = 'foo/bar'
+	 */
+	return async function (path: Array<string | number | undefined>, params: FetchParams = {}) {
+		const normalPath = path.filter(item => item !== undefined) as Array<string | number>
+		const response = await fetch([XIONI_API_URL, ...normalPath], params)
+
+		if (response.status === 'server-error') {
+			throw new Error('Remote Error on ' + response.url)
+		}
+
+		return response
+	}
+}

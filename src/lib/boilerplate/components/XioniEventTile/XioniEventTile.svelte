@@ -4,7 +4,7 @@
 	import { LOCALE } from '$lib/boilerplate/constants'
 	import { goto } from '$app/navigation'
 	import classNames from 'classnames'
-	import { format } from '$lib/boilerplate/utils/format-date'
+	import { format } from '$lib/boilerplate/utils/formatDate'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 

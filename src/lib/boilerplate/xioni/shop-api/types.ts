@@ -1,3 +1,7 @@
+import type { XioniFetchErrorResponse } from '../utils/xioniFetch'
+
+export type XioniShopData<T = unknown> = [T, undefined] | [undefined, XioniFetchErrorResponse]
+
 export namespace XioniShop {
 	export interface Cart {
 		products: {

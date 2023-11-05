@@ -1,5 +1,3 @@
-// XIONI SHOP API
-
 export { CartFactory } from './src/Cart'
 export { CategoriesFactory } from './src/Categories'
 export { InfoFactory } from './src/Info'

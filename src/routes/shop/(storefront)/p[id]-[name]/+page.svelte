@@ -4,7 +4,7 @@
 	import messages from '$lib/messages'
 	import stammdaten from '$stammdaten'
 
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/libraries/xioni-fetch/types'
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 

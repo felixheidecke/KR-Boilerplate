@@ -4,7 +4,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import messages from '$lib/messages'
 
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/libraries/xioni-fetch/types'
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 

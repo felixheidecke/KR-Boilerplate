@@ -1,6 +1,6 @@
 {
 	"name": "boilerplate.ts",
-	"version": "5.1.2.Beta",
+	"version": "5.1.3.Beta",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",

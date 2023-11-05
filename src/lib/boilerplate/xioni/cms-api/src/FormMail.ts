@@ -1,27 +1,26 @@
 import EventEmitter from 'eventemitter3'
-import { FetchMethods, FetchResponseStatus } from '$lib/boilerplate/utils/fetch-json/types'
-import { XioniFetch } from '../../xioni-fetch'
+import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniResponse } from '../types'
-import type { XioniFetchErrorResponse } from '../../xioni-fetch/types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import type { XioniCMSData } from '../types'
 
 export function FormMailFactory(fetchFn: typeof fetch = fetch) {
-	const fetchJSON = XioniFetch(fetchFn)
+	const fetchJSON = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
 	async function createFormMail(
 		formData: { [k: string]: FormDataEntryValue }[]
-	): Promise<XioniResponse<boolean>> {
+	): Promise<XioniCMSData<boolean>> {
 		const context = { emitter: 'createFormMail' }
 
 		event.emit('creating', context)
 
 		const response = await fetchJSON(['form-mail'], {
-			method: FetchMethods.POST,
+			method: 'POST',
 			data: formData
 		})
 
-		if (response.status === FetchResponseStatus.SUCCESS) {
+		if (response.status === 'success') {
 			event.emit('created', true, context)
 			event.emit('finally', context)
 

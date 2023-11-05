@@ -1,4 +1,4 @@
-import * as XioniShop from '$lib/boilerplate/libraries/xioni-shop/index.js'
+import * as XioniShop from '$lib/boilerplate/xioni/shop-api/'
 import { shopModule } from './config.js'
 
 export const Cart = XioniShop.CartFactory(shopModule)
