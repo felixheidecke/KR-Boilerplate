@@ -41,6 +41,7 @@
 {#if icon}
 	<span class={className}>
 		<Icon ex-class={baseName + '__icon'} name={icon} />
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<svelte:element this={tag} href={to} {target} {rel} aria-label={label} on:click>
 			{#if $$slots.default}
 				<slot />
@@ -50,6 +51,7 @@
 		</svelte:element>
 	</span>
 {:else}
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<svelte:element this={tag} class={className} href={to} {target} {rel} aria-label={label} on:click>
 		{#if $$slots.default}
 			<slot />

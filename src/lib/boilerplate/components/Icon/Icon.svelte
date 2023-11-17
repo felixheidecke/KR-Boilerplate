@@ -1,6 +1,4 @@
 <script lang="ts">
-	import './Icon.css'
-
 	import classnames from 'classnames'
 
 	export let name = 'fas fa-carrot'

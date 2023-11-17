@@ -4,12 +4,13 @@
 	background: #dfdfdf;
 	border: 1px solid #7c7c7c;
 	color: darken(rgb(34, 34, 34), 0.666);
+	text-align: center;
+	position: relative;
 }
 
 :where(.Message__title) {
 	margin: 0 0 1rem;
 	padding: 0;
-	text-align: center;
 }
 
 :where(.Message--error) {
@@ -25,4 +26,29 @@
 :where(.Message--success) {
 	background: #e6ffe3;
 	border: 1px solid #8ee79d;
+}
+
+:where(.Message--inline) {
+	display: inline-flex;
+	gap: 0.5rem;
+	align-items: center;
+	padding: 0.5rem;
+	text-align: left;
+}
+
+:where(.Message--inline .Message__title) {
+	margin: 0;
+}
+
+:where(.Message--closable) {
+	padding-right: 1.25rem;
+}
+
+:where(.Message__close-button) {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(33%, -33%);
+	padding: 0.5rem;
+	cursor: pointer;
 }

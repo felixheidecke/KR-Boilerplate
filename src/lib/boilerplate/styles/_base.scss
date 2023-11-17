@@ -62,3 +62,19 @@ abbr {
 :where([style*='background-image']) {
 	background-size: contain;
 }
+
+// Tables
+
+:where(table) {
+	width: 100%;
+	border: 1px solid lightgray;
+}
+
+:where(table thead) {
+	background-color: lightgray;
+}
+
+:where(table th),
+:where(table td) {
+	padding: 0.5rem;
+}

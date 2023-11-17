@@ -1,23 +1,19 @@
-:where(.Modal) {
-	background-color: rgba(black, 0.333);
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 10;
+::backdrop {
+	background-color: black;
+	opacity: 0.5;
 }
 
-:where(.Modal__wrapper) {
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, calc(-50% - 2rem));
-	width: 42rem;
-	max-width: 90vw;
+:where(.Modal) {
 	box-shadow: 0.5rem 0.5rem 1rem rgba(black, 0.25);
 	border-radius: 0.5rem;
-	overflow: hidden;
+	border: 0 none;
+	padding: 0;
+}
+
+@media (min-width: 500px) {
+	:where(.Modal) {
+		min-width: 480px;
+	}
 }
 
 :where(.Modal__close-button) {
@@ -35,7 +31,7 @@
 }
 
 :where(.Modal__header) {
-	padding: 1rem 1.5rem;
+	padding: 1rem 3.5rem 1rem 1.5rem;
 	font-weight: bold;
 	text-align: center;
 	border-bottom: 1px solid lightgray;

@@ -1,12 +1,15 @@
 # Patch Notes
 
-## Version `4.12.5`
+## Version `4.13.0`
 
-- Update Dependencies
+- Use line-clamp in headline and paragraph defaults
+- Update Modal to use `<dialog>`
+- Minor components updates pulled from `develop/5` branch
 
 ## Version `4.12.4`
 
 - Remove unused store implementation
+- Update Dependencies
 
 ## Version `4.12.3`
 

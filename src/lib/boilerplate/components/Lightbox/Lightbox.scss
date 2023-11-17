@@ -22,7 +22,9 @@
 	background-color: rgba(black, 0.666);
 	color: white;
 	opacity: 0.333;
-	transition: opacity 333ms, padding 500ms;
+	transition:
+		opacity 333ms,
+		padding 500ms;
 	padding: 1rem;
 }
 
