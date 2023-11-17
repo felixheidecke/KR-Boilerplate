@@ -1,5 +1,9 @@
 # Patch Notes
 
+## Version `4.12.5`
+
+- Update Dependencies
+
 ## Version `4.12.4`
 
 - Remove unused store implementation
