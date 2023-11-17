@@ -10,6 +10,7 @@
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import Product from '$lib/boilerplate/components/XioniShopProduct/XioniShopProduct.svelte'
+	import { CART } from '../../stores'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -19,21 +20,16 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	function updatedHandler() {
-		messages.reset()
-	}
+	Cart.$event
+		.on('success', cart => {
+			messages.reset()
+			CART.set(cart)
+		})
+		.on('error', error => {
+			messages.add(error.data.message, undefined, { type: 'error' })
+		})
 
-	function errordHandler(error: XioniFetchErrorResponse) {
-		messages.add(error.data.message, undefined, { type: 'error' })
-	}
-
-	onMount(function () {
-		Cart.$event.on('updated', updatedHandler).on('error', errordHandler)
-	})
-
-	onDestroy(function () {
-		Cart.$event.off('updated', updatedHandler).off('error', errordHandler)
-	})
+	onDestroy(() => Cart.$event.removeAllListeners())
 </script>
 
 <svelte:head>

@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { Cart } from '../api'
 	import { CART } from '../stores'
-	import { onDestroy, onMount } from 'svelte'
+	import { beforeNavigate } from '$app/navigation'
+	import { isBoolean } from 'lodash-es'
 	import messages from '$lib/messages'
 
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -17,32 +19,30 @@
 
 	let isLoading: boolean = false
 
-	function updatingHandler() {
-		isLoading = true
+	function toggleLoading(status?: boolean) {
+		isLoading = isBoolean(status) ? status : !isLoading
 	}
 
-	function updatedHandler() {
-		messages.reset()
-		isLoading = false
-	}
-
-	function errordHandler(error: XioniFetchErrorResponse) {
+	function errorHandler(error: XioniFetchErrorResponse) {
 		messages.add(error.data.message, undefined, { type: 'error' })
-		isLoading = false
 	}
 
-	onMount(function () {
-		Cart.$event
-			.on('updating', updatingHandler)
-			.on('updated', updatedHandler)
-			.on('error', errordHandler)
-	})
+	function successHandler(cart: XioniShop.Cart) {
+		CART.set(cart)
+		messages.reset()
+	}
 
-	onDestroy(function () {
-		Cart.$event
-			.off('updating', updatingHandler)
-			.off('updated', updatedHandler)
-			.off('error', errordHandler)
+	function updateItemQuantity({ detail }: any) {
+		Cart.updateItemQuantity(detail.productId, detail.quantity)
+	}
+
+	Cart.$event
+		.on('loading-toggle', toggleLoading)
+		.on('error', errorHandler)
+		.on('success', successHandler)
+
+	beforeNavigate(function () {
+		Cart.$event.removeAllListeners()
 	})
 </script>
 
@@ -59,8 +59,7 @@
 			total={$CART.total}
 			quantitySelector
 			readOnly={isLoading}
-			on:product-quantity-update={({ detail }) =>
-				Cart.updateItemQuantity(detail.productId, detail.quantity)} />
+			on:product-quantity-update={updateItemQuantity} />
 
 		<div class="$mt-2">
 			<Button icon="fas fa-angle-left" to="/shop">zurück zum Shop</Button>

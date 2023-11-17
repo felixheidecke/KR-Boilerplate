@@ -1,10 +1,19 @@
 <script lang="ts">
+	import messages from '$lib/messages.js'
 	import { format } from '$lib/boilerplate/utils/formatDate.js'
+	import { Order } from '../../api.js'
+	import { ORDER } from '../../stores.js'
+	import { payPalClientId as clientId } from '../../config.js'
+	import { onDestroy, onMount } from 'svelte'
+
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types.js'
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import Button from '$lib/boilerplate/components/Button/Button.svelte'
+	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
+	import PayPalButtons from '$lib/boilerplate/components/PayPalButtons/PayPalButtons.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -12,11 +21,59 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	const order = data.order
+	let orderId: string
+
+	const order = data.order as XioniShop.Order
+	const address = order.address as XioniShop.Order['address']
 	const date = format(order.date as Date, 'PPP')
-	const address = order.address
-	const shippingAddress = order.shippingAddress
+	const shippingAddress = order.shippingAddress as XioniShop.Order['shippingAddress']
+
+	async function onApproveHandler() {
+		await Order.capturePaypalOrder(orderId)
+		await Order.getOrder(order.transactionId)
+	}
+
+	async function createOrderHandler() {
+		const [id] = (await Order.createPayPalOrder(order.transactionId as string)) as [
+			string,
+			undefined
+		]
+
+		return (orderId = id)
+	}
+
+	function successHandler(data: any, { emitter }: { emitter: string }) {
+		switch (emitter) {
+			case 'getOrder':
+				ORDER.set(data)
+			case 'capturePaypalOrder':
+				messages.add('Zahlung abgeschlossen.', undefined, { type: 'success', timeout: 5000 })
+		}
+	}
+
+	function errorHandler({ data }: XioniFetchErrorResponse) {
+		messages.reset()
+		messages.add((data.payload || [])?.join('\n'), data.message)
+	}
+
+	onMount(function () {
+		// prettier-ignore
+		Order.$event
+			.on('success', successHandler)
+			.on('error', errorHandler)
+	})
+
+	onDestroy(function () {
+		// prettier-ignore
+		Order.$event
+			.off('success', successHandler)
+			.off('error', errorHandler)
+	})
 </script>
+
+<svelte:head>
+	<title>Rechnung {order.transactionId?.toUpperCase()}</title>
+</svelte:head>
 
 <ol class="$mt-4">
 	{#if address.company}
@@ -80,16 +137,22 @@
 
 <p class="$mt-3">Vielen Dank für Ihren Auftrag.</p>
 
-<p>
-	Wir bitte um die Überweisung des Gesamtbetrag von {order.total.formatted} innerhalb von 14 Tagen ab
-	Rechnungsdatum an folgende genannte Bankverbindung.
-</p>
+{#if order.paymentType !== 'Paypal'}
+	<p class="$font-bold">Bezahlen Sie jetzt per PayPal:</p>
 
-<p>
-	Name des Kontoinhaber<br />
-	DE 70 5500 0000 1234 5678 00<br />
-	Verwendungszweck: <code>{order.transactionId?.toUpperCase()}</code>
-</p>
+	<PayPalButtons {clientId} {createOrderHandler} {onApproveHandler} />
+
+	<p>
+		Alternativ können Sie den Gesamtbetrag von {order.total.formatted} innerhalb von 14 Tagen ab Rechnungsdatum
+		an folgende genannte Bankverbindung überweisen:
+	</p>
+
+	<p>
+		Name des Kontoinhaber<br />
+		DE 70 5500 0000 1234 5678 00<br />
+		Verwendungszweck: <code>{order.transactionId?.toUpperCase()}</code>
+	</p>
+{/if}
 
 {#if shippingAddress}
 	<p>Nach vollständiger Zahlung wird die Waren wie gewünscht an nachfolgende Adresse verschickt:</p>

@@ -20,18 +20,26 @@ export default function (fetchFn: typeof fetch = fetch) {
 			remoteURL.search = new URLSearchParams(params.params as any).toString()
 		}
 
-		const response = await fetchFn(remoteURL.toString(), {
-			method,
-			credentials: 'include',
-			headers,
-			body
-		})
+		try {
+			const response = await fetchFn(remoteURL.toString(), {
+				method,
+				credentials: 'include',
+				headers,
+				body
+			})
 
-		return {
-			data: response.status !== 202 ? await response.json() : {},
-			status: getStatus(response.status),
-			statusCode: response.status,
-			url: response.url
+			return {
+				data: response.status !== 202 ? await response.json() : {},
+				status: getStatus(response.status),
+				statusCode: response.status,
+				url: response.url
+			}
+		} catch {
+			throw {
+				data: {},
+				status: getStatus(500),
+				statusCode: 500
+			}
 		}
 	}
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from 'svelte'
+	import { onMount, createEventDispatcher, onDestroy } from 'svelte'
 	import { XIONI_API_URL } from '$lib/boilerplate/constants'
 	import classnames from 'classnames'
 	import FetchJson from '$lib/boilerplate/utils/fetch-json'
@@ -26,9 +26,11 @@
 	let isDone = false
 	let isDoneEl: HTMLElement
 
-	// --- Methods -----------------------------------------------------------------------------------
+	const baseName = $$props['ex-class'] || 'Form'
 
-	const scrollToDoneText = () => {
+	// -----------------------------------------------------------------------------------------------
+
+	function scrollToDoneText() {
 		if (!isDoneEl || !$$slots.done) return
 
 		isDoneEl.scrollIntoView({
@@ -38,18 +40,15 @@
 		})
 	}
 
-	const getFormData = () => {
+	function getFormData() {
 		const formData = new FormData(form)
 		return Object.fromEntries(formData)
 	}
 
-	function submitt() {}
-
-	export const submit = async () => {
+	async function _submit() {
 		if (isDone) return
 
 		// Reset status
-		isLoading = true
 		errors = []
 
 		try {
@@ -74,40 +73,43 @@
 			isDone = false
 			errors = [error as string]
 			emit('error', error)
-		} finally {
-			isLoading = false
 		}
 	}
 
-	function creatingHandler() {
-		isLoading = true
+	async function submit() {
+		formMail.submit({ to: +id, required, subject }, getFormData())
 	}
 
-	function createdHandler() {
+	function setLoadingHandler(state: boolean) {
+		isLoading = state
+	}
+
+	function successHandler() {
 		setTimeout(scrollToDoneText, 100)
 	}
 
-	function errorHandler(error: XioniFetchErrorResponse) {
-		error.data.payload
+	function errorHandler({ data }: XioniFetchErrorResponse) {
+		errors = data.payload
 	}
 
-	function finallyHandler() {
-		isLoading = false
-	}
-
-	// collect required entries
 	onMount(() => {
-		formMail.$event.on('creating', creatingHandler)
-		formMail.$event.on('finally', finallyHandler)
-		formMail.$event.on('error', errorHandler)
-		formMail.$event.on('created', createdHandler)
+		formMail.$event
+			.on('loading-toggle', setLoadingHandler)
+			.on('error', errorHandler)
+			.on('success', successHandler)
 
+		// collect required entries
 		form.querySelectorAll('[required]').forEach(element => {
 			required = [...required, element.getAttribute('name') || '']
 		})
 	})
 
-	const baseName = $$props['ex-class'] || 'Form'
+	onDestroy(function () {
+		formMail.$event
+			.off('loading-toggle', setLoadingHandler)
+			.off('error', errorHandler)
+			.off('success', successHandler)
+	})
 </script>
 
 <form

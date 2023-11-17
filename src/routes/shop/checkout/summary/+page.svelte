@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
+	import { beforeNavigate, goto } from '$app/navigation'
 	import { Order } from '../../api'
 	import { ORDER, CART } from '../../stores'
-	import { isEmpty } from 'lodash-es'
-	import { onDestroy, onMount } from 'svelte'
+	import { isBoolean, isEmpty } from 'lodash-es'
 	import messages from '$lib/messages'
 
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -19,47 +17,40 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	let shopPendingMessage = false
+	let isLoading = false
 
 	$: products = $CART.products || {}
 	$: address = $ORDER.address || {}
 	$: shippingAddress = $ORDER.shippingAddress || null
 
-	function orderErrorHandler(error: XioniFetchErrorResponse) {
-		shopPendingMessage = false
+	function toggleLoading(status?: boolean) {
+		isLoading = isBoolean(status) ? status : !isLoading
+	}
 
+	function errorHandler(error: XioniFetchErrorResponse) {
 		if (error.statusCode !== 412) {
 			messages.reset()
 			messages.add((error.data.payload || [])?.join('\n'), error.data.message)
 		}
 	}
 
-	function orderCreatedHandler({ transactionId }: XioniShop.Order) {
-		goto('/shop/order-confirmation/' + transactionId)
+	async function submitOrder() {
+		const [order] = await Order.createOrder()
+
+		if (order) {
+			ORDER.set(order)
+			goto('/shop/order-confirmation/' + order.transactionId)
+		}
 	}
 
-	function orderCreatingHandler() {
-		shopPendingMessage = true
-	}
+	Order.$event.on('loading-toggle', toggleLoading).on('error', errorHandler)
 
-	onMount(() => {
-		Order.$event
-			.on('creating', orderCreatingHandler)
-			.on('error', orderErrorHandler)
-			.on('created', orderCreatedHandler)
-	})
-
-	onDestroy(() => {
-		// prettier-ignore
-		Order.$event
-			.off('error', orderErrorHandler)
-			.off('created', orderCreatedHandler)
-	})
+	beforeNavigate(() => Order.$event.removeAllListeners())
 </script>
 
 <h2>Zusammenfassung</h2>
 
-{#if shopPendingMessage}
+{#if isLoading}
 	<Message title="Bitte warten" type="success">Sie werden in Kürze weitergeleitet.</Message>
 {:else if isEmpty(products)}
 	<Message title="Ihr Warenkorb ist leer!" type="error">
@@ -125,6 +116,6 @@
 		<Button
 			icon="fas fa-angle-right"
 			class="Button--primary $float-right $row-reverse"
-			on:click={Order.createOrder}>jetzt kostenpflichtig bestellen</Button>
+			on:click={submitOrder}>jetzt kostenpflichtig bestellen</Button>
 	</div>
 {/if}

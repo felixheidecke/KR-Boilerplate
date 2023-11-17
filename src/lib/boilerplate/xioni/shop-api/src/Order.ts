@@ -10,33 +10,30 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
-	/**
-	 * Get the cart contents
-	 *
-	 * @returns Cart
-	 */
-
 	async function createOrder(): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'createOrder' }
 
-		event.emit('creating', context)
+		event.emit('loading', context)
+		event.emit('loading-toggle', true, context)
 
-		const response = await fetch(['shop', module, 'order'], { method: 'POST' })
+		try {
+			const response = await fetch(['shop', module, 'order'], { method: 'POST' })
 
-		if (response.status === 'success') {
-			const order = orderAdapter(response.data) as XioniShop.Order
+			if (response.status === 'success') {
+				const order = orderAdapter(response.data) as XioniShop.Order
 
-			event.emit('created', order, context)
-			event.emit('finally', context)
+				event.emit('success', order, context)
+				event.emit('loading-toggle', false, context)
 
-			return [order, undefined]
-		} else {
-			const error = response as XioniFetchErrorResponse
+				return [order, undefined]
+			} else {
+				event.emit('error', response, context)
+				event.emit('loading-toggle', false, context)
 
-			event.emit('error', error, context)
-			event.emit('finally', context)
-
-			return [undefined, error]
+				return [undefined, response as XioniFetchErrorResponse]
+			}
+		} catch (error) {
+			return [undefined, error as XioniFetchErrorResponse]
 		}
 	}
 
@@ -48,7 +45,8 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 	}): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'updateOrder' }
 
-		event.emit('updating', context)
+		event.emit('loading', context)
+		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'order'], {
 			method: 'PATCH',
@@ -58,84 +56,98 @@ export function OrderFactory(module: number, fetchFn: typeof fetch = fetch) {
 		if (response.status === 'success') {
 			const order = orderAdapter(response.data) as XioniShop.Order
 
-			event.emit('updated', order, context)
-			event.emit('finally', context)
+			event.emit('success', order, context)
+			event.emit('loading-toggle', false, context)
 
 			return [order, undefined]
 		} else {
-			const error = response as XioniFetchErrorResponse
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
 
-			event.emit('error', error, context)
-			event.emit('finally', context)
-
-			return [undefined, error]
+			return [undefined, response as XioniFetchErrorResponse]
 		}
 	}
 
-	async function getOrder(id?: string | number): Promise<XioniShopData<XioniShop.Order>> {
+	async function getOrder(id?: string): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'getOrder' }
 
 		event.emit('loading', context)
+		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'order', id])
 
 		if (response.status === 'success') {
 			const order = orderAdapter(response.data) as XioniShop.Order
 
-			event.emit('loaded', order, context)
-			event.emit('finally', context)
+			event.emit('success', order, context)
+			event.emit('loading-toggle', false, context)
 
 			return [order, undefined]
 		} else {
-			const error = response as XioniFetchErrorResponse
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
 
-			event.emit('error', error, context)
-			event.emit('finally', context)
-
-			return [undefined, error]
-		}
-	}
-
-	/**
-	 * Create a Paypal Order
-	 *
-	 * @returns Order ID
-	 */
-
-	async function createPaypalOrder(): Promise<XioniShopData<unknown>> {
-		const response = await fetch(['shop', module, 'order/paypal/create'], { method: 'POST' })
-
-		if (response.status === 'success') {
-			return [orderAdapter(response.data), undefined]
-		} else {
 			return [undefined, response as XioniFetchErrorResponse]
 		}
 	}
 
-	/**
-	 * Catch an Paypal Order
-	 *
-	 * @param id Order ID
-	 * @returns
-	 */
+	async function createPayPalOrder(transactionId: string): Promise<XioniShopData<string>> {
+		const context = { emitter: 'createPayPalOrder' }
 
-	async function capturePaypalOrder(id: string): Promise<XioniShopData<string>> {
-		const path = ['shop', module, 'order/paypal/capture']
-		const response = await fetch(path, {
+		event.emit('loading', context)
+		event.emit('loading-toggle', true, context)
+
+		const response = await fetch(['shop', module, 'payment/paypal/create'], {
 			method: 'POST',
-			params: { id }
+			data: {
+				transactionId
+			}
 		})
 
 		if (response.status === 'success') {
-			return [response.data as any, undefined]
+			const orderId = (response.data as any).orderId as string
+
+			event.emit('success', orderId, context)
+			event.emit('loading-toggle', false, context)
+
+			return [orderId, undefined]
 		} else {
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
+
+			return [undefined, response as XioniFetchErrorResponse]
+		}
+	}
+
+	async function capturePaypalOrder(orderId: string): Promise<XioniShopData<boolean>> {
+		const context = { emitter: 'capturePaypalOrder' }
+
+		event.emit('loading', context)
+		event.emit('loading-toggle', true, context)
+
+		const response = await fetch(['shop', module, 'payment/paypal/capture'], {
+			method: 'POST',
+			data: { orderId }
+		})
+
+		if (response.status === 'success') {
+			event.emit('success', true, context)
+			event.emit('loading-toggle', false, context)
+
+			return [true, undefined]
+		} else {
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
+
 			return [undefined, response as XioniFetchErrorResponse]
 		}
 	}
 
 	return {
-		updateOrder,
 		createOrder,
+		updateOrder,
+		createPayPalOrder,
+		capturePaypalOrder,
 		getOrder,
 		$event: event
 	}

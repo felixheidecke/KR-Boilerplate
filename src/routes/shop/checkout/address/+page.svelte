@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { isEmpty, omitBy } from 'lodash-es'
+	import { isBoolean, isEmpty, omitBy } from 'lodash-es'
 	import { ORDER, CART } from '../../stores'
 	import { shopPath } from '../../config'
 	import { Order } from '../../api'
@@ -21,6 +21,7 @@
 
 	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -33,6 +34,10 @@
 	let shippingAddress = { ...$ORDER.shippingAddress } || {}
 	let message = $ORDER.message || ''
 
+	function toggleLoading(status?: boolean) {
+		isLoading = isBoolean(status) ? status : !isLoading
+	}
+
 	function toggleShippingForm() {
 		if (showShippingForm) {
 			showShippingForm = false
@@ -42,39 +47,42 @@
 		}
 	}
 
-	async function updateCart() {
-		isLoading = true
+	function errorHandler(error: XioniFetchErrorResponse) {
+		formErrors = error.data.payload as any
+
+		document.querySelector('.Message')?.scrollIntoView({ behavior: 'smooth' })
+	}
+
+	function successHandler(order: XioniShop.Order) {
+		ORDER.set(order)
+		goto(shopPath + '/checkout/summary')
+
+		formErrors = {}
+	}
+
+	function updateCart() {
 		const addressData = omitBy(address, isEmpty) as any
 		const shippingAddressData = omitBy(shippingAddress, isEmpty) as any
 
-		await Order.updateOrder({
+		Order.updateOrder({
 			address: addressData,
 			shippingAddress: !isEmpty(shippingAddress) ? shippingAddressData : null,
 			message: message.trim() || null
 		})
-
-		isLoading = false
-	}
-
-	async function errorHandler(error: XioniFetchErrorResponse) {
-		if (!error.data.payload) return
-
-		formErrors = error.data.payload as any
-
-		await Promise.resolve()
-		document.querySelector('.Message')?.scrollIntoView({ behavior: 'smooth' })
-	}
-
-	function successHandler() {
-		goto(shopPath + '/checkout/summary')
 	}
 
 	onMount(function () {
-		Order.$event.on('error', errorHandler).once('updated', successHandler)
+		Order.$event
+			.on('loading-toggle', toggleLoading)
+			.on('error', errorHandler)
+			.on('success', successHandler)
 	})
 
 	onDestroy(function () {
-		Order.$event.off('error', errorHandler).off('updated', successHandler)
+		Order.$event
+			.off('loading-toggle', toggleLoading)
+			.off('error', errorHandler)
+			.off('success', successHandler)
 	})
 </script>
 

@@ -8,35 +8,38 @@ export function FormMailFactory(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = xioniFetch(fetchFn)
 	const event = new EventEmitter()
 
-	async function createFormMail(
-		formData: { [k: string]: FormDataEntryValue }[]
+	async function submit(
+		config: { to: number; required: string[]; subject: string },
+		formData: { [k: string]: FormDataEntryValue }
 	): Promise<XioniCMSData<boolean>> {
 		const context = { emitter: 'createFormMail' }
 
-		event.emit('creating', context)
+		event.emit('loading', context)
+		event.emit('loading-toggle', true, context)
 
 		const response = await fetchJSON(['form-mail'], {
 			method: 'POST',
-			data: formData
+			data: {
+				config,
+				formData
+			}
 		})
 
 		if (response.status === 'success') {
-			event.emit('created', true, context)
-			event.emit('finally', context)
+			event.emit('success', true, context)
+			event.emit('loading-toggle', false, context)
 
 			return [true, undefined]
 		} else {
-			const error = response as XioniFetchErrorResponse
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
 
-			event.emit('error', error, context)
-			event.emit('finally', context)
-
-			return [undefined, error]
+			return [undefined, response as XioniFetchErrorResponse]
 		}
 	}
 
 	return {
-		createFormMail,
+		submit,
 		$event: event
 	}
 }

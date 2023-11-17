@@ -1,5 +1,4 @@
 import { XIONI_API_URL } from '$lib/boilerplate/constants'
-import { isEmpty, isNull, isUndefined, omitBy } from 'lodash-es'
 import FetchJson from '../../utils/fetch-json'
 
 // --- [ Types ] -----------------------------------------------------------------------------------
@@ -30,10 +29,6 @@ export function xioniFetch(fetchFn: typeof fetch = fetch) {
 	return async function (path: Array<string | number | undefined>, params: FetchParams = {}) {
 		const normalPath = path.filter(item => item !== undefined) as Array<string | number>
 		const response = await fetch([XIONI_API_URL, ...normalPath], params)
-
-		if (response.status === 'server-error') {
-			throw new Error('Remote Error on ' + response.url)
-		}
 
 		return response
 	}

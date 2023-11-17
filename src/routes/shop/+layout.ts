@@ -3,8 +3,11 @@ import { Products } from './api'
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
 
 import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types'
+import { CART } from './stores'
 
 export const load = async function () {
+	Cart.$event.once('success', CART.set)
+
 	const [categories, products] = await Promise.all([
 		xioniLoader(Categories.getCategories()),
 		xioniLoader(Products.getProductHighlights()),
