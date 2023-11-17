@@ -1,5 +1,9 @@
 # Patch Notes
 
+## Version `4.12.4`
+
+- Remove unused store implementation
+
 ## Version `4.12.3`
 
 - Remove unused Axios lib
