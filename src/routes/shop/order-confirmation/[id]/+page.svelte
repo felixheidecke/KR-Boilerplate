@@ -2,7 +2,6 @@
 	import messages from '$lib/messages.js'
 	import { format } from '$lib/boilerplate/utils/formatDate.js'
 	import { Order } from '../../api.js'
-	import { ORDER } from '../../stores.js'
 	import { payPalClientId as clientId } from '../../config.js'
 	import { onDestroy, onMount } from 'svelte'
 
@@ -21,15 +20,14 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	let orderId: string
-
-	const order = data.order as XioniShop.Order
-	const address = order.address as XioniShop.Order['address']
-	const date = format(order.date as Date, 'PPP')
-	const shippingAddress = order.shippingAddress as XioniShop.Order['shippingAddress']
+	let paypalOrderId: string
+	let order = data.order as XioniShop.Order
+	$: address = order.address as XioniShop.Order['address']
+	$: date = format(order.date as Date, 'PPP')
+	$: shippingAddress = order.shippingAddress as XioniShop.Order['shippingAddress']
 
 	async function onApproveHandler() {
-		await Order.capturePaypalOrder(orderId)
+		await Order.capturePaypalOrder(paypalOrderId)
 		await Order.getOrder(order.transactionId)
 	}
 
@@ -39,13 +37,14 @@
 			undefined
 		]
 
-		return (orderId = id)
+		return (paypalOrderId = id)
 	}
 
 	function successHandler(data: any, { emitter }: { emitter: string }) {
 		switch (emitter) {
 			case 'getOrder':
-				ORDER.set(data)
+				order = data
+				break
 			case 'capturePaypalOrder':
 				messages.add('Zahlung abgeschlossen.', undefined, { type: 'success', timeout: 5000 })
 		}
@@ -53,7 +52,7 @@
 
 	function errorHandler({ data }: XioniFetchErrorResponse) {
 		messages.reset()
-		messages.add((data.payload || [])?.join('\n'), data.message)
+		messages.add((data.payload || ['Ein Fehler ist aufgetreten.'])?.join('\n'), data.message)
 	}
 
 	onMount(function () {
@@ -90,7 +89,7 @@
 
 <Grid>
 	<Grid size="1-2">
-		<strong class="$font-larger">Rechnung</strong>
+		<strong class="$font-larger">Ihre Bestellung</strong>
 	</Grid>
 	<Grid size="1-2" class="$text-right">
 		<ul>
@@ -155,7 +154,7 @@
 {/if}
 
 {#if shippingAddress}
-	<p>Nach vollständiger Zahlung wird die Waren wie gewünscht an nachfolgende Adresse verschickt:</p>
+	<p>Die Waren werden wie gewünscht an folgende Adresse verschickt:</p>
 	<ol>
 		{#if shippingAddress.company}
 			<li>{shippingAddress.company}</li>
@@ -166,10 +165,8 @@
 		<li>{shippingAddress.address}</li>
 		<li>{shippingAddress.zip} {shippingAddress.city}</li>
 	</ol>
-{:else}
-	<p>Nach vollständiger Zahlung wird die Waren an oben genannte Adresse verschickt.</p>
 {/if}
-
+<hr />
 <p>
 	Mit freundlichen Grüßen,<br />
 	Max Mustermann

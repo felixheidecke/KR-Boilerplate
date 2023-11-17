@@ -24,13 +24,20 @@
 	$: shippingAddress = $ORDER.shippingAddress || null
 
 	function toggleLoading(status?: boolean) {
+		const id = 'loading-indicator'
 		isLoading = isBoolean(status) ? status : !isLoading
+
+		if (isLoading) {
+			messages.add('Bestellung wird verarbeitet.', 'Bitte warten', { id, timeout: 0 })
+		} else {
+			messages.remove(id)
+		}
 	}
 
 	function errorHandler(error: XioniFetchErrorResponse) {
 		if (error.statusCode !== 412) {
 			messages.reset()
-			messages.add((error.data.payload || [])?.join('\n'), error.data.message)
+			messages.add((error.data.payload || [])?.join('\n'), error.data.message, { type: 'error' })
 		}
 	}
 
@@ -50,9 +57,7 @@
 
 <h2>Zusammenfassung</h2>
 
-{#if isLoading}
-	<Message title="Bitte warten" type="success">Sie werden in Kürze weitergeleitet.</Message>
-{:else if isEmpty(products)}
+{#if isEmpty(products)}
 	<Message title="Ihr Warenkorb ist leer!" type="error">
 		<Link to="/shop">zurück zum Shop</Link>
 	</Message>
