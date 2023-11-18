@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { onMount, createEventDispatcher, onDestroy } from 'svelte'
-	import { XIONI_API_URL } from '$lib/boilerplate/constants'
 	import classnames from 'classnames'
-	import FetchJson from '$lib/boilerplate/utils/fetch-json'
+	import FetchJson from '$lib/utils/fetch-json'
 	import Message from '../Message/Message.svelte'
 	import { FormMailFactory } from '$lib/boilerplate/xioni/cms-api'
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
@@ -52,7 +51,7 @@
 		errors = []
 
 		try {
-			const { data, status } = (await fetchJson([XIONI_API_URL, 'form'], {
+			const { data, status } = (await fetchJson([xinoiConfig.apiUrl, 'form'], {
 				method: 'POST',
 				data: getFormData(),
 				params: attach === 'csv' ? { attach: 'csv' } : undefined

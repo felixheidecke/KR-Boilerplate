@@ -3,7 +3,7 @@ import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 import type { XioniCMS, XioniCMSData } from '../types'
-import { formatFromTo } from '$lib/boilerplate/utils/formatDate'
+import { formatFromTo } from '$lib/utils/formatDate'
 
 export function EventsFactory(fetchFn: typeof fetch = fetch) {
 	const fetchJson = xioniFetch(fetchFn)

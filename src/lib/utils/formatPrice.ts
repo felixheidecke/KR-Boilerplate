@@ -1,4 +1,4 @@
-import { LOCALE } from '../constants'
+import { LOCALE } from '../boilerplate/constants'
 
 export default function (price: number) {
 	return new Intl.NumberFormat(LOCALE, {

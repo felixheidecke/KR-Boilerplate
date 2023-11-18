@@ -2,7 +2,7 @@
 	import './Button.scss'
 
 	import classnames from 'classnames'
-	import isExternalURL from '$lib/boilerplate/utils/isExternalURL'
+	import isExternalURL from '$lib/utils/isExternalURL'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 

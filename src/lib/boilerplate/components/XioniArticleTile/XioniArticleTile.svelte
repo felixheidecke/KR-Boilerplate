@@ -1,7 +1,7 @@
 <script lang="ts">
 	import './XioniArticleTile.scss'
 
-	import { format } from '$lib/boilerplate/utils/formatDate'
+	import { format } from '$lib/utils/formatDate'
 	import { goto } from '$app/navigation'
 	import { LOCALE } from '$lib/boilerplate/constants'
 	import cn from 'classnames'

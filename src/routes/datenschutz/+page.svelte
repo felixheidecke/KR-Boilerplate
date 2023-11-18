@@ -1,5 +1,5 @@
 <script>
-	import { format } from '$lib/boilerplate/utils/formatDate'
+	import { format } from '$lib/utils/formatDate'
 	import stammdaten from '$lib/stammdaten'
 
 	const lastUpdated = format(new Date('1983-6-5'), 'PPPP')

@@ -1,8 +1,6 @@
 <script lang="ts">
 	import {
 		loadScript,
-		type OnApproveActions,
-		type OnApproveData,
 		type OnClickActions,
 		type PayPalButtonsComponentOptions
 	} from '@paypal/paypal-js'

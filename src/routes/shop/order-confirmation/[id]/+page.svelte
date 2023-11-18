@@ -1,6 +1,6 @@
 <script lang="ts">
 	import messages from '$lib/messages.js'
-	import { format } from '$lib/boilerplate/utils/formatDate.js'
+	import { format } from '$lib/utils/formatDate.js'
 	import { Order } from '../../api.js'
 	import { payPalClientId as clientId } from '../../config.js'
 	import { onDestroy, onMount } from 'svelte'

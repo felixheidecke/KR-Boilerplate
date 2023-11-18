@@ -1,9 +1,9 @@
-import { XIONI_API_URL } from '$lib/boilerplate/constants'
-import FetchJson from '../../utils/fetch-json'
+import { xinoiConfig } from '$lib/config'
+import FetchJson from '../../../utils/fetch-json'
 
 // --- [ Types ] -----------------------------------------------------------------------------------
 
-import type { FetchParams, FetchResponse } from '../../utils/fetch-json/types'
+import type { FetchParams, FetchResponse } from '../../../utils/fetch-json/types'
 
 export type XioniFetchResponse<T = unknown> = FetchResponse<T>
 
@@ -28,7 +28,7 @@ export function xioniFetch(fetchFn: typeof fetch = fetch) {
 	 */
 	return async function (path: Array<string | number | undefined>, params: FetchParams = {}) {
 		const normalPath = path.filter(item => item !== undefined) as Array<string | number>
-		const response = await fetch([XIONI_API_URL, ...normalPath], params)
+		const response = await fetch([xinoiConfig.apiPath, ...normalPath], params)
 
 		return response
 	}

@@ -2,7 +2,7 @@
 	import './OpeningHours.css'
 
 	import classnames from 'classnames'
-	import OpeningHours from '$lib/boilerplate/utils/OpeningHours'
+	import OpeningHours from '$lib/utils/OpeningHours'
 
 	// --- Components --------------------------------------------------------------------------------
 

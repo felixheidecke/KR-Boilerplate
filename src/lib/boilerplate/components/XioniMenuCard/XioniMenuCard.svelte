@@ -1,7 +1,7 @@
 <script lang="ts">
 	import './XioniMenuCard.scss'
 	import classnames from 'classnames'
-	import formatPrice from '$lib/boilerplate/utils/formatPrice'
+	import formatPrice from '$lib/utils/formatPrice'
 	import type { XioniMenuCard } from '$lib/boilerplate/libraries/xioni/menuCards.types'
 
 	// --- Props -------------------------------------------------------------------------------------

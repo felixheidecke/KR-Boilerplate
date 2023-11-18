@@ -2,9 +2,10 @@
 	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
 
+	import cdn from '$lib/utils/cdn'
+	import MESSAGES from '$lib/messages'
 	import routes from '$routes'
 	import stammdaten from '$stammdaten'
-	import MESSAGES from '$lib/messages'
 </script>
 
 <svelte:head>
@@ -13,7 +14,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={stammdaten.title} />
 	<meta property="og:description" content="…" />
-	<meta property="og:image" content="/images/og-image.jpg" />
+	<meta property="og:image" content="{cdn}/images/og-image.jpg" />
 </svelte:head>
 
 <header>
