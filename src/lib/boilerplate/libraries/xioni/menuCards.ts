@@ -1,5 +1,5 @@
-import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import fetchJson from '$lib/boilerplate/libraries/fetch-json'
+import { xioniConfig } from '$lib/config'
 import { FetchResponseStatus } from '../fetch-json/types'
 import type { XioniMenuCard } from './menuCards.types'
 import type { XioniResponse } from './types'
@@ -14,7 +14,7 @@ export default function XioniMenuCard(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getMenuCard(module: number): Promise<XioniResponse<XioniMenuCard>> {
-		const { status, data } = await fetchJSON([XIONI_API_URL, 'menu-card', module])
+		const { status, data } = await fetchJSON([xioniConfigapiPath, 'menu-card', module])
 
 		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
 	}

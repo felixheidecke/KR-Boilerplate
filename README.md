@@ -1,5 +1,11 @@
 # Patch Notes
 
+## Version `4.14.0`
+
+- Remove info.json (will be replaced)
+- Add CDN Support
+- Create new project `config.js`
+
 ## Version `4.13.0`
 
 - Use line-clamp in headline and paragraph defaults

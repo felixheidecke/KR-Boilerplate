@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/kit/vite'
+import { kitConfig } from './src/lib/config.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,20 +11,18 @@ const config = {
 	kit: {
 		inlineStyleThreshold: 10000,
 		adapter: adapter({
-			pages: 'htdocs',
-			assets: 'htdocs',
+			pages: 'htdocs/pages',
+			assets: 'htdocs/assets',
 			fallback: '200.html',
 			strict: false,
 			precompress: false
 		}),
-		paths: {
-			relative: false
-		},
 		alias: {
 			$variables: './src/lib/styles/variables.scss',
 			$routes: './src/routes.js',
 			$stammdaten: './src/lib/stammdaten.js'
-		}
+		},
+		...kitConfig
 	}
 }
 

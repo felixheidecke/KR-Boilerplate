@@ -1,4 +1,4 @@
-import { XIONI_API_URL } from '$lib/boilerplate/constants'
+import { xioniConfig } from '$lib/config'
 import FetchJson from '../fetch-json'
 import { FetchResponseStatus, type FetchParams } from '../fetch-json/types'
 
@@ -10,7 +10,7 @@ export default function XioniFetch(fetchFn: typeof fetch = fetch) {
 			path = [path]
 		}
 
-		const response = await fetchJson([XIONI_API_URL, ...path], params)
+		const response = await fetchJson([xioniConfigapiPath, ...path], params)
 
 		if (response.status === FetchResponseStatus.SERVER_ERROR) {
 			throw new Error('Failed loading' + response.url)

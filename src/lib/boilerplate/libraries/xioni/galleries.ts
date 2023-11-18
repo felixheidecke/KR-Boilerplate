@@ -1,8 +1,8 @@
 import FetchJSON from '$lib/boilerplate/libraries/fetch-json'
-import { XIONI_API_URL } from '$lib/boilerplate/constants'
 import type { XioniAlbum, XioniGallery } from './galleries.types'
 import type { XioniResponse } from './types'
 import { FetchResponseStatus } from '../fetch-json/types'
+import { xioniConfig } from '$lib/config'
 
 export default function XioniGallery(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = FetchJSON(fetchFn)
@@ -15,7 +15,7 @@ export default function XioniGallery(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getGallery(module: number): Promise<XioniResponse<XioniGallery>> {
-		const { status, data } = await fetchJSON([XIONI_API_URL, 'gallery', module])
+		const { status, data } = await fetchJSON([xioniConfigapiPath, 'gallery', module])
 
 		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
 	}
@@ -28,7 +28,7 @@ export default function XioniGallery(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getAlbum(id: number): Promise<XioniResponse<XioniAlbum>> {
-		const { status, data } = await fetchJSON([XIONI_API_URL, 'gallery/album', id])
+		const { status, data } = await fetchJSON([xioniConfigapiPath, 'gallery/album', id])
 
 		return status === FetchResponseStatus.SUCCESS ? [undefined, data] : [data, undefined]
 	}
