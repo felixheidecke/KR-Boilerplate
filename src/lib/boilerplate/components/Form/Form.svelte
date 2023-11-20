@@ -49,7 +49,7 @@
 		errors = []
 
 		try {
-			const { data, status } = await fetchJson([xioniConfigapiPath, 'form'], {
+			const { data, status } = await fetchJson([xioniConfig.apiPath, 'form'], {
 				method: FetchMethods.POST,
 				data: getFormData(),
 				params: attach === 'csv' ? { attach: 'csv' } : undefined

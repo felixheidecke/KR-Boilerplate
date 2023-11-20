@@ -2,7 +2,7 @@
 	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
 
-	import { assets } from '$app/paths'
+	import cdnPath from '$lib/boilerplate/utils/cdnPath'
 	import routes from '$routes'
 	import stammdaten from '$stammdaten'
 </script>
@@ -13,7 +13,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={stammdaten.title} />
 	<meta property="og:description" content="…" />
-	<meta property="og:image" content="{assets}/images/og-image.jpg" />
+	<meta property="og:image" content="{cdnPath}/images/og-image.jpg" />
 </svelte:head>
 
 <header>

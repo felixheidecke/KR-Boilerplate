@@ -10,7 +10,7 @@ export default function XioniFetch(fetchFn: typeof fetch = fetch) {
 			path = [path]
 		}
 
-		const response = await fetchJson([xioniConfigapiPath, ...path], params)
+		const response = await fetchJson([xioniConfig.apiPath, ...path], params)
 
 		if (response.status === FetchResponseStatus.SERVER_ERROR) {
 			throw new Error('Failed loading' + response.url)
