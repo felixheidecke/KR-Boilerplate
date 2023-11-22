@@ -1,5 +1,9 @@
 # Patch Notes
 
+## Version `4.14.1`
+
+- Minor folder restructuring
+
 ## Version `4.14.0`
 
 - Remove info.json (will be replaced)
@@ -57,40 +61,23 @@
 - Bump Minor & Patch versions of dependencies
 - Add `$routes` & `$stammdaten` aliases
 
-### `AccordionSlide`
+---
 
-- Add up & down caret icons
+# Update Guide
 
-### `Button`
+Replace the following files and folders upon updating:
 
-- Simplify component types in
-- Open external links in new tab
-- Open PDF links in new tab
+### Folder
 
-### `Link`
+- `/src/lib/boilerplate/`
 
-- Open PDF links in new tab
+### Files
 
-### `InView`
-
-- Adding `fade-rtl` _(right to left)_ and `fade-ltr` _(left to right)_ transitions
-
-### `Lightbox`
-
-- Update styling of tiles in overview
-
-### `Nav`
-
-The current and active routes now are based on the current urls pathname. This negates the need to
-passt `activeRoute` and `activeParent` as props
-
-### `PageTransition`
-
-- Prop `path` removed.
-
-_(`width` is required for inline image with caption to work propperly)_
-
-### XioniEventReistration
-
-- Titles `<h4>` becomes `<h3>`
-- Date font-size from small to default size
+- `/src/lib/config.js`
+- `/src/app.html`
+- `/README.md`
+- `/package-lock.json`
+- `/package.json`
+- `/svelte.config.js`
+- `/tsconfig.json`
+- `/vite.config.js`
