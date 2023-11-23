@@ -1,5 +1,4 @@
 <script>
-	import '$lib/boilerplate/styles/style.scss'
 	import '$lib/styles/style.scss'
 
 	import routes from '$routes'

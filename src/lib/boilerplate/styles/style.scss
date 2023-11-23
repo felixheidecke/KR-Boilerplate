@@ -1,9 +1,0 @@
-@import url('https://assets.klickrhein.de/libs/font-awesome/5.15.4/css/all.min.css');
-
-@import 'variables', 'mixins', 'base', 'fonts', 'list', 'helper';
-
-:root {
-	@each $query, $size in $mediaquery {
-		--#{$query}: #{$size};
-	}
-}

@@ -10,7 +10,7 @@ const config = {
 		preloadStrategy: 'preload-mjs'
 	},
 	kit: {
-		inlineStyleThreshold: 10_000,
+		inlineStyleThreshold: 25_000,
 		adapter: adapter({
 			pages: 'htdocs',
 			assets: 'htdocs',

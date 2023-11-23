@@ -1,5 +1,9 @@
 # Patch Notes
 
+## Version `4.14.2`
+
+- Introduce _kr-stylebox_ to replace internal styles
+
 ## Version `4.14.1`
 
 - Minor folder restructuring
