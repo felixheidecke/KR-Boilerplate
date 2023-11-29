@@ -1,5 +1,10 @@
 # Patch Notes
 
+## Version `4.14.3`
+
+- Allow for `target: "_blank"` in `route.js`
+- Update Dependencies
+
 ## Version `4.14.2`
 
 - Introduce _kr-stylebox_ to replace internal styles

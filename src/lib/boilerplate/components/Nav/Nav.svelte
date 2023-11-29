@@ -19,6 +19,7 @@
 		name: string
 		class?: string
 		routes?: Route[]
+		target?: '_blank'
 	}
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -125,7 +126,8 @@
 						isActivePath(route.path) ? baseName + '__a--active' : null,
 						isCurrentPath(route.path) ? baseName + '__a--current' : null
 					)}
-					href={route.path}>
+					href={route.path}
+					target={route.target}>
 					{route.name}
 				</svelte:element>
 
@@ -144,7 +146,8 @@
 										isActivePath(subRoute.path) ? baseName + '__a-a--active' : undefined,
 										subRoute.class
 									)}
-									href={subRoute.path}>
+									href={subRoute.path}
+									target={route.target}>
 									{subRoute.name}
 								</a>
 							</li>
