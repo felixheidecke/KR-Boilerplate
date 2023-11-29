@@ -1,6 +1,6 @@
 export const kitConfig = {
 	paths: {
-		assets: 'https://assets.klickrhein.de/website.de'
+		assets: 'https://assets.klickrhein.de/pages/website.de'
 	}
 }
 
