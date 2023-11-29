@@ -1,6 +1,6 @@
 export const kitConfig = {
 	paths: {
-		assets: 'https://assets.klickrhein.de/rhine-tiger-gin.de'
+		assets: 'https://assets.klickrhein.de/pages/website'
 	}
 }
 
