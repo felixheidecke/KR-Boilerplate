@@ -1,5 +1,10 @@
 # Patch Notes
 
+## Version `4.14.4`
+
+- Move `og-image.jpg` to `_meta` folder
+- Prettier ignores `app.html`
+
 ## Version `4.14.3`
 
 - Allow for `target: "_blank"` in `route.js`

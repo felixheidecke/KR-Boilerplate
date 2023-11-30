@@ -1,4 +1,5 @@
 <script>
+	import cdnPath from '$lib/boilerplate/utils/cdnPath'
 	import '$lib/styles/style.scss'
 
 	import routes from '$routes'
@@ -11,7 +12,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={stammdaten.title} />
 	<meta property="og:description" content="…" />
-	<meta property="og:image" content="/images/og-image.jpg" />
+	<meta property="og:image" content="{cdnPath}/_meta/og-image.jpg" />
 </svelte:head>
 
 <header>
