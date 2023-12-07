@@ -1,5 +1,9 @@
 # Patch Notes
 
+## Version `4.14.5`
+
+- Update Dependencies
+
 ## Version `4.14.4`
 
 - Move `og-image.jpg` to `_meta` folder
