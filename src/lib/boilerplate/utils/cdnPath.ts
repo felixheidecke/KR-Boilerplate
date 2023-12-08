@@ -1,3 +1,3 @@
 import { assets } from '$app/paths'
 
-export default assets + '_assets'
+export default assets + '/_assets'

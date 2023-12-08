@@ -1,9 +1,8 @@
 <script lang="ts">
-	import './modal.scss'
+	import './Modal.scss'
 
 	import classnames from 'classnames'
-	import { createEventDispatcher } from 'svelte'
-	import { fade } from 'svelte/transition'
+	import { createEventDispatcher, onMount } from 'svelte'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -12,6 +11,7 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let title: string | null = null
+	export let isOpen: boolean = false
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -32,6 +32,10 @@
 	function onKeyDown({ key }: KeyboardEvent) {
 		if (key === 'Escape') close()
 	}
+
+	onMount(() => {
+		if (isOpen) open()
+	})
 </script>
 
 <dialog bind:this={modal} class={classnames(baseName, $$props.class)}>

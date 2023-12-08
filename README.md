@@ -1,5 +1,11 @@
 # Patch Notes
 
+## Version `4.14.6`
+
+- Clearnup Swiper.svelte
+- Fix Modal.svelte
+- Fix `cdnPath`
+
 ## Version `4.14.5`
 
 - Update Dependencies
