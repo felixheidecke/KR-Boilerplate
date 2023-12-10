@@ -1,5 +1,15 @@
 # Patch Notes
 
+## Version `4.15.0`
+
+- Add `$cdnPath` variable and `cdnUrl()` function to component SCSS styles
+- Minor Cleanup
+- Update Dependencies
+
+## Version `4.14.6`
+
+- Cleanup
+
 ## Version `4.14.6`
 
 - Clearnup Swiper.svelte

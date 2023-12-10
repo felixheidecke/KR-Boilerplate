@@ -25,13 +25,12 @@
 	export let config: object | undefined = undefined // Optional full config model
 	export let exClass: string = ''
 
-	// --- [ Logic ] ---------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
 
 	let slider: HTMLElement
 	let swiper: any
 
 	const baseName = exClass || 'Swiper'
-	const className = classnames(baseName, $$props.class, 'glide')
 	const id = uniqueId('swiper-')
 	const glideConfig = config || {
 		autoplay,
@@ -52,7 +51,7 @@
 	})
 </script>
 
-<div {id} class={className} bind:this={slider}>
+<div {id} class={classnames(baseName, $$props.class, 'glide')} bind:this={slider}>
 	<div class="glide__track" data-glide-el="track">
 		<div class="glide__slides">
 			{#if images && images.length}

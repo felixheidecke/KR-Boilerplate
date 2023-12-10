@@ -5,7 +5,22 @@ import pkg from './package.json' assert { type: 'json' }
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: vitePreprocess(),
+	preprocess: vitePreprocess({
+		style: {
+			css: {
+				preprocessorOptions: {
+					scss: {
+						additionalData: `
+							$cdnPath: "${kitConfig.paths.assets}/_assets";
+
+							@function cdnUrl($file) {
+								@return url($cdnPath + $file);
+							}`
+					}
+				}
+			}
+		}
+	}),
 	output: {
 		preloadStrategy: 'preload-mjs'
 	},

@@ -24,11 +24,12 @@
 		!collapsed || `${baseName}--collapsed`
 	)
 
-	const handleClick = () => {
+	function handleClick() {
 		activeItem.set($activeItem === id ? null : id)
 	}
 </script>
 
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <li class={className} on:click={handleClick} on:keypress>
 	<h5 class="{baseName}__title">
 		{title}

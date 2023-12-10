@@ -1,14 +1,12 @@
 <script lang="ts">
 	import './XioniEventTile.scss'
 
-	import { LOCALE } from '$lib/boilerplate/constants'
-	import { goto } from '$app/navigation'
-	import classNames from 'classnames'
 	import { format } from '$lib/boilerplate/utils/format-date'
+	import { goto } from '$app/navigation'
+	import { LOCALE } from '$lib/boilerplate/constants'
+	import classNames from 'classnames'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniEventTileProps } from './XioniEventTile.types'
+	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -16,12 +14,11 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let basePath: XioniEventTileProps['basePath'] = ''
-	export let event: XioniEventTileProps['event']
-	export let exClass: XioniEventTileProps['exClass'] = ''
-	export let linkDelimiter: XioniEventTileProps['linkDelimiter'] = '_'
-	export let linkText: XioniEventTileProps['linkText'] = 'Mehr erfahren'
-	export let tag: XioniEventTileProps['tag'] = 'div'
+	export let basePath: string = ''
+	export let event: XioniEvent
+	export let linkDelimiter: string = '_'
+	export let linkText: string = 'Mehr erfahren'
+	export let tag: string = 'div'
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -29,16 +26,20 @@
 	const link = basePath + event.slug + linkDelimiter + event.id
 
 	// CSS Classname
-	const baseName = exClass || 'XioniEventTile'
-	const className = classNames(baseName, $$props.class)
+	const baseName = $$props['ex-class'] || 'XioniEventTile'
 </script>
 
-<svelte:element this={tag} class={className} itemscope itemtype="https://schema.org/Event">
+<svelte:element
+	this={tag}
+	class={classNames(baseName, $$props.class)}
+	itemscope
+	itemtype="https://schema.org/Event">
 	<meta itemprop="startDate" content={format(starts, 'yyyy-MM-dd')} />
 	<meta itemprop="endDate" content={format(ends, 'yyyy-MM-dd')} />
 	<meta itemprop="organizer" content={organizer} />
 
 	{#if image}
+		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 		<img
 			itemprop="image"
 			class="{baseName}__image"

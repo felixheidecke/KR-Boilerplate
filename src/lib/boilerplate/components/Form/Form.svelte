@@ -83,14 +83,13 @@
 		})
 	})
 
-	// --- CSS Class --------------------
-
 	const baseName = $$props['ex-class'] || 'Form'
-
-	$: className = classnames(baseName, $$props.class)
 </script>
 
-<form class={className} bind:this={form} on:submit|preventDefault={submit}>
+<form
+	class={classnames(baseName, $$props.class)}
+	bind:this={form}
+	on:submit|preventDefault={submit}>
 	<input type="hidden" name="subject" value={subject} />
 	<input type="hidden" name="id" value={id} />
 	<input type="hidden" name="required" value={required.join(',')} />

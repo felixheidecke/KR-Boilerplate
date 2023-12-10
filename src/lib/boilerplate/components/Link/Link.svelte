@@ -1,6 +1,5 @@
 <script lang="ts">
 	import './Link.css'
-
 	import classnames from 'classnames'
 	import isExternalURL from '$lib/boilerplate/utils/isExternalURL'
 
@@ -12,21 +11,21 @@
 
 	export let to: string | undefined = undefined
 	export let target: '_blank' | undefined = undefined
-	export let icon = ''
-	export let rel: 'follow' | 'nofollow' = 'follow'
-	export let label = ''
-	export let exClass = undefined
+	export let icon: string = ''
+	export let rel: string = 'follow'
+	export let label: string = ''
+	export let exClass: string | undefined = undefined
 
 	// -----------------------------------------------------------------------------------------------
+
+	const tag = to ? 'a' : 'span'
+	const baseName = exClass || 'Link'
+	const className = classnames(baseName, $$props.class, !icon || baseName + '--has-icon')
 
 	if (to && isExternalURL(to)) {
 		rel = 'nofollow'
 		target = '_blank'
 	}
-
-	const tag = to ? 'a' : 'span'
-	const baseName = exClass || 'Link'
-	const className = classnames(baseName, $$props.class, !icon || baseName + '--has-icon')
 
 	function trimScheme(link: typeof to) {
 		if (!link) return ''

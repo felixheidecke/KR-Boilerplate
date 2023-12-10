@@ -4,7 +4,7 @@
 	export let name = 'fas fa-carrot'
 	export let size: number | string = 0
 
-	// --- CSS Class --------------------
+	// -----------------------------------------------------------------------------------------------
 
 	const baseName = $$props['ex-class'] || 'Icon'
 

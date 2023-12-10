@@ -4,22 +4,18 @@
 	import classnames from 'classnames'
 	import { uniqueId } from 'lodash-es'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import { type InputProps, ImputPropsType } from './Input.types'
-
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let label: InputProps['label'] = ''
-	export let max: InputProps['max'] = undefined
-	export let min: InputProps['min'] = undefined
-	export let name: InputProps['name'] = 'input'
-	export let placeholder: InputProps['placeholder'] = ''
-	export let readonly: InputProps['readonly'] = undefined
-	export let required: InputProps['required'] = undefined
-	export let type: InputProps['type'] = ImputPropsType.TEXT
-	export let value: InputProps['value'] = ''
-	export let error: InputProps['error'] = ''
+	export let label: string = ''
+	export let max: number | string | undefined = undefined
+	export let min: number | string | undefined = undefined
+	export let name: string = 'input'
+	export let placeholder: string = ''
+	export let readonly: true | undefined = undefined
+	export let required: true | undefined = undefined
+	export let type: 'text' | 'number' | 'email' | 'tel' = 'text'
+	export let value: string | number = ''
+	export let error: string = ''
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
