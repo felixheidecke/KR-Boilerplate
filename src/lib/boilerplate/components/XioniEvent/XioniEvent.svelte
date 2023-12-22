@@ -1,7 +1,7 @@
 <script lang="ts">
 	import './XioniEvent.scss'
 
-	import { formatFromTo } from '$lib/utils/formatDate'
+	import { formatFromTo } from '$lib/boilerplate/utils/format-date'
 	import { formatISO } from 'date-fns'
 	import classnames from 'classnames'
 	import { createEventDispatcher } from 'svelte'

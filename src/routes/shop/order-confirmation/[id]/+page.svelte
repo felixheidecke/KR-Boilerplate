@@ -5,7 +5,7 @@
 	import { payPalClientId as clientId } from '../../config.js'
 	import { onDestroy, onMount } from 'svelte'
 
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types.js'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------

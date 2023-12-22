@@ -2,7 +2,7 @@ import { Cart, Categories } from './api'
 import { Products } from './api'
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
 
-import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types'
+import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 import { CART } from './stores'
 
 export const load = async function () {

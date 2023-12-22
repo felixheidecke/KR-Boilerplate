@@ -4,8 +4,12 @@
 	import { ORDER, CART } from '../../stores'
 	import { shopPath } from '../../config'
 	import { Order } from '../../api'
-	import { IS_MOBILE } from '$lib/boilerplate/stores/breakpoints'
+	import { IS_MOBILE } from '$lib/utils/breakpoints'
 	import { onDestroy, onMount } from 'svelte'
+
+	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
+	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -16,12 +20,6 @@
 	import Message from '$lib/boilerplate/components/Message/Message.svelte'
 	import Select from '$lib/boilerplate/components/Select/Select.svelte'
 	import Textarea from '$lib/boilerplate/components/Textarea/Textarea.svelte'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types'
 
 	// -----------------------------------------------------------------------------------------------
 

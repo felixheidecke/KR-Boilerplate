@@ -1,11 +1,6 @@
 <script lang="ts">
 	import './Lightbox.scss'
-
 	import { onMount } from 'svelte'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { LightboxProps } from './Lightbox.types'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
@@ -14,7 +9,10 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let images = [] as LightboxProps['images']
+	export let images: {
+		src: string
+		alt: string
+	}[] = []
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
@@ -67,6 +65,7 @@
 	<slot />
 </div>
 <Modal class="Lightbox__modal" bind:this={modal}>
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="Lightbox__navigate Lightbox__navigate--prev"
 		class:$invisible={!(lightboxImages.length > 2)}
@@ -75,6 +74,7 @@
 		<Icon name="fas fa-angle-left" size="2" />
 	</div>
 
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="Lightbox__navigate Lightbox__navigate--next"
 		class:$invisible={!(lightboxImages.length > 2)}

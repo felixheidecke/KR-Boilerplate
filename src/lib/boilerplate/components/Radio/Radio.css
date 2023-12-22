@@ -1,0 +1,15 @@
+:where(.Radio) {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	cursor: pointer;
+}
+
+:where(.Radio__input) {
+	margin: 0;
+}
+
+:where(.Radio__label) {
+	user-select: none;
+	font-size: 0.85rem;
+}

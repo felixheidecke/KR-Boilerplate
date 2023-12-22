@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { XioniGalleryProps } from './XioniGallery.types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/types'
 
 	// --- Props -------------------------------------------------------------------------------------
 
-	export let gallery: XioniGalleryProps['gallery']
-	export let basePath: XioniGalleryProps['basePath'] = ''
-	export let linkDelimiter: XioniGalleryProps['linkDelimiter'] = '_'
-	export let exClass: XioniGalleryProps['exClass'] = ''
+	export let gallery: XioniCMS.Gallery
+	export let basePath: string = ''
+	export let linkDelimiter: string = '_'
+	export let exClass: string = ''
 
 	// --- Data --------------------------------------------------------------------------------------
 

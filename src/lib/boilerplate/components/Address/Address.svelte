@@ -21,10 +21,9 @@
 	// -----------------------------------------------------------------------------------------------
 
 	const baseName = exClass || 'Address'
-	const className = classNames(baseName, $$props.class)
 </script>
 
-<ol class={className}>
+<ol class={classNames(baseName, $$props.class)}>
 	<li class="{baseName}__name">{name}</li>
 	{#if title}
 		<li class="{baseName}__title">{title}</li>

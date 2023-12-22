@@ -1,5 +1,0 @@
-export { CartFactory } from './src/Cart'
-export { CategoriesFactory } from './src/Categories'
-export { InfoFactory } from './src/Info'
-export { OrderFactory } from './src/Order'
-export { ProductsFactory } from './src/Products'

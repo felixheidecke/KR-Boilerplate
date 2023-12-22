@@ -1,5 +1,5 @@
 <script>
-	import './NavBurger.scss'
+	import './NavBurger.css'
 	import classNames from 'classnames'
 
 	export let active = false

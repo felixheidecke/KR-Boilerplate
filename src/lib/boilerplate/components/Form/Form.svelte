@@ -1,22 +1,19 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher, onDestroy } from 'svelte'
+	import { onMount, createEventDispatcher } from 'svelte'
+	import { xioniFetch } from '$lib/boilerplate/xioni/utils/xioniFetch'
 	import classnames from 'classnames'
-	import FetchJson from '$lib/utils/fetch-json'
 	import Message from '../Message/Message.svelte'
-	import { FormMailFactory } from '$lib/boilerplate/xioni/cms-api'
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	const emit = createEventDispatcher()
-	const formMail = FormMailFactory()
-	const fetchJson = FetchJson()
+	const http = xioniFetch()
 
-	// --- [ Props ] ---------------------------------------------------------------------------------
+	// --- Props -------------------------------------------------------------------------------------
 
 	export let subject = 'Kontakformular'
 	export let id: number | string = 0
 	export let attach: string | false = false
 
-	// --- [ Data ] ----------------------------------------------------------------------------------
+	// --- Data --------------------------------------------------------------------------------------
 
 	let form: HTMLFormElement
 	let required: string[] = []
@@ -25,11 +22,9 @@
 	let isDone = false
 	let isDoneEl: HTMLElement
 
-	const baseName = $$props['ex-class'] || 'Form'
+	// --- Methods -----------------------------------------------------------------------------------
 
-	// -----------------------------------------------------------------------------------------------
-
-	function scrollToDoneText() {
+	const scrollToDoneText = () => {
 		if (!isDoneEl || !$$slots.done) return
 
 		isDoneEl.scrollIntoView({
@@ -39,23 +34,24 @@
 		})
 	}
 
-	function getFormData() {
+	const getFormData = () => {
 		const formData = new FormData(form)
 		return Object.fromEntries(formData)
 	}
 
-	async function _submit() {
+	export const submit = async () => {
 		if (isDone) return
 
 		// Reset status
+		isLoading = true
 		errors = []
 
 		try {
-			const { data, status } = (await fetchJson([xinoiConfig.apiUrl, 'form'], {
+			const { data, status } = await http(['form'], {
 				method: 'POST',
 				data: getFormData(),
 				params: attach === 'csv' ? { attach: 'csv' } : undefined
-			})) as any
+			})
 
 			if (status !== 'success') throw data
 
@@ -68,47 +64,24 @@
 
 			isDone = true
 			emit('success')
+			setTimeout(scrollToDoneText, 100)
 		} catch (error) {
 			isDone = false
 			errors = [error as string]
 			emit('error', error)
+		} finally {
+			isLoading = false
 		}
 	}
 
-	async function submit() {
-		formMail.submit({ to: +id, required, subject }, getFormData())
-	}
-
-	function setLoadingHandler(state: boolean) {
-		isLoading = state
-	}
-
-	function successHandler() {
-		setTimeout(scrollToDoneText, 100)
-	}
-
-	function errorHandler({ data }: XioniFetchErrorResponse) {
-		errors = data.payload
-	}
-
+	// collect required entries
 	onMount(() => {
-		formMail.$event
-			.on('loading-toggle', setLoadingHandler)
-			.on('error', errorHandler)
-			.on('success', successHandler)
-
-		// collect required entries
 		form.querySelectorAll('[required]').forEach(element => {
 			required = [...required, element.getAttribute('name') || '']
 		})
 	})
 
-	onDestroy(function () {
-		formMail.$event
-			.off('loading-toggle', setLoadingHandler)
-			.off('error', errorHandler)
-			.off('success', successHandler)
-	})
+	const baseName = $$props['ex-class'] || 'Form'
 </script>
 
 <form
@@ -117,8 +90,8 @@
 	on:submit|preventDefault={submit}>
 	<input type="hidden" name="subject" value={subject} />
 	<input type="hidden" name="id" value={id} />
-	<input type="hidden" name="_required" value={required.join(',')} />
-	<input type="text" name="_honig" style="position:absolute;left:-9999px;" />
+	<input type="hidden" name="required" value={required.join(',')} />
+	<input type="text" name="honig" style="position:absolute;left:-9999px;" />
 
 	{#if isDone}
 		<div bind:this={isDoneEl} class={baseName + '__done'}>

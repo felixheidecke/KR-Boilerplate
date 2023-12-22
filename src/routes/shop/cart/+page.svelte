@@ -6,7 +6,7 @@
 	import messages from '$lib/messages'
 
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop-api/types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
