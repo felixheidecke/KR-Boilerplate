@@ -1,3 +1,5 @@
+@import '$lib/boilerplate/styles/variables';
+
 :where(.XioniShopProduct) {
 	display: inline-block;
 	width: 100%;
@@ -5,8 +7,13 @@
 
 :where(.XioniShopProduct__image) {
 	float: left;
-	width: 100%;
 	max-height: 640px;
+
+	@include breakpoint('tablet-up') {
+		aspect-ratio: 3/4;
+		object-fit: contain;
+		cursor: pointer;
+	}
 }
 
 :where(.XioniShopProduct__price-box) {

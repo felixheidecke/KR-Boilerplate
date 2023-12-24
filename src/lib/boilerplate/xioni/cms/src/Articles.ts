@@ -23,8 +23,6 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 		const context = { emitter: 'getArticles' }
 		const params = {}
 
-		event.emit('loading', context)
-
 		if (filter.limit) {
 			Object.assign(params, { limit: filter.limit })
 		}
@@ -62,8 +60,6 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 	async function getArticle(id: number): Promise<XioniCMSData<XioniCMS.Article>> {
 		const context = { emitter: 'getArticle' }
 
-		event.emit('loading', context)
-
 		const response = await fetchJson(['cms/article', id])
 
 		if (response.status === 'success') {
@@ -97,8 +93,6 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 	): Promise<XioniCMSData<XioniCMS.Article[]>> {
 		const params = { category }
 		const context = { emitter: 'getArticlesByCategory' }
-
-		event.emit('loading', context)
 
 		if ('filter' in filter) {
 			Object.assign(params, { limit: filter.limit })

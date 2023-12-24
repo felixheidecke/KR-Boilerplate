@@ -1,12 +1,11 @@
 <script lang="ts">
-	import './XioniShopProduct.css'
+	import './XioniShopProduct.scss'
 
 	import classnames from 'classnames'
 	import { createEventDispatcher } from 'svelte'
+	import { IS_MOBILE } from '$lib/utils/breakpoints'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -34,14 +33,21 @@
 	// -----------------------------------------------------------------------------------------------
 
 	// Refs
-	let modal: Modal
+	let addToCartModal: Modal
+	let productImageModal: Modal
 
 	const emit = createEventDispatcher()
 	const baseClass = 'XioniShopProduct'
 
 	function addToCartHandler() {
 		emit('addToCart', id)
-		modal.open()
+		addToCartModal.open()
+	}
+
+	function imageClickHanlder() {
+		if ($IS_MOBILE) return
+
+		productImageModal.open()
 	}
 </script>
 
@@ -56,10 +62,13 @@
 
 		<Grid gap>
 			<Grid size="tablet-1-3">
+				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 				<img
 					class="{baseClass}__image $mb-2@mobile"
-					src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
-					alt={name} />
+					src={image?.src ||
+						'https://assets.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+					alt={name}
+					on:click={imageClickHanlder} />
 			</Grid>
 			<Grid size="tablet-2-3">
 				{#if teaser}
@@ -100,12 +109,20 @@
 		</Grid>
 	</div>
 
-	<Modal bind:this={modal} title={name}>
+	<Modal bind:this={productImageModal} title={name}>
+		<img
+			class="{baseClass}__image-presentation"
+			src={image?.src || 'https://assets.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+			alt={name} />
+	</Modal>
+
+	<Modal bind:this={addToCartModal} title={name}>
 		<p>wurde dem Warenkorb hinzugefügt.</p>
 		<p>Wie soll es weitergehen?</p>
 		<div slot="footer">
-			<Button on:click={modal.close} to="/shop">weiter einkaufen</Button>
-			<Button on:click={modal.close} class="$float-right" to="/shop/cart">zum Warenkorb</Button>
+			<Button on:click={addToCartModal.close} to="/shop">weiter einkaufen</Button>
+			<Button on:click={addToCartModal.close} class="$float-right" to="/shop/cart"
+				>zum Warenkorb</Button>
 		</div>
 	</Modal>
 {/if}

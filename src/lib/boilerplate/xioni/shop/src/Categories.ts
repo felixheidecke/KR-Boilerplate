@@ -16,8 +16,6 @@ export function useCategories(module: number, fetchFn: typeof fetch = fetch) {
 	async function getCategories(): Promise<XioniShopData<XioniShop.Category[]>> {
 		const context = { emitter: 'getCategories' }
 
-		event.emit('loading', context)
-
 		const response = await fetch(['shop', module, 'categories'])
 
 		if (response.status === 'success') {
@@ -46,8 +44,6 @@ export function useCategories(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function getCategory(id: number): Promise<XioniShopData<XioniShop.Category>> {
 		const context = { emitter: 'getCategory' }
-
-		event.emit('loading', context)
 
 		const response = await fetch(['shop', module, 'categories', id])
 

@@ -14,7 +14,6 @@ export function useFormMail(fetchFn: typeof fetch = fetch) {
 	): Promise<XioniCMSData<boolean>> {
 		const context = { emitter: 'createFormMail' }
 
-		event.emit('loading', context)
 		event.emit('loading-toggle', true, context)
 
 		const response = await fetchJSON(['form-mail'], {

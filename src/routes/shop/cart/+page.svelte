@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Cart } from '../api'
-	import { CART } from '../stores'
+	import Shop, { CART } from '../ShopApi'
 	import { beforeNavigate } from '$app/navigation'
 	import { isBoolean } from 'lodash-es'
 	import messages from '$lib/messages'
@@ -33,16 +32,19 @@
 	}
 
 	function updateItemQuantity({ detail }: any) {
-		Cart.updateItemQuantity(detail.productId, detail.quantity)
+		Shop.cart.updateItemQuantity(detail.productId, detail.quantity)
 	}
 
-	Cart.$event
+	Shop.cart.$event
 		.on('loading-toggle', toggleLoading)
 		.on('error', errorHandler)
 		.on('success', successHandler)
 
-	beforeNavigate(function () {
-		Cart.$event.removeAllListeners()
+	beforeNavigate(() => {
+		Shop.cart.$event
+			.off('loading-toggle', toggleLoading)
+			.off('error', errorHandler)
+			.off('success', successHandler)
 	})
 </script>
 

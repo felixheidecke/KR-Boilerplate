@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
+	import { beforeNavigate, goto } from '$app/navigation'
 	import { isBoolean, isEmpty, omitBy } from 'lodash-es'
-	import { ORDER, CART } from '../../stores'
+	import Shop, { ORDER, CART } from '../../ShopApi'
 	import { shopPath } from '../../config'
-	import { Order } from '../../api'
 	import { IS_MOBILE } from '$lib/utils/breakpoints'
-	import { onDestroy, onMount } from 'svelte'
 
 	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
@@ -62,22 +60,20 @@
 		const addressData = omitBy(address, isEmpty) as any
 		const shippingAddressData = omitBy(shippingAddress, isEmpty) as any
 
-		Order.updateOrder({
+		Shop.order.updateOrder({
 			address: addressData,
 			shippingAddress: !isEmpty(shippingAddress) ? shippingAddressData : null,
 			message: message.trim() || null
 		})
 	}
 
-	onMount(function () {
-		Order.$event
-			.on('loading-toggle', toggleLoading)
-			.on('error', errorHandler)
-			.on('success', successHandler)
-	})
+	Shop.order.$event
+		.on('loading-toggle', toggleLoading)
+		.on('error', errorHandler)
+		.on('success', successHandler)
 
-	onDestroy(function () {
-		Order.$event
+	beforeNavigate(() => {
+		Shop.order.$event
 			.off('loading-toggle', toggleLoading)
 			.off('error', errorHandler)
 			.off('success', successHandler)

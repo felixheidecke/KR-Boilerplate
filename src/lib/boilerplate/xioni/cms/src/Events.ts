@@ -33,8 +33,6 @@ export function useEvents(fetchFn: typeof fetch = fetch) {
 		const context = { emitter: 'getEvents' }
 		const params = {}
 
-		event.emit('loading', context)
-
 		if ('limit' in filter) {
 			Object.assign(params, { limit: filter.limit })
 		}
@@ -83,8 +81,6 @@ export function useEvents(fetchFn: typeof fetch = fetch) {
 
 	async function getEvent(id: number): Promise<XioniCMSData<XioniCMS.Event>> {
 		const context = { emitter: 'getEvent' }
-
-		event.emit('loading', context)
 
 		const response = await fetchJson(['cms/event', id])
 

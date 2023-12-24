@@ -1,7 +1,7 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../types'
+import type { XioniEventContext, XioniShop, XioniShopData } from '../types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 
 export function useInfo(module: number, fetchFn: typeof fetch = fetch) {
@@ -15,24 +15,24 @@ export function useInfo(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getInfo(): Promise<XioniShopData<XioniShop.Info>> {
-		const context = { emitter: 'getInfo' }
+		const context: XioniEventContext = { emitter: 'getInfo' }
 
-		event.emit('loading', context)
+		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'info'])
 
 		if (response.status === 'success') {
 			const data = response.data as XioniShop.Info
 
-			event.emit('loaded', data, context)
-			event.emit('finally', context)
+			event.emit('success', data, context)
+			event.emit('loading-toggle', false, context)
 
 			return [data, undefined]
 		} else {
 			const error = response as XioniFetchErrorResponse
 
 			event.emit('error', error, context)
-			event.emit('finally', context)
+			event.emit('loading-toggle', false, context)
 
 			return [undefined, error]
 		}

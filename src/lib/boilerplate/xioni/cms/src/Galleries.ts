@@ -18,8 +18,6 @@ export function useGallery(fetchFn: typeof fetch = fetch) {
 	async function getGallery(module: number): Promise<XioniCMSData<XioniCMS.Gallery>> {
 		const context = { emitter: 'getGallery' }
 
-		event.emit('loading', context)
-
 		const response = await fetchJSON(['cms/gallery', module])
 
 		if (response.status === 'success') {
@@ -48,7 +46,6 @@ export function useGallery(fetchFn: typeof fetch = fetch) {
 
 	async function getAlbum(id: number): Promise<XioniCMSData<XioniCMS.Album>> {
 		const context = { emitter: 'getAlbum' }
-		event.emit('loading', context)
 
 		const response = await fetchJSON(['cms/album', id])
 

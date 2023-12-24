@@ -3,9 +3,7 @@
 
 	import classnames from 'classnames'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -21,7 +19,7 @@
 	<div class={classnames(className, $$props.class)} on:click>
 		<img
 			class="{className}__image"
-			src={image?.src || 'https://via.placeholder.com/268x268.png?text=Kein+Produktbild'}
+			src={image?.src || 'https://assets.klickrhein.de/boilerplate/shop/product-placeholder.png'}
 			alt={name || 'Kein Produktbild'}
 			title={name || 'Kein Produktbild'}
 			loading="lazy" />

@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { Cart } from '../../api'
-	import { onDestroy, onMount } from 'svelte'
+	import { beforeNavigate } from '$app/navigation'
 	import messages from '$lib/messages'
+	import Shop, { CART } from '../../ShopApi'
 	import stammdaten from '$stammdaten'
 
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import Product from '$lib/boilerplate/components/XioniShopProduct/XioniShopProduct.svelte'
-	import { CART } from '../../stores'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -20,16 +20,20 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	Cart.$event
-		.on('success', cart => {
-			messages.reset()
-			CART.set(cart)
-		})
-		.on('error', error => {
-			messages.add(error.data.message, undefined, { type: 'error' })
-		})
+	function successHandler(cart: XioniShop.Cart) {
+		messages.reset()
+		CART.set(cart)
+	}
 
-	onDestroy(() => Cart.$event.removeAllListeners())
+	function errorHandler(error: XioniFetchErrorResponse) {
+		messages.add(error.data.message, undefined, { type: 'error' })
+	}
+
+	Shop.cart.$event.on('success', successHandler).on('error', errorHandler)
+
+	beforeNavigate(() => {
+		Shop.cart.$event.off('success', successHandler).off('error', errorHandler)
+	})
 </script>
 
 <svelte:head>
@@ -38,7 +42,7 @@
 </svelte:head>
 
 {#if product}
-	<Product {product} on:addToCart={({ detail: id }) => Cart.addItem(id)} />
+	<Product {product} on:addToCart={({ detail: id }) => Shop.cart.addItem(id)} />
 
 	<div class="$text-center">
 		<Link icon="fas fa-reply" on:click={() => history.back()}>Zurück</Link>

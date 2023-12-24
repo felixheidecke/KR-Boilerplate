@@ -1,6 +1,6 @@
 {
 	"name": "boilerplate.ts",
-	"version": "5.1.5.Beta",
+	"version": "5.2.0.Beta",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -10,40 +10,43 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"update": "ncu"
+		"update": "ncu -u",
+		"update:dry": "ncu",
+		"update:minor": "ncu -u --target minor",
+		"update:patch": "ncu -u --target patch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.1.0",
+		"@sveltejs/adapter-auto": "^2.1.1",
 		"@sveltejs/adapter-static": "^2.0.3",
-		"@sveltejs/kit": "^1.26.0",
-		"@types/lodash-es": "^4.17.10",
-		"@typescript-eslint/eslint-plugin": "^6.8.0",
-		"@typescript-eslint/parser": "^6.8.0",
-		"eslint": "^8.51.0",
-		"eslint-config-prettier": "^9.0.0",
-		"eslint-plugin-svelte": "^2.34.0",
-		"npm-check-updates": "^16.14.6",
-		"prettier": "^3.0.3",
-		"prettier-plugin-svelte": "^3.0.3",
-		"sass": "^1.69.4",
-		"svelte": "^4.2.2",
-		"svelte-check": "^3.5.2",
+		"@sveltejs/kit": "^1.30.3",
+		"@types/lodash-es": "^4.17.12",
+		"@typescript-eslint/eslint-plugin": "^6.15.0",
+		"@typescript-eslint/parser": "^6.15.0",
+		"eslint": "^8.56.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-svelte": "^2.35.1",
+		"npm-check-updates": "^16.14.12",
+		"prettier": "^3.1.1",
+		"prettier-plugin-svelte": "^3.1.2",
+		"sass": "^1.69.5",
+		"svelte": "^4.2.8",
+		"svelte-check": "^3.6.2",
 		"sveltekit-autoimport": "^1.7.1",
 		"tslib": "^2.6.2",
-		"typescript": "^5.2.2",
-		"vite": "^4.5.0"
+		"typescript": "^5.3.3",
+		"vite": "^4.5.1"
 	},
 	"type": "module",
 	"dependencies": {
 		"@glidejs/glide": "^3.6.0",
-		"@paypal/paypal-js": "^7.0.3",
-		"axios": "^1.5.1",
+		"@paypal/paypal-js": "^7.1.1",
+		"axios": "^1.6.2",
 		"classnames": "^2.3.2",
 		"date-fns": "^2.30.0",
 		"eventemitter3": "^5.0.1",
 		"in-view": "^0.6.1",
 		"lodash-es": "^4.17.21",
 		"opening_hours": "^3.8.0",
-		"svelte-preprocess": "^5.0.4"
+		"svelte-preprocess": "^5.1.3"
 	}
 }

@@ -18,8 +18,6 @@ export default function useMenuCard(fetchFn: typeof fetch = fetch) {
 	async function getMenuCard(module: number): Promise<XioniCMSData<XioniCMS.MenuCard>> {
 		const context = { emitter: 'getMenuCard' }
 
-		event.emit('loading', context)
-
 		const response = await fetchJSON(['cms/menu-card', module])
 
 		if (response.status === 'success') {

@@ -157,3 +157,7 @@ export namespace XioniShop {
 		}
 	}
 }
+
+export type XioniEventContext = {
+	emitter: string
+}

@@ -13,27 +13,22 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 	async function createOrder(): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'createOrder' }
 
-		event.emit('loading', context)
 		event.emit('loading-toggle', true, context)
 
-		try {
-			const response = await fetch(['shop', module, 'order'], { method: 'POST' })
+		const response = await fetch(['shop', module, 'order'], { method: 'POST' })
 
-			if (response.status === 'success') {
-				const order = orderAdapter(response.data) as XioniShop.Order
+		if (response.status === 'success') {
+			const order = orderAdapter(response.data) as XioniShop.Order
 
-				event.emit('success', order, context)
-				event.emit('loading-toggle', false, context)
+			event.emit('success', order, context)
+			event.emit('loading-toggle', false, context)
 
-				return [order, undefined]
-			} else {
-				event.emit('error', response, context)
-				event.emit('loading-toggle', false, context)
+			return [order, undefined]
+		} else {
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
 
-				return [undefined, response as XioniFetchErrorResponse]
-			}
-		} catch (error) {
-			return [undefined, error as XioniFetchErrorResponse]
+			return [undefined, response as XioniFetchErrorResponse]
 		}
 	}
 
@@ -45,7 +40,6 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 	}): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'updateOrder' }
 
-		event.emit('loading', context)
 		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'order'], {
@@ -71,7 +65,6 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 	async function getOrder(id?: string): Promise<XioniShopData<XioniShop.Order>> {
 		const context = { emitter: 'getOrder' }
 
-		event.emit('loading', context)
 		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'order', id])
@@ -94,7 +87,6 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 	async function createPayPalOrder(transactionId: string): Promise<XioniShopData<string>> {
 		const context = { emitter: 'createPayPalOrder' }
 
-		event.emit('loading', context)
 		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'payment/paypal/create'], {
@@ -122,7 +114,6 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 	async function capturePaypalOrder(orderId: string): Promise<XioniShopData<boolean>> {
 		const context = { emitter: 'capturePaypalOrder' }
 
-		event.emit('loading', context)
 		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'payment/paypal/capture'], {

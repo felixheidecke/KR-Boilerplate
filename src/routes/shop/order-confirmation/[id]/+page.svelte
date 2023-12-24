@@ -1,11 +1,10 @@
 <script lang="ts">
-	import messages from '$lib/messages.js'
 	import { format } from '$lib/utils/formatDate.js'
-	import { Order } from '../../api.js'
 	import { payPalClientId as clientId } from '../../config.js'
-	import { onDestroy, onMount } from 'svelte'
+	import messages from '$lib/messages.js'
+	import Shop from '../../ShopApi.js'
 
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
+	import type { XioniEventContext, XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -13,6 +12,7 @@
 	import Button from '$lib/boilerplate/components/Button/Button.svelte'
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import PayPalButtons from '$lib/boilerplate/components/PayPalButtons/PayPalButtons.svelte'
+	import { beforeNavigate } from '$app/navigation'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -27,12 +27,12 @@
 	$: shippingAddress = order.shippingAddress as XioniShop.Order['shippingAddress']
 
 	async function onApproveHandler() {
-		await Order.capturePaypalOrder(paypalOrderId)
-		await Order.getOrder(order.transactionId)
+		await Shop.order.capturePaypalOrder(paypalOrderId)
+		await Shop.order.getOrder(order.transactionId)
 	}
 
 	async function createOrderHandler() {
-		const [id] = (await Order.createPayPalOrder(order.transactionId as string)) as [
+		const [id] = (await Shop.order.createPayPalOrder(order.transactionId as string)) as [
 			string,
 			undefined
 		]
@@ -40,7 +40,7 @@
 		return (paypalOrderId = id)
 	}
 
-	function successHandler(data: any, { emitter }: { emitter: string }) {
+	function successHandler(data: any, { emitter }: XioniEventContext) {
 		switch (emitter) {
 			case 'getOrder':
 				order = data
@@ -55,18 +55,10 @@
 		messages.add((data.payload || ['Ein Fehler ist aufgetreten.'])?.join('\n'), data.message)
 	}
 
-	onMount(function () {
-		// prettier-ignore
-		Order.$event
-			.on('success', successHandler)
-			.on('error', errorHandler)
-	})
+	Shop.order.$event.on('success', successHandler).on('error', errorHandler)
 
-	onDestroy(function () {
-		// prettier-ignore
-		Order.$event
-			.off('success', successHandler)
-			.off('error', errorHandler)
+	beforeNavigate(function () {
+		Shop.order.$event.off('success', successHandler).off('error', errorHandler)
 	})
 </script>
 
@@ -79,7 +71,9 @@
 		<li>{address.company}</li>
 	{/if}
 	<li>
-		<strong>{address.salutation} {address.firstname} {address.name}</strong>
+		{address.salutation}
+		{address.firstname}
+		{address.name}
 	</li>
 	<li>{address.address}</li>
 	<li>{address.zip} {address.city}</li>
@@ -159,9 +153,7 @@
 		{#if shippingAddress.company}
 			<li>{shippingAddress.company}</li>
 		{/if}
-		<li>
-			<strong>{shippingAddress.name}</strong>
-		</li>
+		<li>{shippingAddress.name}</li>
 		<li>{shippingAddress.address}</li>
 		<li>{shippingAddress.zip} {shippingAddress.city}</li>
 	</ol>

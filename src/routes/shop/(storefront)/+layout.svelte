@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { CART } from '../stores'
 	import { shopPath } from '../config'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -9,6 +8,7 @@
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import stammdaten from '$stammdaten'
+	import { CART } from '../ShopApi'
 
 	const { categories } = $$props.data
 </script>
@@ -25,7 +25,7 @@
 		<Grid size="desktop-1-4" tag="aside" class="$order-1@tablet-down">
 			<div class="sidebar">
 				{#if $CART.products?.length}
-					<h3>Ihr Warenkorb:</h3>
+					<h3>Warenkorb:</h3>
 					<ul class="$mt $font-small">
 						{#each $CART.products as { product, quantity }}
 							<li class="$overflow-ellipsis">
@@ -57,8 +57,10 @@
 							</li>
 						{/if}
 					</ul>
-					<Button icon="fas fa-shopping-cart" to="{shopPath}/cart" class="$mt $w-full"
-						>Zum Warenkorb</Button>
+					<Button
+						icon="fas fa-shopping-cart"
+						to="{shopPath}/cart"
+						class="$mt $w-full $content-center $font-small">Zum Warenkorb</Button>
 					<hr />
 				{/if}
 				<h3 class="$hidden@tablet-down">Kategorien:</h3>

@@ -11,8 +11,6 @@ const config = {
 				preprocessorOptions: {
 					scss: {
 						additionalData: `
-						  @import '$variables';
-
 							$cdnPath: "${kitConfig.paths.assets}/_assets";
 
 							@function cdnUrl($file) {

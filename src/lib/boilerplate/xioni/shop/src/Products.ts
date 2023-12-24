@@ -1,3 +1,4 @@
+import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniShop, XioniShopData } from '../types'
@@ -5,6 +6,7 @@ import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 
 export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
+	const event = new EventEmitter()
 	/**
 	 * Get all products
 	 *
@@ -17,13 +19,27 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	}: {
 		limit?: number
 	}): Promise<XioniShopData<XioniShop.Product[]>> {
-		const { status, data } = await fetch(['shop', module, 'products'], {
+		const context = { emitter: 'getProducts' }
+
+		event.emit('loading-toggle', true, context)
+
+		const response = await fetch(['shop', module, 'products'], {
 			params: { limit }
 		})
 
-		return status === 'success'
-			? [data as XioniShop.Product[], undefined]
-			: [undefined, data as XioniFetchErrorResponse]
+		if (response.status === 'success') {
+			const cart = response.data as XioniShop.Product[]
+
+			event.emit('success', cart, context)
+			event.emit('loading-toggle', false, context)
+
+			return [cart, undefined]
+		} else {
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
+
+			return [undefined, response as XioniFetchErrorResponse]
+		}
 	}
 
 	/**
@@ -34,11 +50,25 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getProduct(id: number): Promise<XioniShopData<XioniShop.Product>> {
-		const { status, data } = await fetch(['shop', module, 'products', id])
+		const context = { emitter: 'getProduct' }
 
-		return status === 'success'
-			? [data as XioniShop.Product, undefined]
-			: [undefined, data as XioniFetchErrorResponse]
+		event.emit('loading-toggle', true, context)
+
+		const response = await fetch(['shop', module, 'products', id])
+
+		if (response.status === 'success') {
+			const product = response.data as XioniShop.Product
+
+			event.emit('success', product, context)
+			event.emit('loading-toggle', false, context)
+
+			return [product, undefined]
+		} else {
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
+
+			return [undefined, response as XioniFetchErrorResponse]
+		}
 	}
 
 	/**
@@ -53,13 +83,27 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 		category: number,
 		config: { limit?: number } = {}
 	): Promise<XioniShopData<XioniShop.Product[]>> {
-		const { status, data } = await fetch(['shop', module, 'categories', category, 'products'], {
+		const context = { emitter: 'getProductsByCategory' }
+
+		event.emit('loading-toggle', true, context)
+
+		const response = await fetch(['shop', module, 'categories', category, 'products'], {
 			params: config
 		})
 
-		return status === 'success'
-			? [data as XioniShop.Product[], undefined]
-			: [undefined, data as XioniFetchErrorResponse]
+		if (response.status === 'success') {
+			const product = response.data as XioniShop.Product[]
+
+			event.emit('success', product, context)
+			event.emit('loading-toggle', false, context)
+
+			return [product, undefined]
+		} else {
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
+
+			return [undefined, response as XioniFetchErrorResponse]
+		}
 	}
 
 	/**
@@ -72,22 +116,33 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	async function getProductHighlights(
 		config: { limit?: number } = {}
 	): Promise<XioniShopData<XioniShop.Product[]>> {
-		const params = {
-			...config,
-			highlight: true
+		const context = { emitter: 'getProductHighlights' }
+		const params = { ...config, highlight: true }
+
+		event.emit('loading-toggle', true, context)
+
+		const response = await fetch(['shop', module, 'products'], { params })
+
+		if (response.status === 'success') {
+			const products = response.data as XioniShop.Product[]
+
+			event.emit('success', products, context)
+			event.emit('loading-toggle', false, context)
+
+			return [products, undefined]
+		} else {
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
+
+			return [undefined, response as XioniFetchErrorResponse]
 		}
-
-		const { status, data } = await fetch(['shop', module, 'products'], { params })
-
-		return status === 'success'
-			? [data as XioniShop.Product[], undefined]
-			: [undefined, data as XioniFetchErrorResponse]
 	}
 
 	return {
 		getProduct,
 		getProductHighlights,
 		getProducts,
-		getProductsByCategory
+		getProductsByCategory,
+		$event: event
 	}
 }

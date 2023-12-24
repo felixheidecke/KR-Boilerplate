@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { beforeNavigate, goto } from '$app/navigation'
-	import { Order } from '../../api'
-	import { ORDER, CART } from '../../stores'
 	import { isBoolean, isEmpty } from 'lodash-es'
+	import Shop, { CART, ORDER } from '../../ShopApi'
 	import messages from '$lib/messages'
 
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
+	import type { XioniEventContext, XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -41,18 +41,25 @@
 		}
 	}
 
-	async function submitOrder() {
-		const [order] = await Order.createOrder()
+	async function successHandler(order: XioniShop.Order, { emitter }: XioniEventContext) {
+		if (emitter !== 'createOrder') return
 
-		if (order) {
-			ORDER.set(order)
-			goto('/shop/order-confirmation/' + order.transactionId)
-		}
+		ORDER.set(order)
+		messages.reset()
+		goto('/shop/order-confirmation/' + order.transactionId)
 	}
 
-	Order.$event.on('loading-toggle', toggleLoading).on('error', errorHandler)
+	Shop.order.$event
+		.on('loading-toggle', toggleLoading)
+		.on('error', errorHandler)
+		.on('success', successHandler)
 
-	beforeNavigate(() => Order.$event.removeAllListeners())
+	beforeNavigate(() => {
+		Shop.order.$event
+			.off('loading-toggle', toggleLoading)
+			.off('error', errorHandler)
+			.off('success', successHandler)
+	})
 </script>
 
 <h2>Zusammenfassung</h2>
@@ -121,6 +128,6 @@
 		<Button
 			icon="fas fa-angle-right"
 			class="Button--primary $float-right $row-reverse"
-			on:click={submitOrder}>jetzt kostenpflichtig bestellen</Button>
+			on:click={Shop.order.createOrder}>jetzt kostenpflichtig bestellen</Button>
 	</div>
 {/if}

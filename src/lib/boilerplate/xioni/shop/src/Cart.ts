@@ -15,21 +15,22 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getCart(): Promise<XioniShopData<XioniShop.Cart>> {
-		event.emit('loading')
-		event.emit('loading-toggle', true)
+		const context = { emitter: 'getCart' }
+
+		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'cart'])
 
 		if (response.status === 'success') {
 			const cart = response.data as XioniShop.Cart
 
-			event.emit('success', cart)
-			event.emit('loading-toggle', false)
+			event.emit('success', cart, context)
+			event.emit('loading-toggle', false, context)
 
 			return [cart, undefined]
 		} else {
-			event.emit('error', response)
-			event.emit('loading-toggle', false)
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
 
 			return [undefined, response as XioniFetchErrorResponse]
 		}
@@ -48,8 +49,9 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 		id: number,
 		quantity: number
 	): Promise<XioniShopData<XioniShop.Cart>> {
-		event.emit('loading')
-		event.emit('loading-toggle', true)
+		const context = { emitter: 'updateItemQuantity' }
+
+		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'cart'], {
 			method: 'PUT',
@@ -59,13 +61,13 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 		if (response.status === 'success') {
 			const cart = response.data as XioniShop.Cart
 
-			event.emit('success', cart)
-			event.emit('loading-toggle', false)
+			event.emit('success', cart, context)
+			event.emit('loading-toggle', false, context)
 
 			return [cart, undefined]
 		} else {
-			event.emit('error', response)
-			event.emit('loading-toggle', false)
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
 
 			return [undefined, response as XioniFetchErrorResponse]
 		}
@@ -80,8 +82,9 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function addItem(id: number): Promise<XioniShopData<XioniShop.Cart>> {
-		event.emit('loading')
-		event.emit('loading-toggle', true)
+		const context = { emitter: 'addItem' }
+
+		event.emit('loading-toggle', true, context)
 
 		const response = await fetch(['shop', module, 'cart'], {
 			method: 'PUT',
@@ -91,13 +94,13 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 		if (response.status === 'success') {
 			const cart = response.data as XioniShop.Cart
 
-			event.emit('success', cart)
-			event.emit('loading-toggle', false)
+			event.emit('success', cart, context)
+			event.emit('loading-toggle', false, context)
 
 			return [cart, undefined]
 		} else {
-			event.emit('error', response)
-			event.emit('loading-toggle', false)
+			event.emit('error', response, context)
+			event.emit('loading-toggle', false, context)
 
 			return [undefined, response as XioniFetchErrorResponse]
 		}
