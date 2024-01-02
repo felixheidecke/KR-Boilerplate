@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { beforeNavigate, goto } from '$app/navigation'
-	import { isBoolean, isEmpty } from 'lodash-es'
-	import Shop, { CART, ORDER } from '../../ShopApi'
+	import { CART, ORDER } from '../../shopApi'
+	import { goto } from '$app/navigation'
+	import { isEmpty } from 'lodash-es'
+	import { onDestroy } from 'svelte'
 	import messages from '$lib/messages'
 
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
-	import type { XioniEventContext, XioniShop } from '$lib/boilerplate/xioni/shop/types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -17,54 +17,43 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	let isLoading = false
+	let address = {} as XioniShop.Order['address']
+	let shippingAddress = undefined as XioniShop.Order['shippingAddress']
 
-	$: products = $CART.products || {}
-	$: address = $ORDER.address || {}
-	$: shippingAddress = $ORDER.shippingAddress || null
+	const unsubscribe = ORDER.subscribe(order => {
+		address = order.data.address
+		shippingAddress = order.data.shippingAddress
 
-	function toggleLoading(status?: boolean) {
-		const id = 'loading-indicator'
-		isLoading = isBoolean(status) ? status : !isLoading
-
-		if (isLoading) {
-			messages.add('Bestellung wird verarbeitet.', 'Bitte warten', { id, timeout: 0 })
+		if (order.isLoading) {
+			messages.add('Bestellung wird verarbeitet.', 'Bitte warten', {
+				id: 'loading-indicator'
+			})
 		} else {
-			messages.remove(id)
+			messages.remove('loading-indicator')
 		}
-	}
 
-	function errorHandler(error: XioniFetchErrorResponse) {
-		if (error.statusCode !== 412) {
+		if (order.errors && order.errors?.statusCode !== 412) {
 			messages.reset()
-			messages.add((error.data.payload || [])?.join('\n'), error.data.message, { type: 'error' })
+			messages.add((order.errors?.data.payload || [])?.join('\n'), order.errors?.data.message, {
+				type: 'error'
+			})
+		}
+	})
+
+	async function createOrder() {
+		const [_, error] = await ORDER.create()
+
+		if (!error) {
+			goto('/shop/order-confirmation/' + $ORDER.data.transactionId)
 		}
 	}
 
-	async function successHandler(order: XioniShop.Order, { emitter }: XioniEventContext) {
-		if (emitter !== 'createOrder') return
-
-		ORDER.set(order)
-		messages.reset()
-		goto('/shop/order-confirmation/' + order.transactionId)
-	}
-
-	Shop.order.$event
-		.on('loading-toggle', toggleLoading)
-		.on('error', errorHandler)
-		.on('success', successHandler)
-
-	beforeNavigate(() => {
-		Shop.order.$event
-			.off('loading-toggle', toggleLoading)
-			.off('error', errorHandler)
-			.off('success', successHandler)
-	})
+	onDestroy(unsubscribe)
 </script>
 
 <h2>Zusammenfassung</h2>
 
-{#if isEmpty(products)}
+{#if isEmpty($CART.data.products)}
 	<Message title="Ihr Warenkorb ist leer!" type="error">
 		<Link to="/shop">zurück zum Shop</Link>
 	</Message>
@@ -116,10 +105,10 @@
 	<h2 class="h3 $mt-3">Warenkorb</h2>
 
 	<CartTable
-		products={$CART.products}
-		shippingCost={$CART.shippingCost}
-		supplementalCost={$CART.supplementalCost}
-		total={$CART.total} />
+		products={$CART.data.products}
+		shippingCost={$CART.data.shippingCost}
+		supplementalCost={$CART.data.supplementalCost}
+		total={$CART.data.total} />
 
 	<Link icon="fas fa-pen" class="$mt" to="/shop/cart">anpassen</Link>
 
@@ -128,6 +117,6 @@
 		<Button
 			icon="fas fa-angle-right"
 			class="Button--primary $float-right $row-reverse"
-			on:click={Shop.order.createOrder}>jetzt kostenpflichtig bestellen</Button>
+			on:click={createOrder}>jetzt kostenpflichtig bestellen</Button>
 	</div>
 {/if}

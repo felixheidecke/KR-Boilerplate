@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { shopPath } from '../config'
+	import { shopPath } from '../shopConfig'
+	import { CART } from '../shopApi'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -8,9 +9,10 @@
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import stammdaten from '$stammdaten'
-	import { CART } from '../ShopApi'
 
 	const { categories } = $$props.data
+
+	$: ({ products, gross, supplementalCost, shippingCost, total } = $CART.data)
 </script>
 
 <svelte:head>
@@ -19,15 +21,12 @@
 
 <Client browser>
 	<Grid gap={2} tag="section" class="$flex-column@tablet-down">
-		<Grid size="desktop-3-4" tag="main" class="$order-2@tablet-down">
-			<slot />
-		</Grid>
 		<Grid size="desktop-1-4" tag="aside" class="$order-1@tablet-down">
 			<div class="sidebar">
-				{#if $CART.products?.length}
+				{#if products?.length}
 					<h3>Warenkorb:</h3>
 					<ul class="$mt $font-small">
-						{#each $CART.products as { product, quantity }}
+						{#each products as { product, quantity }}
 							<li class="$overflow-ellipsis">
 								{quantity}&times; {product.name}
 							</li>
@@ -36,24 +35,24 @@
 					<ul class="$mt-1/2 $font-small">
 						<li class="$mb-1/4 $flex $space-between">
 							<b>Zwischensumme:</b>&nbsp;
-							<span>{$CART.gross?.formatted}</span>
+							<span>{gross?.formatted}</span>
 						</li>
-						{#if $CART.supplementalCost}
+						{#if supplementalCost}
 							<li class="$mb-1/4 $flex $space-between">
-								<b>{$CART.supplementalCost.title}:</b>
-								<span>{$CART.supplementalCost.formatted}</span>
+								<b>{supplementalCost.title}:</b>
+								<span>{supplementalCost.formatted}</span>
 							</li>
 						{/if}
-						{#if $CART.shippingCost.value}
+						{#if shippingCost.value}
 							<li class="$mb-1/4 $flex $space-between">
 								<b>Versand:</b>
-								<span>{$CART.shippingCost.formatted}</span>
+								<span>{shippingCost.formatted}</span>
 							</li>
 						{/if}
-						{#if $CART.total}
+						{#if total}
 							<li class="$flex $space-between">
 								<b>Gesamt:</b>
-								<span class="$font-bold $decoration-double-underline">{$CART.total.formatted}</span>
+								<span class="$font-bold $decoration-double-underline">{total.formatted}</span>
 							</li>
 						{/if}
 					</ul>
@@ -74,6 +73,9 @@
 					{/each}
 				</ol>
 			</div>
+		</Grid>
+		<Grid size="desktop-3-4" tag="main" class="$order-2@tablet-down">
+			<slot />
 		</Grid>
 	</Grid>
 </Client>

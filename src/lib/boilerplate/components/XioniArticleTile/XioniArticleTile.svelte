@@ -1,18 +1,18 @@
 <script lang="ts">
 	import './XioniArticleTile.scss'
 
-	import { format } from '$lib/boilerplate/utils/format-date'
+	import { format } from '$lib/utils/formatDate'
 	import { goto } from '$app/navigation'
 	import { LOCALE } from '$lib/boilerplate/constants'
 	import cn from 'classnames'
-	import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/articles.types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 	import Link from '../Link/Link.svelte'
 	import Icon from '../Icon/Icon.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
-	export let article: XioniArticle
+	export let article: XioniCMS.Article
 	export let basePath: string = ''
 	export let linkDelimiter: string = '_'
 	export let linkText: string = 'Weiterlesen'
@@ -25,6 +25,7 @@
 
 <svelte:element this={tag} class={cn('XioniArticleTile', $$props.class)}>
 	{#if image}
+		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 		<img
 			class="XioniArticleTile__image"
 			class:$pointer={!!content}

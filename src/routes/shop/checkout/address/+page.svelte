@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { beforeNavigate, goto } from '$app/navigation'
-	import { isBoolean, isEmpty, omitBy } from 'lodash-es'
-	import Shop, { ORDER, CART } from '../../ShopApi'
-	import { shopPath } from '../../config'
+	import { CART, ORDER } from '../../shopApi'
+	import { goto } from '$app/navigation'
 	import { IS_MOBILE } from '$lib/utils/breakpoints'
+	import { isEmpty, omitBy } from 'lodash-es'
+	import { shopPath } from '../../shopConfig'
 
 	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -18,21 +16,28 @@
 	import Message from '$lib/boilerplate/components/Message/Message.svelte'
 	import Select from '$lib/boilerplate/components/Select/Select.svelte'
 	import Textarea from '$lib/boilerplate/components/Textarea/Textarea.svelte'
+	import { onDestroy } from 'svelte'
 
 	// -----------------------------------------------------------------------------------------------
 
-	let isLoading = false
-	let showShippingForm = !!$ORDER.shippingAddress
-	let formErrors = {} as { [key: string]: string[] }
+	let showShippingForm = !!$ORDER.data.shippingAddress
+	let formErrors = $ORDER.errors?.data.payload as undefined | { [key: string]: string[] }
 
 	// Form bindings
-	let address = { ...$ORDER.address } || {}
-	let shippingAddress = { ...$ORDER.shippingAddress } || {}
-	let message = $ORDER.message || ''
+	let address = { ...$ORDER.data.address } || {}
+	let shippingAddress = { ...$ORDER.data.shippingAddress } || {}
+	let message = $ORDER.data.message || ''
 
-	function toggleLoading(status?: boolean) {
-		isLoading = isBoolean(status) ? status : !isLoading
-	}
+	const unsubscribe = ORDER.subscribe(({ errors }) => {
+		formErrors = errors?.data.payload as unknown as { [key: string]: string[] }
+
+		if (formErrors) {
+			setTimeout(
+				() => document.querySelector('.Message')?.scrollIntoView({ behavior: 'smooth' }),
+				250
+			)
+		}
+	})
 
 	function toggleShippingForm() {
 		if (showShippingForm) {
@@ -43,55 +48,34 @@
 		}
 	}
 
-	function errorHandler(error: XioniFetchErrorResponse) {
-		formErrors = error.data.payload as any
-
-		document.querySelector('.Message')?.scrollIntoView({ behavior: 'smooth' })
-	}
-
-	function successHandler(order: XioniShop.Order) {
-		ORDER.set(order)
-		goto(shopPath + '/checkout/summary')
-
-		formErrors = {}
-	}
-
-	function updateCart() {
+	async function updateCart() {
 		const addressData = omitBy(address, isEmpty) as any
 		const shippingAddressData = omitBy(shippingAddress, isEmpty) as any
-
-		Shop.order.updateOrder({
+		const [_, error] = await ORDER.update({
 			address: addressData,
 			shippingAddress: !isEmpty(shippingAddress) ? shippingAddressData : null,
 			message: message.trim() || null
 		})
+
+		if (!error) {
+			goto(shopPath + '/checkout/summary')
+		}
 	}
 
-	Shop.order.$event
-		.on('loading-toggle', toggleLoading)
-		.on('error', errorHandler)
-		.on('success', successHandler)
-
-	beforeNavigate(() => {
-		Shop.order.$event
-			.off('loading-toggle', toggleLoading)
-			.off('error', errorHandler)
-			.off('success', successHandler)
-	})
+	onDestroy(unsubscribe)
 </script>
 
 <h1 class="h2">Kasse</h1>
 
 <p>
-	Der Gesamtrechnungsbetrag von <span class="$decoration-double-underline">
-		{$CART.total?.formatted}
-	</span>
-	wird per Vorkasse beglichen.
+	Aktueller Rechnungsbetrag: <span class="$decoration-double-underline">
+		{$CART.data.total?.formatted}
+	</span> <small>(inkl. MwSt.)</small>
 </p>
 
 <h2 class="h3">Rechnungsanschrift</h2>
 
-{#if formErrors.address}
+{#if formErrors?.address}
 	<Message title="⛔️ Eingabefehler" type="error" class="$mb">
 		<ul>
 			{#each formErrors.address as error}
@@ -145,7 +129,7 @@
 {#if showShippingForm}
 	<h2 class="h3">Lieferadresse</h2>
 
-	{#if formErrors.shippingAddress}
+	{#if formErrors?.shippingAddress}
 		<Message title="⛔️ Eingabefehler" type="error" class="$mb">
 			<ul>
 				{#each formErrors.shippingAddress as error}
@@ -177,7 +161,7 @@
 <div class="$mt-3">
 	<h3 class="h4">Ihre Nachricht</h3>
 
-	{#if formErrors.message}
+	{#if formErrors?.message}
 		<Message title="" type="error" class="$mb">
 			{formErrors.message[0]}
 		</Message>
@@ -187,12 +171,12 @@
 </div>
 
 <Button
-	icon={isLoading ? 'fas fa-spinner fa-pulse' : 'fas fa-angle-right'}
+	icon={$ORDER.isLoading ? 'fas fa-spinner fa-pulse' : 'fas fa-angle-right'}
 	class={[
 		{
 			'$mt $w-full $content-center': $IS_MOBILE
 		},
 		'Button--primary $mt-2 $float-right $row-reverse'
 	]}
-	disabled={isLoading}
+	disabled={$ORDER.isLoading}
 	on:click={updateCart}>weiter zur Zusammenfassung</Button>

@@ -1,13 +1,13 @@
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
-import Shop from '../../ShopApi'
-
+import { useOrder } from '$lib/boilerplate/xioni/shop'
+import { shopModule } from '../../shopConfig.js'
 import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
-export const load = async function ({ params }) {
-	return {
-		order: (await xioniLoader(Shop.order.getOrder(params.id))) as XioniShop.Order
-	}
-}
+const { getOrder } = useOrder(shopModule)
+
+export const load = async ({ params }) => ({
+	order: (await xioniLoader(getOrder(params.id))) as XioniShop.Order
+})
 
 export const prerender = false
 export const ssr = false

@@ -3,6 +3,7 @@ import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniShop, XioniShopData } from '../types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import { writable } from 'svelte/store'
 
 // --- Factory -------------------------------------------------------------------------------------
 
@@ -84,67 +85,56 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 		}
 	}
 
-	async function createPayPalOrder(transactionId: string): Promise<XioniShopData<string>> {
-		const context = { emitter: 'createPayPalOrder' }
-
-		event.emit('loading-toggle', true, context)
-
-		const response = await fetch(['shop', module, 'payment/paypal/create'], {
-			method: 'POST',
-			data: {
-				transactionId
-			}
-		})
-
-		if (response.status === 'success') {
-			const orderId = (response.data as any).orderId as string
-
-			event.emit('success', orderId, context)
-			event.emit('loading-toggle', false, context)
-
-			return [orderId, undefined]
-		} else {
-			event.emit('error', response, context)
-			event.emit('loading-toggle', false, context)
-
-			return [undefined, response as XioniFetchErrorResponse]
-		}
-	}
-
-	async function capturePaypalOrder(orderId: string): Promise<XioniShopData<boolean>> {
-		const context = { emitter: 'capturePaypalOrder' }
-
-		event.emit('loading-toggle', true, context)
-
-		const response = await fetch(['shop', module, 'payment/paypal/capture'], {
-			method: 'POST',
-			data: { orderId }
-		})
-
-		if (response.status === 'success') {
-			event.emit('success', true, context)
-			event.emit('loading-toggle', false, context)
-
-			return [true, undefined]
-		} else {
-			event.emit('error', response, context)
-			event.emit('loading-toggle', false, context)
-
-			return [undefined, response as XioniFetchErrorResponse]
-		}
-	}
-
 	return {
 		createOrder,
 		updateOrder,
-		createPayPalOrder,
-		capturePaypalOrder,
 		getOrder,
 		$event: event
 	}
 }
 
-// Helper
+export function useOrderStore(order: ReturnType<typeof useOrder>) {
+	const { subscribe, set, update } = writable(
+		{
+			data: {} as XioniShop.Order,
+			isLoading: false,
+			errors: null as XioniFetchErrorResponse | null
+		},
+		() => {
+			console.log('Initialising order store')
+			addListeners()
+
+			return function () {
+				console.log('Stopping order store')
+				order.$event.removeAllListeners()
+			}
+		}
+	)
+
+	function addListeners() {
+		order.$event.on('success', data => {
+			set({ data, isLoading: false, errors: null })
+		})
+
+		order.$event.on('error', errors => {
+			update(({ data }) => ({ data, isLoading: false, errors }))
+		})
+
+		order.$event.on('loading-toggle', isLoading => {
+			update(({ data, errors }) => ({ data, isLoading, errors }))
+		})
+	}
+
+	return {
+		$event: order.$event,
+		subscribe,
+		get: order.getOrder,
+		update: order.updateOrder,
+		create: order.createOrder
+	}
+}
+
+// --- Helper --------------------------------------------------------------------------------------
 
 function orderAdapter(order: any): XioniShop.Order {
 	return {

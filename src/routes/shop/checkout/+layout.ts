@@ -1,11 +1,7 @@
-import Shop, { ORDER } from '../ShopApi'
+import { ORDER } from '../shopApi'
 
-export const load = async () => {
-	const [order] = await Shop.order.getOrder()
-
-	if (order) {
-		ORDER.set(order)
-	}
+export function load() {
+	ORDER.get()
 }
 
 export const prerender = false

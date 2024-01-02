@@ -1,11 +1,7 @@
 <script lang="ts">
-	import { beforeNavigate } from '$app/navigation'
 	import messages from '$lib/messages'
-	import Shop, { CART } from '../../ShopApi'
 	import stammdaten from '$stammdaten'
-
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
+	import { CART } from '../../shopApi'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -20,20 +16,15 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	function successHandler(cart: XioniShop.Cart) {
-		messages.reset()
-		CART.set(cart)
+	async function addToCartHandler({ detail }: { detail: number }) {
+		const [cart, error] = await CART.addItem(detail)
+
+		if (cart) {
+			messages.reset()
+		} else if (error) {
+			messages.add(error.data.message, undefined, { type: 'error' })
+		}
 	}
-
-	function errorHandler(error: XioniFetchErrorResponse) {
-		messages.add(error.data.message, undefined, { type: 'error' })
-	}
-
-	Shop.cart.$event.on('success', successHandler).on('error', errorHandler)
-
-	beforeNavigate(() => {
-		Shop.cart.$event.off('success', successHandler).off('error', errorHandler)
-	})
 </script>
 
 <svelte:head>
@@ -42,7 +33,7 @@
 </svelte:head>
 
 {#if product}
-	<Product {product} on:addToCart={({ detail: id }) => Shop.cart.addItem(id)} />
+	<Product {product} on:addToCart={addToCartHandler} />
 
 	<div class="$text-center">
 		<Link icon="fas fa-reply" on:click={() => history.back()}>Zurück</Link>

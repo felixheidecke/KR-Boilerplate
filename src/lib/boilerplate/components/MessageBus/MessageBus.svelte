@@ -2,9 +2,6 @@
 	import './MessageBus.css'
 
 	import { blur } from 'svelte/transition'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
 	import type { MessageBus } from './MessageBus'
 
 	// --- [ Components ] ----------------------------------------------------------------------------

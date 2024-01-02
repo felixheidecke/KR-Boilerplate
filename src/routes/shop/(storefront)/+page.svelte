@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { shopPath } from '../config.js'
+	import { shopPath } from '../shopConfig.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
-	import ProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
+	import ProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 

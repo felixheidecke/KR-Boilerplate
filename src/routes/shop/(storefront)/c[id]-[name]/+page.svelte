@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import stammdaten from '$stammdaten'
-	import { shopPath } from '../../config.js'
+	import { shopPath } from '../../shopConfig.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
-	import XioniShopProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
+	import ProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@
 	{#each products as product, index (product.id)}
 		<Grid tag="li" size="tablet-1-2" {index}>
 			<Link class="$decoration-none" to="{shopPath}/p{product.id}-{product.slug}">
-				<XioniShopProductTile {product} />
+				<ProductTile {product} />
 			</Link>
 		</Grid>
 	{/each}

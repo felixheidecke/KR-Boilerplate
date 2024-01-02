@@ -3,6 +3,7 @@ import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniShop, XioniShopData } from '../types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import { writable } from 'svelte/store'
 
 export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
@@ -111,5 +112,47 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 		updateItemQuantity,
 		addItem,
 		$event: event
+	}
+}
+
+export function useCartStore(cart: ReturnType<typeof useCart>) {
+	const { subscribe, set, update } = writable(
+		{
+			data: {} as XioniShop.Cart,
+			isLoading: false,
+			errors: null as XioniFetchErrorResponse | null
+		},
+		() => {
+			console.log('Initialising cart store')
+			addListeners()
+
+			return function () {
+				console.log('Stopping cart store')
+				cart.$event.removeAllListeners()
+			}
+		}
+	)
+
+	function addListeners() {
+		cart.$event.on('success', data => {
+			set({ data, isLoading: false, errors: null })
+		})
+
+		cart.$event.on('error', errors => {
+			update(({ data }) => ({ data, isLoading: false, errors }))
+		})
+
+		cart.$event.on('loading-toggle', isLoading => {
+			if (!isLoading) return
+
+			update(({ data, errors }) => ({ data, isLoading, errors }))
+		})
+	}
+
+	return {
+		subscribe,
+		get: cart.getCart,
+		addItem: cart.addItem,
+		updateItemQuantity: cart.updateItemQuantity
 	}
 }

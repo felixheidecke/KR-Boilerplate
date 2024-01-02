@@ -1,19 +1,7 @@
-<script>
-	// --- [ Props ] ---------------------------------------------------------------------------------
-
-	export let data
-
-	const { info } = data
-
-	// -----------------------------------------------------------------------------------------------
-</script>
-
 <svelte:head>
 	<title>Allgemeine Geschäftsbedingungen</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
-
-<pre hidden>{JSON.stringify(info, 2, null)}</pre>
 
 <h1>Muster - Test - MUSTER - T E S T - muster - M U S T E R</h1>
 <hr />

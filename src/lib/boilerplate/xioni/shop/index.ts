@@ -1,5 +1,6 @@
-export { useCart } from './src/Cart'
+export { useCart, useCartStore } from './src/Cart'
 export { useCategories } from './src/Categories'
 export { useInfo } from './src/Info'
-export { useOrder } from './src/Order'
+export { useOrder, useOrderStore } from './src/Order'
 export { useProducts } from './src/Products'
+export { usePayment } from './src/Payment'

@@ -1,12 +1,9 @@
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
-import Shop from '../../ShopApi'
+import { products } from '../../shopApi'
+import type { XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
 
-import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
+const { getProduct } = products
 
-export const load = async ({ params }) => {
-	const { getProduct } = Shop.products
-
-	return {
-		product: (await xioniLoader(getProduct(+params.id))) as XioniShop.Product
-	}
-}
+export const load = async ({ params }) => ({
+	product: (await xioniLoader(getProduct(+params.id))) as XioniShop.Product
+})

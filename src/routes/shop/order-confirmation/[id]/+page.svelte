@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { format } from '$lib/utils/formatDate.js'
-	import { payPalClientId as clientId } from '../../config.js'
+	import { onDestroy } from 'svelte'
+	import { order as orderApi, payment as paymentApi } from '../../shopApi.js'
+	import { payPalClientId as clientId } from '../../shopConfig.js'
 	import messages from '$lib/messages.js'
-	import Shop from '../../ShopApi.js'
 
-	import type { XioniEventContext, XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -12,7 +13,6 @@
 	import Button from '$lib/boilerplate/components/Button/Button.svelte'
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import PayPalButtons from '$lib/boilerplate/components/PayPalButtons/PayPalButtons.svelte'
-	import { beforeNavigate } from '$app/navigation'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -22,17 +22,18 @@
 
 	let paypalOrderId: string
 	let order = data.order as XioniShop.Order
+
 	$: address = order.address as XioniShop.Order['address']
 	$: date = format(order.date as Date, 'PPP')
 	$: shippingAddress = order.shippingAddress as XioniShop.Order['shippingAddress']
 
 	async function onApproveHandler() {
-		await Shop.order.capturePaypalOrder(paypalOrderId)
-		await Shop.order.getOrder(order.transactionId)
+		await paymentApi.capturePayPalTransaction(paypalOrderId)
+		await orderApi.getOrder(order.transactionId)
 	}
 
 	async function createOrderHandler() {
-		const [id] = (await Shop.order.createPayPalOrder(order.transactionId as string)) as [
+		const [id] = (await paymentApi.createPayPalTransaction(order.transactionId as string)) as [
 			string,
 			undefined
 		]
@@ -40,30 +41,38 @@
 		return (paypalOrderId = id)
 	}
 
-	function successHandler(data: any, { emitter }: XioniEventContext) {
-		switch (emitter) {
-			case 'getOrder':
-				order = data
-				break
-			case 'capturePaypalOrder':
-				messages.add('Zahlung abgeschlossen.', undefined, { type: 'success', timeout: 5000 })
-		}
-	}
-
 	function errorHandler({ data }: XioniFetchErrorResponse) {
 		messages.reset()
-		messages.add((data.payload || ['Ein Fehler ist aufgetreten.'])?.join('\n'), data.message)
+		messages.add((data.payload || ['Ein Fehler ist aufgetreten.'])?.join('\n'), data.message, {
+			type: 'error'
+		})
 	}
 
-	Shop.order.$event.on('success', successHandler).on('error', errorHandler)
+	// prettier-ignore
+	orderApi.$event
+		.on('error', errorHandler)
+		.on('success', data => (order = data))
 
-	beforeNavigate(function () {
-		Shop.order.$event.off('success', successHandler).off('error', errorHandler)
+	// prettier-ignore
+	paymentApi.$event
+		.on('error', errorHandler)
+		.on('success', (_, {emitter}) => {
+			if (emitter !== 'capturePayPalTransaction') return
+
+			messages.add('Zahlung abgeschlossen.', 'Pay Pal', {
+				type: 'success',
+				timeout: 5000
+			})
+	})
+
+	onDestroy(() => {
+		orderApi.$event.removeAllListeners()
+		paymentApi.$event.removeAllListeners()
 	})
 </script>
 
 <svelte:head>
-	<title>Rechnung {order.transactionId?.toUpperCase()}</title>
+	<title>Bestellung {order.transactionId?.toUpperCase()}</title>
 </svelte:head>
 
 <ol class="$mt-4">
@@ -87,7 +96,9 @@
 	</Grid>
 	<Grid size="1-2" class="$text-right">
 		<ul>
-			<li>Transaktion: <code>{order.transactionId?.toUpperCase()}</code></li>
+			<li>
+				Transaktion: <span style="letter-spacing: 1px">{order.transactionId?.toUpperCase()}</span>
+			</li>
 			<li>Datum: {date}</li>
 			<li>Zahlart: {order.paymentType}</li>
 		</ul>
@@ -143,7 +154,8 @@
 	<p>
 		Name des Kontoinhaber<br />
 		DE 70 5500 0000 1234 5678 00<br />
-		Verwendungszweck: <code>{order.transactionId?.toUpperCase()}</code>
+		Verwendungszweck:
+		<span style="letter-spacing: 1px">{order.transactionId?.toUpperCase()}</span>
 	</p>
 {/if}
 

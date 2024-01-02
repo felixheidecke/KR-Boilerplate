@@ -1,11 +1,7 @@
 <script lang="ts">
-	import Shop, { CART } from '../ShopApi'
-	import { beforeNavigate } from '$app/navigation'
-	import { isBoolean } from 'lodash-es'
+	import { CART } from '../shopApi'
+	import { onDestroy } from 'svelte'
 	import messages from '$lib/messages'
-
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -16,51 +12,36 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	let isLoading: boolean = false
+	$: ({ products, supplementalCost, shippingCost, total } = $CART.data)
 
-	function toggleLoading(status?: boolean) {
-		isLoading = isBoolean(status) ? status : !isLoading
+	async function updateItemQuantity({ detail }: any) {
+		CART.updateItemQuantity(detail.productId, detail.quantity)
 	}
 
-	function errorHandler(error: XioniFetchErrorResponse) {
-		messages.add(error.data.message, undefined, { type: 'error' })
-	}
-
-	function successHandler(cart: XioniShop.Cart) {
-		CART.set(cart)
-		messages.reset()
-	}
-
-	function updateItemQuantity({ detail }: any) {
-		Shop.cart.updateItemQuantity(detail.productId, detail.quantity)
-	}
-
-	Shop.cart.$event
-		.on('loading-toggle', toggleLoading)
-		.on('error', errorHandler)
-		.on('success', successHandler)
-
-	beforeNavigate(() => {
-		Shop.cart.$event
-			.off('loading-toggle', toggleLoading)
-			.off('error', errorHandler)
-			.off('success', successHandler)
+	const unsubscribe = CART.subscribe(({ errors }) => {
+		if (errors) {
+			messages.add(errors.data.message, undefined, { type: 'error' })
+		} else {
+			messages.reset()
+		}
 	})
+
+	onDestroy(unsubscribe)
 </script>
 
 <h1>Warenkorb</h1>
 <Client browser>
-	{#if !$CART.products?.length}
+	{#if !products?.length}
 		<h4>Ihr Warenkorb ist noch leer.</h4>
 		<Link to="/shop" icon="fas fa-store">Zum Shop</Link>
 	{:else}
 		<CartTable
-			products={$CART.products}
-			supplementalCost={$CART.supplementalCost}
-			shippingCost={$CART.shippingCost}
-			total={$CART.total}
+			{products}
+			{supplementalCost}
+			{shippingCost}
+			{total}
 			quantitySelector
-			readOnly={isLoading}
+			readOnly={$CART.isLoading}
 			on:product-quantity-update={updateItemQuantity} />
 
 		<div class="$mt-2">
