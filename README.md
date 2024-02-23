@@ -1,5 +1,9 @@
 # Patch Notes
 
+## Version `4.15.1`
+
+- Update Dependencies
+
 ## Version `4.15.0`
 
 - Add `$cdnPath` variable and `cdnUrl()` function to component SCSS styles

@@ -1,6 +1,6 @@
 {
 	"name": "boilerplate.ts",
-	"version": "4.15.0",
+	"version": "4.15.1",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -18,32 +18,32 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.1",
 		"@sveltejs/adapter-static": "^2.0.3",
-		"@sveltejs/kit": "^1.30.3",
+		"@sveltejs/kit": "^1.30.4",
 		"@types/lodash-es": "^4.17.12",
-		"@typescript-eslint/eslint-plugin": "^6.14.0",
-		"@typescript-eslint/parser": "^6.14.0",
+		"@typescript-eslint/eslint-plugin": "^6.21.0",
+		"@typescript-eslint/parser": "^6.21.0",
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
-		"npm-check-updates": "^16.14.12",
-		"prettier": "^3.1.1",
-		"prettier-plugin-svelte": "^3.1.2",
-		"sass": "^1.69.5",
-		"svelte": "^4.2.8",
-		"svelte-check": "^3.6.2",
+		"npm-check-updates": "^16.14.15",
+		"prettier": "^3.2.5",
+		"prettier-plugin-svelte": "^3.2.1",
+		"sass": "^1.71.1",
+		"svelte": "^4.2.12",
+		"svelte-check": "^3.6.4",
 		"sveltekit-autoimport": "^1.7.1",
 		"tslib": "^2.6.2",
 		"typescript": "^5.3.3",
-		"vite": "^4.5.1"
+		"vite": "^4.5.2"
 	},
 	"type": "module",
 	"dependencies": {
 		"@glidejs/glide": "^3.6.0",
-		"classnames": "^2.3.2",
+		"classnames": "^2.5.1",
 		"date-fns": "^2.30.0",
 		"in-view": "^0.6.1",
 		"lodash-es": "^4.17.21",
 		"opening_hours": "^3.8.0",
-		"svelte-preprocess": "^5.1.2"
+		"svelte-preprocess": "^5.1.3"
 	}
 }
