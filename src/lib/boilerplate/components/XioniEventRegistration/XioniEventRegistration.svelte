@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
-	import * as date from '$lib/boilerplate/utils/format-date'
 	import classNames from 'classnames'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -8,11 +6,13 @@
 	import Button from '../Button/Button.svelte'
 	import Form from '../Form/Form.svelte'
 	import Modal from '../Modal/Modal.svelte'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
+	import * as date from '$lib/utils/formatDate'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let formId: number | string
-	export let event: XioniEvent | undefined = undefined
+	export let event: XioniCMS.Event | undefined = undefined
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -22,19 +22,23 @@
 	export const close = () => modal.close()
 
 	// CSS Classnames
-	const baseName = $$props['ex-class'] || 'XioniEventRegistration'
-	const className = classNames(baseName, $$props.class)
+	const baseName = 'XioniEventRegistration'
 </script>
 
-<Modal title="Anmeldung" bind:this={modal} class={baseName} on:open on:close>
+<Modal
+	title="Anmeldung"
+	bind:this={modal}
+	class={classNames(baseName, $$props.class)}
+	on:open
+	on:close>
 	{#if event}
-		<header class="{className}__header">
-			<h3 class="{className}__title">{event.title}</h3>
+		<header class="{baseName}__header">
+			<h3 class="{baseName}__title">{event.title}</h3>
 			<time>{@html date.formatFromTo(event.starts, event.ends)}</time>
 		</header>
 
-		<Form id={formId} subject="Event Anmeldung ({event.id})" class="$mt-2" attach="csv">
-			<input type="hidden" name="Event" value="{event.title} ({event.id})" />
+		<Form id={formId} subject="Event Anmeldung ({event.$id})" class="$mt-2" attach="csv">
+			<input type="hidden" name="Event" value="{event.title} ({event.$id})" />
 			<input type="hidden" name="Datum" value={date.format(event.starts, 'P')} />
 
 			<slot />

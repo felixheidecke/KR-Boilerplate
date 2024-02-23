@@ -34,7 +34,7 @@ export default function (fetchFn: typeof fetch = fetch) {
 				statusCode: response.status,
 				url: response.url
 			}
-		} catch {
+		} catch (error) {
 			throw {
 				data: {},
 				status: getStatus(500),

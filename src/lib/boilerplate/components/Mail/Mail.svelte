@@ -10,7 +10,7 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let to: string
-	export let icon: string | null = 'fas fa-envelope'
+	export let icon: string | undefined = 'fas fa-envelope'
 	export let subject: string | undefined = undefined
 	export let body: string | undefined = undefined
 
@@ -21,18 +21,17 @@
 	const className = classnames(baseName, $$props.class)
 
 	function makeHref() {
-		const link = 'mailto:' + to
-		const params = []
+		const link = new URL('mailto:' + to)
 
 		if (subject) {
-			params.push('subject=' + subject)
+			link.searchParams.set('subject', subject)
 		}
 
 		if (body) {
-			params.push('body=' + subject)
+			link.searchParams.set('body', body)
 		}
 
-		return params.length ? link + '?' + params.join('&') : link
+		return link.toString()
 	}
 </script>
 

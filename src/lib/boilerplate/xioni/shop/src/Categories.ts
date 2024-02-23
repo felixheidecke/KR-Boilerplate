@@ -1,8 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../types'
+import type { XioniShop, XioniShopData } from '../XioniShop.types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import type { Xioni } from '../../Xioni.types'
 
 export function useCategories(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
@@ -13,10 +14,17 @@ export function useCategories(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns List of Categories
 	 */
 
-	async function getCategories(): Promise<XioniShopData<XioniShop.Category[]>> {
+	async function getCategories(config?: {
+		detailLevel?: Xioni.DetailLevel
+	}): Promise<XioniShopData<XioniShop.Category[]>> {
 		const context = { emitter: 'getCategories' }
+		const params = {}
 
-		const response = await fetch(['shop', module, 'categories'])
+		if (config?.detailLevel) {
+			Object.assign(params, { detailLevel: config.detailLevel })
+		}
+
+		const response = await fetch(['shop', module, 'categories'], { params })
 
 		if (response.status === 'success') {
 			const category = response.data as XioniShop.Category[]
@@ -42,10 +50,20 @@ export function useCategories(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns A Category
 	 */
 
-	async function getCategory(id: number): Promise<XioniShopData<XioniShop.Category>> {
+	async function getCategory(
+		id: number,
+		config?: {
+			detailLevel?: Xioni.DetailLevel
+		}
+	): Promise<XioniShopData<XioniShop.Category>> {
 		const context = { emitter: 'getCategory' }
+		const params = {}
 
-		const response = await fetch(['shop', module, 'categories', id])
+		if (config?.detailLevel) {
+			Object.assign(params, { detailLevel: config.detailLevel })
+		}
+
+		const response = await fetch(['shop', module, 'categories', id], { params })
 
 		if (response.status === 'success') {
 			const category = response.data as XioniShop.Category

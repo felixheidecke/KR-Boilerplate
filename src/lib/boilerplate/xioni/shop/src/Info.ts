@@ -1,8 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniEventContext, XioniShop, XioniShopData } from '../types'
+import type { XioniShop, XioniShopData } from '../XioniShop.types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import type { Xioni } from '../../Xioni.types'
 
 export function useInfo(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
@@ -15,7 +16,7 @@ export function useInfo(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getInfo(): Promise<XioniShopData<XioniShop.Info>> {
-		const context: XioniEventContext = { emitter: 'getInfo' }
+		const context: Xioni.EventContext = { emitter: 'getInfo' }
 
 		event.emit('loading-toggle', true, context)
 

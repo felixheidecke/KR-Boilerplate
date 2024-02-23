@@ -38,3 +38,7 @@ $mediaquery: (
 	'desktop-down': '(max-width: 1440px)',
 	'widescreen': '(min-width: 1441px)'
 );
+
+@function cdnUrl($path, $file) {
+	@return url('https://assets.klickrhein.de/pages/' + $path + '/_assets/' + $file);
+}

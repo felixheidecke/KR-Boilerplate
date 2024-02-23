@@ -1,21 +1,22 @@
 <script lang="ts">
 	import './XioniEventTile.scss'
 
-	import { format } from '$lib/utils/formatDate'
+	import { format, formatFromTo } from '$lib/utils/formatDate'
 	import { goto } from '$app/navigation'
 	import { LOCALE } from '$lib/boilerplate/constants'
 	import classNames from 'classnames'
 
-	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '../Link/Link.svelte'
+	import Picture from '../Picture/Picture.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let basePath: string = ''
-	export let event: XioniCMS.Event
+	export let event: XioniCMS.Event.Basic
 	export let exClass: string = ''
 	export let linkDelimiter: string = '_'
 	export let linkText: string = 'Mehr erfahren'
@@ -23,8 +24,8 @@
 
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
-	const { title, image, description, starts, ends, duration, organizer } = event
-	const link = basePath + event.slug + linkDelimiter + event.id
+	const { title, image, description, starts, ends } = event
+	const link = basePath + event.slug + linkDelimiter + event.$id
 
 	// CSS Classname
 	const baseName = exClass || 'XioniEventTile'
@@ -37,15 +38,13 @@
 	itemtype="https://schema.org/Event">
 	<meta itemprop="startDate" content={format(starts, 'yyyy-MM-dd')} />
 	<meta itemprop="endDate" content={format(ends, 'yyyy-MM-dd')} />
-	<meta itemprop="organizer" content={organizer} />
 
 	{#if image}
 		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		<img
-			itemprop="image"
+		<Picture
 			class="{baseName}__image"
-			src={image.thumbSrc}
-			alt={image.alt || title}
+			src={image.srcset?.small || ''}
+			alt={image.alt}
 			on:click={() => goto(link)} />
 	{/if}
 
@@ -55,7 +54,7 @@
 
 	<h3 class="{baseName}__date">
 		<time datetime={starts.toLocaleDateString(LOCALE)}>
-			{duration}
+			{formatFromTo(starts, ends)}
 		</time>
 	</h3>
 

@@ -1,9 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
-
-import type { XioniShop, XioniShopData } from '../types'
-import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 import { writable } from 'svelte/store'
+
+import type { XioniShop, XioniShopData } from '../XioniShop.types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 
 // --- Factory -------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function updateOrder(update: {
 		address?: XioniShop.Order['address']
-		shippingAddress?: XioniShop.Order['shippingAddress'] | null
+		deliveryAddress?: XioniShop.Order['deliveryAddress'] | null
 		paymentType?: XioniShop.Order['paymentType']
 		message?: XioniShop.Order['message'] | null
 	}): Promise<XioniShopData<XioniShop.Order>> {
@@ -101,29 +101,23 @@ export function useOrderStore(order: ReturnType<typeof useOrder>) {
 			errors: null as XioniFetchErrorResponse | null
 		},
 		() => {
-			console.log('Initialising order store')
-			addListeners()
+			order.$event.on('success', data => {
+				set({ data, isLoading: false, errors: null })
+			})
+
+			order.$event.on('error', errors => {
+				update(({ data }) => ({ data, isLoading: false, errors }))
+			})
+
+			order.$event.on('loading-toggle', isLoading => {
+				update(({ data, errors }) => ({ data, isLoading, errors }))
+			})
 
 			return function () {
-				console.log('Stopping order store')
 				order.$event.removeAllListeners()
 			}
 		}
 	)
-
-	function addListeners() {
-		order.$event.on('success', data => {
-			set({ data, isLoading: false, errors: null })
-		})
-
-		order.$event.on('error', errors => {
-			update(({ data }) => ({ data, isLoading: false, errors }))
-		})
-
-		order.$event.on('loading-toggle', isLoading => {
-			update(({ data, errors }) => ({ data, isLoading, errors }))
-		})
-	}
 
 	return {
 		$event: order.$event,

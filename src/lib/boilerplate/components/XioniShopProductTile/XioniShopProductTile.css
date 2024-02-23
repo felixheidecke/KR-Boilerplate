@@ -22,7 +22,6 @@
 }
 
 :where(.XioniShopProductTile__image) {
-	aspect-ratio: 1;
 	object-fit: contain;
 	margin-bottom: 1rem;
 	width: 100%;

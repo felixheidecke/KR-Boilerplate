@@ -3,7 +3,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniAlbum } from '$lib/boilerplate/libraries/xioni/galleries.types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -11,14 +11,19 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let photos: XioniAlbum['photos'] = []
+	export let images: XioniCMS.Album['images'] = []
 </script>
 
 <Lightbox>
 	<ul class="XioniAlbum">
-		{#each photos as { src, thumbSrc, alt }}
+		{#each images as { src, srcset, alt }}
 			<li class="XioniAlbum__item">
-				<img class="XioniAlbum__image" src={thumbSrc} data-lightbox={src} loading="lazy" {alt} />
+				<img
+					class="XioniAlbum__image"
+					src={srcset?.small}
+					data-lightbox={src}
+					loading="lazy"
+					{alt} />
 			</li>
 		{/each}
 	</ul>

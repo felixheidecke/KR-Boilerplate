@@ -2,7 +2,7 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMS, XioniCMSData } from '../types'
+import type { XioniCMS, XioniCMSData } from '../XioniCMS.types'
 
 export function useGallery(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = xioniFetch(fetchFn)
@@ -44,10 +44,10 @@ export function useGallery(fetchFn: typeof fetch = fetch) {
 	 * @returns Album
 	 */
 
-	async function getAlbum(id: number): Promise<XioniCMSData<XioniCMS.Album>> {
+	async function getAlbum(module: number, id: number): Promise<XioniCMSData<XioniCMS.Album>> {
 		const context = { emitter: 'getAlbum' }
 
-		const response = await fetchJSON(['cms/album', id])
+		const response = await fetchJSON(['cms/gallery', module, id])
 
 		if (response.status === 'success') {
 			const album = response.data as XioniCMS.Album

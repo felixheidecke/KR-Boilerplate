@@ -10,12 +10,7 @@ const config = {
 			css: {
 				preprocessorOptions: {
 					scss: {
-						additionalData: `
-							$cdnPath: "${kitConfig.paths.assets}/_assets";
-
-							@function cdnUrl($file) {
-								@return url($cdnPath + $file);
-							}`
+						additionalData: `@import '$variables';`
 					}
 				}
 			}

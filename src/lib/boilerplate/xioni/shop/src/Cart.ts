@@ -1,7 +1,7 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../types'
+import type { XioniShop, XioniShopData } from '../XioniShop.types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 import { writable } from 'svelte/store'
 
@@ -56,7 +56,12 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 
 		const response = await fetch(['shop', module, 'cart'], {
 			method: 'PUT',
-			data: { [id]: quantity }
+			data: [
+				{
+					productId: id,
+					quantity
+				}
+			]
 		})
 
 		if (response.status === 'success') {
@@ -89,7 +94,12 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 
 		const response = await fetch(['shop', module, 'cart'], {
 			method: 'PUT',
-			data: { [id]: 1 }
+			data: [
+				{
+					productId: id,
+					quantity: 1
+				}
+			]
 		})
 
 		if (response.status === 'success') {
@@ -123,31 +133,26 @@ export function useCartStore(cart: ReturnType<typeof useCart>) {
 			errors: null as XioniFetchErrorResponse | null
 		},
 		() => {
-			console.log('Initialising cart store')
-			addListeners()
+			cart.$event.on('success', data => {
+				set({ data, isLoading: false, errors: null })
+			})
+
+			cart.$event.on('error', errors => {
+				update(({ data }) => ({ data, isLoading: false, errors }))
+			})
+
+			cart.$event.on('loading-toggle', isLoading => {
+				// isLoading = false will be set by success and error handlers
+				if (!isLoading) return
+
+				update(({ data, errors }) => ({ data, isLoading, errors }))
+			})
 
 			return function () {
-				console.log('Stopping cart store')
 				cart.$event.removeAllListeners()
 			}
 		}
 	)
-
-	function addListeners() {
-		cart.$event.on('success', data => {
-			set({ data, isLoading: false, errors: null })
-		})
-
-		cart.$event.on('error', errors => {
-			update(({ data }) => ({ data, isLoading: false, errors }))
-		})
-
-		cart.$event.on('loading-toggle', isLoading => {
-			if (!isLoading) return
-
-			update(({ data, errors }) => ({ data, isLoading, errors }))
-		})
-	}
 
 	return {
 		subscribe,

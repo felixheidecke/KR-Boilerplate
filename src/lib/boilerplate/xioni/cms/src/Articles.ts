@@ -2,7 +2,8 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMS, XioniCMSData } from '../types'
+import type { XioniCMS, XioniCMSData } from '../XioniCMS.types'
+import type { Xioni } from '../../Xioni.types'
 
 export function useArticles(fetchFn: typeof fetch = fetch) {
 	const fetchJson = xioniFetch(fetchFn)
@@ -18,7 +19,8 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 
 	async function getArticles(
 		module: number,
-		filter: { limit?: number; status?: 'live' | 'archived' } = {}
+		filter: { limit?: number; status?: 'live' | 'archived' } = {},
+		detailLevel?: Xioni.DetailLevel.MINIMAL | Xioni.DetailLevel.EXTENDED
 	): Promise<XioniCMSData<XioniCMS.Article[]>> {
 		const context = { emitter: 'getArticles' }
 		const params = {}
@@ -29,6 +31,10 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 
 		if (filter.status) {
 			Object.assign(params, { status: filter.status })
+		}
+
+		if (detailLevel) {
+			Object.assign(params, { detailLevel })
 		}
 
 		const response = await fetchJson(['cms/articles', module], { params })
@@ -57,10 +63,10 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 	 * @returns An article
 	 */
 
-	async function getArticle(id: number): Promise<XioniCMSData<XioniCMS.Article>> {
+	async function getArticle(module: number, id: number): Promise<XioniCMSData<XioniCMS.Article>> {
 		const context = { emitter: 'getArticle' }
 
-		const response = await fetchJson(['cms/article', id])
+		const response = await fetchJson(['cms/articles', module, id])
 
 		if (response.status === 'success') {
 			const article = articleAdapter(response.data) as XioniCMS.Article

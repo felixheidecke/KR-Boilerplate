@@ -6,7 +6,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@
 
 	export let products: XioniShop.Cart['products']
 	export let supplementalCost: XioniShop.Cart['supplementalCost']
-	export let shippingCost: XioniShop.Cart['shippingCost']
+	export let shipping: XioniShop.Cart['shipping']
 	export let total: XioniShop.Cart['total']
 	export let quantitySelector = false
 	export let readOnly = false
@@ -54,7 +54,7 @@
 							value={quantity}
 							class="XioniShopCartTable__select-quantity"
 							disabled={readOnly}
-							on:change={event => update(product.id, event)} />
+							on:change={event => update(product.$id, event)} />
 					{:else}
 						{quantity}
 					{/if}
@@ -74,10 +74,12 @@
 				<td class="$text-right">{supplementalCost.formatted}</td>
 			</tr>
 		{/if}
-		<tr>
-			<td colspan="3" class="$text-right $font-bold">Versand:</td>
-			<td class="$text-right">{shippingCost.formatted}</td>
-		</tr>
+		{#if shipping}
+			<tr>
+				<td colspan="3" class="$text-right $font-bold">Versand:</td>
+				<td class="$text-right">{shipping.price.formatted}</td>
+			</tr>
+		{/if}
 		<tr>
 			<td colspan="3" class="$text-right $font-bold"
 				>Gesamt:

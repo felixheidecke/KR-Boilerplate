@@ -21,7 +21,7 @@
 }
 
 :where(.XioniShopProduct__price) {
-	font-size: 2rem;
+	font-size: 1.75rem;
 	font-weight: bold;
 }
 
@@ -42,4 +42,17 @@
 	margin-top: 1rem;
 	padding-top: 1rem;
 	border-top: 1px solid lightgray;
+}
+
+.XioniShopProduct__image-presentation {
+	max-height: 85vh;
+	max-width: 75vw;
+}
+
+.XioniShopProduct__product-modal {
+	max-width: 85vw;
+
+	.Modal__body {
+		max-height: inherit;
+	}
 }

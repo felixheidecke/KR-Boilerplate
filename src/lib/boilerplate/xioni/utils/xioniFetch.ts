@@ -10,7 +10,7 @@ export type XioniFetchResponse<T = unknown> = FetchResponse<T>
 export type XioniFetchErrorResponse = FetchResponse<{
 	message: string
 	code?: string
-	payload?: [string, string][]
+	details?: any
 }>
 
 /**

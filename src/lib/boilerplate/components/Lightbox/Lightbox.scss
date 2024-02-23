@@ -66,6 +66,11 @@
 	}
 }
 
+.Lightbox__modal {
+	max-width: 100%;
+	max-width: 1280px;
+}
+
 .Lightbox__modal .Modal__wrapper {
 	width: fit-content;
 	height: fit-content;

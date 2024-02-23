@@ -2,8 +2,9 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMS, XioniCMSData } from '../types'
+import type { XioniCMS, XioniCMSData } from '../XioniCMS.types'
 import { formatFromTo } from '$lib/utils/formatDate'
+import type { Xioni } from '../../Xioni.types'
 
 export function useEvents(fetchFn: typeof fetch = fetch) {
 	const fetchJson = xioniFetch(fetchFn)
@@ -13,44 +14,49 @@ export function useEvents(fetchFn: typeof fetch = fetch) {
 	 * Get all Events by module
 	 *
 	 * @param module Module id
-	 * @param filter.limit Maximale Anzahl an Artikeln
-	 * @param filter.startsBefore Event startet vor Datum
-	 * @param filter.startsAfter Event startet nach Datum
-	 * @param filter.endsBefore Event endet vor Datum
-	 * @param filter.endsAfter Event endet nach Datum
+	 * @param query.limit Maximale Anzahl an Artikeln
+	 * @param query.startsBefore Event startet vor Datum
+	 * @param query.startsAfter Event startet nach Datum
+	 * @param query.endsBefore Event endet vor Datum
+	 * @param query.endsAfter Event endet nach Datum
 	 */
 
 	async function getEvents(
 		module: number,
-		filter: {
+		query: {
 			limit?: number
 			startsBefore?: Date
 			startsAfter?: Date
 			endsBefore?: Date
 			endsAfter?: Date
+			detailLevel?: Xioni.DetailLevel.MINIMAL | Xioni.DetailLevel.BASIC
 		} = {}
 	): Promise<XioniCMSData<XioniCMS.Event[]>> {
 		const context = { emitter: 'getEvents' }
 		const params = {}
 
-		if ('limit' in filter) {
-			Object.assign(params, { limit: filter.limit })
+		if ('limit' in query) {
+			Object.assign(params, { limit: query.limit })
 		}
 
-		if (filter.startsBefore) {
-			Object.assign(params, { startsBefore: filter.startsBefore.toDateString() })
+		if (query.startsBefore) {
+			Object.assign(params, { startsBefore: query.startsBefore.toDateString() })
 		}
 
-		if (filter.startsAfter) {
-			Object.assign(params, { startsAfter: filter.startsAfter.toDateString() })
+		if (query.startsAfter) {
+			Object.assign(params, { startsAfter: query.startsAfter.toDateString() })
 		}
 
-		if (filter.endsBefore) {
-			Object.assign(params, { endsBefore: filter.endsBefore.toDateString() })
+		if (query.endsBefore) {
+			Object.assign(params, { endsBefore: query.endsBefore.toDateString() })
 		}
 
-		if (filter.endsAfter) {
-			Object.assign(params, { endsAfter: filter.endsAfter.toDateString() })
+		if (query.endsAfter) {
+			Object.assign(params, { endsAfter: query.endsAfter.toDateString() })
+		}
+
+		if (query.detailLevel) {
+			Object.assign(params, { detailLevel: query.detailLevel })
 		}
 
 		const response = await fetchJson(['cms/events', module], { params })
@@ -79,13 +85,13 @@ export function useEvents(fetchFn: typeof fetch = fetch) {
 	 * @returns XioniEvent
 	 */
 
-	async function getEvent(id: number): Promise<XioniCMSData<XioniCMS.Event>> {
+	async function getEvent(module: number, id: number): Promise<XioniCMSData<XioniCMS.Event.Full>> {
 		const context = { emitter: 'getEvent' }
 
-		const response = await fetchJson(['cms/event', id])
+		const response = await fetchJson(['cms/events', module, id])
 
 		if (response.status === 'success') {
-			const data = eventAdapter(response.data) as XioniCMS.Event
+			const data = eventAdapter(response.data) as XioniCMS.Event.Full
 
 			event.emit('loaded', data, context)
 			event.emit('finally', context)

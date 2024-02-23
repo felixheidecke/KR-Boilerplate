@@ -5,7 +5,7 @@
 	import { goto } from '$app/navigation'
 	import { LOCALE } from '$lib/boilerplate/constants'
 	import cn from 'classnames'
-	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 	import Link from '../Link/Link.svelte'
@@ -20,7 +20,7 @@
 
 	// -----------------------------------------------------------------------------------------------
 	const { title, date, image, text, author, content } = article
-	const link = basePath + article.slug + linkDelimiter + article.id
+	const link = basePath + article.slug + linkDelimiter + article.$id
 </script>
 
 <svelte:element this={tag} class={cn('XioniArticleTile', $$props.class)}>
@@ -29,7 +29,7 @@
 		<img
 			class="XioniArticleTile__image"
 			class:$pointer={!!content}
-			src={image.thumbSrc}
+			src={image.srcset?.small}
 			alt={image.alt}
 			on:click={() => {
 				if (content) goto(link)

@@ -2,7 +2,7 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMSData } from '../types'
+import type { XioniCMSData } from '../XioniCMS.types'
 
 export function useFormMail(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = xioniFetch(fetchFn)

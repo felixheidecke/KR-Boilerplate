@@ -1,7 +1,7 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShopData } from '../types'
+import type { XioniShopData } from '../XioniShop.types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 
 // --- Factory -------------------------------------------------------------------------------------

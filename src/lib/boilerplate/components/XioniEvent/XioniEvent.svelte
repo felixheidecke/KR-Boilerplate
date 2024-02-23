@@ -1,14 +1,14 @@
 <script lang="ts">
 	import './XioniEvent.scss'
 
-	import { formatFromTo } from '$lib/boilerplate/utils/format-date'
+	import { createEventDispatcher } from 'svelte'
+	import { formatFromTo } from '$lib/utils/formatDate'
 	import { formatISO } from 'date-fns'
 	import classnames from 'classnames'
-	import { createEventDispatcher } from 'svelte'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniEvent } from '$lib/boilerplate/libraries/xioni/events.types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -19,6 +19,8 @@
 	import Button from '../Button/Button.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
+
+	export let event: XioniCMS.Event.Full
 
 	const {
 		description,
@@ -32,9 +34,9 @@
 		website,
 		ticketshop,
 		organizer
-	} = $$props.event as XioniEvent
+	} = event
 
-	const images = $$props.event.images || []
+	const images = event.images || []
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -82,6 +84,7 @@
 				<Grid gap>
 					{#each imageRow as { src, alt }, index}
 						<Grid size="1-5" class="$mt">
+							<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 							<img
 								class={baseName + '__piucture-row-image $pointer'}
 								{src}
@@ -92,6 +95,7 @@
 					{/each}
 					{#if images.length > maxImages}
 						<Grid size="1-5" class="$mt">
+							<!-- svelte-ignore a11y-no-static-element-interactions -->
 							<div
 								class={baseName + '__piucture-row-overflow-indicator $pointer'}
 								on:click={() => lightbox.open(4)}>

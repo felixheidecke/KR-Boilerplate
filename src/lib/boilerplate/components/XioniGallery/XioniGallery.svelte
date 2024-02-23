@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
 
 	// --- Props -------------------------------------------------------------------------------------
 

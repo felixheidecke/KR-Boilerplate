@@ -1,8 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../types'
+import type { XioniShop, XioniShopData } from '../XioniShop.types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
+import type { Xioni } from '../../Xioni.types'
 
 export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
@@ -14,18 +15,16 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns List of Products
 	 */
 
-	async function getProducts({
-		limit
-	}: {
+	async function getProducts(params?: {
 		limit?: number
+		highlights?: boolean
+		detailLevel?: Exclude<Xioni.DetailLevel, Xioni.DetailLevel.EXTENDED>
 	}): Promise<XioniShopData<XioniShop.Product[]>> {
 		const context = { emitter: 'getProducts' }
 
 		event.emit('loading-toggle', true, context)
 
-		const response = await fetch(['shop', module, 'products'], {
-			params: { limit }
-		})
+		const response = await fetch(['shop', module, 'products'], { params })
 
 		if (response.status === 'success') {
 			const cart = response.data as XioniShop.Product[]
@@ -81,15 +80,17 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function getProductsByCategory(
 		category: number,
-		config: { limit?: number } = {}
+		params?: {
+			limit?: number
+			highlights?: boolean
+			detailLevel?: Exclude<Xioni.DetailLevel, Xioni.DetailLevel.EXTENDED>
+		}
 	): Promise<XioniShopData<XioniShop.Product[]>> {
 		const context = { emitter: 'getProductsByCategory' }
 
 		event.emit('loading-toggle', true, context)
 
-		const response = await fetch(['shop', module, 'categories', category, 'products'], {
-			params: config
-		})
+		const response = await fetch(['shop', module, 'categories', category, 'products'], { params })
 
 		if (response.status === 'success') {
 			const product = response.data as XioniShop.Product[]
@@ -106,41 +107,8 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 		}
 	}
 
-	/**
-	 * Get all frontpage products
-	 *
-	 * @param limit Limit of products
-	 * @returns List of Products
-	 */
-
-	async function getProductHighlights(
-		config: { limit?: number } = {}
-	): Promise<XioniShopData<XioniShop.Product[]>> {
-		const context = { emitter: 'getProductHighlights' }
-		const params = { ...config, highlight: true }
-
-		event.emit('loading-toggle', true, context)
-
-		const response = await fetch(['shop', module, 'products'], { params })
-
-		if (response.status === 'success') {
-			const products = response.data as XioniShop.Product[]
-
-			event.emit('success', products, context)
-			event.emit('loading-toggle', false, context)
-
-			return [products, undefined]
-		} else {
-			event.emit('error', response, context)
-			event.emit('loading-toggle', false, context)
-
-			return [undefined, response as XioniFetchErrorResponse]
-		}
-	}
-
 	return {
 		getProduct,
-		getProductHighlights,
 		getProducts,
 		getProductsByCategory,
 		$event: event

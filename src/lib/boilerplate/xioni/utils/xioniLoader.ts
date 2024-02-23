@@ -1,8 +1,8 @@
 import { error as svelteError } from '@sveltejs/kit'
 import type { XioniFetchErrorResponse } from './xioniFetch'
 
-export default async function xioniLoader(
-	xioniResponse: Promise<[unknown, undefined] | [undefined, XioniFetchErrorResponse]>
+export default async function xioniLoader<T>(
+	xioniResponse: Promise<[T, undefined] | [undefined, XioniFetchErrorResponse]>
 ) {
 	const [data, error] = await xioniResponse
 
@@ -10,5 +10,5 @@ export default async function xioniLoader(
 		throw svelteError(error.statusCode, error.data.message)
 	}
 
-	return data
+	return data as T
 }

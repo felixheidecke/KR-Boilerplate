@@ -6,6 +6,7 @@
 
 	import Link from '../Link/Link.svelte'
 	import Mail from '../Mail/Mail.svelte'
+	import Icon from '../Icon/Icon.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -14,13 +15,13 @@
 	export let street: string
 	export let town: string
 	export let phone = ''
+	export let fax = ''
 	export let email = ''
 	export let web = ''
-	export let exClass = ''
 
 	// -----------------------------------------------------------------------------------------------
 
-	const baseName = exClass || 'Address'
+	const baseName = 'Address'
 </script>
 
 <ol class={classNames(baseName, $$props.class)}>
@@ -34,6 +35,12 @@
 	{#if phone}
 		<li class="{baseName}__phone">
 			<Link icon="fas fa-phone-alt" to={'tel://' + phone}>{phone}</Link>
+		</li>
+	{/if}
+	{#if fax}
+		<li class="{baseName}__fax">
+			<Icon name="fas fa-fax" />
+			{fax}
 		</li>
 	{/if}
 	{#if email}

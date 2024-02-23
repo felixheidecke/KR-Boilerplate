@@ -3,18 +3,20 @@
 
 	import classnames from 'classnames'
 
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	const { id, name, teaser, price, vat, image } = $$props.product as XioniShop.Product
+	export let product: XioniShop.Product.Basic | XioniShop.Product.Full
+
+	const { name, teaser, price, vat, image } = product
 
 	// -----------------------------------------------------------------------------------------------
 
 	const className = 'XioniShopProductTile'
 </script>
 
-{#if id}
+{#if product.$id}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class={classnames(className, $$props.class)} on:click>
 		<img
@@ -33,12 +35,14 @@
 					{@html teaser}
 				</div>
 			{/if}
-			<div class="{className}__price $font-larger">
-				{price.formatted}
-			</div>
-			<div class="{className}__tax">
-				inkl. {vat.formatted} MwSt.
-			</div>
+			{#if price}
+				<div class="{className}__price $font-larger">
+					{price.formatted}
+				</div>
+				<div class="{className}__tax">
+					inkl. {vat.formatted} MwSt.
+				</div>
+			{/if}
 		</div>
 	</div>
 {/if}
