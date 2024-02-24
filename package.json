@@ -1,6 +1,6 @@
 {
 	"name": "boilerplate.ts",
-	"version": "5.5.0",
+	"version": "5.5.1",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -18,23 +18,23 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.1",
 		"@sveltejs/adapter-static": "^2.0.3",
-		"@sveltejs/kit": "^1.30.3",
+		"@sveltejs/kit": "^1.30.4",
 		"@types/lodash-es": "^4.17.12",
 		"@typescript-eslint/eslint-plugin": "^6.21.0",
 		"@typescript-eslint/parser": "^6.21.0",
-		"eslint": "^8.56.0",
+		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
 		"npm-check-updates": "^16.14.15",
 		"prettier": "^3.2.5",
-		"prettier-plugin-svelte": "^3.2.0",
-		"sass": "^1.70.0",
-		"svelte": "^4.2.10",
+		"prettier-plugin-svelte": "^3.2.1",
+		"sass": "^1.71.1",
+		"svelte": "^4.2.12",
 		"svelte-check": "^3.6.4",
 		"sveltekit-autoimport": "^1.7.1",
 		"tslib": "^2.6.2",
 		"typescript": "^5.3.3",
-		"vite": "^4.5.2"
+		"vite": "^5.1.4"
 	},
 	"type": "module",
 	"dependencies": {
@@ -42,7 +42,7 @@
 		"@paypal/paypal-js": "^7.1.1",
 		"axios": "^1.6.7",
 		"classnames": "^2.5.1",
-		"date-fns": "^2.30.0",
+		"date-fns": "^3.3.1",
 		"eventemitter3": "^5.0.1",
 		"in-view": "^0.6.1",
 		"lodash-es": "^4.17.21",
