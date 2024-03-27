@@ -1,7 +1,7 @@
 <script lang="ts">
 	import './Swiper.scss'
 
-	import { onMount } from 'svelte'
+	import { createEventDispatcher, onMount } from 'svelte'
 	import { uniqueId } from 'lodash-es'
 	import classnames from 'classnames'
 	// @ts-ignore missing declaration
@@ -30,6 +30,7 @@
 	let slider: HTMLElement
 	let swiper: any
 
+	const emit = createEventDispatcher()
 	const baseName = exClass || 'Swiper'
 	const id = uniqueId('swiper-')
 	const glideConfig = config || {
@@ -44,6 +45,19 @@
 
 	onMount(() => {
 		swiper = new Glide('#' + id, glideConfig)
+
+		swiper.on('swipe.start', function () {
+			emit('swipeStart', swiper)
+		})
+
+		swiper.on('swipe.move', function () {
+			emit('swipeMove', swiper)
+		})
+
+		swiper.on('swipe.end', function () {
+			emit('swipeEnd', swiper)
+		})
+
 		slider
 			.querySelectorAll('.glide__slides > *')
 			.forEach(slide => slide.classList.add('glide__slide'))
