@@ -1,5 +1,10 @@
 # Patch Notes
 
+## Version `4.16.0`
+
+- Update Dependencies
+- Revert external kit assets feature (keep them local)
+
 ## Version `4.15.1`
 
 - Update Dependencies
