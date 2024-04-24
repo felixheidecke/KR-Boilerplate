@@ -25,7 +25,7 @@
 	// --- [ Logic ] ---------------------------------------------------------------------------------
 
 	const { title, image, description, starts, ends } = event
-	const link = basePath + event.slug + linkDelimiter + event.$id
+	const link = basePath + event.slug + linkDelimiter + event.id
 
 	// CSS Classname
 	const baseName = exClass || 'XioniEventTile'

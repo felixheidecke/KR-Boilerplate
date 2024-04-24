@@ -1,9 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../XioniShop.types'
+import type { XioniShop, XioniShopData } from '../types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { Xioni } from '../../Xioni.types'
+import type { Xioni } from '../../xioni.types'
 
 export function useInfo(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)

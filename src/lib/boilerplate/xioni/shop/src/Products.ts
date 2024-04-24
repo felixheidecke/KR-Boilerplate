@@ -1,9 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../XioniShop.types'
+import type { XioniShop, XioniShopData } from '../types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { Xioni } from '../../Xioni.types'
+import type { Xioni } from '../../xioni.types'
 
 export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
@@ -18,7 +18,7 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	async function getProducts(params?: {
 		limit?: number
 		highlights?: boolean
-		detailLevel?: Exclude<Xioni.DetailLevel, Xioni.DetailLevel.EXTENDED>
+		detailLevel?: Xioni.DetailLevel.Minimal | Xioni.DetailLevel.Basic
 	}): Promise<XioniShopData<XioniShop.Product[]>> {
 		const context = { emitter: 'getProducts' }
 
@@ -83,7 +83,7 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 		params?: {
 			limit?: number
 			highlights?: boolean
-			detailLevel?: Exclude<Xioni.DetailLevel, Xioni.DetailLevel.EXTENDED>
+			detailLevel?: Xioni.DetailLevel.Minimal | Xioni.DetailLevel.Basic
 		}
 	): Promise<XioniShopData<XioniShop.Product[]>> {
 		const context = { emitter: 'getProductsByCategory' }

@@ -1,9 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../XioniShop.types'
+import type { XioniShop, XioniShopData } from '../types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { Xioni } from '../../Xioni.types'
+import type { Xioni } from '../../xioni.types'
 
 export function useCategories(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
@@ -15,7 +15,7 @@ export function useCategories(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getCategories(config?: {
-		detailLevel?: Xioni.DetailLevel
+		detailLevel?: Xioni.DetailLevel.Basic | Xioni.DetailLevel.Extended
 	}): Promise<XioniShopData<XioniShop.Category[]>> {
 		const context = { emitter: 'getCategories' }
 		const params = {}
@@ -53,7 +53,7 @@ export function useCategories(module: number, fetchFn: typeof fetch = fetch) {
 	async function getCategory(
 		id: number,
 		config?: {
-			detailLevel?: Xioni.DetailLevel
+			detailLevel?: Xioni.DetailLevel.Minimal | Xioni.DetailLevel.Basic | Xioni.DetailLevel.Extended
 		}
 	): Promise<XioniShopData<XioniShop.Category>> {
 		const context = { emitter: 'getCategory' }

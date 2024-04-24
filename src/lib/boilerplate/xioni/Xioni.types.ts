@@ -10,14 +10,19 @@ export namespace Xioni {
 		}
 	}
 
+	export interface PDF {
+		src: string
+		title: string
+	}
+
 	export type EventContext = {
 		emitter: string
 	}
 
-	export enum DetailLevel {
-		MINIMAL = 'minimal',
-		BASIC = 'basic',
-		FULL = 'full',
-		EXTENDED = 'extended'
+	export namespace DetailLevel {
+		export type Minimal = 'minimal'
+		export type Basic = 'basic'
+		export type Full = 'full'
+		export type Extended = 'extended'
 	}
 }

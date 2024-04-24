@@ -1,5 +1,5 @@
 import { format as formatDate } from 'date-fns'
-import de from 'date-fns/locale/de/index'
+import de from 'date-fns/locale/de'
 
 const longFormat = 'EEEE d. LLLL yyyy'
 const mediumFormat = 'EEEE d. LLLL'

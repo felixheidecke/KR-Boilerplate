@@ -44,7 +44,7 @@
 	const baseClass = 'XioniShopProduct'
 
 	function addToCartHandler() {
-		emit('addToCart', product.$id)
+		emit('addToCart', product.id)
 		addToCartModal.open()
 	}
 
@@ -55,12 +55,12 @@
 	}
 </script>
 
-{#if product.$id}
+{#if product.id}
 	<div class={classnames(baseClass, $$props.class)}>
 		<ul class="{baseClass}__breadcrubs">
-			{#each path || [] as { $id, name, slug }}
+			{#each path || [] as { id, name, slug }}
 				<li class="{baseClass}__breadcrubs-crub">
-					<Link to="/shop/c{$id}-{slug}">{name}</Link>
+					<Link to="/shop/c{id}-{slug}">{name}</Link>
 				</li>
 			{/each}
 		</ul>

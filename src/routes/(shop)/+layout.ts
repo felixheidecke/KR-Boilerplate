@@ -1,16 +1,15 @@
 import { CART, categories, products } from './shopApi'
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
 
-import { Xioni } from '$lib/boilerplate/xioni/Xioni.types'
-import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
+import type { XioniShop } from '$lib/boilerplate/xioni/shop/types'
 
 const { getCategories } = categories
 const { getProducts } = products
 
 export const load = async function () {
 	const [categories, products] = await Promise.all([
-		xioniLoader(getCategories({ detailLevel: Xioni.DetailLevel.BASIC })),
-		xioniLoader(getProducts({ detailLevel: Xioni.DetailLevel.BASIC, highlights: true }))
+		xioniLoader(getCategories({ detailLevel: 'basic' })),
+		xioniLoader(getProducts({ detailLevel: 'basic', highlights: true }))
 	])
 
 	CART.get()

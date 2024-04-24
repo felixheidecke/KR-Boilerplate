@@ -20,8 +20,8 @@
 </svelte:head>
 
 <h1 class="h3">
-	{#each category.path || [] as { $id, name }}
-		<Link to="/shop/c{$id}-{name}">
+	{#each category.path || [] as { id, name }}
+		<Link to="/shop/c{id}-{name}">
 			{name}
 		</Link>
 		/
@@ -34,9 +34,9 @@
 {/if}
 
 <Grid gap tag="ol">
-	{#each products || [] as product, index (product.$id)}
+	{#each products || [] as product, index (product.id)}
 		<Grid tag="li" size="tablet-1-2" {index}>
-			<Link class="$decoration-none" to="/shop/p{product.$id}-{product.slug}">
+			<Link class="$decoration-none" to="/shop/p{product.id}-{product.slug}">
 				<ProductTile {product} />
 			</Link>
 		</Grid>
@@ -45,10 +45,10 @@
 {#if category.subcategories}
 	<hr />
 	<Grid gap tag="ol">
-		{#each category.subcategories as subcategory, index (subcategory.$id)}
+		{#each category.subcategories as subcategory, index (subcategory.id)}
 			<Grid tag="li" size="1" {index}>
 				<h3 class="h4">
-					<Link to="/shop/c{subcategory.$id}-{subcategory.slug}">
+					<Link to="/shop/c{subcategory.id}-{subcategory.slug}">
 						{subcategory.name}
 					</Link>
 				</h3>
@@ -56,9 +56,9 @@
 					{@html subcategory.description}
 				{/if}
 				<ol class="subcategory-product-list">
-					{#each subcategory.products || [] as product, index (product.$id)}
+					{#each subcategory.products || [] as product, index (product.id)}
 						<li>
-							<Link to="/shop/p{product.$id}-{product.slug}" {index}>
+							<Link to="/shop/p{product.id}-{product.slug}" {index}>
 								{product.name}
 							</Link>
 						</li>

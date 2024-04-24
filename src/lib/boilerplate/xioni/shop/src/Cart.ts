@@ -1,7 +1,7 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../XioniShop.types'
+import type { XioniShop, XioniShopData } from '../types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 import { writable } from 'svelte/store'
 

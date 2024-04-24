@@ -13,9 +13,9 @@
 
 <Client browser>
 	<Grid gap tag="ol">
-		{#each data.products as product, index (product.$id)}
+		{#each data.products as product, index (product.id)}
 			<Grid tag="li" size="tablet-1-2" {index}>
-				<Link class="$decoration-none" to="/shop/p{product.$id}-{product.slug}">
+				<Link class="$decoration-none" to="/shop/p{product.id}-{product.slug}">
 					<ProductTile {product} />
 				</Link>
 			</Grid>

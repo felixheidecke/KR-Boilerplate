@@ -54,7 +54,7 @@
 							value={quantity}
 							class="XioniShopCartTable__select-quantity"
 							disabled={readOnly}
-							on:change={event => update(product.$id, event)} />
+							on:change={event => update(product.id, event)} />
 					{:else}
 						{quantity}
 					{/if}

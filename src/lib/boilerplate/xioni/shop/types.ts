@@ -1,4 +1,4 @@
-import type { Xioni } from '../Xioni.types'
+import type { Xioni } from '../xioni.types'
 import type { XioniFetchErrorResponse } from '../utils/xioniFetch'
 
 export type XioniShopData<T = unknown> = [T, undefined] | [undefined, XioniFetchErrorResponse]
@@ -19,7 +19,7 @@ export namespace XioniShop {
 			formatted: string
 		}
 		supplementalCost?: {
-			$module: number
+			module: number
 			value: number
 			formatted: string
 			title: string
@@ -44,7 +44,7 @@ export namespace XioniShop {
 
 	export namespace Category {
 		export interface Minimal {
-			$id: number
+			id: number
 			$group: number
 			name: string
 			slug: string
@@ -56,7 +56,7 @@ export namespace XioniShop {
 		}
 
 		export interface Full extends Basic {
-			path: { $id: number; name: string; slug: string }[]
+			path: { id: number; name: string; slug: string }[]
 		}
 
 		export interface Extended extends Full {
@@ -121,7 +121,7 @@ export namespace XioniShop {
 
 	export namespace Product {
 		export interface Minimal {
-			$id: number
+			id: number
 			$group: number
 			name: string
 			slug: string
@@ -135,7 +135,7 @@ export namespace XioniShop {
 			description: string
 			image?: Xioni.Image
 			path: {
-				$id: number
+				id: number
 				name: string
 				slug: string
 			}[]

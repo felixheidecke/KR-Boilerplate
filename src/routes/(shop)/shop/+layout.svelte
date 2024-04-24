@@ -45,16 +45,16 @@
 				{/if}
 				<h4 class="$hidden@tablet-down">Kategorien:</h4>
 				<ol class="$flex $flex-wrap $gap-1/2 $flex-column@desktop">
-					{#each data.categories as { $id, slug, name, subcategories }}
+					{#each data.categories as { id, slug, name, subcategories }}
 						<li>
-							<Link to="/shop/c{$id}-{slug}">
+							<Link to="/shop/c{id}-{slug}">
 								{name}
 							</Link>
 							{#if subcategories.length}
 								<ul class="$ml-1/2 $font-small">
-									{#each subcategories as { $id, slug, name }}
+									{#each subcategories as { id, slug, name }}
 										<li>
-											<Link to="/shop/c{$id}-{slug}">
+											<Link to="/shop/c{id}-{slug}">
 												{name}
 											</Link>
 										</li>

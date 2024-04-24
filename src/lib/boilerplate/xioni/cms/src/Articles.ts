@@ -2,8 +2,8 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMS, XioniCMSData } from '../XioniCMS.types'
-import type { Xioni } from '../../Xioni.types'
+import type { XioniCMS, XioniCMSData } from '../types'
+import type { Xioni } from '../../xioni.types'
 
 export function useArticles(fetchFn: typeof fetch = fetch) {
 	const fetchJson = xioniFetch(fetchFn)
@@ -19,22 +19,25 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 
 	async function getArticles(
 		module: number,
-		filter: { limit?: number; status?: 'live' | 'archived' } = {},
-		detailLevel?: Xioni.DetailLevel.MINIMAL | Xioni.DetailLevel.EXTENDED
+		query: {
+			limit?: number
+			status?: 'live' | 'archived'
+			detailLevel?: Xioni.DetailLevel.Minimal | Xioni.DetailLevel.Extended
+		} = {}
 	): Promise<XioniCMSData<XioniCMS.Article[]>> {
 		const context = { emitter: 'getArticles' }
 		const params = {}
 
-		if (filter.limit) {
-			Object.assign(params, { limit: filter.limit })
+		if (query.limit) {
+			Object.assign(params, { limit: query.limit })
 		}
 
-		if (filter.status) {
-			Object.assign(params, { status: filter.status })
+		if (query.status) {
+			Object.assign(params, { status: query.status })
 		}
 
-		if (detailLevel) {
-			Object.assign(params, { detailLevel })
+		if (query.detailLevel) {
+			Object.assign(params, { detailLevel: query.detailLevel })
 		}
 
 		const response = await fetchJson(['cms/articles', module], { params })
@@ -95,13 +98,13 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 
 	async function getArticlesByCategory(
 		category: number,
-		filter: { limit?: number } = {}
+		query: { limit?: number } = {}
 	): Promise<XioniCMSData<XioniCMS.Article[]>> {
 		const params = { category }
 		const context = { emitter: 'getArticlesByCategory' }
 
-		if ('filter' in filter) {
-			Object.assign(params, { limit: filter.limit })
+		if ('limit' in query) {
+			Object.assign(params, { limit: query.limit })
 		}
 
 		const response = await fetchJson(['cms/articles'], { params })

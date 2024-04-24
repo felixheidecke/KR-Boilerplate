@@ -1,26 +1,32 @@
-import type { Xioni } from '../Xioni.types'
+import type { Xioni } from '../xioni.types'
 import type { XioniFetchErrorResponse } from '../utils/xioniFetch'
 
 export type XioniCMSData<T = unknown> = [T, undefined] | [undefined, XioniFetchErrorResponse]
 
 export namespace XioniCMS {
-	export interface Article {
-		$id: number
-		$module: number
+	// --- [ Article ] -------------------------------------------------------------------------------
+
+	export type Article = MinimalArticle | FullArticle | ExtendedArticle
+
+	export interface MinimalArticle {
+		id: number
+		module: number
 		slug: string
 		title: string
 		date: Date
+	}
+
+	export interface FullArticle extends MinimalArticle {
 		text: string
 		image?: Xioni.Image
-		pdf?: {
-			src: string
-			name: string
-			title: string
-		}
+		pdf?: Xioni.PDF
 		website?: URL
 		author?: string
+	}
+
+	export interface ExtendedArticle extends FullArticle {
 		content?: {
-			$id: number
+			id: number
 			text: string
 			image?: Xioni.Image
 		}[]
@@ -33,8 +39,8 @@ export namespace XioniCMS {
 	export namespace Event {
 		// Minimal Event data
 		export interface Minimal {
-			$id: number
-			$module: number
+			id: number
+			module: number
 			slug: string
 			title: string
 			starts: Date
@@ -73,8 +79,8 @@ export namespace XioniCMS {
 	}
 
 	export interface Album {
-		$id: number
-		$module: number
+		id: number
+		module: number
 		slug: string
 		title: string
 		images: Xioni.Image[]

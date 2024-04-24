@@ -1,4 +1,3 @@
-import { kitConfig } from './src/lib/config.js'
 import { vitePreprocess } from '@sveltejs/kit/vite'
 import adapter from '@sveltejs/adapter-static'
 import pkg from './package.json' assert { type: 'json' }
@@ -36,7 +35,6 @@ const config = {
 		version: {
 			name: `Boilerplate: ${pkg.version}; Built: ${new Date().toString()}`
 		},
-		...kitConfig
 	}
 }
 

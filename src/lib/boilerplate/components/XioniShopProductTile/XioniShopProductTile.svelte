@@ -16,7 +16,7 @@
 	const className = 'XioniShopProductTile'
 </script>
 
-{#if product.$id}
+{#if product.id}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class={classnames(className, $$props.class)} on:click>
 		<img

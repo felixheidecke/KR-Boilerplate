@@ -2,9 +2,9 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMS, XioniCMSData } from '../XioniCMS.types'
+import type { XioniCMS, XioniCMSData } from '../types'
 import { formatFromTo } from '$lib/utils/formatDate'
-import type { Xioni } from '../../Xioni.types'
+import type { Xioni } from '../../xioni.types'
 
 export function useEvents(fetchFn: typeof fetch = fetch) {
 	const fetchJson = xioniFetch(fetchFn)

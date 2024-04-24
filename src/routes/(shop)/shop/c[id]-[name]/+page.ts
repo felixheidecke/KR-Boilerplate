@@ -1,8 +1,8 @@
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader.js'
 import { categories, products } from '../../shopApi'
 
-import { Xioni } from '$lib/boilerplate/xioni/Xioni.types'
-import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types.js'
+import { Xioni } from '$lib/boilerplate/xioni/xioni.types'
+import type { XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
 
 const { getCategory } = categories
 const { getProductsByCategory } = products

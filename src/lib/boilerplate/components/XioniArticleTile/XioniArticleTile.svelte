@@ -5,22 +5,26 @@
 	import { goto } from '$app/navigation'
 	import { LOCALE } from '$lib/boilerplate/constants'
 	import cn from 'classnames'
+
 	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
+
 	import Link from '../Link/Link.svelte'
 	import Icon from '../Icon/Icon.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
-	export let article: XioniCMS.Article
+
 	export let basePath: string = ''
-	export let linkDelimiter: string = '_'
 	export let linkText: string = 'Weiterlesen'
 	export let tag: string = 'div'
+	export let article: XioniCMS.FullArticle | XioniCMS.ExtendedArticle
 
 	// -----------------------------------------------------------------------------------------------
-	const { title, date, image, text, author, content } = article
-	const link = basePath + article.slug + linkDelimiter + article.$id
+
+	const { id, slug, title, date, image, text, author } = article
+	const content = (article as XioniCMS.ExtendedArticle).content
+	const link = `${basePath}${slug}_${id}`
 </script>
 
 <svelte:element this={tag} class={cn('XioniArticleTile', $$props.class)}>

@@ -3,16 +3,16 @@
 
 	import { format } from 'date-fns'
 	import cn from 'classnames'
-	import de from 'date-fns/locale/de/index.js'
-	import type { XioniArticle } from '$lib/boilerplate/libraries/xioni/articles.types'
+	import de from 'date-fns/locale/de'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 	import Icon from '../Icon/Icon.svelte'
 	import Button from '../Button/Button.svelte'
 	import ButtonRow from '../ButtonRow/ButtonRow.svelte'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
-	export let article: XioniArticle
+	export let article: XioniCMS.ExtendedArticle
 	export let id: string | undefined = undefined
 
 	// -----------------------------------------------------------------------------------------------
