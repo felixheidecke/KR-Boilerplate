@@ -1,28 +1,25 @@
 <script lang="ts">
-	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
+	import { page } from '$app/stores'
+	import classnames from 'classnames'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/xioniCMS.types'
 
 	// --- Props -------------------------------------------------------------------------------------
 
 	export let gallery: XioniCMS.Gallery
-	export let basePath: string = ''
-	export let linkDelimiter: string = '_'
-	export let exClass: string = ''
+	export let baseName = 'XioniGallery'
+	export let baseLink: string = $page.url.pathname + '/'
 
-	// --- Data --------------------------------------------------------------------------------------
-
-	const baseClass = exClass || 'XioniGallery'
+	// -----------------------------------------------------------------------------------------------
 
 	function makeLink(slug: string, id: number | string) {
-		return basePath + slug + linkDelimiter + id
+		return baseLink + slug + '_' + id
 	}
-
-	// --- Lifecycle ---------------------------------------------------------------------------------
 </script>
 
-<ul class={baseClass}>
+<ul class={classnames(baseName, $$props.class)}>
 	{#each gallery as { id, title, slug }}
-		<li class="{baseClass}__item">
-			<a class="{baseClass}__item-link" href={makeLink(slug, id)}>{title}</a>
+		<li class="{baseName}__item">
+			<a class="{baseName}__item-link" href={makeLink(slug, id)}>{title}</a>
 		</li>
 	{/each}
 </ul>

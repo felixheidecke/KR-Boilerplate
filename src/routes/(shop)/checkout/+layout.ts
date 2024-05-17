@@ -1,4 +1,4 @@
-import { ORDER } from '../shopApi'
+import { ORDER } from '../shop.api'
 
 export function load() {
 	ORDER.get()

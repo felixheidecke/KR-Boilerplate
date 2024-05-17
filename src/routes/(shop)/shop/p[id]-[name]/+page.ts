@@ -1,10 +1,18 @@
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
-import { products } from '../../shopApi'
-
-import type { XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
+import { products, groups } from '../../shop.api'
 
 const { getProduct } = products
+const { getGroupByProductId } = groups
 
-export const load = async ({ params }) => ({
-	product: (await xioniLoader(getProduct(+params.id))) as XioniShop.Product.Full
-})
+export const load = async function ({ params }) {
+	const id = +params.id
+	const [product, group] = await Promise.all([
+		xioniLoader(getProduct(id)),
+		xioniLoader(getGroupByProductId(id))
+	])
+
+	return {
+		product,
+		group
+	}
+}

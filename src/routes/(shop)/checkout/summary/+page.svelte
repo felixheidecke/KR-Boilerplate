@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { CART, ORDER } from '../../shopApi'
+	import { CART, ORDER } from '../../shop.api'
 	import { goto } from '$app/navigation'
 	import { isEmpty } from 'lodash-es'
 	import { onDestroy } from 'svelte'
 	import messages from '$lib/messages'
 
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/xioniShop.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -19,10 +19,12 @@
 
 	let address = {} as XioniShop.Order['address']
 	let deliveryAddress = undefined as XioniShop.Order['deliveryAddress']
+	let message = ''
 
 	const unsubscribe = ORDER.subscribe(order => {
 		address = order.data.address
 		deliveryAddress = order.data.deliveryAddress
+		message = order.data.message
 
 		if (order.isLoading) {
 			messages.add('Bestellung wird verarbeitet.', 'Bitte warten', { id: 'loading-indicator' })
@@ -95,6 +97,12 @@
 				<i>Entspricht Rechnungsadresse</i>
 			{/if}
 		</Grid>
+		{#if message}
+			<Grid size>
+				<h4>Ihre Nachricht</h4>
+				<p>{message}</p>
+			</Grid>
+		{/if}
 		<Grid size>
 			<Link icon="fas fa-pen" to="./address">anpassen</Link>
 		</Grid>
@@ -111,7 +119,7 @@
 	<Link icon="fas fa-pen" class="$mt" to="/warenkorb">anpassen</Link>
 
 	<div class="$mt-2">
-		<Button icon="fas fa-angle-left" to="/shop">zurück zum Shop</Button>
+		<Button icon="fas fa-angle-left" to="/shop">zum Shop</Button>
 		<Button
 			icon="fas fa-angle-right"
 			class="Button--primary $float-right $row-reverse"

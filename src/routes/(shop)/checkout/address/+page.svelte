@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { CART, ORDER } from '../../shopApi'
+	import { CART, ORDER } from '../../shop.api'
 	import { goto } from '$app/navigation'
+	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
 	import { IS_MOBILE } from '$lib/utils/breakpoints'
 	import { isEmpty, omitBy } from 'lodash-es'
-
-	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
+	import { onDestroy } from 'svelte'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -15,7 +15,6 @@
 	import Message from '$lib/boilerplate/components/Message/Message.svelte'
 	import Select from '$lib/boilerplate/components/Select/Select.svelte'
 	import Textarea from '$lib/boilerplate/components/Textarea/Textarea.svelte'
-	import { onDestroy } from 'svelte'
 
 	// -----------------------------------------------------------------------------------------------
 

@@ -1,6 +1,3 @@
-import type { XioniCMS, XioniCMSData } from './types'
-export type { XioniCMS, XioniCMSData }
-
 export { useEvents } from './src/Events'
 export { useFormMail } from './src/FormMail'
 export { useGallery } from './src/Galleries'

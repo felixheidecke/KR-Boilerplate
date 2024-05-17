@@ -2,7 +2,7 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMS, XioniCMSData } from '../types'
+import type { XioniCMS, XioniCMSData } from '../xioniCMS.types'
 
 export default function useMenuCard(fetchFn: typeof fetch = fetch) {
 	const fetchJSON = xioniFetch(fetchFn)

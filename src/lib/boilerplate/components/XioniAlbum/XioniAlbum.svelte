@@ -3,7 +3,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/xioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 

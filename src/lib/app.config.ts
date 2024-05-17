@@ -1,9 +1,8 @@
-import type { AppConfig } from './app.types.js'
+import { PUBLIC_KR_API_URL, PUBLIC_KR_API_KEY } from '$env/static/public'
 
 export default {
 	api: {
-		// basePath: 'https://www.weber-auto-service.de/api',
-		basePath: 'https://www.weber-auto-service.de/api',
-		authorization: 'Basic d2ViZXI6MXhmcng4OWc='
+		url: PUBLIC_KR_API_URL || 'https://api.klickrhein.de/v5',
+		key: PUBLIC_KR_API_KEY || ''
 	}
-} satisfies AppConfig
+} as const

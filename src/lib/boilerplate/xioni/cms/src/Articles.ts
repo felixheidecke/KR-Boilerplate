@@ -2,8 +2,7 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMS, XioniCMSData } from '../types'
-import type { Xioni } from '../../xioni.types'
+import type { XioniCMS, XioniCMSData } from '../xioniCMS.types'
 
 export function useArticles(fetchFn: typeof fetch = fetch) {
 	const fetchJson = xioniFetch(fetchFn)
@@ -21,23 +20,23 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 		module: number,
 		query: {
 			limit?: number
-			status?: 'live' | 'archived'
-			detailLevel?: Xioni.DetailLevel.Minimal | Xioni.DetailLevel.Extended
+			archived?: boolean
+			parts?: 'content'[]
 		} = {}
 	): Promise<XioniCMSData<XioniCMS.Article[]>> {
 		const context = { emitter: 'getArticles' }
 		const params = {}
 
-		if (query.limit) {
+		if ('limit' in query) {
 			Object.assign(params, { limit: query.limit })
 		}
 
-		if (query.status) {
-			Object.assign(params, { status: query.status })
+		if ('archived' in query) {
+			Object.assign(params, { archived: query.archived })
 		}
 
-		if (query.detailLevel) {
-			Object.assign(params, { detailLevel: query.detailLevel })
+		if ('parts' in query && query.parts?.length) {
+			Object.assign(params, { parts: query.parts.join() })
 		}
 
 		const response = await fetchJson(['cms/articles', module], { params })
@@ -88,44 +87,6 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 		}
 	}
 
-	/**
-	 * Get all artciles in a given category
-	 *
-	 * @param category Category ID
-	 * @param limit Limit number of articles
-	 * @returns XioniCMS.Articles
-	 */
-
-	async function getArticlesByCategory(
-		category: number,
-		query: { limit?: number } = {}
-	): Promise<XioniCMSData<XioniCMS.Article[]>> {
-		const params = { category }
-		const context = { emitter: 'getArticlesByCategory' }
-
-		if ('limit' in query) {
-			Object.assign(params, { limit: query.limit })
-		}
-
-		const response = await fetchJson(['cms/articles'], { params })
-
-		if (response.status === 'success') {
-			const articles = articleAdapter(response.data) as XioniCMS.Article[]
-
-			event.emit('loaded', articles, context)
-			event.emit('finally', context)
-
-			return [articles, undefined]
-		} else {
-			const error = response as XioniFetchErrorResponse
-
-			event.emit('error', error, context)
-			event.emit('finally', context)
-
-			return [undefined, error]
-		}
-	}
-
 	// Remap response data
 	function articleAdapter(article: any) {
 		return {
@@ -138,7 +99,6 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 	return {
 		getArticles,
 		getArticle,
-		getArticlesByCategory,
 		$event: event
 	}
 }
@@ -146,5 +106,3 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 export const getArticles = useArticles().getArticles
 
 export const getArticle = useArticles().getArticle
-
-export const getArticlesByCategory = useArticles().getArticlesByCategory

@@ -1,5 +1,5 @@
 import { format, formatDistanceToNow } from 'date-fns'
-import de from 'date-fns/locale/de/index'
+import { de } from 'date-fns/locale'
 import openingHours, { type nominatim_object } from 'opening_hours'
 
 enum T {

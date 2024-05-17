@@ -1,44 +1,46 @@
 <script lang="ts">
 	import './XioniMenuCard.scss'
 	import classnames from 'classnames'
-	import formatPrice from '$lib/boilerplate/utils/format-price'
-	import type { XioniMenuCard } from '$lib/boilerplate/libraries/xioni/menuCards.types'
+
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/xioniCMS.types'
 
 	// --- Props -------------------------------------------------------------------------------------
 
-	export let menuCard: XioniMenuCard
+	export let menuCard: XioniCMS.MenuCard
 
-	// --- Data --------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
 
 	const baseClassName = $$props['ex-class'] || 'XioniMenuCard'
 </script>
 
 <ol class={classnames(baseClassName, $$props.class)}>
-	{#each menuCard as category}
-		<li class="{baseClassName}__category">
-			<div class="{baseClassName}__category-description">
-				<h3 class="{baseClassName}__category-name">{category.name}</h3>
-				{#if category.description}
-					{@html category.description}
+	{#each menuCard as group}
+		<li class="{baseClassName}__group">
+			<div class="{baseClassName}__group-description">
+				<h3 class="{baseClassName}__group-name">{group.name}</h3>
+				{#if group.description}
+					{@html group.description}
 				{/if}
 			</div>
 			<ul class="{baseClassName}__dishes">
-				{#each category.items as dish}
+				{#each group.items as item}
 					<li class="{baseClassName}__dish">
-						<h4 class="{baseClassName}__dish-title">{dish.name}</h4>
-						<div class="{baseClassName}__dish-price">
-							{dish.price.formatted}
-						</div>
-						{#if dish.image}
+						<h4 class="{baseClassName}__dish-title">{item.name}</h4>
+						{#if item.price.value > 0}
+							<div class="{baseClassName}__dish-price">
+								{item.price.formatted}
+							</div>
+						{/if}
+						{#if item.image}
 							<img
-								src={dish.image.src}
-								alt={dish.image.alt}
+								src={item.image.src}
+								alt={item.image.alt}
 								class="{baseClassName}__dish-image"
 								loading="lazy" />
 						{/if}
-						{#if dish.description}
+						{#if item.description}
 							<div class="{baseClassName}__dish-description">
-								{@html dish.description}
+								{@html item.description}
 							</div>
 						{/if}
 					</li>

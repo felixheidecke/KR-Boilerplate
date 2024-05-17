@@ -1,70 +1,68 @@
 <script lang="ts">
 	import './XioniEventTile.scss'
 
-	import { format, formatFromTo } from '$lib/utils/formatDate'
+	import { format } from '$lib/utils/formatDate'
 	import { goto } from '$app/navigation'
 	import { LOCALE } from '$lib/boilerplate/constants'
-	import classNames from 'classnames'
+	import { page } from '$app/stores'
+	import classnames from 'classnames'
 
-	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/xioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '../Link/Link.svelte'
-	import Picture from '../Picture/Picture.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let basePath: string = ''
-	export let event: XioniCMS.Event.Basic
-	export let exClass: string = ''
-	export let linkDelimiter: string = '_'
+	export let event: XioniCMS.Event
+	export let baseName = 'XioniEventTile'
 	export let linkText: string = 'Mehr erfahren'
 	export let tag: string = 'div'
+	export let id: string = [event.module, event.id].join('-')
+	export let link: string | undefined = `${$page.url.pathname}/${event.slug}_${event.id}`
 
-	// --- [ Logic ] ---------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
 
-	const { title, image, description, starts, ends } = event
-	const link = basePath + event.slug + linkDelimiter + event.id
-
-	// CSS Classname
-	const baseName = exClass || 'XioniEventTile'
+	const { title, image, description, starts, ends, duration, organizer } = event
 </script>
 
 <svelte:element
 	this={tag}
-	class={classNames(baseName, $$props.class)}
+	{id}
+	class={classnames(baseName, $$props.class)}
 	itemscope
 	itemtype="https://schema.org/Event">
 	<meta itemprop="startDate" content={format(starts, 'yyyy-MM-dd')} />
 	<meta itemprop="endDate" content={format(ends, 'yyyy-MM-dd')} />
-
+	<meta itemprop="organizer" content={organizer} />
 	{#if image}
 		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		<Picture
+		<img
+			itemprop="image"
 			class="{baseName}__image"
-			src={image.srcset?.small || ''}
-			alt={image.alt}
-			on:click={() => goto(link)} />
+			src={image.srcset.small || image.src}
+			alt={image.alt || title}
+			on:click={() => {
+				if (link) goto(link)
+			}} />
 	{/if}
-
 	<h2 itemprop="name" class="{baseName}__title">
 		{title}
 	</h2>
-
 	<h3 class="{baseName}__date">
 		<time datetime={starts.toLocaleDateString(LOCALE)}>
-			{formatFromTo(starts, ends)}
+			{duration}
 		</time>
 	</h3>
-
 	{#if description}
 		<div itemprop="description" class="{baseName}__description">
 			{@html description}
 		</div>
 	{/if}
-
-	<Link to={link} class="{baseName}__link $row-reverse" icon="fas fa-angle-right">
-		{linkText}
-	</Link>
+	{#if link}
+		<Link to={link} class="{baseName}__link $row-reverse" icon="fas fa-angle-right">
+			{linkText}
+		</Link>
+	{/if}
 </svelte:element>

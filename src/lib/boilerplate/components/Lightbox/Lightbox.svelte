@@ -20,7 +20,6 @@
 	let modal: Modal
 	let lightboxImages = images
 	let index = -1
-	let isMobile = true
 
 	$: activeImage = lightboxImages[index] || {}
 
@@ -53,12 +52,7 @@
 	}
 
 	// Init
-	onMount(() => {
-		if (window.innerWidth < 620 || images.length) return
-
-		getImages()
-		isMobile = false
-	})
+	onMount(getImages)
 </script>
 
 <div class="Lightbox" bind:this={lightbox}>
@@ -93,8 +87,6 @@
 	<img class="Lightbox__active-image" src={activeImage.src} alt={activeImage.alt} />
 </Modal>
 
-{#if !isMobile}
-	{#each lightboxImages as { src, alt }}
-		<img {src} {alt} hidden aria-hidden />
-	{/each}
-{/if}
+{#each lightboxImages as { src, alt }}
+	<img {src} {alt} hidden aria-hidden loading="lazy" />
+{/each}

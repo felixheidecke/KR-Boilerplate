@@ -3,11 +3,11 @@
 
 	import classnames from 'classnames'
 
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/xioniShop.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let product: XioniShop.Product.Basic | XioniShop.Product.Full
+	export let product: XioniShop.Product
 
 	const { name, teaser, price, vat, image } = product
 
@@ -21,7 +21,7 @@
 	<div class={classnames(className, $$props.class)} on:click>
 		<img
 			class="{className}__image"
-			src={image?.src || 'https://assets.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+			src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
 			alt={name || 'Kein Produktbild'}
 			title={name || 'Kein Produktbild'}
 			loading="lazy" />

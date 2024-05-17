@@ -4,10 +4,6 @@
 	import classnames from 'classnames'
 	import { createEventDispatcher, onMount } from 'svelte'
 
-	// --- [ Components ] ----------------------------------------------------------------------------
-
-	import Icon from '../Icon/Icon.svelte'
-
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let title: string | null = null
@@ -39,9 +35,7 @@
 </script>
 
 <dialog bind:this={modal} class={classnames(baseName, $$props.class)}>
-	<button class="{baseName}__close-button" on:click={close}>
-		<Icon name="fas fa-times" />
-	</button>
+	<button class="{baseName}__close-button" on:click={close}>Schließen</button>
 	{#if title}
 		<header class="{baseName}__header">{title}</header>
 	{/if}

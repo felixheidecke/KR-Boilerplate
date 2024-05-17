@@ -1,12 +1,12 @@
 <script lang="ts">
-	import './XioniShopCartTable.css'
+	import './XioniShopCartTable.scss'
 
 	import { range } from 'lodash-es'
 	import { createEventDispatcher } from 'svelte'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/xioniShop.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@
 	}
 </script>
 
-<table data-component class="XioniShopCartTable">
+<table class="XioniShopCartTable">
 	<thead>
 		<tr>
 			<th>Produkt</th>
@@ -52,7 +52,6 @@
 							options={range(0, 11)}
 							values={range(0, 11)}
 							value={quantity}
-							class="XioniShopCartTable__select-quantity"
 							disabled={readOnly}
 							on:change={event => update(product.id, event)} />
 					{:else}
@@ -90,7 +89,7 @@
 </table>
 
 <style lang="scss">
-	[data-component] {
+	.XioniShopCartTable {
 		:global(.Select) {
 			max-width: 4rem;
 		}

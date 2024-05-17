@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { format } from '$lib/utils/formatDate.js'
 	import { onDestroy } from 'svelte'
-	import { order as orderApi, payment as paymentApi } from '../../shopApi.js'
-	import { payPalClientId as clientId } from '../../shopConfig.js'
-	import messages from '$lib/messages.js'
+	import { order as orderApi, payment as paymentApi } from '../../shop.api'
+	import shopConfig from '../../shop.config'
+	import messages from '$lib/messages'
 
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types.js'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/xioniShop.types.js'
 	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch.js'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -97,7 +97,7 @@
 	<Grid size="1-2" class="$text-right">
 		<ul>
 			<li>
-				Transaktion: <span style="letter-spacing: 1px">{order.transactionId?.toUpperCase()}</span>
+				Auftrags-Nr.: <span style="letter-spacing: 1px">{order.transactionId?.toUpperCase()}</span>
 			</li>
 			<li>Datum: {date}</li>
 		</ul>
@@ -143,7 +143,7 @@
 {#if order.paymentType !== 'Paypal'}
 	<p class="$font-bold">Bezahlen Sie jetzt per PayPal:</p>
 
-	<PayPalButtons {clientId} {createOrderHandler} {onApproveHandler} />
+	<PayPalButtons clientId={shopConfig.payPalClientId} {createOrderHandler} {onApproveHandler} />
 
 	<p>
 		Alternativ können Sie den Gesamtbetrag von {order.total.formatted} innerhalb von 14 Tagen ab Rechnungsdatum
@@ -151,10 +151,12 @@
 	</p>
 
 	<p>
-		Musterfirma GmbH<br />
-		IBAN: DE00 0000 0000 0000 0000 00<br />
-		Musterbank<br />
-		Verwendungszweck: <span style="letter-spacing: 1px">{order.transactionId?.toUpperCase()}</span>
+		Weber Fahrzeugetchnik Marius & Bernd Weber GbR<br />
+		IBAN: DE08 5109 1500 0001 5086 36<br />
+		BIC: GEN0DE5 1RGG<br />
+		Rheingauer Volksbank<br />
+		Verwendungszweck: Auftrags-Nr.
+		<span style="letter-spacing: 1px">{order.transactionId?.toUpperCase()}</span>
 	</p>
 {/if}
 
@@ -169,6 +171,11 @@
 		<li>{deliveryAddress.zip} {deliveryAddress.city}</li>
 	</ol>
 {/if}
+<hr />
+<p>
+	Mit freundlichen Grüßen<br />
+	Marius & Bernd Weber
+</p>
 
 <Button class="$mt-4" icon="fas fa-print" on:click={() => window.print()}>Drucken</Button>
 

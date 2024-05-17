@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CART } from '../shopApi'
+	import { CART } from '../shop.api'
 	import { onDestroy } from 'svelte'
 	import messages from '$lib/messages'
 
@@ -45,11 +45,11 @@
 			on:product-quantity-update={updateItemQuantity} />
 
 		<div class="$mt-2">
-			<Button icon="fas fa-angle-left" to="/shop">zurück zum Shop</Button>
+			<Button icon="fas fa-angle-left" to="/shop">zum Shop</Button>
 			<Button
 				icon="fas fa-angle-right"
 				class="Button--primary $float-right $row-reverse"
-				to="/checkout/address">weiter zur Kasse</Button>
+				to="/checkout/address">zur Kasse</Button>
 		</div>
 	{/if}
 </Client>

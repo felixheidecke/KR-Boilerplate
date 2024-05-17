@@ -1,8 +1,5 @@
-import type { XioniShop, XioniShopData } from './types'
-export type { XioniShop, XioniShopData }
-
 export { useCart, useCartStore } from './src/Cart'
-export { useCategories } from './src/Categories'
+export { useGroups as useCategories } from './src/Groups'
 export { useInfo } from './src/Info'
 export { useOrder, useOrderStore } from './src/Order'
 export { useProducts } from './src/Products'

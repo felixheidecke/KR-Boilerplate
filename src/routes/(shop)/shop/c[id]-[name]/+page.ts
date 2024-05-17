@@ -1,20 +1,18 @@
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader.js'
-import { categories, products } from '../../shopApi'
+import { groups, products } from '../../shop.api'
 
-import { Xioni } from '$lib/boilerplate/xioni/xioni.types'
-import type { XioniShop } from '$lib/boilerplate/xioni/shop/types.js'
-
-const { getCategory } = categories
-const { getProductsByCategory } = products
+const { getGroup } = groups
+const { getProductsByGroup } = products
 
 export const load = async function ({ params }) {
-	const [category, products] = await Promise.all([
-		xioniLoader(getCategory(+params.id, { detailLevel: Xioni.DetailLevel.EXTENDED })),
-		xioniLoader(getProductsByCategory(+params.id))
+	const id = +params.id
+	const [group, products] = await Promise.all([
+		xioniLoader(getGroup(id)),
+		xioniLoader(getProductsByGroup(id, { recursive: true }))
 	])
 
 	return {
-		category: category as XioniShop.Category.Extended,
-		products: products as XioniShop.Product.Full[]
+		group,
+		products
 	}
 }

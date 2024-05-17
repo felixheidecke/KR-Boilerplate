@@ -1,9 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
-
-import type { XioniShop, XioniShopData } from '../types'
-import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 import { writable } from 'svelte/store'
+
+import type { XioniShop, XioniShopData } from '../xioniShop.types'
+import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
 
 export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)

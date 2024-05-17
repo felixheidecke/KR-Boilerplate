@@ -1,20 +1,10 @@
-import { vitePreprocess } from '@sveltejs/kit/vite'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import adapter from '@sveltejs/adapter-static'
 import pkg from './package.json' assert { type: 'json' }
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: vitePreprocess({
-		style: {
-			css: {
-				preprocessorOptions: {
-					scss: {
-						additionalData: `@import '$variables';`
-					}
-				}
-			}
-		}
-	}),
+	preprocess: vitePreprocess(),
 	output: {
 		preloadStrategy: 'preload-mjs'
 	},

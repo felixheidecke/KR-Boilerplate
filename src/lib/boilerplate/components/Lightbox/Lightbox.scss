@@ -58,12 +58,6 @@
 
 :where(.Lightbox img[data-lightbox]) {
 	cursor: pointer;
-	transition: opacity 0.5s;
-
-	&:hover {
-		opacity: 0.25;
-		cursor: pointer;
-	}
 }
 
 .Lightbox__modal {

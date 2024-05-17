@@ -2,12 +2,11 @@
 	import messages from '$lib/messages'
 	import stammdaten from '$stammdaten'
 
-	import { CART } from '../../shopApi'
-
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import Product from '$lib/boilerplate/components/XioniShopProduct/XioniShopProduct.svelte'
+	import { CART } from '../../shop.api'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -33,14 +32,12 @@
 	<title>{product.name} | {stammdaten.name} Online Shop</title>
 </svelte:head>
 
-<div class="wrapper">
-	{#if product}
-		<Product {product} on:addToCart={addToCartHandler} />
+{#if product}
+	<Product {product} on:addToCart={addToCartHandler} />
 
-		<hr />
+	<hr />
 
-		<div class="$text-center">
-			<Link icon="fas fa-reply" on:click={() => history.back()}>Zurück</Link>
-		</div>
-	{/if}
-</div>
+	<div class="$text-center">
+		<Link icon="fas fa-reply" on:click={() => history.back()}>Zurück</Link>
+	</div>
+{/if}

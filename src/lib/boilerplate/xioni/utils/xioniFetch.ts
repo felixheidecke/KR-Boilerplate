@@ -25,13 +25,13 @@ export function xioniFetch(fetchFn: typeof fetch = fetch) {
 	 * @param path Array items will form path: ['foo','bar'] = 'foo/bar'
 	 */
 	return async function (path: Array<string | number | undefined>, params: FetchParams = {}) {
-		const { basePath, authorization } = xinoiConfig?.api || {}
+		const { url, key } = xinoiConfig?.api || {}
 
 		const normalPath = path.filter(item => item !== undefined) as Array<string | number>
-		const response = await fetch([basePath, ...normalPath], {
+		const response = await fetch([url, ...normalPath], {
 			...params,
 			headers: {
-				authorization
+				apikey: key
 			}
 		})
 

@@ -2,8 +2,8 @@ export namespace Xioni {
 	export interface Image {
 		src: string
 		alt: string
-		align?: 'left' | 'right'
-		srcset?: {
+		align: 'left' | 'right'
+		srcset: {
 			small?: string
 			medium?: string
 			large?: string
@@ -12,6 +12,7 @@ export namespace Xioni {
 
 	export interface PDF {
 		src: string
+		name: string
 		title: string
 	}
 
@@ -19,10 +20,10 @@ export namespace Xioni {
 		emitter: string
 	}
 
-	export namespace DetailLevel {
-		export type Minimal = 'minimal'
-		export type Basic = 'basic'
-		export type Full = 'full'
-		export type Extended = 'extended'
+	export enum DetailLevel {
+		MINIMAL = 'minimal',
+		BASIC = 'basic',
+		FULL = 'full',
+		EXTENDED = 'extended'
 	}
 }

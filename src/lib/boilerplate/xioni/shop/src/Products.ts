@@ -1,9 +1,9 @@
 import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
-import type { XioniShop, XioniShopData } from '../types'
+import type { XioniShop, XioniShopData } from '../xioniShop.types'
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { Xioni } from '../../xioni.types'
+import { writable } from 'svelte/store'
 
 export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	const fetch = xioniFetch(fetchFn)
@@ -17,8 +17,7 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function getProducts(params?: {
 		limit?: number
-		highlights?: boolean
-		detailLevel?: Xioni.DetailLevel.Minimal | Xioni.DetailLevel.Basic
+		frontpage?: boolean
 	}): Promise<XioniShopData<XioniShop.Product[]>> {
 		const context = { emitter: 'getProducts' }
 
@@ -78,19 +77,18 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns List of Products
 	 */
 
-	async function getProductsByCategory(
+	async function getProductsByGroup(
 		category: number,
 		params?: {
 			limit?: number
-			highlights?: boolean
-			detailLevel?: Xioni.DetailLevel.Minimal | Xioni.DetailLevel.Basic
+			recursive?: boolean
 		}
 	): Promise<XioniShopData<XioniShop.Product[]>> {
-		const context = { emitter: 'getProductsByCategory' }
+		const context = { emitter: 'getProductsByGroup' }
 
 		event.emit('loading-toggle', true, context)
 
-		const response = await fetch(['shop', module, 'categories', category, 'products'], { params })
+		const response = await fetch(['shop', module, 'groups', category, 'products'], { params })
 
 		if (response.status === 'success') {
 			const product = response.data as XioniShop.Product[]
@@ -110,7 +108,42 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	return {
 		getProduct,
 		getProducts,
-		getProductsByCategory,
+		getProductsByGroup,
 		$event: event
+	}
+}
+
+export function useProductsStore(products: ReturnType<typeof useProducts>) {
+	const { subscribe, set, update } = writable(
+		{
+			data: [] as XioniShop.Product[],
+			isLoading: false,
+			errors: null as XioniFetchErrorResponse | null
+		},
+		() => {
+			products.$event.on('success', data => {
+				set({ data, isLoading: false, errors: null })
+			})
+
+			products.$event.on('error', errors => {
+				update(({ data }) => ({ data, isLoading: false, errors }))
+			})
+
+			products.$event.on('loading-toggle', isLoading => {
+				// isLoading = false will be set by success and error handlers
+				if (!isLoading) return
+
+				update(({ data, errors }) => ({ data, isLoading, errors }))
+			})
+
+			return function () {
+				products.$event.removeAllListeners()
+			}
+		}
+	)
+
+	return {
+		subscribe,
+		get: products.getProducts
 	}
 }

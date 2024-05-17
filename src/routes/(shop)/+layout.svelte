@@ -4,9 +4,6 @@
 	import routes from '$routes'
 	import stammdaten from '$stammdaten'
 	import messages from '$lib/messages'
-	import cdnPath from '$lib/utils/cdnPath'
-
-	import MessageBus from '$lib/boilerplate/components/MessageBus/MessageBus.svelte'
 </script>
 
 <svelte:head>
@@ -15,14 +12,12 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={stammdaten.title} />
 	<meta property="og:description" content="[...]" />
-	<meta property="og:image" content="{cdnPath}/_meta/og-image.jpg" />
+	<meta property="og:image" content="/meta/og-image.jpg" />
 </svelte:head>
 
-<div id="shop-layout">
-	<MessageBus {messages} />
-	<Nav {routes} sticky />
-	<main class="wrapper">
-		<slot />
-	</main>
-</div>
+<Nav {routes} sticky />
+<MessageBus {messages} />
+<Wrapper id="shop-layout">
+	<slot />
+</Wrapper>
 <Toplink />

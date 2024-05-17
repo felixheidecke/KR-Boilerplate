@@ -25,6 +25,7 @@
 	object-fit: contain;
 	margin-bottom: 1rem;
 	width: 100%;
+	aspect-ratio: 1 / 1;
 }
 
 :where(.XioniShopProductTile__name) {
@@ -38,7 +39,7 @@
 	text-decoration: none;
 }
 
-:where(.XioniShopProductTile__category) {
+:where(.XioniShopProductTile__group) {
 	display: block;
 	font-weight: normal;
 	font-style: italic;

@@ -1,9 +1,9 @@
 <script lang="ts">
-	// import './XioniShopOrderTable.css'
+	import './XioniShopOrderTable.scss'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniShop } from '$lib/boilerplate/libraries/xioni-shop/types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/xioniShop.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 

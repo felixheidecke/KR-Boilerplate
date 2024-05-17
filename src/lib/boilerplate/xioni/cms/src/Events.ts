@@ -2,9 +2,8 @@ import EventEmitter from 'eventemitter3'
 import { xioniFetch } from '../../utils/xioniFetch'
 
 import type { XioniFetchErrorResponse } from '../../utils/xioniFetch'
-import type { XioniCMS, XioniCMSData } from '../types'
+import type { XioniCMS, XioniCMSData } from '../xioniCMS.types'
 import { formatFromTo } from '$lib/utils/formatDate'
-import type { Xioni } from '../../xioni.types'
 
 export function useEvents(fetchFn: typeof fetch = fetch) {
 	const fetchJson = xioniFetch(fetchFn)
@@ -14,11 +13,11 @@ export function useEvents(fetchFn: typeof fetch = fetch) {
 	 * Get all Events by module
 	 *
 	 * @param module Module id
-	 * @param query.limit Maximale Anzahl an Artikeln
-	 * @param query.startsBefore Event startet vor Datum
-	 * @param query.startsAfter Event startet nach Datum
-	 * @param query.endsBefore Event endet vor Datum
-	 * @param query.endsAfter Event endet nach Datum
+	 * @param filter.limit Maximale Anzahl an Artikeln
+	 * @param filter.startsBefore Event startet vor Datum
+	 * @param filter.startsAfter Event startet nach Datum
+	 * @param filter.endsBefore Event endet vor Datum
+	 * @param filter.endsAfter Event endet nach Datum
 	 */
 
 	async function getEvents(
@@ -29,14 +28,18 @@ export function useEvents(fetchFn: typeof fetch = fetch) {
 			startsAfter?: Date
 			endsBefore?: Date
 			endsAfter?: Date
-			detailLevel?: Xioni.DetailLevel.MINIMAL | Xioni.DetailLevel.BASIC
+			parts?: Array<'images' | 'flags'>
 		} = {}
 	): Promise<XioniCMSData<XioniCMS.Event[]>> {
 		const context = { emitter: 'getEvents' }
 		const params = {}
 
-		if ('limit' in query) {
+		if (query.limit && query.limit > 0) {
 			Object.assign(params, { limit: query.limit })
+		}
+
+		if (query.parts && query.parts.length) {
+			Object.assign(params, { parts: query.parts.join() })
 		}
 
 		if (query.startsBefore) {
@@ -53,10 +56,6 @@ export function useEvents(fetchFn: typeof fetch = fetch) {
 
 		if (query.endsAfter) {
 			Object.assign(params, { endsAfter: query.endsAfter.toDateString() })
-		}
-
-		if (query.detailLevel) {
-			Object.assign(params, { detailLevel: query.detailLevel })
 		}
 
 		const response = await fetchJson(['cms/events', module], { params })
@@ -85,13 +84,13 @@ export function useEvents(fetchFn: typeof fetch = fetch) {
 	 * @returns XioniEvent
 	 */
 
-	async function getEvent(module: number, id: number): Promise<XioniCMSData<XioniCMS.Event.Full>> {
+	async function getEvent(module: number, id: number): Promise<XioniCMSData<XioniCMS.Event>> {
 		const context = { emitter: 'getEvent' }
 
 		const response = await fetchJson(['cms/events', module, id])
 
 		if (response.status === 'success') {
-			const data = eventAdapter(response.data) as XioniCMS.Event.Full
+			const data = eventAdapter(response.data) as XioniCMS.Event
 
 			event.emit('loaded', data, context)
 			event.emit('finally', context)
@@ -130,7 +129,6 @@ export const getEvent = useEvents().getEvent
 function eventAdapter(rawEvent: any): XioniCMS.Event {
 	const starts = new Date(rawEvent.starts)
 	const ends = new Date(rawEvent.ends)
-
 	const event = {
 		...rawEvent,
 		starts,

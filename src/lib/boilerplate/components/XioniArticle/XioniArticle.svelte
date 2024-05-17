@@ -2,25 +2,26 @@
 	import './XioniArticle.scss'
 
 	import { format } from 'date-fns'
+	import { de } from 'date-fns/locale'
 	import cn from 'classnames'
-	import de from 'date-fns/locale/de'
+
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/xioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 	import Icon from '../Icon/Icon.svelte'
 	import Button from '../Button/Button.svelte'
 	import ButtonRow from '../ButtonRow/ButtonRow.svelte'
-	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
-	export let article: XioniCMS.ExtendedArticle
-	export let id: string | undefined = undefined
+	export let article: XioniCMS.Article
+	export let id: string | undefined
 
 	// -----------------------------------------------------------------------------------------------
-	const { author, content, date, image, pdf, text, title, website } = article
+	const { author, date, content, image, pdf, text, title, website } = article
 	const hasMetadata = author || date || website
 </script>
 
-<article class={cn('XioniArticle', $$props.class)} {id}>
+<article class={cn('XioniArticle', $$props.class)} data-xinoi-article-id={article.id} {id}>
 	{#if image}
 		<figure class="XioniArticle__wrapper">
 			<img class="XioniArticle__image" src={image.src} alt={image.alt} />
@@ -32,9 +33,9 @@
 		</figure>
 	{/if}
 
-	<h2 class="XioniArticle__title">
+	<h1 class="XioniArticle__title">
 		{title}
-	</h2>
+	</h1>
 
 	{#if hasMetadata}
 		<ul class="XioniArticle__metadata">
@@ -57,9 +58,14 @@
 		{@html text}
 	</div>
 
-	{#if content}
+	{#if content?.length}
 		<div class="XioniArticle__content">
-			{#each content as { image, text }}
+			{#each content as { image, title, text }}
+				{#if title}
+					<h3 class="XioniArticle__content-title">
+						{title}
+					</h3>
+				{/if}
 				{#if image}
 					<figure
 						class="XioniArticle__content-image"

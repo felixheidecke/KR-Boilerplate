@@ -5,7 +5,7 @@
 	import { createEventDispatcher } from 'svelte'
 	import { IS_MOBILE } from '$lib/utils/breakpoints'
 
-	import type { XioniShop } from '$lib/boilerplate/xioni/shop/XioniShop.types'
+	import type { XioniShop } from '$lib/boilerplate/xioni/shop/xioniShop.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let product: XioniShop.Product.Full
+	export let product: XioniShop.Product
 
 	const {
 		name,
@@ -82,8 +82,7 @@
 				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 				<img
 					class="{baseClass}__image $mb-2@mobile"
-					src={image?.src ||
-						'https://assets.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+					src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
 					alt={name}
 					on:click={imageClickHandler} />
 			</Grid>
@@ -124,10 +123,6 @@
 						{@html legal}
 					</div>
 				{/if}
-
-				{#if pdf}
-					<Link icon="fas fa-file-pdf" to={pdf.src} target="_blank">{pdf.name}</Link>
-				{/if}
 			</Grid>
 		</Grid>
 	</div>
@@ -135,7 +130,7 @@
 	<Modal bind:this={productImageModal} title={name}>
 		<img
 			class="{baseClass}__image-presentation"
-			src={image?.src || 'https://assets.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+			src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
 			alt={name} />
 	</Modal>
 

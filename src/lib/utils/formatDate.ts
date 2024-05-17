@@ -1,5 +1,5 @@
 import { format as formatDate } from 'date-fns'
-import de from 'date-fns/locale/de'
+import { de } from 'date-fns/locale'
 
 const longFormat = 'EEEE d. LLLL yyyy'
 const mediumFormat = 'EEEE d. LLLL'
@@ -15,7 +15,7 @@ export function formatFromTo(from: Date, to: Date) {
 	}
 
 	const daysMatch = formatDate(from, 'd') === formatDate(to, 'd')
-	const yearsMatch = formatDate(from, 'Y') === formatDate(to, 'Y')
+	const yearsMatch = formatDate(from, 'y') === formatDate(to, 'y')
 	const monthsMatch = formatDate(from, 'LL') === formatDate(to, 'LL')
 
 	let fromFormat

@@ -8,7 +8,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/XioniCMS.types'
+	import type { XioniCMS } from '$lib/boilerplate/xioni/cms/xioniCMS.types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -19,8 +19,6 @@
 	import Button from '../Button/Button.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
-
-	export let event: XioniCMS.Event.Full
 
 	const {
 		description,
@@ -34,16 +32,16 @@
 		website,
 		ticketshop,
 		organizer
-	} = event
+	} = $$props.event as XioniCMS.Event
 
-	const images = event.images || []
+	const images = $$props.event.images || []
 
 	// -----------------------------------------------------------------------------------------------
 
 	let lightbox: Lightbox // ref
 
 	const emit = createEventDispatcher()
-	const allowRegistration = flags ? flags.includes('Anmeldung') : false
+	const allowRegistration = flags ? flags.includes('anmeldung') : false
 
 	// Classname
 	const baseName = $$props['ex-class'] || 'XioniEvent'
@@ -134,14 +132,14 @@
 		{#if allowRegistration}
 			<Button
 				icon="fas fa-ticket-alt"
-				on:click={() => emit('click', 'registration')}
+				on:click={() => emit('registrationButtonClick')}
 				class={baseName + '__registration'}>Jetzt anmelden</Button>
 		{/if}
 
 		{#if ticketshop && !allowRegistration}
 			<Button
 				to={ticketshop.toString()}
-				on:click={() => emit('click', 'ticketshop')}
+				on:click={() => emit('ticketshopButtonClick')}
 				icon="fas fa-ticket-alt">Zum Ticketshop</Button>
 		{/if}
 

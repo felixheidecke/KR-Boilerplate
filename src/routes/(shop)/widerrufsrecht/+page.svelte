@@ -16,11 +16,14 @@
 	Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter
 	Dritter, der nicht Beförderer ist, die Waren in Besitz genommen haben bzw. hat.
 </p>
-<p>
-	Um Ihr Widerrufsrecht auszuüben, müssen Sie uns die Firma {stammdaten.name}, {stammdaten.owner}, {stammdaten.street},
-	{stammdaten.town}
-</p>
-<p>Tel: {stammdaten.phone} oder E-Mail: {stammdaten.email}</p>
+<p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns</p>
+<p>{stammdaten.name}<br />
+	{stammdaten.owner}<br />
+	{stammdaten.street}<br />
+	{stammdaten.town}<br />
+	Tel: {stammdaten.phone}<br />
+	Fax: {stammdaten.fax}<br />
+	E-Mail: {stammdaten.email}</p>
 <p>
 	(z.B. ein mit der Post versandter Brief, Telefax oder E-Mail) über Ihren Entschluss, diesen
 	Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte <Link
