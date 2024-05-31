@@ -22,5 +22,9 @@ function flattenRoutes(routes: Route[]) {
 export default function findRoutePath(routes: Route[], path: Route['path']) {
 	const flattenedRoutes = flattenRoutes(routes)
 
-	return flattenedRoutes.find(route => route.path === path)
+	return flattenedRoutes.find(route => {
+		if (route.path === '/') return false
+
+		return route.path === path || path?.startsWith(route.path || '')
+	})
 }
