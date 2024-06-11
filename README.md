@@ -1,5 +1,9 @@
 # Patch Notes
 
+## Version `4.16.2`
+
+- Update Dependencies
+
 ## Version `4.16.1`
 
 - Update Dependencies
