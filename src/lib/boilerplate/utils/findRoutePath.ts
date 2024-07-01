@@ -19,10 +19,15 @@ function flattenRoutes(routes: Route[]) {
 	return flattenedRoutes
 }
 
+function sortRoutesByLength(routes: Route[]) {
+	return routes.sort((a, b) => (b.path || '').length - (a.path || '').length)
+}
+
 export default function findRoutePath(routes: Route[], path: Route['path']) {
 	const flattenedRoutes = flattenRoutes(routes)
+	const sortedRoutes = sortRoutesByLength(flattenedRoutes)
 
-	return flattenedRoutes.find(
+	return sortedRoutes.find(
 		route => route.path === path || (path?.startsWith(route.path || '') && route.path !== '/')
 	)
 }
