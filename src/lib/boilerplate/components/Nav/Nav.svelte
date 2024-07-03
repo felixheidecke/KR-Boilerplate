@@ -147,7 +147,7 @@
 										subRoute.class
 									)}
 									href={subRoute.path}
-									target={route.target}>
+									target={subRoute.target}>
 									{subRoute.name}
 								</a>
 							</li>
