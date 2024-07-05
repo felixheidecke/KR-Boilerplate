@@ -70,7 +70,7 @@ Um Ihr Widerrufsrecht auszuüben, müssen Sie uns
   Mail: <%= owner.email %>
 
 mittels einer eindeutigen Erklärung (Bspw. postalisch oder per E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte Muster-Widerrufsformular verwenden.
-<%= new URL('widerrufsformular.pdf', origin) %>
+<%= new URL('/pdf/widerrufsformular.pdf', origin) %>
 
 Machen Sie von dieser Möglichkeit Gebrauch, so werden wir Ihnen unverzüglich eine Bestätigung über den Eingang eines solchen Widerrufs übermitteln.
 

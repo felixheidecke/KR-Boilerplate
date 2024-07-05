@@ -3,8 +3,6 @@ import { cartApi, groupsApi } from './shop.api'
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader'
 
 export const prerender = false
-export const ssr = false
-export const trailingSlash = 'always'
 export const load = async function () {
 	const [groups, cart] = await Promise.all([
 		xioniLoader(groupsApi.getGroups()),
@@ -14,6 +12,7 @@ export const load = async function () {
 	CART.set(cart)
 
 	return {
-		groups
+		groups,
+		layout: 'shop'
 	}
 }
