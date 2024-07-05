@@ -20,8 +20,9 @@
 		{
 			"command": "npm",
 			"problemMatcher": [],
+			"type": "shell",
 			"options": {
-				"cwd": "${workspaceFolder}"
+				"cwd": "${fileDirname}"
 			},
 			"args": ["install", "--legacy-peer-deps"],
 			"label": "Install",
