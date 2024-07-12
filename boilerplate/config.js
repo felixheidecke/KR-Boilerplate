@@ -1,7 +1,7 @@
 let version = require('./dependencies.json').dependencies
 
 module.exports = {
-  baseUrl: 'https://assets.klickrhein.de/libs',
+  baseUrl: 'https://cdn.klickrhein.de/libs',
   paths: {
     vue: `vue/${version.vue}/vue.min.js`,
     textile: `textile-js/${version['textile-js']}/textile.min.js`,
