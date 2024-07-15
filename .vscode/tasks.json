@@ -22,7 +22,7 @@
 			"problemMatcher": [],
 			"type": "shell",
 			"options": {
-				"cwd": "${fileDirname}"
+				"cwd": "./"
 			},
 			"args": ["install", "--legacy-peer-deps"],
 			"label": "Install",
