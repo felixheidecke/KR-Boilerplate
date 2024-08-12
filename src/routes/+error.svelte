@@ -3,6 +3,10 @@
 
 	import { page } from '$app/stores'
 	import routes from '$routes'
+
+	if (browser && !$page.url.searchParams.has('error')) {
+		goto('?error=' + $page.status)
+	}
 </script>
 
 <div id="error-layout">
