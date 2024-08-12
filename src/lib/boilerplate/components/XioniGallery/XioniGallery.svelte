@@ -7,7 +7,7 @@
 
 	export let gallery: XioniCMS.Gallery
 	export let baseName = 'XioniGallery'
-	export let baseLink: string = $page.url.pathname + '/'
+	export let baseLink: string = $page.url.pathname
 
 	// -----------------------------------------------------------------------------------------------
 

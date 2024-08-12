@@ -1,10 +1,24 @@
+@import '$variables';
+
 :where(.XioniAlbum) {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 	gap: 1rem;
 	row-gap: 1rem;
 }
 
 :where(.XioniAlbum__image) {
+	transition: transform 200ms ease;
 	object-fit: cover;
+}
+
+@include breakpoint('mobile') {
+	:where(.XioniAlbum) {
+		justify-items: center;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	}
+
+	:where(.XioniAlbum__image:hover) {
+		transform: scale(1.1);
+	}
 }

@@ -1,6 +1,8 @@
+@import '$variables';
+
 :where(.Lightbox) {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 	gap: 1rem;
 }
 
@@ -56,15 +58,6 @@
 	max-height: 85vh;
 }
 
-:where(.Lightbox img[data-lightbox]) {
-	cursor: pointer;
-}
-
-.Lightbox__modal {
-	max-width: 100%;
-	max-width: 1280px;
-}
-
 .Lightbox__modal .Modal__wrapper {
 	width: fit-content;
 	height: fit-content;
@@ -73,4 +66,23 @@
 .Lightbox__modal .Modal__body {
 	padding: 0;
 	overflow: hidden;
+}
+
+@include breakpoint('tablet-up') {
+	:where(.Lightbox img[data-lightbox]) {
+		cursor: pointer;
+		transition: opacity 0.5s;
+
+		&:hover {
+			opacity: 0.25;
+			cursor: pointer;
+		}
+	}
+}
+
+@include breakpoint('mobile') {
+	:where(.Lightbox) {
+		justify-items: center;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	}
 }
