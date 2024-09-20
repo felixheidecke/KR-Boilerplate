@@ -3,6 +3,13 @@ import { defineConfig } from 'vite';
 import autoImport from 'sveltekit-autoimport'
 
 export default defineConfig({
+	css: {
+		preprocessorOptions: {
+			scss: {
+				api: "modern",
+			}
+		}
+	},
 	plugins: [
 		autoImport({
 			components: [

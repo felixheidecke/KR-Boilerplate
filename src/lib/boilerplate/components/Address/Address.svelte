@@ -11,7 +11,6 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let name: string
-	export let title = ''
 	export let owner = ''
 	export let street: string
 	export let town: string
@@ -26,9 +25,6 @@
 
 <ol {...$$restProps} class={classnames(baseName, $$props.class)}>
 	<li class="{baseName}__name">{name}</li>
-	{#if title}
-		<li class="{baseName}__title">{title}</li>
-	{/if}
 	{#if owner}
 		<li class="{baseName}__owner">{owner}</li>
 	{/if}
@@ -37,7 +33,7 @@
 	<slot />
 	{#if phone}
 		<li class="{baseName}__phone">
-			<Link icon="fas fa-phone-alt" to={'tel://' + phone}>{phone}</Link>
+			<Link icon="fas fa-phone-alt" to={'tel:' + phone}>{phone}</Link>
 		</li>
 	{/if}
 	{#if fax}
@@ -53,7 +49,8 @@
 	{/if}
 	{#if web}
 		<li class="{baseName}__web">
-			<Link icon="fas fa-globe" to="https://{web}" />
+			<Icon name="fas fa-globe" />
+			{web}
 		</li>
 	{/if}
 </ol>

@@ -34,11 +34,14 @@
 }
 
 :where(.XioniArticle__content-image) {
-	@include breakpoint('tablet-up') {
+	margin: 0;
+}
+
+@include breakpoint('tablet-up') {
+	:where(.XioniArticle__content-image) {
 		display: inline-block;
 		max-width: calc(100% / 3) !important;
 	}
-	margin: 0;
 }
 
 :where(.XioniArticle__content-image-caption) {
