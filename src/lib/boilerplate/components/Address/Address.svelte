@@ -33,12 +33,12 @@
 	<slot />
 	{#if phone}
 		<li class="{baseName}__phone">
-			<Link icon="fas fa-phone-alt" to={'tel:' + phone}>{phone}</Link>
+			<Link icon="phone" to={'tel:' + phone}>{phone}</Link>
 		</li>
 	{/if}
 	{#if fax}
 		<li class="{baseName}__fax">
-			<Icon name="fas fa-fax" />
+			<Icon name="fax" />
 			{fax}
 		</li>
 	{/if}
@@ -49,7 +49,7 @@
 	{/if}
 	{#if web}
 		<li class="{baseName}__web">
-			<Icon name="fas fa-globe" />
+			<Icon name="globe" />
 			{web}
 		</li>
 	{/if}

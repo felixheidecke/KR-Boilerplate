@@ -1,0 +1,11 @@
+:where(.Icon) {
+	// Map KR-API link-types to fontello icons
+
+	&.fontello-website::before {
+		content: '\e802';
+	}
+
+	&.fontello-ticketshop::before {
+		content: '\f145';
+	}
+}

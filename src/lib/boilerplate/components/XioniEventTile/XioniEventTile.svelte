@@ -3,8 +3,8 @@
 
 	import { format } from '$lib/boilerplate/utils/formatDate'
 	import { goto } from '$app/navigation'
-	import { LOCALE } from '$lib/boilerplate/constants'
 	import { page } from '$app/stores'
+	import { LOCALE } from '$lib/boilerplate/utils/constants'
 	import classnames from 'classnames'
 
 	import type { XioniCMS } from '$lib/boilerplate/xioni/types'
@@ -23,7 +23,7 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	const { title, image, teaser, starts, ends, duration, organizer } = event
+	const { title, image, teaser, startDate, endDate, duration, organizer } = event
 </script>
 
 <svelte:element
@@ -32,8 +32,8 @@
 	itemtype="https://schema.org/Event"
 	{...$$restProps}
 	class={classnames(baseName, $$props.class)}>
-	<meta itemprop="startDate" content={format(starts, 'yyyy-MM-dd')} />
-	<meta itemprop="endDate" content={format(ends, 'yyyy-MM-dd')} />
+	<meta itemprop="startDate" content={format(startDate, 'yyyy-MM-dd')} />
+	<meta itemprop="endDate" content={format(endDate, 'yyyy-MM-dd')} />
 	<meta itemprop="organizer" content={organizer} />
 	{#if image}
 		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
@@ -41,7 +41,7 @@
 			itemprop="image"
 			class="{baseName}__image"
 			src={image.srcset.small || image.src}
-			alt={image.alt || title}
+			alt={image.description || title}
 			on:click={() => {
 				if (link) goto(link)
 			}} />
@@ -50,7 +50,7 @@
 		{title}
 	</h2>
 	<h3 class="{baseName}__date">
-		<time datetime={starts.toLocaleDateString(LOCALE)}>
+		<time datetime={startDate.toLocaleDateString(LOCALE)}>
 			{duration}
 		</time>
 	</h3>
@@ -60,7 +60,7 @@
 		</p>
 	{/if}
 	{#if link}
-		<Link to={link} class="{baseName}__link $row-reverse" icon="fas fa-angle-right">
+		<Link to={link} class="{baseName}__link $row-reverse" icon="angle-right">
 			{linkText}
 		</Link>
 	{/if}

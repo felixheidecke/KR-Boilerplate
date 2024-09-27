@@ -3,10 +3,9 @@
 
 	import { format } from '$lib/boilerplate/utils/formatDate'
 	import { goto } from '$app/navigation'
-	import { LOCALE } from '$lib/boilerplate/constants'
 	import { page } from '$app/stores'
+	import { LOCALE } from '$lib/boilerplate/utils/constants'
 	import classnames from 'classnames'
-
 	import type { XioniCMS } from '$lib/boilerplate/xioni/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -20,7 +19,7 @@
 	export let baseName: string = 'XioniArticleTile'
 	export let linkText: string = 'Weiterlesen'
 	export let tag: string = 'div'
-	export let link: string | undefined = `${$page.url.pathname}${article.slug}_${article.id}`
+	export let link: string | undefined | null = `${$page.url.pathname}${article.slug}_${article.id}`
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -34,7 +33,7 @@
 			class="{baseName}__image"
 			class:$pointer={!!link}
 			src={image.srcset?.small}
-			alt={image.alt}
+			alt={image.description}
 			on:click={() => {
 				if (link) goto(link)
 			}} />
@@ -45,12 +44,12 @@
 	<ul class="{baseName}__metadata">
 		{#if author}
 			<li class="{baseName}__author">
-				<Icon name="far fa-user" class="$mr-1/4" />
+				<Icon name="user" />
 				Von {author}
 			</li>
 		{/if}
 		<li class="{baseName}__date">
-			<Icon name="far fa-calendar-alt" class="$mr-1/4" />
+			<Icon name="calendar-empty" />
 			<time datetime={date.toLocaleDateString(LOCALE)}>
 				{format(date, 'd. LLLL y')}
 			</time>
@@ -60,7 +59,7 @@
 		{@html teaser}
 	</p>
 	{#if link}
-		<Link to={link} class="{baseName}__link $pointer $row-reverse" icon="fas fa-angle-right">
+		<Link to={link} class="{baseName}__link $pointer $row-reverse" icon="angle-right">
 			{linkText}
 		</Link>
 	{/if}

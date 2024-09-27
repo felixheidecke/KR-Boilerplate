@@ -14,7 +14,7 @@
 	denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz
 	entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.
 </p>
-<h3>Datenerfassung auf unserer Webseite</h3>
+<h2>Datenerfassung auf unserer Webseite</h2>
 <h3>Wer ist verantwortlich für die Datenerfassung auf dieser Webseite?</h3>
 <p>
 	Die Datenverarbeitung auf dieser Webseite erfolgt durch den Webseitenbetreiber. Dessen

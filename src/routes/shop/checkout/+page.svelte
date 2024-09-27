@@ -3,6 +3,7 @@
 	import { cartApi } from '../shop.api'
 	import { onMount } from 'svelte'
 	import messages from '$lib/messages'
+	import boolStore from '$lib/boilerplate/utils/booleanStore'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
@@ -17,10 +18,10 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	let isLoading: boolean = false
+	const isLoading = boolStore()
 
 	function updateItemQuantity({ detail }: any) {
-		isLoading = true
+		isLoading.true()
 
 		cartApi
 			.updateItemQuantity(detail.productId, detail.quantity)
@@ -33,7 +34,7 @@
 
 				messages.add(error.message, 'Achtung!', { type: 'error' })
 			})
-			.finally(() => (isLoading = false))
+			.finally(isLoading.false)
 	}
 
 	onMount(messages.reset)
@@ -51,13 +52,13 @@
 			shipping={$CART.shipping}
 			total={$CART.total}
 			quantitySelector
-			readOnly={isLoading}
+			readOnly={$isLoading}
 			on:product-quantity-update={updateItemQuantity} />
 
 		<div class="$mt-2">
 			<Button icon="fas fa-angle-left" to="/shop/">zum Shop</Button>
 			<Button
-				icon="fas fa-angle-right"
+				icon="angle-right"
 				class="Button--primary $float-right $row-reverse"
 				to="/shop/checkout/address/">zur Kasse</Button>
 		</div>

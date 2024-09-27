@@ -1,19 +1,15 @@
 <script lang="ts">
+	import './Icon.scss'
 	import classnames from 'classnames'
 
-	export let name = 'fas fa-carrot'
-	export let size: number | string = 0
+	export let baseName = 'Icon'
+	export let name = 'wine'
+	export let size = undefined
 
 	// -----------------------------------------------------------------------------------------------
 
-	const baseName = $$props['ex-class'] || 'Icon'
-
-	$: className = classnames(
-		$$props.class,
-		baseName,
-		name,
-		!(+size > 1 && +size <= 10) || `fa-${size}x`
-	)
+	const className = classnames($$props.class, baseName, `fontello-${name}`)
+	const style = size ? `font-size: ${size} !important;` : undefined
 </script>
 
-<i class={className} aria-hidden="true" on:click />
+<i class={className} aria-hidden="true" {style} on:click />

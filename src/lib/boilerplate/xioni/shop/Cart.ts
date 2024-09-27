@@ -1,6 +1,5 @@
-import type { XioniShop } from '../types'
 import { xioniFetch } from '../utils/xioniFetch'
-
+import type { XioniShop } from '../types'
 import type { XioniFetchErrorResponse } from '../utils/xioniFetch'
 
 export function useCart(module: number, fetchFn: typeof fetch = fetch) {

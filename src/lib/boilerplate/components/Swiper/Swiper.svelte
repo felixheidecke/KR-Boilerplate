@@ -67,13 +67,13 @@
 			aria-label="Vorheriges Bild zeigen"
 			class={`${baseName}__button ${baseName}__button--prev`}
 			on:click={() => swiper.go('<')}>
-			<Icon ex-class={`${baseName}__button-icon`} name="fas fa-angle-left" size="5" />
+			<Icon ex-class={`${baseName}__button-icon`} name="angle-left" />
 		</button>
 		<button
 			aria-label="Nächstes Bild zeigen"
 			class={`${baseName}__button ${baseName}__button--next`}
 			on:click={() => swiper.go('>')}>
-			<Icon ex-class={`${baseName}__button-icon`} name="fas fa-angle-right" size="5" />
+			<Icon ex-class={`${baseName}__button-icon`} name="angle-right" />
 		</button>
 	{/if}
 </div>

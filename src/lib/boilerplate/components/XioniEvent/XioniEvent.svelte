@@ -25,23 +25,9 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	const {
-		teaser,
-		description,
-		ends,
-		image,
-		pdf,
-		flags,
-		starts,
-		title,
-		website,
-		ticketshop,
-		organizer
-	} = event
-
 	let lightbox: Lightbox // ref
-
-	const images = $$props.event.images || []
+	const { teaser, description, endDate, image, flags, startDate, title, organizer } = event
+	const images = event.images || []
 	const emit = createEventDispatcher()
 	const allowRegistration = flags ? flags.includes('anmeldung') : false
 	const maxImages = 5
@@ -65,8 +51,8 @@
 	itemtype="https://schema.org/Event"
 	{...$$restProps}
 	class={classnames(baseName, $$props.class)}>
-	<meta itemprop="startDate" content={formatISO(starts, { representation: 'date' })} />
-	<meta itemprop="endDate" content={formatISO(starts, { representation: 'date' })} />
+	<meta itemprop="startDate" content={formatISO(startDate, { representation: 'date' })} />
+	<meta itemprop="endDate" content={formatISO(endDate, { representation: 'date' })} />
 	<meta itemprop="organizer" content={organizer} />
 
 	{#if image || images?.length}
@@ -76,17 +62,17 @@
 					ex-class={baseName + '__image'}
 					src={image.src}
 					tablet={image.src}
-					alt={image.alt} />
+					alt={image.description} />
 			{/if}
 			{#if images.length}
 				<Grid gap>
-					{#each imageRow as { src, alt }, index}
+					{#each imageRow as { src, description }, index}
 						<Grid size="1-5" class="$mt">
 							<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 							<img
 								class={baseName + '__piucture-row-image $pointer'}
 								{src}
-								{alt}
+								alt={description}
 								loading="lazy"
 								on:click={() => lightbox.open(index)} />
 						</Grid>
@@ -111,8 +97,8 @@
 	</h2>
 
 	<h3 class={baseName + '__date'}>
-		<date datetime={starts.toDateString()}>
-			{@html formatFromTo(starts, ends)}
+		<date datetime={startDate.toDateString()}>
+			{@html formatFromTo(startDate, endDate)}
 		</date>
 	</h3>
 
@@ -131,25 +117,13 @@
 	<ButtonRow class={baseName + '__metadata'}>
 		{#if allowRegistration}
 			<Button
-				icon="fas fa-ticket-alt"
 				on:click={() => emit('registrationButtonClick')}
+				icon="ticket"
 				class={baseName + '__registration'}>Jetzt anmelden</Button>
 		{/if}
 
-		{#if ticketshop && !allowRegistration}
-			<Button
-				to={ticketshop.toString()}
-				on:click={() => emit('ticketshopButtonClick')}
-				icon="fas fa-ticket-alt">Zum Ticketshop</Button>
-		{/if}
-
-		{#if website}
-			<Button icon="fas fa-globe" on:click={() => emit('click', 'website')} to={website.toString()}
-				>{website.hostname}</Button>
-		{/if}
-
-		{#if pdf}
-			<Button icon="fas fa-file-pdf" to={pdf.src}>{pdf.title}</Button>
-		{/if}
+		{#each event.links as { type, url, title }}
+			<Button to={url} icon={type}>{title}</Button>
+		{/each}
 	</ButtonRow>
 </div>

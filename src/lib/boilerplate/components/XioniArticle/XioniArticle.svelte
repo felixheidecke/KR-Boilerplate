@@ -6,29 +6,31 @@
 	import classnames from 'classnames'
 
 	import type { XioniCMS } from '$lib/boilerplate/xioni/types'
+	import type { Prettify } from '$lib/boilerplate/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
+
 	import Icon from '../Icon/Icon.svelte'
 	import Button from '../Button/Button.svelte'
 	import ButtonRow from '../ButtonRow/ButtonRow.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let article: XioniCMS.Article
+	export let article: Prettify<XioniCMS.Article>
 	export let baseName = 'XioniArticle'
 
 	// -----------------------------------------------------------------------------------------------
-	const { author, date, content, image, pdf, teaser, title, website } = article
-	const hasMetadata = author || date || website
+	const { author, date, content, image, teaser, title, links } = article
+	const hasMetadata = author || date
 </script>
 
 <article {...$$restProps} class={classnames(baseName, $$props.class)}>
 	{#if image}
 		<figure class="{baseName}__wrapper">
-			<img class="{baseName}__image" src={image.src} alt={image.alt} />
-			{#if image.alt}
+			<img class="{baseName}__image" src={image.src} alt={image.description} />
+			{#if image.description}
 				<figcaption class="{baseName}__image-caption">
-					{image.alt}
+					{image.description}
 				</figcaption>
 			{/if}
 		</figure>
@@ -42,7 +44,7 @@
 		<ul class="{baseName}__metadata">
 			{#if author}
 				<li class="{baseName}__author">
-					<Icon name="far fa-user" class="$mr-1/4" />
+					<Icon name="user" class="$mr-1/4" />
 					<span>Von {author}</span>
 				</li>
 			{/if}
@@ -75,10 +77,10 @@
 									`${baseName}__content-image `,
 									`${baseName}__content-image--${image.align}`
 								)}>
-								<img src={image.src} alt={image.alt} />
-								{#if image.alt}
+								<img src={image.src} alt={image.description || title} />
+								{#if image.description}
 									<figcaption class="{baseName}__content-image-caption">
-										{image.alt}
+										{image.description}
 									</figcaption>
 								{/if}
 							</figure>
@@ -92,15 +94,13 @@
 		</div>
 	{/if}
 
-	<ButtonRow class="{baseName}__button-row">
-		{#if pdf}
-			<Button to={pdf.src} class="{baseName}__pdf" icon="fas fa-file-pdf">
-				{pdf.title}
-			</Button>
-		{/if}
-
-		{#if website}
-			<Button to={website.toString()} icon="fas fa-link">{website.host}</Button>
-		{/if}
-	</ButtonRow>
+	{#if links}
+		<ButtonRow class="{baseName}__button-row">
+			{#each links as link}
+				<Button to={link.url} icon={link.type}>
+					{link.title}
+				</Button>
+			{/each}
+		</ButtonRow>
+	{/if}
 </article>

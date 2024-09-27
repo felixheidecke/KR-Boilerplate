@@ -16,15 +16,13 @@ export function useFormMail(fetchFn: typeof fetch = fetch) {
 			attachBodyAsCSV?: boolean
 		} = {}
 	): Promise<boolean> {
-		const context = { emitter: 'send' }
-
 		return new Promise(async (resolve, reject) => {
 			const response = await fetchJSON(['form-mail/send'], {
 				method: 'POST',
 				data: {
 					body,
 					config: {
-						to,
+						to: to.toString(),
 						subject,
 						required: required.join()
 					}

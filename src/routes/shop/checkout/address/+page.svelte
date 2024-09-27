@@ -5,13 +5,11 @@
 	import { IS_MOBILE } from '$lib/boilerplate/utils/breakpoints'
 	import { head, isEmpty, omitBy } from 'lodash-es'
 	import { orderApi } from '../../shop.api'
+	import booleanStore from '$lib/boilerplate/utils/booleanStore'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type {
-		XioniFetchError,
-		XioniFetchErrorResponse
-	} from '$lib/boilerplate/xioni/utils/xioniFetch'
+	import type { XioniFetchError } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -25,26 +23,22 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	let isLoading = false
-	let showShippingForm = !!$ORDER.deliveryAddress
+	const isLoading = booleanStore(false)
+	const showShippingForm = booleanStore(!!$ORDER.deliveryAddress)
+
 	let formBodyErrors: string[] | undefined = undefined
 	let formMessageError: string | undefined = undefined
 
 	// Form bindings
-	let address = { ...$ORDER.address } || {}
-	let deliveryAddress = { ...$ORDER.deliveryAddress } || {}
+	let address = { ...$ORDER.address }
+	let deliveryAddress = { ...$ORDER.deliveryAddress }
 	let message = $ORDER.message || ''
 
-	function toggleLoading() {
-		isLoading = !isLoading
-	}
-
 	function toggleShippingForm() {
-		if (showShippingForm) {
-			showShippingForm = false
+		showShippingForm.toggle()
+
+		if ($showShippingForm) {
 			deliveryAddress = {}
-		} else {
-			showShippingForm = true
 		}
 	}
 
@@ -52,7 +46,7 @@
 		const addressData = omitBy(address, isEmpty) as any
 		const deliveryAddressData = omitBy(deliveryAddress, isEmpty) as any
 
-		toggleLoading()
+		isLoading.true()
 		orderApi
 			.updateOrder({
 				address: addressData,
@@ -74,7 +68,7 @@
 					250
 				)
 			})
-			.finally(toggleLoading)
+			.finally(isLoading.false)
 	}
 </script>
 
@@ -174,12 +168,12 @@
 </div>
 
 <Button
-	icon={isLoading ? 'fas fa-spinner fa-pulse' : 'fas fa-angle-right'}
+	icon={$isLoading ? 'fas fa-spinner fa-pulse' : 'fas fa-angle-right'}
 	class={[
 		{
 			'$mt $w-full $content-center': $IS_MOBILE
 		},
 		'Button--primary $mt-2 $float-right $row-reverse'
 	]}
-	disabled={isLoading}
+	disabled={$isLoading}
 	on:click={updateOrder}>weiter zur Zusammenfassung</Button>

@@ -34,12 +34,12 @@
 	{#if event}
 		<header class="{baseName}__header">
 			<h3 class="{baseName}__title">{event.title}</h3>
-			<time>{@html date.formatFromTo(event.starts, event.ends)}</time>
+			<time>{@html date.formatFromTo(event.startDate, event.endDate)}</time>
 		</header>
 
 		<Form {to} subject="Event Anmeldung ({event.id})" attachBodyAsCSV class="$mt-2">
 			<input type="hidden" name="Event" value="{event.title} ({event.id})" />
-			<input type="hidden" name="Datum" value={date.format(event.starts, 'P')} />
+			<input type="hidden" name="Datum" value={date.format(event.startDate, 'P')} />
 
 			<slot />
 

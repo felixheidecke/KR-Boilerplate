@@ -7,5 +7,5 @@ export function load() {
 	orderApi
 		.getOrder()
 		.then(ORDER.set)
-		.catch(response => console.log(response.data.message))
+		.catch(response => console.error(response.data.message))
 }

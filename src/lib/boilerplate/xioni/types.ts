@@ -6,15 +6,14 @@ export namespace XioniCMS {
 		title: string
 		teaser: string
 		date: Date
-		image?: Image
-		pdf?: PDF
-		website?: URL
-		author?: string
+		image: Image | null
+		links: Link[]
+		author: string | null
 		content?: {
 			id: number
-			title: string
-			text: string
-			image?: Image
+			title: string | null
+			text: string | null
+			image: Image | null
 		}[]
 	}
 
@@ -23,25 +22,18 @@ export namespace XioniCMS {
 		module: number
 		slug: string
 		title: string
-		starts: Date
-		ends: Date
+		teaser: string | null
+		description: string | null
+		address: string | null
+		startDate: Date
+		endDate: Date
+		image: Image | null
+		links: Link[]
+		organizer: string | null
 		duration: string
-		teaser: string
-		description: string
-		image?: Image
-		pdf?: PDF
-		website?: URL
-		ticketshop?: URL
-		organizer?: string
-		coordinates?: {
-			lat: number
-			lng: number
-		}
-		images?: {
-			src: string
-			alt: string
-		}[]
-		flags?: 'anmeldung'[]
+		coordinates: [number, number] | null
+		images?: Image[]
+		flags?: string[]
 	}
 
 	export interface Album {
@@ -55,22 +47,15 @@ export namespace XioniCMS {
 	export type Gallery = Album[]
 
 	export interface MenuItem {
-		id: number
 		name: string
-		description?: string
-		image?: {
-			src: string
-			alt: string
-		}
-		price: {
-			value: number
-			formatted: string
-		}
+		description: string | null
+		image: Image | null
+		price: Price | null
 	}
 
 	export interface MenuGroup {
-		name: string
-		description?: string
+		name: string | null
+		description: string | null
 		items: MenuItem[]
 	}
 
@@ -244,8 +229,8 @@ export namespace XioniShop {
 
 interface Image {
 	src: string
-	alt: string
-	align: 'left' | 'right'
+	description: string | null
+	align?: 'left' | 'right' | null
 	srcset: {
 		small?: string
 		medium?: string
@@ -253,8 +238,13 @@ interface Image {
 	}
 }
 
-interface PDF {
-	src: string
-	name: string
+interface Link {
+	type: 'ticketshop' | 'website' | 'file-pdf'
 	title: string
+	url: string
+}
+
+interface Price {
+	value: number
+	formatted: string
 }

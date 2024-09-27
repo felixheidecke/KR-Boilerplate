@@ -108,21 +108,13 @@ export const getEvent = useEvents().getEvent
  */
 
 function eventAdapter(rawEvent: any): XioniCMS.Event {
-	const starts = new Date(rawEvent.starts)
-	const ends = new Date(rawEvent.ends)
+	const startDate = new Date(rawEvent.startDate)
+	const endDate = new Date(rawEvent.endDate)
 	const event = {
 		...rawEvent,
-		starts,
-		ends,
-		duration: formatFromTo(starts, ends)
-	}
-
-	if (rawEvent.website) {
-		event.website = new URL(rawEvent.website)
-	}
-
-	if (rawEvent.ticketshop) {
-		event.ticketshop = new URL(rawEvent.ticketshop)
+		startDate,
+		endDate,
+		duration: formatFromTo(startDate, endDate)
 	}
 
 	return event

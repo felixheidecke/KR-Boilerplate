@@ -10,7 +10,7 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let to: string
-	export let icon: string | null | false = 'fas fa-envelope'
+	export let icon: string | null | false = 'mail'
 	export let subject: string | undefined = undefined
 	export let body: string | undefined = undefined
 

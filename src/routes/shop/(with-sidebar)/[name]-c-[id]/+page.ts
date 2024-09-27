@@ -5,8 +5,6 @@ const { getGroup } = groupsApi
 const { getProductsByGroup } = productsApi
 
 export const load = async function ({ params }) {
-	console.log('params', params)
-
 	const id = +params.id
 	const [group, products] = await Promise.all([
 		xioniLoader(getGroup(id)),

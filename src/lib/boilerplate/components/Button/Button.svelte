@@ -36,7 +36,7 @@
 {#if !to}
 	<button on:click {disabled} {...$$restProps} class={classnames(className, $$props.class)}>
 		{#if icon}
-			<Icon ex-class={baseName + '__icon'} name={icon} />
+			<Icon class={baseName + '__icon'} name={icon} />
 		{/if}
 		<span class="{baseName}__text">
 			<slot />
@@ -45,7 +45,7 @@
 {:else}
 	<a on:click href={to} {target} {...$$restProps} class={classnames(className, $$props.class)}>
 		{#if icon}
-			<Icon ex-class={baseName + '__icon'} name={icon} />
+			<Icon class={baseName + '__icon'} name={icon} />
 		{/if}
 		<span class="{baseName}__text">
 			<slot />

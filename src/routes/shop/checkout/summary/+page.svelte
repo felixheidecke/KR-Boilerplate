@@ -111,7 +111,7 @@
 	<div class="$mt-2">
 		<Button icon="fas fa-angle-left" to="/shop/">zum Shop</Button>
 		<Button
-			icon="fas fa-angle-right"
+			icon="angle-right"
 			class="Button--primary $float-right $row-reverse"
 			on:click={createOrder}>jetzt kostenpflichtig bestellen</Button>
 	</div>
