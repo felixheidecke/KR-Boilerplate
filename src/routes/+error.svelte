@@ -1,8 +1,11 @@
-<script>
+<script lang="ts">
 	import '$lib/styles/styles.scss'
 
+	import { browser } from '$app/environment'
+	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import routes from '$routes'
+	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 
 	if (browser && !$page.url.searchParams.has('error')) {
 		goto('?error=' + $page.status)
@@ -18,7 +21,7 @@
 				🥵 Fehler {$page.status} ist aufgetreten!
 			</h3>
 			<p class="$font-large">
-				{$page.error.message}
+				{$page.error?.message || 'Error'}
 			</p>
 		{/if}
 		<hr />
@@ -33,7 +36,7 @@
 		<ul>
 			{#each routes as route}
 				<li class="$mt">
-					<Link to={route.path} target={route.target}>{route.name}</Link>
+					<Link to={route.path}>{route.name}</Link>
 				</li>
 			{/each}
 		</ul>
