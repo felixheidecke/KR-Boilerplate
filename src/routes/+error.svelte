@@ -1,11 +1,10 @@
-<script lang="ts">
+<script>
 	import '$lib/styles/styles.scss'
 
 	import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import routes from '$routes'
-	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 
 	if (browser && !$page.url.searchParams.has('error')) {
 		goto('?error=' + $page.status)
