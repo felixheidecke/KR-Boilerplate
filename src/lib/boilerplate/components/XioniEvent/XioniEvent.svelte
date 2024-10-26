@@ -76,7 +76,7 @@
 					ex-class={baseName + '__image'}
 					src={image.src}
 					tablet={image.src}
-					alt={image.alt} />
+					alt={image.description} />
 			{/if}
 			{#if images.length}
 				<Grid gap>

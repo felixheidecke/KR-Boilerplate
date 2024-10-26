@@ -10,12 +10,14 @@ export namespace XioniCMS {
 		pdf?: PDF
 		website?: URL
 		author?: string
-		content?: {
-			id: number
-			title: string
-			text: string
-			image?: Image
-		}[]
+		content?: ArticleContent[]
+	}
+
+	export interface ArticleContent {
+		id: number
+		title: string
+		text: string
+		image?: Image
 	}
 
 	export interface Event {
@@ -244,8 +246,8 @@ export namespace XioniShop {
 
 interface Image {
 	src: string
-	alt: string
-	align: 'left' | 'right'
+	description: string
+	align: 'left' | 'right' | null
 	srcset: {
 		small?: string
 		medium?: string

@@ -11,16 +11,16 @@
 	export let caption = ''
 	export let loading: HTMLImageElement['loading'] | undefined = undefined
 	export let placeholder = ''
-	export let baseClass = 'Figure'
+	export let baseName = 'Figure'
 
 	// -----------------------------------------------------------------------------------------------
 
 	const style = placeholder ? `background-image:url(${placeholder})` : undefined
 </script>
 
-<figure {...$$restProps} class={classNames(baseClass, $$props.class)}>
+<figure {...$$restProps} class={classNames(baseName, $$props.class)}>
 	<img
-		class="{baseClass}__image"
+		class="{baseName}__image"
 		{src}
 		{alt}
 		{width}
@@ -28,7 +28,7 @@
 		{style}
 		loading={placeholder ? 'lazy' : loading} />
 	{#if caption}
-		<figcaption class="{baseClass}__caption">
+		<figcaption class="{baseName}__caption">
 			{caption}
 		</figcaption>
 	{/if}

@@ -4,7 +4,6 @@
 	import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
-	import routes from '$routes'
 
 	if (browser && !$page.url.searchParams.has('error')) {
 		goto('?error=' + $page.status)
@@ -32,13 +31,6 @@
 			Dort geht es weiter, als sei nichts geschehen.
 		</p>
 		<hr />
-		<ul>
-			{#each routes as route}
-				<li class="$mt">
-					<Link to={route.path}>{route.name}</Link>
-				</li>
-			{/each}
-		</ul>
 	</div>
 </div>
 

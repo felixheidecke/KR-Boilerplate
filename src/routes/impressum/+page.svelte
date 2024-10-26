@@ -10,7 +10,6 @@
 <h4>Angaben gemäß § 5 TMG:</h4>
 
 <Address {...stammdaten} />
-<p>{stammdaten.web}</p>
 
 <h3>Haftungshinweis</h3>
 <p>

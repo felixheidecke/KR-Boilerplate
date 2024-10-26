@@ -1,0 +1,10 @@
+:where(.XioniArticleMeta) {
+	display: flex;
+	margin: 1rem 0;
+	gap: 1rem;
+}
+
+:where(.XioniArticleMeta__author),
+:where(.XioniArticleMeta__date) {
+	font-size: 0.9rem;
+}

@@ -34,7 +34,7 @@
 			class="{baseName}__image"
 			class:$pointer={!!link}
 			src={image.srcset?.small}
-			alt={image.alt}
+			alt={image.description}
 			on:click={() => {
 				if (link) goto(link)
 			}} />

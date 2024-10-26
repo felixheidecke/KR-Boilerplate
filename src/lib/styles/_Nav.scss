@@ -1,9 +1,11 @@
 .Nav {
-	@media (width < $Nav-breakpoint) {
-		// Mobile navigation styles
-	}
+	// --- Desktop navigation styles -----------------------------------------------------------------
 
 	@media (width >= $Nav-breakpoint) {
-		// Desktop navigation styles
+	}
+
+	// --- Mobile navigation styles ------------------------------------------------------------------
+
+	@media (width < $Nav-breakpoint) {
 	}
 }

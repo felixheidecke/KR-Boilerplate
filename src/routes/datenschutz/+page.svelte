@@ -63,7 +63,7 @@
 </p>
 <h3>Hinweis zur verantwortlichen Stelle</h3>
 <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
-<Address {...stammdaten} fax="" />
+<Address {...stammdaten} web="" />
 <p>
 	Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit
 	anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen,
