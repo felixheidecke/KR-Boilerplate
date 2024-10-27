@@ -10,7 +10,7 @@
 	// --- Props -------------------------------------------------------------------------------------
 
 	export let subject = 'Kontakformular'
-	export let to: number | string = 4
+	export let to: number | string
 	export let attachBodyAsCSV: boolean = false
 	export let baseName = 'Form'
 

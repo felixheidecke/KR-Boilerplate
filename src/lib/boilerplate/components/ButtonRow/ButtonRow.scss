@@ -1,10 +1,10 @@
-@import '$lib/boilerplate/styles/mixins/breakpoint';
+@use '$lib/boilerplate/styles/mixins' as mixin;
 
 .ButtonRow {
 	display: flex;
 }
 
-@include breakpoint('mobile') {
+@include mixin.breakpoint('mobile') {
 	.ButtonRow {
 		flex-direction: column;
 	}
@@ -19,7 +19,7 @@
 		z-index: 1;
 	}
 
-	@include breakpoint('mobile') {
+	@include mixin.breakpoint('mobile') {
 		.Button:first-child {
 			border-bottom: {
 				right-radius: 0;
@@ -44,7 +44,7 @@
 		}
 	}
 
-	@include breakpoint('tablet-up') {
+	@include mixin.breakpoint('tablet-up') {
 		.Button:first-child {
 			border-top-right-radius: 0;
 			border-bottom-right-radius: 0;

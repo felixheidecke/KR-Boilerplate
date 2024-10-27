@@ -1,9 +1,11 @@
+@use 'sass:color';
+
 :where(.Message) {
 	padding: 1rem;
 	border-radius: 0.25rem;
 	background: #dfdfdf;
 	border: 1px solid #7c7c7c;
-	color: mix(black, rgb(34, 34, 34), 66%);
+	color: color.mix(black, rgb(34, 34, 34), 66%);
 	text-align: center;
 	position: relative;
 }

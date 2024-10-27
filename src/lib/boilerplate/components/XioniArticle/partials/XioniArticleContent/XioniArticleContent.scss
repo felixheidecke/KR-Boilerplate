@@ -1,10 +1,10 @@
-@import '$lib/boilerplate/styles/mixins/breakpoint';
+@use '$lib/boilerplate/styles/mixins' as mixin;
 
 :where(.XioniArticleContentImage) {
 	margin: 0;
 }
 
-@include breakpoint('tablet-up') {
+@include mixin.breakpoint('tablet-up') {
 	:where(.XioniArticleContentImage) {
 		display: inline-block;
 		max-width: calc(100% / 3) !important;

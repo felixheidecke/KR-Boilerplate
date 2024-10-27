@@ -1,4 +1,4 @@
-@import '$lib/boilerplate/styles/mixins/breakpoint';
+@use '$lib/boilerplate/styles/mixins' as mixin;
 
 :where(.XioniShopProduct) {
 	display: inline-block;
@@ -9,7 +9,7 @@
 	float: left;
 	max-height: 640px;
 
-	@include breakpoint('tablet-up') {
+	@include mixin.breakpoint('tablet-up') {
 		aspect-ratio: 3/4;
 		object-fit: contain;
 		cursor: pointer;

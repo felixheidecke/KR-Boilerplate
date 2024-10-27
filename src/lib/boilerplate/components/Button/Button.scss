@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 :where(.Button) {
 	align-items: center;
 	background-color: white;
@@ -24,7 +26,7 @@
 }
 
 :where(.Button:not(:disabled):hover) {
-	background-color: mix(black, white, 5%);
+	background-color: color.mix(black, white, 5%);
 	box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
 }
 

@@ -1,4 +1,4 @@
-@import '$variables';
+@use '$lib/boilerplate/styles/mixins' as mixins;
 
 :where(.XioniAlbum) {
 	display: grid;
@@ -12,7 +12,7 @@
 	object-fit: cover;
 }
 
-@include breakpoint('mobile') {
+@include mixins.breakpoint('mobile') {
 	:where(.XioniAlbum) {
 		justify-items: center;
 		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

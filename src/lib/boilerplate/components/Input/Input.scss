@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 :where(.Input) {
 	width: 100%;
 }
@@ -40,10 +42,10 @@
 
 :where(.Input--has-error .Input__label) {
 	background: #ffeded;
-	border-color: mix(black, red, 10%);
-	color: mix(black, red, 10%);
+	border-color: color.mix(black, red, 10%);
+	color: color.mix(black, red, 10%);
 }
 
 :where(.Input--has-error .Input__input) {
-	border-color: mix(black, red, 10%);
+	border-color: color.mix(black, red, 10%);
 }

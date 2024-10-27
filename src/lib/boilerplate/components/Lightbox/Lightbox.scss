@@ -1,4 +1,4 @@
-@import '$variables';
+@use '$lib/boilerplate/styles/mixins' as mixins;
 
 :where(.Lightbox) {
 	display: grid;
@@ -68,7 +68,7 @@
 	}
 }
 
-@include breakpoint('tablet-up') {
+@include mixins.breakpoint('tablet-up') {
 	:where(.Lightbox img[data-lightbox]) {
 		cursor: pointer;
 		transition: opacity 0.5s;
@@ -80,7 +80,7 @@
 	}
 }
 
-@include breakpoint('mobile') {
+@include mixins.breakpoint('mobile') {
 	:where(.Lightbox) {
 		justify-items: center;
 		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

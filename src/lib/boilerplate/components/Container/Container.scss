@@ -1,4 +1,4 @@
-@import '$variables';
+@use '$lib/boilerplate/styles/mixins' as mixins;
 
 :where(.Container) {
 	width: 100%;
@@ -7,11 +7,11 @@
 		right: auto;
 	}
 
-	@include breakpoint('mobile') {
+	@include mixins.breakpoint('mobile') {
 		max-width: 512px;
 	}
 
-	@include breakpoint('tablet-up') {
+	@include mixins.breakpoint('tablet-up') {
 		max-width: 960px;
 	}
 }

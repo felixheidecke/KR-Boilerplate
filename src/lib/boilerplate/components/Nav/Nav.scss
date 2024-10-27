@@ -1,8 +1,6 @@
-@import '$variables';
+@use '$lib/styles/variables' as var;
 
-$Nav-breakpoint: 1024px !default;
-
-@media (width < $Nav-breakpoint) {
+@media (width < var.$Nav-breakpoint) {
 	:where(.Nav) {
 		position: fixed;
 		top: 0;
@@ -84,7 +82,7 @@ $Nav-breakpoint: 1024px !default;
 	}
 }
 
-@media (width >= $Nav-breakpoint) {
+@media (width >= var.$Nav-breakpoint) {
 	:where(.Nav) {
 		width: 100%;
 		display: flex;

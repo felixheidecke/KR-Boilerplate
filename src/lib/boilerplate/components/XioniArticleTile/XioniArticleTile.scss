@@ -1,5 +1,4 @@
-@import '$variables';
-
+@use '$lib/boilerplate/styles/mixins' as mixins;
 :where(.XioniArticleTile) {
 	padding: 1rem;
 	display: flow-root;
@@ -12,7 +11,7 @@
 	display: block;
 	margin: 0;
 
-	@include breakpoint('tablet-up') {
+	@include mixins.breakpoint('tablet-up') {
 		width: 12.5rem;
 		aspect-ratio: 1/1;
 		object-fit: cover;
