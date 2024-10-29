@@ -1,4 +1,4 @@
-@use '$lib/styles/variables' as var;
+@use '$lib/styles/Nav' as var;
 
 @media (width < var.$Nav-breakpoint) {
 	:where(.Nav) {

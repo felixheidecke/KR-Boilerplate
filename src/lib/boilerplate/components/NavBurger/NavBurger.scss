@@ -1,6 +1,4 @@
-@use '$lib/styles/variables' as var;
-
-// $Nav-breakpoint: 1024px !default;
+@use '$lib/styles/Nav' as var;
 
 @media (width < var.$Nav-breakpoint) {
 	:where(.NavBurger) {

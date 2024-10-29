@@ -10,7 +10,7 @@
 	}
 </script>
 
-<div id="error-layout">
+<div data-layout="error">
 	<div class="$text-center">
 		{#if $page.status === 404}
 			<h3>Leider wurde diese Seite nicht gefunden!</h3>
@@ -40,7 +40,7 @@
 		margin: 0 auto;
 	}
 
-	#error-layout {
+	[data-layout] {
 		display: grid;
 		place-items: center;
 		height: 80vh;

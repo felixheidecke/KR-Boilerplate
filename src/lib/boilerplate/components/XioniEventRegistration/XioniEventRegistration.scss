@@ -1,15 +1,9 @@
-@import '$lib/boilerplate/styles/mixins';
-
 .XioniEventRegistration {
 	&__header {
-		@include font-large;
-
 		text-align: center;
 	}
 
 	&__title {
-		@include font-small;
-
 		text-align: center;
 		margin-bottom: 0.25rem;
 	}

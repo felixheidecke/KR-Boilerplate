@@ -76,10 +76,10 @@
 {/if}
 
 <style lang="scss">
-	@import '$variables';
+	@use '$lib/boilerplate/styles/mixins' as mixins;
 
 	.subgroup-product-list {
-		@include breakpoint('tablet-up') {
+		@include mixins.breakpoint('tablet-up') {
 			column-count: 2;
 		}
 	}

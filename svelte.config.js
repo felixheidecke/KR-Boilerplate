@@ -20,7 +20,7 @@ const config = {
 			precompress: false
 		}),
 		alias: {
-			$variables: './src/lib/styles/variables.scss',
+			$styles: './src/lib/styles/',
 			$routes: './src/routes.js',
 			$stammdaten: './src/lib/stammdaten.js'
 		},
