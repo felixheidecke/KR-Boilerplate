@@ -28,7 +28,7 @@ export default function useEvents(fetchFn: typeof fetch = fetch) {
 			startsAfter?: Date
 			endsBefore?: Date
 			endsAfter?: Date
-			parts?: Array<'images' | 'flags'>
+			parts?: Array<'images' | 'flags' | 'tags'>
 		} = {}
 	): Promise<XioniCMS.Event[]> {
 		const params = {}

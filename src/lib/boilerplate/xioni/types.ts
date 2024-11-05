@@ -43,6 +43,10 @@ export namespace XioniCMS {
 			src: string
 			alt: string
 		}[]
+		tags?: {
+			id: number
+			name: string
+		}[]
 		flags?: 'anmeldung'[]
 	}
 
