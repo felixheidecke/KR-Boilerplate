@@ -31,8 +31,8 @@
 	let formMessageError: string | undefined = undefined
 
 	// Form bindings
-	let address = { ...$ORDER.address } || {}
-	let deliveryAddress = { ...$ORDER.deliveryAddress } || {}
+	let address = { ...$ORDER.address }
+	let deliveryAddress = { ...$ORDER.deliveryAddress }
 	let message = $ORDER.message || ''
 
 	function toggleLoading() {
@@ -173,13 +173,15 @@
 	<Textarea bind:value={message} rows={4} name="message" label="Nachricht" />
 </div>
 
-<Button
-	icon={isLoading ? 'fas fa-spinner fa-pulse' : 'fas fa-angle-right'}
-	class={[
-		{
-			'$mt $w-full $content-center': $IS_MOBILE
-		},
-		'Button--primary $mt-2 $float-right $row-reverse'
-	]}
-	disabled={isLoading}
-	on:click={updateOrder}>weiter zur Zusammenfassung</Button>
+<div class="$flex $content-right">
+	<Button
+		icon={isLoading ? 'fas fa-spinner fa-pulse' : 'fas fa-angle-right'}
+		class={[
+			{
+				'$mt $w-full $content-center': $IS_MOBILE
+			},
+			'Button--primary $mt-2 $row-reverse'
+		]}
+		disabled={isLoading}
+		on:click={updateOrder}>weiter zur Zusammenfassung</Button>
+</div>

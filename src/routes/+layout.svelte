@@ -28,3 +28,12 @@
 
 <MessageBus {messages} />
 <Toplink />
+
+<style lang="scss">
+	@use '$styles/colors' as colors;
+
+	:global(body) {
+		background-color: colors.$dark;
+		color: colors.$light;
+	}
+</style>
