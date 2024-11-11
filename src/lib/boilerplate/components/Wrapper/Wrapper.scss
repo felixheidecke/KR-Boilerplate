@@ -1,4 +1,4 @@
-.Wrapper {
+:where(.Wrapper) {
 	width: 100%;
 	max-width: 1024px;
 
@@ -11,26 +11,26 @@
 		left: auto;
 		right: auto;
 	}
+}
 
-	&--smaller {
-		max-width: 512px;
-	}
+:where(.Wrapper--smaller) {
+	max-width: 512px;
+}
 
-	&--small {
+:where(.Wrapper--small) {
+	max-width: 768px;
+}
+
+:where(.Wrapper--large) {
+	max-width: 1280px;
+}
+
+:where(.Wrapper--responsive) {
+	@media (max-width: calc(1024px - 1px)) {
 		max-width: 768px;
 	}
 
-	&--large {
-		max-width: 1280px;
-	}
-
-	&--responsive {
-		@media (max-width: calc(1024px - 1px)) {
-			max-width: 768px;
-		}
-
-		@media (max-width: calc(768px - 1px)) {
-			max-width: 512px;
-		}
+	@media (max-width: calc(768px - 1px)) {
+		max-width: 512px;
 	}
 }
