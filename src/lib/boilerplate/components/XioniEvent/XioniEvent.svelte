@@ -132,14 +132,14 @@
 		{#if allowRegistration}
 			<Button
 				icon="fas fa-ticket-alt"
-				on:click={() => emit('registrationButtonClick')}
+				on:click={() => emit('registrationClick')}
 				class={baseName + '__registration'}>Jetzt anmelden</Button>
 		{/if}
 
 		{#if ticketshop && !allowRegistration}
 			<Button
 				to={ticketshop.toString()}
-				on:click={() => emit('ticketshopButtonClick')}
+				on:click={() => emit('ticketshopClick')}
 				icon="fas fa-ticket-alt">Zum Ticketshop</Button>
 		{/if}
 

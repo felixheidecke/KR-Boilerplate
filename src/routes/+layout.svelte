@@ -30,10 +30,10 @@
 <Toplink />
 
 <style lang="scss">
-	@use '$styles/colors' as colors;
+	@use '$styles/colors';
 
-	:global(body) {
-		background-color: colors.$dark;
-		color: colors.$light;
-	}
+	// :global(body) {
+	// 	background-color: colors.$dark;
+	// 	color: colors.$light;
+	// }
 </style>

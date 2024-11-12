@@ -1,5 +1,0 @@
-@use 'sass:color';
-
-@function darken($color, $amount) {
-	@return color.mix(black, $color, $amount);
-}
