@@ -18,28 +18,15 @@
 	}
 }
 
-.Grid--gap-2 {
-	row-gap: 2rem;
-	width: calc(100% + 2rem);
-	transform: translateX(-1rem);
+@each $query in (2, 4, 6, 8) {
+	.Grid--gap-#{$query} {
+		row-gap: #{$query}rem;
+		width: calc(100% + #{$query}rem);
+		transform: translateX(#{calc($query / -2)}rem);
 
-	> [class*='Grid__item'] {
-		padding: {
-			left: 1rem;
-			right: 1rem;
-		}
-	}
-}
-
-.Grid--gap-3 {
-	row-gap: 3rem;
-	width: calc(100% + 3rem);
-	transform: translateX(-1.5rem);
-
-	> [class*='Grid__item'] {
-		padding: {
-			left: 1.5rem;
-			right: 1.5rem;
+		> [class*='Grid__item'] {
+			padding-left: #{calc($query / 2)}rem;
+			padding-right: #{calc($query / 2)}rem;
 		}
 	}
 }

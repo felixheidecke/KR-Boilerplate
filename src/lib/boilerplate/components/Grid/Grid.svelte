@@ -5,7 +5,7 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let tag: string = 'div'
-	export let gap: number | string | boolean = 0
+	export let gap: 0 | 2 | 4 | 6 | 8 | boolean = 0
 	export let size: string | boolean = false
 	export let id: string | undefined = undefined
 	export let index: number | string | undefined = undefined
