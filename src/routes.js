@@ -4,16 +4,16 @@ export default [
 		name: 'Home'
 	},
 	{
-		path: '/shop',
+		path: '/shop/',
 		name: 'Shop'
 	},
 	{
-		path: '/impressum',
+		path: '/impressum/',
 		name: 'Impressum',
 		class: '$hidden@desktop-up'
 	},
 	{
-		path: '/datenschutz',
+		path: '/datenschutz/',
 		name: 'Datenschutz',
 		class: '$hidden@desktop-up'
 	}
