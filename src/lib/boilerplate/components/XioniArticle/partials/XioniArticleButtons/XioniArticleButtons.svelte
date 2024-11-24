@@ -17,13 +17,14 @@
 
 <ButtonRow class={baseName}>
 	{#if pdf}
-		<Button to={pdf.src} class="{baseName}__pdf" icon="fas fa-file-pdf">
+		<Button to={pdf.src} class="{baseName}__pdf" fontello="file-pdf">
 			{pdf.title}
 		</Button>
 	{/if}
 
 	{#if website}
-		<Button to={website.toString()} class="{baseName}__website" icon="fas fa-link"
-			>{website.host}</Button>
+		<Button to={website.toString()} class="{baseName}__website" fontello="link">
+			{website.host}
+		</Button>
 	{/if}
 </ButtonRow>

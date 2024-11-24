@@ -17,6 +17,10 @@
 		opacity 0.33s;
 }
 
+:where(.Swiper__button-icon)::before {
+	scale: 3;
+}
+
 :where(.Swiper__button--prev) {
 	background: linear-gradient(90deg, rgba(black, 0.25) 0%, transparent 100%);
 	left: 0;

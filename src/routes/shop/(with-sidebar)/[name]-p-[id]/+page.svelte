@@ -51,6 +51,6 @@
 	<hr />
 
 	<div class="$text-center">
-		<Link icon="fas fa-reply" on:click={() => history.back()}>Zurück</Link>
+		<Link fontello="angle-left" on:click={() => history.back()}>Zurück</Link>
 	</div>
 {/if}

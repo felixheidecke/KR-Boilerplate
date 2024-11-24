@@ -8,6 +8,7 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Icon from '$lib/boilerplate/components/Icon/Icon.svelte'
+	import Fontello from '$lib/boilerplate/components/Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -22,13 +23,13 @@
 <ul class={baseName}>
 	{#if author}
 		<li class="{baseName}__author">
-			<Icon name="far fa-user" class="$mr-1/4" />
+			<Fontello name="user" />
 			<span>Von {author}</span>
 		</li>
 	{/if}
 	{#if date}
 		<li class="{baseName}__date">
-			<Icon name="far fa-calendar-alt" class="$mr-1/4" />
+			<Fontello name="calendar-empty" />
 			<time>{format(date, 'PPP', { locale: de })}</time>
 		</li>
 	{/if}

@@ -20,20 +20,9 @@
 <div data-layout={$page.data.layout}>
 	<Nav {routes} sticky />
 	<Wrapper tag="main">
-		<PageTransition>
-			<slot />
-		</PageTransition>
+		<slot />
 	</Wrapper>
 </div>
 
 <MessageBus {messages} />
 <Toplink />
-
-<style lang="scss">
-	@use '$styles/colors';
-
-	// :global(body) {
-	// 	background-color: colors.$dark;
-	// 	color: colors.$light;
-	// }
-</style>

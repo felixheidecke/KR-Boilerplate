@@ -41,7 +41,7 @@
 			itemprop="image"
 			class="{baseName}__image"
 			src={image.srcset.small || image.src}
-			alt={image.alt || title}
+			alt={image.description || title}
 			on:click={() => {
 				if (link) goto(link)
 			}} />
@@ -60,7 +60,7 @@
 		</p>
 	{/if}
 	{#if link}
-		<Link to={link} class="{baseName}__link $row-reverse" icon="fas fa-angle-right">
+		<Link to={link} class="{baseName}__link $row-reverse" fontello="angle-right">
 			{linkText}
 		</Link>
 	{/if}

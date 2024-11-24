@@ -3,10 +3,9 @@
 
 	export let name = 'fas fa-carrot'
 	export let size: number | string = 0
+	export let baseName = 'Icon'
 
 	// -----------------------------------------------------------------------------------------------
-
-	const baseName = $$props['ex-class'] || 'Icon'
 
 	$: className = classnames(
 		$$props.class,
@@ -16,4 +15,4 @@
 	)
 </script>
 
-<i class={className} aria-hidden="true" on:click />
+<i class={className} aria-hidden="true" on:click></i>

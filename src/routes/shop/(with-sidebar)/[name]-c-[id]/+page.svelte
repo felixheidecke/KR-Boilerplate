@@ -14,8 +14,7 @@
 	// -----------------------------------------------------------------------------------------------
 
 	$: group = data.group
-	$: products = data.products || []
-	$: mainProducts = products.filter(product => product.group === group.id)
+	$: products = (data.products || []).filter(product => product.group === group.id)
 </script>
 
 <svelte:head>
@@ -37,9 +36,9 @@
 	<p>{@html group.description}</p>
 {/if}
 
-{#if mainProducts.length}
+{#if products.length}
 	<Grid gap tag="ol">
-		{#each mainProducts as product, index (product.id)}
+		{#each products as product, index (product.id)}
 			<Grid tag="li" size="tablet-1-2" {index}>
 				<Link class="$decoration-none" to="/shop/{product.slug}-p-{product.id}/">
 					<ProductTile {product} />

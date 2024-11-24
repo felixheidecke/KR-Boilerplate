@@ -43,7 +43,7 @@
 <Client browser>
 	{#if !$CART.products?.length}
 		<h4>Ihr Warenkorb ist noch leer.</h4>
-		<Link to="/shop/" icon="fas fa-store">Zum Shop</Link>
+		<Link to="/shop/">Zum Shop</Link>
 	{:else}
 		<CartTable
 			products={$CART.products}
@@ -55,9 +55,9 @@
 			on:product-quantity-update={updateItemQuantity} />
 
 		<div class="$mt-2">
-			<Button icon="fas fa-angle-left" to="/shop/">zum Shop</Button>
+			<Button fontello="angle-left" to="/shop/">zum Shop</Button>
 			<Button
-				icon="fas fa-angle-right"
+				fontello="angle-right"
 				class="Button--primary $float-right $row-reverse"
 				to="/shop/checkout/address/">zur Kasse</Button>
 		</div>

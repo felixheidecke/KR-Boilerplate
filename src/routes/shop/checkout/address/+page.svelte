@@ -8,10 +8,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import type {
-		XioniFetchError,
-		XioniFetchErrorResponse
-	} from '$lib/boilerplate/xioni/utils/xioniFetch'
+	import type { XioniFetchError } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -175,7 +172,7 @@
 
 <div class="$flex $content-right">
 	<Button
-		icon={isLoading ? 'fas fa-spinner fa-pulse' : 'fas fa-angle-right'}
+		fontello="angle-right"
 		class={[
 			{
 				'$mt $w-full $content-center': $IS_MOBILE

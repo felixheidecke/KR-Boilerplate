@@ -10,6 +10,7 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Icon from '../Icon/Icon.svelte'
+	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -67,13 +68,13 @@
 			aria-label="Vorheriges Bild zeigen"
 			class={`${baseName}__button ${baseName}__button--prev`}
 			on:click={() => swiper.go('<')}>
-			<Icon ex-class={`${baseName}__button-icon`} name="fas fa-angle-left" size="5" />
+			<Fontello baseName={`${baseName}__button-icon`} name="right-open" />
 		</button>
 		<button
 			aria-label="Nächstes Bild zeigen"
 			class={`${baseName}__button ${baseName}__button--next`}
 			on:click={() => swiper.go('>')}>
-			<Icon ex-class={`${baseName}__button-icon`} name="fas fa-angle-right" size="5" />
+			<Fontello baseName={`${baseName}__button-icon`} name="left-open" />
 		</button>
 	{/if}
 </div>

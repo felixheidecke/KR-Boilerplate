@@ -1,7 +1,7 @@
 <script>
 	import stammdaten from '$lib/stammdaten'
 
-	const { name, title, owner, street, town, phone, fax, email } = stammdaten
+	const { title } = stammdaten
 </script>
 
 <svelte:head>
@@ -19,15 +19,7 @@
 	Dritter, der nicht Beförderer ist, die Waren in Besitz genommen haben bzw. hat.
 </p>
 <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns</p>
-<p>
-	{name}<br />
-	{owner}<br />
-	{street}<br />
-	{town}<br />
-	Tel: {phone}<br />
-	Fax: {fax}<br />
-	E-Mail: {email}
-</p>
+<Address {...stammdaten} />
 <p>
 	(z.B. ein mit der Post versandter Brief, Telefax oder E-Mail) über Ihren Entschluss, diesen
 	Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte <Link
@@ -72,6 +64,6 @@
 	wurde.
 </p>
 <p>
-	<Link to="/pdf/MusterWiderrufsformular.pdf" icon="fas fa-file-pdf">Widerrufsformular</Link>
+	<Link to="/pdf/MusterWiderrufsformular.pdf" fontello="file-pdf">Widerrufsformular</Link>
 </p>
 <em>Ende der Widerrufsbelehrung</em>

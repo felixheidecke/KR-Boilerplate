@@ -131,25 +131,24 @@
 	<ButtonRow class={baseName + '__metadata'}>
 		{#if allowRegistration}
 			<Button
-				icon="fas fa-ticket-alt"
+				fontello="ticket"
 				on:click={() => emit('registrationClick')}
 				class={baseName + '__registration'}>Jetzt anmelden</Button>
 		{/if}
 
 		{#if ticketshop && !allowRegistration}
-			<Button
-				to={ticketshop.toString()}
-				on:click={() => emit('ticketshopClick')}
-				icon="fas fa-ticket-alt">Zum Ticketshop</Button>
+			<Button to={ticketshop.toString()} on:click={() => emit('ticketshopClick')} fontello="ticket">
+				Zum Ticketshop
+			</Button>
 		{/if}
 
 		{#if website}
-			<Button icon="fas fa-globe" on:click={() => emit('click', 'website')} to={website.toString()}
+			<Button fontello="globe" on:click={() => emit('click', 'website')} to={website.toString()}
 				>{website.hostname}</Button>
 		{/if}
 
 		{#if pdf}
-			<Button icon="fas fa-file-pdf" to={pdf.src}>{pdf.title}</Button>
+			<Button fontello="file-pdf" to={pdf.src}>{pdf.title}</Button>
 		{/if}
 	</ButtonRow>
 </div>

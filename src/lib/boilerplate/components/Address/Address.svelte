@@ -7,6 +7,7 @@
 	import Link from '../Link/Link.svelte'
 	import Mail from '../Mail/Mail.svelte'
 	import Icon from '../Icon/Icon.svelte'
+	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -33,12 +34,12 @@
 	<slot />
 	{#if phone}
 		<li class="{baseName}__phone">
-			<Link icon="fas fa-phone-alt" to={'tel:' + phone}>{phone}</Link>
+			<Link to={'tel:' + phone} fontello="phone">{phone}</Link>
 		</li>
 	{/if}
 	{#if fax}
 		<li class="{baseName}__fax">
-			<Icon name="fas fa-fax" />
+			<Fontello name="fax" />
 			{fax}
 		</li>
 	{/if}
@@ -49,7 +50,7 @@
 	{/if}
 	{#if web}
 		<li class="{baseName}__web">
-			<Icon name="fas fa-globe" />
+			<Fontello name="globe" />
 			{web}
 		</li>
 	{/if}

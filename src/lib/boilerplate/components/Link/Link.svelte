@@ -2,16 +2,15 @@
 	import './Link.css'
 	import classnames from 'classnames'
 	import isExternalURL from '$lib/boilerplate/utils/isExternalURL'
-
-	// --- [ Components ] ----------------------------------------------------------------------------
-
 	import Icon from '../Icon/Icon.svelte'
+	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let to: string | undefined = undefined
 	export let target: '_blank' | undefined = undefined
 	export let icon: string = ''
+	export let fontello: string = ''
 	export let rel: string = 'follow'
 	export let label: string = ''
 	export let exClass: string | undefined = undefined
@@ -37,9 +36,13 @@
 	}
 </script>
 
-{#if icon}
+{#if icon || fontello}
 	<span class={className}>
-		<Icon ex-class={baseName + '__icon'} name={icon} />
+		{#if icon}
+			<Icon baseName={baseName + '__icon'} name={icon} />
+		{:else if fontello}
+			<Fontello class={baseName + '__icon'} name={fontello} />
+		{/if}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<svelte:element this={tag} href={to} {target} {rel} aria-label={label} on:click>
 			{#if $$slots.default}

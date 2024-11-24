@@ -75,10 +75,7 @@
 	zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde in datenschutzrechtlichen Fragen ist
 	der Landesdatenschutzbeauftragte des Bundeslandes, in dem unser Unternehmen seinen Sitz hat. Eine
 	Liste der Datenschutzbeauftragten sowie deren Kontaktdaten können folgendem Link entnommen werden:
-	<Link to="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html">
-		www.bfdi.bund.de
-	</Link>
-	.
+	<Link to="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" />.
 </p>
 <h3>Recht auf Datenübertragbarkeit</h3>
 <p>

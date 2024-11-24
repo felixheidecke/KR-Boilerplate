@@ -173,7 +173,7 @@
 	{stammdaten.name}
 </p>
 
-<Button class="$mt-4" icon="fas fa-print" on:click={() => window.print()}>Drucken</Button>
+<Button class="$mt-4" fontello="print" on:click={() => window.print()}>Drucken</Button>
 
 <style>
 	li + li {

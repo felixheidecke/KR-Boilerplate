@@ -2,6 +2,7 @@
 	import stammdaten from '$stammdaten'
 	import { CART } from '../shop.stores'
 	import { page } from '$app/stores'
+	import type { XioniShop } from '$lib/boilerplate/xioni/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -18,7 +19,7 @@
 	// -----------------------------------------------------------------------------------------------
 
 	$: groups = data.groups
-	$: activeGroup = $page.data.group
+	$: activeGroup = $page.data.group as XioniShop.Group
 </script>
 
 <svelte:head>
@@ -32,7 +33,7 @@
 				{#if $CART.products?.length}
 					<MiniCart cart={$CART} />
 					<Button
-						icon="fas fa-shopping-cart"
+						fontello="basket"
 						to="/shop/checkout/"
 						class="$mt $w-full $content-center $font-small">Zum Warenkorb</Button>
 					<hr />

@@ -5,12 +5,12 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Icon from '../Icon/Icon.svelte'
+	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let to: string
-	export let icon: string | null | false = 'fas fa-envelope'
+	export let fontello: string = 'mail'
 	export let subject: string | undefined = undefined
 	export let body: string | undefined = undefined
 
@@ -19,7 +19,6 @@
 	const obfuscatedEmail = to.replaceAll('@', '&#64;').replaceAll('.de', '&#8228;&#100;&#101;')
 	const baseName = $$props['ex-class'] || 'Mail'
 	const className = classnames(baseName, $$props.class)
-	const showIcon = typeof icon === 'string' && icon !== 'false'
 
 	function makeHref() {
 		const link = new URL('mailto:' + to)
@@ -41,8 +40,8 @@
 	on:click|preventDefault={() => (location.href = makeHref())}
 	{...$$restProps}
 	class={className}>
-	{#if showIcon && icon}
-		<Icon ex-class={baseName + '__icon'} name={icon} />
+	{#if fontello}
+		<Fontello baseName={baseName + '__icon'} name={fontello} />
 	{/if}
 	<span class={baseName + '__address'}>
 		{#if $$slots.default}

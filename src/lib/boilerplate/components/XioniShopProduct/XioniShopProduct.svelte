@@ -106,7 +106,7 @@
 					<Button
 						on:click={addToCartHandler}
 						class="{baseName}__add-to-cart-button"
-						icon="fas fa-cart-arrow-down">
+						fontello="basket">
 						In den Warenkorb
 					</Button>
 				{/if}

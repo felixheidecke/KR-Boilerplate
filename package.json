@@ -1,6 +1,6 @@
 {
 	"name": "boilerplate.ts",
-	"version": "5.0.19",
+	"version": "5.1.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -14,7 +14,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.6",
-		"@sveltejs/kit": "^2.8.1",
+		"@sveltejs/kit": "^2.8.2",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"@types/eslint": "^9.6.1",
 		"@types/lodash-es": "^4.17.12",
@@ -25,18 +25,18 @@
 		"eslint-plugin-svelte": "^2.46.0",
 		"npm-check-updates": "^17.1.11",
 		"prettier": "^3.3.3",
-		"prettier-plugin-svelte": "^3.3.0",
+		"prettier-plugin-svelte": "^3.3.2",
 		"sass": "^1.81.0",
 		"svelte": "^4.2.19",
-		"svelte-check": "^4.0.9",
+		"svelte-check": "^4.1.0",
 		"sveltekit-autoimport": "^1.8.1",
 		"tslib": "^2.8.1",
-		"typescript": "^5.6.3",
+		"typescript": "^5.7.2",
 		"vite": "^5.4.11"
 	},
 	"type": "module",
 	"dependencies": {
-		"@glidejs/glide": "^3.7.0",
+		"@glidejs/glide": "^3.7.1",
 		"@paypal/paypal-js": "^8.1.2",
 		"axios": "^1.7.7",
 		"classnames": "^2.5.1",

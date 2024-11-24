@@ -7,12 +7,14 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Icon from '../Icon/Icon.svelte'
+	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let baseName = 'Button'
 	export let disabled = false
 	export let icon = ''
+	export let fontello: string = ''
 	export let isLoading = false
 	export let rel: 'follow' | 'nofollow' = 'follow'
 	export let target: '_blank' | undefined = undefined
@@ -36,7 +38,9 @@
 {#if !to}
 	<button on:click {disabled} {...$$restProps} class={classnames(className, $$props.class)}>
 		{#if icon}
-			<Icon ex-class={baseName + '__icon'} name={icon} />
+			<Icon baseName={baseName + '__icon'} name={icon} />
+		{:else if fontello}
+			<Fontello baseName={baseName + '__icon'} name={fontello} />
 		{/if}
 		<span class="{baseName}__text">
 			<slot />
@@ -45,7 +49,9 @@
 {:else}
 	<a on:click href={to} {target} {...$$restProps} class={classnames(className, $$props.class)}>
 		{#if icon}
-			<Icon ex-class={baseName + '__icon'} name={icon} />
+			<Icon baseName={baseName + '__icon'} name={icon} />
+		{:else if fontello}
+			<Fontello baseName={baseName + '__icon'} name={fontello} />
 		{/if}
 		<span class="{baseName}__text">
 			<slot />

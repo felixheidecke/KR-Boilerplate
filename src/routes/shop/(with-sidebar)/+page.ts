@@ -6,5 +6,7 @@ export const ssr = false
 export const load = async () => {
 	const getProducts = productsApi.getProducts({ frontpage: true })
 
-	return { products: await xioniLoader(getProducts) }
+	return {
+		products: await xioniLoader(getProducts)
+	}
 }
