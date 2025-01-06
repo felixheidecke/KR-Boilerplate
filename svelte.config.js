@@ -26,7 +26,7 @@ const config = {
 		},
 		version: {
 			name: `Boilerplate: ${pkg.version}; Built: ${new Date().toString()}`
-		},
+		}
 	}
 }
 

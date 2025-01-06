@@ -36,9 +36,11 @@
 	Warenkorb enthaltenen Waren ab. Die Bestätigung des Zugangs Ihrer Bestellung erfolgt per E-Mail
 	unmittelbar nach dem Absenden der Bestellung.
 </p>
-<p>Wir nehmen Ihr Angebot innerhalb von zwei Tagen an, indem wir eine Annahmeerklärung in separater E-Mail abgeben oder	gegebenenfalls die Zahlungstransaktion durch unseren Dienstleister oder den ausgewählten
-	Zahlungsdienstleister durchgeführt wird. Der Durchführungszeitpunkt der Zahlungstransaktion
-	richtet sich nach der jeweils ausgewählten Zahlungsart (s. unter „Bezahlung“).
+<p>
+	Wir nehmen Ihr Angebot innerhalb von zwei Tagen an, indem wir eine Annahmeerklärung in separater
+	E-Mail abgeben oder gegebenenfalls die Zahlungstransaktion durch unseren Dienstleister oder den
+	ausgewählten Zahlungsdienstleister durchgeführt wird. Der Durchführungszeitpunkt der
+	Zahlungstransaktion richtet sich nach der jeweils ausgewählten Zahlungsart (s. unter „Bezahlung“).
 </p>
 <p>
 	Die für Sie relevante Alternative richtet sich danach, welches der aufgezählten Ereignisse als
@@ -57,8 +59,8 @@
 </p>
 <p>
 	Sie haben grundsätzlich die Möglichkeit der Abholung bei {stammdaten.name},
-	{stammdaten.street}, {stammdaten.town} - Deutschland zu den nachfolgend angegebenen
-	Geschäftszeiten: Montag bis Freitag, 7:30 bis 18 Uhr
+	{stammdaten.street}, {stammdaten.town} - Deutschland zu den nachfolgend angegebenen Geschäftszeiten:
+	Montag bis Freitag, 7:30 bis 18 Uhr
 </p>
 <p>Wir liefern nicht an Packstationen!</p>
 <h4>5. Bezahlung</h4>
