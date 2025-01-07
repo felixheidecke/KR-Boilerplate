@@ -1,36 +1,40 @@
-<script>
+<script lang="ts">
 	import '$lib/styles/styles.scss'
 
 	import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
+	import Message from '$lib/boilerplate/components/Message/Message.svelte'
+	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 
 	if (browser && !$page.url.searchParams.has('error')) {
 		goto('?error=' + $page.status)
 	}
+
+	const status = $page.status || 500
+	const message = $page.error?.message || 'Ein Fehler ist aufgetreten'
 </script>
 
 <div data-layout="error">
 	<div class="$text-center">
-		{#if $page.status === 404}
-			<h3>Leider wurde diese Seite nicht gefunden!</h3>
-		{:else}
-			<h3>
-				🥵 Fehler {$page.status} ist aufgetreten!
-			</h3>
-			<p class="$font-large">
-				{$page.error?.message || 'Error'}
-			</p>
-		{/if}
-		<hr />
+		<Message title="🥵 Ups…" type="error">
+			<em>
+				{#if status === 404}
+					Die Seite wurde nicht gefunden.
+				{:else if status === 400}
+					Fehlerhafte Eingabe
+				{:else}
+					Ein interner Fehler ist aufgetreten
+				{/if}
+			</em>
+		</Message>
 		<p>
-			<strong>Ist aber nicht so schlimm.</strong>
-		</p>
-		<p>
-			Kehren Sie einfach wieder zur <Link to="/">Startseite</Link> zurück.<br />
-			Dort geht es weiter, als sei nichts geschehen.
+			<Link to="/">Zur Startseite</Link>.
 		</p>
 		<hr />
+		<p>
+			<small>{message}</small>
+		</p>
 	</div>
 </div>
 

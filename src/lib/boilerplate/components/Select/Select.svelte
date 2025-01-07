@@ -12,6 +12,7 @@
 	export let required: boolean = false
 	export let values: Array<string | number> = options
 	export let value: string | number = values[0]
+	export let placeholder: string = ''
 	export let disabled: boolean = false
 	export let id = uniqueId(name + '-')
 	export let baseName = 'Select'
@@ -29,6 +30,9 @@
 		class={classnames(baseName + '__input', $$props.class)}
 		bind:value
 		on:change>
+		{#if placeholder}
+			<option value="" selected>{placeholder}</option>
+		{/if}
 		{#each options as option, i}
 			<option value={values[i]}>{option}</option>
 		{/each}

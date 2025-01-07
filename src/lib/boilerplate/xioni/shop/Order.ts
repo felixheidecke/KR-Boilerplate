@@ -1,5 +1,5 @@
-import { xioniFetch, type XioniFetchErrorResponse } from '../utils/xioniFetch'
-
+import config from '$lib/app.config'
+import Axios from 'axios'
 import type { XioniShop } from '../types'
 
 type UpdateOrderParams = {
@@ -12,45 +12,42 @@ type UpdateOrderParams = {
 // --- Factory -------------------------------------------------------------------------------------
 
 export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
-	const fetch = xioniFetch(fetchFn)
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
 
 	async function createOrder(): Promise<XioniShop.Order> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'order'], { method: 'POST' })
+		try {
+			const { data } = await axios.post(`shop/${module}/order`)
 
-			if (response.status === 'success') {
-				resolve(orderAdapter(response.data) as XioniShop.Order)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return orderAdapter(data) as XioniShop.Order
+		} catch (error) {
+			throw error
+		}
 	}
 
 	async function updateOrder(update: UpdateOrderParams): Promise<XioniShop.Order> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'order'], {
-				method: 'PATCH',
+		try {
+			const { data } = await axios.patch(`shop/${module}/order`, {
 				data: update
 			})
 
-			if (response.status === 'success') {
-				resolve(orderAdapter(response.data) as XioniShop.Order)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return orderAdapter(data) as XioniShop.Order
+		} catch (error) {
+			throw error
+		}
 	}
 
 	async function getOrder(id?: string): Promise<XioniShop.Order> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'order', id])
+		try {
+			const { data } = await axios.get(`shop/${module}/order/${id}`)
 
-			if (response.status === 'success') {
-				const order = resolve(orderAdapter(response.data) as XioniShop.Order)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return orderAdapter(data) as XioniShop.Order
+		} catch (error) {
+			throw error
+		}
 	}
 
 	return {

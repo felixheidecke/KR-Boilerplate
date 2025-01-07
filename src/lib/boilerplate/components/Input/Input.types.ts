@@ -1,8 +1,9 @@
-export enum ImputPropsType {
+export enum InputPropsType {
 	TEXT = 'text',
 	NUMBER = 'number',
 	EMAIL = 'email',
-	TEL = 'tel'
+	TEL = 'tel',
+	FILE = 'file'
 }
 
 export interface InputProps {
@@ -13,7 +14,8 @@ export interface InputProps {
 	placeholder?: string
 	readonly?: boolean
 	required?: boolean
-	type?: ImputPropsType
+	type?: InputPropsType
 	value: string
 	error?: string
+	multiple?: boolean
 }

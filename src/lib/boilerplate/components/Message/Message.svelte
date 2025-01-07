@@ -11,7 +11,7 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let type: 'error' | 'info' | 'success' | undefined = undefined
-	export let title: string | undefined = undefined
+	export let title: string | number | undefined = undefined
 	export let inline = false
 	export let tag = 'div'
 	export let closable = false

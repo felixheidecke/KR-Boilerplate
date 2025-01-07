@@ -1,11 +1,16 @@
-import { xioniFetch, type XioniFetchErrorResponse } from '../utils/xioniFetch'
-
+import { dev } from '$app/environment'
+import Axios from 'axios'
+import config from '$lib/app.config'
 import type { XioniCMS } from '../types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
 export default function useGallery(fetchFn: typeof fetch = fetch) {
-	const fetch = xioniFetch(fetchFn)
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
 
 	/**
 	 * Get Albums grouped as a Gallery
@@ -14,18 +19,21 @@ export default function useGallery(fetchFn: typeof fetch = fetch) {
 	 * @returns Gallery
 	 */
 
-	function getGallery(module: number): Promise<XioniCMS.Gallery> {
-		const context = { emitter: 'getGallery' }
+	async function getGallery(module: number): Promise<{
+		albums: XioniCMS.Gallery
+		meta: {
+			totalCount: number
+		}
+	}> {
+		try {
+			const { data } = await axios.get(`cms/gallery/${module}`)
 
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['cms/gallery', module])
+			return data
+		} catch (error) {
+			if (dev) console.error(error)
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniCMS.Gallery)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			throw error
+		}
 	}
 
 	/**
@@ -35,16 +43,21 @@ export default function useGallery(fetchFn: typeof fetch = fetch) {
 	 * @returns Album
 	 */
 
-	async function getAlbum(module: number, id: number): Promise<XioniCMS.Album> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['cms/gallery', module, id])
+	async function getAlbum(
+		module: number,
+		id: number
+	): Promise<{
+		album: XioniCMS.Album
+	}> {
+		try {
+			const { data } = await axios.get(`cms/gallery/${module}/${id}`)
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniCMS.Album)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return data
+		} catch (error) {
+			if (dev) console.error(error)
+
+			throw error
+		}
 	}
 
 	return {

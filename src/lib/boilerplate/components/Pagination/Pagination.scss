@@ -1,0 +1,27 @@
+:where(.Pagination) {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+:where(.Pagination__item) {
+	width: auto;
+	height: auto;
+	font-size: 1rem;
+	line-height: 0;
+	padding: 1rem 0;
+	width: 2rem;
+	cursor: pointer;
+	user-select: none;
+	text-align: center;
+}
+
+:where(.Pagination__item:hover) {
+	text-decoration: underline;
+}
+
+:where(.Pagination__item--current) {
+	cursor: auto;
+	background-color: lime;
+	border-radius: 0.25rem;
+}

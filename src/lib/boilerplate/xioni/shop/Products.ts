@@ -1,9 +1,14 @@
-import { xioniFetch, type XioniFetchErrorResponse } from '../utils/xioniFetch'
-
+import config from '$lib/app.config'
+import Axios from 'axios'
 import type { XioniShop } from '../types'
 
 export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
-	const fetch = xioniFetch(fetchFn)
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
+
 	/**
 	 * Get all products
 	 *
@@ -15,15 +20,15 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 		limit?: number
 		frontpage?: boolean
 	}): Promise<XioniShop.Product[]> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'products'], { params })
+		try {
+			const { data } = await axios.get<XioniShop.Product[]>(`/shop/${module}/products`, {
+				params
+			})
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniShop.Product[])
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return data
+		} catch (error) {
+			throw error
+		}
 	}
 
 	/**
@@ -34,15 +39,13 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getProduct(id: number): Promise<XioniShop.Product> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'products', id])
+		try {
+			const { data } = await axios.get<XioniShop.Product>(`shop/${module}/products/${id}`)
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniShop.Product)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return data
+		} catch (error) {
+			throw error
+		}
 	}
 
 	/**
@@ -60,15 +63,16 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 			recursive?: boolean
 		}
 	): Promise<XioniShop.Product[]> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'groups', category, 'products'], { params })
+		try {
+			const { data } = await axios.get<XioniShop.Product[]>(
+				`shop/${module}/groups/${category}/products`,
+				{ params }
+			)
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniShop.Product[])
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return data
+		} catch (error) {
+			throw error
+		}
 	}
 
 	return {

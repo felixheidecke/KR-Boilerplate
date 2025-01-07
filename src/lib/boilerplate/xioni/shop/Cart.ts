@@ -1,10 +1,13 @@
 import type { XioniShop } from '../types'
-import { xioniFetch } from '../utils/xioniFetch'
-
-import type { XioniFetchErrorResponse } from '../utils/xioniFetch'
+import Axios from 'axios'
+import config from '$lib/app.config'
 
 export function useCart(module: number, fetchFn: typeof fetch = fetch) {
-	const fetch = xioniFetch(fetchFn)
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
 
 	/**
 	 * Get the cart contents
@@ -12,16 +15,14 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 	 * @returns Cart
 	 */
 
-	function getCart(): Promise<XioniShop.Cart> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'cart'])
+	async function getCart(): Promise<XioniShop.Cart> {
+		try {
+			const { data } = await axios.get<XioniShop.Cart>(`shop/${module}/cart`)
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniShop.Cart)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return data
+		} catch (error) {
+			throw error
+		}
 	}
 
 	/**
@@ -34,23 +35,15 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function updateItemQuantity(id: number, quantity: number): Promise<XioniShop.Cart> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'cart'], {
-				method: 'PUT',
-				data: [
-					{
-						productId: id,
-						quantity
-					}
-				]
+		try {
+			const { data } = await axios.put<XioniShop.Cart>(`shop/${module}/cart`, {
+				data: [{ productId: id, quantity }]
 			})
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniShop.Cart)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return data
+		} catch (error) {
+			throw error
+		}
 	}
 
 	/**
@@ -62,25 +55,15 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function addItem(id: number): Promise<XioniShop.Cart> {
-		const context = { emitter: 'addItem', module }
-
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['shop', module, 'cart'], {
-				method: 'PUT',
-				data: [
-					{
-						productId: id,
-						quantity: 1
-					}
-				]
+		try {
+			const { data } = await axios.put<XioniShop.Cart>(`shop/${module}/cart`, {
+				data: [{ productId: id, quantity: 1 }]
 			})
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniShop.Cart)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return data
+		} catch (error) {
+			throw error
+		}
 	}
 
 	return {

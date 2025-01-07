@@ -1,0 +1,78 @@
+:where(.LoadingIndicator) {
+	background-color: transparent;
+	overflow: hidden;
+	border: 0 none;
+	user-select: none;
+	outline: none;
+}
+
+:where(.LoadingIndicator__animation--dot):after {
+	background: white;
+}
+
+.LoadingIndicator__animation {
+	box-sizing: border-box;
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 80px;
+
+	&--dot {
+		box-sizing: border-box;
+		animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+		transform-origin: 40px 40px;
+
+		&:after {
+			content: ' ';
+			display: block;
+			position: absolute;
+			width: 7.2px;
+			height: 7.2px;
+			border-radius: 50%;
+			margin: -3.6px 0 0 -3.6px;
+		}
+
+		@for $i from 1 through 8 {
+			&:nth-child(#{$i}) {
+				animation-delay: -0.036s * $i;
+
+				&:after {
+					@if $i == 1 {
+						top: 62.62742px;
+						left: 62.62742px;
+					} @else if $i == 2 {
+						top: 67.71281px;
+						left: 56px;
+					} @else if $i == 3 {
+						top: 70.90963px;
+						left: 48.28221px;
+					} @else if $i == 4 {
+						top: 72px;
+						left: 40px;
+					} @else if $i == 5 {
+						top: 70.90963px;
+						left: 31.71779px;
+					} @else if $i == 6 {
+						top: 67.71281px;
+						left: 24px;
+					} @else if $i == 7 {
+						top: 62.62742px;
+						left: 17.37258px;
+					} @else if $i == 8 {
+						top: 56px;
+						left: 12.28719px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@keyframes lds-roller {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

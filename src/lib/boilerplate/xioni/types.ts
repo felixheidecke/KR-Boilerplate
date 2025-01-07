@@ -264,3 +264,10 @@ interface PDF {
 	name: string
 	title: string
 }
+
+export type XioniApiErrorResponse = {
+	v6: {
+		message: string
+		details: Record<string, { message: string; code: string }[]>
+	}
+}

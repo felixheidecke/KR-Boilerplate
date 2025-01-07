@@ -1,12 +1,15 @@
-import { xioniFetch } from '../utils/xioniFetch'
-
-import type { XioniFetchErrorResponse } from '../utils/xioniFetch'
+import { dev } from '$app/environment'
+import { LOCALE } from '$lib/boilerplate/constants'
+import Axios from 'axios'
+import config from '$lib/app.config'
 import type { XioniCMS } from '../types'
 
-// --- Factory -------------------------------------------------------------------------------------
-
-export default function useArticles(fetchFn: typeof fetch = fetch) {
-	const fetch = xioniFetch(fetchFn)
+export function useArticles(fetchFn: typeof fetch = fetch) {
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
 
 	/**
 	 * Get all articles by module
@@ -19,15 +22,21 @@ export default function useArticles(fetchFn: typeof fetch = fetch) {
 	async function getArticles(
 		module: number,
 		query: {
-			limit?: number
+			limit?: string | number
+			offset?: string | number
 			archived?: boolean
 			parts?: 'content'[]
+			createdAfter?: Date
 		} = {}
-	): Promise<XioniCMS.Article[]> {
+	) {
 		const params = {}
 
 		if ('limit' in query) {
-			Object.assign(params, { limit: query.limit })
+			Object.assign(params, { limit: Number(query.limit) })
+		}
+
+		if ('offset' in query) {
+			Object.assign(params, { offset: Number(query.offset) })
 		}
 
 		if ('archived' in query) {
@@ -38,15 +47,29 @@ export default function useArticles(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { parts: query.parts.join() })
 		}
 
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['cms/articles', module], { params })
+		if ('archived' in query) {
+			Object.assign(params, { createdAfter: query.createdAfter?.toLocaleDateString(LOCALE) })
+		}
 
-			if (response.status === 'success') {
-				resolve((response.data as []).map(articleAdapter) as XioniCMS.Article[])
-			} else {
-				reject(response as XioniFetchErrorResponse)
+		try {
+			const { data } = await axios.get<{
+				articles: XioniCMS.Article[]
+				meta: {
+					totalCount: number
+				}
+			}>(`/cms/articles/${module}`, {
+				params
+			})
+
+			return {
+				meta: data.meta,
+				articles: data.articles.map(articleAdapter)
 			}
-		})
+		} catch (error) {
+			if (dev) console.error(error)
+
+			throw error
+		}
 	}
 
 	/**
@@ -56,20 +79,27 @@ export default function useArticles(fetchFn: typeof fetch = fetch) {
 	 * @returns An article
 	 */
 
-	async function getArticle(module: number, id: number): Promise<XioniCMS.Article> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['cms/articles', module, id])
+	async function getArticle(
+		module: number,
+		id: number
+	): Promise<{
+		article: XioniCMS.Article
+	}> {
+		try {
+			const { data } = await axios.get(`/cms/articles/${module}/${id}`)
 
-			if (response.status === 'success') {
-				resolve(articleAdapter(response.data) as XioniCMS.Article)
-			} else {
-				reject(response as XioniFetchErrorResponse)
+			return {
+				article: articleAdapter(data.article)
 			}
-		})
+		} catch (error) {
+			if (dev) console.error(error)
+
+			throw error
+		}
 	}
 
 	// Remap response data
-	function articleAdapter(article: any) {
+	function articleAdapter(article: any): XioniCMS.Article {
 		return {
 			...article,
 			date: new Date(article.date),

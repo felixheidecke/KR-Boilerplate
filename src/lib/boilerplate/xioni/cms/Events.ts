@@ -1,13 +1,28 @@
-import { xioniFetch } from '../utils/xioniFetch'
 import { formatFromTo } from '$lib/boilerplate/utils/formatDate'
-
+import config from '$lib/app.config'
+import Axios from 'axios'
 import type { XioniCMS } from '../types'
-import type { XioniFetchErrorResponse } from '../utils/xioniFetch'
+import { dev } from '$app/environment'
+
+type GetEventResponse = {
+	event: XioniCMS.Event
+}
+
+type GetEventsResponse = {
+	events: XioniCMS.Event[]
+	meta: {
+		totalCount: number
+	}
+}
 
 // --- Factory -------------------------------------------------------------------------------------
 
 export default function useEvents(fetchFn: typeof fetch = fetch) {
-	const fetch = xioniFetch(fetchFn)
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
 
 	/**
 	 * Get all Events by module
@@ -30,7 +45,7 @@ export default function useEvents(fetchFn: typeof fetch = fetch) {
 			endsAfter?: Date
 			parts?: Array<'images' | 'flags' | 'tags'>
 		} = {}
-	): Promise<XioniCMS.Event[]> {
+	): Promise<GetEventsResponse> {
 		const params = {}
 
 		if (query.limit && query.limit > 0) {
@@ -57,15 +72,20 @@ export default function useEvents(fetchFn: typeof fetch = fetch) {
 			Object.assign(params, { endsAfter: query.endsAfter.toDateString() })
 		}
 
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['cms/events', module], { params })
+		try {
+			const { data } = await axios.get(`cms/events/${module}`, {
+				params
+			})
 
-			if (response.status === 'success') {
-				resolve((response.data as []).map(eventAdapter) as XioniCMS.Event[])
-			} else {
-				reject(response as XioniFetchErrorResponse)
+			return {
+				meta: data.meta,
+				events: data.events.map(eventAdapter)
 			}
-		})
+		} catch (error) {
+			if (dev) console.error(error)
+
+			throw error
+		}
 	}
 
 	/**
@@ -75,18 +95,18 @@ export default function useEvents(fetchFn: typeof fetch = fetch) {
 	 * @returns XioniEvent
 	 */
 
-	async function getEvent(module: number, id: number): Promise<XioniCMS.Event> {
-		const context = { emitter: 'getEvent' }
+	async function getEvent(module: number, id: number): Promise<GetEventResponse> {
+		try {
+			const { data } = await axios.get(`cms/events/${module}/${id}`)
 
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['cms/events', module, id])
-
-			if (response.status === 'success') {
-				resolve(eventAdapter(response.data) as XioniCMS.Event)
-			} else {
-				reject(response as XioniFetchErrorResponse)
+			return {
+				event: eventAdapter(data.event)
 			}
-		})
+		} catch (error) {
+			if (dev) console.error(error)
+
+			throw error
+		}
 	}
 
 	return {
@@ -103,26 +123,26 @@ export const getEvent = useEvents().getEvent
 /**
  * Set propper Date() and URL() Object where nessesary
  *
- * @param rawEvent
+ * @param dto
  * @returns Xioni XioniEvent
  */
 
-function eventAdapter(rawEvent: any): XioniCMS.Event {
-	const starts = new Date(rawEvent.starts)
-	const ends = new Date(rawEvent.ends)
+function eventAdapter(dto: any): XioniCMS.Event {
+	const starts = new Date(dto.starts)
+	const ends = new Date(dto.ends)
 	const event = {
-		...rawEvent,
+		...dto,
 		starts,
 		ends,
 		duration: formatFromTo(starts, ends)
 	}
 
-	if (rawEvent.website) {
-		event.website = new URL(rawEvent.website)
+	if (dto.website) {
+		event.website = new URL(dto.website)
 	}
 
-	if (rawEvent.ticketshop) {
-		event.ticketshop = new URL(rawEvent.ticketshop)
+	if (dto.ticketshop) {
+		event.ticketshop = new URL(dto.ticketshop)
 	}
 
 	return event

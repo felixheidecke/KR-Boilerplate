@@ -7,7 +7,7 @@
 
 	import Message from '../Message/Message.svelte'
 
-	// --- Props -------------------------------------------------------------------------------------
+	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let subject = 'Kontakformular'
 	export let to: number | string

@@ -1,9 +1,18 @@
-import objectFilterBy from '$lib/boilerplate/utils/objectFilterBy'
+import { dev } from '$app/environment'
 import { isUndefined } from 'lodash-es'
-import { xioniFetch, type XioniFetchErrorResponse } from '../utils/xioniFetch'
+import Axios from 'axios'
+import config from '$lib/app.config'
+import objectFilterBy from '$lib/boilerplate/utils/objectFilterBy'
+import type { XioniApiErrorResponse } from '../types'
+
+// --- [ Factory ] ---------------------------------------------------------------------------------
 
 export function useFormMail(fetchFn: typeof fetch = fetch) {
-	const fetchJSON = xioniFetch(fetchFn)
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
 
 	async function send(
 		to: number | string,
@@ -16,11 +25,8 @@ export function useFormMail(fetchFn: typeof fetch = fetch) {
 			attachBodyAsCSV?: boolean
 		} = {}
 	): Promise<boolean> {
-		const context = { emitter: 'send' }
-
-		return new Promise(async (resolve, reject) => {
-			const response = await fetchJSON(['form-mail/send'], {
-				method: 'POST',
+		try {
+			await axios.post('v5/mailer/message', {
 				data: {
 					body,
 					config: {
@@ -37,11 +43,37 @@ export function useFormMail(fetchFn: typeof fetch = fetch) {
 				)
 			})
 
-			if (response.status === 'success') {
-				resolve(true)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
+			return true
+		} catch (error) {
+			throw error
+		}
+	}
+
+	return {
+		send
+	}
+}
+
+export function useFormMail6(fetchFn: typeof fetch = fetch) {
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
+
+	async function send(data: FormData): Promise<boolean> {
+		return new Promise(async (resolve, reject) => {
+			axios
+				.post('/mailer/message', data)
+				.catch(error => {
+					if (dev) console.error(error)
+
+					reject({
+						code: error.status,
+						...error.response.data
+					} satisfies XioniApiErrorResponse['v6'])
+				})
+				.then(() => resolve(true))
 		})
 	}
 
@@ -49,3 +81,5 @@ export function useFormMail(fetchFn: typeof fetch = fetch) {
 		send
 	}
 }
+
+export const sendFormMail = useFormMail6().send

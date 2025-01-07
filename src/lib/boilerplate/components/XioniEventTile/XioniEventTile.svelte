@@ -60,7 +60,7 @@
 		</p>
 	{/if}
 	{#if link}
-		<Link to={link} class="{baseName}__link $flex $row-reverse" fontello="angle-right">
+		<Link to={link} class="{baseName}__link $row-reverse" fontello="angle-right">
 			{linkText}
 		</Link>
 	{/if}

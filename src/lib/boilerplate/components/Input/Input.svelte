@@ -6,7 +6,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import { type InputProps, ImputPropsType } from './Input.types'
+	import { type InputProps, InputPropsType } from './Input.types'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -17,13 +17,14 @@
 	export let placeholder: InputProps['placeholder'] = ''
 	export let readonly: InputProps['readonly'] = undefined
 	export let required: InputProps['required'] = undefined
-	export let type: InputProps['type'] = ImputPropsType.TEXT
+	export let type: InputProps['type'] = InputPropsType.TEXT
 	export let value: InputProps['value'] = ''
 	export let error: InputProps['error'] = ''
+	export let multiple: InputProps['multiple'] = false
+	export let baseName = 'Input'
 
-	// --- [ Logic ] ---------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
 
-	const baseName = $$props['ex-class'] || 'Input'
 	$: className = classnames(
 		baseName,
 		$$props.class,
@@ -38,7 +39,8 @@
 		placeholder,
 		required,
 		readonly,
-		type
+		type,
+		multiple
 	}
 </script>
 

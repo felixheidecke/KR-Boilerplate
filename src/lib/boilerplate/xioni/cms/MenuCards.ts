@@ -1,11 +1,16 @@
-import { xioniFetch, type XioniFetchErrorResponse } from '../utils/xioniFetch'
-
+import { dev } from '$app/environment'
+import Axios from 'axios'
+import config from '$lib/app.config'
 import type { XioniCMS } from '../types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
 export default function useMenuCard(fetchFn: typeof fetch = fetch) {
-	const fetch = xioniFetch(fetchFn)
+	const axios = Axios.create({
+		httpAgent: fetchFn,
+		baseURL: config.api.url,
+		headers: { 'api-key': config.api.key }
+	})
 
 	/**
 	 * Get a Menu Card
@@ -14,16 +19,18 @@ export default function useMenuCard(fetchFn: typeof fetch = fetch) {
 	 * @returns Menu Card
 	 */
 
-	async function getMenuCard(module: number): Promise<XioniCMS.MenuCard> {
-		return new Promise(async (resolve, reject) => {
-			const response = await fetch(['cms/menu-card', module])
+	async function getMenuCard(module: number): Promise<{
+		menuCard: XioniCMS.MenuCard
+	}> {
+		try {
+			const { data } = await axios.get(`cms/menu-card/${module}`)
 
-			if (response.status === 'success') {
-				resolve(response.data as XioniCMS.MenuCard)
-			} else {
-				reject(response as XioniFetchErrorResponse)
-			}
-		})
+			return data
+		} catch (error) {
+			if (dev) console.error(error)
+
+			throw error
+		}
 	}
 
 	return {
