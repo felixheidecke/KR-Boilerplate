@@ -1,5 +1,6 @@
-import config from '$lib/app.config'
+import { API_BASE_URL } from '../constants'
 import Axios from 'axios'
+import config from '$lib/app.config'
 import type { XioniShop } from '../types'
 
 type UpdateOrderParams = {
@@ -14,8 +15,10 @@ type UpdateOrderParams = {
 export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 	const axios = Axios.create({
 		httpAgent: fetchFn,
-		baseURL: config.api.url,
-		headers: { 'api-key': config.api.key }
+		baseURL: new URL('v5', API_BASE_URL).toString(),
+		headers: {
+			'api-key': config.krApiKey
+		}
 	})
 
 	async function createOrder(): Promise<XioniShop.Order> {
@@ -30,9 +33,7 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function updateOrder(update: UpdateOrderParams): Promise<XioniShop.Order> {
 		try {
-			const { data } = await axios.patch(`shop/${module}/order`, {
-				data: update
-			})
+			const { data } = await axios.patch(`shop/${module}/order`, update)
 
 			return orderAdapter(data) as XioniShop.Order
 		} catch (error) {
@@ -42,7 +43,7 @@ export function useOrder(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function getOrder(id?: string): Promise<XioniShop.Order> {
 		try {
-			const { data } = await axios.get(`shop/${module}/order/${id}`)
+			const { data } = await axios.get(`shop/${module}/order${id ? '/' + id : ''}`)
 
 			return orderAdapter(data) as XioniShop.Order
 		} catch (error) {

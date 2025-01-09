@@ -3,7 +3,8 @@ import { ORDER } from '../shop.stores'
 
 export const prerender = false
 export const ssr = false
-export function load() {
+
+export async function load() {
 	orderApi
 		.getOrder()
 		.then(ORDER.set)

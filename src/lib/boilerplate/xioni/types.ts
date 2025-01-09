@@ -266,8 +266,6 @@ interface PDF {
 }
 
 export type XioniApiErrorResponse = {
-	v6: {
-		message: string
-		details: Record<string, { message: string; code: string }[]>
-	}
+	message: string
+	details: Record<string, { message: string; code: string }[]>
 }

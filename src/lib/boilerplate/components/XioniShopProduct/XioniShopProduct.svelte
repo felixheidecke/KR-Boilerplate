@@ -41,10 +41,6 @@
 
 	let productImageModal: Modal
 
-	function addToCartHandler() {
-		emit('addToCart', product.id)
-	}
-
 	function imageClickHandler() {
 		if ($IS_MOBILE) return
 
@@ -104,7 +100,7 @@
 					</div>
 
 					<Button
-						on:click={addToCartHandler}
+						on:click={() => emit('addToCart')}
 						class="{baseName}__add-to-cart-button"
 						fontello="basket">
 						In den Warenkorb

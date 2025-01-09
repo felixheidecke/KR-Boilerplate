@@ -1,97 +1,83 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from 'svelte'
-	import { useFormMail } from '$lib/boilerplate/xioni/formmail/FormMail'
+	import { createEventDispatcher, SvelteComponent } from 'svelte'
+	import { useFormMail6 } from '$lib/boilerplate/xioni/formmail/FormMail'
+	import { writable } from 'svelte/store'
 	import classnames from 'classnames'
+
+	import type { XioniApiErrorResponse } from '$lib/boilerplate/xioni/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Message from '../Message/Message.svelte'
+	import Modal from '../Modal/Modal.svelte'
+	import LoadingIndicator from '../LoadingIndicator/LoadingIndicator.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let subject = 'Kontakformular'
-	export let to: number | string
-	export let attachBodyAsCSV: boolean = false
 	export let baseName = 'Form'
+	let moduleId: number | string = $$props['module-id']
 
 	// -----------------------------------------------------------------------------------------------
 
-	const emit = createEventDispatcher()
-	const formMail = useFormMail()
-
 	let formEl: HTMLFormElement
-	let formErrors: string[] = []
-	let formFieldsRequired: string[] = []
-	let isFormDone = false
-	let isFormLoading = false
-	let isDoneEl: HTMLElement
+	let doneModalEl: SvelteComponent
+	let errorModalEl: SvelteComponent
 
-	function scrollToDoneText() {
-		if (!isDoneEl || !$$slots.done) return
-
-		isDoneEl.scrollIntoView({
-			behavior: `smooth`,
-			block: 'center',
-			inline: 'nearest'
-		})
-	}
-
-	function getFormData() {
-		const formData = new FormData(formEl)
-		return Object.fromEntries(formData)
-	}
+	const emit = createEventDispatcher()
+	const formMail = useFormMail6()
+	const formError = writable<XioniApiErrorResponse | undefined>()
+	const isFormDone = writable(false)
+	const isLoading = writable(false)
 
 	export function submit() {
-		if (isFormDone) return
+		const formData = new FormData(formEl)
 
-		isFormLoading = true
-		formErrors = []
+		formData.set('module-id', moduleId.toString())
+
+		isLoading.set(true)
+		formError.set(undefined)
 
 		formMail
-			.send(to, subject, formFieldsRequired, getFormData(), { attachBodyAsCSV })
+			.send(formData)
 			.then(() => {
-				isFormDone = true
-
-				scrollToDoneText()
+				formEl.reset()
+				isFormDone.set(true)
+				doneModalEl.open()
 				emit('success')
 			})
 			.catch(error => {
-				formErrors = error.details.body
-
-				emit('error', error.details)
+				formError.set(error)
+				errorModalEl.open()
+				emit('error', error)
 			})
-			.finally(() => {
-				isFormLoading = false
-			})
+			.finally(() => isLoading.set(false))
 	}
-
-	onMount(() => {
-		// collect required entries
-		formEl.querySelectorAll('[required]').forEach(element => {
-			formFieldsRequired = [...formFieldsRequired, element.getAttribute('name') || '']
-		})
-	})
 </script>
 
 <form
 	class={classnames(baseName, $$props.class)}
 	bind:this={formEl}
 	on:submit|preventDefault={submit}>
-	{#if isFormDone}
-		<div bind:this={isDoneEl} class={baseName + '__done'}>
-			<slot name="done" />
-		</div>
-	{:else}
-		<slot />
-	{/if}
-
-	{#if formErrors.length}
-		<Message class="{baseName}__errors $mt" type="error" title="Fehler aufgetreten">
-			<ul>
-				{#each formErrors as message}
-					<li>{message}</li>
-				{/each}
-			</ul>
-		</Message>
-	{/if}
+	<slot />
 </form>
+
+{#if $isLoading}
+	<LoadingIndicator />
+{/if}
+
+<Modal bind:this={doneModalEl}>
+	<slot name="done" />
+</Modal>
+
+<Modal bind:this={errorModalEl}>
+	<Message class="{baseName}__errors" type="error">
+		<ul>
+			{#each Object.entries($formError?.details || []) as [key, values]}
+				<li>
+					<b>{key.toUpperCase()}:</b>
+					{values.map(value => value.message).join('<br />')}
+				</li>
+			{/each}
+		</ul>
+	</Message>
+</Modal>

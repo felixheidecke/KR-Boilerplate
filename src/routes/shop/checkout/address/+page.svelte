@@ -1,14 +1,10 @@
 <script lang="ts">
 	import { CART, ORDER } from '../../shop.stores'
 	import { goto } from '$app/navigation'
-	import { ImputPropsType } from '$lib/boilerplate/components/Input/Input.types'
+	import { InputPropsType } from '$lib/boilerplate/components/Input/Input.types'
 	import { IS_MOBILE } from '$lib/boilerplate/utils/breakpoints'
 	import { head, isEmpty, omitBy } from 'lodash-es'
 	import { orderApi } from '../../shop.api'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniFetchError } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -19,6 +15,8 @@
 	import Message from '$lib/boilerplate/components/Message/Message.svelte'
 	import Select from '$lib/boilerplate/components/Select/Select.svelte'
 	import Textarea from '$lib/boilerplate/components/Textarea/Textarea.svelte'
+	import type { AxiosError } from 'axios'
+	import type { XioniApiErrorResponse } from '$lib/boilerplate/xioni/types'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -60,11 +58,11 @@
 				ORDER.set(order)
 				goto('/shop/checkout/summary/')
 			})
-			.catch(({ data: error }) => {
-				const { details } = error as XioniFetchError
+			.catch(error => {
+				const data = (error as AxiosError).response?.data as any // Still version 5
 
-				formBodyErrors = details?.body
-				formMessageError = details?.message ? head(details?.message) : undefined
+				formBodyErrors = data.details?.body
+				formMessageError = data.details?.message ? head(data.details?.message) : undefined
 
 				setTimeout(
 					() => document.querySelector('.Message')?.scrollIntoView({ behavior: 'smooth' }),
@@ -119,7 +117,7 @@
 	</Grid>
 	<Grid size="1">
 		<Input
-			type={ImputPropsType.TEL}
+			type={InputPropsType.TEL}
 			bind:value={address.phone}
 			name="phone"
 			label="Telefonnummer"

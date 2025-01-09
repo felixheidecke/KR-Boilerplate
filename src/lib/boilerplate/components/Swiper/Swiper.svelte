@@ -4,12 +4,10 @@
 	import { onMount } from 'svelte'
 	import { uniqueId } from 'lodash-es'
 	import classnames from 'classnames'
-	// @ts-ignore missing declaration
-	import Glide from '@glidejs/glide/dist/glide.esm'
+	import Glide from '@glidejs/glide'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Icon from '../Icon/Icon.svelte'
 	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------

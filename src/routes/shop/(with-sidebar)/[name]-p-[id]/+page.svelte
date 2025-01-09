@@ -4,14 +4,11 @@
 	import { cartApi } from '../../shop.api'
 	import { CART } from '../../shop.stores'
 
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
-
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import Product from '$lib/boilerplate/components/XioniShopProduct/XioniShopProduct.svelte'
+	import type { AxiosError } from 'axios'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -21,11 +18,13 @@
 
 	const { product } = data
 
-	async function addToCartHandler({ detail }: { detail: number }) {
+	async function addToCartHandler(productId: number) {
 		messages.reset()
 
+		console.log({ productId })
+
 		cartApi
-			.addItem(detail)
+			.addItem(productId)
 			.then(cart => {
 				CART.set(cart)
 				messages.add(`${product.name} wurde in den Warenkorb gelegt.`, undefined, {
@@ -33,7 +32,7 @@
 				})
 			})
 			.catch(response => {
-				const { data: error } = response as XioniFetchErrorResponse
+				const error = response as AxiosError
 
 				messages.add(error.message, undefined, { type: 'error' })
 			})
@@ -46,7 +45,7 @@
 </svelte:head>
 
 {#if product}
-	<Product {product} on:addToCart={addToCartHandler} />
+	<Product {product} on:addToCart={() => addToCartHandler(product.id)} />
 
 	<hr />
 

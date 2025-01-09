@@ -4,14 +4,17 @@ import Axios from 'axios'
 import config from '$lib/app.config'
 import objectFilterBy from '$lib/boilerplate/utils/objectFilterBy'
 import type { XioniApiErrorResponse } from '../types'
+import { API_BASE_URL } from '../constants'
 
 // --- [ Factory ] ---------------------------------------------------------------------------------
 
 export function useFormMail(fetchFn: typeof fetch = fetch) {
 	const axios = Axios.create({
 		httpAgent: fetchFn,
-		baseURL: config.api.url,
-		headers: { 'api-key': config.api.key }
+		baseURL: new URL('v6', API_BASE_URL).toString(),
+		headers: {
+			'api-key': config.krApiKey
+		}
 	})
 
 	async function send(
@@ -57,8 +60,10 @@ export function useFormMail(fetchFn: typeof fetch = fetch) {
 export function useFormMail6(fetchFn: typeof fetch = fetch) {
 	const axios = Axios.create({
 		httpAgent: fetchFn,
-		baseURL: config.api.url,
-		headers: { 'api-key': config.api.key }
+		baseURL: new URL('v6', API_BASE_URL).toString(),
+		headers: {
+			'api-key': config.krApiKey
+		}
 	})
 
 	async function send(data: FormData): Promise<boolean> {

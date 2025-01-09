@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../constants'
 import { dev } from '$app/environment'
 import Axios from 'axios'
 import config from '$lib/app.config'
@@ -8,8 +9,10 @@ import type { XioniCMS } from '../types'
 export default function useMenuCard(fetchFn: typeof fetch = fetch) {
 	const axios = Axios.create({
 		httpAgent: fetchFn,
-		baseURL: config.api.url,
-		headers: { 'api-key': config.api.key }
+		baseURL: new URL('v6', API_BASE_URL).toString(),
+		headers: {
+			'api-key': config.krApiKey
+		}
 	})
 
 	/**
