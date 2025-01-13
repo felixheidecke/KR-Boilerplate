@@ -12,7 +12,7 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let to: number | string
+	export let moduleId: number | string
 	export let event: XioniCMS.Event
 	export let baseName = 'XioniEventRegistration'
 
@@ -37,7 +37,7 @@
 			<time>{@html date.formatFromTo(event.starts, event.ends)}</time>
 		</header>
 
-		<Form {to} subject="Event Anmeldung ({event.id})" attachBodyAsCSV class="$mt-2">
+		<Form {moduleId} class="$mt-2">
 			<input type="hidden" name="Event" value="{event.title} ({event.id})" />
 			<input type="hidden" name="Datum" value={date.format(event.starts, 'P')} />
 
