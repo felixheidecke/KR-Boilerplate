@@ -66,13 +66,13 @@
 			aria-label="Vorheriges Bild zeigen"
 			class={`${baseName}__button ${baseName}__button--prev`}
 			on:click={() => swiper.go('<')}>
-			<Fontello baseName={`${baseName}__button-icon`} name="right-open" />
+			<Fontello baseName={`${baseName}__button-icon`} name="left-open" />
 		</button>
 		<button
 			aria-label="Nächstes Bild zeigen"
 			class={`${baseName}__button ${baseName}__button--next`}
 			on:click={() => swiper.go('>')}>
-			<Fontello baseName={`${baseName}__button-icon`} name="left-open" />
+			<Fontello baseName={`${baseName}__button-icon`} name="right-open" />
 		</button>
 	{/if}
 </div>

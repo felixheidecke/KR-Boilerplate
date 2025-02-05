@@ -10,6 +10,7 @@
 
 <svelte:head>
 	<meta name="theme-color" content="#333" />
+	<meta name="thumbnail" content="/meta/og-image.jpg" />
 	<meta property="og:url" content="https://{stammdaten.web}" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={stammdaten.title} />
