@@ -2,7 +2,7 @@
 	import './Select.css'
 
 	import classnames from 'classnames'
-	import { uniqueId } from 'lodash-es'
+	import randomString from '$lib/boilerplate/utils/randomString'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -14,13 +14,13 @@
 	export let value: string | number = values[0]
 	export let placeholder: string = ''
 	export let disabled: boolean = false
-	export let id = uniqueId(name + '-')
+	export let id = 'select-' + randomString()
 	export let baseName = 'Select'
 </script>
 
 <div {...$$restProps} class={classnames(baseName, $$props.class)}>
 	{#if label}
-		<label class={baseName + '__label'} for={name}>{label}</label>
+		<label class={baseName + '__label'} for={id}>{label}</label>
 	{/if}
 	<select
 		{id}

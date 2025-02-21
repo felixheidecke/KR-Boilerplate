@@ -2,7 +2,7 @@
 	import './Input.scss'
 
 	import classnames from 'classnames'
-	import { uniqueId } from 'lodash-es'
+	import randomString from '$lib/boilerplate/utils/randomString'
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
@@ -21,6 +21,7 @@
 	export let value: InputProps['value'] = ''
 	export let error: InputProps['error'] = ''
 	export let multiple: InputProps['multiple'] = false
+	export let id = 'input-' + randomString()
 	export let baseName = 'Input'
 
 	// -----------------------------------------------------------------------------------------------
@@ -31,7 +32,6 @@
 		!!error ? baseName + '--has-error' : null,
 		!!readonly ? baseName + '--read-only' : null
 	)
-	const id = uniqueId(name + '-')
 	const inputProps = {
 		max,
 		min,
@@ -44,7 +44,7 @@
 	}
 </script>
 
-<div {id} class={className}>
+<div class={className}>
 	{#if label}
 		<label class={baseName + '__label'} for={id}>
 			{label}
@@ -52,5 +52,5 @@
 			{#if required}*{/if}
 		</label>
 	{/if}
-	<input class={baseName + '__input'} {...inputProps} bind:value />
+	<input {id} class={baseName + '__input'} {...inputProps} bind:value />
 </div>

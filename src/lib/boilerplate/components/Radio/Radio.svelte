@@ -1,7 +1,8 @@
 <script lang="ts">
 	import './Radio.css'
+
 	import classnames from 'classnames'
-	import { uniqueId } from 'lodash-es'
+	import randomString from '$lib/boilerplate/utils/randomString'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -11,7 +12,7 @@
 	export let label: string = ''
 	export let name: string = 'radio'
 	export let required: boolean = false
-	export let id = uniqueId(`radio-${name}-`)
+	export let id = 'select-' + randomString()
 	export let baseName = 'Radio'
 
 	// -----------------------------------------------------------------------------------------------

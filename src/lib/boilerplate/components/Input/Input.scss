@@ -33,6 +33,10 @@
 	&[type='date'] {
 		text-transform: uppercase;
 	}
+
+	&:focus-visible {
+		box-shadow: 0 2px cornflowerblue;
+	}
 }
 
 :where(.Input--read-only .Input__input) {

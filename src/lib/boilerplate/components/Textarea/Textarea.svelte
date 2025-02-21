@@ -2,7 +2,7 @@
 	import './Textarea.scss'
 
 	import classnames from 'classnames'
-	import { uniqueId } from 'lodash-es'
+	import randomString from '$lib/boilerplate/utils/randomString'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -12,13 +12,13 @@
 	export let required = false
 	export let rows: number | null | undefined = 4
 	export let value = ''
-	export let id = uniqueId(`textarea-${name}-`)
+	export let id = 'text-' + randomString()
 	export let baseName = 'Textarea'
 </script>
 
 <div {...$$restProps} class={classnames(baseName, $$props.class)}>
 	{#if label}
-		<label class={baseName + '__label'} for={name}>
+		<label class={baseName + '__label'} for={id}>
 			{label}
 			{#if required}*{/if}
 		</label>
