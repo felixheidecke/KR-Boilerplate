@@ -13,6 +13,7 @@
 		class?: string
 		routes?: Route[]
 		target?: '_blank'
+		title?: string
 	}
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -65,12 +66,8 @@
 <svelte:window on:scroll|passive={() => throttle(handleOffset, 250)} />
 
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<nav
-	bind:this={nav}
-	class={className}
-	aria-label="main navigation"
-	on:click={() => (active = false)}>
-	<ul class={baseName + '__ul'}>
+<nav bind:this={nav} class={className} on:click={() => (active = false)}>
+	<ul class={baseName + '__ul'} aria-label="navigation path">
 		{#each routes as route, i}
 			<li
 				class={classnames(baseName + '__li', route.class)}
@@ -85,7 +82,9 @@
 						isCurrentPath(route.path) ? baseName + '__a--current' : null
 					)}
 					href={route.path}
-					target={route.target}>
+					target={route.target}
+					title={route.title}
+					aria-current={isActivePath(route.path) ? 'page' : undefined}>
 					{route.name}
 				</svelte:element>
 
@@ -104,8 +103,10 @@
 										isActivePath(subRoute.path) ? baseName + '__a-a--active' : undefined,
 										subRoute.class
 									)}
+									aria-current={isActivePath(subRoute.path) ? 'page' : undefined}
 									href={subRoute.path}
-									target={subRoute.target}>
+									target={subRoute.target}
+									title={subRoute.title}>
 									{subRoute.name}
 								</a>
 							</li>
