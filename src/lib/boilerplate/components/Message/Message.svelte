@@ -3,10 +3,9 @@
 
 	import classnames from 'classnames'
 	import { createEventDispatcher } from 'svelte'
+	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
-
-	import Icon from '../Icon/Icon.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -32,10 +31,7 @@
 
 <svelte:element this={tag} class={className}>
 	{#if closable}
-		<Icon
-			name="fas fa-times-circle"
-			class="{baseName}__close-button"
-			on:click={() => emit('close')} />
+		<Fontello name="cancel" class="{baseName}__close-button" on:click={() => emit('close')} />
 	{/if}
 	{#if title}
 		<h4 class={baseName + '__title'}>

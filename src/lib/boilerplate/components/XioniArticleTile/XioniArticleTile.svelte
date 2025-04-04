@@ -12,7 +12,6 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Link from '../Link/Link.svelte'
-	import Icon from '../Icon/Icon.svelte'
 	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------

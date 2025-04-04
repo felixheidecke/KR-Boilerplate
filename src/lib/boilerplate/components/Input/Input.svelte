@@ -11,8 +11,6 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let label: InputProps['label'] = ''
-	export let max: InputProps['max'] = undefined
-	export let min: InputProps['min'] = undefined
 	export let name: InputProps['name'] = 'input'
 	export let placeholder: InputProps['placeholder'] = ''
 	export let readonly: InputProps['readonly'] = undefined
@@ -33,8 +31,6 @@
 		!!readonly ? baseName + '--read-only' : null
 	)
 	const inputProps = {
-		max,
-		min,
 		name,
 		placeholder,
 		required,
@@ -52,5 +48,5 @@
 			{#if required}*{/if}
 		</label>
 	{/if}
-	<input {id} class={baseName + '__input'} {...inputProps} bind:value />
+	<input {id} {...inputProps} {...$$restProps} class={baseName + '__input'} bind:value />
 </div>

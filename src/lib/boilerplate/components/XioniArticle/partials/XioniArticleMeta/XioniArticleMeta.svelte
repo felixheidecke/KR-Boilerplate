@@ -7,7 +7,6 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Icon from '$lib/boilerplate/components/Icon/Icon.svelte'
 	import Fontello from '$lib/boilerplate/components/Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------

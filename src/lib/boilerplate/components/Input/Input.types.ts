@@ -1,9 +1,10 @@
 export enum InputPropsType {
-	TEXT = 'text',
-	NUMBER = 'number',
+	DATE = 'date',
 	EMAIL = 'email',
+	FILE = 'file',
+	NUMBER = 'number',
 	TEL = 'tel',
-	FILE = 'file'
+	TEXT = 'text'
 }
 
 export interface InputProps {

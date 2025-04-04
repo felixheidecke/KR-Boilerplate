@@ -6,7 +6,6 @@
 
 	import Link from '../Link/Link.svelte'
 	import Mail from '../Mail/Mail.svelte'
-	import Icon from '../Icon/Icon.svelte'
 	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------

@@ -6,24 +6,22 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Icon from '../Icon/Icon.svelte'
 	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let baseName = 'Button'
 	export let disabled = false
-	export let icon = ''
 	export let fontello: string = ''
 	export let isLoading = false
-	export let rel: 'follow' | 'nofollow' = 'follow'
+	export let rel: 'follow' | 'nofollow noopener' = 'nofollow noopener'
 	export let target: '_blank' | undefined = undefined
 	export let to: string | undefined = undefined
 
 	// -----------------------------------------------------------------------------------------------
 
 	if (to && isExternalURL(to)) {
-		rel = 'nofollow'
+		rel = 'nofollow noopener'
 		target = '_blank'
 	}
 
@@ -37,9 +35,7 @@
 
 {#if !to}
 	<button on:click {disabled} {...$$restProps} class={classnames(className, $$props.class)}>
-		{#if icon}
-			<Icon baseName={baseName + '__icon'} name={icon} />
-		{:else if fontello}
+		{#if fontello}
 			<Fontello baseName={baseName + '__icon'} name={fontello} />
 		{/if}
 		<span class="{baseName}__text">
@@ -48,9 +44,7 @@
 	</button>
 {:else}
 	<a on:click href={to} {target} {...$$restProps} class={classnames(className, $$props.class)}>
-		{#if icon}
-			<Icon baseName={baseName + '__icon'} name={icon} />
-		{:else if fontello}
+		{#if fontello}
 			<Fontello baseName={baseName + '__icon'} name={fontello} />
 		{/if}
 		<span class="{baseName}__text">

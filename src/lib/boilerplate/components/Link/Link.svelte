@@ -2,16 +2,14 @@
 	import './Link.css'
 	import classnames from 'classnames'
 	import isExternalURL from '$lib/boilerplate/utils/isExternalURL'
-	import Icon from '../Icon/Icon.svelte'
 	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let to: string | undefined = undefined
 	export let target: '_blank' | undefined = undefined
-	export let icon: string = ''
 	export let fontello: string = ''
-	export let rel: string = 'follow'
+	export let rel: 'follow' | 'nofollow noopener' = 'nofollow noopener'
 	export let label: string = ''
 	export let exClass: string | undefined = undefined
 
@@ -19,10 +17,10 @@
 
 	const tag = to ? 'a' : 'span'
 	const baseName = exClass || 'Link'
-	const className = classnames(baseName, $$props.class, !icon || baseName + '--has-icon')
+	const className = classnames(baseName, $$props.class, !fontello || baseName + '--has-icon')
 
 	if (to && isExternalURL(to)) {
-		rel = 'nofollow'
+		rel = 'nofollow noopener'
 		target = '_blank'
 	}
 
@@ -36,11 +34,9 @@
 	}
 </script>
 
-{#if icon || fontello}
+{#if fontello}
 	<span class={className}>
-		{#if icon}
-			<Icon baseName={baseName + '__icon'} name={icon} />
-		{:else if fontello}
+		{#if fontello}
 			<Fontello class={baseName + '__icon'} name={fontello} />
 		{/if}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
