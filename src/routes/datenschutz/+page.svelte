@@ -108,29 +108,10 @@
 </p>
 <h2>Datenerfassung auf unserer Webseite</h2>
 <h3>Cookies</h3>
-<h3>Sitzungs-Cookies/Session-Cookies</h3>
 <p>
-	Wir verwenden mit unserem Internetauftritt sog. Cookies. Cookies sind kleine Textdateien oder
-	andere Speichertechnologien, die durch den von Ihnen eingesetzten Internet-Browser auf Ihrem
-	Endgerät ablegt und gespeichert werden. Durch diese Cookies werden im individuellen Umfang
-	bestimmte Informationen von Ihnen verarbeitet.
+	Wir sind nicht daran interessiert, ein Nutzerverhalten oder dergleichen festzustellen. Daher
+	setzen diese Internetseiten keine Cookies ein.
 </p>
-<p>
-	Durch diese Verarbeitung wird unser Internetauftritt benutzerfreundlicher, effektiver und
-	sicherer. In dem Cookie wird ein zufällig generierter Session-Code gespeichert, um bspw. die
-	Warenkorbfunktion im OnlineShop zu ermöglichen.
-</p>
-<p>
-	Rechtsgrundlage dieser Verarbeitung ist Art. 6 Abs. 1 lit. b DSGVO, sofern diese Cookies Daten zur
-	Vertragsanbahnung oder Vertragsabwicklung verarbeitet werden.
-</p>
-<p>
-	Falls die Verarbeitung nicht der Vertragsanbahnung oder Vertragsabwicklung dient, liegt unser
-	berechtigtes Interesse in der Verbesserung der Funktionalität unseres Internetauftritts.
-	Rechtsgrundlage ist dann Art. 6 Abs. 1 lit. f DSGVO.
-</p>
-<p>Alle Cookies werden beim Logout gelöscht.</p>
-<p>Wir verwenden keine Drittanbieter-Cookies.</p>
 <h3>Welche Daten werden erfasst? (Server-Log-Dateien)</h3>
 <p>
 	Bei jedem Zugriff auf unsere Internetseiten werden über diesen Vorgang Daten in einer

@@ -7,7 +7,6 @@
 </svelte:head>
 
 <h1>Impressum</h1>
-<h4>Angaben gemäß § 5 TMG:</h4>
 
 <Address {...stammdaten} />
 
