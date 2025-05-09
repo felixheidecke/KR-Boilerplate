@@ -18,7 +18,7 @@
 	<meta property="og:image" content="/meta/og-image.jpg" />
 </svelte:head>
 
-<div data-layout={$page.data.layout}>
+<div data-layout="root">
 	<Nav {routes} sticky />
 	<Wrapper tag="main">
 		<slot />

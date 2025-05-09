@@ -1,19 +1,14 @@
-import { API_BASE_URL } from '../constants'
 import { dev } from '$app/environment'
-import Axios from 'axios'
 import config from '$lib/app.config'
 import type { XioniCMS } from '../types'
+import createClient from '../api/client'
+import type { ClientOptions } from 'openapi-fetch'
+import { ApiPaths } from '../api/api'
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export default function useGallery(fetchFn: typeof fetch = fetch) {
-	const axios = Axios.create({
-		httpAgent: fetchFn,
-		baseURL: new URL('v6', API_BASE_URL).toString(),
-		headers: {
-			'api-key': config.krApiKey
-		}
-	})
+export default function useGallery(clientOptions?: ClientOptions) {
+	const client = createClient(clientOptions)
 
 	/**
 	 * Get Albums grouped as a Gallery
@@ -22,14 +17,20 @@ export default function useGallery(fetchFn: typeof fetch = fetch) {
 	 * @returns Gallery
 	 */
 
-	async function getGallery(module: number): Promise<{
+	async function getGallery(moduleId: number): Promise<{
 		albums: XioniCMS.Gallery
 		meta: {
 			totalCount: number
 		}
 	}> {
 		try {
-			const { data } = await axios.get(`cms/gallery/${module}`)
+			const { data, error } = await client.GET(ApiPaths.getAlbums, {
+				params: {
+					path: { moduleId }
+				}
+			})
+
+			if (error || !data) throw error
 
 			return data
 		} catch (error) {

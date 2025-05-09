@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { createEventDispatcher, SvelteComponent } from 'svelte'
-	import { useFormMail6 } from '$lib/boilerplate/xioni/formmail/FormMail'
+	import { useMailer6 } from '$lib/boilerplate/xioni/mailer/Message'
 	import { writable } from 'svelte/store'
 	import classnames from 'classnames'
 
 	import type { XioniApiErrorResponse } from '$lib/boilerplate/xioni/types'
+	import type { FormProps } from './Form'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -14,24 +14,31 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let baseName = 'Form'
-	export let moduleId: number | string
+	let {
+		baseName = 'Form',
+		moduleId,
+		successHandler = () => console.log('success'),
+		errorHandler = error => console.error(error),
+		class: className,
+		children,
+		done
+	}: FormProps = $props()
 
 	// -----------------------------------------------------------------------------------------------
 
 	let formEl: HTMLFormElement
-	let doneModalEl: SvelteComponent
-	let errorModalEl: SvelteComponent
+	let doneModalEl: Modal
+	let errorModalEl: Modal
 
-	const emit = createEventDispatcher()
-	const formMail = useFormMail6()
+	const formMail = useMailer6()
 	const formError = writable<XioniApiErrorResponse | undefined>()
 	const isFormDone = writable(false)
 	const isLoading = writable(false)
 
-	export function submit() {
-		const formData = new FormData(formEl)
+	export function submit(e: Event) {
+		e.preventDefault()
 
+		const formData = new FormData(formEl)
 		formData.set('module-id', moduleId.toString())
 
 		isLoading.set(true)
@@ -43,22 +50,19 @@
 				formEl.reset()
 				isFormDone.set(true)
 				doneModalEl.open()
-				emit('success')
+				successHandler()
 			})
 			.catch(error => {
 				formError.set(error)
 				errorModalEl.open()
-				emit('error', error)
+				errorHandler(error)
 			})
 			.finally(() => isLoading.set(false))
 	}
 </script>
 
-<form
-	class={classnames(baseName, $$props.class)}
-	bind:this={formEl}
-	on:submit|preventDefault={submit}>
-	<slot />
+<form class={classnames(baseName, className)} bind:this={formEl} onsubmit={submit}>
+	{@render children?.()}
 </form>
 
 {#if $isLoading}
@@ -66,7 +70,11 @@
 {/if}
 
 <Modal bind:this={doneModalEl}>
-	<slot name="done" />
+	{#if done}
+		{@render done?.()}
+	{:else}
+		<p>Vielen Dank.</p>
+	{/if}
 </Modal>
 
 <Modal bind:this={errorModalEl}>
