@@ -1,13 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { isEmpty } from 'lodash-es'
-	import { orderApi } from '../../shop.api'
-	import { ORDER, CART } from '../../shop.stores'
+	import { ORDER, CART } from '$lib/stores'
+	import { useOrder } from '$lib/boilerplate/xioni/shop/Order'
 	import messages from '$lib/messages'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniFetchError } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -26,14 +22,14 @@
 		messages.reset()
 		messages.add('Bestellung wird verarbeitet.', 'Bitte warten', { id: 'loading-indicator' })
 
-		orderApi
+		useOrder()
 			.createOrder()
 			.then(order => {
 				ORDER.set(order)
-				goto(`/shop/order/${order.transactionId}/`)
+				goto(`/order/${order.transactionId}/`)
 			})
 			.catch(({ data: error }) => {
-				const { details, message } = error as XioniFetchError
+				const { details, message } = error as any
 				const errors = details ? Object.values(details) : []
 
 				messages.add(errors?.join('\n'), message, { type: 'error' })
@@ -45,11 +41,11 @@
 
 {#if isEmpty($CART.products)}
 	<Message title="Ihr Warenkorb ist leer!" type="error">
-		<Link to="/shop/">zurück zum Shop</Link>
+		<Link to="/">zurück zum Shop</Link>
 	</Message>
 {:else if isEmpty(address)}
 	<Message title="Rechnungs- und Lieferadresse fehlt!" type="error">
-		<Link to="/shop/checkout/address/">jetzt Adresse eingeben</Link>
+		<Link to="/checkout/address/">jetzt Adresse eingeben</Link>
 	</Message>
 {:else}
 	<p>Bitte überprüfen Sie die Daten auf Richtigkeit bevor Sie die Bestellung abschließen.</p>
@@ -94,7 +90,7 @@
 			</Grid>
 		{/if}
 		<Grid size>
-			<Link icon="fas fa-pen" to="/shop/checkout/address/">anpassen</Link>
+			<Link icon="fas fa-pen" to="/checkout/address/">anpassen</Link>
 		</Grid>
 	</Grid>
 
@@ -106,10 +102,10 @@
 		supplementalCost={$CART.supplementalCost}
 		total={$CART.total} />
 
-	<Link icon="fas fa-pen" class="$mt" to="/shop/checkout/">anpassen</Link>
+	<Link icon="fas fa-pen" class="$mt" to="/checkout/">anpassen</Link>
 
 	<div class="$mt-2">
-		<Button icon="fas fa-angle-left" to="/shop/">zum Shop</Button>
+		<Button icon="fas fa-angle-left" to="/">zum Shop</Button>
 		<Button
 			icon="fas fa-angle-right"
 			class="Button--primary $float-right $row-reverse"

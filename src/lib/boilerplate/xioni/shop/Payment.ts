@@ -1,26 +1,25 @@
-import { API_BASE_URL } from '../constants'
-import Axios from 'axios'
-import config from '$lib/app.config'
+import appConfig from '$lib/app.config'
+import Axios, { type CreateAxiosDefaults } from 'axios'
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export function usePayment(module: number, fetchFn: typeof fetch = fetch) {
+export function usePayment(config?: CreateAxiosDefaults) {
+	const { shopApiKey, shopApiBaseUrl } = appConfig
+
 	const axios = Axios.create({
-		httpAgent: fetchFn,
-		baseURL: new URL('v5', API_BASE_URL).toString(),
+		baseURL: shopApiBaseUrl,
+		...config,
 		headers: {
-			'api-key': config.krApiKey
+			'api-key': shopApiKey,
+			...config?.headers
 		}
 	})
 
 	async function createPayPalTransaction(transactionId: string): Promise<string> {
 		try {
-			const { data } = await axios.post<{ orderId: string }>(
-				`shop/${module}/payment/paypal/create`,
-				{
-					transactionId
-				}
-			)
+			const { data } = await axios.post<{ orderId: string }>('/payment/paypal/create', {
+				transactionId
+			})
 			return data.orderId
 		} catch (error) {
 			throw error
@@ -29,7 +28,7 @@ export function usePayment(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function capturePayPalTransaction(orderId: string): Promise<boolean> {
 		try {
-			await axios.post(`shop/${module}/payment/paypal/capture`, {
+			await axios.post('/payment/paypal/capture', {
 				orderId
 			})
 

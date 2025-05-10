@@ -1,7 +1,7 @@
 Hallo <%= address.salutation + ' ' + address.name %>,
 
 Ihre Bestellung ist bei uns eingegangen:
-<%= new URL('/shop/order/' + transactionId, origin + '/') %>
+<%= new URL('/order/' + transactionId, origin + '/') %>
 
 ------------------------------------------------------------
 ${ cart.join('\n') }

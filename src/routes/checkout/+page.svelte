@@ -1,12 +1,7 @@
 <script lang="ts">
-	import { CART } from '../shop.stores'
-	import { cartApi } from '../shop.api'
+	import { CART } from '$lib/stores'
 	import { onMount } from 'svelte'
 	import messages from '$lib/messages'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -14,6 +9,7 @@
 	import Client from '$lib/boilerplate/components/Client/Client.svelte'
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import CartTable from '$lib/boilerplate/components/XioniShopCartTable/XioniShopCartTable.svelte'
+	import { useCart } from '$lib/boilerplate/xioni/shop/Cart'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -22,14 +18,14 @@
 	function updateItemQuantity({ detail }: any) {
 		isLoading = true
 
-		cartApi
+		useCart()
 			.updateItemQuantity(detail.productId, detail.quantity)
 			.then(cart => {
 				CART.set(cart)
 				messages.reset()
 			})
 			.catch(response => {
-				const { data: error } = response as XioniFetchErrorResponse
+				const { data: error } = response as any
 
 				messages.add(error.message, 'Achtung!', { type: 'error' })
 			})
@@ -43,7 +39,7 @@
 <Client browser>
 	{#if !$CART.products?.length}
 		<h4>Ihr Warenkorb ist noch leer.</h4>
-		<Link to="/shop/">Zum Shop</Link>
+		<Link to="/">Zum Shop</Link>
 	{:else}
 		<CartTable
 			products={$CART.products}
@@ -55,11 +51,11 @@
 			on:product-quantity-update={updateItemQuantity} />
 
 		<div class="$mt-2">
-			<Button fontello="angle-left" to="/shop/">zum Shop</Button>
+			<Button fontello="angle-left" to="/">zum Shop</Button>
 			<Button
 				fontello="angle-right"
 				class="Button--primary $float-right $row-reverse"
-				to="/shop/checkout/address/">zur Kasse</Button>
+				to="/checkout/address/">zur Kasse</Button>
 		</div>
 	{/if}
 </Client>

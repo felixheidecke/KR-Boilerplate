@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
-	import stammdaten from '$stammdaten'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -19,12 +18,12 @@
 
 <svelte:head>
 	<meta name="description" content="Kaufen Sie {group.name} in unserem Online Shop." />
-	<title>{group.name} | {stammdaten.name} Online Shop</title>
+	<title>{group.name} | Online Shop</title>
 </svelte:head>
 
 <h1 class="h3">
 	{#each group.path || [] as { id, name, slug }}
-		<Link to="/shop/{slug}-c-{id}/">
+		<Link to="/{slug}-c-{id}/">
 			{name}
 		</Link>
 		/
@@ -40,7 +39,7 @@
 	<Grid gap tag="ol">
 		{#each products as product, index (product.id)}
 			<Grid tag="li" size="tablet-1-2" {index}>
-				<Link class="$decoration-none" to="/shop/{product.slug}-p-{product.id}/">
+				<Link class="$decoration-none" to="/{product.slug}-p-{product.id}/">
 					<ProductTile {product} />
 				</Link>
 			</Grid>
@@ -53,7 +52,7 @@
 		{#each group.subgroups as subgroup, index (subgroup.id)}
 			<Grid tag="li" size="1" {index}>
 				<h3 class="h4">
-					<Link to="/shop/{subgroup.slug}-c-{subgroup.id}">
+					<Link to="/{subgroup.slug}-c-{subgroup.id}">
 						{subgroup.name}
 					</Link>
 				</h3>
@@ -63,7 +62,7 @@
 				<ol class="subgroup-product-list">
 					{#each products.filter(product => product.group === subgroup.id) || [] as product, index (product.id)}
 						<li>
-							<Link to="/shop/{product.slug}-p-{product.id}/" {index}>
+							<Link to="/{product.slug}-p-{product.id}/" {index}>
 								{product.name}
 							</Link>
 						</li>

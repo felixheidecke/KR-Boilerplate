@@ -1,14 +1,16 @@
-import { API_BASE_URL } from '../constants'
-import Axios from 'axios'
-import config from '$lib/app.config'
+import appConfig from '$lib/app.config'
+import Axios, { type CreateAxiosDefaults } from 'axios'
 import type { XioniShop } from '../types'
 
-export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
+export function useProducts(config?: CreateAxiosDefaults) {
+	const { shopApiKey, shopApiBaseUrl } = appConfig
+
 	const axios = Axios.create({
-		httpAgent: fetchFn,
-		baseURL: new URL('v5', API_BASE_URL).toString(),
+		baseURL: shopApiBaseUrl,
+		...config,
 		headers: {
-			'api-key': config.krApiKey
+			'api-key': shopApiKey,
+			...config?.headers
 		}
 	})
 
@@ -24,7 +26,7 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 		frontpage?: boolean
 	}): Promise<XioniShop.Product[]> {
 		try {
-			const { data } = await axios.get<XioniShop.Product[]>(`/shop/${module}/products`, {
+			const { data } = await axios.get<XioniShop.Product[]>('/products', {
 				params
 			})
 
@@ -43,14 +45,13 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function getProduct(id: number): Promise<XioniShop.Product> {
 		try {
-			const { data } = await axios.get<XioniShop.Product>(`shop/${module}/products/${id}`)
+			const { data } = await axios.get<XioniShop.Product>(`/products/${id}`)
 
 			return data
 		} catch (error) {
 			throw error
 		}
 	}
-
 	/**
 	 * Get produtcs corresponding to a given Category
 	 *
@@ -67,10 +68,9 @@ export function useProducts(module: number, fetchFn: typeof fetch = fetch) {
 		}
 	): Promise<XioniShop.Product[]> {
 		try {
-			const { data } = await axios.get<XioniShop.Product[]>(
-				`shop/${module}/groups/${category}/products`,
-				{ params }
-			)
+			const { data } = await axios.get<XioniShop.Product[]>(`/groups/${category}/products`, {
+				params
+			})
 
 			return data
 		} catch (error) {

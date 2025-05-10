@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { CART, ORDER } from '../../shop.stores'
+	import { CART, ORDER } from '$lib/stores'
 	import { goto } from '$app/navigation'
+	import { head, isEmpty, omitBy } from 'lodash-es'
 	import { InputPropsType } from '$lib/boilerplate/components/Input/Input.types'
 	import { IS_MOBILE } from '$lib/boilerplate/utils/breakpoints'
-	import { head, isEmpty, omitBy } from 'lodash-es'
-	import { orderApi } from '../../shop.api'
+	import { useOrder } from '$lib/boilerplate/xioni/shop/Order'
+	import type { AxiosError } from 'axios'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -15,8 +16,6 @@
 	import Message from '$lib/boilerplate/components/Message/Message.svelte'
 	import Select from '$lib/boilerplate/components/Select/Select.svelte'
 	import Textarea from '$lib/boilerplate/components/Textarea/Textarea.svelte'
-	import type { AxiosError } from 'axios'
-	import type { XioniApiErrorResponse } from '$lib/boilerplate/xioni/types'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -48,7 +47,8 @@
 		const deliveryAddressData = omitBy(deliveryAddress, isEmpty) as any
 
 		toggleLoading()
-		orderApi
+
+		useOrder()
 			.updateOrder({
 				address: addressData,
 				deliveryAddress: !isEmpty(deliveryAddress) ? deliveryAddressData : null,
@@ -56,7 +56,7 @@
 			})
 			.then(order => {
 				ORDER.set(order)
-				goto('/shop/checkout/summary/')
+				goto('/checkout/summary/')
 			})
 			.catch(error => {
 				const data = (error as AxiosError).response?.data as any // Still version 5

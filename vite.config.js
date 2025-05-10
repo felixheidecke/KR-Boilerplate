@@ -1,5 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
+import appConfig from './src/lib/app.config'
 import autoImport from 'sveltekit-autoimport'
 
 export default defineConfig({
@@ -27,6 +28,13 @@ export default defineConfig({
 		sveltekit()
 	],
 	server: {
-		port: 3000
+		port: 3000,
+		proxy: {
+			'/api': {
+				changeOrigin: true,
+				target: 'https://api.klickrhein.de/',
+				rewrite: path => path.replace(/^\/api\//, ''),
+			}
+		}
 	}
 })

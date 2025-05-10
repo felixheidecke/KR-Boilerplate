@@ -1,7 +1,5 @@
-import * as ENV from '$env/static/public'
-
-const { PUBLIC_KR_API_KEY } = ENV
-
 export default {
-	krApiKey: PUBLIC_KR_API_KEY || ''
+	payPalClientId: '',
+	shopApiKey: '',
+	shopApiBaseUrl: '/api/v5/shop/' + 1511, // Shop Module ID
 }

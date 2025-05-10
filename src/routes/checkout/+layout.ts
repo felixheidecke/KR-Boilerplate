@@ -1,11 +1,10 @@
-import { orderApi } from '../shop.api'
-import { ORDER } from '../shop.stores'
+import { useOrder } from '$lib/boilerplate/xioni/shop/Order'
+import { ORDER } from '$lib/stores'
 
 export const prerender = false
-export const ssr = false
 
 export async function load() {
-	orderApi
+	useOrder()
 		.getOrder()
 		.then(ORDER.set)
 		.catch(response => console.error(response.data.message))

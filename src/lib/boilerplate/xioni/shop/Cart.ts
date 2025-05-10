@@ -1,14 +1,16 @@
-import { API_BASE_URL } from '../constants'
-import Axios from 'axios'
-import config from '$lib/app.config'
+import appConfig from '$lib/app.config'
+import Axios, { type CreateAxiosDefaults } from 'axios'
 import type { XioniShop } from '../types'
 
-export function useCart(module: number, fetchFn: typeof fetch = fetch) {
+export function useCart(config?: CreateAxiosDefaults) {
+	const { shopApiKey, shopApiBaseUrl } = appConfig
+
 	const axios = Axios.create({
-		httpAgent: fetchFn,
-		baseURL: new URL('v5', API_BASE_URL).toString(),
+		baseURL: shopApiBaseUrl,
+		...config,
 		headers: {
-			'api-key': config.krApiKey
+			'api-key': shopApiKey,
+			...config?.headers
 		}
 	})
 
@@ -20,7 +22,7 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function getCart(): Promise<XioniShop.Cart> {
 		try {
-			const { data } = await axios.get<XioniShop.Cart>(`shop/${module}/cart`)
+			const { data } = await axios.get<XioniShop.Cart>('/cart')
 
 			return data
 		} catch (error) {
@@ -39,9 +41,7 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function updateItemQuantity(id: number, quantity: number): Promise<XioniShop.Cart> {
 		try {
-			const { data } = await axios.put<XioniShop.Cart>(`shop/${module}/cart`, [
-				{ productId: id, quantity }
-			])
+			const { data } = await axios.put<XioniShop.Cart>('/cart', [{ productId: id, quantity }])
 
 			return data
 		} catch (error) {
@@ -59,9 +59,7 @@ export function useCart(module: number, fetchFn: typeof fetch = fetch) {
 
 	async function addItem(id: number): Promise<XioniShop.Cart> {
 		try {
-			const { data } = await axios.put<XioniShop.Cart>(`shop/${module}/cart`, [
-				{ productId: id, quantity: 1 }
-			])
+			const { data } = await axios.put<XioniShop.Cart>('/cart', [{ productId: id, quantity: 1 }])
 
 			return data
 		} catch (error) {

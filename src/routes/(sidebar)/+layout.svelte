@@ -1,6 +1,6 @@
 <script lang="ts">
 	import stammdaten from '$stammdaten'
-	import { CART } from '../shop.stores'
+	import { CART } from '$lib/stores'
 	import { page } from '$app/stores'
 	import type { XioniShop } from '$lib/boilerplate/xioni/types'
 
@@ -15,9 +15,6 @@
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
 	export let data
-
-	// -----------------------------------------------------------------------------------------------
-
 	$: groups = data.groups
 	$: activeGroup = $page.data.group as XioniShop.Group
 </script>
@@ -32,14 +29,12 @@
 			<div class="sidebar">
 				{#if $CART.products?.length}
 					<MiniCart cart={$CART} />
-					<Button
-						fontello="basket"
-						to="/shop/checkout/"
-						class="$mt $w-full $content-center $font-small">Zum Warenkorb</Button>
+					<Button fontello="basket" to="/checkout" class="$mt $w-full $content-center $font-small"
+						>Zum Warenkorb</Button>
 					<hr />
 				{/if}
 				<h4 class="$hidden@tablet-down">Kategorien:</h4>
-				<ShopNav {groups} {activeGroup} basePath="/shop/" />
+				<ShopNav {groups} {activeGroup} />
 			</div>
 		</Grid>
 		<Grid size="desktop-3-4" tag="main" class="$order-2@tablet-down">

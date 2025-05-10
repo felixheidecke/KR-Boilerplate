@@ -6,6 +6,8 @@ export default async function xioniLoader<T>(xioniRequest: Promise<T>) {
 	try {
 		return await xioniRequest
 	} catch (error) {
+		console.error(error)
+
 		const { status, message } = error as AxiosError
 
 		throw svelteError(status || 500, message || 'Ein unbekannter Fehler ist aufgetreten.')

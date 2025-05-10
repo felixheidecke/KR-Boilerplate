@@ -1,8 +1,6 @@
 <script>
 	import '$lib/styles/styles.scss'
 
-	import routes from '$routes'
-	import stammdaten from '$stammdaten'
 	import messages from '$lib/messages'
 	import { page } from '$app/stores'
 	import { head } from 'lodash-es'
@@ -11,15 +9,13 @@
 <svelte:head>
 	<meta name="theme-color" content="#333" />
 	<meta name="thumbnail" content="/meta/og-image.jpg" />
-	<meta property="og:url" content="https://{stammdaten.web}" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content={stammdaten.title} />
+	<meta property="og:url" content="https://}" />
+	<meta property="og:type" content="shop" />
+	<meta property="og:title" content="Webshop" />
 	<meta property="og:description" content="[...]" />
-	<meta property="og:image" content="/meta/og-image.jpg" />
 </svelte:head>
 
-<div data-layout={$page.data.layout}>
-	<Nav {routes} sticky />
+<div data-layout="root">
 	<Wrapper tag="main">
 		<slot />
 	</Wrapper>

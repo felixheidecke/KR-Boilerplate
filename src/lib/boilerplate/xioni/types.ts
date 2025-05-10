@@ -1,88 +1,3 @@
-export namespace XioniCMS {
-	export interface Article {
-		id: number
-		module: number
-		slug: string
-		title: string
-		teaser: string
-		date: Date
-		image?: Image
-		pdf?: PDF
-		website?: URL
-		author?: string
-		content?: ArticleContent[]
-	}
-
-	export interface ArticleContent {
-		id: number
-		title: string
-		text: string
-		image?: Image
-	}
-
-	export interface Event {
-		id: number
-		module: number
-		slug: string
-		title: string
-		starts: Date
-		ends: Date
-		duration: string
-		teaser: string
-		description: string
-		image?: Image
-		pdf?: PDF
-		website?: URL
-		ticketshop?: URL
-		organizer?: string
-		coordinates?: {
-			lat: number
-			lng: number
-		}
-		images?: {
-			src: string
-			alt: string
-		}[]
-		tags?: {
-			id: number
-			name: string
-		}[]
-		flags?: 'anmeldung'[]
-	}
-
-	export interface Album {
-		id: number
-		module: number
-		slug: string
-		title: string
-		images: Image[]
-	}
-
-	export type Gallery = Album[]
-
-	export interface MenuItem {
-		id: number
-		name: string
-		description?: string
-		image?: {
-			src: string
-			alt: string
-		}
-		price: {
-			value: number
-			formatted: string
-		}
-	}
-
-	export interface MenuGroup {
-		name: string
-		description?: string
-		items: MenuItem[]
-	}
-
-	export type MenuCard = MenuGroup[]
-}
-
 export namespace XioniShop {
 	export interface Cart {
 		products: {
@@ -203,11 +118,7 @@ export namespace XioniShop {
 			value: number
 			formatted: string
 		}
-		pdf?: {
-			src: string
-			name: string
-			title: string
-		}
+		pdf?: PDF
 		quantity: {
 			value: number
 			formatted: string
@@ -261,7 +172,6 @@ interface Image {
 
 interface PDF {
 	src: string
-	name: string
 	title: string
 }
 

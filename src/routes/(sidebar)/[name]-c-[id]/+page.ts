@@ -1,8 +1,9 @@
+import { useGroups } from '$lib/boilerplate/xioni/shop/Groups.js'
+import { useProducts } from '$lib/boilerplate/xioni/shop/Products.js'
 import xioniLoader from '$lib/boilerplate/xioni/utils/xioniLoader.js'
-import { groupsApi, productsApi as productsApi } from '../../shop.api'
 
-const { getGroup } = groupsApi
-const { getProductsByGroup } = productsApi
+const { getGroup } = useGroups()
+const { getProductsByGroup } = useProducts()
 
 export async function load({ params }) {
 	const id = +params.id

@@ -1,13 +1,9 @@
 <script lang="ts">
 	import { format } from '$lib/boilerplate/utils/formatDate.js'
-	import { paymentApi, orderApi } from '../../shop.api'
+	import { useOrder } from '$lib/boilerplate/xioni/shop/Order.js'
+	import { usePayment } from '$lib/boilerplate/xioni/shop/Payment.js'
 	import messages from '$lib/messages'
-	import shopConfig from '../../shop.config'
-	import stammdaten from '$stammdaten'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	import type { XioniFetchErrorResponse } from '$lib/boilerplate/xioni/utils/xioniFetch'
+	import shopConfig from '$lib/app.config'
 	import type { XioniShop } from '$lib/boilerplate/xioni/types'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -28,6 +24,9 @@
 	let date = format(order.date as Date, 'PPP')
 	let deliveryAddress = order.deliveryAddress as XioniShop.Order['deliveryAddress']
 
+	const orderApi = useOrder()
+	const paymentApi = usePayment()
+
 	async function onApproveHandler() {
 		await paymentApi.capturePayPalTransaction(paypalOrderId)
 		await orderApi.getOrder(order.transactionId)
@@ -44,7 +43,7 @@
 				timeout: 5000
 			})
 		} catch (e) {
-			const { data: error } = e as XioniFetchErrorResponse
+			const { data: error } = e as any
 			const errors = error.details ? Object.entries(error.details) : ['Ein Fehler ist aufgetreten.']
 
 			messages.add(errors.join('\n'), error.message, {
@@ -138,22 +137,24 @@
 	</p>
 
 	<table class="payment-info-table">
-		<tr>
-			<td>Empfänger</td>
-			<td>{stammdaten.name}</td>
-		</tr>
-		<tr>
-			<td>IBAN</td>
-			<td>DE00 0000 0000 0000 0000 00</td>
-		</tr>
-		<tr>
-			<td>BIC</td>
-			<td>MUSTER123</td>
-		</tr>
-		<tr>
-			<td>Verwendungszweck</td>
-			<td>{order.transactionId?.toUpperCase()}</td>
-		</tr>
+		<tbody>
+			<tr>
+				<td>Empfänger</td>
+				<td>Max Mustermann</td>
+			</tr>
+			<tr>
+				<td>IBAN</td>
+				<td>DE00 0000 0000 0000 0000 00</td>
+			</tr>
+			<tr>
+				<td>BIC</td>
+				<td>MUSTER123</td>
+			</tr>
+			<tr>
+				<td>Verwendungszweck</td>
+				<td>{order.transactionId?.toUpperCase()}</td>
+			</tr>
+		</tbody>
 	</table>
 {/if}
 
@@ -170,7 +171,7 @@
 {/if}
 <p>
 	Mit freundlichen Grüßen<br />
-	{stammdaten.name}
+	Max Mustermann
 </p>
 
 <Button class="$mt-4" fontello="print" on:click={() => window.print()}>Drucken</Button>
