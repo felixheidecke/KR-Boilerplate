@@ -15,9 +15,9 @@ export namespace XioniCMS {
 
 	export interface ArticleContent {
 		id: number
-		title: string
-		text: string
-		image?: Image
+		title?: string | null
+		text?: string | null
+		image?: Image | null
 	}
 
 	export interface Event {
@@ -25,25 +25,18 @@ export namespace XioniCMS {
 		module: number
 		slug: string
 		title: string
-		teaser: string
-		description: string | null
-		address: string | null
+		teaser?: string
+		description?: string | null
+		address?: string | null
 		starts: Date
 		ends: Date
-		image: Image | null
+		image?: Image | null
 		duration: string
-		pdf?: PDF
+		pdf?: PDF | null
 		website?: URL
 		ticketshopURL?: URL
-		organizer?: string
-		coordinates?: {
-			lat: number
-			lng: number
-		}
-		images?: {
-			src: string
-			alt: string
-		}[]
+		organizer?: string | null
+		coordinates?: [number, number] | null
 		tags?: {
 			id: number
 			name: string
@@ -56,7 +49,7 @@ export namespace XioniCMS {
 		module: number
 		slug: string
 		title: string
-		images: Image[]
+		images?: Image[]
 	}
 
 	export type Gallery = Album[]
@@ -88,14 +81,14 @@ interface Image {
 	src: string
 	description?: string | null
 	align?: ('left' | 'right' | 'wide' | 'auto') | null
-	srcset: {
+	srcset?: {
 		small?: string
 	}
 }
 
 interface PDF {
 	src: string
-	title: string
+	title?: string
 }
 
 export type XioniApiErrorResponse = {

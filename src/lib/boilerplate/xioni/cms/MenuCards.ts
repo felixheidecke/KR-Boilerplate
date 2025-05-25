@@ -1,19 +1,14 @@
-import { API_BASE_URL } from '../constants'
+import { ApiPaths } from '../api/api.d'
 import { dev } from '$app/environment'
-import Axios from 'axios'
-import config from '$lib/app.config'
+import createClient from '../api/client'
+import type { ClientOptions } from 'openapi-fetch'
 import type { XioniCMS } from '../types'
+import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export default function useMenuCard(fetchFn: typeof fetch = fetch) {
-	const axios = Axios.create({
-		httpAgent: fetchFn,
-		baseURL: new URL('v6', API_BASE_URL).toString(),
-		headers: {
-			'api-key': config.krApiKey
-		}
-	})
+export default function useMenuCard(clientOptions?: ClientOptions) {
+	const client = createClient(clientOptions)
 
 	/**
 	 * Get a Menu Card
@@ -22,18 +17,20 @@ export default function useMenuCard(fetchFn: typeof fetch = fetch) {
 	 * @returns Menu Card
 	 */
 
-	async function getMenuCard(module: number): Promise<{
+	async function getMenuCard(moduleId: number): Promise<{
 		menuCard: XioniCMS.MenuCard
 	}> {
-		try {
-			const { data } = await axios.get(`cms/menu-card/${module}`)
+		const data = await fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getMenuCard, {
+				params: {
+					path: { moduleId }
+				}
+			})
+		)
 
-			return data
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
-		}
+		// Workaround, weil data.menuCard laut Specs auch undefined sein kann
+		// es in der Realität aber immer ein Objekt ist
+		return { menuCard: data.menuCard as XioniCMS.MenuCard }
 	}
 
 	return {

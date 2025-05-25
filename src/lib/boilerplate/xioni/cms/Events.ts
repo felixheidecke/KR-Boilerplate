@@ -1,9 +1,10 @@
+import { ApiPaths, type operations, type SchemaEvent } from '../api/api.d'
 import { dev } from '$app/environment'
 import { formatFromTo } from '$lib/boilerplate/utils/formatDate'
 import createClient from '../api/client'
 import type { ClientOptions } from 'openapi-fetch'
 import type { XioniCMS } from '../types'
-import { ApiPaths, type operations, type SchemaEvent } from '../api/api'
+import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
 
 type GetEventResponse = {
 	event: XioniCMS.Event
@@ -76,29 +77,19 @@ export default function useEvents(clientOptions?: ClientOptions) {
 			query.endsAfter = endsAfter.toDateString()
 		}
 
-		try {
-			const { data, error } = await client.GET(ApiPaths.getEvents, {
+		const data = await fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getEvents, {
 				params: {
 					query,
-					path: {
-						moduleId
-					}
+					path: { moduleId }
 				}
 			})
+		)
 
-			// Forward to catch block
-			// TODO: Get rid of data check
-			if (error || !data) throw error
-
-			return {
-				// TODO: Remove any
-				meta: data.meta as any,
-				events: (data.events as any).map(eventAdapter)
-			}
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
+		return {
+			// TODO: Remove any
+			meta: data.meta as any,
+			events: data.events.map(eventAdapter)
 		}
 	}
 

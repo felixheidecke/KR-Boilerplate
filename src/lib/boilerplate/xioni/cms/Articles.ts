@@ -1,8 +1,8 @@
-import { dev } from '$app/environment'
+import { ApiPaths, type operations, type SchemaArticle } from '../api/api.d'
+import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
 import { LOCALE } from '$lib/boilerplate/constants'
 import createClient from '../api/client'
 import type { ClientOptions } from 'openapi-fetch'
-import { ApiPaths, type components, type operations, type SchemaArticle } from '../api/api'
 import type { XioniCMS } from '../types'
 
 export function useArticles(clientOptions?: ClientOptions) {
@@ -48,22 +48,18 @@ export function useArticles(clientOptions?: ClientOptions) {
 			requestQuery.createdAfter = query.createdAfter?.toLocaleDateString(LOCALE)
 		}
 
-		try {
-			const { data, error } = await client.GET(ApiPaths.getArticles, {
+		const data = await fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getArticles, {
 				params: {
 					path: { moduleId },
 					query: requestQuery
 				}
 			})
+		)
 
-			return {
-				meta: data?.meta,
-				articles: data?.articles?.map(articleAdapter)
-			}
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
+		return {
+			meta: data.meta,
+			articles: data.articles.map(articleAdapter)
 		}
 	}
 
@@ -75,24 +71,16 @@ export function useArticles(clientOptions?: ClientOptions) {
 	 */
 
 	async function getArticle(moduleId: number, articleId: number) {
-		try {
-			const { data, error, response } = await client.GET(ApiPaths.getArticle, {
+		const data = await fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getArticle, {
 				params: {
 					path: { moduleId, articleId }
 				}
 			})
+		)
 
-			if (dev) console.log(response)
-
-			if (error) throw error
-
-			return {
-				article: articleAdapter(data?.article as SchemaArticle)
-			}
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
+		return {
+			article: articleAdapter(data.article)
 		}
 	}
 
