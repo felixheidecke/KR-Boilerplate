@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { useMailer6 } from '$lib/boilerplate/xioni/mailer/Message'
+	import { useMailer } from '$lib/boilerplate/xioni/mailer/Message'
 	import { writable } from 'svelte/store'
 	import classnames from 'classnames'
 
 	import type { XioniApiErrorResponse } from '$lib/boilerplate/xioni/types'
+	import type { SchemaMailerMessageRequestBody } from '$lib/boilerplate/xioni/api/api.d'
 	import type { FormProps } from './Form'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
@@ -30,7 +31,7 @@
 	let doneModalEl: Modal
 	let errorModalEl: Modal
 
-	const formMail = useMailer6()
+	const formMail = useMailer()
 	const formError = writable<XioniApiErrorResponse | undefined>()
 	const isFormDone = writable(false)
 	const isLoading = writable(false)
@@ -45,7 +46,7 @@
 		formError.set(undefined)
 
 		formMail
-			.send(formData)
+			.send(formData as unknown as SchemaMailerMessageRequestBody)
 			.then(() => {
 				formEl.reset()
 				isFormDone.set(true)
