@@ -8,10 +8,10 @@ import type { ClientOptions } from 'openapi-fetch'
 export function useMailer(clientOptions?: ClientOptions) {
 	const client = createClient(clientOptions)
 
-	async function send(data: SchemaMailerMessageRequestBody): Promise<boolean> {
+	async function send(body: SchemaMailerMessageRequestBody): Promise<boolean> {
 		return new Promise(async (resolve, reject) => {
 			client
-				.POST(ApiPaths.sendMessage, { data })
+				.POST(ApiPaths.sendMessage, { body })
 				.catch(error => {
 					if (dev) console.error(error)
 
