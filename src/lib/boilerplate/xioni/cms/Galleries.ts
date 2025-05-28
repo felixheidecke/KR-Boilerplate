@@ -1,19 +1,14 @@
-import { API_BASE_URL } from '../constants'
+import { ApiPaths } from '../api/api.d'
 import { dev } from '$app/environment'
-import Axios from 'axios'
-import config from '$lib/app.config'
+import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
+import createClient from '../api/client'
+import type { ClientOptions } from 'openapi-fetch'
 import type { XioniCMS } from '../types'
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export default function useGallery(fetchFn: typeof fetch = fetch) {
-	const axios = Axios.create({
-		httpAgent: fetchFn,
-		baseURL: new URL('v6', API_BASE_URL).toString(),
-		headers: {
-			'api-key': config.krApiKey
-		}
-	})
+export default function useGallery(clientOptions?: ClientOptions) {
+	const client = createClient(clientOptions)
 
 	/**
 	 * Get Albums grouped as a Gallery
@@ -22,21 +17,19 @@ export default function useGallery(fetchFn: typeof fetch = fetch) {
 	 * @returns Gallery
 	 */
 
-	async function getGallery(module: number): Promise<{
+	async function getGallery(moduleId: number): Promise<{
 		albums: XioniCMS.Gallery
 		meta: {
-			totalCount: number
+			totalCount?: number
 		}
 	}> {
-		try {
-			const { data } = await axios.get(`cms/gallery/${module}`)
-
-			return data
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
-		}
+		return fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getAlbums, {
+				params: {
+					path: { moduleId }
+				}
+			})
+		)
 	}
 
 	/**
@@ -47,20 +40,21 @@ export default function useGallery(fetchFn: typeof fetch = fetch) {
 	 */
 
 	async function getAlbum(
-		module: number,
-		id: number
+		moduleId: number,
+		albumId: number
 	): Promise<{
 		album: XioniCMS.Album
 	}> {
-		try {
-			const { data } = await axios.get(`cms/gallery/${module}/${id}`)
-
-			return data
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
-		}
+		return fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getAlbum, {
+				params: {
+					path: {
+						moduleId,
+						albumId
+					}
+				}
+			})
+		)
 	}
 
 	return {

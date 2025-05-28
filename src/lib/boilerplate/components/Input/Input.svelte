@@ -6,7 +6,7 @@
 
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
-	import { type InputProps, InputPropsType } from './Input.types'
+	import { type InputProps, InputPropsType } from './Input.d'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 

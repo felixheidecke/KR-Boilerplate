@@ -1,29 +1,23 @@
-import { API_BASE_URL } from '../constants'
-import { dev } from '$app/environment'
+import { ApiPaths, type operations, type SchemaArticle } from '../api/api.d'
+import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
 import { LOCALE } from '$lib/boilerplate/constants'
-import Axios from 'axios'
-import config from '$lib/app.config'
+import createClient from '../api/client'
+import type { ClientOptions } from 'openapi-fetch'
 import type { XioniCMS } from '../types'
 
-export function useArticles(fetchFn: typeof fetch = fetch) {
-	const axios = Axios.create({
-		httpAgent: fetchFn,
-		baseURL: new URL('v6', API_BASE_URL).toString(),
-		headers: {
-			'api-key': config.krApiKey
-		}
-	})
+export function useArticles(clientOptions?: ClientOptions) {
+	const client = createClient(clientOptions)
 
 	/**
 	 * Get all articles by module
 	 *
-	 * @param module Module id
+	 * @param moduleId Module id
 	 * @param limit Limit number of articles
 	 * @returns List of articles
 	 */
 
 	async function getArticles(
-		module: number,
+		moduleId: number,
 		query: {
 			limit?: string | number
 			offset?: string | number
@@ -32,46 +26,40 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 			createdAfter?: Date
 		} = {}
 	) {
-		const params = {}
+		const requestQuery: operations['getArticles']['parameters']['query'] = {}
 
 		if ('limit' in query) {
-			Object.assign(params, { limit: Number(query.limit) })
+			requestQuery.limit = Number(query.limit)
 		}
 
 		if ('offset' in query) {
-			Object.assign(params, { offset: Number(query.offset) })
+			requestQuery.offset = Number(query.offset)
 		}
 
 		if ('archived' in query) {
-			Object.assign(params, { archived: query.archived })
+			requestQuery.archived = !!query.archived
 		}
 
 		if ('parts' in query && query.parts?.length) {
-			Object.assign(params, { parts: query.parts.join() })
+			requestQuery.parts = query.parts
 		}
 
 		if ('archived' in query) {
-			Object.assign(params, { createdAfter: query.createdAfter?.toLocaleDateString(LOCALE) })
+			requestQuery.createdAfter = query.createdAfter?.toLocaleDateString(LOCALE)
 		}
 
-		try {
-			const { data } = await axios.get<{
-				articles: XioniCMS.Article[]
-				meta: {
-					totalCount: number
+		const data = await fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getArticles, {
+				params: {
+					path: { moduleId },
+					query: requestQuery
 				}
-			}>(`/cms/articles/${module}`, {
-				params
 			})
+		)
 
-			return {
-				meta: data.meta,
-				articles: data.articles.map(articleAdapter)
-			}
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
+		return {
+			meta: data.meta,
+			articles: data.articles.map(articleAdapter)
 		}
 	}
 
@@ -82,31 +70,26 @@ export function useArticles(fetchFn: typeof fetch = fetch) {
 	 * @returns An article
 	 */
 
-	async function getArticle(
-		module: number,
-		id: number
-	): Promise<{
-		article: XioniCMS.Article
-	}> {
-		try {
-			const { data } = await axios.get(`/cms/articles/${module}/${id}`)
+	async function getArticle(moduleId: number, articleId: number) {
+		const data = await fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getArticle, {
+				params: {
+					path: { moduleId, articleId }
+				}
+			})
+		)
 
-			return {
-				article: articleAdapter(data.article)
-			}
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
+		return {
+			article: articleAdapter(data.article)
 		}
 	}
 
 	// Remap response data
-	function articleAdapter(article: any): XioniCMS.Article {
+	function articleAdapter(article: SchemaArticle): XioniCMS.Article {
 		return {
 			...article,
 			date: new Date(article.date),
-			website: article.website ? new URL(article.website) : undefined
+			website: article.website ? new URL(article.website) : null
 		}
 	}
 

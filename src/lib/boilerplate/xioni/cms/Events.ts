@@ -1,34 +1,22 @@
-import { API_BASE_URL } from '../constants'
+import { ApiPaths, type operations, type SchemaEvent } from '../api/api.d'
 import { dev } from '$app/environment'
 import { formatFromTo } from '$lib/boilerplate/utils/formatDate'
-import Axios from 'axios'
-import config from '$lib/app.config'
+import createClient from '../api/client'
+import type { ClientOptions } from 'openapi-fetch'
 import type { XioniCMS } from '../types'
+import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
 
 type GetEventResponse = {
 	event: XioniCMS.Event
 }
 
-type GetEventsResponse = {
-	events: XioniCMS.Event[]
-	meta: {
-		totalCount: number
-	}
-}
-
 // --- Factory -------------------------------------------------------------------------------------
 
-export default function useEvents(fetchFn: typeof fetch = fetch) {
-	const axios = Axios.create({
-		httpAgent: fetchFn,
-		baseURL: new URL('v6', API_BASE_URL).toString(),
-		headers: {
-			'api-key': config.krApiKey
-		}
-	})
+export default function useEvents(clientOptions?: ClientOptions) {
+	const client = createClient(clientOptions)
 
 	/**
-	 * Get all Events by module
+	 * Get all Events by module ----------------------------------------------------------------------
 	 *
 	 * @param module Module id
 	 * @param filter.limit Maximale Anzahl an Artikeln
@@ -38,56 +26,70 @@ export default function useEvents(fetchFn: typeof fetch = fetch) {
 	 * @param filter.endsAfter Event endet nach Datum
 	 */
 
+	type GetEventsQuery = {
+		limit?: number
+		offset?: number
+		order?: string
+		endsAfter?: Date
+		startsAfter?: Date
+		endsBefore?: Date
+		parts?: ('flags' | 'tags' | 'images')[]
+	}
+
+	type GetEventsResponse = {
+		events: XioniCMS.Event[]
+		meta: {
+			totalCount: number
+		}
+	}
+
 	async function getEvents(
-		module: number,
-		query: {
-			limit?: number
-			startsBefore?: Date
-			startsAfter?: Date
-			endsBefore?: Date
-			endsAfter?: Date
-			parts?: Array<'images' | 'flags' | 'tags'>
-		} = {}
+		moduleId: number,
+		{ limit, offset, order, endsAfter, startsAfter, endsBefore, parts }: GetEventsQuery = {}
 	): Promise<GetEventsResponse> {
-		const params = {}
+		const query: operations['getEvents']['parameters']['query'] = {}
 
-		if (query.limit && query.limit > 0) {
-			Object.assign(params, { limit: query.limit })
+		if (limit && limit > 0) {
+			query.limit = Number(limit)
 		}
 
-		if (query.parts && query.parts.length) {
-			Object.assign(params, { parts: query.parts.join() })
+		if (order) {
+			query.order = order
 		}
 
-		if (query.startsBefore) {
-			Object.assign(params, { startsBefore: query.startsBefore.toDateString() })
+		if (offset && offset > 0) {
+			query.offset = Number(offset)
 		}
 
-		if (query.startsAfter) {
-			Object.assign(params, { startsAfter: query.startsAfter.toDateString() })
+		if (parts && parts.length) {
+			query.parts = parts
 		}
 
-		if (query.endsBefore) {
-			Object.assign(params, { endsBefore: query.endsBefore.toDateString() })
+		if (startsAfter) {
+			query.startsAfter = startsAfter.toDateString()
 		}
 
-		if (query.endsAfter) {
-			Object.assign(params, { endsAfter: query.endsAfter.toDateString() })
+		if (endsBefore) {
+			query.endsBefore = endsBefore.toDateString()
 		}
 
-		try {
-			const { data } = await axios.get(`cms/events/${module}`, {
-				params
+		if (endsAfter) {
+			query.endsAfter = endsAfter.toDateString()
+		}
+
+		const data = await fetchWithErrorHandling(() =>
+			client.GET(ApiPaths.getEvents, {
+				params: {
+					query,
+					path: { moduleId }
+				}
 			})
+		)
 
-			return {
-				meta: data.meta,
-				events: data.events.map(eventAdapter)
-			}
-		} catch (error) {
-			if (dev) console.error(error)
-
-			throw error
+		return {
+			// TODO: Remove any
+			meta: data.meta as any,
+			events: data.events.map(eventAdapter)
 		}
 	}
 
@@ -98,15 +100,26 @@ export default function useEvents(fetchFn: typeof fetch = fetch) {
 	 * @returns XioniEvent
 	 */
 
-	async function getEvent(module: number, id: number): Promise<GetEventResponse> {
+	async function getEvent(moduleId: number, eventId: number): Promise<GetEventResponse> {
 		try {
-			const { data } = await axios.get(`cms/events/${module}/${id}`)
+			const { data, error } = await client.GET(ApiPaths.getEvent, {
+				params: {
+					path: { moduleId, eventId }
+				}
+			})
+
+			// Forward to catch block
+			// TODO: Get rid of data check
+			if (error || !data) throw error
 
 			return {
-				event: eventAdapter(data.event)
+				// TODO: Remove any
+				event: eventAdapter(data.event as any)
 			}
 		} catch (error) {
-			if (dev) console.error(error)
+			if (dev) {
+				console.error(error)
+			}
 
 			throw error
 		}
@@ -130,10 +143,10 @@ export const getEvent = useEvents().getEvent
  * @returns Xioni XioniEvent
  */
 
-function eventAdapter(dto: any): XioniCMS.Event {
+function eventAdapter(dto: SchemaEvent): XioniCMS.Event {
 	const starts = new Date(dto.starts)
 	const ends = new Date(dto.ends)
-	const event = {
+	const event: XioniCMS.Event = {
 		...dto,
 		starts,
 		ends,
@@ -144,8 +157,8 @@ function eventAdapter(dto: any): XioniCMS.Event {
 		event.website = new URL(dto.website)
 	}
 
-	if (dto.ticketshop) {
-		event.ticketshop = new URL(dto.ticketshop)
+	if (dto.ticketshopURL) {
+		event.ticketshopURL = new URL(dto.ticketshopURL)
 	}
 
 	return event

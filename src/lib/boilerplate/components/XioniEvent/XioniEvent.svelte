@@ -1,7 +1,6 @@
 <script lang="ts">
 	import './XioniEvent.scss'
 
-	import { createEventDispatcher } from 'svelte'
 	import { formatFromTo } from '$lib/boilerplate/utils/formatDate'
 	import { formatISO } from 'date-fns'
 	import classnames from 'classnames'
@@ -9,6 +8,7 @@
 	// --- [ Types ] ---------------------------------------------------------------------------------
 
 	import type { XioniCMS } from '$lib/boilerplate/xioni/types'
+	import type { XioniEventProps } from './XioniEvent'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -20,8 +20,15 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let baseName = 'XioniEvent'
-	export let event: XioniCMS.Event
+	let {
+		baseName = 'XioniEvent',
+		class: className,
+		event,
+
+		// Events
+		registrationClickHandler,
+		...restProps
+	}: XioniEventProps = $props()
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -39,10 +46,9 @@
 		organizer
 	} = event
 
-	let lightbox: Lightbox // ref
+	let lightbox = $state<Lightbox>()
 
-	const images = $$props.event.images || []
-	const emit = createEventDispatcher()
+	const images = event.images || []
 	const allowRegistration = flags ? flags.includes('anmeldung') : false
 	const maxImages = 5
 	const imageRow = (function () {
@@ -63,8 +69,8 @@
 <div
 	itemscope
 	itemtype="https://schema.org/Event"
-	{...$$restProps}
-	class={classnames(baseName, $$props.class)}>
+	{...restProps}
+	class={classnames(baseName, className)}>
 	<meta itemprop="startDate" content={formatISO(starts, { representation: 'date' })} />
 	<meta itemprop="endDate" content={formatISO(starts, { representation: 'date' })} />
 	<meta itemprop="organizer" content={organizer} />
@@ -82,21 +88,23 @@
 				<Grid gap>
 					{#each imageRow as { src, alt }, index}
 						<Grid size="1-5" class="$mt">
-							<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+							<!-- svelte-ignore a11y_click_events_have_key_events -->
+							<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 							<img
 								class={baseName + '__piucture-row-image $pointer'}
 								{src}
 								{alt}
 								loading="lazy"
-								on:click={() => lightbox.open(index)} />
+								onclick={() => lightbox?.open(index)} />
 						</Grid>
 					{/each}
 					{#if images.length > maxImages}
 						<Grid size="1-5" class="$mt">
-							<!-- svelte-ignore a11y-no-static-element-interactions -->
+							<!-- svelte-ignore a11y_click_events_have_key_events -->
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
 							<div
 								class={baseName + '__piucture-row-overflow-indicator $pointer'}
-								on:click={() => lightbox.open(4)}>
+								onclick={() => lightbox?.open(4)}>
 								+{images.length - maxImages}
 							</div>
 						</Grid>
@@ -132,19 +140,16 @@
 		{#if allowRegistration}
 			<Button
 				fontello="ticket"
-				on:click={() => emit('registrationClick')}
+				onclick={registrationClickHandler}
 				class={baseName + '__registration'}>Jetzt anmelden</Button>
 		{/if}
 
 		{#if ticketshop && !allowRegistration}
-			<Button to={ticketshop.toString()} on:click={() => emit('ticketshopClick')} fontello="ticket">
-				Zum Ticketshop
-			</Button>
+			<Button to={ticketshop.toString()} fontello="ticket">Zum Ticketshop</Button>
 		{/if}
 
 		{#if website}
-			<Button fontello="globe" on:click={() => emit('click', 'website')} to={website.toString()}
-				>{website.hostname}</Button>
+			<Button fontello="globe" to={website.toString()}>{website.hostname}</Button>
 		{/if}
 
 		{#if pdf}

@@ -15,7 +15,7 @@
 	const message = $page.error?.message || 'Ein Fehler ist aufgetreten'
 </script>
 
-<div data-layout="error">
+<div data-error>
 	<div class="$text-center">
 		<Message title="🥵 Ups…" type="error">
 			<em>
@@ -44,7 +44,7 @@
 		margin: 0 auto;
 	}
 
-	[data-layout] {
+	[data-error] {
 		display: grid;
 		place-items: center;
 		height: 80vh;

@@ -2,27 +2,39 @@
 	import './Modal.scss'
 
 	import classnames from 'classnames'
-	import { createEventDispatcher, onMount } from 'svelte'
+	import { onMount } from 'svelte'
+
+	import type { ModalProps } from './Modal'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let title: string | null = null
-	export let isOpen: boolean = false
+	let {
+		baseName = 'Modal',
+		title,
+		isOpen = false,
+		class: className,
+
+		children,
+		footer,
+
+		closeHandler,
+		openHandler
+	}: ModalProps = $props()
 
 	// -----------------------------------------------------------------------------------------------
 
-	const emit = createEventDispatcher()
-	const baseName = $$props['ex-class'] || 'Modal'
 	let modal: HTMLDialogElement
 
 	export function close() {
 		modal.close()
-		emit('close')
+
+		if (closeHandler) closeHandler()
 	}
 
 	export function open() {
 		modal.showModal()
-		emit('open')
+
+		if (openHandler) openHandler()
 	}
 
 	function onKeyDown({ key }: KeyboardEvent) {
@@ -34,16 +46,18 @@
 	})
 </script>
 
-<dialog bind:this={modal} class={classnames(baseName, $$props.class)}>
-	<button class="{baseName}__close-button" on:click={close}>Schließen</button>
+<dialog bind:this={modal} class={classnames(baseName, className)}>
+	<button class="{baseName}__close-button" onclick={close}>Schließen</button>
 	{#if title}
 		<header class="{baseName}__header">{title}</header>
 	{/if}
 	<main class="{baseName}__body">
-		<slot />
+		{@render children?.()}
 	</main>
-	{#if $$slots.footer}
-		<footer class="{baseName}__footer"><slot name="footer" /></footer>
+	{#if footer}
+		<footer class="{baseName}__footer">
+			{@render footer?.()}
+		</footer>
 	{/if}
 </dialog>
 

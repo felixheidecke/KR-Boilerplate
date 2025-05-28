@@ -1,12 +1,14 @@
 .DS_Store
 node_modules
-/build
-/.svelte-kit
-/package
 .env
 .env.*
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .sync_*
-htdocs
+
+# Generated items
+/.svelte-kit
+/build
+/htdocs
+src/lib/boilerplate/xioni/api/api.d.ts
