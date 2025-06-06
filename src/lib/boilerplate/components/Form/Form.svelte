@@ -18,8 +18,8 @@
 	let {
 		baseName = 'Form',
 		moduleId,
-		successHandler = () => console.log('success'),
-		errorHandler = error => console.error(error),
+		successHandler = () => void 0,
+		errorHandler = () => void 0,
 		class: className,
 		children,
 		done

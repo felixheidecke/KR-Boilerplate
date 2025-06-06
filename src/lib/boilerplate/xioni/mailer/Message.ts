@@ -9,19 +9,23 @@ export function useMailer(clientOptions?: ClientOptions) {
 	const client = createClient(clientOptions)
 
 	async function send(body: SchemaMailerMessageRequestBody): Promise<boolean> {
-		return new Promise(async (resolve, reject) => {
-			client
-				.POST(ApiPaths.sendMessage, { body })
-				.catch(error => {
-					if (dev) console.error(error)
+		const { error, response } = await client.POST(ApiPaths.sendMessage, { body })
 
-					reject({
-						code: error.status,
-						...error.response.data
-					})
-				})
-				.then(() => resolve(true))
-		})
+		if (error) {
+			const errorResponse = {
+				status: response.status,
+				messages: error.message,
+				details: (error as any).details || null
+			}
+
+			if (dev) {
+				console.error(errorResponse)
+			}
+
+			throw errorResponse
+		}
+
+		return true
 	}
 
 	return {
