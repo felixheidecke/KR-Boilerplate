@@ -1,4 +1,4 @@
-import type { SchemaArticle, SchemaArticleParagraph } from '../api/api'
+import type { SchemaArticle, SchemaArticleParagraph } from '../api/api.d'
 import type { XioniCMS } from '../types'
 import { mapDtoImage } from './dtoImageMapper'
 

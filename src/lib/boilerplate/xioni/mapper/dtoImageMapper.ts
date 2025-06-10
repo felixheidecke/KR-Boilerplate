@@ -1,4 +1,4 @@
-import type { SchemaImage } from '../api/api'
+import type { SchemaImage } from '../api/api.d'
 import type { Image } from '../types'
 
 /**
