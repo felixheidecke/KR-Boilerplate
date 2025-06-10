@@ -1,9 +1,9 @@
-import { ApiPaths, type operations, type SchemaArticle } from '../api/api.d'
+import { ApiPaths, type operations } from '../api/api.d'
 import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
 import { LOCALE } from '$lib/boilerplate/constants'
+import { mapDtoArticle } from '../mapper/dtoArticleMapper'
+import { type ClientOptions } from 'openapi-fetch'
 import createClient from '../api/client'
-import type { ClientOptions } from 'openapi-fetch'
-import type { XioniCMS } from '../types'
 
 export function useArticles(clientOptions?: ClientOptions) {
 	const client = createClient(clientOptions)
@@ -59,7 +59,7 @@ export function useArticles(clientOptions?: ClientOptions) {
 
 		return {
 			meta: data.meta,
-			articles: data.articles.map(articleAdapter)
+			articles: data.articles.map(mapDtoArticle)
 		}
 	}
 
@@ -80,18 +80,11 @@ export function useArticles(clientOptions?: ClientOptions) {
 		)
 
 		return {
-			article: articleAdapter(data.article)
+			article: mapDtoArticle(data.article)
 		}
 	}
 
-	// Remap response data
-	function articleAdapter(article: SchemaArticle): XioniCMS.Article {
-		return {
-			...article,
-			date: new Date(article.date),
-			website: article.website ? new URL(article.website) : null
-		}
-	}
+	// --- Mappers -----------------------------------------------------------------------------------
 
 	return {
 		getArticles,

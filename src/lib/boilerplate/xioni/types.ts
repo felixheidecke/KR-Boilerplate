@@ -4,20 +4,20 @@ export namespace XioniCMS {
 		module: number
 		slug: string
 		title: string
-		date: Date
+		date: Date | null
 		teaser: string
-		image?: Image | null
-		pdf?: PDF | null
-		website?: URL | null
-		author?: string | null
+		image: Image | null
+		pdf: PDF | null
+		website: URL | null
+		author: string | null
 		content?: ArticleContent[]
 	}
 
 	export interface ArticleContent {
 		id: number
-		title?: string | null
-		text?: string | null
-		image?: Image | null
+		title: string | null
+		text: string | null
+		image: Image | null
 	}
 
 	export interface Event {
@@ -25,23 +25,21 @@ export namespace XioniCMS {
 		module: number
 		slug: string
 		title: string
-		teaser?: string
-		description?: string | null
-		address?: string | null
+		teaser: string | null
+		description: string | null
+		address: string | null
 		starts: Date
 		ends: Date
-		image?: Image | null
-		duration: string
-		pdf?: PDF | null
-		website?: URL
-		ticketshopURL?: URL
-		organizer?: string | null
-		coordinates?: [number, number] | null
-		tags?: {
-			id: number
-			name: string
-		}[]
-		flags?: 'anmeldung'[]
+		image: Image | null
+		duration: string // Let's see if we can format this later
+		pdf: PDF | null
+		website: URL | null
+		ticketshopURL: URL | null
+		organizer: string | null
+		coordinates: [number, number] | null
+		images?: Image[]
+		tags?: { id: number; name: string }[]
+		flags?: string[]
 	}
 
 	export interface Album {
@@ -77,16 +75,16 @@ export namespace XioniCMS {
 	export type MenuCard = MenuGroup[]
 }
 
-interface Image {
+export interface Image {
 	src: string
-	description?: string | null
-	align?: ('left' | 'right' | 'wide' | 'auto') | null
-	srcset?: {
+	description: string | null
+	align: ('left' | 'right' | 'wide' | 'auto') | null
+	srcset: {
 		small?: string
 	}
 }
 
-interface PDF {
+export interface PDF {
 	src: string
 	title?: string
 }

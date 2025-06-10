@@ -1,10 +1,10 @@
 import { ApiPaths, type operations, type SchemaEvent } from '../api/api.d'
 import { dev } from '$app/environment'
-import { formatFromTo } from '$lib/boilerplate/utils/formatDate'
+import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
+import { mapDtoEvent } from '../mapper/dtoEventMapper'
 import createClient from '../api/client'
 import type { ClientOptions } from 'openapi-fetch'
 import type { XioniCMS } from '../types'
-import { fetchWithErrorHandling } from '../utils/fetchWithErrorResponse'
 
 type GetEventResponse = {
 	event: XioniCMS.Event
@@ -87,9 +87,8 @@ export default function useEvents(clientOptions?: ClientOptions) {
 		)
 
 		return {
-			// TODO: Remove any
-			meta: data.meta as any,
-			events: data.events.map(eventAdapter)
+			meta: data.meta as GetEventsResponse['meta'],
+			events: data.events.map(mapDtoEvent)
 		}
 	}
 
@@ -113,8 +112,7 @@ export default function useEvents(clientOptions?: ClientOptions) {
 			if (error || !data) throw error
 
 			return {
-				// TODO: Remove any
-				event: eventAdapter(data.event as any)
+				event: mapDtoEvent(data.event as SchemaEvent)
 			}
 		} catch (error) {
 			if (dev) {
@@ -133,33 +131,3 @@ export default function useEvents(clientOptions?: ClientOptions) {
 
 export const getEvents = useEvents().getEvents
 export const getEvent = useEvents().getEvent
-
-// --- [ Helper ] ----------------------------------------------------------------------------------
-
-/**
- * Set propper Date() and URL() Object where nessesary
- *
- * @param dto
- * @returns Xioni XioniEvent
- */
-
-function eventAdapter(dto: SchemaEvent): XioniCMS.Event {
-	const starts = new Date(dto.starts)
-	const ends = new Date(dto.ends)
-	const event: XioniCMS.Event = {
-		...dto,
-		starts,
-		ends,
-		duration: formatFromTo(starts, ends)
-	}
-
-	if (dto.website) {
-		event.website = new URL(dto.website)
-	}
-
-	if (dto.ticketshopURL) {
-		event.ticketshopURL = new URL(dto.ticketshopURL)
-	}
-
-	return event
-}
