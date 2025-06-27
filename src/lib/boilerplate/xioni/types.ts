@@ -73,6 +73,25 @@ export namespace XioniCMS {
 	}
 
 	export type MenuCard = MenuGroup[]
+
+	export interface FileDownload {
+		id: number
+		module: number
+		category: number | null
+		title: string
+		number?: string
+		description: string
+		priority: number
+		filename: string
+		path: string
+		size: {
+			value: number
+			formatted: string
+		}
+		thumb: string | null
+		date: Date
+		url: URL
+	}
 }
 
 export interface Image {
