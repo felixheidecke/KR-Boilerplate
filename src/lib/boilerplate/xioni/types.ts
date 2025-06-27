@@ -73,6 +73,34 @@ export namespace XioniCMS {
 	}
 
 	export type MenuCard = MenuGroup[]
+
+	export type AddressbookCategory = {
+		id: number
+		module: number
+		priority: number | null
+		title: string | null
+		entries?: AddressbookEntry[]
+	}
+
+	export type AddressbookEntry = {
+		id: number
+		module: number
+		title: string | null
+		subtitle: string | null
+		name: string | null
+		room: string | null
+		address: string | null
+		city: string | null
+		phone: string | null
+		mobile: string | null
+		fax: string | null
+		email: string | null
+		web: URL | null
+		description: string | null
+		priority: number
+		image: Image | null
+		keywords: string | null
+	}
 }
 
 export interface Image {
