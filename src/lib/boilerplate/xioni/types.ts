@@ -77,7 +77,7 @@ export namespace XioniCMS {
 	export type AddressbookCategory = {
 		id: number
 		module: number
-		priority: number | null
+		priority: number
 		title: string | null
 		entries?: AddressbookEntry[]
 	}
