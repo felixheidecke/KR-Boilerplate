@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './Address.css'
 	import classnames from 'classnames'
+	import type { AddressProps } from './Address.d'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -9,31 +10,51 @@
 	import Fontello from '../Fontello/Fontello.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
+	let {
+		name,
+		owner,
+		street,
+		town,
+		phone,
+		mobile,
+		fax,
+		email,
+		web,
 
-	export let name: string
-	export let owner = ''
-	export let street: string
-	export let town: string
-	export let phone = ''
-	export let fax = ''
-	export let email = ''
-	export let web = ''
-	export let baseName = 'Address'
+		class: className,
+		baseName = 'Address',
+		children
+	}: AddressProps = $props()
+
+	const webUrl = $derived(web ? new URL(web) : undefined)
 
 	// -----------------------------------------------------------------------------------------------
 </script>
 
-<ol {...$$restProps} class={classnames(baseName, $$props.class)}>
-	<li class="{baseName}__name">{name}</li>
+<ol class={classnames(baseName, className)}>
+	{#if name}
+		<li class="{baseName}__name">{name}</li>
+	{/if}
 	{#if owner}
 		<li class="{baseName}__owner">{owner}</li>
 	{/if}
-	<li class="{baseName}__street">{street}</li>
-	<li class="{baseName}__town">{town}</li>
-	<slot />
+	{#if street}
+		<li class="{baseName}__street">{street}</li>
+	{/if}
+	{#if town}
+		<li class="{baseName}__town">{town}</li>
+	{/if}
+	{@render children?.()}
 	{#if phone}
 		<li class="{baseName}__phone">
-			<Link to={'tel:' + phone} fontello="phone">{phone}</Link>
+			<Fontello name="phone" />
+			<a href={'tel:' + phone} aria-label="Telefonnummer anrufen">{phone}</a>
+		</li>
+	{/if}
+	{#if mobile}
+		<li class="{baseName}__mobile">
+			<Fontello name="phone" />
+			<a href={'tel:' + mobile} aria-label="Mobilnummer anrufen">{mobile}</a>
 		</li>
 	{/if}
 	{#if fax}
@@ -44,13 +65,13 @@
 	{/if}
 	{#if email}
 		<li class="{baseName}__email">
-			<Mail to={email} />
+			<Mail to={email} aria-label="E-Mail schreiben" />
 		</li>
 	{/if}
-	{#if web}
+	{#if webUrl}
 		<li class="{baseName}__web">
 			<Fontello name="globe" />
-			{web}
+			<Link to={webUrl.toString()}>{webUrl.hostname}{webUrl.pathname}</Link>
 		</li>
 	{/if}
 </ol>

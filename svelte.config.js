@@ -11,7 +11,6 @@ const config = {
 		preloadStrategy: 'preload-mjs'
 	},
 	kit: {
-		inlineStyleThreshold: 25_000,
 		adapter: adapter({
 			pages: 'htdocs',
 			assets: 'htdocs',
@@ -25,7 +24,7 @@ const config = {
 			$stammdaten: './src/lib/stammdaten.js'
 		},
 		version: {
-			name: `Boilerplate: ${pkg.version}; Built: ${new Date().toString()}`
+			name: `Shop: ${pkg.version}; Built: ${new Date().toString()}`
 		}
 	}
 }

@@ -5,4 +5,4 @@
 	export let baseName = 'Fontello'
 </script>
 
-<i class={classnames($$props.class, baseName, 'fontello-' + name)} aria-hidden="true" on:click></i>
+<i class={classnames($$props.class, baseName, 'fontello-' + name)} aria-hidden="true" on:click />
