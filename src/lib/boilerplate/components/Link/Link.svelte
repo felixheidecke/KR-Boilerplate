@@ -50,7 +50,8 @@
 	</span>
 {:else}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<svelte:element this={tag} class={className} href={to} {target} {rel} aria-label={label} on:click>
+	<svelte:element this={tag} class={className} href={to} {target} {rel} aria-label={label} on:click
+		>&nbsp;
 		{#if $$slots.default}
 			<slot />
 		{:else}
