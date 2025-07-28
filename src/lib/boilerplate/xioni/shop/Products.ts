@@ -1,18 +1,8 @@
-import appConfig from '$lib/app.config'
-import Axios, { type CreateAxiosDefaults } from 'axios'
 import type { XioniShop } from '../types'
+import { createClient, createUrl } from '../api/client'
 
-export function useProducts(config?: CreateAxiosDefaults) {
-	const { shopApiKey, shopApiBaseUrl } = appConfig
-
-	const axios = Axios.create({
-		baseURL: shopApiBaseUrl,
-		...config,
-		headers: {
-			'api-key': shopApiKey,
-			...config?.headers
-		}
-	})
+export function useProducts() {
+	const client = createClient()
 
 	/**
 	 * Get all products
@@ -26,11 +16,14 @@ export function useProducts(config?: CreateAxiosDefaults) {
 		frontpage?: boolean
 	}): Promise<XioniShop.Product[]> {
 		try {
-			const { data } = await axios.get<XioniShop.Product[]>('/products', {
-				params
+			const url = createUrl('products', {
+				query: {
+					limit: params?.limit,
+					frontpage: params?.frontpage
+				}
 			})
 
-			return data
+			return client.get<XioniShop.Product[]>(url).json()
 		} catch (error) {
 			throw error
 		}
@@ -45,9 +38,7 @@ export function useProducts(config?: CreateAxiosDefaults) {
 
 	async function getProduct(id: number): Promise<XioniShop.Product> {
 		try {
-			const { data } = await axios.get<XioniShop.Product>(`/products/${id}`)
-
-			return data
+			return client.get<XioniShop.Product>(`products/${id}`).json()
 		} catch (error) {
 			throw error
 		}
@@ -68,11 +59,14 @@ export function useProducts(config?: CreateAxiosDefaults) {
 		}
 	): Promise<XioniShop.Product[]> {
 		try {
-			const { data } = await axios.get<XioniShop.Product[]>(`/groups/${category}/products`, {
-				params
+			const url = createUrl(`groups/${category}/products`, {
+				query: {
+					limit: params?.limit,
+					recursive: params?.recursive
+				}
 			})
 
-			return data
+			return client.get<XioniShop.Product[]>(url).json()
 		} catch (error) {
 			throw error
 		}

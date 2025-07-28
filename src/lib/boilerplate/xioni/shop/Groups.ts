@@ -1,24 +1,12 @@
-import appConfig from '$lib/app.config'
-import Axios, { type CreateAxiosDefaults } from 'axios'
 import type { XioniShop } from '../types'
+import { createClient } from '../api/client'
 
-export function useGroups(config?: CreateAxiosDefaults) {
-	const { shopApiKey, shopApiBaseUrl } = appConfig
-
-	const axios = Axios.create({
-		baseURL: shopApiBaseUrl,
-		...config,
-		headers: {
-			'api-key': shopApiKey,
-			...config?.headers
-		}
-	})
+export function useGroups() {
+	const client = createClient()
 
 	async function getGroups(): Promise<XioniShop.Group[]> {
 		try {
-			const { data } = await axios.get<XioniShop.Group[]>('/groups')
-
-			return data
+			return await client.get('groups').json()
 		} catch (error) {
 			throw error
 		}
@@ -26,9 +14,7 @@ export function useGroups(config?: CreateAxiosDefaults) {
 
 	async function getGroup(id: number): Promise<XioniShop.Group> {
 		try {
-			const { data } = await axios.get<XioniShop.Group>(`/groups/${id}`)
-
-			return data
+			return await client.get(`groups/${id}`).json()
 		} catch (error) {
 			throw error
 		}
@@ -36,9 +22,7 @@ export function useGroups(config?: CreateAxiosDefaults) {
 
 	async function getGroupByProductId(id: number): Promise<XioniShop.Group> {
 		try {
-			const { data } = await axios.get<XioniShop.Group>(`/products/${id}/group`)
-
-			return data
+			return await client.get(`products/${id}/group`).json()
 		} catch (error) {
 			throw error
 		}

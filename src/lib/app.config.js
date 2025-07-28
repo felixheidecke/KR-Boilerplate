@@ -1,5 +1,6 @@
 export default {
 	payPalClientId: '',
-	shopApiKey: '',
-	shopApiBaseUrl: '/api/v5/shop/' + 1511, // Shop Module ID
+	apiBaseUrl: 'https://api.klickrhein.de',
+	shopApiKey: '89c23389a304fe080e558cd3bca390df',
+	shopModuleID: 1552
 }

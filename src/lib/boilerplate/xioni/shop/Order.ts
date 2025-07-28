@@ -1,6 +1,5 @@
-import appConfig from '$lib/app.config'
-import Axios, { type CreateAxiosDefaults } from 'axios'
 import type { XioniShop } from '../types'
+import { createClient, createUrl } from '../api/client'
 
 type UpdateOrderParams = {
 	address?: XioniShop.Order['address']
@@ -11,21 +10,12 @@ type UpdateOrderParams = {
 
 // --- Factory -------------------------------------------------------------------------------------
 
-export function useOrder(config?: CreateAxiosDefaults) {
-	const { shopApiKey, shopApiBaseUrl } = appConfig
-
-	const axios = Axios.create({
-		baseURL: shopApiBaseUrl,
-		...config,
-		headers: {
-			'api-key': shopApiKey,
-			...config?.headers
-		}
-	})
+export function useOrder() {
+	const client = createClient()
 
 	async function createOrder(): Promise<XioniShop.Order> {
 		try {
-			const { data } = await axios.post('/order')
+			const data = await client.post(createUrl('order'))
 
 			return orderAdapter(data) as XioniShop.Order
 		} catch (error) {
@@ -35,7 +25,7 @@ export function useOrder(config?: CreateAxiosDefaults) {
 
 	async function updateOrder(update: UpdateOrderParams): Promise<XioniShop.Order> {
 		try {
-			const { data } = await axios.patch('/order', update)
+			const data = await client.patch(createUrl('order'), { body: JSON.stringify(update) })
 
 			return orderAdapter(data) as XioniShop.Order
 		} catch (error) {
@@ -45,7 +35,7 @@ export function useOrder(config?: CreateAxiosDefaults) {
 
 	async function getOrder(id?: string): Promise<XioniShop.Order> {
 		try {
-			const { data } = await axios.get(`/order${id ? '/' + id : ''}`)
+			const data = await client.get(createUrl(`order${id ? '/' + id : ''}`)).json()
 
 			return orderAdapter(data) as XioniShop.Order
 		} catch (error) {

@@ -7,16 +7,23 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Fontello from '../Fontello/Fontello.svelte'
+	import type { ButtonProps } from './Button'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let baseName = 'Button'
-	export let disabled = false
-	export let fontello: string = ''
-	export let isLoading = false
-	export let rel: 'follow' | 'nofollow noopener' = 'nofollow noopener'
-	export let target: '_blank' | undefined = undefined
-	export let to: string | undefined = undefined
+	let {
+		baseName = 'Button',
+		class: classNamePorp,
+		children,
+
+		disabled = false,
+		fontello,
+		isLoading = false,
+		rel = 'nofollow noopener',
+		target,
+		to,
+		...restProps
+	}: ButtonProps = $props()
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -25,7 +32,8 @@
 		target = '_blank'
 	}
 
-	const className = classnames(
+	const classNames = classnames(
+		classNamePorp,
 		baseName,
 		disabled ? baseName + '--disabled' : null,
 		!to || baseName + '--anchor',
@@ -34,21 +42,20 @@
 </script>
 
 {#if !to}
-	<button on:click {disabled} {...$$restProps} class={classnames(className, $$props.class)}>
+	<button {disabled} {...restProps} class={classNames}>
 		{#if fontello}
 			<Fontello baseName={baseName + '__icon'} name={fontello} />
 		{/if}
 		<span class="{baseName}__text">
-			<slot />
+			{@render children?.()}
 		</span>
 	</button>
-{:else}
-	<a on:click href={to} {target} {...$$restProps} class={classnames(className, $$props.class)}>
+	<a href={to} {target} {...restProps} class={classNames}>
 		{#if fontello}
 			<Fontello baseName={baseName + '__icon'} name={fontello} />
 		{/if}
 		<span class="{baseName}__text">
-			<slot />
+			{@render children?.()}
 		</span>
 	</a>
 {/if}

@@ -2,19 +2,9 @@
 	import './Nav.scss'
 
 	import classnames from 'classnames'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import { throttle } from 'lodash-es'
-
-	// --- [ Types ] ---------------------------------------------------------------------------------
-
-	type Route = {
-		path?: string
-		name: string
-		class?: string
-		routes?: Route[]
-		target?: '_blank'
-		title?: string
-	}
+	import type { NavProps, NavRoute } from './Nav.d.ts'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -22,21 +12,21 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let routes: Route[]
-	export let sticky = false
-	export let baseName = 'Nav'
+	let { routes, baseName = 'Nav', sticky, class: className }: NavProps = $props()
 
 	// -----------------------------------------------------------------------------------------------
 
 	let nav: HTMLElement
-	let active = false
-	let hoverState: number = -1
+	let active = $state(false)
+	let hoverState: number = $state(-1)
 
-	$: className = classnames(
-		baseName,
-		$$props.class,
-		!active || baseName + '--active',
-		!sticky || baseName + '--sticky'
+	let classNames = $derived(
+		classnames(
+			baseName,
+			className,
+			!active || baseName + '--active',
+			!sticky || baseName + '--sticky'
+		)
 	)
 
 	function handleOffset() {
@@ -50,23 +40,24 @@
 		}
 	}
 
-	$: isCurrentPath = (target: URL['pathname'] | undefined) => {
+	let isCurrentPath = $derived((target: URL['pathname'] | undefined) => {
 		if (!target || target === '/') return false
 
-		return $page.url.pathname.includes(target)
-	}
+		return page.url.pathname.includes(target)
+	})
 
-	$: isActivePath = (target: URL['pathname'] | undefined) => {
+	let isActivePath = $derived((target: URL['pathname'] | undefined) => {
 		if (!target) return false
 
-		return $page.url.pathname === target
-	}
+		return page.url.pathname === target
+	})
 </script>
 
 <svelte:window on:scroll|passive={() => throttle(handleOffset, 250)} />
 
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<nav bind:this={nav} class={className} on:click={() => (active = false)}>
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<nav bind:this={nav} class={classNames} on:click={() => (active = false)}>
 	<ul class={baseName + '__ul'} aria-label="navigation path">
 		{#each routes as route, i}
 			<li

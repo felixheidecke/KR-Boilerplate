@@ -3,17 +3,14 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Link from '$lib/boilerplate/components/Link/Link.svelte'
-	import ProductTile from '$lib/boilerplate/components/XioniShopProductTile/XioniShopProductTile.svelte'
+	import { Link, ProductTile } from '$lib/boilerplate/components'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let data
+	let { data } = $props()
 
-	// -----------------------------------------------------------------------------------------------
-
-	$: group = data.group
-	$: products = (data.products || []).filter(product => product.group === group.id)
+	const group = $derived(data.group)
+	const products = $derived((data.products || []).filter(product => product.group === group.id))
 </script>
 
 <svelte:head>
@@ -38,7 +35,7 @@
 {#if products.length}
 	<Grid gap tag="ol">
 		{#each products as product, index (product.id)}
-			<Grid tag="li" size="tablet-1-2" {index}>
+			<Grid tag="li" size="tablet-1-3" {index}>
 				<Link class="$decoration-none" to="/{product.slug}-p-{product.id}/">
 					<ProductTile {product} />
 				</Link>

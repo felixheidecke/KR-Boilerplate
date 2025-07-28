@@ -1,0 +1,13 @@
+$Nav-breakpoint: 1024px;
+
+.Nav {
+	// --- Desktop navigation styles -----------------------------------------------------------------
+
+	@media (width >= $Nav-breakpoint) {
+	}
+
+	// --- Mobile navigation styles ------------------------------------------------------------------
+
+	@media (width < $Nav-breakpoint) {
+	}
+}

@@ -1,18 +1,9 @@
-import appConfig from '$lib/app.config'
-import Axios, { type CreateAxiosDefaults } from 'axios'
+import { createClient, createUrl } from '../api/client'
 import type { XioniShop } from '../types'
 
-export function useCart(config?: CreateAxiosDefaults) {
-	const { shopApiKey, shopApiBaseUrl } = appConfig
-
-	const axios = Axios.create({
-		baseURL: shopApiBaseUrl,
-		...config,
-		headers: {
-			'api-key': shopApiKey,
-			...config?.headers
-		}
-	})
+export function useCart() {
+	const client = createClient()
+	const url = createUrl(`cart`)
 
 	/**
 	 * Get the cart contents
@@ -20,11 +11,9 @@ export function useCart(config?: CreateAxiosDefaults) {
 	 * @returns Cart
 	 */
 
-	async function getCart(): Promise<XioniShop.Cart> {
+	async function getCart() {
 		try {
-			const { data } = await axios.get<XioniShop.Cart>('/cart')
-
-			return data
+			return client.get<XioniShop.Cart>(url).json()
 		} catch (error) {
 			throw error
 		}
@@ -39,11 +28,14 @@ export function useCart(config?: CreateAxiosDefaults) {
 	 * @returns Cart
 	 */
 
-	async function updateItemQuantity(id: number, quantity: number): Promise<XioniShop.Cart> {
+	async function updateItemQuantity(id: number, quantity: number) {
 		try {
-			const { data } = await axios.put<XioniShop.Cart>('/cart', [{ productId: id, quantity }])
-
-			return data
+			return client
+				.put<XioniShop.Cart>(url, {
+					body: JSON.stringify([{ productId: id, quantity }]),
+					headers: { 'Content-Type': 'application/json' }
+				})
+				.json()
 		} catch (error) {
 			throw error
 		}
@@ -59,9 +51,12 @@ export function useCart(config?: CreateAxiosDefaults) {
 
 	async function addItem(id: number): Promise<XioniShop.Cart> {
 		try {
-			const { data } = await axios.put<XioniShop.Cart>('/cart', [{ productId: id, quantity: 1 }])
-
-			return data
+			return client
+				.put<XioniShop.Cart>(url, {
+					body: JSON.stringify([{ productId: id, quantity: 1 }]),
+					headers: { 'Content-Type': 'application/json' }
+				})
+				.json()
 		} catch (error) {
 			throw error
 		}

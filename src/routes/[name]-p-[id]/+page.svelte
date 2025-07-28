@@ -2,7 +2,6 @@
 	import { CART } from '$lib/stores'
 	import { useCart } from '$lib/boilerplate/xioni/shop/Cart.js'
 	import messages from '$lib/messages'
-	import type { AxiosError } from 'axios'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -11,7 +10,7 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let data
+	const { data } = $props()
 	const { product } = data
 
 	// -----------------------------------------------------------------------------------------------
@@ -28,7 +27,7 @@
 				})
 			})
 			.catch(response => {
-				const error = response as AxiosError
+				const error = response as Error
 
 				messages.add(error.message, undefined, { type: 'error' })
 			})
