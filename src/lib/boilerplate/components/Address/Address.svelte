@@ -26,8 +26,6 @@
 		children
 	}: AddressProps = $props()
 
-	const webUrl = $derived(web ? new URL(web) : undefined)
-
 	// -----------------------------------------------------------------------------------------------
 </script>
 
@@ -47,20 +45,19 @@
 	{@render children?.()}
 	{#if phone}
 		<li class="{baseName}__phone">
-			<Fontello name="phone" />
-			<a href={'tel:' + phone} aria-label="Telefonnummer anrufen">{phone}</a>
+			<Fontello name="phone" />&nbsp;<a href={'tel:' + phone} aria-label="Telefonnummer anrufen"
+				>{phone}</a>
 		</li>
 	{/if}
 	{#if mobile}
 		<li class="{baseName}__mobile">
-			<Fontello name="phone" />
-			<a href={'tel:' + mobile} aria-label="Mobilnummer anrufen">{mobile}</a>
+			<Fontello name="phone" />&nbsp;<a href={'tel:' + mobile} aria-label="Mobilnummer anrufen"
+				>{mobile}</a>
 		</li>
 	{/if}
 	{#if fax}
 		<li class="{baseName}__fax">
-			<Fontello name="fax" />
-			{fax}
+			<Fontello name="fax" />&nbsp;{fax}
 		</li>
 	{/if}
 	{#if email}
@@ -68,10 +65,9 @@
 			<Mail to={email} aria-label="E-Mail schreiben" />
 		</li>
 	{/if}
-	{#if webUrl}
+	{#if web}
 		<li class="{baseName}__web">
-			<Fontello name="globe" />
-			<Link to={webUrl.toString()}>{webUrl.hostname}{webUrl.pathname}</Link>
+			<Fontello name="globe" />&nbsp;{web}
 		</li>
 	{/if}
 </ol>

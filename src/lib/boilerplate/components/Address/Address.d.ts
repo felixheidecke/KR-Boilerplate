@@ -11,5 +11,5 @@ export interface AddressProps {
 	mobile?: string
 	fax?: string
 	email?: string
-	web?: URL | string
+	web?: string
 }

@@ -37,7 +37,7 @@
 {#if fontello}
 	<span class={className}>
 		{#if fontello}
-			<Fontello class={baseName + '__icon'} name={fontello} />
+			<Fontello class={baseName + '__icon'} name={fontello} />&nbsp;
 		{/if}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<svelte:element this={tag} href={to} {target} {rel} aria-label={label} on:click>
@@ -50,8 +50,7 @@
 	</span>
 {:else}
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<svelte:element this={tag} class={className} href={to} {target} {rel} aria-label={label} on:click
-		>&nbsp;
+	<svelte:element this={tag} class={className} href={to} {target} {rel} aria-label={label} on:click>
 		{#if $$slots.default}
 			<slot />
 		{:else}
