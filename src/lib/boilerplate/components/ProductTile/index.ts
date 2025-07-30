@@ -1,4 +1,4 @@
 import ProductTile from './ProductTile.svelte'
-import ProductTileProps from './ProductTile'
+import type { ProductTileProps } from './ProductTile.d'
 
-export { ProductTile, ProductTileProps }
+export { ProductTile, type ProductTileProps }

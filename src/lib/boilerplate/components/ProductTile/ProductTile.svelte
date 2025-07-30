@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProductTileProps } from './ProductTile'
+	import type { ProductTileProps } from './ProductTile.d'
 	import './ProductTile.css'
 
 	import classnames from 'classnames'

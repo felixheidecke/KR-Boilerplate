@@ -10,7 +10,7 @@
 
 	import Button from '$lib/boilerplate/components/Button/Button.svelte'
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
-	import PayPalButtons from '$lib/boilerplate/components/PayPalButtons/PayPalButtons.svelte'
+	import { PayPalButtons } from '$lib/boilerplate/components'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 

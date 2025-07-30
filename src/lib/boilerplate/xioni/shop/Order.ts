@@ -1,5 +1,5 @@
 import type { XioniShop } from '../types'
-import { createClient, createUrl } from '../api/client'
+import { createClient, createShopUrl } from '../api/client'
 
 type UpdateOrderParams = {
 	address?: XioniShop.Order['address']
@@ -15,7 +15,7 @@ export function useOrder() {
 
 	async function createOrder(): Promise<XioniShop.Order> {
 		try {
-			const data = await client.post(createUrl('order'))
+			const data = await client.post(createShopUrl('order'))
 
 			return orderAdapter(data) as XioniShop.Order
 		} catch (error) {
@@ -25,7 +25,7 @@ export function useOrder() {
 
 	async function updateOrder(update: UpdateOrderParams): Promise<XioniShop.Order> {
 		try {
-			const data = await client.patch(createUrl('order'), { body: JSON.stringify(update) })
+			const data = await client.patch(createShopUrl('order'), { body: JSON.stringify(update) })
 
 			return orderAdapter(data) as XioniShop.Order
 		} catch (error) {
@@ -35,7 +35,7 @@ export function useOrder() {
 
 	async function getOrder(id?: string): Promise<XioniShop.Order> {
 		try {
-			const data = await client.get(createUrl(`order${id ? '/' + id : ''}`)).json()
+			const data = await client.get(createShopUrl(`order${id ? '/' + id : ''}`)).json()
 
 			return orderAdapter(data) as XioniShop.Order
 		} catch (error) {

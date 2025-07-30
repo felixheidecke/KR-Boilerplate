@@ -6,7 +6,6 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Button from '$lib/boilerplate/components/Button/Button.svelte'
-	import Client from '$lib/boilerplate/components/Client/Client.svelte'
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import CartTable from '$lib/boilerplate/components/XioniShopCartTable/XioniShopCartTable.svelte'
 	import { useCart } from '$lib/boilerplate/xioni/shop/Cart'
@@ -35,27 +34,25 @@
 	onMount(messages.reset)
 </script>
 
-<h1>Warenkorb</h1>
-<Client browser>
-	{#if !$CART.products?.length}
-		<h4>Ihr Warenkorb ist noch leer.</h4>
-		<Link to="/">Zum Shop</Link>
-	{:else}
-		<CartTable
-			products={$CART.products}
-			supplementalCost={$CART.supplementalCost}
-			shipping={$CART.shipping}
-			total={$CART.total}
-			quantitySelector
-			readOnly={isLoading}
-			on:product-quantity-update={updateItemQuantity} />
+<h2>Warenkorb</h2>
+{#if !$CART.products?.length}
+	<h4>Ihr Warenkorb ist noch leer.</h4>
+	<Link to="/">Zum Shop</Link>
+{:else}
+	<CartTable
+		products={$CART.products}
+		supplementalCost={$CART.supplementalCost}
+		shipping={$CART.shipping}
+		total={$CART.total}
+		quantitySelector
+		readOnly={isLoading}
+		on:product-quantity-update={updateItemQuantity} />
 
-		<div class="$mt-2">
-			<Button fontello="angle-left" to="/">zum Shop</Button>
-			<Button
-				fontello="angle-right"
-				class="Button--primary $float-right $row-reverse"
-				to="/checkout/address/">zur Kasse</Button>
-		</div>
-	{/if}
-</Client>
+	<div class="$mt-2">
+		<Button fontello="angle-left" to="/">zum Shop</Button>
+		<Button
+			fontello="angle-right"
+			class="Button--primary $float-right $row-reverse"
+			to="/checkout/address/">zur Kasse</Button>
+	</div>
+{/if}

@@ -19,7 +19,7 @@
 
 	export let product: XioniShop.Product
 	export let baseName = 'XioniShopProduct'
-	export let basePath: string = $page.url.pathname + '../'
+	export let basePath: string = $page.url.pathname + '/../'
 
 	// -----------------------------------------------------------------------------------------------
 

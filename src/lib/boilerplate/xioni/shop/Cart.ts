@@ -1,9 +1,9 @@
-import { createClient, createUrl } from '../api/client'
+import { createClient, createShopUrl } from '../api/client'
 import type { XioniShop } from '../types'
 
 export function useCart() {
 	const client = createClient()
-	const url = createUrl(`cart`)
+	const url = createShopUrl(`cart`)
 
 	/**
 	 * Get the cart contents

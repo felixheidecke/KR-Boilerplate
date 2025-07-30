@@ -1,4 +1,4 @@
-import { createClient, createUrl } from '../api/client'
+import { createClient, createShopUrl } from '../api/client'
 
 // --- Factory -------------------------------------------------------------------------------------
 
@@ -8,7 +8,7 @@ export function usePayment() {
 	async function createPayPalTransaction(transactionId: string): Promise<string> {
 		try {
 			const { orderId } = await client
-				.post<{ orderId: string }>(createUrl('payment/paypal/create'), {
+				.post<{ orderId: string }>(createShopUrl('payment/paypal/create'), {
 					body: JSON.stringify({ transactionId })
 				})
 				.json()
@@ -21,7 +21,7 @@ export function usePayment() {
 
 	async function capturePayPalTransaction(orderId: string): Promise<boolean> {
 		try {
-			await client.post(createUrl('payment/paypal/capture'), {
+			await client.post(createShopUrl('payment/paypal/capture'), {
 				body: JSON.stringify({ orderId })
 			})
 

@@ -1,4 +1,4 @@
-$Nav-breakpoint: 1024px;
+$Nav-breakpoint: 1920px;
 
 .Nav {
 	// --- Desktop navigation styles -----------------------------------------------------------------
@@ -9,5 +9,10 @@ $Nav-breakpoint: 1024px;
 	// --- Mobile navigation styles ------------------------------------------------------------------
 
 	@media (width < $Nav-breakpoint) {
+	}
+
+	&__item--website {
+		border-top: 1px solid white;
+		padding-top: 0.5rem;
 	}
 }

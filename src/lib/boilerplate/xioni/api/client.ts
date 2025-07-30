@@ -12,8 +12,8 @@ export function createClient() {
 	})
 }
 
-export function createUrl(path: string, { query }: { query?: Record<string, any> } = {}): URL {
-	const url = new URL('/v5/shop/' + path, appConfig.apiBaseUrl)
+export function createShopUrl(path: string, { query }: { query?: Record<string, any> } = {}): URL {
+	const url = new URL('/v5/shop/' + appConfig.shopModuleID + '/' + path, appConfig.apiBaseUrl)
 
 	if (query) {
 		Object.entries(query).forEach(([key, value]) => {

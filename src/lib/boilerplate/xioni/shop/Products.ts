@@ -1,5 +1,5 @@
 import type { XioniShop } from '../types'
-import { createClient, createUrl } from '../api/client'
+import { createClient, createShopUrl } from '../api/client'
 
 export function useProducts() {
 	const client = createClient()
@@ -16,7 +16,7 @@ export function useProducts() {
 		frontpage?: boolean
 	}): Promise<XioniShop.Product[]> {
 		try {
-			const url = createUrl('products', {
+			const url = createShopUrl('products', {
 				query: {
 					limit: params?.limit,
 					frontpage: params?.frontpage
@@ -38,7 +38,7 @@ export function useProducts() {
 
 	async function getProduct(id: number): Promise<XioniShop.Product> {
 		try {
-			return client.get<XioniShop.Product>(`products/${id}`).json()
+			return client.get<XioniShop.Product>(createShopUrl(`products/${id}`)).json()
 		} catch (error) {
 			throw error
 		}
@@ -59,7 +59,7 @@ export function useProducts() {
 		}
 	): Promise<XioniShop.Product[]> {
 		try {
-			const url = createUrl(`groups/${category}/products`, {
+			const url = createShopUrl(`groups/${category}/products`, {
 				query: {
 					limit: params?.limit,
 					recursive: params?.recursive
