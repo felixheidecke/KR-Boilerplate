@@ -7,23 +7,16 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Fontello from '../Fontello/Fontello.svelte'
-	import type { ButtonProps } from './Button'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	let {
-		baseName = 'Button',
-		class: classNamePorp,
-		children,
-
-		disabled = false,
-		fontello,
-		isLoading = false,
-		rel = 'nofollow noopener',
-		target,
-		to,
-		...restProps
-	}: ButtonProps = $props()
+	export let baseName = 'Button'
+	export let disabled = false
+	export let fontello: string = ''
+	export let isLoading = false
+	export let rel: 'follow' | 'nofollow noopener' = 'nofollow noopener'
+	export let target: '_blank' | undefined = undefined
+	export let to: string | undefined = undefined
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -32,8 +25,7 @@
 		target = '_blank'
 	}
 
-	const classNames = classnames(
-		classNamePorp,
+	const className = classnames(
 		baseName,
 		disabled ? baseName + '--disabled' : null,
 		!to || baseName + '--anchor',
@@ -42,20 +34,21 @@
 </script>
 
 {#if !to}
-	<button {disabled} {...restProps} class={classNames}>
+	<button on:click {disabled} {...$$restProps} class={classnames(className, $$props.class)}>
 		{#if fontello}
-			<Fontello baseName={baseName + '__icon'} name={fontello} />
+			<Fontello baseName={baseName + '__icon'} name={fontello} />&nbsp;
 		{/if}
 		<span class="{baseName}__text">
-			{@render children?.()}
+			<slot />
 		</span>
 	</button>
-	<a href={to} {target} {...restProps} class={classNames}>
+{:else}
+	<a on:click href={to} {target} {...$$restProps} class={classnames(className, $$props.class)}>
 		{#if fontello}
-			<Fontello baseName={baseName + '__icon'} name={fontello} />
+			<Fontello baseName={baseName + '__icon'} name={fontello} />&nbsp;
 		{/if}
 		<span class="{baseName}__text">
-			{@render children?.()}
+			<slot />
 		</span>
 	</a>
 {/if}
