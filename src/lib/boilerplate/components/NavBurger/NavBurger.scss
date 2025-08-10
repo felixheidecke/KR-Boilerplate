@@ -3,11 +3,11 @@
 @media (width < var.$Nav-breakpoint) {
 	:where(.NavBurger) {
 		align-items: center;
-		background: none;
-		border: 0 none;
+		background: white;
+		border: 1px solid #e6e6e6;
+		border-radius: 3px;
 		cursor: pointer;
 		display: flex;
-		height: 42px;
 		justify-content: center;
 		margin: 0;
 		padding: 0;
@@ -18,10 +18,19 @@
 		font-weight: bold;
 		font-size: 1rem;
 	}
+
+	:where(.NavBurger--active .NavBurger__svg) {
+		transform: scaleX(-1);
+	}
+
 	:where(.NavBurger__svg) {
-		width: 21px;
-		height: 21px;
-		fill: currentColor;
+		transition: transform 333ms ease-in-out;
+		width: 36px;
+		height: 36px;
+	}
+
+	:where(.NavBurger__svg-path) {
+		stroke: #777;
 	}
 }
 

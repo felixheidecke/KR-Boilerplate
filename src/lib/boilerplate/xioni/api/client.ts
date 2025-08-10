@@ -1,5 +1,6 @@
 import appConfig from '$lib/app.config'
 import ky from 'ky'
+import { pickBy } from 'lodash-es'
 
 export function createClient() {
 	const apiKey = appConfig.shopApiKey
@@ -12,15 +13,16 @@ export function createClient() {
 	})
 }
 
-export function createShopUrl(path: string, { query }: { query?: Record<string, any> } = {}): URL {
-	const url = new URL('/v5/shop/' + appConfig.shopModuleID + '/' + path, appConfig.apiBaseUrl)
+export function createShopUrl(
+	path: string,
+	{ query }: { query?: Record<string, any> } = {}
+): string {
+	const url = `/api/shop/${appConfig.shopModuleID}/${path}`
 
 	if (query) {
-		Object.entries(query).forEach(([key, value]) => {
-			if (value === undefined) return
+		const searchParams = new URLSearchParams(pickBy(query, value => value !== undefined)).toString()
 
-			url.searchParams.append(key, String(value))
-		})
+		return `${url}?${searchParams}`
 	}
 
 	return url

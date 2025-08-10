@@ -64,20 +64,22 @@
 				class={classnames(baseName + '__li', route.class)}
 				on:mouseenter={() => (hoverState = i)}
 				on:mouseleave={() => (hoverState = -1)}>
-				<svelte:element
-					this={route.path ? 'a' : 'span'}
-					id="route-{i}"
-					class={classnames(
-						baseName + '__a',
-						isActivePath(route.path) ? baseName + '__a--active' : null,
-						isCurrentPath(route.path) ? baseName + '__a--current' : null
-					)}
-					href={route.path}
-					target={route.target}
-					title={route.title}
-					aria-current={isActivePath(route.path) ? 'page' : undefined}>
-					{route.name}
-				</svelte:element>
+				{#if route.name}
+					<svelte:element
+						this={route.path ? 'a' : 'span'}
+						id="route-{i}"
+						class={classnames(
+							baseName + '__a',
+							isActivePath(route.path) ? baseName + '__a--active' : null,
+							isCurrentPath(route.path) ? baseName + '__a--current' : null
+						)}
+						href={route.path}
+						target={route.target}
+						title={route.title}
+						aria-current={isActivePath(route.path) ? 'page' : undefined}>
+						{route.name}
+					</svelte:element>
+				{/if}
 
 				{#if !!route.routes?.length}
 					<ul

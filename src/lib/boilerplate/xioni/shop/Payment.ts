@@ -1,3 +1,4 @@
+import type { KyResponse } from 'ky'
 import { createClient, createShopUrl } from '../api/client'
 
 // --- Factory -------------------------------------------------------------------------------------
@@ -15,7 +16,9 @@ export function usePayment() {
 
 			return orderId
 		} catch (error) {
-			throw error
+			const errorData = await ((error as any).response as KyResponse).json()
+
+			throw errorData
 		}
 	}
 
@@ -27,7 +30,9 @@ export function usePayment() {
 
 			return true
 		} catch (error) {
-			throw error
+			const errorData = await ((error as any).response as KyResponse).json()
+
+			throw errorData
 		}
 	}
 

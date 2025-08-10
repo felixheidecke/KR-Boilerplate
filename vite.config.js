@@ -27,6 +27,13 @@ export default defineConfig({
 		sveltekit()
 	],
 	server: {
-		port: 3000
+		port: 3000,
+		proxy: {
+			'/api': {
+				changeOrigin: true,
+				target: 'https://api.klickrhein.de/v5',
+				rewrite: (path) => path.replace(/^\/api/, '')
+			}
+		}
 	}
 })

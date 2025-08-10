@@ -3,6 +3,9 @@ export type ButtonProps = {
 	baseName?: string
 	children?: Snippet
 
+	onClick?: Function
+
+	variant?: 'primary' | 'secondary'
 	disabled?: boolean
 	fontello?: string
 	isLoading?: boolean

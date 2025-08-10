@@ -1,5 +1,6 @@
 import type { XioniShop } from '../types'
 import { createClient, createShopUrl } from '../api/client'
+import type { KyResponse } from 'ky'
 
 export function useGroups() {
 	const client = createClient()
@@ -8,7 +9,9 @@ export function useGroups() {
 		try {
 			return await client.get(createShopUrl('groups')).json()
 		} catch (error) {
-			throw error
+			const errorData = await ((error as any).response as KyResponse).json()
+
+			throw errorData
 		}
 	}
 
@@ -16,7 +19,9 @@ export function useGroups() {
 		try {
 			return await client.get(createShopUrl(`groups/${id}`)).json()
 		} catch (error) {
-			throw error
+			const errorData = await ((error as any).response as KyResponse).json()
+
+			throw errorData
 		}
 	}
 
@@ -24,7 +29,9 @@ export function useGroups() {
 		try {
 			return await client.get(createShopUrl(`products/${id}/group`)).json()
 		} catch (error) {
-			throw error
+			const errorData = await ((error as any).response as KyResponse).json()
+
+			throw errorData
 		}
 	}
 

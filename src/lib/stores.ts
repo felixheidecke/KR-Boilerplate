@@ -4,7 +4,12 @@ import type { XioniShop } from '$lib/boilerplate/xioni/types'
 
 // Order
 
-export const ORDER = writable({} as XioniShop.Order)
+export const ORDER = writable({
+	address: {},
+	total: {},
+	shippingCost: {}
+} as XioniShop.Order)
+
 export const CART = writable({
 	gross: {
 		value: 0,

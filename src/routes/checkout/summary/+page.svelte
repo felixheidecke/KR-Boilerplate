@@ -12,6 +12,7 @@
 	import CartTable from '$lib/boilerplate/components/XioniShopCartTable/XioniShopCartTable.svelte'
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import Message from '$lib/boilerplate/components/Message/Message.svelte'
+	import type { XioniShop } from '$lib/boilerplate/xioni/types'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -24,9 +25,13 @@
 
 		useOrder()
 			.createOrder()
-			.then(order => {
-				ORDER.set(order)
-				goto(`/order/${order.transactionId}/`)
+			.then(transactionId => {
+				ORDER.set({
+					address: {},
+					total: {},
+					shippingCost: {}
+				} as XioniShop.Order)
+				goto(`/order/${transactionId}/`)
 			})
 			.catch(({ data: error }) => {
 				const { details, message } = error as any
@@ -105,10 +110,10 @@
 	<Link icon="fas fa-pen" class="$mt" to="/checkout/">anpassen</Link>
 
 	<div class="$mt-2">
-		<Button icon="fas fa-angle-left" to="/">zum Shop</Button>
+		<Button fontello="angle-left" to="/">zum Shop</Button>
 		<Button
-			icon="fas fa-angle-right"
+			fontello="angle-right"
 			class="Button--primary $float-right $row-reverse"
-			on:click={createOrder}>jetzt kostenpflichtig bestellen</Button>
+			onClick={createOrder}>jetzt kostenpflichtig bestellen</Button>
 	</div>
 {/if}

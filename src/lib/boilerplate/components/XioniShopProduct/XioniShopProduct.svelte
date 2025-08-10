@@ -1,12 +1,10 @@
 <script lang="ts">
 	import './XioniShopProduct.scss'
 
-	import { createEventDispatcher } from 'svelte'
 	import { IS_MOBILE } from '$lib/boilerplate/utils/breakpoints'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import classnames from 'classnames'
-
-	import type { XioniShop } from '$lib/boilerplate/xioni/types'
+	import type { XioniShopProductProps } from './XioniShopProduct'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -17,13 +15,18 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let product: XioniShop.Product
-	export let baseName = 'XioniShopProduct'
-	export let basePath: string = $page.url.pathname + '/../'
+	const {
+		product,
+		baseName = 'XioniShopProduct',
+		basePath = page.url.pathname + '/../',
+
+		class: className,
+
+		onAddToCart
+	}: XioniShopProductProps = $props()
 
 	// -----------------------------------------------------------------------------------------------
 
-	const emit = createEventDispatcher()
 	const {
 		name,
 		teaser,
@@ -46,10 +49,16 @@
 
 		productImageModal.open()
 	}
+
+	function addToCartHandler() {
+		if (!onAddToCart) return
+
+		onAddToCart(product)
+	}
 </script>
 
 {#if product.id}
-	<div class={classnames(baseName, $$props.class)}>
+	<div class={classnames(baseName, className)}>
 		<ul class="{baseName}__breadcrubs">
 			{#each path || [] as { id, name, slug }}
 				<li class="{baseName}__breadcrubs-crub">
@@ -78,7 +87,7 @@
 					class="{baseName}__image $mb-2@mobile"
 					src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
 					alt={name}
-					on:click={imageClickHandler} />
+					onclick={imageClickHandler} />
 			</Grid>
 			<Grid size="tablet-3-5">
 				{#if teaser}
@@ -101,7 +110,8 @@
 					</div>
 
 					<Button
-						on:click={() => emit('addToCart')}
+						variant="primary"
+						onClick={addToCartHandler}
 						class="{baseName}__add-to-cart-button"
 						fontello="basket">
 						In den Warenkorb

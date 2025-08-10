@@ -37,7 +37,7 @@
 <h2>Warenkorb</h2>
 {#if !$CART.products?.length}
 	<h4>Ihr Warenkorb ist noch leer.</h4>
-	<Link to="/">Zum Shop</Link>
+	<Button fontello="angle-left" to="/">zum Shop</Button>
 {:else}
 	<CartTable
 		products={$CART.products}

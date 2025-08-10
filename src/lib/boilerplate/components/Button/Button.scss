@@ -1,5 +1,7 @@
 @use 'sass:color';
 
+$button-primary-color: rgb(82, 82, 174);
+
 :where(.Button) {
 	align-items: center;
 	background-color: white;
@@ -19,6 +21,16 @@
 	white-space: nowrap;
 }
 
+:where(.Button:hover) {
+	box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
+}
+
+:where(.Button--primary) {
+	background-color: $button-primary-color;
+	border-color: $button-primary-color;
+	color: white;
+}
+
 :where(.Button__icon)::before {
 	margin: {
 		left: 0 !important;
@@ -31,9 +43,8 @@
 	text-overflow: ellipsis;
 }
 
-:where(.Button:not(:disabled):hover) {
+:where(.Button:not(:disabled, .Button--primary):hover) {
 	background-color: color.mix(black, white, 5%);
-	box-shadow: 0px 12px 24px -6px rgb(0 0 0 / 30%);
 }
 
 :where(.Button:disabled) {

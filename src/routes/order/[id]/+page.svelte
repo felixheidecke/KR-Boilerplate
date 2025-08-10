@@ -11,6 +11,7 @@
 	import Button from '$lib/boilerplate/components/Button/Button.svelte'
 	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
 	import { PayPalButtons } from '$lib/boilerplate/components'
+	import Wrapper from '$lib/boilerplate/components/Wrapper/Wrapper.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -58,123 +59,123 @@
 <svelte:head>
 	<title>Bestellung {order.transactionId?.toUpperCase()}</title>
 </svelte:head>
+<Wrapper class="$mb-4">
+	<ol>
+		{#if address.company}
+			<li>{address.company}</li>
+		{/if}
+		<li>
+			{address.salutation}
+			{address.firstname}
+			{address.name}
+		</li>
+		<li>{address.address}</li>
+		<li>{address.zip} {address.city}</li>
+	</ol>
 
-{JSON.stringify(deliveryAddress)}
+	<hr />
 
-<ol>
-	{#if address.company}
-		<li>{address.company}</li>
-	{/if}
-	<li>
-		{address.salutation}
-		{address.firstname}
-		{address.name}
-	</li>
-	<li>{address.address}</li>
-	<li>{address.zip} {address.city}</li>
-</ol>
-
-<hr />
-
-<Grid>
-	<Grid size="1-2">
-		<strong class="$font-larger">Ihre Bestellung</strong>
+	<Grid>
+		<Grid size="1-2">
+			<strong class="$font-larger">Ihre Bestellung</strong>
+		</Grid>
+		<Grid size="1-2" class="$text-right">
+			<ul>
+				<li>
+					Auftrags-Nr.: <span style="letter-spacing: 1px"
+						>{order.transactionId?.toUpperCase()}</span>
+				</li>
+				<li>Datum: {date}</li>
+			</ul>
+		</Grid>
+		<Grid size class="$mt-2">
+			<table>
+				<thead>
+					<tr>
+						<th class="$text-left">Produkt</th>
+						<th>Menge</th>
+						<th class="$text-right">Preis</th>
+						<th class="$text-right">Gesamt</th>
+					</tr>
+				</thead>
+				<tbody>
+					{#each order.cart as product}
+						<tr>
+							<td>{product.name}</td>
+							<td width="1%" class="$text-center">{product.quantity}</td>
+							<td width="1%" class="$text-right">{product.price.formatted}</td>
+							<td width="1%" class="$text-right">{product.total.formatted}</td>
+						</tr>
+					{/each}
+				</tbody>
+				<tfoot>
+					{#if order.shippingCost}
+						<tr>
+							<td colspan="3" class="$pt $text-right $font-bold">Versandkosten</td>
+							<td class="$pt $text-right">{order.shippingCost.formatted}</td>
+						</tr>
+					{/if}
+					<tr>
+						<td colspan="3" class="$pt $text-right $font-bold">Gesamt</td>
+						<td class="$pt $text-right $font-bold">{order.total.formatted}</td>
+					</tr>
+				</tfoot>
+			</table>
+		</Grid>
 	</Grid>
-	<Grid size="1-2" class="$text-right">
-		<ul>
-			<li>
-				Auftrags-Nr.: <span style="letter-spacing: 1px">{order.transactionId?.toUpperCase()}</span>
-			</li>
-			<li>Datum: {date}</li>
-		</ul>
-	</Grid>
-	<Grid size class="$mt-2">
-		<table>
-			<thead>
-				<tr>
-					<th class="$text-left">Produkt</th>
-					<th>Menge</th>
-					<th class="$text-right">Preis</th>
-					<th class="$text-right">Gesamt</th>
-				</tr>
-			</thead>
+
+	<p class="$mt-3">Vielen Dank für Ihren Auftrag.</p>
+
+	{#if order.paymentType !== 'Paypal'}
+		<p class="$font-bold">Bezahlen Sie jetzt per PayPal:</p>
+
+		<PayPalButtons clientId={shopConfig.payPalClientId} {createOrderHandler} {onApproveHandler} />
+
+		<p>
+			Alternativ können Sie den Gesamtbetrag von {order.total.formatted} innerhalb von 14 Tagen ab Rechnungsdatum
+			an folgende Bankverbindung überweisen:
+		</p>
+
+		<table class="payment-info-table">
 			<tbody>
-				{#each order.cart as product}
-					<tr>
-						<td>{product.name}</td>
-						<td width="1%" class="$text-center">{product.quantity}</td>
-						<td width="1%" class="$text-right">{product.price.formatted}</td>
-						<td width="1%" class="$text-right">{product.total.formatted}</td>
-					</tr>
-				{/each}
-			</tbody>
-			<tfoot>
-				{#if order.shippingCost}
-					<tr>
-						<td colspan="3" class="$pt $text-right $font-bold">Versandkosten</td>
-						<td class="$pt $text-right">{order.shippingCost.formatted}</td>
-					</tr>
-				{/if}
 				<tr>
-					<td colspan="3" class="$pt $text-right $font-bold">Gesamt</td>
-					<td class="$pt $text-right $font-bold">{order.total.formatted}</td>
+					<td>Empfänger</td>
+					<td>Max Mustermann</td>
 				</tr>
-			</tfoot>
+				<tr>
+					<td>IBAN</td>
+					<td>DE00 0000 0000 0000 0000 00</td>
+				</tr>
+				<tr>
+					<td>BIC</td>
+					<td>MUSTER123</td>
+				</tr>
+				<tr>
+					<td>Verwendungszweck</td>
+					<td>{order.transactionId?.toUpperCase()}</td>
+				</tr>
+			</tbody>
 		</table>
-	</Grid>
-</Grid>
+	{/if}
 
-<p class="$mt-3">Vielen Dank für Ihren Auftrag.</p>
-
-{#if order.paymentType !== 'Paypal'}
-	<p class="$font-bold">Bezahlen Sie jetzt per PayPal:</p>
-
-	<PayPalButtons clientId={shopConfig.payPalClientId} {createOrderHandler} {onApproveHandler} />
-
+	{#if deliveryAddress}
+		<p>Die Waren werden wie gewünscht an folgende Adresse verschickt:</p>
+		<ol>
+			{#if deliveryAddress.company}
+				<li>{deliveryAddress.company}</li>
+			{/if}
+			<li>{deliveryAddress.name}</li>
+			<li>{deliveryAddress.address}</li>
+			<li>{deliveryAddress.zip} {deliveryAddress.city}</li>
+		</ol>
+	{/if}
 	<p>
-		Alternativ können Sie den Gesamtbetrag von {order.total.formatted} innerhalb von 14 Tagen ab Rechnungsdatum
-		an folgende Bankverbindung überweisen:
+		Mit freundlichen Grüßen<br />
+		Max Mustermann
 	</p>
 
-	<table class="payment-info-table">
-		<tbody>
-			<tr>
-				<td>Empfänger</td>
-				<td>Max Mustermann</td>
-			</tr>
-			<tr>
-				<td>IBAN</td>
-				<td>DE00 0000 0000 0000 0000 00</td>
-			</tr>
-			<tr>
-				<td>BIC</td>
-				<td>MUSTER123</td>
-			</tr>
-			<tr>
-				<td>Verwendungszweck</td>
-				<td>{order.transactionId?.toUpperCase()}</td>
-			</tr>
-		</tbody>
-	</table>
-{/if}
-
-{#if deliveryAddress}
-	<p>Die Waren werden wie gewünscht an folgende Adresse verschickt:</p>
-	<ol>
-		{#if deliveryAddress.company}
-			<li>{deliveryAddress.company}</li>
-		{/if}
-		<li>{deliveryAddress.name}</li>
-		<li>{deliveryAddress.address}</li>
-		<li>{deliveryAddress.zip} {deliveryAddress.city}</li>
-	</ol>
-{/if}
-<p>
-	Mit freundlichen Grüßen<br />
-	Max Mustermann
-</p>
-
-<Button class="$mt-4" fontello="print" on:click={() => window.print()}>Drucken</Button>
+	<Button class="$mt-4" fontello="print" on:click={() => window.print()}>Drucken</Button>
+</Wrapper>
 
 <style>
 	li + li {

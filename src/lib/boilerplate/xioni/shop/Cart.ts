@@ -1,3 +1,4 @@
+import type { KyResponse } from 'ky'
 import { createClient, createShopUrl } from '../api/client'
 import type { XioniShop } from '../types'
 
@@ -15,7 +16,9 @@ export function useCart() {
 		try {
 			return client.get<XioniShop.Cart>(url).json()
 		} catch (error) {
-			throw error
+			const errorData = await ((error as any).response as KyResponse).json()
+
+			throw errorData
 		}
 	}
 
@@ -37,7 +40,9 @@ export function useCart() {
 				})
 				.json()
 		} catch (error) {
-			throw error
+			const errorData = await ((error as any).response as KyResponse).json()
+
+			throw errorData
 		}
 	}
 
@@ -58,7 +63,9 @@ export function useCart() {
 				})
 				.json()
 		} catch (error) {
-			throw error
+			const errorData = await ((error as any).response as KyResponse).json()
+
+			throw errorData
 		}
 	}
 

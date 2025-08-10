@@ -7,6 +7,7 @@
 
 	import Link from '$lib/boilerplate/components/Link/Link.svelte'
 	import Product from '$lib/boilerplate/components/XioniShopProduct/XioniShopProduct.svelte'
+	import Wrapper from '$lib/boilerplate/components/Wrapper/Wrapper.svelte'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -15,11 +16,11 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	async function addToCartHandler(productId: number) {
+	async function addToCartHandler({ id }: { id: number }) {
 		messages.reset()
 
 		useCart()
-			.addItem(productId)
+			.addItem(id)
 			.then(cart => {
 				CART.set(cart)
 				messages.add(`${product.name} wurde in den Warenkorb gelegt.`, undefined, {
@@ -38,9 +39,8 @@
 	<meta name="description" content="Kaufen Sie {product.name} in unserem Online Shop." />
 	<title>{product.name} | Online Shop</title>
 </svelte:head>
-
 {#if product}
-	<Product {product} on:addToCart={() => addToCartHandler(product.id)} />
+	<Product {product} onAddToCart={addToCartHandler} />
 
 	<hr />
 

@@ -7,7 +7,7 @@ export type NavProps = {
 
 type NavRoute = {
 	path?: string
-	name: string
+	name?: string
 	class?: string
 	routes?: Route[]
 	target?: '_blank'
