@@ -48,8 +48,8 @@
 
 :where(.Message__close-button) {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 0.5rem;
+	right: 0.5rem;
 	transform: translate(33%, -33%);
 	padding: 0.5rem;
 	cursor: pointer;

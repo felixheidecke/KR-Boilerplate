@@ -3,6 +3,8 @@
 
 	import classnames from 'classnames'
 	import isExternalURL from '$lib/boilerplate/utils/isExternalURL'
+	import makeBEM from '$lib/boilerplate/utils/makeBem'
+	import type { ButtonProps } from './Button'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -10,45 +12,62 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	export let baseName = 'Button'
-	export let disabled = false
-	export let fontello: string = ''
-	export let isLoading = false
-	export let rel: 'follow' | 'nofollow noopener' = 'nofollow noopener'
-	export let target: '_blank' | undefined = undefined
-	export let to: string | undefined = undefined
+	let {
+		baseName = 'Button',
+		children,
+		class: classProp,
+		disabled = false,
+		fontello = '',
+		isLoading = false,
+		rel = 'nofollow noopener',
+		target,
+		to,
+		variant,
+		onClick,
+		...restProps
+	}: ButtonProps = $props()
 
 	// -----------------------------------------------------------------------------------------------
 
-	if (to && isExternalURL(to)) {
+	const { block, element, modifier } = makeBEM(baseName)
+
+	if (to && !target && isExternalURL(to)) {
 		rel = 'nofollow noopener'
 		target = '_blank'
 	}
 
-	const className = classnames(
-		baseName,
-		disabled ? baseName + '--disabled' : null,
-		!to || baseName + '--anchor',
-		!isLoading || baseName + '--loading'
+	const classNames = classnames(
+		block,
+		classProp,
+		variant ? modifier(variant) : null,
+		disabled ? modifier('disabled') : null,
+		!to || modifier('anchor'),
+		!isLoading || modifier('loading')
 	)
+
+	function handleClick() {
+		if (disabled || !onClick) return
+
+		onClick()
+	}
 </script>
 
 {#if !to}
-	<button on:click {disabled} {...$$restProps} class={classnames(className, $$props.class)}>
+	<button onclick={handleClick} {disabled} {...restProps} class={classNames}>
 		{#if fontello}
-			<Fontello baseName={baseName + '__icon'} name={fontello} />&nbsp;
+			<Fontello baseName={element('icon')} name={fontello} />&nbsp;
 		{/if}
-		<span class="{baseName}__text">
-			<slot />
+		<span class={element('text')}>
+			{@render children?.()}
 		</span>
 	</button>
 {:else}
-	<a on:click href={to} {target} {...$$restProps} class={classnames(className, $$props.class)}>
+	<a href={to} onclick={handleClick} {target} {...restProps} class={classNames}>
 		{#if fontello}
-			<Fontello baseName={baseName + '__icon'} name={fontello} />&nbsp;
+			<Fontello baseName={element('icon')} name={fontello} />&nbsp;
 		{/if}
-		<span class="{baseName}__text">
-			<slot />
+		<span class={element('text')}>
+			{@render children?.()}
 		</span>
 	</a>
 {/if}
