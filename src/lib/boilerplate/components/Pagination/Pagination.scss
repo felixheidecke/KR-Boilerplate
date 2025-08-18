@@ -14,14 +14,14 @@
 	cursor: pointer;
 	user-select: none;
 	text-align: center;
+	border-radius: 0.25rem;
 }
 
-:where(.Pagination__item:hover) {
-	text-decoration: underline;
+:where(.Pagination__item:not(.Pagination__item--current):hover) {
+	background-color: #e5e5e5;
 }
 
 :where(.Pagination__item--current) {
 	cursor: auto;
-	background-color: lime;
-	border-radius: 0.25rem;
+	background-color: #ccc;
 }
