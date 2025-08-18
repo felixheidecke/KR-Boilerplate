@@ -23,12 +23,17 @@
 
 	// -----------------------------------------------------------------------------------------------
 
-	const { title, image, teaser, starts, ends, duration, organizer } = event
+	const { title, image, teaser, starts, ends, duration, organizer, tags } = event
+
+	function tagsToString(tags: XioniCMS.Event['tags']) {
+		return tags?.map(tag => tag.id).join(',')
+	}
 </script>
 
 <svelte:element
 	this={tag}
 	itemscope
+	data-tags={tagsToString(tags)}
 	itemtype="https://schema.org/Event"
 	{...$$restProps}
 	class={classnames(baseName, $$props.class)}>
@@ -36,13 +41,14 @@
 	<meta itemprop="endDate" content={format(ends, 'yyyy-MM-dd')} />
 	<meta itemprop="organizer" content={organizer} />
 	{#if image}
-		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<img
 			itemprop="image"
 			class="{baseName}__image"
 			src={image.srcset.small || image.src}
 			alt={image.description || title}
-			on:click={() => {
+			onclick={() => {
 				if (link) goto(link)
 			}} />
 	{/if}
