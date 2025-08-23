@@ -40,21 +40,6 @@ Die Zahlung wurde per PayPal beglichen.
 
 Vielen Dank für Ihren Auftrag!
 
-Mit freundlichen Grüßen,
-<%= owner.name %>
-
-- Die Lieferung erfolgt als mit DHL. Die Lieferzeit beträgt ca. 3 - 5 Tage.
-- Die gelieferte Ware bleibt bis zur vollständigen Bezahlung mein Eigentum.
-- Die Zahlung wird innerhalb von 30 Tagen ab Rechnungsdatum rein netto erbeten.
-- Neukunden beliefern wir gegen Zahlung per Nachnahme oder Vorkasse.
-- Bestandskunden beliefern wir zusätzlich gegen Zahlung per Rechnung.
-- Lieferung gegen Vorauskasse erfolgt unter Angabe der Auftragsnummer an o. g. Konto
-
-Jugendschutz
-════════════
-
-Nach §9 des Jugendschutzgesetzes ist es untersagt, Branntwein, branntweinhaltige Getränke oder Lebensmittel, die Branntwein in nicht nur geringer Menge enthalten, an Kinder und Jugendliche abzugeben. Nach §9 des JuSchG ist darüber hinaus auch untersagt, andere alkoholische Getränke an Kinder und Jugendliche unter 16 Jahren abzugeben (so z.B. Wein, Bier und Sekt). Mit Anerkennung der AGB bestätigen Sie, dass Sie mindestens 16 Jahre (Bestellung von Wein und Sekt) bzw. 18 Jahre (Bestellung von Spirituosen) alt sind.
-
 Widerrufsbelehrung
 ══════════════════
 

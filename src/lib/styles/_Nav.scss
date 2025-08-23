@@ -11,9 +11,5 @@ $Nav-breakpoint: 9999px;
 	// --- Mobile navigation styles ------------------------------------------------------------------
 
 	@media (width < $Nav-breakpoint) {
-		&__item--website {
-			border-top: 1px solid white;
-			padding-top: 0.5rem;
-		}
 	}
 }

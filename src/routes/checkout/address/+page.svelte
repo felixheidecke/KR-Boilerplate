@@ -8,14 +8,16 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Button from '$lib/boilerplate/components/Button/Button.svelte'
-	import Checkbox from '$lib/boilerplate/components/Checkbox/Checkbox.svelte'
-	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
-	import Input from '$lib/boilerplate/components/Input/Input.svelte'
-	import Message from '$lib/boilerplate/components/Message/Message.svelte'
-	import Select from '$lib/boilerplate/components/Select/Select.svelte'
-	import Textarea from '$lib/boilerplate/components/Textarea/Textarea.svelte'
-	import Wrapper from '$lib/boilerplate/components/Wrapper/Wrapper.svelte'
+	import {
+		Button,
+		Checkbox,
+		Grid,
+		Input,
+		Message,
+		Select,
+		Textarea,
+		Wrapper
+	} from '$lib/boilerplate/components'
 
 	// -----------------------------------------------------------------------------------------------
 

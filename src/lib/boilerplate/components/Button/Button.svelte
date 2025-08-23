@@ -36,13 +36,15 @@
 		target = '_blank'
 	}
 
-	const classNames = classnames(
-		block,
-		classProp,
-		variant ? modifier(variant) : null,
-		disabled ? modifier('disabled') : null,
-		!to || modifier('anchor'),
-		!isLoading || modifier('loading')
+	const classNames = $derived(
+		classnames(
+			block,
+			classProp,
+			variant ? modifier(variant) : null,
+			disabled ? modifier('disabled') : null,
+			!to || modifier('anchor'),
+			!isLoading || modifier('loading')
+		)
 	)
 
 	function handleClick() {

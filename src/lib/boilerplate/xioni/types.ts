@@ -16,7 +16,7 @@ export namespace XioniShop {
 		supplementalCost?: {
 			value: number
 			formatted: string
-			title: string
+			description: string
 			text: string
 		}
 		shipping: {
@@ -134,29 +134,43 @@ export namespace XioniShop {
 	}
 
 	export interface Info {
-		name: string
-		web: URL
-		email: string
-		phone: string
-		address: string
-		city: string
-		zip: string
-		shipping: InfoShipping
+		owner: Owner
+		shippingCost: ShippingCostInfo
+		supplementalCost: SupplementalCost
 	}
+}
 
-	export interface InfoShipping {
-		description: string
-		rates?: {
-			weight: {
-				value: number
-				formatted: string
-			}
-			price: {
-				value: number
-				formatted: string
-			}
+interface ShippingCostInfo {
+	rates: {
+		threshold: number
+		rate: {
+			value: number
+			formatted: string
 		}
+	}[]
+	freeShippingThreshold: {
+		value: number
+		formatted: string
 	}
+	unit: string
+	text: string
+}
+
+interface Owner {
+	id: number
+	name: string
+	phone: string
+	address: string
+	zip: string
+	city: string
+	web: URL
+	email: string
+}
+
+interface SupplementalCost {
+	value: number
+	formatted: string
+	title: string
 }
 
 interface Image {

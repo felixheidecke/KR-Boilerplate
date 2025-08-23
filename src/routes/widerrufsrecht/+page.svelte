@@ -1,5 +1,4 @@
 <script>
-	import div from '$lib/boilerplate/components/Wrapper/Wrapper.svelte'
 	import stammdaten from '$lib/stammdaten'
 
 	const { title } = stammdaten
@@ -10,7 +9,7 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<div class="$mx-auto $mb-4" style="max-width: 48rem;">
+<Wrapper class="$px-0">
 	<h2>Widerrufsbelehrung</h2>
 	<h3>Widerrufsrecht</h3>
 	<p>
@@ -67,7 +66,7 @@
 		entfernt wurde.
 	</p>
 	<p>
-		<Link to="/pdf/MusterWiderrufsformular.pdf" fontello="file-pdf">Widerrufsformular</Link>
+		<Link to="/pdf/Widerrufsformular.pdf" fontello="file-pdf">Widerrufsformular</Link>
 	</p>
 	<em>Ende der Widerrufsbelehrung</em>
-</div>
+</Wrapper>

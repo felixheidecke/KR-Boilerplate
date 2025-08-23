@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { CART } from '$lib/stores'
 	import { onMount } from 'svelte'
+	import { useCart } from '$lib/boilerplate/xioni/shop/Cart'
 	import messages from '$lib/messages'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Button from '$lib/boilerplate/components/Button/Button.svelte'
-	import Link from '$lib/boilerplate/components/Link/Link.svelte'
-	import CartTable from '$lib/boilerplate/components/XioniShopCartTable/XioniShopCartTable.svelte'
-	import { useCart } from '$lib/boilerplate/xioni/shop/Cart'
+	import { Button, XioniShopCartTable } from '$lib/boilerplate/components'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -39,7 +37,7 @@
 	<h4>Ihr Warenkorb ist noch leer.</h4>
 	<Button fontello="angle-left" to="/">zum Shop</Button>
 {:else}
-	<CartTable
+	<XioniShopCartTable
 		products={$CART.products}
 		supplementalCost={$CART.supplementalCost}
 		shipping={$CART.shipping}

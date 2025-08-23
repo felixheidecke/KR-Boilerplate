@@ -3,16 +3,12 @@
 	import { isEmpty } from 'lodash-es'
 	import { ORDER, CART } from '$lib/stores'
 	import { useOrder } from '$lib/boilerplate/xioni/shop/Order'
+	import type { XioniShop } from '$lib/boilerplate/xioni/types'
 	import messages from '$lib/messages'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Button from '$lib/boilerplate/components/Button/Button.svelte'
-	import Link from '$lib/boilerplate/components/Link/Link.svelte'
-	import CartTable from '$lib/boilerplate/components/XioniShopCartTable/XioniShopCartTable.svelte'
-	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
-	import Message from '$lib/boilerplate/components/Message/Message.svelte'
-	import type { XioniShop } from '$lib/boilerplate/xioni/types'
+	import { Button, Grid, Link, Message, XioniShopCartTable } from '$lib/boilerplate/components'
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -95,19 +91,21 @@
 			</Grid>
 		{/if}
 		<Grid size>
-			<Link icon="fas fa-pen" to="/checkout/address/">anpassen</Link>
+			<Button fontello="angle-right" class="$row-reverse" to="/checkout/address/">anpassen</Button>
 		</Grid>
 	</Grid>
 
 	<h2 class="h3 $mt-3">Warenkorb</h2>
 
-	<CartTable
+	<XioniShopCartTable
 		products={$CART.products}
 		shipping={$CART.shipping}
 		supplementalCost={$CART.supplementalCost}
 		total={$CART.total} />
 
-	<Link icon="fas fa-pen" class="$mt" to="/checkout/">anpassen</Link>
+	<Button fontello="angle-right" class="$row-reverse $mt" to="/checkout/">anpassen</Button>
+
+	<p><strong>Zahlungsoptionen:</strong> Per PayPal oder im Voraus.</p>
 
 	<div class="$mt-2">
 		<Button fontello="angle-left" to="/">zum Shop</Button>

@@ -85,7 +85,7 @@
 				<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 				<img
 					class="{baseName}__image $mb-2@mobile"
-					src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+					src={image?.src || 'https://cdn.klickrhein.de/shop/product-placeholder.png'}
 					alt={name}
 					onclick={imageClickHandler} />
 			</Grid>
@@ -134,7 +134,7 @@
 	<Modal bind:this={productImageModal} title={name}>
 		<img
 			class="{baseName}__image-presentation"
-			src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+			src={image?.src || 'https://cdn.klickrhein.de/shop/product-placeholder.png'}
 			alt={name} />
 	</Modal>
 {/if}

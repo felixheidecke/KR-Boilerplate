@@ -8,10 +8,7 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Button from '$lib/boilerplate/components/Button/Button.svelte'
-	import Grid from '$lib/boilerplate/components/Grid/Grid.svelte'
-	import { PayPalButtons } from '$lib/boilerplate/components'
-	import Wrapper from '$lib/boilerplate/components/Wrapper/Wrapper.svelte'
+	import { Button, Grid, PayPalButtons, Wrapper } from '$lib/boilerplate/components/index.js'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -126,36 +123,16 @@
 
 	<p class="$mt-3">Vielen Dank für Ihren Auftrag.</p>
 
-	{#if order.paymentType !== 'Paypal'}
+	{#if order.paymentType !== 'Paypal' && shopConfig.payPalClientId}
 		<p class="$font-bold">Bezahlen Sie jetzt per PayPal:</p>
 
 		<PayPalButtons clientId={shopConfig.payPalClientId} {createOrderHandler} {onApproveHandler} />
 
 		<p>
 			Alternativ können Sie den Gesamtbetrag von {order.total.formatted} innerhalb von 14 Tagen ab Rechnungsdatum
-			an folgende Bankverbindung überweisen:
+			überweisen. Wir nennen Ihnen unsere Bankverbindung in separater E-Mail und liefern die Ware nach
+			Zahlungseingang.
 		</p>
-
-		<table class="payment-info-table">
-			<tbody>
-				<tr>
-					<td>Empfänger</td>
-					<td>Max Mustermann</td>
-				</tr>
-				<tr>
-					<td>IBAN</td>
-					<td>DE00 0000 0000 0000 0000 00</td>
-				</tr>
-				<tr>
-					<td>BIC</td>
-					<td>MUSTER123</td>
-				</tr>
-				<tr>
-					<td>Verwendungszweck</td>
-					<td>{order.transactionId?.toUpperCase()}</td>
-				</tr>
-			</tbody>
-		</table>
 	{/if}
 
 	{#if deliveryAddress}
@@ -174,22 +151,11 @@
 		Max Mustermann
 	</p>
 
-	<Button class="$mt-4" fontello="print" on:click={() => window.print()}>Drucken</Button>
+	<Button class="$mt-4" fontello="print" onClick={() => window.print()}>Drucken</Button>
 </Wrapper>
 
 <style>
 	li + li {
 		margin-top: 0.25rem;
-	}
-
-	.payment-info-table {
-		& td:nth-child(1) {
-			font-weight: bold;
-		}
-
-		& td:nth-child(2) {
-			font-family: monospace;
-			letter-spacing: 1px;
-		}
 	}
 </style>

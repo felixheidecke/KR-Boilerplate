@@ -1,22 +1,25 @@
 <script lang="ts">
 	import '$lib/styles/styles.scss'
-	import { CART } from '$lib/stores'
-	import linkedData from '$lib/linkedData'
 	import messages from '$lib/messages'
-	import stammdaten from '$stammdaten'
-	import type { NavProps } from '$lib/boilerplate/components/Nav/Nav.js'
 	import type { XioniShop } from '$lib/boilerplate/xioni/types.js'
+	import linkedData from '$lib/linkedData'
+
+	// --- [ Components ] ----------------------------------------------------------------------------
+
+	import Header from '$lib/components/Header.svelte'
+	import Footer from '$lib/components/Footer.svelte'
+	import {
+		LinkedData,
+		MessageBus,
+		Nav,
+		type NavProps,
+		Toplink,
+		Wrapper
+	} from '$lib/boilerplate/components'
+
+	// --- [ Setup ] ---------------------------------------------------------------------------------
 
 	const { data, children } = $props()
-
-	// --- Components --------------------------------------------------------------------------------
-
-	import { Link } from '$lib/boilerplate/components'
-	import MessageBus from '$lib/boilerplate/components/MessageBus/MessageBus.svelte'
-	import Nav from '$lib/boilerplate/components/Nav/Nav.svelte'
-	import Toplink from '$lib/boilerplate/components/Toplink/Toplink.svelte'
-	import Wrapper from '$lib/boilerplate/components/Wrapper/Wrapper.svelte'
-	import LinkedData from '$lib/boilerplate/components/LinkedData/LinkedData.svelte'
 
 	function mapGroupToRoutes(groups: XioniShop.Group[]): NavProps['routes'] {
 		return groups.map(group => ({
@@ -58,37 +61,23 @@
 </script>
 
 <svelte:head>
-	<meta name="theme-color" content="#333" />
-	<meta name="thumbnail" content="https://{stammdaten.web}/meta/og-image.jpg" />
-	<meta property="og:url" content="https://{stammdaten.web}" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content={stammdaten.title} />
-	<meta property="og:description" content="[...]" />
-	<meta property="og:image" content="https://{stammdaten.web}/meta/og-image.jpg" />
+	<meta name="theme-color" content="#6e767e" />
+	<meta property="og:url" content="https://example.com" />
+	<meta property="og:type" content="shop" />
+	<meta property="og:title" content="" />
+	<meta property="og:description" content="" />
+	<meta property="og:image" content="/meta/og-image.jpg" />
+	<meta name="thumbnail" content="/meta/og-thumb.png" />
 	<LinkedData data={linkedData} />
 </svelte:head>
 
-<div data-layout>
-	<header>Shop Header</header>
-	<Wrapper size="large">
-		<Link to="/checkout" fontello="basket"
-			>Warenkorb
-			{#if !!$CART.products.length}({$CART.products.length}){/if}
-		</Link>
-	</Wrapper>
-	<Wrapper size="large" tag="main">
+<div data-layout="root">
+	<Header />
+	<Wrapper tag="main" size="large">
 		<Nav class="product-nav" {routes} />
-		<main>{@render children?.()}</main>
+		{@render children?.()}
 	</Wrapper>
-	<footer>Footer</footer>
+	<Footer />
 </div>
 <MessageBus {messages} />
 <Toplink />
-
-<style lang="scss">
-	@use '$styles/colors';
-
-	hr {
-		border-top: 1px solid colors.$gray;
-	}
-</style>

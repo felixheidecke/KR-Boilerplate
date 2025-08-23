@@ -5,9 +5,7 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Link from '$lib/boilerplate/components/Link/Link.svelte'
-	import Product from '$lib/boilerplate/components/XioniShopProduct/XioniShopProduct.svelte'
-	import Wrapper from '$lib/boilerplate/components/Wrapper/Wrapper.svelte'
+	import { Link, XioniShopCartButton, XioniShopProduct } from '$lib/boilerplate/components/index.js'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -39,11 +37,14 @@
 	<meta name="description" content="Kaufen Sie {product.name} in unserem Online Shop." />
 	<title>{product.name} | Online Shop</title>
 </svelte:head>
+
+<div class="leiste $py-2">
+	<XioniShopCartButton />
+</div>
+
 {#if product}
-	<Product {product} onAddToCart={addToCartHandler} />
-
+	<XioniShopProduct {product} onAddToCart={addToCartHandler} />
 	<hr />
-
 	<div class="$text-center">
 		<Link fontello="angle-left" on:click={() => history.back()}>Zurück</Link>
 	</div>

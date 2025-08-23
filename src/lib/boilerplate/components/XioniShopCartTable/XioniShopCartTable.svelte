@@ -12,6 +12,7 @@
 	// --- [ Components ] ----------------------------------------------------------------------------
 
 	import Select from '../Select/Select.svelte'
+	import { Link } from '../Link'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -37,18 +38,20 @@
 		<tr>
 			<th>Produkt</th>
 			<th>Menge</th>
-			<th>Einzelpreis</th>
-			<th style="width:6rem">Preis</th>
+			<th>Preis</th>
 		</tr>
 	</thead>
 	<tbody>
 		{#each products || [] as { product, total, quantity }}
 			<tr>
-				<td width="66%">
-					{product.name}
-					{#if product.code}
-						<small>({product.code})</small>{/if}</td>
-				<td>
+				<td width="100%">
+					<Link to="/{product.slug}-p-{product.id}/">
+						{product.name}
+						{#if product.code}<br />
+							<small>({product.code})</small>{/if}
+					</Link>
+				</td>
+				<td class="$text-center">
 					{#if quantitySelector}
 						<Select
 							options={range(0, 11)}
@@ -60,29 +63,30 @@
 						{quantity}
 					{/if}
 				</td>
-				<td class="$text-right">{product.price.formatted}</td>
-				<td class="$text-right">{total.formatted}</td>
+				<td class="$text-right">
+					{total.formatted}
+				</td>
 			</tr>
 		{/each}
 	</tbody>
 	<tfoot>
-		<tr aria-hidden>
-			<td colspan="4"><hr class="$m-0" /></td>
+		<tr aria-hidden="true">
+			<td colspan="3"><hr class="$m-0" /></td>
 		</tr>
 		{#if supplementalCost}
 			<tr>
-				<td colspan="3" class="$text-right $font-bold">{supplementalCost.title}:</td>
+				<td colspan="2" class="$text-right $font-bold">{supplementalCost.description}:</td>
 				<td class="$text-right">{supplementalCost.formatted}</td>
 			</tr>
 		{/if}
 		{#if shipping}
 			<tr>
-				<td colspan="3" class="$text-right $font-bold">Versand:</td>
+				<td colspan="2" class="$text-right $font-bold">Versand:</td>
 				<td class="$text-right">{shipping.price.formatted}</td>
 			</tr>
 		{/if}
 		<tr>
-			<td colspan="3" class="$text-right $font-bold"
+			<td colspan="2" class="$text-right $font-bold"
 				>Gesamt:
 				<span class="$font-small $font-italic">(inkl. MwSt.)</span></td>
 			<td class="$text-right $font-bold $decoration-double-underline">{total.formatted}</td>

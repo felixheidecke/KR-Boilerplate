@@ -20,7 +20,7 @@
 	<div {...restProps} class={classnames(baseName, classProp)}>
 		<img
 			class="{baseName}__image"
-			src={image?.src || 'https://cdn.klickrhein.de/boilerplate/shop/product-placeholder.png'}
+			src={image?.src || 'https://cdn.klickrhein.de/shop/product-placeholder.png'}
 			alt={name || 'Kein Produktbild'}
 			title={name || 'Kein Produktbild'}
 			loading="lazy" />

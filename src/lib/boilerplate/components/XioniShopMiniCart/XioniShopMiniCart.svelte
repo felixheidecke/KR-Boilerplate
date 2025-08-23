@@ -29,7 +29,7 @@
 		</li>
 		{#if cart.supplementalCost}
 			<li class="$mb-1/4 $flex $space-between">
-				<b>{cart.supplementalCost.title}:</b>
+				<b>{cart.supplementalCost.description}:</b>
 				<span>{cart.supplementalCost.formatted}</span>
 			</li>
 		{/if}
