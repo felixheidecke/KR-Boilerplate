@@ -32,12 +32,10 @@
 	const routes = $derived([
 		{
 			name: 'Startseite',
-			class: 'Nav__item--startpage',
 			path: '/'
 		},
 		...mapGroupToRoutes(data.groups),
 		{
-			class: 'Nav__item--website',
 			routes: [
 				{
 					name: 'AGB',

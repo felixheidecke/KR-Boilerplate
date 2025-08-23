@@ -1,12 +1,7 @@
 <script lang="ts">
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import {
-		Grid,
-		Link,
-		ProductTile,
-		XioniShopCartButton
-	} from '$lib/boilerplate/components/index.js'
+	import { Grid, Link, ProductTile, XioniShopCartButton } from '$lib/boilerplate/components'
 
 	// --- [ Setup ] ---------------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
-import type { XioniShop } from '../types'
 import { createClient, createShopUrl } from '../api/client'
+import type { XioniShop } from '../types'
 import type { KyResponse } from 'ky'
 
 export function useInfo() {

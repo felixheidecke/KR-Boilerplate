@@ -1,5 +1,5 @@
-import type { KyResponse } from 'ky'
 import { createClient, createShopUrl } from '../api/client'
+import type { KyResponse } from 'ky'
 import type { XioniShop } from '../types'
 
 export function useCart() {

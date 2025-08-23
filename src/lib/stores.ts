@@ -1,8 +1,5 @@
 import { writable } from 'svelte/store'
-
 import type { XioniShop } from '$lib/boilerplate/xioni/types'
-
-// Order
 
 export const ORDER = writable({
 	address: {},

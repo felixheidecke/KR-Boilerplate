@@ -8,10 +8,7 @@
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
-	import Grid from '../Grid/Grid.svelte'
-	import Modal from '../Modal/Modal.svelte'
-	import Button from '../Button/Button.svelte'
-	import Link from '../Link/Link.svelte'
+	import { Button, Grid, Link, Modal } from '$lib/boilerplate/components'
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
@@ -42,6 +39,7 @@
 		ean
 	} = product
 
+	// svelte-ignore non_reactive_update
 	let productImageModal: Modal
 
 	function imageClickHandler() {
@@ -58,7 +56,10 @@
 </script>
 
 {#if product.id}
-	<div class={classnames(baseName, className)}>
+	<div class={classnames(baseName, className)} itemscope itemtype="https://schema.org/Product">
+		<meta itemprop="productID" content={code} />
+		<meta itemprop="price" content={price.value} />
+
 		<ul class="{baseName}__breadcrubs">
 			{#each path || [] as { id, name, slug }}
 				<li class="{baseName}__breadcrubs-crub">
@@ -66,7 +67,7 @@
 				</li>
 			{/each}
 		</ul>
-		<h2 class="{baseName}__name $mb-2 $mt-1/2">
+		<h2 class="{baseName}__name $mb-2 $mt-1/2" itemprop="name">
 			{name}
 		</h2>
 
@@ -87,7 +88,8 @@
 					class="{baseName}__image $mb-2@mobile"
 					src={image?.src || 'https://cdn.klickrhein.de/shop/product-placeholder.png'}
 					alt={name}
-					onclick={imageClickHandler} />
+					onclick={imageClickHandler}
+					itemprop="image" />
 			</Grid>
 			<Grid size="tablet-3-5">
 				{#if teaser}
@@ -119,7 +121,7 @@
 				{/if}
 
 				{#if description}
-					<p class="{baseName}__description">{@html description}</p>
+					<p class="{baseName}__description" itemprop="description">{@html description}</p>
 				{/if}
 
 				{#if legal}

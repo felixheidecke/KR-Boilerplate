@@ -23,6 +23,7 @@ Versand an:   <%= shippingAddress.company %>
               <%= shippingAddress.address %>
               <%= shippingAddress.zip + ' ' + shippingAddress.city %>
 
+
 <% } if (message) {
   print(message)
 } %>
