@@ -1,6 +1,6 @@
 {
 	"name": "boilerplate.ts",
-	"version": "5.4.0",
+	"version": "5.4.1",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -12,17 +12,17 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.9",
-		"@sveltejs/kit": "^2.36.1",
+		"@sveltejs/kit": "^2.37.0",
 		"@sveltejs/vite-plugin-svelte": "^5.1.1",
 		"@types/eslint": "^9.6.1",
-		"@typescript-eslint/eslint-plugin": "^8.40.0",
-		"@typescript-eslint/parser": "^8.40.0",
+		"@typescript-eslint/eslint-plugin": "^8.41.0",
+		"@typescript-eslint/parser": "^8.41.0",
 		"eslint": "^9.34.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.11.0",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
-		"sass": "^1.90.0",
+		"sass": "^1.91.0",
 		"svelte-check": "^4.3.1",
 		"svelte-preprocess": "^6.0.3",
 		"sveltekit-autoimport": "^1.8.1",
@@ -32,12 +32,12 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@paypal/paypal-js": "^8.2.0",
+		"@paypal/paypal-js": "^8.3.0",
 		"@types/lodash-es": "^4.17.12",
 		"classnames": "^2.5.1",
 		"date-fns": "^4.1.0",
-		"ky": "^1.9.0",
+		"ky": "^1.9.1",
 		"lodash-es": "^4.17.21",
-		"svelte": "^5.38.2"
+		"svelte": "^5.38.6"
 	}
 }

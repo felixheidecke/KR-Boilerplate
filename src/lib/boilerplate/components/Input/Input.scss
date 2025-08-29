@@ -23,12 +23,9 @@
 	font-size: 1rem;
 	font-family: sans-serif;
 	border: 1px solid lightgray;
-	border-top: 0 none;
 	outline: none;
 	background-color: white;
-	border-radius: 0;
-	border-bottom-left-radius: 0.25rem;
-	border-bottom-right-radius: 0.25rem;
+	border-radius: 0.25rem;
 
 	&[type='date'] {
 		text-transform: uppercase;
@@ -37,6 +34,12 @@
 	&:focus-visible {
 		box-shadow: 0 2px cornflowerblue;
 	}
+}
+
+:where(.Input__label + .Input__input) {
+	border-top: 0 none;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 :where(.Input--read-only .Input__input) {

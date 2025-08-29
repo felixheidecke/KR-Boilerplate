@@ -4,7 +4,7 @@
 	import classnames from 'classnames'
 	import { page } from '$app/state'
 	import { throttle } from 'lodash-es'
-	import type { NavProps, NavRoute } from './Nav.d.ts'
+	import type { NavProps } from './Nav.d.ts'
 
 	// --- [ Components ] ----------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@
 
 	// --- [ Props ] ---------------------------------------------------------------------------------
 
-	let { routes, baseName = 'Nav', sticky, class: className }: NavProps = $props()
+	let { routes, baseName = 'Nav', sticky, class: className, children }: NavProps = $props()
 
 	// -----------------------------------------------------------------------------------------------
 
@@ -57,13 +57,14 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<nav bind:this={nav} class={classNames} on:click={() => (active = false)}>
+<nav bind:this={nav} class={classNames} onclick={() => (active = false)}>
+	{@render children?.()}
 	<ul class={baseName + '__ul'} aria-label="navigation path">
 		{#each routes as route, i}
 			<li
 				class={classnames(baseName + '__li', route.class)}
-				on:mouseenter={() => (hoverState = i)}
-				on:mouseleave={() => (hoverState = -1)}>
+				onmouseenter={() => (hoverState = i)}
+				onmouseleave={() => (hoverState = -1)}>
 				{#if route.name}
 					<svelte:element
 						this={route.path ? 'a' : 'span'}

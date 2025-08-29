@@ -54,8 +54,8 @@
 				<td class="$text-center">
 					{#if quantitySelector}
 						<Select
-							options={range(0, 11)}
-							values={range(0, 11)}
+							options={range(0, 37)}
+							values={range(0, 37)}
 							value={quantity}
 							disabled={readOnly}
 							on:change={event => update(product.id, event)} />

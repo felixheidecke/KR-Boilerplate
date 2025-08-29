@@ -1,6 +1,10 @@
+import type { Snippet } from 'svelte'
+
 export type NavProps = {
-	baseName?: string
 	class?: string
+	children?: Snippet
+
+	baseName?: string
 	routes: NavRoute[]
 	sticky?: boolean
 }

@@ -2,7 +2,6 @@
 	import { CART, ORDER } from '$lib/stores'
 	import { goto } from '$app/navigation'
 	import { head, isEmpty, omitBy } from 'lodash-es'
-	import { InputPropsType } from '$lib/boilerplate/components/Input/Input.types'
 	import { IS_MOBILE } from '$lib/boilerplate/utils/breakpoints'
 	import { useOrder } from '$lib/boilerplate/xioni/shop/Order'
 
@@ -13,6 +12,7 @@
 		Checkbox,
 		Grid,
 		Input,
+		InputPropsType,
 		Message,
 		Select,
 		Textarea,

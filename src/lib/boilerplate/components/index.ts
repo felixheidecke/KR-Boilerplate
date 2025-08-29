@@ -39,12 +39,14 @@ export { default as XioniShopNav } from './XioniShopNav/XioniShopNav.svelte'
 export { default as XioniShopOrderTable } from './XioniShopOrderTable/XioniShopOrderTable.svelte'
 export { default as XioniShopProduct } from './XioniShopProduct/XioniShopProduct.svelte'
 
-// --- [ Types ] -----------------------------------------------------------------------------------
-export type { AddressProps } from './Address/Address.d.ts'
-export type { ButtonProps } from './Button/Button.d.ts'
-export type { InputProps, InputPropsType } from './Input/Input.d.ts'
-export type { ModalProps } from './Modal/Modal.d.ts'
-export type { NavProps, NavRoute } from './Nav/Nav.d.ts'
+// --- [ Types & Enums ] ---------------------------------------------------------------------------
+export { InputPropsType } from './Input/Input.d'
+
+export type { AddressProps } from './Address/Address.d'
+export type { ButtonProps } from './Button/Button.d'
+export type { InputProps } from './Input/Input.d'
+export type { ModalProps } from './Modal/Modal.d'
+export type { NavProps, NavRoute } from './Nav/Nav.d'
 export type { ProductTileProps } from './ProductTile/ProductTile.d'
-export type { XioniShopCartButtonProps } from './XioniShopCart/XioniShopCartButton.d.ts'
-export type { XioniShopProductProps } from './XioniShopProduct/XioniShopProduct.d.ts'
+export type { XioniShopCartButtonProps } from './XioniShopCart/XioniShopCartButton.d'
+export type { XioniShopProductProps } from './XioniShopProduct/XioniShopProduct.d'
